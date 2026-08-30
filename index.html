@@ -5042,8 +5042,14 @@ async function boot() {
     window.__ODDS = ODDS; window.__SIM = SIM;
 
     const oldest = DB.seasons[DB.seasons.length - 1], newest = DB.seasons[0];
-    $("#eyebrow").textContent = `${oldest.season}–${newest.season} · ${chain[0].total_rosters} teams`;
-    $("#lgSub").textContent = `${DB.games.length} games on record, and every one of them still counts against you.`;
+    // One season on the chain is not a range, and "0 games on record, and every
+    // one of them still counts against you" is a sentence about nothing.
+    $("#eyebrow").textContent = oldest.season === newest.season
+      ? `${newest.season} · ${chain[0].total_rosters} teams`
+      : `${oldest.season}–${newest.season} · ${chain[0].total_rosters} teams`;
+    $("#lgSub").textContent = DB.games.length
+      ? `${DB.games.length} games on record, and every one of them still counts against you.`
+      : `Season one. Nothing on record yet — and everything from here counts against you.`;
 
     const app = $("#app");
     app.appendChild(panelHome(AT, RB, ODDS, SIM));
