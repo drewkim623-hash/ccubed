@@ -1,0 +1,45 @@
+{
+  "_comment": "The week in the C Cubed. The scheduled job appends one object to weeks[] after each week finalizes: a lede, a write-up for each of the six games, and an 'around' notebook covering everything else that moved that week. articles[] holds longer pieces — draft reports, midseason takes — which are written by hand or on request rather than by the weekly job; the job must carry articles[] through untouched. The site sorts both newest-first and computes risers and sliders itself from its own power rankings, so nothing here should ever quote a rank or a movement.",
+  "_schema": {
+    "weeks[]": {
+      "season": "4-digit year as a string",
+      "week": "integer 1-17",
+      "note": "optional subtitle, e.g. 'Playoffs - Round 1'",
+      "lede": "one paragraph on the week as a whole - the shape of it, what mattered, what it set up",
+      "games[]": {
+        "headline": "short ESPN-style game headline",
+        "winner": "manager display name",
+        "winner_points": "number",
+        "loser": "manager display name",
+        "loser_points": "number",
+        "body": "2-4 sentence recap"
+      },
+      "around[]": {
+        "kind": "one of: trade, waivers, riser, slider, streak, injury, race, note",
+        "headline": "short, factual",
+        "body": "2-3 sentences"
+      }
+    },
+    "articles[]": {
+      "season": "4-digit year as a string",
+      "slug": "url-safe id, unique",
+      "date": "YYYY-MM-DD",
+      "kicker": "small line above the headline",
+      "headline": "the piece's title",
+      "dek": "one-sentence standfirst under the headline",
+      "byline": "who wrote it",
+      "standfirst": "optional short detail line next to the byline",
+      "blocks[]": {
+        "p": "{type:'p', text, lead?}  - a paragraph; lead:true gets the drop cap. <b> is allowed, nothing else",
+        "h": "{type:'h', eyebrow, text}  - a section heading",
+        "stat": "{type:'stat', n, text}  - a pull-out number",
+        "bars": "{type:'bars', title, sub, rows:[{label, sub, value, group}]}  - diverging bars about zero; group 1-3 picks the colour",
+        "cards": "{type:'cards', items:[{title, big, sub, lead?, rows:[{label, value}]}]}",
+        "picks": "{type:'picks', items:[{slot, name, sub, delta}]}",
+        "note": "{type:'note', text}  - a quiet footnote"
+      }
+    }
+  },
+  "weeks": [],
+  "articles": []
+}

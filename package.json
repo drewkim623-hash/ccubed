@@ -1,0 +1,14 @@
+{
+  "name": "ccubed",
+  "version": "1.0.0",
+  "description": "A single-page site for the C Cubed fantasy football league. It reads the public Sleeper API directly from the visitor's browser, so there is no server, no database, no API key, and nothing to keep in sync.",
+  "scripts": {
+    "verify": "node verify.mjs"
+  },
+  "private": "true",
+  "type": "module",
+  "license": "ISC",
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}
