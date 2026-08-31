@@ -2087,9 +2087,11 @@ async function panelRecaps() {
 
   const weeks = ((data && data.weeks) || []).slice()
     .sort((a, b) => (Number(b.season) - Number(a.season)) || (b.week - a.week));
-  if (articles.length && weeks.length) p.appendChild(sechead("Week by week"));
+  if (articles.length) p.appendChild(sechead("Week by week"));
+  // Long reads can exist before a single game has been played. When they do,
+  // the weekly write-ups are still missing and the page has to say so — an
+  // article list on its own reads as though the section is finished.
   if (!weeks.length) {
-    if (articles.length) return p;
     p.appendChild(el("div", "empty",
       "<b>Nothing to read yet</b>The write-ups start the week the season kicks off — every game, plus the trades, the waiver moves and the power-board swings around them."));
     return p;

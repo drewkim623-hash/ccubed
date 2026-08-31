@@ -1,45 +1,677 @@
 {
-  "_comment": "The week in the C Cubed. The scheduled job appends one object to weeks[] after each week finalizes: a lede, a write-up for each of the six games, and an 'around' notebook covering everything else that moved that week. articles[] holds longer pieces — draft reports, midseason takes — which are written by hand or on request rather than by the weekly job; the job must carry articles[] through untouched. The site sorts both newest-first and computes risers and sliders itself from its own power rankings, so nothing here should ever quote a rank or a movement.",
-  "_schema": {
-    "weeks[]": {
-      "season": "4-digit year as a string",
-      "week": "integer 1-17",
-      "note": "optional subtitle, e.g. 'Playoffs - Round 1'",
-      "lede": "one paragraph on the week as a whole - the shape of it, what mattered, what it set up",
-      "games[]": {
-        "headline": "short ESPN-style game headline",
-        "winner": "manager display name",
-        "winner_points": "number",
-        "loser": "manager display name",
-        "loser_points": "number",
-        "body": "2-4 sentence recap"
-      },
-      "around[]": {
-        "kind": "one of: trade, waivers, riser, slider, streak, injury, race, note",
-        "headline": "short, factual",
-        "body": "2-3 sentences"
-      }
-    },
-    "articles[]": {
-      "season": "4-digit year as a string",
-      "slug": "url-safe id, unique",
-      "date": "YYYY-MM-DD",
-      "kicker": "small line above the headline",
-      "headline": "the piece's title",
-      "dek": "one-sentence standfirst under the headline",
-      "byline": "who wrote it",
-      "standfirst": "optional short detail line next to the byline",
-      "blocks[]": {
-        "p": "{type:'p', text, lead?}  - a paragraph; lead:true gets the drop cap. <b> is allowed, nothing else",
-        "h": "{type:'h', eyebrow, text}  - a section heading",
-        "stat": "{type:'stat', n, text}  - a pull-out number",
-        "bars": "{type:'bars', title, sub, rows:[{label, sub, value, group}]}  - diverging bars about zero; group 1-3 picks the colour",
-        "cards": "{type:'cards', items:[{title, big, sub, lead?, rows:[{label, value}]}]}",
-        "picks": "{type:'picks', items:[{slot, name, sub, delta}]}",
-        "note": "{type:'note', text}  - a quiet footnote"
-      }
-    }
+ "_comment": "The week in the C Cubed. The scheduled job appends one object to weeks[] after each week finalizes: a lede, a write-up for each of the six games, and an 'around' notebook covering everything else that moved that week. articles[] holds longer pieces — draft reports, midseason takes — which are written by hand or on request rather than by the weekly job; the job must carry articles[] through untouched. The site sorts both newest-first and computes risers and sliders itself from its own power rankings, so nothing here should ever quote a rank or a movement.",
+ "_schema": {
+  "weeks[]": {
+   "season": "4-digit year as a string",
+   "week": "integer 1-17",
+   "note": "optional subtitle, e.g. 'Playoffs - Round 1'",
+   "lede": "one paragraph on the week as a whole - the shape of it, what mattered, what it set up",
+   "games[]": {
+    "headline": "short ESPN-style game headline",
+    "winner": "manager display name",
+    "winner_points": "number",
+    "loser": "manager display name",
+    "loser_points": "number",
+    "body": "2-4 sentence recap"
+   },
+   "around[]": {
+    "kind": "one of: trade, waivers, riser, slider, streak, injury, race, note",
+    "headline": "short, factual",
+    "body": "2-3 sentences"
+   }
   },
-  "weeks": [],
-  "articles": []
+  "articles[]": {
+   "season": "4-digit year as a string",
+   "slug": "url-safe id, unique",
+   "date": "YYYY-MM-DD",
+   "kicker": "small line above the headline",
+   "headline": "the piece's title",
+   "dek": "one-sentence standfirst under the headline",
+   "byline": "who wrote it",
+   "standfirst": "optional short detail line next to the byline",
+   "blocks[]": {
+    "p": "{type:'p', text, lead?}  - a paragraph; lead:true gets the drop cap. <b> is allowed, nothing else",
+    "h": "{type:'h', eyebrow, text}  - a section heading",
+    "stat": "{type:'stat', n, text}  - a pull-out number",
+    "bars": "{type:'bars', title, sub, rows:[{label, sub, value, group}]}  - diverging bars about zero; group 1-3 picks the colour",
+    "cards": "{type:'cards', items:[{title, big, sub, lead?, rows:[{label, value}]}]}",
+    "picks": "{type:'picks', items:[{slot, name, sub, delta}]}",
+    "note": "{type:'note', text}  - a quiet footnote"
+   }
+  }
+ },
+ "weeks": [],
+ "articles": [
+  {
+   "season": "2026",
+   "slug": "2026-draft-report",
+   "date": "2026-08-30",
+   "kicker": "2026 Draft · Report",
+   "headline": "Nobody wanted a quarterback, and Josh Jacobs paid for it",
+   "dek": "Six backs, six receivers, two tight ends at the turn — and a top-32 running back still sitting there at pick 101.",
+   "byline": "C Cubed",
+   "standfirst": "180 picks, 79 minutes",
+   "cover": {
+    "tone": "gold",
+    "players": [
+     "9221",
+     "9509",
+     "7564",
+     "9493"
+    ],
+    "caption": "The first four off the board: Gibbs, Robinson, Chase, Nacua."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "lead": true,
+     "text": "The first draft this league has ever held ran on Sunday evening and took seventy-nine minutes end to end — fifteen rounds, a hundred and eighty picks, not one traded slot, and an average of twenty-seven seconds between names. For eight picks it went exactly the way the market said it would. Then it stopped doing that, and it never really started again."
+    },
+    {
+     "type": "stat",
+     "n": "26.6s",
+     "text": "the average gap between picks. A hundred and eighty of them, start to finish, in an hour and twenty minutes."
+    },
+    {
+     "type": "h",
+     "eyebrow": "Round one",
+     "text": "Six backs, six receivers, nothing else"
+    },
+    {
+     "type": "p",
+     "text": "The first round split exactly down the middle and touched no other position — no quarterback, no tight end, no thought given to either. It was also the most obedient stretch of the night: none of the first eight picks moved more than two places off its pre-draft price. <b>jiddyyyyyy</b> opened with Jahmyr Gibbs from the one slot, <b>yojarshh</b> took Bijan Robinson behind him, and the receivers came in the order the board had them."
+    },
+    {
+     "type": "picks",
+     "items": [
+      {
+       "slot": "1.01",
+       "name": "Jahmyr Gibbs",
+       "sub": "RB · DET · jiddyyyyyy",
+       "delta": "ADP 1.5"
+      },
+      {
+       "slot": "1.02",
+       "name": "Bijan Robinson",
+       "sub": "RB · ATL · yojarshh",
+       "delta": "ADP 2.3"
+      },
+      {
+       "slot": "1.03",
+       "name": "Ja'Marr Chase",
+       "sub": "WR · CIN · Lee284",
+       "delta": "ADP 3.9"
+      },
+      {
+       "slot": "1.04",
+       "name": "Puka Nacua",
+       "sub": "WR · LAR · edyun1",
+       "delta": "ADP 3.0"
+      },
+      {
+       "slot": "1.05",
+       "name": "Jaxon Smith-Njigba",
+       "sub": "WR · SEA · saiky7",
+       "delta": "ADP 5.5"
+      },
+      {
+       "slot": "1.06",
+       "name": "Christian McCaffrey",
+       "sub": "RB · SF · bigmoneyjos",
+       "delta": "ADP 6.6"
+      }
+     ]
+    },
+    {
+     "type": "p",
+     "text": "The turn is where it loosened. <b>drewkim</b> took James Cook at 9 and <b>andychoe03</b> took Chase Brown at 10, both roughly three picks ahead of the board, and from the back of the round <b>nikhil1123</b> got Justin Jefferson at 12 and De'Von Achane at 13 — the only manager to leave the first two rounds with a receiver and a back both priced inside the top thirteen."
+    },
+    {
+     "type": "h",
+     "eyebrow": "The turn",
+     "text": "Two tight ends, then twenty picks of silence"
+    },
+    {
+     "type": "p",
+     "text": "<b>edyun1</b> broke the position at 21 with Brock Bowers, fourteen picks ahead of the market, and <b>Lee284</b> followed immediately with Trey McBride, seven ahead of his. Both of them play in <b>tech</b>, and having taken the two best tight ends off the board they then watched twenty picks go by before anyone else touched the position — Tyler Warren, to <b>jjnhwg</b>, at 42."
+    },
+    {
+     "type": "h",
+     "eyebrow": "Quarterback",
+     "text": "Thirty-three picks of everybody waiting for somebody else"
+    },
+    {
+     "type": "p",
+     "text": "Josh Allen went to <b>andychoe03</b> at 34, and he was the first quarterback drafted. The twelfth team to take one was <b>yojarshh</b>, at pick 122. That is a room in which nobody wanted to be first, and the market punished the position all the way down: four starters with real prices sat there until somebody finally took pity."
+    },
+    {
+     "type": "picks",
+     "items": [
+      {
+       "slot": "162",
+       "name": "Jared Goff",
+       "sub": "jjnhwg",
+       "delta": "61 picks late"
+      },
+      {
+       "slot": "142",
+       "name": "Brock Purdy",
+       "sub": "Lee284",
+       "delta": "55 picks late"
+      },
+      {
+       "slot": "122",
+       "name": "Matthew Stafford",
+       "sub": "yojarshh",
+       "delta": "46 picks late"
+      },
+      {
+       "slot": "174",
+       "name": "Baker Mayfield",
+       "sub": "bigmoneyjos",
+       "delta": "44 picks late"
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "The fall",
+     "text": "Josh Jacobs, pick 101"
+    },
+    {
+     "type": "stat",
+     "n": "70",
+     "text": "picks past his price. Jacobs came off the pre-draft board at 31.4 and sat until <b>saiky7</b> took him at 101 — the longest fall of the night by eight picks."
+    },
+    {
+     "type": "p",
+     "text": "Nothing complicated happened to him. Six backs went in the first round and six more in the second, the run emptied out, and by the time the room came back around to running back it had moved on to receivers. Jacobs is the fourth back on saiky7's roster and cost a seventh-round slot. If the market was right about him in August, that is the single best price anybody paid all night."
+    },
+    {
+     "type": "h",
+     "eyebrow": "The other direction",
+     "text": "Who could not wait"
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "title": "MarShawn Lloyd",
+       "big": "68",
+       "sub": "picks early · drewkim",
+       "lead": true,
+       "rows": [
+        {
+         "label": "Taken",
+         "value": "81"
+        },
+        {
+         "label": "Market",
+         "value": "148.8"
+        }
+       ]
+      },
+      {
+       "title": "Dalton Kincaid",
+       "big": "57",
+       "sub": "picks early · saiky7",
+       "rows": [
+        {
+         "label": "Taken",
+         "value": "92"
+        },
+        {
+         "label": "Market",
+         "value": "148.7"
+        }
+       ]
+      },
+      {
+       "title": "Jake Ferguson",
+       "big": "44",
+       "sub": "picks early · tonypng",
+       "rows": [
+        {
+         "label": "Taken",
+         "value": "89"
+        },
+        {
+         "label": "Market",
+         "value": "132.7"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "p",
+     "text": "Three of the five biggest reaches were tight ends, and they came in a ten-pick window: Sam LaPorta to <b>asierbelay</b> at 83, Jake Ferguson to <b>tonypng</b> at 89, Dalton Kincaid to <b>saiky7</b> at 92, each of them thirty-four to fifty-seven picks ahead of his price. All three had watched Bowers and McBride vanish at the turn. That is what a two-man cliff does to a room — it does not make anybody wait, it makes everybody jump early and separately."
+    },
+    {
+     "type": "h",
+     "eyebrow": "Method",
+     "text": "Who let the board come to them"
+    },
+    {
+     "type": "bars",
+     "title": "Picks gained against the market",
+     "sub": "How far a manager's players fell past their pre-draft price, less what he spent going early. Positive means the board came to him. Colour is his division.",
+     "rows": [
+      {
+       "label": "Lee284",
+       "sub": "tech",
+       "value": 86,
+       "group": 3
+      },
+      {
+       "label": "bigmoneyjos",
+       "sub": "cville",
+       "value": 71,
+       "group": 1
+      },
+      {
+       "label": "andychoe03",
+       "sub": "cville",
+       "value": 49,
+       "group": 1
+      },
+      {
+       "label": "asierbelay",
+       "sub": "cville",
+       "value": 37,
+       "group": 1
+      },
+      {
+       "label": "nikhil1123",
+       "sub": "chaps",
+       "value": 33,
+       "group": 2
+      },
+      {
+       "label": "tonypng",
+       "sub": "tech",
+       "value": 26,
+       "group": 3
+      },
+      {
+       "label": "yojarshh",
+       "sub": "chaps",
+       "value": 12,
+       "group": 2
+      },
+      {
+       "label": "saiky7",
+       "sub": "chaps",
+       "value": 6,
+       "group": 2
+      },
+      {
+       "label": "jjnhwg",
+       "sub": "chaps",
+       "value": -2,
+       "group": 2
+      },
+      {
+       "label": "edyun1",
+       "sub": "tech",
+       "value": -20,
+       "group": 3
+      },
+      {
+       "label": "drewkim",
+       "sub": "cville",
+       "value": -20,
+       "group": 1
+      },
+      {
+       "label": "jiddyyyyyy",
+       "sub": "tech",
+       "value": -69,
+       "group": 3
+      }
+     ]
+    },
+    {
+     "type": "p",
+     "text": "It is worth being careful with that chart, because it does not rank the drafts. <b>Lee284</b> tops it and did come out with one of the better rosters — Chase, McBride, and then Jakobi Meyers and Brock Purdy arriving thirty-six and fifty-five picks beneath their prices. But the best roster in the draft belongs to <b>yojarshh</b>, who sits near the middle of it. He did not hunt bargains. He took Bijan Robinson second overall and then George Pickens, Rashee Rice and Davante Adams roughly where the board said, and that was enough."
+    },
+    {
+     "type": "h",
+     "eyebrow": "The verdict",
+     "text": "What the twelve rosters are worth"
+    },
+    {
+     "type": "p",
+     "text": "Priced against the same pre-draft board, best fifteen picks each so nobody is paid for owning extra roster slots, the drafted rosters run from yojarshh at 112.8 points a week down to drewkim at 103.1. That is the whole league inside 9.65 points a week — and the projection only carries a little over half of a draft-day edge forward into scoring, because historically that is about how much of it actually shows up."
+    },
+    {
+     "type": "stat",
+     "n": "9.65",
+     "text": "points a week between the best drafted roster and the twelfth. By opening weekend the model expects roughly half of that gap to still be there."
+    },
+    {
+     "type": "p",
+     "text": "Which is the honest summary of the night. Twelve managers drafted, one of them clearly drafted better than the rest, and the reward for it is a projection that has him winning about seven and a half games out of fourteen. Nobody solved this on Sunday."
+    },
+    {
+     "type": "note",
+     "text": "The Odds and Power boards label a team by its name wherever its manager has set one, so seven of these twelve read differently there: <b>8 and thick</b> is bigmoneyjos, <b>Lucky Strike</b> is drewkim, <b>AB x B</b> is asierbelay, <b>S2? #jtw #imwallin</b> is yojarshh, <b>n²</b> is nikhil1123, <b>Eug</b> is Lee284 and <b>Team Meta/Bloomberg</b> is jiddyyyyyy. This piece names the managers throughout, as the draft board does."
+    },
+    {
+     "type": "note",
+     "text": "Pre-draft prices are the Fantasy Football Calculator 12-team full-PPR board — 8,234 mock drafts sampled 23–30 August 2026, frozen on draft day and never updated, because the board that matters is the one that existed while people were picking. Twelve team defences and one tight end were not on it and are valued at the board's floor. Roster value counts each manager's best fifteen picks, one per round, so every team is priced on the same number of players. The projection those values feed is calibrated on a borrowed sample; the Odds board sets out exactly which, and why."
+    }
+   ]
+  },
+  {
+   "season": "2026",
+   "slug": "2026-divisions",
+   "date": "2026-08-30",
+   "kicker": "Division by division",
+   "headline": "Three divisions, six places, and almost nothing between them",
+   "dek": "chaps drafted the best of it. tech drafted the closest. cville drafted the worst — and still owns a top-three seed.",
+   "byline": "C Cubed",
+   "standfirst": "Before a game has been played",
+   "cover": {
+    "tone": "blue",
+    "players": [
+     "9509",
+     "7564",
+     "4034",
+     "11604"
+    ],
+    "caption": "One from each division, and the tight end who broke the turn."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "lead": true,
+     "text": "Twelve teams, three divisions of four, fourteen weeks and six playoff places. The three division winners take the first three seeds whatever their records look like, and the two best of those get the bye. Everything below is a projection off the draft and nothing else — nobody has played a game — but the shape of the season is already fixed, and the shape says the divisions matter more than the rosters do."
+    },
+    {
+     "type": "stat",
+     "n": "6 of 14",
+     "text": "of every team's games are inside its own division. You play each of your three rivals twice and everybody else once — checked against the schedule Sleeper has actually posted, not assumed."
+    },
+    {
+     "type": "h",
+     "eyebrow": "chaps",
+     "text": "The best of the draft, and the widest gap in it"
+    },
+    {
+     "type": "p",
+     "text": "<b>yojarshh</b> came out of the draft with the most valuable roster in the league — Bijan Robinson, Pickens, Rice, Adams — and he is the shortest price on the board to win the whole thing at +700. Behind him <b>saiky7</b> holds the Josh Jacobs steal and a Jaxon Smith-Njigba–Drake London receiving pair, <b>nikhil1123</b> has Jefferson and Achane from the back of round one, and <b>jjnhwg</b> has Jonathan Taylor and Derrick Henry and the least help behind them. As a group it drafted better than either of the others; it is also the division where the favourite is furthest clear of the field."
+    },
+    {
+     "type": "picks",
+     "items": [
+      {
+       "slot": "1",
+       "name": "yojarshh",
+       "sub": "112.8 a week",
+       "delta": "+190"
+      },
+      {
+       "slot": "2",
+       "name": "saiky7",
+       "sub": "109.2 a week",
+       "delta": "+280"
+      },
+      {
+       "slot": "3",
+       "name": "nikhil1123",
+       "sub": "107.6 a week",
+       "delta": "+320"
+      },
+      {
+       "slot": "4",
+       "name": "jjnhwg",
+       "sub": "105.9 a week",
+       "delta": "+370"
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "tech",
+     "text": "Three teams inside a point and a half"
+    },
+    {
+     "type": "p",
+     "text": "<b>Lee284</b>, <b>jiddyyyyyy</b> and <b>edyun1</b> came out of the draft separated by 1.5 points a week — which, over fourteen games against a weekly swing of twenty-four points, is not a separation at all. The board prices them +230, +260 and +270 to win the division — forty points covering three teams, where no other division gets its top three inside a hundred — and the only reason it is a market at all is <b>tonypng</b> at +390. Two of these three teams also own the best tight ends in the league, taken back to back at 21 and 22, which is either the reason they are level or a coincidence that will look like a reason by November."
+    },
+    {
+     "type": "picks",
+     "items": [
+      {
+       "slot": "1",
+       "name": "Lee284",
+       "sub": "110.4 a week",
+       "delta": "+230"
+      },
+      {
+       "slot": "2",
+       "name": "jiddyyyyyy",
+       "sub": "109.0 a week",
+       "delta": "+260"
+      },
+      {
+       "slot": "3",
+       "name": "edyun1",
+       "sub": "108.8 a week",
+       "delta": "+270"
+      },
+      {
+       "slot": "4",
+       "name": "tonypng",
+       "sub": "104.5 a week",
+       "delta": "+390"
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "cville",
+     "text": "The worst division, and the cheapest bye in the league"
+    },
+    {
+     "type": "p",
+     "text": "On drafted value cville is the weakest of the three — 106.1 a week on average against chaps' 108.9 — and it holds the longest title price on the board in <b>drewkim</b> at +1500, with <b>asierbelay</b> at +1330 not far above him. <b>bigmoneyjos</b> is the favourite at +210 on the back of McCaffrey, A.J. Brown and Nico Collins, with <b>andychoe03</b> and the only Josh Allen in the league behind him."
+    },
+    {
+     "type": "p",
+     "text": "None of which stops one of these four from being seeded first or second in January. That is the format working as designed: win the softest division and you are a top-three seed regardless of what the other eight teams did. It shows up in the numbers as a wash — cville's four teams share 61.9% of a bye between them against chaps' 70.5%, a gap far smaller than the gap between the rosters."
+    },
+    {
+     "type": "picks",
+     "items": [
+      {
+       "slot": "1",
+       "name": "bigmoneyjos",
+       "sub": "109.2 a week",
+       "delta": "+210"
+      },
+      {
+       "slot": "2",
+       "name": "andychoe03",
+       "sub": "107.0 a week",
+       "delta": "+260"
+      },
+      {
+       "slot": "3",
+       "name": "asierbelay",
+       "sub": "105.1 a week",
+       "delta": "+310"
+      },
+      {
+       "slot": "4",
+       "name": "drewkim",
+       "sub": "103.1 a week",
+       "delta": "+370"
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "The board",
+     "text": "Every roster against the league average"
+    },
+    {
+     "type": "bars",
+     "title": "Drafted value, points a week",
+     "sub": "Each roster measured against the average of all twelve, priced off the pre-draft market. Colour is division.",
+     "rows": [
+      {
+       "label": "yojarshh",
+       "sub": "chaps",
+       "value": 5.06,
+       "group": 2
+      },
+      {
+       "label": "Lee284",
+       "sub": "tech",
+       "value": 2.64,
+       "group": 3
+      },
+      {
+       "label": "saiky7",
+       "sub": "chaps",
+       "value": 1.48,
+       "group": 2
+      },
+      {
+       "label": "bigmoneyjos",
+       "sub": "cville",
+       "value": 1.47,
+       "group": 1
+      },
+      {
+       "label": "jiddyyyyyy",
+       "sub": "tech",
+       "value": 1.26,
+       "group": 3
+      },
+      {
+       "label": "edyun1",
+       "sub": "tech",
+       "value": 1.14,
+       "group": 3
+      },
+      {
+       "label": "nikhil1123",
+       "sub": "chaps",
+       "value": -0.15,
+       "group": 2
+      },
+      {
+       "label": "andychoe03",
+       "sub": "cville",
+       "value": -0.7,
+       "group": 1
+      },
+      {
+       "label": "jjnhwg",
+       "sub": "chaps",
+       "value": -1.78,
+       "group": 2
+      },
+      {
+       "label": "asierbelay",
+       "sub": "cville",
+       "value": -2.65,
+       "group": 1
+      },
+      {
+       "label": "tonypng",
+       "sub": "tech",
+       "value": -3.2,
+       "group": 3
+      },
+      {
+       "label": "drewkim",
+       "sub": "cville",
+       "value": -4.58,
+       "group": 1
+      }
+     ]
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "title": "chaps",
+       "big": "108.9",
+       "sub": "average roster · 36.1% of the title",
+       "rows": [
+        {
+         "label": "Favourite",
+         "value": "yojarshh +190"
+        },
+        {
+         "label": "Playoff share",
+         "value": "207 of 600"
+        }
+       ]
+      },
+      {
+       "title": "tech",
+       "big": "108.2",
+       "sub": "average roster · 33.8% of the title",
+       "rows": [
+        {
+         "label": "Favourite",
+         "value": "Lee284 +230"
+        },
+        {
+         "label": "Playoff share",
+         "value": "204 of 600"
+        }
+       ]
+      },
+      {
+       "title": "cville",
+       "big": "106.1",
+       "sub": "average roster · 30.1% of the title",
+       "rows": [
+        {
+         "label": "Favourite",
+         "value": "bigmoneyjos +210"
+        },
+        {
+         "label": "Playoff share",
+         "value": "189 of 600"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "The point",
+     "text": "Nobody is a lock and nobody is out of it"
+    },
+    {
+     "type": "p",
+     "text": "Six of twelve teams make the playoffs, so the average team is a coin flip by definition. What is striking is how little the draft moved anyone off that coin flip: the best team in the league is projected to make it 60.4% of the time and the worst 41.4%, and every other team sits between them."
+    },
+    {
+     "type": "stat",
+     "n": "19 points",
+     "text": "separate the best playoff odds in the league from the worst. Across fourteen games, that is the difference between 7.5 projected wins and 6.6 — the best draft in the league bought about nine-tenths of a win."
+    },
+    {
+     "type": "p",
+     "text": "The win totals say the same thing in plainer language. Six teams are priced at seven and a half wins and six at six and a half, and not one projects above 7.5. There is no team here that has to be beaten and no team here that can be written off, which is the most anyone can honestly say about a league that has never played a down."
+    },
+    {
+     "type": "note",
+     "text": "The Odds and Power boards label a team by its name wherever its manager has set one, so seven of these twelve read differently there: <b>8 and thick</b> is bigmoneyjos, <b>Lucky Strike</b> is drewkim, <b>AB x B</b> is asierbelay, <b>S2? #jtw #imwallin</b> is yojarshh, <b>n²</b> is nikhil1123, <b>Eug</b> is Lee284 and <b>Team Meta/Bloomberg</b> is jiddyyyyyy. This piece names the managers throughout, as the draft board does."
+    },
+    {
+     "type": "note",
+     "text": "Every number here comes off the same model the Odds and Power boards use — the same twenty thousand simulated seasons on the same fixed seed, so the figures in this piece and the prices on those boards are the same figures. Rosters are priced against the frozen pre-draft market; the calibration underneath is borrowed from another league's history because C Cubed has none of its own yet, and the Odds board explains what was borrowed and what it is worth. It gets refitted on C Cubed's own football the moment there is some."
+    }
+   ]
+  }
+ ]
 }

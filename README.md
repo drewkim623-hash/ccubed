@@ -35,8 +35,9 @@ games. Each one currently shows a short note saying what it is waiting for. The 
 finalises on Sleeper they start working, with no edit and no upload — the page recomputes from
 the API on every load.
 
-**What works today** is the **Draft** board (all 180 picks are in), and the **Odds** and **Power**
-boards, which price the twelve rosters that came out of that draft.
+**What works today** is the **Draft** board (all 180 picks are in), the **Odds** and **Power**
+boards, which price the twelve rosters that came out of that draft, and **News & Articles**, which
+carries two long reads off that draft. The weekly write-ups underneath them still start at kickoff.
 
 **The odds board's calibration is borrowed, and says so on its face.** The model needs to know
 how far apart the teams are *and* how noisy a fantasy week is. The first it gets from C Cubed's

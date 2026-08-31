@@ -348,7 +348,14 @@ check("matchups says nobody has played anybody", /nobody has played/i.test(empti
 check("the scoreboard says no games yet", /no games played/i.test(empties.scores));
 check("the race says the season hasn't started", /hasn't started|has not started/i.test(empties.race));
 check("trades says none on record", /no trades/i.test(empties.trades));
-check("the news says nothing to read yet", /nothing to read/i.test(empties.recaps));
+// Articles ship before any football does, so this is not an empty section — but
+// the weekly write-ups genuinely are missing, and the page must still say so
+// rather than letting a couple of long reads imply the section is complete.
+check("the news still says the weekly write-ups have not started",
+  /nothing to read/i.test(empties.recaps));
+check("the news carries the long reads above it",
+  /Josh Jacobs paid for it/.test(empties.recaps)
+  && /almost nothing between them/.test(empties.recaps));
 check("no empty state leaves a bare dash as the whole answer",
   !/^—$/m.test(empties.records + empties.matchups + empties.scores));
 
@@ -375,12 +382,19 @@ const leak = await page.evaluate(async () => {
   const recaps = await fetch("recaps.json").then(r => r.json());
   const ranks = await fetch("rankings.json").then(r => r.json());
   return { ...out, recapWeeks: recaps.weeks.length, recapArticles: (recaps.articles || []).length,
+           artSeasons: [...new Set((recaps.articles || []).map(a => String(a.season)))],
            rankWeeks: ranks.weeks.length,
            recapsHasDFFL: JSON.stringify(recaps).includes("DFFL"),
            ranksHasDFFL: JSON.stringify(ranks).includes("DFFL") };
 });
-check("no DFFL recaps shipped", leak.recapWeeks === 0 && leak.recapArticles === 0,
-  `${leak.recapWeeks} weeks, ${leak.recapArticles} articles`);
+// C Cubed has finalised no week, so a weekly recap could only have come from
+// somewhere else. Articles are different: they are written by hand and can
+// legitimately predate the first kickoff, so they are checked for provenance —
+// every one must be about a C Cubed season — rather than required to be absent.
+check("no weekly recaps shipped for a league that has not played",
+  leak.recapWeeks === 0, `${leak.recapWeeks} weeks`);
+check("every article is a C Cubed season",
+  leak.artSeasons.every(s => s === "2026"), leak.artSeasons.join(","));
 check("no DFFL power blurbs shipped", leak.rankWeeks === 0, String(leak.rankWeeks));
 check("recaps.json mentions no other league", !leak.recapsHasDFFL);
 check("rankings.json mentions no other league", !leak.ranksHasDFFL);
