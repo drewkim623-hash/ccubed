@@ -1,0 +1,141 @@
+# Pull Sleeper and commit the result. C Cubed (league 1387595114829864960) only.
+#
+# Nothing in this workflow sends email. It reads Sleeper, ESPN's injury feed and
+# the published C Cubed page, and commits JSON. The Saturday "blast" schedule
+# carried by the league this was ported from is deliberately not here: C Cubed
+# has no recipient list yet (see poll-tally.mjs / weekly-job-prompt.md TODOs).
+#
+# This workflow exists to solve one problem: the scheduled Claude routine that
+# writes the recaps cannot reach api.sleeper.app. WebFetch there wants a per-URL
+# approval nobody is present to give in an unattended run, and the sandbox's
+# egress proxy rejects curl outright — every Tuesday run failed on that before
+# this existed.
+#
+# GitHub Actions has no such restriction. So the data comes from here and lands
+# in the repo as plain JSON; the routine clones the repo and writes prose from
+# the file without touching the network at all.
+#
+# Tuesday just after midnight: build the week that just finished, and refresh
+# injuries. build-week.mjs only moves data/latest.json once every NFL game that
+# week is complete and every league matchup is scored; until then it writes
+# nothing and exits 0, so an early run is harmless.
+# Sunday late morning: refresh injuries only, after the inactive reports land
+# and before the one o'clock games kick off.
+
+name: Weekly data
+
+on:
+  schedule:
+    # Tuesday build, for the recap routine at 01:00 ET. Cron is UTC and does not
+    # follow daylight saving, so there are two entries on purpose:
+    #   04:30 UTC = 00:30 EDT (until 1 Nov 2026) but 23:30 EST Monday after it,
+    #               which can be before Monday night's game is over;
+    #   05:30 UTC = 01:30 EDT, or 00:30 EST once the clocks go back.
+    # Whichever one runs after the week is final writes it; the other finds the
+    # week not final yet (nothing written) or rebuilds the same final week, and
+    # rebuilding only refreshes timestamps — the same thing the daily 07:00 run
+    # does every day. In EST the 05:30 run is the one the 01:00 routine reads;
+    # in EDT the 04:30 run is, and the 05:30 one lands after the send.
+    - cron: "30 4 * * 2"    # Tue 00:30 EDT / Mon 23:30 EST
+    - cron: "30 5 * * 2"    # Tue 01:30 EDT / Tue 00:30 EST
+    - cron: "30 15 * * 0"   # Sun 11:30 America/New_York — inactives are in, kickoff is not
+    - cron: "0 11 * * *"    # daily 07:00 America/New_York — keeps the story watch current
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "Backfill a specific week (leave blank for the week that just finished)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-data
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # Only the C Cubed repo itself. A fork or a copy must not commit data on a timer.
+    if: github.repository == 'drewkim623-hash/ccubed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "20"
+
+      # The build scripts have no npm dependencies — they share fetch-json.mjs
+      # out of the repo and use the built-in fetch — so there is deliberately no
+      # install step here to go stale. The browser below is a separate matter.
+      - name: Build the finished week
+        run: |
+          if [ -n "${{ inputs.week }}" ]; then
+            node build-week.mjs --week "${{ inputs.week }}"
+          else
+            node build-week.mjs
+          fi
+
+      # Rosters change on waivers, and the live win probabilities need to know
+      # which club each starter plays for. Sunday's run is the one that matters:
+      # it catches the lineups people actually set.
+      - name: Refresh the roster map
+        run: node build-rosters.mjs
+
+      # After the roster map on purpose: the injury snapshot carries ESPN's prose
+      # only for players somebody actually rosters, so it needs today's rosters
+      # rather than last run's.
+      - name: Refresh the injury snapshot
+        run: node build-injuries.mjs
+
+      # The daily picture the story watch reads: standings, the week in
+      # progress, recent trades and claims, who is hurt. Small and factual.
+      - name: Take the league's pulse
+        run: node build-pulse.mjs
+
+      # The email's numbers must be the site's numbers, so they are read off the
+      # published page rather than recomputed. That needs a browser, which is
+      # why it happens here: the routine that sends the email can reach neither
+      # Sleeper nor the site, and composes from the snapshot this leaves behind.
+      - name: Install the browser for the odds snapshot
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Snapshot what the site is showing
+        run: node build-email.mjs
+
+      # The snapshot just written joins data/odds-history.json. The script
+      # merges into the committed file (never rebuilds it), so the default
+      # shallow checkout is safe and no fetch-depth change is needed. It must
+      # never stop the commit below, which the Tuesday recap depends on.
+      - name: Add this run's odds reading to the line history
+        run: node build-odds-history.mjs || echo "::warning::odds history not updated"
+
+      - name: Commit anything that changed
+        run: |
+          git config user.name  "ccubed-data[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data injuries.json rosters.json
+          if git diff --staged --quiet; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git commit -m "Data: $(node -e "
+            try {
+              const l = require('./data/latest.json');
+              process.stdout.write('week ' + l.week + ' of ' + l.season);
+            } catch (e) { process.stdout.write('injury refresh'); }
+          ")"
+          # The routine commits to main too (recaps, the send ledger), and the
+          # two Tuesday runs make a collision likelier. Replay this one commit
+          # on top of whatever landed since checkout, then push once. No loop,
+          # no force: if the rebase conflicts it is aborted and the step fails
+          # loudly, and the next scheduled run starts clean.
+          if ! git pull --rebase origin "${GITHUB_REF_NAME:-main}"; then
+            git rebase --abort || true
+            echo "::error::Could not rebase the data commit onto main; nothing pushed."
+            exit 1
+          fi
+          git push origin "HEAD:${GITHUB_REF_NAME:-main}"
