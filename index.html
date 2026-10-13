@@ -1306,7 +1306,7 @@ async function loadSeason(lg) {
     const tn = u.metadata && u.metadata.team_name;
     if (tn && !m.team) m.team = tn;
     m.locked = true;
-    // Eleven of the twelve teams here are run by two people. Sleeper hangs the
+    // All twelve teams here are run by two people. Sleeper hangs the
     // second name off the roster, not the user, so it has to be read from here.
     for (const c of r.co_owners || []) {
       const cu = userById.get(c);
@@ -1593,7 +1593,7 @@ const teamOf = uid => (DB.mgr.get(uid) || {}).team || "";
 /*
  * Who a team card is called, and who runs it.
  *
- * C Cubed is a co-owned league — eleven of the twelve teams are run by two
+ * C Cubed is a co-owned league — all twelve teams are run by two
  * people — and only half the league has bothered to set a team name. So a card
  * leads with whatever actually identifies the team: its name where there is
  * one, the primary owner where there isn't. The line underneath names everybody

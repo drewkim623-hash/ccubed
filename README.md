@@ -133,7 +133,7 @@ run a normal consolation bracket instead, that is the `C.last` block in `simulat
 
 ## Co-owned teams
 
-Twenty-three people run twelve teams — eleven of the twelve have two owners. Sleeper hangs the
+Twenty-four people run twelve teams — all twelve have two owners. Sleeper hangs the
 second name off the *roster*, not the user, so the site reads `co_owners` from there.
 
 Because only half the league has set a team name, a card leads with whatever actually identifies

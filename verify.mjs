@@ -5137,7 +5137,7 @@ var owners = await page.evaluate(() => {
     named: uids.filter(u => teamOf(u)).every(u => ownerLine(u).includes(nameOf(u))),
   };
 });
-check("eleven teams are run by two people", owners.withCo === 11, String(owners.withCo));
+check("all twelve teams are run by two people", owners.withCo === 12, String(owners.withCo));
 check("a card never prints its own title twice", owners.noEcho);
 check("a team with no name falls back to its owner's handle", owners.fallback);
 check("an unnamed team credits its co-owner underneath", owners.subs);
