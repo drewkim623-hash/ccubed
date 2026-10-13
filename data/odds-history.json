@@ -1,0 +1,5 @@
+{
+ "_comment": "Written by build-odds-history.mjs from data/odds-snapshot.json. Empty on purpose: C Cubed is a redraft league in its first season and no live matchup has been snapshotted yet. Rows appear as the weekly workflow records them.",
+ "generated": null,
+ "weeks": {}
+}

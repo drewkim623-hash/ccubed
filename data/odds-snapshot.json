@@ -1,0 +1,265 @@
+{
+ "_comment": "Written by build-email.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. compose-email.mjs turns this into the weekly email. Nothing downstream recomputes a probability, so the email and the site cannot disagree.",
+ "generated": "2026-10-13T19:03:38.500Z",
+ "at": 1791918218500,
+ "season": "2026",
+ "week": 6,
+ "liveWeek": null,
+ "decided": 30,
+ "remaining": 54,
+ "teams": [
+  {
+   "uid": "1018665525720920064",
+   "rid": 12,
+   "manager": "bigmoneyjos",
+   "titleWas": 0.0956,
+   "titleNow": 0.00185,
+   "playoffWas": 0.5453,
+   "playoffNow": 0.0207,
+   "wins": 3.8697,
+   "titleOdds": 50890,
+   "titleOddsOpen": 890,
+   "playoffOdds": 4460
+  },
+  {
+   "uid": "1257789215605788672",
+   "rid": 2,
+   "manager": "andychoe03",
+   "titleWas": 0.08135,
+   "titleNow": 0.0458,
+   "playoffWas": 0.4914,
+   "playoffNow": 0.47295,
+   "wins": 7.2071,
+   "titleOdds": 1960,
+   "titleOddsOpen": 1060,
+   "playoffOdds": -100
+  },
+  {
+   "uid": "1264454496394674176",
+   "rid": 9,
+   "manager": "asierbelay",
+   "titleWas": 0.06495,
+   "titleNow": 0.177,
+   "playoffWas": 0.44145,
+   "playoffNow": 0.90045,
+   "wins": 8.87365,
+   "titleOdds": 430,
+   "titleOddsOpen": 1350,
+   "playoffOdds": -2100
+  },
+  {
+   "uid": "646481339029475328",
+   "rid": 1,
+   "manager": "drewkim",
+   "titleWas": 0.05465,
+   "titleNow": 0.0267,
+   "playoffWas": 0.3993,
+   "playoffNow": 0.2788,
+   "wins": 6.157,
+   "titleOdds": 3430,
+   "titleOddsOpen": 1630,
+   "playoffOdds": 240
+  },
+  {
+   "uid": "997714306332491776",
+   "rid": 3,
+   "manager": "yojarshh",
+   "titleWas": 0.1247,
+   "titleNow": 0.019,
+   "playoffWas": 0.61815,
+   "playoffNow": 0.15765,
+   "wins": 5.4484,
+   "titleOdds": 4870,
+   "titleOddsOpen": 660,
+   "playoffOdds": 500
+  },
+  {
+   "uid": "1002352049469693952",
+   "rid": 6,
+   "manager": "saiky7",
+   "titleWas": 0.09245,
+   "titleNow": 0.21425,
+   "playoffWas": 0.52725,
+   "playoffNow": 0.932,
+   "wins": 9.17235,
+   "titleOdds": 340,
+   "titleOddsOpen": 920,
+   "playoffOdds": -8180
+  },
+  {
+   "uid": "466018540445495296",
+   "rid": 4,
+   "manager": "nikhil1123",
+   "titleWas": 0.07905,
+   "titleNow": 0.02875,
+   "playoffWas": 0.48995,
+   "playoffNow": 0.2731,
+   "wins": 6.2381,
+   "titleOdds": 3180,
+   "titleOddsOpen": 1090,
+   "playoffOdds": 250
+  },
+  {
+   "uid": "809500620536004608",
+   "rid": 7,
+   "manager": "jjnhwg",
+   "titleWas": 0.069,
+   "titleNow": 0.1539,
+   "playoffWas": 0.44665,
+   "playoffNow": 0.88155,
+   "wins": 8.82765,
+   "titleOdds": 510,
+   "titleOddsOpen": 1270,
+   "playoffOdds": -1430
+  },
+  {
+   "uid": "1057211129820213248",
+   "rid": 10,
+   "manager": "Lee284",
+   "titleWas": 0.1001,
+   "titleNow": 0.1632,
+   "playoffWas": 0.56245,
+   "playoffNow": 0.879,
+   "wins": 8.9036,
+   "titleOdds": 480,
+   "titleOddsOpen": 840,
+   "playoffOdds": -1360
+  },
+  {
+   "uid": "1035404182708203520",
+   "rid": 8,
+   "manager": "jiddyyyyyy",
+   "titleWas": 0.0879,
+   "titleNow": 0.0566,
+   "playoffWas": 0.53045,
+   "playoffNow": 0.40335,
+   "wins": 6.50615,
+   "titleOdds": 1570,
+   "titleOddsOpen": 970,
+   "playoffOdds": 135
+  },
+  {
+   "uid": "1260403115740368896",
+   "rid": 5,
+   "manager": "edyun1",
+   "titleWas": 0.0921,
+   "titleNow": 0.01525,
+   "playoffWas": 0.52675,
+   "playoffNow": 0.1369,
+   "wins": 5.2809,
+   "titleOdds": 6090,
+   "titleOddsOpen": 920,
+   "playoffOdds": 590
+  },
+  {
+   "uid": "809957555957813248",
+   "rid": 11,
+   "manager": "tonypng",
+   "titleWas": 0.05815,
+   "titleNow": 0.0977,
+   "playoffWas": 0.4209,
+   "playoffNow": 0.66355,
+   "wins": 7.5154,
+   "titleOdds": 870,
+   "titleOddsOpen": 1520,
+   "playoffOdds": -240
+  }
+ ],
+ "games": [],
+ "hurt": [
+  {
+   "manager": "nikhil1123",
+   "cost": 0.049854276426409605,
+   "players": [
+    {
+     "name": "Kyle Monangai",
+     "status": "Out"
+    }
+   ]
+  },
+  {
+   "manager": "andychoe03",
+   "cost": 0.04112436731742586,
+   "players": [
+    {
+     "name": "David Montgomery",
+     "status": "Out"
+    }
+   ]
+  },
+  {
+   "manager": "bigmoneyjos",
+   "cost": 0.02378625284238245,
+   "players": [
+    {
+     "name": "TreVeyon Henderson",
+     "status": "Out"
+    }
+   ]
+  },
+  {
+   "manager": "saiky7",
+   "cost": 0.023260563380281707,
+   "players": [
+    {
+     "name": "Jaxon Smith-Njigba",
+     "status": "Questionable"
+    }
+   ]
+  },
+  {
+   "manager": "asierbelay",
+   "cost": 0.019357695987561985,
+   "players": [
+    {
+     "name": "CeeDee Lamb",
+     "status": "Questionable"
+    },
+    {
+     "name": "Roman Wilson",
+     "status": "Out"
+    }
+   ]
+  },
+  {
+   "manager": "Lee284",
+   "cost": 0.009603284107104981,
+   "players": [
+    {
+     "name": "Quinshon Judkins",
+     "status": "Questionable"
+    }
+   ]
+  },
+  {
+   "manager": "yojarshh",
+   "cost": 0.006318916841576261,
+   "players": [
+    {
+     "name": "Rashee Rice",
+     "status": "Questionable"
+    }
+   ]
+  }
+ ],
+ "settled": true,
+ "nfl": null,
+ "articles": [
+  {
+   "slug": "2026-draft-report",
+   "kicker": "2026 Draft · Report",
+   "headline": "Nobody wanted a quarterback, and Josh Jacobs paid for it",
+   "dek": "Six backs, six receivers, two tight ends at the turn — and a top-32 running back still sitting there at pick 101.",
+   "byline": "C Cubed",
+   "date": "2026-08-30"
+  },
+  {
+   "slug": "2026-divisions",
+   "kicker": "Division by division",
+   "headline": "Three divisions, six places, and almost nothing between them",
+   "dek": "chaps drafted the best of it. tech drafted the closest. cville drafted the worst — and still owns a top-three seed.",
+   "byline": "C Cubed",
+   "date": "2026-08-30"
+  }
+ ]
+}
