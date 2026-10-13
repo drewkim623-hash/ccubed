@@ -133,7 +133,7 @@ run a normal consolation bracket instead, that is the `C.last` block in `simulat
 
 ## Co-owned teams
 
-Twenty-three people run twelve teams — eleven of the twelve have two owners. Sleeper hangs the
+Twenty-four people run twelve teams — all twelve have two owners. Sleeper hangs the
 second name off the *roster*, not the user, so the site reads `co_owners` from there.
 
 Because only half the league has set a team name, a card leads with whatever actually identifies
@@ -232,6 +232,26 @@ is disclosed rather than hidden, that no DFFL content leaked in, and that nothin
 
 ```bash
 npm install
-node verify.mjs        # 133 checks, all must pass
+node verify.mjs        # ~700 checks; see below for the ones that cannot pass in season one
 node verify.mjs --headed   # watch it drive
 ```
+
+The harness was ported from the sibling site's (keeper checks removed, redraft checks added). Some
+of its checks assume several seasons of history, a pre-draft board or a specific article; those
+fail honestly here and are listed in the port report. Each group runs in isolation, so one group
+that cannot apply fails as one named check instead of stopping the run. The last group sweeps
+every shipped file for another league's id, a `dffl` URL or any email address.
+
+## Data files and the weekly workflow
+
+`.github/workflows/weekly-data.yml` reads Sleeper (league `1387595114829864960` only), ESPN's
+injury feed and the published page, and commits plain JSON: `data/week-*.json`,
+`data/latest.json`, `data/pulse.json`, `data/odds-snapshot.json`, `data/odds-history.json`,
+`rosters.json`, `injuries.json`. It needs no secrets beyond the default `GITHUB_TOKEN` (with
+`contents: write`) and sends no email. It only runs in `drewkim623-hash/ccubed`.
+
+The email scripts (`compose-email.mjs`, `email-week.mjs`, `blast-status.mjs`, `recap-guard.mjs`,
+`poll-tally.mjs`) only build or check files; none of them sends anything. **TODO (Drew):** there is
+no C Cubed recipient list. `poll-tally.mjs` has an empty `LEAGUE` list and
+`data/sent-emails.json` is an empty ledger. Nothing should be emailed until a C Cubed list is
+written down.

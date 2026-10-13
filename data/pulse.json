@@ -1,0 +1,310 @@
+{
+ "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
+ "generated": "2026-10-13T19:03:23.601Z",
+ "at": 1791918203601,
+ "season": "2026",
+ "nfl_week": 6,
+ "season_type": "regular",
+ "week_in_progress": true,
+ "standings": [
+  {
+   "manager": "saiky7",
+   "wins": 4,
+   "losses": 1,
+   "points_for": 754.68,
+   "points_against": 656.26,
+   "faab_spent": 0,
+   "starters_hurt": [
+    "Jaxon Smith-Njigba (Questionable)"
+   ]
+  },
+  {
+   "manager": "asierbelay",
+   "wins": 4,
+   "losses": 1,
+   "points_for": 738.3,
+   "points_against": 641.08,
+   "faab_spent": 0,
+   "starters_hurt": [
+    "CeeDee Lamb (Questionable)",
+    "Roman Wilson (Out)"
+   ]
+  },
+  {
+   "manager": "jjnhwg",
+   "wins": 4,
+   "losses": 1,
+   "points_for": 723.86,
+   "points_against": 651.08,
+   "faab_spent": 1,
+   "starters_hurt": []
+  },
+  {
+   "manager": "Lee284",
+   "wins": 4,
+   "losses": 1,
+   "points_for": 693.04,
+   "points_against": 614.56,
+   "faab_spent": 0,
+   "starters_hurt": [
+    "Quinshon Judkins (Questionable)"
+   ]
+  },
+  {
+   "manager": "tonypng",
+   "wins": 3,
+   "losses": 2,
+   "points_for": 704.68,
+   "points_against": 598.6,
+   "faab_spent": 0,
+   "starters_hurt": []
+  },
+  {
+   "manager": "andychoe03",
+   "wins": 3,
+   "losses": 2,
+   "points_for": 613.04,
+   "points_against": 610.82,
+   "faab_spent": 52,
+   "starters_hurt": [
+    "David Montgomery (Out)"
+   ]
+  },
+  {
+   "manager": "jiddyyyyyy",
+   "wins": 2,
+   "losses": 3,
+   "points_for": 661.48,
+   "points_against": 650.34,
+   "faab_spent": 40,
+   "starters_hurt": []
+  },
+  {
+   "manager": "drewkim",
+   "wins": 2,
+   "losses": 3,
+   "points_for": 635.92,
+   "points_against": 654.38,
+   "faab_spent": 0,
+   "starters_hurt": []
+  },
+  {
+   "manager": "nikhil1123",
+   "wins": 2,
+   "losses": 3,
+   "points_for": 616.16,
+   "points_against": 681.88,
+   "faab_spent": 65,
+   "starters_hurt": [
+    "Kyle Monangai (Out)"
+   ]
+  },
+  {
+   "manager": "edyun1",
+   "wins": 1,
+   "losses": 4,
+   "points_for": 605.72,
+   "points_against": 715.78,
+   "faab_spent": 12,
+   "starters_hurt": []
+  },
+  {
+   "manager": "yojarshh",
+   "wins": 1,
+   "losses": 4,
+   "points_for": 601.16,
+   "points_against": 720.18,
+   "faab_spent": 12,
+   "starters_hurt": [
+    "Rashee Rice (Questionable)"
+   ]
+  },
+  {
+   "manager": "bigmoneyjos",
+   "wins": 0,
+   "losses": 5,
+   "points_for": 535.74,
+   "points_against": 688.82,
+   "faab_spent": 40,
+   "starters_hurt": [
+    "TreVeyon Henderson (Out)"
+   ]
+  }
+ ],
+ "this_week": [
+  {
+   "a": {
+    "manager": "drewkim",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "edyun1",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "andychoe03",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "nikhil1123",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "yojarshh",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "jiddyyyyyy",
+    "points": 0,
+    "startersLeftToPlay": 9
+   }
+  },
+  {
+   "a": {
+    "manager": "saiky7",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "bigmoneyjos",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "jjnhwg",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "tonypng",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "asierbelay",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "Lee284",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  }
+ ],
+ "trades": [
+  {
+   "week": 5,
+   "type": "trade",
+   "managers": [
+    "andychoe03",
+    "yojarshh"
+   ],
+   "adds": [
+    {
+     "name": "Davante Adams",
+     "pos": "WR",
+     "team": "LAR",
+     "status": null,
+     "to": "andychoe03"
+    },
+    {
+     "name": "Saquon Barkley",
+     "pos": "RB",
+     "team": "PHI",
+     "status": "Out",
+     "to": "yojarshh"
+    },
+    {
+     "name": "Josh Allen",
+     "pos": "QB",
+     "team": "BUF",
+     "status": null,
+     "to": "yojarshh"
+    },
+    {
+     "name": "David Montgomery",
+     "pos": "RB",
+     "team": "HOU",
+     "status": "Out",
+     "to": "andychoe03"
+    },
+    {
+     "name": "George Pickens",
+     "pos": "WR",
+     "team": "DAL",
+     "status": null,
+     "to": "andychoe03"
+    },
+    {
+     "name": "Zay Flowers",
+     "pos": "WR",
+     "team": "BAL",
+     "status": null,
+     "to": "yojarshh"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Davante Adams",
+     "pos": "WR",
+     "team": "LAR",
+     "status": null,
+     "from": "yojarshh"
+    },
+    {
+     "name": "Saquon Barkley",
+     "pos": "RB",
+     "team": "PHI",
+     "status": "Out",
+     "from": "andychoe03"
+    },
+    {
+     "name": "Josh Allen",
+     "pos": "QB",
+     "team": "BUF",
+     "status": null,
+     "from": "andychoe03"
+    },
+    {
+     "name": "David Montgomery",
+     "pos": "RB",
+     "team": "HOU",
+     "status": "Out",
+     "from": "yojarshh"
+    },
+    {
+     "name": "George Pickens",
+     "pos": "WR",
+     "team": "DAL",
+     "status": null,
+     "from": "yojarshh"
+    },
+    {
+     "name": "Zay Flowers",
+     "pos": "WR",
+     "team": "BAL",
+     "status": null,
+     "from": "andychoe03"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  }
+ ],
+ "waivers": [],
+ "free_agent_moves": 22
+}
