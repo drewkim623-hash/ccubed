@@ -356,9 +356,7 @@
   .injteam .bhead .tw{min-width:0;flex:1}
   .injteam .bhead .tc{text-align:right;font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;
     color:var(--ink-2);flex:none;line-height:1.15}
-  .injteam .bhead .tc.bite{color:var(--red)}
-  .injteam .bhead .tc .part{display:block;color:var(--ink-2)}
-  .injteam .bhead .tc .k,.injp .imp .k{display:block;font-size:11px;font-weight:600;text-transform:uppercase;
+  .injteam .bhead .tc .k{display:block;font-size:11px;font-weight:600;text-transform:uppercase;
     letter-spacing:.06em;color:var(--muted)}
   .injp{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;align-items:start;
     padding:10px 15px;border-top:1px solid var(--grid)}
@@ -370,10 +368,14 @@
   .injp .meta .est,.injp .meta .rptd{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
     padding:0 4px;border:1px solid var(--ring);border-radius:4px;white-space:nowrap}
   .injp .imp{grid-column:2;grid-row:1 / span 4;text-align:right;font-size:15px;font-weight:800;
-    font-variant-numeric:tabular-nums;color:var(--red);line-height:1.15}
-  .injp.bench .imp .pw{color:var(--muted)}
-  .injp .imp .pr,.injteam .bhead .tc .tr{display:block;margin-top:5px;font-size:13px;color:var(--ink-2)}
-  .injp .meta.rep{font-size:11px}
+    font-variant-numeric:tabular-nums;color:var(--red);line-height:1.15;max-width:9.5em}
+  .injp .imp .po,.injp .imp .ti{display:block}
+  .injp .imp .ti{margin-top:4px;font-size:12px;font-weight:700;color:var(--ink-2)}
+  .injp .imp .po.zero,.injp .imp .po.pending,.injp .imp .po.none{color:var(--muted)}
+  .injp .imp .po.pending,.injp .imp .po.none{font-size:12px;font-weight:700}
+  .injp .meta .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);
+    padding:0 4px;border:1px solid var(--ring);border-radius:4px;white-space:nowrap}
+  .injteam .bhead .capnote{display:block;font-size:11px;color:var(--muted)}
   .injload{margin-top:10px;background:var(--raised);color:var(--ink);border:1px solid var(--ring);
     border-radius:8px;padding:8px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
   .notice.live p:first-of-type{margin-top:0}
@@ -5150,7 +5152,6 @@ function injuryDeltaOf(pid, k) {
   const d = INJ_DELTAS && INJ_DELTAS.get(String(pid));
   return d ? d[k] : null;
 }
-/** A per-injury playoffDelta/titleDelta (percentage points) for display: "~0" under 0.5 pp, "" while unmeasured. */
 /** "report, checked Oct 14" — the return's source with the day it was looked up (Odds and Injuries tabs). */
 function retSourceText(x) {
   if (!x || !x.retSource) return "";
@@ -5159,11 +5160,18 @@ function retSourceText(x) {
   const day = m ? new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" }) : "";
   return day ? `${lab}, checked ${day}` : lab;
 }
-function fmtInjuryDelta(d) {
+/**
+ * A per-injury playoffDelta/titleDelta (percentage points) for display: "~0"
+ * under 0.5 pp, "" while unmeasured, else "−1.2 pp". `unit` replaces " pp"
+ * and follows "~0" too: fmtInjuryDelta(-1.23, "%") -> "−1.2%", 0.2 -> "~0%".
+ */
+function fmtInjuryDelta(d, unit) {
   if (d == null || !Number.isFinite(Number(d))) return "";
   d = Number(d);
-  if (Math.abs(d) < 0.5) return "~0";
-  return `${d > 0 ? "+" : "−"}${Math.abs(d).toFixed(1)} pp`;
+  // Only a string is a unit: .map(fmtInjuryDelta) passes the index.
+  const u = typeof unit === "string" ? unit : null;
+  if (Math.abs(d) < 0.5) return `~0${u ?? ""}`;
+  return `${d > 0 ? "+" : "−"}${Math.abs(d).toFixed(1)}${u ?? " pp"}`;
 }
 
 /** The worker job: the live sim as plain data, plus one restored loss vector per injury. */
@@ -6029,10 +6037,6 @@ const PTS_LOST = {
   // projection above zero, else his season points per game (projections.last_nonzero,
   // .ppg, .byes from build-injuries.mjs). Off: the raw 0 stands.
   hurtFallback: true,
-  // A team total of at least this many points lost this week is printed in red.
-  highlightAt: 5,
-  // A per-row figure under this many points prints as "—" (team totals stay exact).
-  displayFloor: 0.5,
   // injuries.json `ret` counts as a return date only in this shape.
   dateRe: /^\d{4}-\d{2}-\d{2}/,
   // With no date, a record's `retWeeks` (weeks out, from Research's
@@ -6298,14 +6302,14 @@ function loadProjections() {
 /* ================================================ INJURIES ========== */
 
 /**
- * Every injured player in the league, team by team, with what projectedPointsLost()
- * says each costs in projected points — this week and for the rest of the season.
- * The render below only reads that function's output.
+ * Every injured player in the league, team by team, with what his injury does
+ * to his team's playoff odds — Research's model: injuryLossPlan()'s rows, the
+ * ones the odds worker measures, so this tab and the Odds tab agree.
  */
 function panelInjuries() {
   const p = el("div", "panel"); p.dataset.panel = "injuries";
   p.appendChild(sechead("Injuries",
-    "Every rostered player carrying an injury status — bench and IR slot included — and the projected points each one costs his team."));
+    "Every rostered player carrying an injury status — bench and IR slot included — and what each one does to his team's playoff odds."));
   const host = el("div"); host.id = "injHost";
   host.appendChild(el("div", "wskel", "Reading the injury report…"));
   p.appendChild(host);
@@ -6317,38 +6321,89 @@ let INJTAB_P = null;
 function ensureInjuries(full) {
   if (INJTAB_P && !full) return INJTAB_P;
   return (INJTAB_P = (async () => {
-    const [inj, proj] = await Promise.all([loadInjuries(full ? { full: true } : undefined), loadProjections()]);
-    renderInjuries($("#injHost"), inj, proj);
+    const [inj, proj] = await Promise.all([loadInjuries(full ? { full: true } : undefined), loadProjections(),
+      loadRostered().catch(() => null)]);
+    const draw = opts => renderInjuries($("#injHost"), inj, proj, opts);
+    draw();
     $('[data-panel="injuries"]').dataset.ready = "1";
+    // Rows read "calculating…" until the odds worker has measured them.
+    if (proj && !injuryPlayoffDeltas()) whenInjuryDeltas().then(d => draw(d ? undefined : { unmeasured: true }));
   })());
 }
 
-/** Points lost as printed: −11.2, or 0.0. */
-const ptsLostText = v => (v > 0.05 ? `−${v.toFixed(1)}` : "0.0");
-/** A row's points lost as printed: "—" under PTS_LOST.displayFloor. */
-const ptsRowText = v => (v < PTS_LOST.displayFloor ? "—" : ptsLostText(v));
-
-/** Every team's projectedPointsLost(), injured teams only, biggest this-week loss first. */
-function injuryTeams(season, inj, proj) {
-  const posOf = pid => { const r = ROSTERED && ROSTERED.map.get(String(pid)); return r && r.p; };
-  // Never before the projections' coming week: the return fields (retWeeks, a
-  // ret of this week's Sunday) count from it, as the odds do, so a player back
-  // this week is not charged for a week Sleeper's state hasn't rolled past yet.
-  const sw = Number(DB.state && String(DB.state.season) === String(proj.season) && DB.state.week) || 0;
-  const week = Math.max(sw, Number(proj.current_week) || 0) || proj.current_week;
-  return ((season && season.rosters) || []).map(r => ({ r, uid: season.uidOf.get(r.roster_id),
-    pl: projectedPointsLost(r, inj.map, proj, { week, posOf, rosterPositions: season.rosterPositions }) }))
-    .filter(x => x.pl.rows.length)
-    .map(x => ({ ...x, noEst: x.pl.rows.every(y => y.ros.lost == null) && x.pl.totals.thisWeek === 0 }))
-    .sort((x, y) => (y.pl.totals.thisWeek - x.pl.totals.thisWeek) || (y.pl.totals.ros - x.pl.totals.ros)
-      || (x.noEst - y.noEst) || nameOf(x.uid).localeCompare(nameOf(y.uid)));
+/**
+ * injuryPlayoffDeltas() once the odds worker has filled it: starts the live
+ * board (which runs it) if nothing has, then polls. null when the live board
+ * has no loss plan to measure, or after `ms`.
+ */
+function whenInjuryDeltas(ms = 180000) {
+  return liveOnce().then(L => {
+    if (!(L && L.live && L.plan && L.plan.loss)) return injuryPlayoffDeltas();
+    const t0 = Date.now();
+    return new Promise(resolve => {
+      const tick = () => {
+        const d = injuryPlayoffDeltas();
+        if (d || Date.now() - t0 > ms) resolve(d);
+        else setTimeout(tick, 500);
+      };
+      tick();
+    });
+  }).catch(() => injuryPlayoffDeltas());
 }
 
-function renderInjuries(host, inj, proj) {
+/**
+ * The tab's teams, from the same loss plan the odds price with (attachLossPlan
+ * over injuryPlan): each team's injuryLossPlan rows (teamInjuryImpact rows,
+ * whose playoffDelta/titleDelta read the odds worker's measurement). A team the
+ * plan leaves out (none of its players in the projections, or no rosters.json)
+ * lists its injured players unpriced.
+ *   -> [{ r, uid, rows, priced, cap, capBinds, lost }]
+ */
+function injuryTabTeams(season, inj, proj, rost = ROSTERED) {
+  const map = (inj && inj.map) || new Map();
+  let loss = null;
+  try { loss = attachLossPlan(injuryPlan(season, inj, window.__ODDS), season, inj, proj, rost).loss; } catch (e) { loss = null; }
+  const info = pid => (rost && rost.map && rost.map.get(String(pid))) || {};
+  const clean = a => (a || []).filter(p => p && p !== "0").map(String);
+  return ((season && season.rosters) || []).map(r => {
+    const T = loss && loss.byTeam.get(r.roster_id);
+    const starters = new Set(clean(r.starters));
+    const rows = T ? T.rows.slice() : [...new Set([...clean(r.starters), ...clean(r.players), ...clean(r.reserve), ...clean(r.taxi)])]
+      .filter(pid => map.get(pid) && map.get(pid).s).map(pid => {
+        const rec = map.get(pid), rw = Math.round(Number(rec.retWeeks));
+        return { pid, name: rec.n || info(pid).n || pid, pos: rec.p || info(pid).p || "", status: rec.s,
+          starter: starters.has(pid), bench: !starters.has(pid), unpriced: true,
+          ret: PTS_LOST.dateRe.test(String(rec.ret || "")) ? rec.ret : null, retWeeks: rw > 0 ? rw : null,
+          retSource: rec.retSource || null, retEstimated: !!rec.retEstimated, retNote: rec.retNote || null, retChecked: rec.retChecked || null,
+          retLabel: retSourceText(rec), seasonEnding: injuryOutWeeks(rec, [], null).kind === "season",
+          playoffDelta: null, titleDelta: null };
+      });
+    for (const x of rows) x.club = ((map.get(x.pid) || {}).t) || info(x.pid).t || "";
+    // The cap binds in a week when the team's injuries, uncapped, pass it.
+    const capBinds = !!T && loss.weeks.some(w => [...T.players.values()].reduce((s, x) => s + (x.pts.get(w) || 0), 0) > T.cap + 1e-9);
+    const lost = T ? rows.reduce((s, x) => s + x.totalLost * x.weight, 0) : null;
+    return { r, uid: season.uidOf.get(r.roster_id), rows, priced: !!T, cap: T ? T.cap : null, capBinds, lost };
+  }).filter(t => t.rows.length);
+}
+
+/** Row order: playoff impact, most negative first; unmeasured after; then points lost, then name. */
+function injuryTabOrder(a, b) {
+  const da = a.playoffDelta, db = b.playoffDelta;
+  return ((da == null) - (db == null)) || (da != null && db != null ? da - db : 0)
+    || ((b.totalLost ?? -1) - (a.totalLost ?? -1)) || String(a.name).localeCompare(String(b.name));
+}
+
+/**
+ * opts.unmeasured: the odds worker won't measure (no live board), so rows the
+ * deltas haven't reached read "not measured" rather than "calculating…".
+ */
+function renderInjuries(host, inj, proj, opts = {}) {
   host.innerHTML = "";
   const season = DB.seasons[0];
-  const teams = inj && inj.map && proj ? injuryTeams(season, inj, proj) : [];
-  const total = teams.reduce((s, x) => s + x.pl.rows.length, 0);
+  const teams = inj && inj.map && proj ? injuryTabTeams(season, inj, proj)
+    .sort((x, y) => (y.priced - x.priced) || ((y.lost ?? 0) - (x.lost ?? 0)) || nameOf(x.uid).localeCompare(nameOf(y.uid))) : [];
+  const total = teams.reduce((s, x) => s + x.rows.length, 0);
+  const pending = !injuryPlayoffDeltas() && !opts.unmeasured;
   const when = inj.at ? new Date(inj.at).toLocaleString(undefined,
     { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : null;
 
@@ -6371,14 +6426,17 @@ function renderInjuries(host, inj, proj) {
   }
   if (!proj) {
     host.appendChild(el("div", "empty",
-      "<b>No projections on file yet</b>Points lost need data/projections.json, which build-injuries.mjs writes. Until it is published there is nothing to price the injuries with."));
+      "<b>No projections on file yet</b>The injuries are priced with data/projections.json, which build-injuries.mjs writes. Until it is published there is nothing to price them with."));
     return;
   }
+  const capPct = Math.round(INJ_ODDS.cap * 100);
   const key = el("p", "injkey injsrc",
-    `<b>Points lost</b> is how far the team's best possible lineup drops in each week a player is out —
-     this week, and for the rest of the regular season (through week ${proj.playoff_week_start - 1}). A hurt
-     player only costs points in weeks he'd have started; when several are out the same week, the drop is
-     shared by what losing each one alone would cost. Source: <b>${esc(PTS_LOST.source)}</b>. The tags are ${jx("injstatus", "Sleeper's statuses")}.`);
+    `Each row leads with the injury's <b>${jx("injodds", "playoff odds impact")}</b>: the Odds model's season
+     re-run with just that injury taken out, title odds beside it. Under it, the <b>${jx("injlost", "points")}</b>
+     his team's best starting lineup loses per week he's out (0 if he wouldn't start), times the weeks out.
+     A team's weekly injury loss is capped at ${capPct}% of its strength, so when the cap binds a team's rows
+     add up to more than its injuries do together. Source: <b>${esc(PTS_LOST.source)}</b>. The tags are
+     ${jx("injstatus", "Sleeper's statuses")}.`);
   key.dataset.src = PTS_LOST.source;
   host.appendChild(key);
   if (!teams.length) {
@@ -6387,47 +6445,50 @@ function renderInjuries(host, inj, proj) {
     return;
   }
   const dot = " · ";
-  const nm = pid => { const r = (ROSTERED && ROSTERED.map.get(String(pid))) || inj.map.get(String(pid)); return (r && r.n) || pid; };
-  for (const { r, uid, pl } of teams) {
+  const wks = k => `${k} wk${k === 1 ? "" : "s"}`;
+  for (const { r, uid, rows, priced, capBinds, lost } of teams) {
     const b = el("div", "board injteam");
     b.dataset.rid = r.roster_id;
-    const lineup = pl.rows.filter(x => x.starter).length;
+    b.dataset.lost = lost == null ? "" : lost.toFixed(2);
+    b.dataset.capBinds = capBinds ? "1" : "0";
+    const lineup = rows.filter(x => x.starter).length;
     b.innerHTML = `<div class="bhead">${avatarHTML(uid, "sm")}
       <span class="tw"><span class="bt">${esc(nameOf(uid))}</span>
-        <span class="bs">${pl.rows.length} injured · ${lineup} in the starting lineup</span></span>
-      <span class="tc ${pl.totals.thisWeek >= PTS_LOST.highlightAt ? "bite" : ""}"><span class="tv">${ptsLostText(pl.totals.thisWeek)}</span><span class="k">wk ${pl.week} pts</span>
-        <span class="tr">${ptsLostText(pl.totals.ros)}</span><span class="k">rest of season${pl.totals.partial
-          ? `<span class="part" title="Some injuries here have no return estimate and aren't in this total">partial</span>` : ""}</span></span></div>`;
-    for (const x of pl.rows) {
+        <span class="bs">${rows.length} injured · ${lineup} in the starting lineup</span>${capBinds
+          ? `<span class="capnote">Weekly loss capped at ${capPct}% of team strength, so the rows add up to more than the team effect</span>` : ""}</span>
+      <span class="tc"><span class="tm-pts">${priced ? `−${f1(lost)}` : "—"}</span><span class="k">lineup pts lost</span></span></div>`;
+    for (const x of rows.sort(injuryTabOrder)) {
       const p = inj.map.get(x.pid) || {};
       const back = returnLabel(x.ret);
-      const row = el("div", `injp${x.starter ? "" : " bench"}`);
+      const row = el("div", `injp${x.bench ? " bench" : ""}`);
       row.dataset.pid = x.pid;
       row.dataset.starter = x.starter ? "1" : "0";
-      if (p.note) row.title = p.note;
+      row.dataset.lost = x.unpriced ? "" : (x.totalLost * x.weight).toFixed(2);
+      row.dataset.playoffDelta = x.playoffDelta == null ? "" : String(x.playoffDelta);
+      if (p.note || x.retNote) row.title = [x.retNote, p.note].filter(Boolean).join(" — ");
       const detail = injuryDetail(p);
-      const wks = x.ros.kind === "none" ? "" : `${x.ros.weeks.length} wk${x.ros.weeks.length === 1 ? "" : "s"} out`;
-      const srcTxt = retSourceText(x);
-      const srcTag = (srcTxt ? `${esc(dot)}<span class="rsrc">${esc(srcTxt)}</span>` : "")
-        + (x.estimated ? ` <span class="est">estimated</span>`
+      // A date, else IR to the season's end, else Research's week estimate, else nothing known.
+      const hasWeeks = p.retWeeks != null && p.retWeeks !== "" && Number.isFinite(Number(p.retWeeks));
+      const retTxt = back || (x.status === "IR" && x.seasonEnding ? "season (IR)"
+        : hasWeeks ? (x.retEstimated ? `~${Number(p.retWeeks)} wk (est.)` : `${Number(p.retWeeks)} wk`) : "no estimate");
+      const out = x.unpriced ? "" : x.weeksOut ? `${wks(x.weeksOut)} out` : "back this week";
+      const srcTag = (x.retLabel ? `${esc(dot)}<span class="rsrc">${esc(x.retLabel)}</span>` : "")
+        + (x.retEstimated ? ` <span class="est">estimated</span>`
           : x.retSource === "report" ? ` <span class="rptd">reported</span>` : "");
-      if (x.retNote) row.title = [x.retNote, row.title].filter(Boolean).join(" — ");
-      const tw = x.thisWeek;
-      // A stand-in is named only when he is healthy; an injured one means the lineup reshuffles.
-      const who = pid => (!pid ? "nobody" : pid === "shuffle" || (inj.map.get(pid) || {}).s ? "lineup shuffle" : nm(pid));
-      const outNow = tw.starts || x.ros.weeks.includes(pl.week) || tw.lost > 0;
-      const rep = tw.starts ? `Proj ${tw.hurt.toFixed(1)}${dot}stand-in <span class="sinw">${esc(who(tw.standIn))}</span>`
-        : outNow ? `Proj ${tw.hurt.toFixed(1)}${dot}wouldn't start this week` : "plays this week";
-      const later = x.ros.byWeek.some(c => c.starts) ? `${esc(dot)}rest of season: <span class="sin">${esc(who(x.ros.standIn))}</span>` : "";
-      // IR with no date that runs through the last regular-season week reads as the season.
-      const irSeason = x.status === "IR" && !back && x.ros.weeks.includes(pl.lastWeek);
-      const retTxt = back || (irSeason ? "season (IR)" : x.ros.kind === "weeks" ? (x.estimated ? `~${Number(p.retWeeks)} wk (est.)` : `${Number(p.retWeeks)} wk`) : "no estimate");
-      row.innerHTML = `<span class="nm">${esc(x.name)}</span>
+      // What the starting lineup loses: per week in it × weeks out; 0 if he wouldn't start.
+      const pts = x.unpriced ? "not priced: no projections"
+        : !x.weeksOut ? "0 pts"
+        : x.wouldStart === false ? "wouldn't start · 0 pts"
+        : `${f1(x.lineupPerWeek ?? x.ptsPerWeek)} pts/wk in lineup × ${wks(x.weeksOut)} = ${f1(x.totalLost)} pts`;
+      const calc = pending && !x.unpriced;
+      const po = x.playoffDelta != null ? `${fmtInjuryDelta(x.playoffDelta, "%")} playoff odds` : calc ? "calculating…" : "not measured";
+      const poCls = x.playoffDelta != null ? (Math.abs(x.playoffDelta) < 0.5 ? "zero" : "") : calc ? "pending" : "none";
+      const ti = x.titleDelta != null ? `<span class="ti">${esc(fmtInjuryDelta(x.titleDelta, "%"))} title</span>` : "";
+      row.innerHTML = `<span class="imp"><span class="po ${poCls}">${esc(po)}</span>${ti}</span>
+        <span class="nm">${esc(x.name)}</span>
         <span class="meta">${esc([x.pos, x.club].filter(Boolean).join(dot))}${detail ? esc(dot + detail) : ""}</span>
-        <span class="meta"><span class="st st-${esc(String(x.status).toLowerCase())}">${esc(x.status)}</span>${esc(dot)}<span class="ret">${esc(retTxt)}</span>${wks ? `${esc(dot)}<span class="wo">${esc(wks)}</span>` : ""}${srcTag}</span>
-        <span class="meta rep">${rep}${later}</span>
-        <span class="imp"><span class="pw">${ptsRowText(tw.lost)}</span><span class="k">wk ${pl.week}</span>
-          <span class="pr">${x.ros.lost == null ? "no estimate" : ptsRowText(x.ros.lost)}</span><span class="k">rest of season</span></span>`;
+        <span class="meta"><span class="st st-${esc(String(x.status).toLowerCase())}">${esc(x.status)}</span>${esc(dot)}<span class="ret">${esc(retTxt)}</span>${out ? `${esc(dot)}<span class="wo">${esc(out)}</span>` : ""}${srcTag}</span>
+        <span class="meta pts">${x.bench ? `<span class="tag bench">bench</span> ` : ""}<span class="ptl">${esc(pts)}</span></span>`;
       b.appendChild(row);
     }
     host.appendChild(b);
@@ -8212,6 +8273,8 @@ const JARGON = {
   rating: `The number the board is sorted by: all-play ${pctW(POWER_W.allPlay)}, form ${pctW(POWER_W.form)}, points for ${pctW(POWER_W.points)} (league top scorer 1, bottom 0) and actual win rate ${pctW(POWER_W.record)}. 1.00 would be best at everything.`,
   po: "Playoff weeks: this score came after the regular season ended, in a playoff or consolation-bracket game.",
   otb: "Off the board: the game is so lopsided (favorite 99.5%+ after the house cut) that no sensible moneyline can be posted, so it's pulled. The spread and total still stand.",
+  injlost: "What the team's best starting lineup loses while he is out, from Sleeper projections scored with this league's settings — the same lineup-delta numbers the Odds model charges. Each week out, the best lineup with the week's injured players minus the best lineup without them (a FLEX takes any RB, WR or TE; an RB slot only an RB), shared among the injured players by how much each one adds, and never more than his own projection. A player who wouldn't start that week costs 0, bench players included. The row shows the average per week in the lineup, times the weeks out (from his return date or estimate, playoff weeks included), = the total.",
+  injodds: `How much this one injury moves his team's playoff odds, in percentage points: the Odds model's season simulation re-run with just his injury taken out (its points given back, the team's weekly cap re-applied), against the same seeded sims, so the gap is the injury and not noise. Title odds likewise. Under half a point reads ~0%. A team's weekly injury loss is capped at ${Math.round(INJ_ODDS.cap * 100)}% of its strength, so when several injuries hit at once the players' effects can add up to more than the team's.`,
   injstatus: `Sleeper's injury tags. Q is questionable (priced to play ${pctW(INJ_AVAIL.Questionable)} of the time), D is doubtful (${pctW(INJ_AVAIL.Doubtful)}), O is out. IR is injured reserve, PUP physically unable to perform, Sus suspended, NA not active, DNR did not report, COV the illness list — all priced as not playing.`,
 
 };
@@ -10689,7 +10752,7 @@ async function boot() {
       weekIsFinal, allWeeks, effectiveState,
       loadInjuries, injPlayer, availability, livePosterior, weeksOf, liveState,
       injuryDetail, returnLabel, rosterInjuries, injCutText, ensureInjuries, renderInjuries,
-      PTS_LOST, projectedPointsLost, ptsProj, ptsSunday, ptsWeeksOut, injuryOutWeeks, ptsLostText, ptsRowText, ptsBestLineup, ptsSplitDrop, injuryTeams, loadProjections,
+      PTS_LOST, projectedPointsLost, ptsProj, ptsSunday, ptsWeeksOut, injuryOutWeeks, ptsBestLineup, ptsSplitDrop, loadProjections, injuryTabTeams, injuryTabOrder, whenInjuryDeltas,
       injuryPlan, injuryLossPlan, injuryLossTeam, injuryLostPts, attachLossPlan, pointsLostOpts, INJ_ODDS, retSourceText,
       injuryImpact, teamInjuryImpact, fmtInjuryDelta, injuryPlayoffDeltas, injuryDeltaJob, computeInjuryDeltas, pictureRun, injuryMult, injuryHurtMap, injuryLabel, injuryLabelText, injuryCharged, injuryFuturesNote,
       approxKickoff, lastNameOf, gameCardHTML,

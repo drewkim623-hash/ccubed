@@ -5559,11 +5559,17 @@ const INJ_NAMES = ["injuries: the tab reads the published injuries.json and show
   "injuries: no text in the tab under 11px at 390px", "injury report: every team lists every injured player on its roster",
   "injury report: bench injured players are included, at 0%", "injury report: each team's total matches its charged per-player cuts", "injury report: each starter carries the model's charged cut",
   "injuries: no uncaught page errors",
-  ...["the starter/bench odds-impact % split is gone from the tab", "source label reads \"Sleeper projections, ESPN return dates\"",
+  "injuries tab: rows are injuryLossPlan's rows, the ones the odds worker measures",
+  "injuries tab: each row leads with its playoff odds impact as −X.X% playoff odds, ~0% under 0.5",
+  "injuries tab: title odds and lineup points are secondary: −X.X% title, pts/wk in lineup × wks = total pts",
+  "injuries tab: bench players are tagged bench; players who wouldn't start cost 0 pts",
+  "injuries tab: the return source and its checked date are shown beside the return",
+  "injuries tab: with injuryPlayoffDeltas() null every row reads calculating…",
+  "injuries tab: rows sorted by playoff impact, most negative first, unmeasured last",
+  "injuries tab: each team's lineup pts lost is the sum of its rows; teams sorted by it",
+  "injuries tab: the method text explains the playoff odds, the points and the cap",
+  ...["source label reads \"Sleeper projections, ESPN return dates\"",
     "every week through the last regular-season week has a Sunday", "projectedPointsLost() agrees with the test's own re-implementation",
-    "every row's this-week and rest-of-season figure is what's rendered", "each team's totals are the sums of its rows",
-    "totals are labelled with the site's week", "rows sorted biggest this-week loss first within each team",
-    "teams sorted by this-week total, biggest first", "no-estimate rows carry no number and stay out of the totals",
     "a player costs points this week only if he'd start this week", "questionable/doubtful rows show their status tag",
     "made-up roster — function and re-implementation agree", "made-up roster — a Questionable player with no estimate plays and costs nothing",
     "shared fixture — this week, rest of season and stand-ins match the hand-worked values",
@@ -5577,7 +5583,6 @@ const INJ_NAMES = ["injuries: the tab reads the published injuries.json and show
     "a FLEX slot takes the best RB/WR/TE; a fixed RB/WR slot never takes another position",
     "a bench injury that wouldn't start costs 0; one that would costs the lineup drop",
     "a team with a no-estimate row marks its rest-of-season total partial",
-    "the highlight threshold is read from PTS_LOST",
     "return info — a real ret date wins over retWeeks",
     "return info — retWeeks alone gives that many weeks from this week, capped at the last regular-season week",
     "return info — neither date nor retWeeks keeps the old behaviour",
@@ -5585,7 +5590,6 @@ const INJ_NAMES = ["injuries: the tab reads the published injuries.json and show
     "return info — the tab labels each row's return source and tags estimates",
     "return info — retWeeks without a date reads ~N wk (est.), never no estimate",
     "stand-in names the one healthy player entering the lineup, else lineup shuffle",
-    "per-row values under PTS_LOST.displayFloor show —, team totals stay exact",
     "at 390px nothing overflows and no text is under 11px"].map(n => `points lost: ${n}`),
   "odds fallback: without projections the old multiplier path is origin/main's, byte for byte"];
 if (injDirect.timedOut || injReload.timedOut) {
@@ -5777,15 +5781,10 @@ const PL = await injPage.evaluate(async () => {
       standIn: now[p] ? now[p].standIn : null,
       ros: rosLost[p], nWeeks: outs[p] ? outs[p].length : null, starts: startsIn[p], status: I[p].s }));
   };
-  const fmt = v => (v > 0.05 ? "−" + v.toFixed(1) : "0.0");
-  const rfmt = v => (v < 0.5 ? "—" : fmt(v)); // per-row figures: "—" under PTS_LOST.displayFloor
   const close = (a, b) => (a == null && b == null) || (a != null && b != null && Math.abs(a - b) < 1e-9);
-  const out = { week, sundaysOk: true, fnBad: [], domBad: [], totBad: [], sortBad: [], teamSort: [], noEstBad: [], benchBad: [],
-    qBad: [], rows: 0, noEst: 0, q: 0, all: [], wkLabel: true, partialBad: [], biteBad: [], sinSeen: 0, sinBad: [] };
+  const out = { week, sundaysOk: true, fnBad: [], benchBad: [], qBad: [], rows: 0, q: 0, all: [], partialBad: [] };
   for (let w = week; w < P.playoff_week_start; w++) if (!P.sundays[w]) out.sundaysOk = false;
 
-  const teamEls = [...panel.querySelectorAll(".injteam")];
-  const shownTeams = [];
   for (const r of season.rosters || []) {
     const mine = ref(r, inj, week);
     if (!mine.length) continue;
@@ -5797,52 +5796,21 @@ const PL = await injPage.evaluate(async () => {
         || (f.thisWeek.standIn ?? null) !== m.standIn)
         out.fnBad.push(`${m.pid}: fn ${f && f.thisWeek.lost}/${f && f.ros.lost} vs ref ${m.tw}/${m.ros}`);
     }
+    // projectedPointsLost() on its own; the tab shows Research's loss-plan rows (checked below).
+    if (fn.totals.partial !== mine.some(m => m.ros == null)) out.partialBad.push(r.roster_id);
     const card = panel.querySelector(`.injteam[data-rid="${r.roster_id}"]`);
-    const twTot = mine.reduce((s, m) => s + m.tw, 0), rosTot = mine.reduce((s, m) => s + (m.ros ?? 0), 0);
-    if (!card) { out.domBad.push(`team ${r.roster_id} missing`); continue; }
-    const tv = card.querySelector(".tc .tv").textContent.trim(), tr = card.querySelector(".tc .tr").textContent.trim();
-    if (tv !== fmt(twTot) || tr !== fmt(rosTot) || !close(fn.totals.thisWeek, twTot) || !close(fn.totals.ros, rosTot))
-      out.totBad.push(`${r.roster_id}: ${tv}/${tr} vs ${fmt(twTot)}/${fmt(rosTot)}`);
-    if (!card.querySelector(".tc .k").textContent.includes(`wk ${week}`)) out.wkLabel = false;
-    if (!!card.querySelector(".tc .part") !== mine.some(m => m.ros == null)) out.partialBad.push(r.roster_id);
-    if (card.querySelector(".tc").classList.contains("bite") !== (twTot >= D.PTS_LOST.highlightAt)) out.biteBad.push(r.roster_id);
-    shownTeams.push({ el: card, tw: twTot, ros: rosTot });
-    const rows = [...card.querySelectorAll(".injp")];
-    const byPid = Object.fromEntries(mine.map(m => [m.pid, m]));
-    let prev = null;
-    for (const row of rows) {
-      const m = byPid[row.dataset.pid];
+    for (const m of mine) {
       out.rows++;
-      if (!m) { out.domBad.push(`${row.dataset.pid}: not expected`); continue; }
-      const pw = row.querySelector(".pw").textContent.trim(), pr = row.querySelector(".pr").textContent.trim();
-      if (pw !== rfmt(m.tw) || pr !== (m.ros == null ? "no estimate" : rfmt(m.ros))) out.domBad.push(`${row.dataset.pid}: ${pw}/${pr} vs ${rfmt(m.tw)}/${m.ros}`);
-      const sinEl = row.querySelector(".sin");
-      if (sinEl) {
-        const f = fnRows.find(x => x.pid === m.pid), s = f && f.ros.standIn;
-        const want = !s ? "nobody" : s === "shuffle" || (inj[s] && inj[s].s) ? "lineup shuffle" : ((posMap[s] || {}).n || s);
-        out.sinSeen++;
-        if (sinEl.textContent.trim() !== want) out.sinBad.push(`${row.dataset.pid}: ${sinEl.textContent} vs ${want}`);
-      }
-      if (m.ros == null) { out.noEst++; if (/\d/.test(pr) || row.querySelector(".wo")) out.noEstBad.push(row.dataset.pid); }
-      if (m.tw > 1e-9 && !(fnRows.find(x => x.pid === m.pid) || {}).thisWeek?.starts) out.benchBad.push(row.dataset.pid);
+      if (m.tw > 1e-9 && !(fnRows.find(x => x.pid === m.pid) || {}).thisWeek?.starts) out.benchBad.push(m.pid);
       if (m.status !== "Out" && m.status !== "IR") {
         out.q++;
-        if (row.querySelector(".st").textContent.trim() !== m.status) out.qBad.push(row.dataset.pid);
+        const row = card && card.querySelector(`.injp[data-pid="${m.pid}"]`);
+        if (!row || row.querySelector(".st").textContent.trim() !== m.status) out.qBad.push(m.pid);
       }
-      if (prev && (prev.tw < m.tw - 1e-9 || (close(prev.tw, m.tw) && (prev.ros ?? -1) < (m.ros ?? -1) - 1e-9)))
-        out.sortBad.push(`${prev.pid} before ${m.pid}`);
-      prev = m;
-      out.all.push({ team: card.querySelector(".bt").textContent, rid: r.roster_id, name: (inj[m.pid] || {}).n, pid: m.pid, status: m.status,
+      out.all.push({ team: card ? card.querySelector(".bt").textContent : String(r.roster_id), rid: r.roster_id, name: (inj[m.pid] || {}).n, pid: m.pid, status: m.status,
         slot: m.slot, starter: m.starter, weeksOut: m.nWeeks, starts: m.starts, hurt: m.hurtPts,
         rep: m.rep && ((posMap[m.rep] || {}).n || m.rep), repPts: m.repPts, tw: m.tw, ros: m.ros });
     }
-    if (rows.length !== mine.length) out.domBad.push(`${r.roster_id}: ${rows.length} rows vs ${mine.length}`);
-  }
-  // Teams in the order shown: this week's total, biggest first, rest of season breaking ties.
-  const order = teamEls.map(e => shownTeams.find(t => t.el === e));
-  for (let i = 1; i < order.length; i++) {
-    const a = order[i - 1], b = order[i];
-    if (a && b && (a.tw < b.tw - 1e-9 || (close(a.tw, b.tw) && a.ros < b.ros - 1e-9))) out.teamSort.push(i);
   }
 
   // A made-up roster, so the greedy cover, IR, a return date and no estimate are
@@ -5966,18 +5934,11 @@ const PL = await injPage.evaluate(async () => {
     return null; };
   out.named = Object.fromEntries(["A.J. Brown", "Alec Pierce", "De'Von Achane"].map(n => [n, lookup(n)]));
 
-  // Partial tag and highlight threshold on a made-up report (fake starter, no estimate).
-  const sp0 = String(season.rosters.find(r => (r.starters || []).some(p => p && p !== "0")).starters.find(p => p && p !== "0"));
-  const fakeRep = { at: Date.now(), source: "file", map: new Map([[sp0, { s: "Out", n: "Fake Starter", p: "WR", t: "KC" }]]) };
-  const wasHi = D.PTS_LOST.highlightAt, hp = [];
-  for (const t of [0, 1e9]) {
-    D.PTS_LOST.highlightAt = t;
-    const h = document.createElement("div"); D.renderInjuries(h, fakeRep, P);
-    hp.push(!!h.querySelector(".injteam .tc.bite"));
-    if (t === 0) out.fakePartial = !!h.querySelector(".injteam .tc .part");
-  }
-  D.PTS_LOST.highlightAt = wasHi;
-  out.highlight = { at: wasHi, low: hp[0], high: hp[1] };
+  // Partial total on a made-up report (fake starter, no estimate).
+  const r0p = season.rosters.find(r => (r.starters || []).some(p => p && p !== "0"));
+  const sp0 = String(r0p.starters.find(p => p && p !== "0"));
+  out.fakePartial = D.projectedPointsLost(r0p, new Map([[sp0, { s: "Out", n: "Fake Starter", p: "WR", t: "KC" }]]), P,
+    { week, posOf: pid => posMap[pid] && posMap[pid].p, rosterPositions }).totals.partial === true;
 
   // Return info from Research's injury-returns builder, on a real roster's first
   // four starters: A has a real date (2 weeks) AND retWeeks 1 — the date wins;
@@ -6026,8 +5987,8 @@ const PL = await injPage.evaluate(async () => {
     out.zero = {
       shared: [A, B].map(id => D.injuryOutWeeks(zInj[id], zw, sunF).weeks.length),
       lost: [A, B].map(id => [rowOf(Z, id).thisWeek?.lost, rowOf(Z, id).ros?.weeks?.length]),
-      imp, plays: [A, B].map(id => /plays this week/.test(zr(id)?.querySelector(".rep")?.textContent || "")),
-      pw: [A, B].map(id => zr(id)?.querySelector(".pw")?.textContent.trim()),
+      imp, plays: [A, B].map(id => /back this week/.test(zr(id)?.querySelector(".wo")?.textContent || "")),
+      pw: [A, B].map(id => zr(id)?.querySelector(".ptl")?.textContent.trim()),
       tags: [A, B, C].map(id => [!!zr(id)?.querySelector(".rptd"), !!zr(id)?.querySelector(".est")]),
     };
   }
@@ -6041,9 +6002,7 @@ const PL = await injPage.evaluate(async () => {
   const bnP2 = { ...bnP, weeks: { 6: { ...bnP.weeks[6], Y: 11 } } };
   const sMany = D.projectedPointsLost(bnTeam, bnInj, bnP2, bnOpts);
   out.standIn = { one: rowOf(BN, "X").ros?.standIn, injured: rowOf(sQ, "X").ros?.standIn,
-    many: rowOf(sMany, "X").ros?.standIn, notStarting: rowOf(BN, "Y").ros?.standIn, seen: out.sinSeen, bad: out.sinBad.slice(0, 3) };
-  // Display floor: per-row "—" under 0.5, team totals exact.
-  out.floor = { cfg: D.PTS_LOST.displayFloor, low: D.ptsRowText(0.3), zero: D.ptsRowText(0), at: D.ptsRowText(0.5), tot: D.ptsLostText(0.3) };
+    many: rowOf(sMany, "X").ros?.standIn, notStarting: rowOf(BN, "Y").ros?.standIn };
 
   // The shared fixture: DFFL-style slots and hand-worked answers under the
   // exact rule (best-lineup drop each week, leave-one-out margins). Both sites
@@ -6117,23 +6076,141 @@ const PL = await injPage.evaluate(async () => {
   out.missingFile = /No projections on file/.test(missing.textContent) && !missing.querySelector(".injp");
   const text = panel.textContent;
   out.source = text.includes("Sleeper projections, ESPN return dates") && D.PTS_LOST.source === "Sleeper projections, ESPN return dates";
-  out.noSplit = !/%/.test([...panel.querySelectorAll(".injteam")].map(e => e.textContent).join(" "))
-    && !/odds impact/i.test(text) && !panel.querySelector('.jx[data-jx="injimpact"]') && !("injimpact" in D.JARGON)
-    && ![...panel.querySelectorAll(".injp .imp .k")].some(k => /^(starter|bench)$/.test(k.textContent.trim()));
+
+  // The playoff-odds view: Research's injuryLossPlan rows, led by each one's
+  // measured playoffDelta. The tab is re-rendered with deltas stubbed in (and,
+  // separately, with the worker not done) so the format, order and placeholder
+  // are checked whatever the live worker has finished.
+  const rostTab = await D.loadRostered();
+  const tabOf = host => [...host.querySelectorAll(".injteam")].map(b => ({
+    rid: b.dataset.rid, lost: b.dataset.lost === "" ? null : Number(b.dataset.lost),
+    lostText: b.querySelector(".tc .tm-pts").textContent,
+    rows: [...b.querySelectorAll(".injp")].map(r => ({
+      pid: r.dataset.pid, lost: r.dataset.lost === "" ? null : Number(r.dataset.lost),
+      lead: r.firstElementChild && r.firstElementChild.classList.contains("imp") && r.firstElementChild.firstElementChild
+        ? r.firstElementChild.firstElementChild.textContent : null,
+      title: (r.querySelector(".imp .ti") || {}).textContent || null,
+      pts: (r.querySelector(".meta.pts .ptl") || {}).textContent || "",
+      benchTag: !!r.querySelector(".meta.pts .tag.bench"), benchCls: r.classList.contains("bench"),
+      src: (r.querySelector(".rsrc") || {}).textContent || "", text: r.textContent,
+    })),
+  }));
+  out.shown = tabOf(panel);
+  const injObj = { at: Date.now(), source: "file", map: new Map(Object.entries(inj)) };
+  const loss = D.attachLossPlan(D.injuryPlan(season, injObj, window.__ODDS), season, injObj, P, rostTab).loss;
+  out.lossTeams = loss ? [...loss.byTeam.values()].map(T => ({ rid: String(T.rid),
+    rows: T.rows.map(x => ({ pid: String(x.pid), bench: !!x.bench, wouldStart: x.wouldStart, weeksOut: x.weeksOut,
+      lineupPerWeek: x.lineupPerWeek, totalLost: x.totalLost * x.weight, retLabel: x.retLabel || "" })) })) : null;
+  const realDeltas = INJ_DELTAS;
+  try {
+    // Stubbed measurements: spread from −9.9 to +0.4, one row left unmeasured.
+    const pids = out.lossTeams ? out.lossTeams.flatMap(t => t.rows.map(x => x.pid)) : [];
+    const stub = new Map(pids.slice(1).map((pid, i) => [pid,
+      { rosterId: 0, playoffDelta: i % 5 === 4 ? 0.4 : -((i * 1.37) % 9.9) - 0.5, titleDelta: -((i * 0.61) % 4), sims: 1 }]));
+    out.stubbed = { unmeasured: pids[0] || null, deltas: Object.fromEntries([...stub].map(([k, v]) => [k, [v.playoffDelta, v.titleDelta]])) };
+    INJ_DELTAS = stub;
+    const hs = document.createElement("div");
+    D.renderInjuries(hs, injObj, P);
+    out.stubTab = tabOf(hs);
+    out.stubFmt = [D.fmtInjuryDelta(-3.456, "%"), D.fmtInjuryDelta(0.49, "%"), D.fmtInjuryDelta(-0.5, "%"), D.fmtInjuryDelta(null, "%"),
+      D.fmtInjuryDelta(-3.456), D.fmtInjuryDelta(0.2)];
+    // The worker not done yet.
+    INJ_DELTAS = null;
+    const hn = document.createElement("div");
+    D.renderInjuries(hn, injObj, P);
+    out.nullTab = tabOf(hn);
+    out.nullPending = D.injuryPlayoffDeltas() === null;
+  } finally { INJ_DELTAS = realDeltas; }
+  out.capPct = Math.round(D.INJ_ODDS.cap * 100);
+  out.capNote = new RegExp(`capped at ${out.capPct}% of its strength`).test(((panel.querySelector(".injkey") || {}).textContent || "").replace(/\s+/g, " "));
+  out.explainers = ["injodds", "injlost", "injstatus"].every(k => panel.querySelector(`.jx[data-jx="${k}"]`) && D.JARGON[k]);
+  out.text = text;
   return out;
 });
-check("points lost: the starter/bench odds-impact % split is gone from the tab", PL.noSplit);
+/* The Injuries tab's playoff-odds view (Research's lineup-delta model). */
+{
+  const LT = PL.lossTeams || [];
+  const lossOf = new Map(LT.flatMap(t => t.rows.map(x => [x.pid, { ...x, rid: t.rid }])));
+  const lossTeam = new Map(LT.map(t => [t.rid, t]));
+  const near2 = (a, b) => a != null && b != null && Math.abs(a - b) < 0.006;
+  const f1 = v => (Math.round(v * 10) / 10).toFixed(1);
+  const fmtD = (d, u) => (Math.abs(d) < 0.5 ? `~0${u}` : `${d > 0 ? "+" : "−"}${Math.abs(d).toFixed(1)}${u}`);
+  const LEAD = /^(calculating…|not measured|~0% playoff odds|[−+]\d+\.\d% playoff odds)$/;
+  // Rows: the plan's own, per team, nothing added or dropped.
+  const rowBad = [];
+  for (const t of PL.shown) {
+    const T = lossTeam.get(t.rid);
+    if (!T) { if (t.rows.some(x => x.lost != null)) rowBad.push(`${t.rid}: priced without a plan`); continue; }
+    if (t.rows.map(x => x.pid).sort().join() !== T.rows.map(x => x.pid).sort().join()) rowBad.push(`${t.rid}: rows`);
+    for (const x of t.rows) if (!near2(x.lost, lossOf.get(x.pid).totalLost)) rowBad.push(`${x.pid}: ${x.lost} vs ${lossOf.get(x.pid).totalLost}`);
+  }
+  check("injuries tab: rows are injuryLossPlan's rows, the ones the odds worker measures",
+    LT.length > 0 && PL.shown.length > 0 && rowBad.length === 0, rowBad.slice(0, 4).join(" ; "));
+  const ST = PL.stubTab || [], SD = (PL.stubbed || {}).deltas || {};
+  const leadBad = [], secBad = [], ptsBad = [], benchBad = [], srcBad = [], sortBad = [], wordBad = [];
+  let benchSeen = 0, zeroSeen = 0, srcSeen = 0;
+  for (const t of [...PL.shown, ...ST]) for (const x of t.rows) {
+    if (!LEAD.test(x.lead || "")) leadBad.push(`${x.pid}: ${x.lead}`);
+    if (/for his|stand-in|replacement|stands in/i.test(x.text)) wordBad.push(x.pid);
+  }
+  for (const t of ST) for (const x of t.rows) {
+    const d = SD[x.pid], L = lossOf.get(x.pid);
+    if (d && (x.lead !== `${fmtD(d[0], "%")} playoff odds` || x.title !== `${fmtD(d[1], "%")} title`)) secBad.push(`${x.pid}: ${x.lead} / ${x.title}`);
+    if (!d && (x.lead !== "not measured" || x.title)) secBad.push(`${x.pid} unmeasured: ${x.lead}`);
+    if (!L) continue;
+    const want = !L.weeksOut ? "0 pts" : L.wouldStart === false ? "wouldn't start · 0 pts"
+      : `${f1(L.lineupPerWeek)} pts/wk in lineup × ${L.weeksOut} wk${L.weeksOut === 1 ? "" : "s"} = ${f1(L.totalLost)} pts`;
+    if (x.pts !== want) ptsBad.push(`${x.pid}: "${x.pts}" vs "${want}"`);
+    if (x.benchTag !== L.bench || x.benchCls !== L.bench) benchBad.push(x.pid);
+    if (L.bench) benchSeen++;
+    if (L.wouldStart === false && L.weeksOut) zeroSeen++;
+    if (L.retLabel) { srcSeen++; if (x.src !== L.retLabel) srcBad.push(`${x.pid}: ${x.src}`); }
+    else if (x.src) srcBad.push(`${x.pid}: unexpected ${x.src}`);
+  }
+  for (const t of ST) for (let i = 1; i < t.rows.length; i++) {
+    const a = SD[t.rows[i - 1].pid], b = SD[t.rows[i].pid];
+    if ((!a && b) || (a && b && a[0] > b[0] + 1e-9)) sortBad.push(`${t.rid}: ${t.rows[i - 1].pid} before ${t.rows[i].pid}`);
+  }
+  const F = PL.stubFmt || [];
+  check("injuries tab: each row leads with its playoff odds impact as −X.X% playoff odds, ~0% under 0.5",
+    ST.length > 0 && leadBad.length === 0 && secBad.length === 0 && F.join("|") === "−3.5%|~0%|−0.5%||−3.5 pp|~0"
+      && ST.some(t => t.rows.some(x => x.lead === "~0% playoff odds")) && ST.some(t => t.rows.some(x => x.lead === "not measured")),
+    `${F.join("|")} ${[...leadBad, ...secBad].slice(0, 4).join(" ; ")}`);
+  check("injuries tab: title odds and lineup points are secondary: −X.X% title, pts/wk in lineup × wks = total pts",
+    ptsBad.length === 0 && wordBad.length === 0 && ST.some(t => t.rows.some(x => /pts\/wk in lineup ×/.test(x.pts))),
+    [...ptsBad, ...wordBad.map(p => `${p}: replacement wording`)].slice(0, 4).join(" ; "));
+  check("injuries tab: bench players are tagged bench; players who wouldn't start cost 0 pts",
+    benchBad.length === 0 && benchSeen > 0, `${benchSeen} bench, ${zeroSeen} wouldn't start; ${benchBad.slice(0, 4).join(", ")}`);
+  check("injuries tab: the return source and its checked date are shown beside the return",
+    srcBad.length === 0 && srcSeen > 0, `${srcSeen} with a source; ${srcBad.slice(0, 4).join(" ; ")}`);
+  const NT = PL.nullTab || [];
+  const notCalc = NT.flatMap(t => t.rows.filter(x => lossOf.has(x.pid) && (x.lead !== "calculating…" || x.title)).map(x => `${x.pid}: ${x.lead}`));
+  check("injuries tab: with injuryPlayoffDeltas() null every row reads calculating…",
+    PL.nullPending && NT.length > 0 && notCalc.length === 0, notCalc.slice(0, 4).join(" ; "));
+  check("injuries tab: rows sorted by playoff impact, most negative first, unmeasured last",
+    ST.length > 0 && sortBad.length === 0, sortBad.slice(0, 4).join(" ; "));
+  const sumBad = [], teamSort = [];
+  for (const t of PL.shown) {
+    if (t.lost == null) continue;
+    const s = t.rows.reduce((a, x) => a + (x.lost ?? 0), 0);
+    // Rendered per-row values are rounded to 2dp, so the sum may drift by a few hundredths.
+    if (Math.abs(s - t.lost) > 0.03 || t.lostText !== `−${f1(t.lost)}`) sumBad.push(`team ${t.rid}: ${s.toFixed(2)} vs ${t.lost} "${t.lostText}"`);
+  }
+  for (let i = 1; i < PL.shown.length; i++) {
+    const a = PL.shown[i - 1], b = PL.shown[i];
+    if ((a.lost == null && b.lost != null) || (a.lost != null && b.lost != null && a.lost < b.lost - 1e-9)) teamSort.push(`${a.rid} before ${b.rid}`);
+  }
+  check("injuries tab: each team's lineup pts lost is the sum of its rows; teams sorted by it",
+    PL.shown.length > 0 && sumBad.length === 0 && teamSort.length === 0, [...sumBad, ...teamSort].slice(0, 4).join(" ; "));
+  check("injuries tab: the method text explains the playoff odds, the points and the cap",
+    PL.capNote && PL.explainers && /playoff odds/i.test(PL.text), `cap ${PL.capPct}% note ${PL.capNote}, explainers ${PL.explainers}`);
+  // Five rows as rendered (stubbed deltas), for the log.
+  console.log(`    example rows: ${ST.flatMap(t => t.rows).filter(x => SD[x.pid]).slice(0, 5).map(x => x.text.replace(/\s+/g, " ").trim()).join(" ;; ")}`);
+}
 check("points lost: source label reads \"Sleeper projections, ESPN return dates\"", PL.source);
 check("points lost: every week through the last regular-season week has a Sunday", PL.sundaysOk);
 check("points lost: projectedPointsLost() agrees with the test's own re-implementation", PL.fnBad.length === 0 && PL.rows > 0,
   `${PL.rows} rows; ${PL.fnBad.slice(0, 3).join(" ; ")}`);
-check("points lost: every row's this-week and rest-of-season figure is what's rendered", PL.domBad.length === 0, PL.domBad.slice(0, 3).join(" ; "));
-check("points lost: each team's totals are the sums of its rows", PL.totBad.length === 0, PL.totBad.slice(0, 3).join(" ; "));
-check("points lost: totals are labelled with the site's week", PL.wkLabel, `week ${PL.week}`);
-check("points lost: rows sorted biggest this-week loss first within each team", PL.sortBad.length === 0, PL.sortBad.slice(0, 3).join(" ; "));
-check("points lost: teams sorted by this-week total, biggest first", PL.teamSort.length === 0, PL.teamSort.join(","));
-check("points lost: no-estimate rows carry no number and stay out of the totals", PL.noEstBad.length === 0,
-  `${PL.noEst} no-estimate; ${PL.noEstBad.slice(0, 3).join(", ")}`);
 check("points lost: a player costs points this week only if he'd start this week", PL.benchBad.length === 0, PL.benchBad.join(", "));
 check("points lost: questionable/doubtful rows show their status tag", PL.qBad.length === 0, `${PL.q}; ${PL.qBad.join(", ")}`);
 check("points lost: made-up roster — function and re-implementation agree", PL.fake.agree, JSON.stringify(PL.fake));
@@ -6158,8 +6235,6 @@ check("points lost: a bench injury that wouldn't start costs 0; one that would c
     && PL.bench.yStarts === false, JSON.stringify(PL.bench));
 check("points lost: a team with a no-estimate row marks its rest-of-season total partial",
   PL.fakePartial && PL.partialBad.length === 0, `fake ${PL.fakePartial}; ${PL.partialBad.join(",")}`);
-check("points lost: the highlight threshold is read from PTS_LOST",
-  PL.highlight.at === 5 && PL.highlight.low && !PL.highlight.high && PL.biteBad.length === 0, JSON.stringify(PL.highlight) + PL.biteBad.join(","));
 {
   const R = PL.ret, j = JSON.stringify(R);
   check("points lost: return info — a real ret date wins over retWeeks", R.A[0] === "date" && R.A[1] === 2 && R.agree, j);
@@ -6192,10 +6267,7 @@ check("points lost: the highlight threshold is read from PTS_LOST",
     Math.abs(ON.tw - 1) < 1e-9 && ON.ros === null && ON.weeks.length === 0, JSON.stringify(ON));
   const S = PL.standIn;
   check("points lost: stand-in names the one healthy player entering the lineup, else lineup shuffle",
-    S.one === "S2" && S.injured === "shuffle" && S.many === "S1" && S.notStarting === null && S.bad.length === 0, JSON.stringify(S));
-  const F = PL.floor;
-  check("points lost: per-row values under PTS_LOST.displayFloor show —, team totals stay exact",
-    F.cfg === 0.5 && F.low === "—" && F.zero === "—" && F.at === "−0.5" && F.tot === "−0.3" && PL.totBad.length === 0, JSON.stringify(F));
+    S.one === "S2" && S.injured === "shuffle" && S.many === "S1" && S.notStarting === null, JSON.stringify(S));
 }
 console.log(`    named players: ${JSON.stringify(PL.named)}`);
 const tops = [...PL.all].sort((a, b) => b.tw - a.tw).slice(0, 5);
@@ -6270,7 +6342,7 @@ check("points lost: at 390px nothing overflows and no text is under 11px",
 }
 {
   const top = PL.all.slice().sort((a, b) => b.tw - a.tw || (b.ros ?? -1) - (a.ros ?? -1)).slice(0, 5);
-  console.log(`  week ${PL.week} · ${PL.rows} rows · ${PL.noEst} no estimate · top 5 this week:`);
+  console.log(`  week ${PL.week} · ${PL.rows} rows · ${PL.all.filter(x => x.ros == null).length} no estimate · top 5 this week:`);
   for (const t of top) console.log(`    ${t.team} · ${t.name} (${t.status}) · ${t.weeksOut == null ? "no est." : t.weeksOut + " wks"} · `
     + `proj ${t.hurt.toFixed(1)} · ${t.rep || "no bench"} ${t.repPts.toFixed(1)} · −${t.tw.toFixed(1)} wk / ${t.ros == null ? "no estimate" : "−" + t.ros.toFixed(1)} ROS`);
 }
