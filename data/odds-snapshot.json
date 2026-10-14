@@ -1,7 +1,7 @@
 {
- "_comment": "Written by build-email.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. compose-email.mjs turns this into the weekly email. Nothing downstream recomputes a probability, so the email and the site cannot disagree.",
- "generated": "2026-10-13T19:03:38.500Z",
- "at": 1791918218500,
+ "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
+ "generated": "2026-10-14T11:14:00.752Z",
+ "at": 1791976440753,
  "season": "2026",
  "week": 6,
  "liveWeek": null,
@@ -13,24 +13,24 @@
    "rid": 12,
    "manager": "bigmoneyjos",
    "titleWas": 0.0956,
-   "titleNow": 0.00185,
+   "titleNow": 0.002,
    "playoffWas": 0.5453,
-   "playoffNow": 0.0207,
-   "wins": 3.8697,
-   "titleOdds": 50890,
+   "playoffNow": 0.02295,
+   "wins": 3.95385,
+   "titleOdds": 47070,
    "titleOddsOpen": 890,
-   "playoffOdds": 4460
+   "playoffOdds": 4010
   },
   {
    "uid": "1257789215605788672",
    "rid": 2,
    "manager": "andychoe03",
    "titleWas": 0.08135,
-   "titleNow": 0.0458,
+   "titleNow": 0.04685,
    "playoffWas": 0.4914,
-   "playoffNow": 0.47295,
-   "wins": 7.2071,
-   "titleOdds": 1960,
+   "playoffNow": 0.4742,
+   "wins": 7.207,
+   "titleOdds": 1910,
    "titleOddsOpen": 1060,
    "playoffOdds": -100
   },
@@ -39,24 +39,24 @@
    "rid": 9,
    "manager": "asierbelay",
    "titleWas": 0.06495,
-   "titleNow": 0.177,
+   "titleNow": 0.17695,
    "playoffWas": 0.44145,
-   "playoffNow": 0.90045,
-   "wins": 8.87365,
+   "playoffNow": 0.90165,
+   "wins": 8.87755,
    "titleOdds": 430,
    "titleOddsOpen": 1350,
-   "playoffOdds": -2100
+   "playoffOdds": -2160
   },
   {
    "uid": "646481339029475328",
    "rid": 1,
    "manager": "drewkim",
    "titleWas": 0.05465,
-   "titleNow": 0.0267,
+   "titleNow": 0.02695,
    "playoffWas": 0.3993,
-   "playoffNow": 0.2788,
+   "playoffNow": 0.28025,
    "wins": 6.157,
-   "titleOdds": 3430,
+   "titleOdds": 3400,
    "titleOddsOpen": 1630,
    "playoffOdds": 240
   },
@@ -65,108 +65,122 @@
    "rid": 3,
    "manager": "yojarshh",
    "titleWas": 0.1247,
-   "titleNow": 0.019,
+   "titleNow": 0.01915,
    "playoffWas": 0.61815,
-   "playoffNow": 0.15765,
-   "wins": 5.4484,
-   "titleOdds": 4870,
+   "playoffNow": 0.154,
+   "wins": 5.42085,
+   "titleOdds": 4830,
    "titleOddsOpen": 660,
-   "playoffOdds": 500
+   "playoffOdds": 510
   },
   {
    "uid": "1002352049469693952",
    "rid": 6,
    "manager": "saiky7",
    "titleWas": 0.09245,
-   "titleNow": 0.21425,
+   "titleNow": 0.21095,
    "playoffWas": 0.52725,
-   "playoffNow": 0.932,
-   "wins": 9.17235,
-   "titleOdds": 340,
+   "playoffNow": 0.9255,
+   "wins": 9.0882,
+   "titleOdds": 350,
    "titleOddsOpen": 920,
-   "playoffOdds": -8180
+   "playoffOdds": -5170
   },
   {
    "uid": "466018540445495296",
    "rid": 4,
    "manager": "nikhil1123",
    "titleWas": 0.07905,
-   "titleNow": 0.02875,
+   "titleNow": 0.0288,
    "playoffWas": 0.48995,
-   "playoffNow": 0.2731,
-   "wins": 6.2381,
+   "playoffNow": 0.2746,
+   "wins": 6.2382,
    "titleOdds": 3180,
    "titleOddsOpen": 1090,
-   "playoffOdds": 250
+   "playoffOdds": 240
   },
   {
    "uid": "809500620536004608",
    "rid": 7,
    "manager": "jjnhwg",
    "titleWas": 0.069,
-   "titleNow": 0.1539,
+   "titleNow": 0.15715,
    "playoffWas": 0.44665,
-   "playoffNow": 0.88155,
-   "wins": 8.82765,
-   "titleOdds": 510,
+   "playoffNow": 0.88945,
+   "wins": 8.8941,
+   "titleOdds": 500,
    "titleOddsOpen": 1270,
-   "playoffOdds": -1430
+   "playoffOdds": -1650
   },
   {
    "uid": "1057211129820213248",
    "rid": 10,
    "manager": "Lee284",
    "titleWas": 0.1001,
-   "titleNow": 0.1632,
+   "titleNow": 0.16345,
    "playoffWas": 0.56245,
-   "playoffNow": 0.879,
-   "wins": 8.9036,
+   "playoffNow": 0.8791,
+   "wins": 8.8997,
    "titleOdds": 480,
    "titleOddsOpen": 840,
-   "playoffOdds": -1360
+   "playoffOdds": -1370
   },
   {
    "uid": "1035404182708203520",
    "rid": 8,
    "manager": "jiddyyyyyy",
    "titleWas": 0.0879,
-   "titleNow": 0.0566,
+   "titleNow": 0.05725,
    "playoffWas": 0.53045,
-   "playoffNow": 0.40335,
-   "wins": 6.50615,
-   "titleOdds": 1570,
+   "playoffNow": 0.4119,
+   "wins": 6.5337,
+   "titleOdds": 1550,
    "titleOddsOpen": 970,
-   "playoffOdds": 135
+   "playoffOdds": 130
   },
   {
    "uid": "1260403115740368896",
    "rid": 5,
    "manager": "edyun1",
    "titleWas": 0.0921,
-   "titleNow": 0.01525,
+   "titleNow": 0.0152,
    "playoffWas": 0.52675,
-   "playoffNow": 0.1369,
+   "playoffNow": 0.13815,
    "wins": 5.2809,
-   "titleOdds": 6090,
+   "titleOdds": 6110,
    "titleOddsOpen": 920,
-   "playoffOdds": 590
+   "playoffOdds": 580
   },
   {
    "uid": "809957555957813248",
    "rid": 11,
    "manager": "tonypng",
    "titleWas": 0.05815,
-   "titleNow": 0.0977,
+   "titleNow": 0.0953,
    "playoffWas": 0.4209,
-   "playoffNow": 0.66355,
-   "wins": 7.5154,
-   "titleOdds": 870,
+   "playoffNow": 0.64825,
+   "wins": 7.44895,
+   "titleOdds": 890,
    "titleOddsOpen": 1520,
-   "playoffOdds": -240
+   "playoffOdds": -220
   }
  ],
  "games": [],
  "hurt": [
+  {
+   "manager": "saiky7",
+   "cost": 0.07175690860662565,
+   "players": [
+    {
+     "name": "Lamar Jackson",
+     "status": "Out"
+    },
+    {
+     "name": "Jaxon Smith-Njigba",
+     "status": "Questionable"
+    }
+   ]
+  },
   {
    "manager": "nikhil1123",
    "cost": 0.049854276426409605,
@@ -178,8 +192,18 @@
    ]
   },
   {
+   "manager": "tonypng",
+   "cost": 0.04127581511460776,
+   "players": [
+    {
+     "name": "DeVonta Smith",
+     "status": "Out"
+    }
+   ]
+  },
+  {
    "manager": "andychoe03",
-   "cost": 0.04112436731742586,
+   "cost": 0.041207132506842714,
    "players": [
     {
      "name": "David Montgomery",
@@ -198,26 +222,26 @@
    ]
   },
   {
-   "manager": "saiky7",
-   "cost": 0.023260563380281707,
+   "manager": "yojarshh",
+   "cost": 0.022340523035561555,
    "players": [
     {
-     "name": "Jaxon Smith-Njigba",
+     "name": "Saquon Barkley",
+     "status": "Out"
+    },
+    {
+     "name": "Rashee Rice",
      "status": "Questionable"
     }
    ]
   },
   {
    "manager": "asierbelay",
-   "cost": 0.019357695987561985,
+   "cost": 0.01731301476093705,
    "players": [
     {
      "name": "CeeDee Lamb",
      "status": "Questionable"
-    },
-    {
-     "name": "Roman Wilson",
-     "status": "Out"
     }
    ]
   },
@@ -230,21 +254,19 @@
      "status": "Questionable"
     }
    ]
-  },
-  {
-   "manager": "yojarshh",
-   "cost": 0.006318916841576261,
-   "players": [
-    {
-     "name": "Rashee Rice",
-     "status": "Questionable"
-    }
-   ]
   }
  ],
  "settled": true,
  "nfl": null,
  "articles": [
+  {
+   "slug": "four-teams-at-4-1-and-a-gap-behind-them",
+   "kicker": "2026 · week 5",
+   "headline": "Four Teams at 4-1, and a Gap Behind Them",
+   "dek": "Both unbeaten teams lost in week 5, the highest-scoring week of the season, and four clubs now sit at 4-1. The site's odds board gives each of them at least an 87.9 percent playoff chance and nobody else more than 66.4. Every game in full, below.",
+   "byline": "C Cubed desk",
+   "date": "2026-10-13"
+  },
   {
    "slug": "2026-draft-report",
    "kicker": "2026 Draft · Report",

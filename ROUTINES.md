@@ -16,7 +16,7 @@ article, to that address only, no cc, no bcc. Nothing else is sent to anyone.
 | Routine | Schedule (Eastern) | Cron (UTC, see note) | Writes |
 |---|---|---|---|
 | C Cubed Tuesday recap | Tuesday 8:00 AM | `0 12 * * 2` (EDT) / `0 13 * * 2` (EST) | `weeks[]`, `rankings.json`, one `"tuesday"` article |
-| C Cubed story watch | Thursday and Friday 9:00 AM | `0 13 * * 4,5` (EDT) / `0 14 * * 4,5` (EST) | one `"watch"` article a week |
+| C Cubed story watch | Daily 9:00 AM (does nothing on Tuesday) | `0 13 * * *` (EDT) / `0 14 * * *` (EST) | at most one `"watch"` article a week |
 | C Cubed Saturday odds | Saturday 10:00 AM | `0 14 * * 6` (EDT) / `0 15 * * 6` (EST) | one `"saturday"` article |
 
 Every time is after the data Action has run: the Tuesday build lands by about 1:30 AM ET and the
@@ -148,12 +148,17 @@ You cannot reach api.sleeper.app or the site. Everything you need is committed i
 Do not fetch anything. Do not post or message anyone. The only email you may send is the
 single self-email to Drew in step 8; nothing else is ever sent to anyone.
 
-This routine runs Thursday and Friday. The league gets ONE midweek piece a week, never two.
+This routine runs every day at 9:00 AM Eastern. The league gets AT MOST ONE watch piece per
+fantasy week, never two. A fantasy week, for this routine, runs Wednesday through Monday: it
+starts the day after the most recent Tuesday. Use today's date in America/New_York throughout.
 
-1. Read weekly-job-prompt.md in full. It is the contract; follow it exactly, including
-   "How long" and "The self-email".
-2. Look at recaps.json articles[]. If an article with "source": "watch" is already dated this
-   Thursday or Friday, write nothing, send nothing, and finish with one line saying so. Stop.
+1. If today is Tuesday (America/New_York), write nothing, commit nothing, send nothing, and
+   finish with one line saying Tuesday is the recap's day. Stop.
+2. Look at recaps.json articles[]. If any article with "source": "watch" has a date after the
+   most recent Tuesday (America/New_York), this week's watch piece is already filed: write
+   nothing, commit nothing, send nothing, and finish with one line saying so. Stop.
+   Otherwise read weekly-job-prompt.md in full. It is the contract; follow it exactly,
+   including "How long" and "The self-email".
 3. Read data/pulse.json, data/latest.json and the week files, data/odds-snapshot.json,
    data/odds-history.json and injuries.json. Check every ordinal or count against a sorted list.
 4. Decide the piece, in this order:
@@ -161,12 +166,15 @@ This routine runs Thursday and Friday. The league gets ONE midweek piece a week,
      covered. Who got what, what each side has started since (from the week files), and what
      the odds board says about both teams now.
    - WAIVERS: a FAAB claim of $25 or more since the last Tuesday, or the week's biggest spend.
-   - PREVIEW: if today is Friday and neither of the above exists, preview the coming week:
-     every game with the site's line from data/odds-snapshot.json games, and what each game is
-     worth to the playoff odds.
-   If today is Thursday and there is no trade or waiver story, write nothing, send nothing,
-   and stop: Friday will file the preview.
-5. Write ONE article in recaps.json articles[] with "source": "watch", byline "C Cubed desk".
+   - PREVIEW: ONLY on a Friday, and only if neither of the above exists: preview the coming
+     week: every game with the site's line from data/odds-snapshot.json games, and what each
+     game is worth to the playoff odds.
+   Only Friday may file a PREVIEW. On any other day, if there is no BIG TRADE or WAIVERS
+   story, write nothing, commit nothing, send nothing, and finish with one line saying so.
+   Stop.
+5. Write ONE article in recaps.json articles[] with "source": "watch", byline "C Cubed desk",
+   today's date (America/New_York) as "date", and kind "preview" for the preview or kind
+   "opinion" for a trade or waivers piece.
    A trade or waivers piece: lead paragraph, stat, two or three h sections, cards or bars;
    about 400 words in 7-17 blocks (225-650). The preview: lead paragraph, stat, a cards block
    of the lines, an h per game with two or three paragraphs, bars, note; about 1,150 words
@@ -189,8 +197,10 @@ This routine runs Thursday and Friday. The league gets ONE midweek piece a week,
    `npx playwright install chromium` first); it writes news/<slug>.html and img/og/<slug>.png.
    Keep every existing article and week exactly as found. Save the old file
    (git show HEAD:recaps.json > /tmp/was.json), run `node check-recaps.mjs --was /tmp/was.json`
-   and fix anything it reports. Commit recaps.json, news/<slug>.html and img/og/<slug>.png to
-   main and push to main. Confirm the commit is on origin/main.
+   and fix anything it reports (it rejects a second watch piece in one Wednesday-Monday week, a
+   watch piece dated on a Tuesday, and a preview not dated on a Friday). Commit recaps.json,
+   news/<slug>.html and img/og/<slug>.png to main and push to main. Confirm the commit is on
+   origin/main.
 7. If the push failed, send nothing and finish with what went wrong.
 8. EMAIL DREW, the only send allowed. Only if this run pushed a new article, and only after
    the push succeeded: use the Gmail connector to send exactly ONE email for that article.
