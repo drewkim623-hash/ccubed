@@ -82,7 +82,7 @@ check("__CCUBED internals exposed", await page.evaluate(() => !!window.__CCUBED)
 }
 try {
 group("Tabs");
-var EXPECT = ["home", "scores", "managers", "records", "matchups", "power", "odds", "injuries", "picture", "draft", "trades", "trade", "recaps"];
+var EXPECT = ["home", "scores", "managers", "records", "matchups", "power", "odds", "injuries", "picture", "draft", "trades", "recaps"];
 check("every tab present and in order", JSON.stringify(meta.tabs) === JSON.stringify(EXPECT), meta.tabs.join(","));
 for (const id of EXPECT) {
   await page.click(`#tabs button[data-tab="${id}"]`);
@@ -93,6 +93,29 @@ for (const id of EXPECT) {
   check(`${id}: panel renders and is selectable`, shown.exists && shown.visible && shown.selected && shown.kids > 0, JSON.stringify(shown));
 }
 check("hash routing follows the tab", (await page.evaluate(() => location.hash)) === "#recaps");
+
+// The Trade Machine is gone: no tab, no panel, and its old links land on Trades.
+check("no Trade Machine tab or panel", await page.evaluate(() =>
+  !document.querySelector('#tabs button[data-tab="trade"]') && !document.querySelector('[data-panel="trade"]') &&
+  ![...document.querySelectorAll("#tabs button")].some(b => /machine/i.test(b.textContent)) &&
+  typeof renderTradeMachine === "undefined" && typeof tradeResult === "undefined" && typeof tmRosters === "undefined"));
+const onTrades = p => p.evaluate(() => {
+  const t = document.querySelector('[data-panel="trades"]');
+  return location.hash === "#trades" && !!t && !t.hidden &&
+    document.querySelector('#tabs button[data-tab="trades"]').getAttribute("aria-selected") === "true" &&
+    [...document.querySelectorAll("#app > [data-panel]")].filter(x => !x.hidden).length === 1;
+});
+var rp = await ctx.newPage();
+for (const old of ["trade", "machine"]) {
+  await rp.goto(`${BASE}/#${old}`, { waitUntil: "domcontentloaded" });
+  await rp.waitForFunction(() => document.body.dataset.ready, null, { timeout: 90000 });
+  check(`#${old} on direct load lands on Trades`, await onTrades(rp), await rp.evaluate(() => location.hash));
+  await rp.click('#tabs button[data-tab="home"]');
+  await rp.evaluate(o => { location.hash = "#" + o; }, old);
+  await rp.waitForFunction(() => location.hash === "#trades", null, { timeout: 5000 }).catch(() => {});
+  check(`#${old} on hashchange lands on Trades`, await onTrades(rp), await rp.evaluate(() => location.hash));
+}
+await rp.close();
 
 } catch (e) {
   check(`group ran to completion: ${"Tabs"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
@@ -5585,7 +5608,7 @@ var helper = await lp.evaluate(() => {
 check("teamLabelHTML and teamNameText are exposed", helper.exposed);
 check("a label leads with the team name and names both managers underneath, once", helper.ok);
 
-var LABEL_TABS = ["home", "scores", "managers", "records", "matchups", "power", "odds", "picture", "draft", "trades", "trade", "recaps"];
+var LABEL_TABS = ["home", "scores", "managers", "records", "matchups", "power", "odds", "picture", "draft", "trades", "recaps"];
 for (const width of [1280, 390]) {
   await lp.setViewportSize({ width, height: 900 });
   for (const t of LABEL_TABS) {
