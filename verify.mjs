@@ -4236,6 +4236,8 @@ group("Teasers: every article has one, and it copies");
     const cp = await browser.newPage();
     await cp.goto(`${BASE}/news/${s}.html`, { waitUntil: "domcontentloaded" });
     await cp.waitForFunction(() => document.body && document.body.dataset.ready === "1", null, { timeout: 90000 }).catch(() => {});
+    // the app shows the index first, then opens the piece once recaps.json is in
+    await cp.waitForFunction(() => location.hash.startsWith("#news/"), null, { timeout: 15000 }).catch(() => {});
     const landed = await cp.evaluate(() => location.pathname + location.hash);
     const target = arts.find(a => a.slug === s || (a.aliases || []).includes(s));
     check(`news/${s}.html sends a browser on to #news/${target.slug}`, landed === `/#news/${target.slug}`, landed);
