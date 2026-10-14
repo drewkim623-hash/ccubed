@@ -37,7 +37,7 @@
     "cards": "{type:'cards', items:[{title, big, sub, lead?, rows:[{label, value}]}]}",
     "picks": "{type:'picks', items:[{slot, name, sub, delta}]}",
     "note": "{type:'note', text}  - a quiet footnote",
-    "img": "{type:'img', src, alt, width?, height?, caption?, href?, link?}  - an image from img/ in this repo, with alt text; href/link add a link under it"
+    "img": "{type:'img', src, alt, width?, height?, caption?, href?, link?, narrow?}  - an image from img/ in this repo, with alt text; href/link add a link under it; narrow is an optional img/ crop shown on phones (560px and under). Tapping the image opens it full size"
    },
    "teaser": "plain text, at most 600 characters, no HTML, exactly these 10 lines: '🚨 C CUBED | WEEK n' (or PRESEASON), blank, the headline in capitals, blank, three lines that each open with an emoji and carry a stat printed in the article, blank, 'Full story 👇', and the card link https://drewkim623-hash.github.io/ccubed/news/<slug>.html (built by node build-cards.mjs)",
    "source": "which routine wrote it: tuesday (recap + column), watch (midweek: preview, odds, waivers, big trade), saturday (odds column)",
@@ -249,6 +249,7 @@
     {
      "type": "img",
      "src": "img/playoff-picture-2026-w5.webp",
+     "narrow": "img/playoff-picture-2026-w5-top.webp",
      "width": 968,
      "height": 1408,
      "alt": "C Cubed's Playoff Picture board after week 5: yerra x ecj and AB x B in the two bye spots, Jug, Uzzz uzz uzz, Tshough and andychoe03 & NathKim in the other four playoff places, the bracket if the season ended today, and every team's Bye % and Playoff %.",
@@ -267,7 +268,7 @@
     },
     {
      "type": "p",
-     "text": "andychoe03 started all three players from the deal: Pickens scored 28, Adams 22.1 and Montgomery 1.1 before leaving Sunday's game with a groin injury. Jacoby Brissett, picked up as a free agent the same week, scored 26.28 at quarterback in Allen's place, and andychoe03 beat tonypng by 1.78, the closest game of the week."
+     "text": "andychoe03 started all three players from the deal: Pickens scored 28, Adams 22.1 and Montgomery 1.1; Montgomery is now out with a groin injury. Jacoby Brissett, picked up as a free agent the same week, scored 26.28 at quarterback in Allen's place, and andychoe03 beat tonypng by 1.78, the closest game of the week."
     },
     {
      "type": "p",

@@ -63,7 +63,10 @@ export function keyStat(a) {
   const s = (a.blocks || []).find(b => b.type === "stat");
   if (!s) return null;
   const m = /^([-+]?[\d.,]+)\s*(.*)$/.exec(String(s.n).trim());
-  return { num: m ? m[1] : String(s.n), unit: (m ? m[2] : "").toUpperCase(), label: plain(s.text).split(/(?<=\.)\s/)[0] };
+  // The caption has to read in a chat bubble: one sentence, cut back to its first clause when long.
+  let label = plain(s.text).split(/(?<=\.)\s/)[0];
+  if (label.length > 80) label = label.split(",")[0];
+  return { num: m ? m[1] : String(s.n), unit: (m ? m[2] : "").toUpperCase(), label };
 }
 
 function template(a, fontUrl) {
@@ -71,25 +74,29 @@ function template(a, fontUrl) {
   return `<!doctype html><html><head><meta charset="utf-8"><style>
   @font-face{font-family:Oswald;src:url(${fontUrl}) format("truetype");font-weight:200 700}
   *{box-sizing:border-box}html,body{margin:0}
-  .c{position:relative;width:1200px;height:630px;overflow:hidden;color:#fff;font-family:Oswald,sans-serif;padding:52px 64px 0 82px;
+  .c{position:relative;width:1200px;height:630px;overflow:hidden;color:#fff;font-family:Oswald,sans-serif;padding:52px 64px 44px 82px;
+    display:flex;flex-direction:column;
     background:radial-gradient(circle at 85% 18%,#e4002b40,transparent 55%),linear-gradient(135deg,#0a0f1e,#000)}
   .stripe{position:absolute;left:0;top:0;bottom:0;width:18px;background:#e4002b}
-  .top{display:flex;justify-content:space-between;align-items:center}
+  .top{display:flex;justify-content:space-between;align-items:center;min-height:50px}
   .brand{font-weight:700;font-size:54px;letter-spacing:5px;line-height:1}
   .tag{font-weight:700;font-size:28px;letter-spacing:4px;background:#e4002b;padding:6px 16px;line-height:1.2}
-  .wk{font-weight:700;font-size:34px;letter-spacing:8px;color:#e4002b;margin-top:34px;line-height:1}
-  .hl{font-weight:700;font-size:92px;line-height:.98;margin-top:12px;text-transform:uppercase;max-height:236px;max-width:1040px}
-  .stat{position:absolute;left:82px;bottom:34px;display:flex;align-items:baseline;gap:16px;max-width:1060px}
+  /* Week, headline and stat sit together in the space under the brand: no empty band. */
+  .main{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+  .wk{font-weight:700;font-size:34px;letter-spacing:8px;color:#e4002b;line-height:1}
+  .hl{font-weight:700;font-size:100px;line-height:.98;margin-top:12px;text-transform:uppercase;max-width:1040px}
+  .stat{display:flex;align-items:center;gap:16px;margin-top:26px;max-width:1060px}
   .stat b{font-size:132px;line-height:1;font-weight:700}
-  .stat span{font-weight:700;font-size:52px;color:#e4002b;line-height:1}
-  .stat i{font-style:normal;font-weight:400;font-size:24px;line-height:1.25;color:#a9adbb;max-width:520px;margin-left:12px;
-    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;align-self:center}
+  .stat span{font-weight:700;font-size:56px;color:#e4002b;line-height:1;align-self:flex-end;margin-bottom:12px}
+  .stat i{font-style:normal;font-weight:500;font-size:36px;line-height:1.18;color:#eef0f5;max-width:640px;margin-left:14px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   </style></head><body><div class="c" id="card"><div class="stripe"></div>
-  <div class="top"><span class="brand">C CUBED</span><span class="tag">BREAKING</span></div>
+  <div class="top"><span class="brand">C CUBED</span>${weekLabel(a) === "PRESEASON" ? "" : `<span class="tag">BREAKING</span>`}</div>
+  <div class="main">
   <div class="wk">${esc(weekLabel(a))}</div>
   <div class="hl" id="hl">${esc(plain(a.headline))}</div>
   ${st ? `<div class="stat"><b>${esc(st.num)}</b>${st.unit ? `<span>${esc(st.unit)}</span>` : ""}<i>${esc(st.label)}</i></div>` : ""}
-  </div></body></html>`;
+  </div></div></body></html>`;
 }
 
 async function writeIfChanged(path, data) {
@@ -118,7 +125,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     await page.evaluate(async () => {
       await document.fonts.ready;
       const h = document.getElementById("hl");
-      for (let px = 92; px > 40 && h.scrollHeight > 236; px -= 4) h.style.fontSize = px + "px";
+      for (let px = 100; px > 40 && h.scrollHeight > 250; px -= 4) h.style.fontSize = px + "px";
     });
     const png = await page.locator("#card").screenshot({ type: "png" });
     if (await writeIfChanged(`img/og/${a.slug}.png`, png)) { changed++; console.log(`wrote img/og/${a.slug}.png`); }

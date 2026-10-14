@@ -46,7 +46,7 @@ export const weekWords = w => words(w.lede)
   + (w.around || []).reduce((n, a) => n + words(a.headline) + words(a.body), 0);
 /** Words a reader reads in an article's blocks; ids, links and alt text do not count. */
 export function articleWords(a) {
-  const skip = new Set(["type", "eyebrow", "src", "href", "alt", "width", "height", "group", "lead"]);
+  const skip = new Set(["type", "eyebrow", "src", "href", "alt", "width", "height", "group", "lead", "narrow"]);
   const walk = o => typeof o === "string" ? words(o) : Array.isArray(o) ? o.reduce((n, x) => n + walk(x), 0)
     : o && typeof o === "object" ? Object.entries(o).reduce((n, [k, v]) => n + (skip.has(k) ? 0 : walk(v)), 0) : 0;
   return walk(a.blocks || []);
