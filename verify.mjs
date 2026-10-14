@@ -15,7 +15,8 @@ import { extname, join, resolve } from "node:path";
 
 const ROOT = resolve(new URL(".", import.meta.url).pathname);
 const HEADED = process.argv.includes("--headed");
-const TYPES = { ".html": "text/html", ".json": "application/json", ".js": "text/javascript", ".css": "text/css" };
+const TYPES = { ".html": "text/html", ".json": "application/json", ".js": "text/javascript", ".css": "text/css",
+  ".png": "image/png", ".webp": "image/webp" };
 
 /* ------------------------------------------------------------ harness */
 let pass = 0, fail = 0;
@@ -3002,22 +3003,72 @@ group("The recap guard, and nothing sends");
 
   const prompt = await readFile(join(ROOT, "weekly-job-prompt.md"), "utf8");
   const routines = await readFile(join(ROOT, "ROUTINES.md"), "utf8").catch(() => "");
-  const sendy = /blast-status|compose-email|poll-tally|sent-emails|SendUserFile|--record\b|thread_id/;
-  check("the prompt and the routines carry no send, blast, poll or ledger step",
+  const sendy = /blast-status|compose-email|build-email|email-week|poll-tally|polls\.json|votes\.json|sent-emails|SendUserFile|--record\b|thread_id/;
+  check("the prompt and the routines carry no blast, poll or ledger step",
     !sendy.test(prompt) && !sendy.test(routines), (prompt + routines).match(sendy)?.[0] || "");
+  /* The one send allowed is a copy of each new article's teaser to Drew's own
+   * address. Anything that could widen it — a second address, a cc or bcc
+   * field — fails, and so does the same check run on a doctored copy. */
+  const SELF = "drewkim623@gmail.com";
+  const sendProblems = t => {
+    const out = [];
+    const others = [...new Set(t.match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}/gi) || [])].filter(m => m.toLowerCase() !== SELF);
+    if (others.length) out.push(`another address: ${others.join(", ")}`);
+    if (/\b(?:cc|bcc)\s*:/i.test(t)) out.push("a cc or bcc field");
+    if (/\bTo:[^\n]*@[^\n]*@/i.test(t)) out.push("more than one To: recipient");
+    return out;
+  };
+  check("the prompt and the routines name no address but Drew's own, and no cc or bcc",
+    sendProblems(prompt).length === 0 && sendProblems(routines).length === 0,
+    [...sendProblems(prompt), ...sendProblems(routines)].join(" | "));
+  check("that check catches another recipient, a cc and a bcc",
+    sendProblems(routines.replace("To: drewkim623@gmail.com", "To: drewkim623@gmail.com, someone@example.org")).length > 0
+      && sendProblems(routines + "\nCc: x@y.com").length > 0 && sendProblems(routines + "\nbcc: league@gmail.com").length > 0
+      && sendProblems(prompt.replace(SELF, "commish@gmail.com")).length > 0);
+  check("the contract carries the self-email: Drew only, no cc or bcc, one per article, teaser as body",
+    /## The self-email/.test(prompt) && prompt.includes(`**To:** \`${SELF}\``) && /No cc\. No bcc\./.test(prompt)
+      && /exactly \*\*one\*\* email per new article/.test(prompt) && /`C Cubed: <headline>`/.test(prompt)
+      && /the article's `teaser`, exactly as committed/.test(prompt) && /This self-email is the only send allowed/.test(prompt));
+  check("the contract asks for a full weeks[] entry every week, at the reference length",
+    /Every week gets a full entry, every week/.test(prompt) && /600–950/.test(prompt) && /850–1,500/.test(prompt)
+      && /## How long/.test(prompt));
+  check("the contract carries no keeper step", !/keepers\.json|keeper (?:slot|pick|deadline)/i.test(prompt + routines));
   check("the prompt carries the which-week guard",
     /node recap-guard\.mjs/.test(prompt) && /"final": true/.test(prompt) && /latest\.week \+ 1/.test(prompt)
       && /generated_at/.test(prompt) && /12 hours/.test(prompt) && /write no recap/i.test(prompt));
   const blocks = [...routines.matchAll(/^## (C Cubed [^\n]+)\n+```\n([\s\S]*?)```/gm)];
   check("ROUTINES.md has a prompt for each of the three routines", blocks.length === 3,
     blocks.map(b => b[1]).join(" | "));
-  check("every routine prompt requires the teaser and its #news link",
+  check("every routine prompt requires the breaking-news teaser and its card link",
     blocks.length === 3 && blocks.every(b => /teaser/.test(b[2]) && /600 characters/.test(b[2])
-      && b[2].includes("https://drewkim623-hash.github.io/ccubed/#news/<slug>")));
+      && b[2].includes("🚨 C CUBED | WEEK <n>") && b[2].includes("Full story 👇")
+      && /printed in the article itself/.test(b[2])
+      && b[2].includes("https://drewkim623-hash.github.io/ccubed/news/<slug>.html")));
+  check("every routine prompt builds the link card and commits it with the article",
+    blocks.length === 3 && blocks.every(b => /node build-cards\.mjs/.test(b[2])
+      && /Commit recaps\.json[\s\S]{0,40}news\/<slug>\.html and img\/og\/<slug>\.png/.test(b[2])
+      && b[2].indexOf("node build-cards.mjs") < b[2].indexOf("node check-recaps.mjs --was")));
+  check("the contract carries the teaser shape and the link card",
+    prompt.includes("🚨 C CUBED | WEEK n") && prompt.includes("Full story 👇") && /### The link card/.test(prompt)
+      && prompt.includes("https://drewkim623-hash.github.io/ccubed/news/<slug>.html")
+      && /Commit `news\/<slug>\.html` and `img\/og\/<slug>\.png`/.test(prompt));
   check("every routine prompt says redraft, no keepers, and no invented history",
     blocks.length === 3 && blocks.every(b => /REDRAFT/.test(b[2]) && /no keepers/.test(b[2]) && /Never invent history/.test(b[2])));
   check("every routine prompt runs the teaser check before pushing",
     blocks.length === 3 && blocks.every(b => /node check-recaps\.mjs --was/.test(b[2])));
+  check("every routine prompt emails a new article to Drew alone, after the push, teaser as body",
+    blocks.length === 3 && blocks.every(b => b[2].includes(`To: ${SELF}`) && /No cc\. No bcc\. No other recipient, ever\./.test(b[2])
+      && b[2].includes("Subject: C Cubed: <the article's headline, exactly as committed>")
+      && b[2].includes("Body: the article's teaser, exactly as committed") && /the only send allowed/.test(b[2])
+      && /Gmail connector/.test(b[2]) && /exactly ONE email/.test(b[2])
+      && b[2].indexOf("push to main") < b[2].indexOf("EMAIL DREW")));
+  check("every routine prompt states its length targets",
+    blocks.length === 3 && /600-950/.test(blocks[0][2]) && /850-1,500/.test(blocks[0][2])
+      && /225-650/.test(blocks[1][2]) && /900-1,300/.test(blocks[1][2]) && /425-525/.test(blocks[2][2]));
+  check("the Tuesday routine writes a full weeks[] entry every week",
+    blocks.length === 3 && /FULL weeks\[\] entry/.test(blocks[0][2]) && /every week, never skipped/.test(blocks[0][2]));
+  check("ROUTINES.md keeps the Gmail connector, for the self-email only",
+    /keep Gmail connected/i.test(routines) && !/Remove Gmail/i.test(routines));
 
   const wf = await readFile(join(ROOT, ".github/workflows/weekly-data.yml"), "utf8");
   check("the workflow runs no email step", !/compose-email|blast|sendmail|smtp|poll-tally/i.test(wf.replace(/^\s*#.*$/gm, "")));
@@ -3971,8 +4022,14 @@ check("no board posts an implausible hold",
 try {
 group("A link opens the piece");
 
+// The week 5 Tuesday piece was rewritten under a new slug; its old slug is an
+// alias, so the links already shared in all three forms still open it.
+const W5 = "Four Teams at 4-1, and a Gap Behind Them";
 for (const [url, want] of [
-  ["/#news/the-trade-showed-up-right-away", "The Trade Showed Up Right Away"],
+  ["/#news/four-teams-at-4-1-and-a-gap-behind-them", W5],
+  ["/#news/the-trade-showed-up-right-away", W5],
+  ["/#article/the-trade-showed-up-right-away", W5],
+  ["/?a=the-trade-showed-up-right-away", W5],
   ["/#article/2026-draft-report", "Nobody wanted a quarterback, and Josh Jacobs paid for it"],
   ["/?a=2026-divisions", "Three divisions, six places, and almost nothing between them"],
   ["/#news/nothing-by-this-name", null],
@@ -3990,13 +4047,57 @@ for (const [url, want] of [
     const a = document.querySelector('[data-panel="article"]');
     const vis = [...document.querySelectorAll("#app > .panel")].find(x => !x.hidden);
     return { headline: a && !a.hidden ? a.querySelector("h2").textContent : null,
-             panel: vis ? vis.dataset.panel : null };
+             panel: vis ? vis.dataset.panel : null, hash: location.hash };
   });
   check(`${url} → ${want || "the index, not a blank page"}`,
     want ? got.headline === want : got.headline === null && !!got.panel,
     `panel=${got.panel} headline=${got.headline}${errs.length ? " ERR:" + errs.join("|") : ""}`);
+  if (url.includes("the-trade-showed-up-right-away"))
+    check(`${url} lands on the piece's own address`, got.hash === "#news/four-teams-at-4-1-and-a-gap-behind-them", got.hash);
   await p2.close();
 }
+
+/* The week 5 piece carries the Playoff Picture as an image: it loads, it has
+ * alt text, it never runs wider than the column, and its link goes to the
+ * live board — which, followed in-page, opens the Playoff Picture tab. */
+for (const width of [390, 1280]) {
+  const ictx = await browser.newContext({ viewport: { width, height: 900 } });
+  const ip = await ictx.newPage();
+  await ip.goto(BASE + "/#news/four-teams-at-4-1-and-a-gap-behind-them", { waitUntil: "domcontentloaded" });
+  await ip.waitForFunction(() => document.body.dataset.ready === "1", null, { timeout: 90000 });
+  await ip.waitForSelector('[data-panel="article"] .aimg img', { timeout: 15000 }).catch(() => {});
+  await ip.evaluate(() => { const i = document.querySelector('[data-panel="article"] .aimg img'); if (i) { i.loading = "eager"; i.scrollIntoView(); } });
+  await ip.waitForFunction(() => { const i = document.querySelector('[data-panel="article"] .aimg img'); return i && i.complete; }, null, { timeout: 15000 }).catch(() => {});
+  const im = await ip.evaluate(() => {
+    const f = document.querySelector('[data-panel="article"] .aimg');
+    const i = f && f.querySelector("img"), a = f && f.querySelector("figcaption a");
+    const col = f && f.parentElement.getBoundingClientRect();
+    return i ? { src: i.getAttribute("src"), nw: i.naturalWidth, alt: i.alt, w: i.getBoundingClientRect().width,
+      colW: col.width, docOver: document.documentElement.scrollWidth > innerWidth + 1,
+      href: a && a.getAttribute("href"), link: a && a.textContent } : null;
+  });
+  check(`${width}px: the article shows the Playoff Picture image`, im && im.src === "img/playoff-picture-2026-w5.webp" && im.nw > 0,
+    JSON.stringify(im));
+  check(`${width}px: the image has alt text`, im && im.alt.length > 40, im ? im.alt.slice(0, 60) : "");
+  check(`${width}px: the image fits the column and the page does not scroll sideways`,
+    im && im.w <= im.colW + 0.5 && !im.docOver, im ? `${im.w} in ${im.colW}` : "");
+  check(`${width}px: the image links to the live Playoff Picture`,
+    im && im.href === "https://drewkim623-hash.github.io/ccubed/#picture" && /See the live Playoff Picture/.test(im.link || ""), im && im.href);
+  if (width === 1280) {
+    await ip.evaluate(() => { location.hash = "#picture"; });
+    await ip.waitForTimeout(500);
+    const vis = await ip.evaluate(() => ([...document.querySelectorAll("#app > .panel")].find(x => !x.hidden) || {}).dataset?.panel);
+    check("following #picture from an article opens the Playoff Picture tab", vis === "picture", vis);
+  }
+  await ictx.close();
+}
+const blockOut = await page.evaluate(() => {
+  const B = window.__CCUBED.articleBlock;
+  return [B({ type: "img", src: "javascript:alert(1)", alt: "x" }), B({ type: "img", src: "https://elsewhere.example/x.png", alt: "x" }),
+    B({ type: "img", src: "img/a.webp", alt: "x", href: "javascript:alert(1)", link: "go" })];
+});
+check("an image block only shows the repo's own img/ files and only https links",
+  blockOut[0] === "" && blockOut[1] === "" && !/javascript:/.test(blockOut[2]) && /img\/a\.webp/.test(blockOut[2]), blockOut.join(" | ").slice(0, 200));
 
 /* ------------------------------------------------------------------------
  * Futures markets: the sportsbook-style browser, on both lines. Presentation
@@ -4008,6 +4109,64 @@ for (const [url, want] of [
   check(`group ran to completion: ${"A link opens the piece"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
+group("Recaps: weeks[] in full, every week");
+
+/* Every finished week gets a full write-up in the reference shape: the same
+ * fields, all six games, a 3-6 item notebook, and a length inside the range the
+ * reference recaps actually ran (613-942 words, rounded out to 600-950). The
+ * scores must be the week file's. Week 5 is the first one, backfilled. */
+{
+  const { recapsProblems, weekProblems, weekWords, loadWeekFiles, articleWords, WEEK_WORDS, TUESDAY_WORDS } =
+    await import(new URL("./check-recaps.mjs", import.meta.url));
+  const recaps = JSON.parse(await readFile(join(ROOT, "recaps.json"), "utf8"));
+  const files = await loadWeekFiles(recaps, ROOT);
+  const weeks = recaps.weeks || [];
+  const w5 = weeks.find(w => w.season === "2026" && w.week === 5);
+  check("weeks[] has week 5", !!w5);
+  check("every week has exactly the reference fields",
+    weeks.every(w => Object.keys(w).join() === "season,week,note,lede,games,around"
+      && w.games.every(g => Object.keys(g).join() === "headline,winner,winner_points,loser,loser_points,body")
+      && w.around.every(a => Object.keys(a).join() === "kind,headline,body")),
+    weeks.map(w => Object.keys(w).join()).join(" | "));
+  check(`every week is ${WEEK_WORDS.min}-${WEEK_WORDS.max} words, the reference range`,
+    weeks.length > 0 && weeks.every(w => weekWords(w) >= WEEK_WORDS.min && weekWords(w) <= WEEK_WORDS.max),
+    weeks.map(w => `${w.week}: ${weekWords(w)}`).join(", "));
+  check("every week has its committed week file, and the scores match it",
+    weeks.every(w => files[`${w.season}/${w.week}`]) && weeks.every(w => weekProblems(w, files[`${w.season}/${w.week}`]).length === 0),
+    weeks.flatMap(w => weekProblems(w, files[`${w.season}/${w.week}`])).join(" | "));
+  check("check-recaps.mjs passes the real file, week files included", recapsProblems(recaps, null, files).length === 0,
+    recapsProblems(recaps, null, files).join(" | "));
+  const short = { ...w5, games: w5.games.slice(0, 5), around: [] };
+  const wrong = { ...w5, games: w5.games.map((g, i) => i ? g : { ...g, winner_points: g.winner_points + 1 }) };
+  const thin = { ...w5, lede: "x", games: w5.games.map(g => ({ ...g, body: "Won." })) };
+  check("check-recaps.mjs catches a missing game, a missing notebook, a wrong score and a thin recap",
+    weekProblems(short).some(p => /six games/.test(p)) && weekProblems(short).some(p => /around/.test(p))
+      && weekProblems(wrong, files["2026/5"]).some(p => /not a result/.test(p)) && weekProblems(thin).some(p => /words/.test(p)));
+  const tues = (recaps.articles || []).filter(a => a.source === "tuesday");
+  check(`every Tuesday article is ${TUESDAY_WORDS.min}-${TUESDAY_WORDS.max} words`,
+    tues.length > 0 && tues.every(a => articleWords(a) >= TUESDAY_WORDS.min && articleWords(a) <= TUESDAY_WORDS.max),
+    tues.map(a => `${a.slug}: ${articleWords(a)}`).join(", "));
+  const was = { articles: [{ slug: "the-trade-showed-up-right-away" }], weeks: [] };
+  check("an aliased slug does not count as a lost article", recapsProblems(recaps, was, files).length === 0);
+  const clash = { ...recaps, articles: recaps.articles.map((a, i) => i ? a : { ...a, aliases: [recaps.articles[1].slug] }) };
+  check("an alias may not shadow a live slug", recapsProblems(clash, null, files).some(p => /alias .* is already taken/.test(p)));
+
+  const dom = await page.evaluate(async () => {
+    document.querySelector('#tabs button[data-tab="recaps"]').click();
+    await new Promise(r => setTimeout(r, 400));
+    const p = document.querySelector('[data-panel="recaps"]');
+    const head = [...p.querySelectorAll(".wkhead h3")].map(h => h.textContent);
+    return { head, lede: (p.querySelector(".lede p") || {}).textContent || "", games: p.querySelectorAll(".recap").length,
+      around: p.querySelectorAll(".around .atl").length, over: document.documentElement.scrollWidth > innerWidth + 1 };
+  });
+  check("the News tab shows week 5 in full: lede, six games, the notebook",
+    dom.head.includes("Week 5") && dom.lede === w5.lede && dom.games === 6 && dom.around === w5.around.length,
+    JSON.stringify({ ...dom, lede: dom.lede.slice(0, 40) }));
+}
+} catch (e) {
+  check(`group ran to completion: ${"Recaps: weeks[] in full, every week"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+}
+try {
 group("Teasers: every article has one, and it copies");
 
 /* The teaser is what gets pasted into the group chat, so it is checked as text
@@ -4015,7 +4174,9 @@ group("Teasers: every article has one, and it copies");
  * that piece on a cold load and on a reload, the button copies exactly the
  * teaser, and a refused clipboard leaves the text selected in a textarea. */
 {
-  const { recapsProblems, teaserProblems, teaserLink, TEASER_MAX } = await import(new URL("./check-recaps.mjs", import.meta.url));
+  const { recapsProblems, teaserProblems, teaserLink, TEASER_MAX, SITE: SITE_URL, cardUrl, ogImageUrl,
+    cardFileProblems, cardTagProblems, metaTags, pngSize } = await import(new URL("./check-recaps.mjs", import.meta.url));
+  const newestSlug = as => as.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))[0].slug;
   const recaps = JSON.parse(await readFile(join(ROOT, "recaps.json"), "utf8"));
   const arts = recaps.articles || [];
   const slugs = new Set(arts.map(a => a.slug));
@@ -4024,17 +4185,69 @@ group("Teasers: every article has one, and it copies");
     arts.every(a => typeof a.teaser === "string" && a.teaser.length <= TEASER_MAX),
     arts.filter(a => !(typeof a.teaser === "string" && a.teaser.length <= TEASER_MAX)).map(a => a.slug).join(", "));
   check("no teaser contains HTML", arts.every(a => !/<\/?[a-z][^>]*>|&[a-z#0-9]+;/i.test(a.teaser || "")));
-  const linked = arts.map(a => ((a.teaser || "").match(/#news\/([^\s#?]+)\s*$/) || [])[1]);
+  const linked = arts.map(a => ((a.teaser || "").match(/\/news\/([^\s#?/]+)\.html$/) || [])[1]);
   check("every teaser's link names an article that exists", linked.every(s => s && slugs.has(s)),
     arts.filter((a, i) => !(linked[i] && slugs.has(linked[i]))).map(a => a.slug).join(", "));
-  check("every teaser links to its own article, in the site's #news/ form",
-    arts.every(a => (a.teaser || "").trim().endsWith(teaserLink(a.slug))));
+  check("every teaser ends with its own card link, news/<slug>.html",
+    arts.every(a => (a.teaser || "").endsWith("\n" + teaserLink(a.slug))) && teaserLink("x") === SITE_URL + "news/x.html");
+  check("every teaser is in the breaking-news shape, its stats all printed in the article",
+    arts.every(a => teaserProblems(a, slugs).length === 0),
+    arts.flatMap(a => teaserProblems(a, slugs).map(p => `${a.slug}: ${p}`)).join(" | ").slice(0, 300));
   check("check-recaps.mjs finds nothing wrong with recaps.json", recapsProblems(recaps).length === 0,
     recapsProblems(recaps).join(" | "));
-  check("check-recaps.mjs catches a long teaser, HTML and a link to nowhere",
+  // Doctored copies of a real teaser: each must fail on exactly the thing broken.
+  const good = arts[0], bad = (f, re) => teaserProblems({ ...good, teaser: f(good.teaser) }, slugs).some(p => re.test(p));
+  check("check-recaps.mjs catches a long teaser, HTML, a wrong shape, a made-up stat and a link to nowhere",
     teaserProblems({ slug: "a", teaser: "x".repeat(601) }, slugs).length > 0
-      && teaserProblems({ slug: "a", teaser: `<b>Hi</b>\nline\n${teaserLink("a")}` }, slugs).some(p => /HTML/.test(p))
-      && teaserProblems({ slug: "a", teaser: `Hi\nline\n${teaserLink("zzz")}` }, slugs).length > 0);
+      && bad(t => t.replace(/\n\n/, "\n\n<b>x</b>"), /HTML|third line/)
+      && bad(t => t.replace("🚨 C CUBED | ", "C CUBED | "), /first line/)
+      && bad(t => t.replace("Full story 👇", "Read more"), /Full story/)
+      && bad(t => t.split("\n").filter((l, i) => i !== 6).join("\n"), /lines/)
+      && bad(t => t.split("\n").map((l, i) => i === 4 ? l.replace(/\d+(\.\d+)?/, "987.65") : l).join("\n"), /not in the article/)
+      && bad(t => t.replace(/\n[^\n]*$/, "\n" + teaserLink("zzz")), /not an article|last line/)
+      && bad(t => t.replace(/\n[^\n]*$/, "\nhttps://drewkim623-hash.github.io/ccubed/#news/" + good.slug), /last line/));
+
+  /* The link card: a page per slug and alias with absolute og:/twitter: tags,
+   * a 1200x630 picture per article, and .nojekyll so Pages serves both. */
+  const cardProbs = await cardFileProblems(recaps, ROOT);
+  check("every article and alias has its card page, and every article its 1200x630 og:image",
+    cardProbs.length === 0, cardProbs.join(" | ").slice(0, 300));
+  const allTags = [];
+  for (const a of arts) for (const s of [a.slug, ...(a.aliases || [])]) {
+    const t = metaTags(await readFile(join(ROOT, "news", s + ".html"), "utf8").catch(() => ""));
+    allTags.push({ s, t, a });
+  }
+  check("every card page carries og:title, og:description, og:image, twitter:card and a canonical, all absolute",
+    allTags.length > 0 && allTags.every(({ t }) => t["og:title"] && t["og:description"] && t["twitter:card"] === "summary_large_image"
+      && ["og:image", "og:url", "twitter:image", "canonical"].every(k => (t[k] || "").startsWith(SITE_URL))),
+    allTags.filter(({ t }) => !(t["og:image"] || "").startsWith(SITE_URL)).map(x => x.s).join(", "));
+  check("an old slug's card page opens the article it became",
+    arts.filter(a => (a.aliases || []).length).every(a => a.aliases.every(s => {
+      const x = allTags.find(y => y.s === s);
+      return x && x.t["og:url"] === cardUrl(a.slug) && x.t["og:image"] === ogImageUrl(a.slug);
+    })));
+  check("check-recaps.mjs catches a card page with a relative og:image and a missing twitter:card",
+    (() => {
+      const a = arts[0], html = `<link rel="canonical" href="${cardUrl(a.slug)}"><meta property="og:image" content="img/og/${a.slug}.png">`;
+      const p = cardTagProblems(html, a);
+      return p.some(x => /og:image is/.test(x)) && p.some(x => /no twitter:card/.test(x)) && p.some(x => /send the reader/.test(x));
+    })());
+  for (const s of [newestSlug(arts), ...(arts.find(a => (a.aliases || []).length)?.aliases || [])].slice(0, 2)) {
+    const cp = await browser.newPage();
+    await cp.goto(`${BASE}/news/${s}.html`, { waitUntil: "domcontentloaded" });
+    await cp.waitForFunction(() => document.body && document.body.dataset.ready === "1", null, { timeout: 90000 }).catch(() => {});
+    // the app shows the index first, then opens the piece once recaps.json is in
+    await cp.waitForFunction(() => location.hash.startsWith("#news/"), null, { timeout: 15000 }).catch(() => {});
+    const landed = await cp.evaluate(() => location.pathname + location.hash);
+    const target = arts.find(a => a.slug === s || (a.aliases || []).includes(s));
+    check(`news/${s}.html sends a browser on to #news/${target.slug}`, landed === `/#news/${target.slug}`, landed);
+    await cp.close();
+  }
+  const imgRes = await fetch(`${BASE}/img/og/${newestSlug(arts)}.png`);
+  const sz = pngSize(Buffer.from(await imgRes.arrayBuffer()));
+  check("the newest article's og:image is served as a 1200x630 PNG",
+    imgRes.ok && /image\/png/.test(imgRes.headers.get("content-type") || "") && sz && sz.width === 1200 && sz.height === 630,
+    `${imgRes.status} ${JSON.stringify(sz)}`);
 
   const newest = arts.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))[0];
   for (const width of [390, 1280]) {
@@ -4057,6 +4270,14 @@ group("Teasers: every article has one, and it copies");
       `headline=${got.headline}${terrs.length ? " ERR:" + terrs.join("|") : ""}`);
     check(`${width}px: the article shows its teaser exactly`, got.teaser === newest.teaser);
     check(`${width}px: the address stays on #news/<slug>`, got.hash === hash, got.hash);
+    const placed = await tp.evaluate(() => {
+      const art = document.querySelector('[data-panel="article"] article.artl'), t = art && art.querySelector(".ateaser");
+      const body = art && art.querySelector(".abd");
+      return { last: !!t && art.lastElementChild === t, afterBody: !!t && !!body && t.previousElementSibling === body,
+        inHeader: !!(art && art.querySelector(".ahdr .ateaser")) };
+    });
+    check(`${width}px: the teaser box sits at the bottom, after the article's last block`,
+      placed.last && placed.afterBody && !placed.inHeader, JSON.stringify(placed));
     await tp.reload({ waitUntil: "domcontentloaded" });
     await tp.waitForFunction(() => document.body.dataset.ready === "1", null, { timeout: 90000 });
     await tp.waitForSelector('[data-panel="article"] .ateaser', { timeout: 15000 }).catch(() => {});
@@ -6315,18 +6536,20 @@ var leak = await page.evaluate(async () => {
   }
   const recaps = await fetch("recaps.json").then(r => r.json());
   const ranks = await fetch("rankings.json").then(r => r.json());
-  return { ...out, recapWeeks: recaps.weeks.length, recapArticles: (recaps.articles || []).length,
+  return { ...out, recapWeeks: recaps.weeks.length, recapWeekIds: recaps.weeks.map(w => [w.season, w.week]),
+           recapArticles: (recaps.articles || []).length,
            artSeasons: [...new Set((recaps.articles || []).map(a => String(a.season)))],
            rankWeeks: ranks.weeks.length,
            recapsHasDFFL: JSON.stringify(recaps).includes("DFFL"),
            ranksHasDFFL: JSON.stringify(ranks).includes("DFFL") };
 });
-// C Cubed has finalised no week, so a weekly recap could only have come from
-// somewhere else. Articles are different: they are written by hand and can
-// legitimately predate the first kickoff, so they are checked for provenance —
-// every one must be about a C Cubed season — rather than required to be absent.
-check("no weekly recaps shipped for a league that has not played",
-  leak.recapWeeks === 0, `${leak.recapWeeks} weeks`);
+// A weekly recap must be a week C Cubed has finished: 2026, no later than the
+// newest finished week in data/latest.json (its scores are checked against the
+// week file in "Recaps: weeks[] in full"). Articles are checked for provenance —
+// every one must be about a C Cubed season.
+var latestWk = JSON.parse(await readFile(join(ROOT, "data/latest.json"), "utf8"));
+check("every weekly recap is a C Cubed week that has finished",
+  leak.recapWeekIds.every(([s, w]) => s === "2026" && w >= 1 && w <= latestWk.week), JSON.stringify(leak.recapWeekIds));
 check("every article is a C Cubed season",
   leak.artSeasons.every(s => s === "2026"), leak.artSeasons.join(","));
 check("no DFFL power blurbs shipped", leak.rankWeeks === 0, String(leak.rankWeeks));
@@ -6352,7 +6575,7 @@ group("Safety: nothing points at another league");
   const SHIPPED = [];
   const walk = async d => { for (const e of await readdir(join(ROOT, d), { withFileTypes: true })) {
     const p = d ? `${d}/${e.name}` : e.name;
-    if (/^(node_modules|\.git)$/.test(e.name) || /\.png$/.test(e.name)) continue;
+    if (/^(node_modules|\.git)$/.test(e.name) || /\.(png|webp)$/.test(e.name)) continue;
     if (e.isDirectory()) await walk(p); else SHIPPED.push(p);
   } };
   await walk("");
@@ -6365,8 +6588,12 @@ group("Safety: nothing points at another league");
     const t = await rf(join(ROOT, f), "utf8");
     if (t.includes(FOREIGN_ID) || FOREIGN_PREV.some(x => t.includes(x))) hits.id.push(f);
     if (/https?:\/\/[^\s"'`)]*dffl/i.test(t) || /github\.com\/[^\s"'`)]*\/dffl\b/i.test(t)) hits.url.push(f);
+    // Drew's own address is the self-email recipient, and may appear in the two
+    // files that define that step — nowhere else.
+    const selfOk = f === "ROUTINES.md" || f === "weekly-job-prompt.md";
     const mails = (t.match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}/g) || [])
-      .filter(m => !/@(example\.com|users\.noreply\.github\.com|anthropic\.com)$/i.test(m));
+      .filter(m => !/@(example\.com|users\.noreply\.github\.com|anthropic\.com)$/i.test(m))
+      .filter(m => !(selfOk && m.toLowerCase() === "drewkim623@gmail.com"));
     if (mails.length) hits.email.push(`${f}: ${[...new Set(mails)].join(", ")}`);
   }
   const html = await rf(join(ROOT, "index.html"), "utf8");

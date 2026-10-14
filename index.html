@@ -850,6 +850,7 @@
   /* The teaser: the few lines somebody pastes into the group chat, with the link. */
   .ateaser{margin:18px 0 0;background:var(--raised);border:1px solid var(--ring);border-left:3px solid var(--blue);
     border-radius:var(--rs);padding:13px 15px;max-width:66ch;min-width:0}
+  .artl > .ateaser{margin-top:26px}
   .ateaser .tk{font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
     font-weight:700;margin:0 0 7px}
   .ateaser pre{margin:0 0 12px;font:inherit;font-size:14.5px;line-height:1.55;color:var(--ink-2);
@@ -878,14 +879,39 @@
   .astat .t{font-size:14.5px;line-height:1.5;color:var(--ink-2)}
   .anote{font-size:13px;line-height:1.6;color:var(--muted);border-top:1px solid var(--grid);
     padding-top:14px;margin:24px 0 0}
+  .aimg{margin:24px 0}
+  .aimg img{display:block;max-width:100%;height:auto;border-radius:12px;border:1px solid var(--grid)}
+  .aimg figcaption{font-size:13px;line-height:1.5;color:var(--muted);margin-top:9px}
+  .aimg figcaption a{display:inline-block;margin-top:4px;font-weight:750;color:var(--blue)}
+  .aimgz{display:block;position:relative;width:100%;padding:0;border:0;background:none;color:inherit;
+    font:inherit;text-align:left;cursor:zoom-in;border-radius:12px}
+  .aimgz:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+  .aimgz picture{display:block}
+  .aimgz .zhint{position:absolute;right:10px;bottom:10px;background:rgba(8,10,16,.86);color:#fff;
+    border:1px solid var(--ring);border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700}
+  /* The enlarged image: a modal <dialog>, the picture at full size, panned by scrolling. */
+  .imgdlg{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;padding:0;border:0;
+    background:rgba(5,6,10,.97);color:#fff}
+  .imgdlg::backdrop{background:rgba(0,0,0,.7)}
+  .imgdlg-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;
+    border-bottom:1px solid var(--ring);height:60px;box-sizing:border-box}
+  .imgdlg-t{font-size:13.5px;font-weight:700;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .imgdlg-x{flex-shrink:0;white-space:nowrap;min-height:44px;min-width:44px;padding:0 16px;border-radius:999px;border:1px solid var(--ring);
+    background:var(--raised);color:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+  .imgdlg-x:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .imgdlg-sc{height:calc(100% - 60px);overflow:auto;-webkit-overflow-scrolling:touch}
+  .imgdlg-sc img{display:block;max-width:none;margin:0 auto}
 
   .abars{margin:24px 0;max-width:none}
   .abars .at{font-size:15px;font-weight:800;letter-spacing:-.01em}
   .abars .as{font-size:12.5px;color:var(--muted);margin:3px 0 14px;line-height:1.45}
-  .abody{display:grid;gap:6px}
-  .abar{display:grid;grid-template-columns:minmax(84px,124px) 1fr 46px;align-items:center;gap:10px}
-  .abar .who{font-size:13px;font-weight:650;text-align:right;overflow:hidden;text-overflow:ellipsis;
-    white-space:nowrap;line-height:1.2}
+  /* One grid for every row, so the bars line up; the label column is as wide as the longest
+     word needs (never narrower) and labels wrap only between words. */
+  .abody{display:grid;grid-template-columns:fit-content(40%) 1fr 46px;align-items:center;gap:6px 10px}
+  .abar{display:contents}
+  .abar .who{font-size:13px;font-weight:650;text-align:right;line-height:1.2;min-width:min-content}
+  .abar .who .tlab-n,.abar .who .tlab-m{white-space:normal!important;overflow:visible!important;
+    text-overflow:clip!important;overflow-wrap:normal;word-break:normal;hyphens:none}
   .abar .who i{display:block;font-style:normal;font-size:9.5px;letter-spacing:.12em;
     text-transform:uppercase;color:var(--muted);font-weight:700}
   .abar .track{position:relative;height:20px;background:var(--raised);border-radius:3px}
@@ -921,7 +947,7 @@
     .artl{padding:20px 17px 22px}
     .astat{flex-direction:column;gap:7px}
     .astat .n{font-size:38px}
-    .abar{grid-template-columns:minmax(70px,92px) 1fr 42px;gap:8px}
+    .abody{grid-template-columns:fit-content(46%) 1fr 42px;gap:6px 8px}
   }
 
   /* ============ recap notebook ============ */
@@ -3358,6 +3384,21 @@ function articleBlock(b) {
       return `<p class="anote">${artText(b.text)}</p>`;
     case "bracket":
       return bracketHTML(b);
+    case "img": {
+      // Only an image shipped in this repo's img/, and only an https or in-page link.
+      if (!/^img\/[\w.-]+\.(png|webp|jpe?g)$/.test(b.src || "")) return "";
+      const href = /^(https:\/\/|#)/.test(b.href || "") ? b.href : "";
+      const size = b.width && b.height ? ` width="${Number(b.width) || ""}" height="${Number(b.height) || ""}"` : "";
+      const cap = [b.caption ? esc(b.caption) : "",
+        href && b.link ? `<a href="${esc(href)}">${esc(b.link)} →</a>` : ""].filter(Boolean).join("<br>");
+      // `narrow` is an optional crop of the same picture for phones; the button opens the full image.
+      const narrow = /^img\/[\w.-]+\.(png|webp|jpe?g)$/.test(b.narrow || "") ? b.narrow : "";
+      return `<figure class="aimg"><button type="button" class="aimgz" data-full="${esc(b.src)}"
+          aria-label="Enlarge the image: ${esc(b.caption || b.alt || "full size")}" aria-haspopup="dialog"><picture>${
+          narrow ? `<source media="(max-width:560px)" srcset="${esc(narrow)}">` : ""}<img src="${esc(b.src)}" alt="${esc(b.alt || "")}"${size} loading="lazy"></picture>
+          <span class="zhint" aria-hidden="true">${narrow ? "Tap for the full board" : "Tap to enlarge"}</span></button>
+        ${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
+    }
     case "bars": {
       // Diverging about zero, scaled to the biggest swing either way.
       const rows = b.rows || [];
@@ -3488,11 +3529,48 @@ async function copyTeaser(box, text) {
   }
 }
 
+/**
+ * An article image's button opens the full picture in a modal <dialog>: the
+ * close button takes focus, Escape or a tap outside the picture closes it, and
+ * focus goes back to the button that opened it.
+ */
+function openImage(btn) {
+  let d = document.getElementById("imgdlg");
+  if (!d) {
+    d = document.createElement("dialog");
+    d.id = "imgdlg"; d.className = "imgdlg";
+    d.innerHTML = `<div class="imgdlg-bar"><span class="imgdlg-t"></span>
+      <button type="button" class="imgdlg-x" aria-label="Close the full-size image">✕ Close</button></div>
+      <div class="imgdlg-sc"><img alt=""></div>`;
+    d.querySelector(".imgdlg-x").onclick = () => d.close();
+    d.addEventListener("click", e => { if (e.target === d || e.target.classList.contains("imgdlg-sc")) d.close(); });
+    d.addEventListener("close", () => { if (d._from && d._from.isConnected) d._from.focus(); });
+    document.body.appendChild(d);
+  }
+  const src = btn.querySelector("img");
+  const title = (btn.closest("figure")?.querySelector("figcaption")?.firstChild?.textContent || "Full-size image").trim();
+  d.setAttribute("aria-label", title);
+  d.querySelector(".imgdlg-t").textContent = title;
+  const big = d.querySelector(".imgdlg-sc img");
+  big.src = btn.dataset.full;
+  big.alt = src ? src.alt : "";
+  d._from = btn;
+  d.showModal();
+  d.querySelector(".imgdlg-sc").scrollTo(0, 0);
+  d.querySelector(".imgdlg-x").focus();
+}
+document.addEventListener("click", e => {
+  const z = e.target.closest && e.target.closest(".aimgz");
+  if (z) openImage(z);
+});
+
 /** Find a published piece by its slug, for a link that names one. */
 async function articleBySlug(slug) {
   try {
     const j = await jget("recaps.json");
-    return ((j && j.articles) || []).find(a => a.slug === slug) || null;
+    // A rewritten piece lists its old slug in aliases, so links already shared still open it.
+    const arts = (j && j.articles) || [];
+    return arts.find(a => a.slug === slug) || arts.find(a => (a.aliases || []).includes(slug)) || null;
   } catch (e) { return null; }
 }
 
@@ -3511,7 +3589,8 @@ function articleCard(a, full) {
         ${a.standfirst ? `<span>${esc(a.standfirst)}</span>` : ""}</div>
     </header>
     <div class="abd">${(a.blocks || []).map(articleBlock).join("")}</div>`;
-  if (full && a.teaser) box.querySelector(".ahdr").appendChild(teaserBox(a));
+  // The teaser sits under the last block: read the piece, then share it.
+  if (full && a.teaser) box.appendChild(teaserBox(a));
   const hero = box.querySelector(".cover.big");
   if (hero) hero._art = a;   // for the redraw when the window crosses COVER_WIDE_MQ
   return box;
@@ -10124,10 +10203,11 @@ async function boot() {
     };
     route();
     // A #news/<slug> link pasted into a tab that already has the site open
-    // changes only the hash; follow it. replaceState (what the site itself
-    // uses) never fires this, so the tabs do not bounce.
+    // changes only the hash; follow it. So does a link inside an article to a
+    // tab (#picture). replaceState (what the site itself uses) never fires
+    // this, so the tabs do not bounce.
     addEventListener("hashchange", () => {
-      if (/^#(?:news|article)\//.test(location.hash)) route();
+      if (/^#(?:news|article)\//.test(location.hash) || TABS.some(t => "#" + t.id === location.hash)) route();
     });
     $("#footNote").textContent = DB.state ? ` Currently NFL ${DB.state.season}, week ${DB.state.week}.` : "";
     window.__CCUBED = {
