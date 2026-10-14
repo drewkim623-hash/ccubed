@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-13T19:03:23.601Z",
- "at": 1791918203601,
+ "generated": "2026-10-14T11:13:33.302Z",
+ "at": 1791976413302,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -13,8 +13,9 @@
    "losses": 1,
    "points_for": 754.68,
    "points_against": 656.26,
-   "faab_spent": 0,
+   "faab_spent": 25,
    "starters_hurt": [
+    "Lamar Jackson (Questionable)",
     "Jaxon Smith-Njigba (Questionable)"
    ]
   },
@@ -26,8 +27,7 @@
    "points_against": 641.08,
    "faab_spent": 0,
    "starters_hurt": [
-    "CeeDee Lamb (Questionable)",
-    "Roman Wilson (Out)"
+    "CeeDee Lamb (Questionable)"
    ]
   },
   {
@@ -57,7 +57,9 @@
    "points_for": 704.68,
    "points_against": 598.6,
    "faab_spent": 0,
-   "starters_hurt": []
+   "starters_hurt": [
+    "DeVonta Smith (Questionable)"
+   ]
   },
   {
    "manager": "andychoe03",
@@ -65,9 +67,9 @@
    "losses": 2,
    "points_for": 613.04,
    "points_against": 610.82,
-   "faab_spent": 52,
+   "faab_spent": 55,
    "starters_hurt": [
-    "David Montgomery (Out)"
+    "David Montgomery (Doubtful)"
    ]
   },
   {
@@ -96,7 +98,7 @@
    "points_against": 681.88,
    "faab_spent": 65,
    "starters_hurt": [
-    "Kyle Monangai (Out)"
+    "Kyle Monangai (Questionable)"
    ]
   },
   {
@@ -114,8 +116,9 @@
    "losses": 4,
    "points_for": 601.16,
    "points_against": 720.18,
-   "faab_spent": 12,
+   "faab_spent": 33,
    "starters_hurt": [
+    "Saquon Barkley (Questionable)",
     "Rashee Rice (Questionable)"
    ]
   },
@@ -127,7 +130,7 @@
    "points_against": 688.82,
    "faab_spent": 40,
    "starters_hurt": [
-    "TreVeyon Henderson (Out)"
+    "TreVeyon Henderson (Doubtful)"
    ]
   }
  ],
@@ -148,7 +151,7 @@
    "a": {
     "manager": "andychoe03",
     "points": 0,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "nikhil1123",
@@ -165,7 +168,7 @@
    "b": {
     "manager": "jiddyyyyyy",
     "points": 0,
-    "startersLeftToPlay": 9
+    "startersLeftToPlay": 10
    }
   },
   {
@@ -225,7 +228,7 @@
      "name": "Saquon Barkley",
      "pos": "RB",
      "team": "PHI",
-     "status": "Out",
+     "status": "Questionable",
      "to": "yojarshh"
     },
     {
@@ -239,7 +242,7 @@
      "name": "David Montgomery",
      "pos": "RB",
      "team": "HOU",
-     "status": "Out",
+     "status": "Doubtful",
      "to": "andychoe03"
     },
     {
@@ -269,7 +272,7 @@
      "name": "Saquon Barkley",
      "pos": "RB",
      "team": "PHI",
-     "status": "Out",
+     "status": "Questionable",
      "from": "andychoe03"
     },
     {
@@ -283,7 +286,7 @@
      "name": "David Montgomery",
      "pos": "RB",
      "team": "HOU",
-     "status": "Out",
+     "status": "Doubtful",
      "from": "yojarshh"
     },
     {
@@ -305,6 +308,107 @@
    "picks": []
   }
  ],
- "waivers": [],
- "free_agent_moves": 22
+ "waivers": [
+  {
+   "week": 5,
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "MarShawn Lloyd",
+     "pos": "RB",
+     "team": "GB",
+     "status": null,
+     "to": "saiky7"
+    }
+   ],
+   "drops": [],
+   "faab": 25,
+   "picks": []
+  },
+  {
+   "week": 5,
+   "type": "waiver",
+   "managers": [
+    "yojarshh"
+   ],
+   "adds": [
+    {
+     "name": "Germie Bernard",
+     "pos": "WR",
+     "team": "PIT",
+     "status": null,
+     "to": "yojarshh"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Kimani Vidal",
+     "pos": "RB",
+     "team": "LAC",
+     "status": null,
+     "from": "yojarshh"
+    }
+   ],
+   "faab": 21,
+   "picks": []
+  },
+  {
+   "week": 5,
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Jordan Love",
+     "pos": "QB",
+     "team": "GB",
+     "status": null,
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Tre' Harris",
+     "pos": "WR",
+     "team": "LAC",
+     "status": "Doubtful",
+     "from": "andychoe03"
+    }
+   ],
+   "faab": 2,
+   "picks": []
+  },
+  {
+   "week": 5,
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Kansas City Chiefs",
+     "pos": "DEF",
+     "team": "KC",
+     "status": null,
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Dallas Cowboys",
+     "pos": "DEF",
+     "team": "DAL",
+     "status": null,
+     "from": "andychoe03"
+    }
+   ],
+   "faab": 1,
+   "picks": []
+  }
+ ],
+ "free_agent_moves": 28
 }

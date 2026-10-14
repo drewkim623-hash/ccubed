@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 5,
- "generated": "2026-10-13T19:03:31.755Z",
- "generated_at": "2026-10-13T19:03:31.755Z",
+ "generated": "2026-10-14T11:13:31.237Z",
+ "generated_at": "2026-10-14T11:13:31.237Z",
  "final": true,
  "standings_through_week": 5,
  "standings_folded": false,
@@ -1123,7 +1123,7 @@
    "ties": 0,
    "points_for": 754.68,
    "points_against": 656.26,
-   "waiver_budget_used": 0
+   "waiver_budget_used": 25
   },
   {
    "manager": "asierbelay",
@@ -1178,7 +1178,7 @@
    "ties": 0,
    "points_for": 613.04,
    "points_against": 610.82,
-   "waiver_budget_used": 52
+   "waiver_budget_used": 55
   },
   {
    "manager": "jiddyyyyyy",
@@ -1233,7 +1233,7 @@
    "ties": 0,
    "points_for": 601.16,
    "points_against": 720.18,
-   "waiver_budget_used": 12
+   "waiver_budget_used": 33
   },
   {
    "manager": "bigmoneyjos",
@@ -1248,6 +1248,146 @@
   }
  ],
  "transactions": [
+  {
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Jordan Love",
+     "pos": "QB",
+     "team": "GB",
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Tre' Harris",
+     "pos": "WR",
+     "team": "LAC",
+     "from": "andychoe03"
+    }
+   ],
+   "faab": 2,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "yojarshh"
+   ],
+   "adds": [
+    {
+     "name": "Germie Bernard",
+     "pos": "WR",
+     "team": "PIT",
+     "to": "yojarshh"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Kimani Vidal",
+     "pos": "RB",
+     "team": "LAC",
+     "from": "yojarshh"
+    }
+   ],
+   "faab": 21,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "tonypng"
+   ],
+   "adds": [
+    {
+     "name": "Pat Freiermuth",
+     "pos": "TE",
+     "team": "PIT",
+     "to": "tonypng"
+    }
+   ],
+   "drops": [],
+   "faab": 0,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "tonypng"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Brian Robinson",
+     "pos": "RB",
+     "team": "ATL",
+     "from": "tonypng"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Cincinnati Bengals",
+     "pos": "DEF",
+     "team": "CIN",
+     "from": "saiky7"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "MarShawn Lloyd",
+     "pos": "RB",
+     "team": "GB",
+     "to": "saiky7"
+    }
+   ],
+   "drops": [],
+   "faab": 25,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Kansas City Chiefs",
+     "pos": "DEF",
+     "team": "KC",
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Dallas Cowboys",
+     "pos": "DEF",
+     "team": "DAL",
+     "from": "andychoe03"
+    }
+   ],
+   "faab": 1,
+   "picks": []
+  },
   {
    "type": "free_agent",
    "managers": [
