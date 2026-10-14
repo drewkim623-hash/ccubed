@@ -22,12 +22,18 @@
  *
  *   node build-injuries.mjs
  *
+ * It also writes data/projections.json — Sleeper's weekly projections for
+ * rostered players, scored with the league's settings — which the Injuries tab
+ * turns into projected points lost. See the section at the bottom.
+ *
  * Run it whenever you want the front page's injury strip refreshed — the weekly
  * job runs it as part of the Tuesday update, after the roster map, because the
  * prose notes are only worth their bytes for players somebody actually rosters.
  */
 import { writeFile, readFile } from "fs/promises";
 import { fetchJSON } from "./fetch-json.mjs";
+import { effectiveWeek } from "./effective-week.mjs";
+import { hurtFallback } from "./hurt-fallback.mjs";
 
 const SRC = "https://api.sleeper.app/v1/players/nfl";
 const ESPN = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/injuries";
@@ -220,3 +226,105 @@ const bytes = JSON.stringify(out).length;
 console.log(`injuries.json — ${out.count} players carrying a status, ${(bytes / 1024).toFixed(1)}KB`);
 console.log(`  outlook: ${seen.matched} matched on ESPN · ${seen.bp} body parts · ${seen.sev} severities`
   + ` · ${seen.ret} return dates · ${seen.note} notes (rostered only)`);
+
+/* ------------------------------------------------------- data/projections.json */
+
+/**
+ * The Injuries tab prices each hurt player in projected points, and Sleeper's
+ * per-week projections are 2MB a week — so, like the player file above, they
+ * are reduced here and never fetched by the browser. Rostered players only,
+ * scored with this league's own scoring_settings, two decimals.
+ *
+ * Weeks fetched: the effective current week through playoff_week_start - 1.
+ * A week Sleeper has not published yet is left out of the file; the page falls
+ * back to the latest published week for it (see PTS_LOST in index.html).
+ *
+ * Like the ESPN outlook, this is a bonus: if Sleeper fails here, injuries.json
+ * is already written and the run still succeeds.
+ */
+const LEAGUE = "1387595114829864960";
+const API = "https://api.sleeper.app/v1";
+
+// Each stat Sleeper projects, times what this league pays for it. Keys the
+// league doesn't score (pts_ppr, adp_*, gp …) are not in scoring_settings and
+// so count for nothing.
+const scoreStats = (stats, scoring) => {
+  let t = 0;
+  for (const [k, v] of Object.entries(stats || {})) {
+    const m = scoring[k];
+    if (typeof m === "number" && typeof v === "number") t += v * m;
+  }
+  return Math.round(t * 100) / 100;
+};
+
+// The week's Sunday: the date most of its games are played on. Weeks out are
+// counted against it (a week is missed when its Sunday is before ESPN's return
+// date), so it is published alongside the points.
+const sundayOf = rows => {
+  const n = {};
+  for (const r of rows) if (r && r.date) n[r.date] = (n[r.date] || 0) + 1;
+  return Object.entries(n).sort((a, b) => b[1] - a[1])[0]?.[0] || null;
+};
+
+try {
+  const [league, state] = await Promise.all([
+    fetchJSON(`${API}/league/${LEAGUE}`, { label: `league/${LEAGUE}` }),
+    fetchJSON(`${API}/state/nfl`, { label: "state/nfl" }),
+  ]);
+  let latest = null;
+  try { latest = JSON.parse(await readFile("data/latest.json", "utf8")); } catch (e) { /* first week */ }
+  const season = String(league.season);
+  const scoring = league.scoring_settings || {};
+  const pws = Number(league.settings && league.settings.playoff_week_start) || 15;
+  const cur = Math.max(1, Number(effectiveWeek(state, latest)) || 1);
+  if (!rostered.size) throw new Error("rosters.json unreadable — no rostered players to project");
+
+  const weeks = {}, sundays = {};
+  for (let w = cur; w < pws; w++) {
+    const rows = await fetchJSON(
+      `https://api.sleeper.app/projections/nfl/${season}/${w}?season_type=regular`,
+      { label: `projections/${season}/${w}` }).catch(e => { console.warn(e.message); return null; });
+    // Unpublished: an empty list, or one with nobody actually projected.
+    if (!Array.isArray(rows) || !rows.some(r => r && r.stats && Object.keys(r.stats).length > 2)) continue;
+    const wk = {};
+    for (const r of rows) {
+      const pid = r && String(r.player_id || "");
+      if (!pid || !rostered.has(pid)) continue;
+      wk[pid] = scoreStats(r.stats, scoring);
+    }
+    weeks[w] = wk;
+    sundays[w] = sundayOf(rows);
+  }
+
+  // Hurt players Sleeper projects at 0: earlier projection above zero, else season PPG (byes stay 0).
+  const { last_nonzero = {}, ppg = {}, byes = {} } = await hurtFallback({ season, cur, pws, scoring, fetchJSON })
+    .catch(e => { console.warn(`hurt fallback skipped (${e.message})`); return {}; });
+  const proj = {
+    _comment:
+      "Written by build-injuries.mjs. Sleeper's per-week projections for C Cubed's rostered "
+      + "players only, each scored with the league's scoring_settings (stat × points per stat, "
+      + "summed). weeks[w][pid] = projected points; a rostered player missing from a published "
+      + "week is not projected that week (a bye). sundays[w] = the date most of week w's games "
+      + "are played. Read by the Injuries tab's points-lost figures; nothing here touches the odds.",
+    generated: new Date().toISOString(),
+    at: Date.now(),
+    season,
+    scoring: "league scoring_settings",
+    current_week: cur,
+    playoff_week_start: pws,
+    sundays,
+    weeks,
+    // Injured rostered players only. last_nonzero[pid] = { week, pts }: his latest weekly
+    // projection above 0 before current_week; ppg[pid] = season points per game started.
+    // byes[w] = NFL clubs on bye in week w. The page uses them for a hurt player at 0 in a
+    // week his club plays.
+    last_nonzero,
+    ppg,
+    byes,
+  };
+  await writeFile("data/projections.json", JSON.stringify(proj) + "\n");
+  console.log(`data/projections.json — weeks ${Object.keys(weeks).join(",") || "none"} · `
+    + `${rostered.size} rostered · ${(JSON.stringify(proj).length / 1024).toFixed(1)}KB`);
+} catch (e) {
+  console.warn(`projections skipped (${e.message}) — injuries.json is written regardless.`);
+}
