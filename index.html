@@ -188,6 +188,10 @@
   tbody tr:last-child td{border-bottom:0}
   tbody tr:hover td,tbody tr:hover td:first-child{background:var(--hover)}
   .nmcell{display:flex;align-items:center;gap:8px}
+  /* the one team label — teamLabelHTML() */
+  .tlab{display:inline-flex;flex-direction:column;min-width:0;max-width:100%;vertical-align:middle;line-height:1.2;text-align:inherit}
+  .tlab-n,.tlab-m{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tlab-m{font-size:11px;font-weight:500;letter-spacing:0;color:var(--muted);text-transform:none;font-family:inherit}
   /* Long-text ledger columns wrap instead of running off the card. */
   table.ledger th.deal,table.ledger td.deal{white-space:normal;text-align:left;min-width:12em}
   /* Phone cards: on narrow screens each row of these tables stacks into a labelled card. */
@@ -448,6 +452,7 @@
   .tmgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
   @media (max-width:640px){.tmgrid{grid-template-columns:1fr}}
   .tmsel{padding:10px 12px;border-bottom:1px solid var(--grid)}
+  .tmwho{padding:8px 12px;border-bottom:1px solid var(--grid);font-weight:700;font-size:14px}
   .tmsel select{width:100%;background:var(--raised);color:var(--ink);border:1px solid var(--ring);border-radius:8px;padding:8px 10px;font:inherit;font-size:14px}
   .tmlist{max-height:430px;overflow-y:auto}
   .tmp{display:grid;grid-template-columns:18px 38px minmax(0,1fr) auto;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--grid);cursor:pointer;font-size:13.5px}
@@ -1303,7 +1308,7 @@ async function loadSeason(lg) {
     if (!u) continue;
     const m = mgrOf(r.owner_id, u.display_name);
     if (!m.avatar && u.avatar) m.avatar = u.avatar;
-    const tn = u.metadata && u.metadata.team_name;
+    const tn = (r.metadata && r.metadata.team_name) || (u.metadata && u.metadata.team_name);
     if (tn && !m.team) m.team = tn;
     m.locked = true;
     // All twelve teams here are run by two people. Sleeper hangs the
@@ -1599,16 +1604,34 @@ const teamOf = uid => (DB.mgr.get(uid) || {}).team || "";
  * one, the primary owner where there isn't. The line underneath names everybody
  * who runs it, and never repeats the line above it.
  *
- * Tables keep using nameOf(): a 24-character team name does not fit in a
- * head-to-head grid column, and one short handle per row is what those need.
+ * nameOf() is a key, not a label: sorts, blurb lookups and recaps match on it.
+ * Anything a reader sees goes through teamLabelHTML() or teamNameText().
  */
-const titleOf = uid => teamOf(uid) || nameOf(uid);
 const coOf = uid => ((DB.mgr.get(uid) || {}).co) || [];
-const ownerLine = uid => {
-  const co = coOf(uid);
-  if (teamOf(uid)) return [nameOf(uid), ...co].join(" & ");
-  return co.length ? `with ${co.join(" & ")}` : "";
-};
+const managersText = uid => (DB.mgr.has(uid) ? [nameOf(uid), ...coOf(uid)].join(" & ") : "—");
+const titleOf = uid => teamOf(uid) || managersText(uid);
+const ownerLine = uid => (teamOf(uid) ? managersText(uid) : "");
+/** Plain-text label for charts, tooltips, aria, <option>s and prose. */
+const teamNameText = uid => titleOf(uid);
+/**
+ * The one team label: the Sleeper team name, both managers in small type
+ * underneath. An unnamed team leads with its managers and has no second line.
+ * The main line inherits whatever type its slot already uses.
+ */
+function teamLabelHTML(uid, opts = {}) {
+  const sub = ownerLine(uid);
+  const tip = sub ? `${titleOf(uid)} — ${sub}` : titleOf(uid);
+  return `<span class="tlab${opts.cls ? " " + opts.cls : ""}" data-uid="${esc(uid || "")}" title="${esc(tip)}">`
+    + `<span class="tlab-n${opts.nCls ? " " + opts.nCls : ""}">${esc(titleOf(uid))}</span>`
+    + (sub ? `<span class="tlab-m${opts.mCls ? " " + opts.mCls : ""}">${esc(sub)}</span>` : "")
+    + `</span>`;
+}
+/** recaps.json names a team by a manager's handle; label it if it is one of ours. */
+function handleLabelHTML(handle) {
+  const h = String(handle || "").toLowerCase();
+  const m = h && [...DB.mgr.values()].find(x => [x.name, ...x.co].some(n => String(n).toLowerCase() === h));
+  return m ? teamLabelHTML(m.uid) : esc(handle || "");
+}
 const initials = n => String(n || "?").replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase();
 function avatarHTML(uid, cls = "") {
   const m = DB.mgr.get(uid);
@@ -1784,7 +1807,7 @@ function weekStrip(w) {
       const lg = w.live ? liveGameFor(DB.seasons[0], w.week, game.a.rid, game.b.rid) : null;
       const pr = lg ? (lg.a.rid === s.rid ? lg.pA : lg.pB) : null;
       return `<span class="ws ${cls}">${avatarHTML(s.uid, "xs")}
-        <span class="wn">${esc(nameOf(s.uid))}</span>
+        <span class="wn">${teamLabelHTML(s.uid)}</span>
         ${pr != null ? winChip(pr, lg.settled) : ""}
         <span class="wp">${f2(s.pts)}</span></span>`;
     };
@@ -1817,7 +1840,7 @@ function moversRow(season) {
     for (const r of rows) {
       const b = el("button", "mrow");
       b.innerHTML = `${avatarHTML(r.uid, "xs")}
-        <span class="mn">${esc(nameOf(r.uid))}</span>
+        <span class="mn">${teamLabelHTML(r.uid)}</span>
         <span class="mrk">#${r.rank}</span>
         <span class="mdl">${r.move > 0 ? "▲" : "▼"}${Math.abs(r.move)}</span>`;
       b.onclick = () => openProfile(r.uid);
@@ -1844,7 +1867,7 @@ function boardMovers(model, sim, lsim) {
   for (const r of rows) {
     const b = el("button", `bmv ${r.d > 0 ? "up" : "down"}`);
     b.innerHTML = `${avatarHTML(r.uid, "xs")}
-      <span class="bn">${esc(nameOf(r.uid))}</span>
+      <span class="bn">${teamLabelHTML(r.uid)}</span>
       <span class="bp">${(r.now * 100).toFixed(0)}%<span class="k">playoffs</span></span>
       <span class="bd">${r.d > 0 ? "▲" : "▼"} ${Math.abs(r.d * 100).toFixed(0)}pt</span>`;
     b.onclick = () => openProfile(r.uid);
@@ -1867,7 +1890,7 @@ function injuryStrip(model, avail) {
       return `<span class="st-${esc(String(h.status).toLowerCase())}">${esc(p ? p.n : h.pid)}</span>`;
     }).join(", ");
     const more = a.hurt.length > 2 ? ` +${a.hurt.length - 2}` : "";
-    b.innerHTML = `${avatarHTML(t.uid, "xs")}<span class="in">${esc(nameOf(t.uid))}</span>
+    b.innerHTML = `${avatarHTML(t.uid, "xs")}<span class="in">${teamLabelHTML(t.uid)}</span>
       <span class="ipl">${names}${esc(more)}</span>`;
     b.onclick = () => openProfile(t.uid);
     box.appendChild(b);
@@ -1971,8 +1994,7 @@ function panelHome(AT, RB, model, sim) {
     bar.innerHTML = `<span class="ring">${m && m.avatar
       ? `<img src="https://sleepercdn.com/avatars/thumbs/${esc(m.avatar)}" alt="">` : esc(initials(m && m.name))}</span>
       <span class="who"><span class="k">${esc(cs.season)} Champion</span>
-        <div class="nm">${esc(titleOf(champ))}</div>
-        ${ownerLine(champ) ? `<div class="tm">${esc(ownerLine(champ))}</div>` : ""}</span>`;
+        ${teamLabelHTML(champ, { cls: "block", nCls: "nm", mCls: "tm" })}</span>`;
     p.appendChild(bar);
   }
 
@@ -2004,8 +2026,8 @@ function panelHome(AT, RB, model, sim) {
     // Season one is not a range, and nothing is "played" until a champion is crowned.
     { l: "Seasons played", v: completed.length, n: first === last ? (completed.length ? String(last) : `${last}, in progress`) : `${first}–${last}` },
     { l: "Games on record", v: DB.games.length, n: "regular season + playoffs" },
-    { l: "Best win rate", v: top ? pct(top.winPct) : "—", n: top ? `${nameOf(top.uid)} · ${top.w}-${top.l}` : "" },
-    { l: "Highest score ever", v: RB.high ? f2(RB.high.pts) : "—", n: RB.high ? `${nameOf(RB.high.uid)} · ${RB.high.season} week ${RB.high.week}` : "" },
+    { l: "Best win rate", v: top ? pct(top.winPct) : "—", n: top ? `${teamNameText(top.uid)} · ${top.w}-${top.l}` : "" },
+    { l: "Highest score ever", v: RB.high ? f2(RB.high.pts) : "—", n: RB.high ? `${teamNameText(RB.high.uid)} · ${RB.high.season} week ${RB.high.week}` : "" },
   ];
   const tw = el("div", "tiles");
   tw.innerHTML = tiles.map(t =>
@@ -2034,9 +2056,9 @@ function panelHome(AT, RB, model, sim) {
   p.appendChild(sechead("Who's actually the best?",
     "This ranks everyone by how their weekly score would have done against all 11 other teams that same week — not just the one guy they happened to be scheduled against. It takes luck out of it."));
   p.appendChild(barCard(
-    AT.slice().sort((a, b) => b.apPct - a.apPct).map((r, i) => ({ label: `${i + 1}. ${nameOf(r.uid)}`, v: r.apPct, r })),
+    AT.slice().sort((a, b) => b.apPct - a.apPct).map((r, i) => ({ label: `${i + 1}. ${teamNameText(r.uid)}`, v: r.apPct, r })),
     v => pct(v),
-    it => `<b>${esc(nameOf(it.r.uid))}</b><br>Beat ${it.r.apW} of ${it.r.apW + it.r.apL} teams week-for-week<br>Actual record ${it.r.w}-${it.r.l}`
+    it => `<b>${esc(teamNameText(it.r.uid))}</b><br>Beat ${it.r.apW} of ${it.r.apW + it.r.apL} teams week-for-week<br>Actual record ${it.r.w}-${it.r.l}`
   ));
 
   p.appendChild(sechead("Who's been luckiest?",
@@ -2050,10 +2072,10 @@ function panelHome(AT, RB, model, sim) {
       ? `left:50%;width:${w.toFixed(1)}%;background:var(--blue)`
       : `right:50%;width:${w.toFixed(1)}%;background:var(--red)`;
     const row = el("div", "divbar");
-    row.innerHTML = `<span class="nm">${esc(nameOf(r.uid))}</span>
+    row.innerHTML = `<span class="nm">${teamLabelHTML(r.uid)}</span>
       <span class="track"><span class="zero"></span><span class="fill" style="${style}"></span></span>
       <span class="v ${r.luck >= 0 ? "pos-t" : "neg-t"}">${r.luck >= 0 ? "+" : ""}${f1(r.luck)}</span>`;
-    bindTip(row, `<b>${esc(nameOf(r.uid))}</b><br>Actual ${r.w}-${r.l}<br>Earned about ${f1(r.expW)} wins<br>${r.luck >= 0 ? "Up" : "Down"} ${f1(Math.abs(r.luck))} on luck`);
+    bindTip(row, `<b>${esc(teamNameText(r.uid))}</b><br>Actual ${r.w}-${r.l}<br>Earned about ${f1(r.expW)} wins<br>${r.luck >= 0 ? "Up" : "Down"} ${f1(Math.abs(r.luck))} on luck`);
     inner.appendChild(row);
   }
   box.appendChild(inner); p.appendChild(box);
@@ -2072,7 +2094,7 @@ function panelHome(AT, RB, model, sim) {
     p.appendChild(tableCard(
       [{ label: "Manager" }, { label: "Title odds", num: 1 }, { label: "Makes playoffs", num: 1 }, { label: "Projected wins", num: 1 }],
       rows.map(r => `<tr>
-        <td><span class="nmcell">${avatarHTML(r.uid, "sm")}${esc(nameOf(r.uid))}</span></td>
+        <td><span class="nmcell">${avatarHTML(r.uid, "sm")}${teamLabelHTML(r.uid)}</span></td>
         <td class="num"><b>${(r.title * 100).toFixed(1)}%</b></td>
         <td class="num">${(r.playoff * 100).toFixed(0)}%</td>
         <td class="num">${f1(r.wins)}</td></tr>`)));
@@ -2095,8 +2117,7 @@ function managerGrid(AT) {
     const b = el("button", "mcard");
     b.innerHTML = `
       <span class="top">${avatarHTML(r.uid)}
-        <span style="min-width:0"><span class="nm">${esc(titleOf(r.uid))}</span>
-        ${ownerLine(r.uid) ? `<span class="tm">${esc(ownerLine(r.uid))}</span>` : ""}</span></span>
+        ${teamLabelHTML(r.uid, { cls: "block", nCls: "nm", mCls: "tm" })}</span>
       <span class="row"><span class="rec">${r.w}-${r.l}</span><span class="pc">${pct(r.winPct)}</span>
         ${r.titles ? `<span class="badge gold">${r.titles}× champ</span>` : ""}</span>
       <span class="go">View career →</span>`;
@@ -2130,8 +2151,7 @@ function buildProfile(uid) {
 
   const head = el("div", "phead");
   head.innerHTML = `${avatarHTML(uid, "lg")}
-    <span><div class="nm">${esc(titleOf(uid))}</div>
-    ${ownerLine(uid) ? `<div class="tm">${esc(ownerLine(uid))}</div>` : ""}</span>`;
+    ${teamLabelHTML(uid, { cls: "block", nCls: "nm", mCls: "tm" })}`;
   p.appendChild(head);
 
   const bits = [];
@@ -2157,13 +2177,13 @@ function buildProfile(uid) {
   p.appendChild(sechead("Career highs and lows"));
   const rc = el("div", "recs");
   rc.innerHTML = [
-    hi && { c: "up", l: "Best week ever", v: f2(hi.pts), w: `vs ${nameOf(hi.opp.uid)}`, x: `${hi.season} · week ${hi.week}${hi.playoff ? " (playoffs)" : ""} · ${hi.pts > hi.opp.pts ? "won" : "still lost"}` },
-    lo && { c: "down", l: "Worst week ever", v: f2(lo.pts), w: `vs ${nameOf(lo.opp.uid)}`, x: `${lo.season} · week ${lo.week}${lo.playoff ? " (playoffs)" : ""} · ${lo.pts > lo.opp.pts ? "somehow won" : "lost"}` },
+    hi && { c: "up", l: "Best week ever", v: f2(hi.pts), w: `vs ${teamNameText(hi.opp.uid)}`, x: `${hi.season} · week ${hi.week}${hi.playoff ? " (playoffs)" : ""} · ${hi.pts > hi.opp.pts ? "won" : "still lost"}` },
+    lo && { c: "down", l: "Worst week ever", v: f2(lo.pts), w: `vs ${teamNameText(lo.opp.uid)}`, x: `${lo.season} · week ${lo.week}${lo.playoff ? " (playoffs)" : ""} · ${lo.pts > lo.opp.pts ? "somehow won" : "lost"}` },
     st.bestWin && { c: "up", l: "Longest win streak", v: st.bestWin + "W", w: "in a row", x: "regular season, all years" },
     st.worstLoss && { c: "down", l: "Longest losing streak", v: st.worstLoss + "L", w: "in a row", x: "regular season, all years" },
   ].filter(Boolean).map(x =>
     `<div class="rec ${x.c}"><div class="l">${esc(x.l)}</div><div class="v">${esc(x.v)}</div>
-     <div class="w">${esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`).join("");
+     <div class="w">${x.wuid ? teamLabelHTML(x.wuid) : esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`).join("");
   p.appendChild(rc);
 
   p.appendChild(sechead("Season by season"));
@@ -2203,7 +2223,7 @@ function buildProfile(uid) {
   if (vs.length) {
     p.appendChild(sechead("Who he owns, and who owns him", "All-time head-to-head, playoffs included."));
     const rr = vs.slice().sort((a, b) => b.edge - a.edge || b.n - a.n).map(v => `<tr>
-      <td><span class="nmcell">${avatarHTML(v.uid, "sm")}${esc(nameOf(v.uid))}</span></td>
+      <td><span class="nmcell">${avatarHTML(v.uid, "sm")}${teamLabelHTML(v.uid)}</span></td>
       <td class="num ${v.w > v.l ? "pos-t" : v.l > v.w ? "neg-t" : ""}"><b>${v.w}-${v.l}${v.t ? "-" + v.t : ""}</b></td>
       <td class="num">${f1(v.pf / v.n)}</td><td class="num">${f1(v.pa / v.n)}</td></tr>`);
     p.appendChild(tableCard([{ label: "Opponent" }, { label: "Record vs", num: 1 },
@@ -2241,9 +2261,9 @@ function panelManagers(AT) {
       const b = el("button", "rowc");
       b.innerHTML = `<span class="pos">${i + 1}</span>
         <span class="nmcell">${avatarHTML(r.uid)}</span>
-        <span class="id"><span class="n">${esc(titleOf(r.uid))}
+        <span class="id"><span class="n">${teamLabelHTML(r.uid)}
           ${r.titles ? `<span class="badge gold">${r.titles}×</span>` : ""}</span>
-          <span class="s">${esc(ownerLine(r.uid) || `${r.nSeasons} season${r.nSeasons === 1 ? "" : "s"}`)}</span></span>
+          ${ownerLine(r.uid) ? "" : `<span class="s">${r.nSeasons} season${r.nSeasons === 1 ? "" : "s"}</span>`}</span>
         <span class="stats">
           <span class="chip"><span class="cv">${r.w}-${r.l}</span><span class="cl">Record</span></span>
           <span class="chip"><span class="cv">${pct(r.winPct)}</span><span class="cl">Win rate</span></span>
@@ -2281,10 +2301,10 @@ function panelRecords(RB) {
     const card = el("div", "trophy");
     card.innerHTML = `<div class="yr">${esc(s.season)}</div>
       <div class="ch">Champion</div>
-      <div class="win">${avatarHTML(cu)}<span class="nm">${esc(nameOf(cu))}</span></div>
-      <dl><dt>Runner-up</dt><dd>${esc(nameOf(u(2)))}</dd>
-      <dt>Third</dt><dd>${esc(nameOf(u(3)))}</dd>
-      <dt>Last place</dt><dd class="last">${esc(nameOf(u(last)))}</dd></dl>`;
+      <div class="win">${avatarHTML(cu)}<span class="nm">${teamLabelHTML(cu)}</span></div>
+      <dl><dt>Runner-up</dt><dd>${teamLabelHTML(u(2))}</dd>
+      <dt>Third</dt><dd>${teamLabelHTML(u(3))}</dd>
+      <dt>Last place</dt><dd class="last">${teamLabelHTML(u(last))}</dd></dl>`;
     grid.appendChild(card);
   }
   p.appendChild(grid);
@@ -2300,33 +2320,33 @@ function panelRecords(RB) {
   p.appendChild(sechead("The record book", "Every game ever played, regular season and playoffs."));
   const when = s => `${s.season} · week ${s.week}${s.playoff ? " (playoffs)" : ""}`;
   const gwhen = x => `${x.g.season} · week ${x.g.week}${x.g.playoff ? " (playoffs)" : ""}`;
-  const vs = x => `${nameOf(x.g.a.uid)} ${f2(x.g.a.pts)} — ${f2(x.g.b.pts)} ${nameOf(x.g.b.uid)}`;
+  const vs = x => `${teamNameText(x.g.a.uid)} ${f2(x.g.a.pts)} — ${f2(x.g.b.pts)} ${teamNameText(x.g.b.uid)}`;
   const cards = [
-    RB.high && { c: "up", l: "Highest score ever", v: f2(RB.high.pts), w: nameOf(RB.high.uid), x: `${when(RB.high)} · beat ${nameOf(RB.high.opp.uid)}` },
-    RB.low && { c: "down", l: "Lowest score ever", v: f2(RB.low.pts), w: nameOf(RB.low.uid), x: `${when(RB.low)} · vs ${nameOf(RB.low.opp.uid)}` },
+    RB.high && { c: "up", l: "Highest score ever", v: f2(RB.high.pts), w: teamNameText(RB.high.uid), wuid: RB.high.uid, x: `${when(RB.high)} · beat ${teamNameText(RB.high.opp.uid)}` },
+    RB.low && { c: "down", l: "Lowest score ever", v: f2(RB.low.pts), w: teamNameText(RB.low.uid), wuid: RB.low.uid, x: `${when(RB.low)} · vs ${teamNameText(RB.low.opp.uid)}` },
     RB.blowout && { c: "up", l: "Biggest blowout", v: "+" + f2(RB.blowout.margin), w: vs(RB.blowout), x: gwhen(RB.blowout) },
     RB.nailbiter && { c: "down", l: "Closest finish", v: f2(RB.nailbiter.margin), w: vs(RB.nailbiter), x: gwhen(RB.nailbiter) },
-    RB.unlucky && { c: "down", l: "Best score that still lost", v: f2(RB.unlucky.pts), w: nameOf(RB.unlucky.uid), x: `${when(RB.unlucky)} · lost to ${nameOf(RB.unlucky.opp.uid)} (${f2(RB.unlucky.opp.pts)})` },
-    RB.lucky && { c: "up", l: "Worst score that still won", v: f2(RB.lucky.pts), w: nameOf(RB.lucky.uid), x: `${when(RB.lucky)} · beat ${nameOf(RB.lucky.opp.uid)} (${f2(RB.lucky.opp.pts)})` },
+    RB.unlucky && { c: "down", l: "Best score that still lost", v: f2(RB.unlucky.pts), w: teamNameText(RB.unlucky.uid), wuid: RB.unlucky.uid, x: `${when(RB.unlucky)} · lost to ${teamNameText(RB.unlucky.opp.uid)} (${f2(RB.unlucky.opp.pts)})` },
+    RB.lucky && { c: "up", l: "Worst score that still won", v: f2(RB.lucky.pts), w: teamNameText(RB.lucky.uid), wuid: RB.lucky.uid, x: `${when(RB.lucky)} · beat ${teamNameText(RB.lucky.opp.uid)} (${f2(RB.lucky.opp.pts)})` },
     RB.shootout && { c: "up", l: "Highest-scoring game", v: f2(RB.shootout.total), w: vs(RB.shootout), x: gwhen(RB.shootout) },
     RB.snoozer && { c: "down", l: "Lowest-scoring game", v: f2(RB.snoozer.total), w: vs(RB.snoozer), x: gwhen(RB.snoozer) },
-    RB.streakW && RB.streakW.uid && { c: "up", l: "Longest win streak", v: RB.streakW.n + "W", w: nameOf(RB.streakW.uid), x: `ended ${RB.streakW.end.season} week ${RB.streakW.end.week}` },
-    RB.streakL && RB.streakL.uid && { c: "down", l: "Longest losing streak", v: RB.streakL.n + "L", w: nameOf(RB.streakL.uid), x: `ended ${RB.streakL.end.season} week ${RB.streakL.end.week}` },
-    RB.seasonHi && { c: "up", l: "Best season of scoring", v: f2(RB.seasonHi.pf), w: nameOf(RB.seasonHi.uid), x: `${RB.seasonHi.season} regular season` },
-    RB.seasonLo && { c: "down", l: "Worst season of scoring", v: f2(RB.seasonLo.pf), w: nameOf(RB.seasonLo.uid), x: `${RB.seasonLo.season} regular season` },
+    RB.streakW && RB.streakW.uid && { c: "up", l: "Longest win streak", v: RB.streakW.n + "W", w: teamNameText(RB.streakW.uid), wuid: RB.streakW.uid, x: `ended ${RB.streakW.end.season} week ${RB.streakW.end.week}` },
+    RB.streakL && RB.streakL.uid && { c: "down", l: "Longest losing streak", v: RB.streakL.n + "L", w: teamNameText(RB.streakL.uid), wuid: RB.streakL.uid, x: `ended ${RB.streakL.end.season} week ${RB.streakL.end.week}` },
+    RB.seasonHi && { c: "up", l: "Best season of scoring", v: f2(RB.seasonHi.pf), w: teamNameText(RB.seasonHi.uid), wuid: RB.seasonHi.uid, x: `${RB.seasonHi.season} regular season` },
+    RB.seasonLo && { c: "down", l: "Worst season of scoring", v: f2(RB.seasonLo.pf), w: teamNameText(RB.seasonLo.uid), wuid: RB.seasonLo.uid, x: `${RB.seasonLo.season} regular season` },
   ].filter(Boolean);
   const rg = el("div", "recs");
   rg.innerHTML = cards.map(c =>
     `<div class="rec ${c.c}"><div class="l">${esc(c.l)}</div><div class="v">${esc(c.v)}</div>
-     <div class="w">${esc(c.w)}</div><div class="c">${esc(c.x)}</div></div>`).join("");
+     <div class="w">${c.wuid ? teamLabelHTML(c.wuid) : esc(c.w)}</div><div class="c">${esc(c.x)}</div></div>`).join("");
   p.appendChild(rg);
 
   const row = s => `<tr>
-    <td><span class="nmcell">${avatarHTML(s.uid, "sm")}${esc(nameOf(s.uid))}</span></td>
+    <td><span class="nmcell">${avatarHTML(s.uid, "sm")}${teamLabelHTML(s.uid)}</span></td>
     <td class="num"><b>${f2(s.pts)}</b></td>
     <td>${esc(s.season)}</td>
     <td class="num">${s.week}${s.playoff ? ` <span class="badge blue">${jx("po", "PO")}</span>` : ""}</td>
-    <td>${esc(nameOf(s.opp.uid))}</td>
+    <td>${teamLabelHTML(s.opp.uid)}</td>
     <td class="num">${f2(s.opp.pts)}</td>
     <td class="num ${s.pts > s.opp.pts ? "pos-t" : "neg-t"}">${s.pts > s.opp.pts ? "W" : "L"}</td></tr>`;
   const head = [{ label: "Manager" }, { label: "Score", num: 1 }, { label: "Season" },
@@ -2346,7 +2366,7 @@ function panelRecords(RB) {
       const line = (ic, t, d, who, n) => who
         ? `<div class="aw"><span class="ic">${ic}</span>
              <span><span class="t">${esc(t)}</span><span class="d">${esc(d)}</span></span>
-             <span class="n">${esc(nameOf(who.uid))}<br><span style="color:var(--muted);font-weight:600">${esc(n)}</span></span></div>` : "";
+             <span class="n">${teamLabelHTML(who.uid)}<br><span style="color:var(--muted);font-weight:600">${esc(n)}</span></span></div>` : "";
       const card = el("div", "awcard");
       card.innerHTML = `<div class="yr">${esc(s.season)} awards</div>` + [
         line("🔥", "Points Machine", "Most total points scored", a.machine, f1(a.machine && a.machine.total)),
@@ -2372,7 +2392,7 @@ function panelRecords(RB) {
       .filter(x => x.hi || x.lo)
       .sort((a, b) => b.hi - a.hi || a.lo - b.lo)
       .map(x => `<tr>
-        <td><span class="nmcell">${avatarHTML(x.uid, "sm")}${esc(nameOf(x.uid))}</span></td>
+        <td><span class="nmcell">${avatarHTML(x.uid, "sm")}${teamLabelHTML(x.uid)}</span></td>
         <td class="num ${x.hi ? "pos-t" : ""}"><b>${x.hi}</b></td>
         <td class="num ${x.lo ? "neg-t" : ""}"><b>${x.lo}</b></td>
         <td class="num">${x.hi - x.lo >= 0 ? "+" : ""}${x.hi - x.lo}</td></tr>`);
@@ -2406,8 +2426,8 @@ function panelMatchups(AT) {
   const s1 = el("select"), s2 = el("select");
   s1.setAttribute("aria-label", "First manager"); s2.setAttribute("aria-label", "Second manager");
   uids.forEach(u => {
-    const a = el("option", null, nameOf(u)); a.value = u; s1.appendChild(a);
-    const b = el("option", null, nameOf(u)); b.value = u; s2.appendChild(b);
+    const a = el("option", null, esc(teamNameText(u))); a.value = u; s1.appendChild(a);
+    const b = el("option", null, esc(teamNameText(u))); b.value = u; s2.appendChild(b);
   });
   s2.selectedIndex = Math.min(1, uids.length - 1);
   pick.appendChild(s1); pick.appendChild(el("span", "vs", "VS")); pick.appendChild(s2);
@@ -2420,13 +2440,13 @@ function panelMatchups(AT) {
     if (a === b) { out.appendChild(el("div", "empty", "<b>Pick two different managers</b>")); return; }
     const c = M.get(a + "|" + b);
     const n = c ? c.w + c.l + c.t : 0;
-    if (!n) { out.appendChild(el("div", "empty", `<b>They've never played</b>${esc(nameOf(a))} and ${esc(nameOf(b))} have never met.`)); return; }
+    if (!n) { out.appendChild(el("div", "empty", `<b>They've never played</b>${esc(teamNameText(a))} and ${esc(teamNameText(b))} have never met.`)); return; }
     const sc = el("div", "cscore");
     sc.innerHTML = `<div><div class="big" style="color:${c.w >= c.l ? "var(--blue)" : "var(--ink-2)"}">${c.w}</div>
-        <div class="lbl">${esc(nameOf(a))}</div></div>
+        <div class="lbl">${teamLabelHTML(a)}</div></div>
       <div class="dash">—</div>
       <div><div class="big" style="color:${c.l > c.w ? "var(--blue)" : "var(--ink-2)"}">${c.l}</div>
-        <div class="lbl">${esc(nameOf(b))}</div></div>`;
+        <div class="lbl">${teamLabelHTML(b)}</div></div>`;
     out.appendChild(sc);
     const avgA = c.pf / n, avgB = c.pa / n;
     const meta = el("div", "cmeta");
@@ -2444,7 +2464,7 @@ function panelMatchups(AT) {
       proj.innerHTML = `<div style="font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700">
           If they played this week</div>
         <div style="font-size:27px;font-weight:900;letter-spacing:-.02em;margin-top:5px">
-          ${esc(nameOf(fav))} <span style="color:var(--blue)">${pct(favP)}</span></div>
+          ${teamLabelHTML(fav)} <span style="color:var(--blue)">${pct(favP)}</span></div>
         <div style="font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.5">
           Based only on how much each has scored per week and how much that bounces around.
           It knows nothing about their actual rosters.</div>`;
@@ -2458,7 +2478,7 @@ function panelMatchups(AT) {
     "Read across: each row's manager against every other. Blue means that row is winning the series, red means losing. Swipe sideways on a phone."));
   const c = el("div", "card"), sc = el("div", "scroll"), t = el("table", "h2h");
   t.innerHTML = `<thead><tr><th>Manager</th>${uids.map(u =>
-    `<th class="rot num" title="${esc(nameOf(u))}">${esc(nameOf(u).slice(0, 7))}</th>`).join("")}<th class="num">Total</th></tr></thead>`;
+    `<th class="rot num" title="${esc(teamNameText(u))}">${esc(teamNameText(u).slice(0, 7))}</th>`).join("")}<th class="num">Total</th></tr></thead>`;
   const tb = el("tbody");
   for (const a of uids) {
     let tw = 0, tl = 0;
@@ -2471,14 +2491,14 @@ function panelMatchups(AT) {
       return `<td class="cell" data-a="${esc(a)}" data-b="${esc(b)}" style="background:${divergeColor((r.w - r.l) / n, 1)}">${r.w}-${r.l}${r.t ? "-" + r.t : ""}</td>`;
     }).join("");
     const tr = el("tr");
-    tr.innerHTML = `<td><span class="nmcell">${avatarHTML(a, "sm")}${esc(nameOf(a))}</span></td>${cells}<td class="num"><b>${tw}-${tl}</b></td>`;
+    tr.innerHTML = `<td><span class="nmcell">${avatarHTML(a, "sm")}${teamLabelHTML(a)}</span></td>${cells}<td class="num"><b>${tw}-${tl}</b></td>`;
     tb.appendChild(tr);
   }
   t.appendChild(tb); sc.appendChild(t); c.appendChild(sc); p.appendChild(c);
   for (const td of t.querySelectorAll("td.cell[data-a]")) {
     const r = M.get(td.dataset.a + "|" + td.dataset.b);
     const n = r.w + r.l + r.t, avg = (r.pf - r.pa) / n;
-    bindTip(td, `<b>${esc(nameOf(td.dataset.a))}</b> vs <b>${esc(nameOf(td.dataset.b))}</b><br>
+    bindTip(td, `<b>${esc(teamNameText(td.dataset.a))}</b> vs <b>${esc(teamNameText(td.dataset.b))}</b><br>
       ${r.w}-${r.l}${r.t ? "-" + r.t : ""} in ${n} meeting${n === 1 ? "" : "s"}<br>
       Avg margin ${avg >= 0 ? "+" : ""}${f1(avg)}`);
   }
@@ -2499,7 +2519,7 @@ function panelMatchups(AT) {
     pairs.push({ a, b, ...r, n, edge: Math.abs(r.w - r.l) / n });
   }
   if (pairs.length) {
-    const rrow = r => `<tr><td>${esc(nameOf(r.a))} vs ${esc(nameOf(r.b))}</td>
+    const rrow = r => `<tr><td>${teamLabelHTML(r.a)} vs ${teamLabelHTML(r.b)}</td>
       <td class="num">${r.w}-${r.l}${r.t ? "-" + r.t : ""}</td><td class="num">${r.n}</td>
       <td class="num">${f1(r.pf / r.n)} — ${f1(r.pa / r.n)}</td></tr>`;
     const rhead = [{ label: "Matchup" }, { label: "Series", num: 1 }, { label: "Games", num: 1 }, { label: "Avg score", num: 1 }];
@@ -2516,7 +2536,7 @@ function panelMatchups(AT) {
     "Every manager's real weekly scores replayed against somebody else's opponents. Read across: the row's manager, playing the column's schedule. Blue means they'd have won more than they actually did."));
   const wc = el("div", "card"), wsc = el("div", "scroll"), wt = el("table", "h2h wi");
   wt.innerHTML = `<thead><tr><th>Manager</th>${uids.map(u =>
-    `<th class="rot num" title="${esc(nameOf(u))}'s schedule">${esc(nameOf(u).slice(0, 7))}</th>`).join("")}</tr></thead>`;
+    `<th class="rot num" title="${esc(teamNameText(u))}'s schedule">${esc(teamNameText(u).slice(0, 7))}</th>`).join("")}</tr></thead>`;
   const wtb = el("tbody");
   let bestSwing = null;
   for (const a of uids) {
@@ -2530,20 +2550,20 @@ function panelMatchups(AT) {
       return `<td class="cell" data-wa="${esc(a)}" data-wb="${esc(b)}" style="background:${divergeColor(d / 5, 1)}">${r.w}-${r.l}</td>`;
     }).join("");
     const tr = el("tr");
-    tr.innerHTML = `<td><span class="nmcell">${avatarHTML(a, "sm")}${esc(nameOf(a))}</span></td>${cells}`;
+    tr.innerHTML = `<td><span class="nmcell">${avatarHTML(a, "sm")}${teamLabelHTML(a)}</span></td>${cells}`;
     wtb.appendChild(tr);
   }
   wt.appendChild(wtb); wsc.appendChild(wt); wc.appendChild(wsc); p.appendChild(wc);
   for (const td of wt.querySelectorAll("td.cell[data-wa]")) {
     const a = td.dataset.wa, b = td.dataset.wb, r = WI.get(a + "|" + b), d = r.w - (actual.get(a) || 0);
-    bindTip(td, `<b>${esc(nameOf(a))}</b> with <b>${esc(nameOf(b))}</b>'s schedule<br>
+    bindTip(td, `<b>${esc(teamNameText(a))}</b> with <b>${esc(teamNameText(b))}</b>'s schedule<br>
       ${r.w}-${r.l} instead of ${actual.get(a)}-${(AT.find(x => x.uid === a) || {}).l}<br>
       <b>${d >= 0 ? "+" : ""}${d} win${Math.abs(d) === 1 ? "" : "s"}</b>`);
   }
   if (bestSwing && bestSwing.d > 0) {
     const note = el("p", "sub");
     note.style.marginTop = "11px";
-    note.textContent = `Biggest gripe: ${nameOf(bestSwing.a)} would be ${bestSwing.r.w}-${bestSwing.r.l} instead of ${actual.get(bestSwing.a)}-${(AT.find(x => x.uid === bestSwing.a) || {}).l} with ${nameOf(bestSwing.b)}'s schedule — ${bestSwing.d} extra wins, same exact scores.`;
+    note.textContent = `Biggest gripe: ${teamNameText(bestSwing.a)} would be ${bestSwing.r.w}-${bestSwing.r.l} instead of ${actual.get(bestSwing.a)}-${(AT.find(x => x.uid === bestSwing.a) || {}).l} with ${teamNameText(bestSwing.b)}'s schedule — ${bestSwing.d} extra wins, same exact scores.`;
     p.appendChild(note);
   }
 
@@ -2589,8 +2609,7 @@ function panelMatchups(AT) {
         const b = el("button", "rowc");
         b.innerHTML = `<span class="pos">${pl || "—"}</span>
           <span class="nmcell">${avatarHTML(uid)}</span>
-          <span class="id"><span class="n">${esc(nameOf(uid))}${pl === 1 ? ' <span class="badge gold">CHAMP</span>' : ""}</span>
-            <span class="s">${esc(teamOf(uid) || "")}</span></span>
+          <span class="id"><span class="n">${teamLabelHTML(uid)}${pl === 1 ? ' <span class="badge gold">CHAMP</span>' : ""}</span></span>
           <span class="stats">
             <span class="chip"><span class="cv">${r.w}-${r.l}</span><span class="cl">Record</span></span>
             <span class="chip"><span class="cv">${f1(r.pf)}</span><span class="cl">Points</span></span>
@@ -3123,7 +3142,7 @@ function bracketHTML(b) {
     return `<div class="brd"><div class="brh">${esc(b.roundNames && b.roundNames[r - 1] || `Round ${r}`)}</div>
       ${ms.map(m => {
         const side = (nm, won) => `<div class="bside${won ? " won" : ""}">
-          <span class="n">${esc(nm || "—")}</span></div>`;
+          <span class="n">${nm ? handleLabelHTML(nm) : "—"}</span></div>`;
         return `<div class="brm${m.place ? " placed" : ""}">
           ${m.place ? `<div class="bpl">${esc(m.place)}</div>` : ""}
           ${side(m.a, m.winner === m.a)}${side(m.b, m.winner === m.b)}</div>`;
@@ -3156,7 +3175,7 @@ function articleBlock(b) {
         const v = Number(r.value) || 0, w = Math.abs(v) / max * 50;
         const left = v >= 0 ? 50 : 50 - w;
         return `<div class="abar g${Number(r.group) || 1}">
-          <span class="who">${esc(r.label || "")}${r.sub ? `<i>${esc(r.sub)}</i>` : ""}</span>
+          <span class="who">${handleLabelHTML(r.label)}${r.sub ? `<i>${esc(r.sub)}</i>` : ""}</span>
           <span class="track"><span class="zero"></span>
             <span class="fill" style="left:${left.toFixed(1)}%;width:${w.toFixed(1)}%"></span></span>
           <span class="v">${v >= 0 ? "+" : "−"}${f1(Math.abs(v))}</span></div>`;
@@ -3176,7 +3195,7 @@ function articleBlock(b) {
     case "picks":
       return `<div class="apicks">${(b.items || []).map(x => `
         <div class="apick"><span class="sl">${esc(x.slot || "")}</span>
-          <span class="nm">${esc(x.name || "")}${x.sub ? `<i>${esc(x.sub)}</i>` : ""}</span>
+          <span class="nm">${handleLabelHTML(x.name)}${x.sub ? `<i>${esc(x.sub)}</i>` : ""}</span>
           <span class="dl">${esc(x.delta || "")}</span></div>`).join("")}</div>`;
     default:
       return "";
@@ -3291,7 +3310,7 @@ async function panelRecaps() {
     if (mv) {
       const strip = el("div", "movers");
       const one = r => `<span class="mvr">${avatarHTML(r.uid, "sm")}
-        <span class="who"><b>${esc(nameOf(r.uid))}</b><i>to ${ord(r.rank)}</i></span>
+        <span class="who"><b>${teamLabelHTML(r.uid)}</b><i>to ${ord(r.rank)}</i></span>
         ${moveHTML(r.move)}</span>`;
       strip.innerHTML =
         `${mv.up.length ? `<div class="mgrp"><div class="ml">Climbing</div>${mv.up.map(one).join("")}</div>` : ""}
@@ -3303,7 +3322,7 @@ async function panelRecaps() {
     for (const g of w.games || []) {
       p.appendChild(el("div", "recap",
         `<h3>${esc(g.headline || "")}</h3>
-         <div class="sc">${esc(g.winner)} ${esc(String(g.winner_points))} — ${esc(String(g.loser_points))} ${esc(g.loser)}</div>
+         <div class="sc">${handleLabelHTML(g.winner)} ${esc(String(g.winner_points))} — ${esc(String(g.loser_points))} ${handleLabelHTML(g.loser)}</div>
          <p>${esc(g.body || "")}</p>`));
     }
 
@@ -3503,8 +3522,8 @@ function panelScoreboard() {
         const p = lg ? (lg.a.rid === s.rid ? lg.pA : lg.pB) : null;
         return `<button class="gside ${cls}" data-uid="${esc(s.uid)}">
           ${avatarHTML(s.uid, "sm")}
-          <span style="min-width:0"><span class="gn">${esc(titleOf(s.uid))}</span>
-            <span class="gt">${esc(tags.join(" · ") || ownerLine(s.uid) || "")}</span></span>
+          <span style="min-width:0">${teamLabelHTML(s.uid, { cls: "block", nCls: "gn", mCls: "gt" })}
+            ${tags.length ? `<span class="gt">${esc(tags.join(" · "))}</span>` : ""}</span>
           ${p != null ? winChip(p, lg.settled) : ""}
           <span class="gp">${f2(s.pts)}</span></button>`;
       };
@@ -4781,8 +4800,8 @@ function oddsBoard(title, sub, priced, noteFn) {
   priced.forEach((r, i) => {
     const btn = el("button", "orow");
     btn.innerHTML = `<span class="rk">${i + 1}</span>${avatarHTML(r.uid, "sm avcell")}
-      <span class="who"><span class="n">${esc(nameOf(r.uid))}</span>
-      <span class="s">${esc(noteFn ? noteFn(r) : teamOf(r.uid))}</span></span>${priceTile(r)}`;
+      <span class="who">${teamLabelHTML(r.uid, { cls: "block", nCls: "n", mCls: "s" })}
+      ${noteFn ? `<span class="s">${esc(noteFn(r))}</span>` : ""}</span>${priceTile(r)}`;
     btn.onclick = () => openProfile(r.uid);
     b.appendChild(btn);
   });
@@ -5065,8 +5084,8 @@ function liveBoard(title, sub, priced, openBy, noteFn) {
     const was = openBy.get(r.uid);
     const btn = el("button", "orow live");
     btn.innerHTML = `<span class="rk">${i + 1}</span>${avatarHTML(r.uid, "sm avcell")}
-      <span class="who"><span class="n">${esc(nameOf(r.uid))}</span>
-      <span class="s">${esc(noteFn ? noteFn(r) : teamOf(r.uid))}</span>
+      <span class="who">${teamLabelHTML(r.uid, { cls: "block", nCls: "n", mCls: "s" })}
+      ${noteFn ? `<span class="s">${esc(noteFn(r))}</span>` : ""}
       ${was ? `<span class="was">opened ${esc(fmtOdds(was.price))}
         ${moveChip(r.p, was.p)}</span>` : ""}</span>${priceTile(r)}`;
     btn.onclick = () => openProfile(r.uid);
@@ -5144,7 +5163,7 @@ function injuryBoard(model, avail, inj) {
           back ? `<em>${esc(back)}</em>` : ""}</span>`;
     }).join("");
     r.innerHTML = `${avatarHTML(t.uid, "sm avcell")}
-      <span class="who"><span class="n">${esc(nameOf(t.uid))}</span>
+      <span class="who">${teamLabelHTML(t.uid, { cls: "block", nCls: "n", mCls: "s" })}
         <span class="plist">${list}</span></span>
       <span class="cost ${a.mult < 0.97 ? "bite" : ""}">−${((1 - a.mult) * 100).toFixed(1)}%<span class="k">next week</span></span>`;
     b.appendChild(r);
@@ -5589,8 +5608,8 @@ function plCardHTML(a, b, data) {
   // Phones get the ranking folded away; anything wider shows it open.
   const open = !(window.matchMedia && matchMedia("(max-width:520px)").matches);
   return `<div ${attrs}>
-    <div class="pl-left"><span class="pl-a">${esc(plSideText(nameOf(a.uid), A))}</span>
-      · <span class="pl-b">${esc(plSideText(nameOf(b.uid), B))}</span></div>
+    <div class="pl-left"><span class="pl-a">${esc(plSideText(teamNameText(a.uid), A))}</span>
+      · <span class="pl-b">${esc(plSideText(teamNameText(b.uid), B))}</span></div>
     ${dec.length ? `<details class="pl-dec"${open ? " open" : ""}>
       <summary>Games that decide this</summary>
       <ol>${dec.map(r => `<li>${esc(r.label)}</li>`).join("")}</ol></details>` : ""}
@@ -5621,7 +5640,7 @@ function liveMatchupBoard(board) {
     const side = (s, S, p, lead) => `
       <span class="lside ${lead ? "up" : ""}">
         ${avatarHTML(s.uid, "xs")}
-        <span class="ln">${esc(nameOf(s.uid))}</span>
+        <span class="ln">${teamLabelHTML(s.uid)}</span>
         <span class="lpts">${f2(S.scored)}</span>
         ${winChip(p, g.settled)}
         <span class="lleft">${S.frac < 0.001
@@ -5871,10 +5890,10 @@ function pathHTML(pts, uid) {
   const pc = p => `${(p * 100).toFixed(0)}%`;
   if (!pts.length) return `<div class="glpath">No line history yet</div>`;
   const tag = pts[0].pre ? " (pregame model)" : "";
-  if (pts.length === 1) return `<div class="glpath">${esc(nameOf(uid))} opened at <b>${pc(pts[0].p)}</b>${tag}</div>`;
+  if (pts.length === 1) return `<div class="glpath">${esc(teamNameText(uid))} opened at <b>${pc(pts[0].p)}</b>${tag}</div>`;
   const open = pts[0].p, now = pts[pts.length - 1].p, live = pts.filter(q => q.live).length;
   return `<div class="glpath">${pts.length >= 3 ? lineSpark(pts) : ""}
-    <span>${esc(nameOf(uid))} to win: open <b>${pc(open)}</b>${tag} → now <b>${pc(now)}</b>${moveChip(now, open, " pp")}</span>
+    <span>${esc(teamNameText(uid))} to win: open <b>${pc(open)}</b>${tag} → now <b>${pc(now)}</b>${moveChip(now, open, " pp")}</span>
     <span>${pts.length} readings · ${pts.length - live} pre-kickoff, ${live} in-game</span></div>`;
 }
 
@@ -5964,7 +5983,7 @@ function gameCardHTML(g) {
     const mlExtra = done ? `<span class="r">${res === "won" ? "Won" : res === "lost" ? "Lost" : "Tie"}</span>`
       : L && L.offBoard ? `<span class="r">${jx("otb", "OTB")}</span>` : "";
     return `<div class="glrow">
-      <span class="glwho ${res}">${avatarHTML(side.uid, "xs")}<span class="n">${esc(nameOf(side.uid))}</span>
+      <span class="glwho ${res}">${avatarHTML(side.uid, "xs")}<span class="n">${teamLabelHTML(side.uid)}</span>
         ${g.started || done ? `<span class="sc">${f2(pts)}</span>` : ""}</span>
       ${cell("spread", S ? fmtSpread(sp) : "—", S ? sp : null, done ? null : S && S.spreadPrice, done ? " " : "")}
       ${cell("ml", null, null, L && !done ? L.ml[i] : null, mlExtra)}
@@ -5979,7 +5998,7 @@ function gameCardHTML(g) {
   if (g.settled) {
     const cv = g.cover, fav = O && O.spread !== 0 ? (O.spread > 0 ? g.a : g.b) : null;
     res = `<div class="glres">Final${O ? ` · pregame ${O.spread === 0 ? "PK"
-      : `${esc(nameOf(fav.uid))} −${Math.abs(O.spread).toFixed(1)}`}` : ""}${cv
+      : `${esc(teamNameText(fav.uid))} −${Math.abs(O.spread).toFixed(1)}`}` : ""}${cv
       ? ` · <span class="cv ${cv === "covered" ? "yes" : cv === "push" ? "push" : "no"}">${cv === "covered"
         ? "Covered" : cv === "push" ? "Push" : "Didn't cover"}</span>` : ""}</div>`;
   }
@@ -6012,7 +6031,7 @@ function paintGameLines(data) {
     <span class="stamp">${esc(updatedAt(data.at, "Updated"))}</span></div>`;
   const grid = el("div", "glgrid");
   grid.innerHTML = data.games.map(gameCardHTML).join("") + data.byes.map(t =>
-    `<div class="glbye">${avatarHTML(t.uid, "xs")}<span>${esc(nameOf(t.uid))} — Bye</span></div>`).join("");
+    `<div class="glbye">${avatarHTML(t.uid, "xs")}<span>${teamLabelHTML(t.uid)} — Bye</span></div>`).join("");
   if (!data.games.length) grid.innerHTML = `<div class="empty" style="grid-column:1/-1">No matchups found for week ${data.week}.</div>`;
   b.appendChild(grid);
   const how = el("details", "gloss glhow");
@@ -6181,7 +6200,7 @@ function futuresMarkets(model, sim) {
     <label class="fxm-sel">Division<select data-fxm="div"><option value="">All</option>${divs.map(d =>
       `<option value="${d}">${esc(model.divNames.get(d))}</option>`).join("")}</select></label>
     <label class="fxm-sel">Team<select data-fxm="team"><option value="">All teams</option>${byName.map(i =>
-      `<option value="${esc(T[i].uid)}">${esc(nameOf(T[i].uid))}</option>`).join("")}</select></label>`;
+      `<option value="${esc(T[i].uid)}">${esc(teamNameText(T[i].uid))}</option>`).join("")}</select></label>`;
   root.appendChild(bar);
   const divSel = bar.querySelector('[data-fxm="div"]'), teamSel = bar.querySelector('[data-fxm="team"]');
   const sortBtns = [...bar.querySelectorAll("[data-sort]")];
@@ -6214,9 +6233,9 @@ function futuresMarkets(model, sim) {
           row.type = "button";
           Object.assign(row.dataset, { uid, div: T[r.i].div, key: r.key, name: nameOf(uid), price: r.prices[0].price });
           row.innerHTML = `<span class="rk"></span>${avatarHTML(uid, "sm avcell")}
-            <span class="who"><span class="n">${esc(nameOf(uid))}</span><span class="s">${esc(r.note)}</span>${r.inj ? `<span class="fxm-inj">${esc(r.inj.replace(/^ · /, ""))}</span>` : ""}</span>
+            <span class="who">${teamLabelHTML(uid, { cls: "block", nCls: "n", mCls: "s" })}<span class="s">${esc(r.note)}</span>${r.inj ? `<span class="fxm-inj">${esc(r.inj.replace(/^ · /, ""))}</span>` : ""}</span>
             ${m.two ? `<span class="prices">${tiles(r)}</span>` : tiles(r)}`;
-          row.title = `All of ${nameOf(uid)}'s prices`;
+          row.title = `All of ${teamNameText(uid)}'s prices`;
           row.onclick = () => { st.team = uid; apply(); };
           return { r, row, name: nameOf(uid) };
         });
@@ -6266,7 +6285,7 @@ function futuresMarkets(model, sim) {
     card.dataset.uid = uid;
     card.dataset.line = st.line;
     card.innerHTML = `<div class="bhead"><span class="bt fxm-th">${avatarHTML(uid, "sm")}
-      <span class="fxm-tn">${esc(nameOf(uid))}<span class="bs">${esc(model.divNames.get(T[i].div))} · projects ${f1(L.S.wins[i] / n)} wins · ${st.line === "live" ? "live" : "opening"} line</span></span></span>
+      <span class="fxm-tn">${teamLabelHTML(uid)}<span class="bs">${esc(model.divNames.get(T[i].div))} · projects ${f1(L.S.wins[i] / n)} wins · ${st.line === "live" ? "live" : "opening"} line</span></span></span>
       <button type="button" class="fxm-prof">Profile</button></div>`;
     card.querySelector(".fxm-prof").onclick = () => openProfile(uid);
     for (const m of CHIPS) {
@@ -6509,7 +6528,7 @@ function panelOdds(model, sim) {
         const fromDraft = W_ROSTER * t.rosterEdge, fromRec = W_HIST_POST * t.rawEdge;
         const sgn = (v, d = 1) => `${v >= 0 ? "+" : ""}${d === 1 ? f1(v) : f2(v)}`;
         return `<tr>
-          <td><span class="nmcell">${avatarHTML(t.uid, "sm")}${esc(nameOf(t.uid))}</span></td>
+          <td><span class="nmcell">${avatarHTML(t.uid, "sm")}${teamLabelHTML(t.uid)}</span></td>
           <td class="num">${f1(t.rosterValue)}</td>
           <td class="num ${t.rosterEdge >= 0 ? "pos-t" : "neg-t"}"><b>${sgn(t.rosterEdge)}</b></td>
           <td class="num ${fromDraft >= 0 ? "pos-t" : "neg-t"}">${sgn(fromDraft)}</td>
@@ -6688,7 +6707,7 @@ function playerModal(season, pick, analysis) {
       <div class="who">
         <div class="n">${esc(name)}</div>
         <div class="s">${esc(md.team || "free agent")} · pick ${pick.pick_no}, round ${pick.round}
-          · ${esc(pick.picked_by ? nameOf(pick.picked_by) : "—")}</div>
+          · ${pick.picked_by ? teamLabelHTML(pick.picked_by) : "—"}</div>
       </div>
     </div>
     ${seasonPlayed(season) ? `
@@ -6751,13 +6770,13 @@ function panelDraft() {
     const steal = A.steals[0], bust = A.busts[0];
     const t = el("div", "recs");
     t.innerHTML = [
-      steal && { c: "up", l: "Steal of the draft", v: `+${steal.value}`, w: steal.name, x: `${nameOf(steal.uid)} took him at ${steal.pick} — finished ${ord(steal.prodRank)} in scoring` },
-      bust && { c: "down", l: "Bust of the draft", v: `${bust.value}`, w: bust.name, x: `${nameOf(bust.uid)} took him at ${bust.pick} — finished ${ord(bust.prodRank)}` },
-      A.byMgr[0] && { c: "up", l: "Best draft haul", v: f1(A.byMgr[0].pts), w: nameOf(A.byMgr[0].uid), x: `most total points from his ${A.byMgr[0].n} picks` },
-      A.byMgr[A.byMgr.length - 1] && { c: "down", l: "Worst draft haul", v: f1(A.byMgr[A.byMgr.length - 1].pts), w: nameOf(A.byMgr[A.byMgr.length - 1].uid), x: "fewest total points drafted" },
+      steal && { c: "up", l: "Steal of the draft", v: `+${steal.value}`, w: steal.name, x: `${teamNameText(steal.uid)} took him at ${steal.pick} — finished ${ord(steal.prodRank)} in scoring` },
+      bust && { c: "down", l: "Bust of the draft", v: `${bust.value}`, w: bust.name, x: `${teamNameText(bust.uid)} took him at ${bust.pick} — finished ${ord(bust.prodRank)}` },
+      A.byMgr[0] && { c: "up", l: "Best draft haul", v: f1(A.byMgr[0].pts), w: teamNameText(A.byMgr[0].uid), wuid: A.byMgr[0].uid, x: `most total points from his ${A.byMgr[0].n} picks` },
+      A.byMgr[A.byMgr.length - 1] && { c: "down", l: "Worst draft haul", v: f1(A.byMgr[A.byMgr.length - 1].pts), w: teamNameText(A.byMgr[A.byMgr.length - 1].uid), wuid: A.byMgr[A.byMgr.length - 1].uid, x: "fewest total points drafted" },
     ].filter(Boolean).map(x =>
       `<div class="rec ${x.c}"><div class="l">${esc(x.l)}</div><div class="v">${esc(x.v)}</div>
-       <div class="w">${esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`).join("");
+       <div class="w">${x.wuid ? teamLabelHTML(x.wuid) : esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`).join("");
     highlights.appendChild(t);
   }
 
@@ -6785,7 +6804,7 @@ function panelDraft() {
     const head = [`<span class="bh corner"></span>`];
     for (const sl of slots) {
       const uid = s.uidOf.get(slotOf.get(sl));
-      head.push(`<span class="bh" title="${esc(uid ? nameOf(uid) : "")}">${esc(uid ? nameOf(uid) : "—")}</span>`);
+      head.push(`<span class="bh" title="${esc(uid ? teamNameText(uid) : "")}">${uid ? teamLabelHTML(uid) : "—"}</span>`);
     }
     grid.innerHTML = head.join("");
     for (const rd of rounds) {
@@ -6805,7 +6824,7 @@ function panelDraft() {
         b.innerHTML = `<span class="no">${pk.pick_no}</span>
           <span class="nm">${esc(nm)}</span>
           <span class="mt">${esc(md.position || "")}${scored && row ? ` · ${f1(row.pts)}` : ""}</span>
-          ${traded ? `<span class="via">${esc(nameOf(drafter))}</span>` : ""}`;
+          ${traded ? `<span class="via">${esc(teamNameText(drafter))}</span>` : ""}`;
         b.onclick = () => openPlayer(s, pk, A);
         grid.appendChild(b);
       }
@@ -6835,7 +6854,7 @@ function panelDraft() {
       const mine = A.rows.filter(r => r.uid === m.uid).sort((a, b) => a.pick - b.pick);
       const c = el("div", "dcard");
       c.innerHTML = `<div class="dh">${avatarHTML(m.uid, "sm")}
-          <span class="n">${esc(nameOf(m.uid))}</span>
+          <span class="n">${teamLabelHTML(m.uid)}</span>
           ${scored ? `<span class="tot">${f1(m.pts)}</span>` : ""}</div>`;
       const ul = el("div", "dpicks");
       for (const r of mine) {
@@ -6865,7 +6884,7 @@ function panelDraft() {
       <td class="num">${r.prodRank}</td>
       <td class="num ${r.value >= 0 ? "pos-t" : "neg-t"}"><b>${r.value >= 0 ? "+" : ""}${r.value}</b></td>
       <td class="num">${f1(r.pts)}</td>
-      <td>${r.uid ? esc(nameOf(r.uid)) : "—"}</td></tr>`;
+      <td>${r.uid ? teamLabelHTML(r.uid) : "—"}</td></tr>`;
     const phead = [{ label: "Player" }, { label: "Pick", num: 1, title: "Where he was drafted" },
     { label: "Finished", num: 1, title: "Where he ranked in actual scoring" },
     { label: "Value", num: 1 }, { label: "Points", num: 1 }, { label: "Drafted by" }];
@@ -6879,7 +6898,7 @@ function panelDraft() {
       host.appendChild(tableCard([{ label: "Manager" }, { label: "Picks", num: 1 }, { label: "Points", num: 1 },
       { label: "Best pick" }, { label: "Worst pick" }],
         A.byMgr.map(m => `<tr>
-          <td><span class="nmcell">${avatarHTML(m.uid, "sm")}${esc(nameOf(m.uid))}</span></td>
+          <td><span class="nmcell">${avatarHTML(m.uid, "sm")}${teamLabelHTML(m.uid)}</span></td>
           <td class="num">${m.n}</td><td class="num"><b>${f1(m.pts)}</b></td>
           <td>${m.best ? `${esc(m.best.name)} <span class="pos-t">+${m.best.value}</span>` : "—"}</td>
           <td>${m.worst ? `${esc(m.worst.name)} <span class="neg-t">${m.worst.value}</span>` : "—"}</td></tr>`)));
@@ -6890,7 +6909,7 @@ function panelDraft() {
       A.rows.slice().sort((a, b) => a.pick - b.pick).map(r => `<tr>
         <td class="num">${r.pick}</td><td class="num">${r.round}</td>
         <td>${pill(r)}</td>
-        <td>${r.uid ? esc(nameOf(r.uid)) : "—"}</td>
+        <td>${r.uid ? teamLabelHTML(r.uid) : "—"}</td>
         <td class="num">${scored ? f1(r.pts) : "—"}</td>
         <td class="num ${r.value >= 0 ? "pos-t" : "neg-t"}">${scored ? `${r.value >= 0 ? "+" : ""}${r.value}` : "—"}</td></tr>`)));
   }
@@ -7218,7 +7237,7 @@ function positionRoomsOf(season, rostered) {
           .sort((a, b) => o.rooms[b].rank - o.rooms[a].rank || me.rooms[a].rank - me.rooms[b].rank)[0];
         if (!need) return;
         const top = o.bench[weakest].top;
-        clauses.push(`${nameOf(o.uid)} has the ${k ? `${ord(k + 1)}-deepest` : "deepest"} ${weakest} bench${top ? ` (${top})` : ""}`
+        clauses.push(`${teamNameText(o.uid)} has the ${k ? `${ord(k + 1)}-deepest` : "deepest"} ${weakest} bench${top ? ` (${top})` : ""}`
           + ` and needs ${roomNeed(need)}, where you rank ${ord(me.rooms[need].rank)}`);
         me.partners.push(o.uid);
       });
@@ -7258,7 +7277,7 @@ function roomsSection() {
   for (const r of rows) {
     const row = el("div", "rmrow");
     row.dataset.uid = r.uid;
-    row.innerHTML = `<span class="who">${avatarHTML(r.uid, "sm")}<span class="n">${esc(nameOf(r.uid))}</span></span>`
+    row.innerHTML = `<span class="who">${avatarHTML(r.uid, "sm")}<span class="n">${teamLabelHTML(r.uid)}</span></span>`
       + ROOMS.map(room => {
         const x = r.rooms[room];
         const cls = x.rank <= 3 ? " top" : x.rank > R.n - 3 ? " bot" : "";
@@ -7411,7 +7430,7 @@ function panelPower(model, sim) {
         <span class="mv none"></span>
         ${avatarHTML(r.uid, "sm")}
         <span class="id">
-          <span class="n">${esc(nameOf(r.uid))}</span>
+          <span class="n">${teamLabelHTML(r.uid)}</span>
           <span class="s">projects to ${f1(r.mean)} points a week · ${f1(r.wins)} wins</span>
         </span>
         <span class="sp"></span>
@@ -7421,7 +7440,7 @@ function panelPower(model, sim) {
           <span class="chip"><span class="cv">${r.fromRecord >= 0 ? "+" : ""}${f1(r.fromRecord)}</span><span class="cl">From record</span></span>
           <span class="chip"><span class="cv">${pct(r.playoff)}</span><span class="cl">Playoffs</span></span>
         </span>`;
-      bindTip(row, `<b>${esc(nameOf(r.uid))}</b><br>
+      bindTip(row, `<b>${esc(teamNameText(r.uid))}</b><br>
         projects ${f1(r.mean)} pts a week · ${f1(r.wins)} wins<br>
         makes the playoffs ${pct(r.playoff)} · wins it ${pct(r.title)}`);
       rows.appendChild(row);
@@ -7462,7 +7481,7 @@ function panelPower(model, sim) {
         ${moveHTML(r.move)}
         ${avatarHTML(r.uid, "sm")}
         <span class="id">
-          <span class="n">${esc(nameOf(r.uid))}</span>
+          <span class="n">${teamLabelHTML(r.uid)}</span>
           <span class="s">${blurb ? esc(blurb) : `${r.w}–${r.l}${r.t ? `–${r.t}` : ""} · ${f1(r.pf)} points for`}</span>
         </span>
         <span class="sp">${rankSpark(R.history.get(r.uid), idx + 1, R.n)}</span>
@@ -7472,7 +7491,7 @@ function panelPower(model, sim) {
           <span class="chip"><span class="cv">${pct(r.formPct)}</span><span class="cl">${jx("form", "Form")}</span></span>
           <span class="chip"><span class="cv">${f2(r.score)}</span><span class="cl">${jx("rating", "Rating")}</span></span>
         </span>`;
-      bindTip(row, `<b>${esc(nameOf(r.uid))}</b><br>
+      bindTip(row, `<b>${esc(teamNameText(r.uid))}</b><br>
         all-play ${pct(r.apPct)} · form ${pct(r.formPct)}<br>
         ${f1(r.pf)} points for · ${pct(r.pfNorm)} of the league's range<br>
         rating ${f2(r.score)}${r.move != null ? `<br>${r.move === 0 ? "held" : r.move > 0 ? `up ${r.move}` : `down ${-r.move}`} on week ${wk - 1}` : ""}`);
@@ -7997,14 +8016,14 @@ function renderPicture(host, PP) {
   host._ppSig = pictureSig(PP);
   const { rules, rows } = PP;
   const P = rules.playoffTeams;
-  const nameI = i => nameOf(rows[i].uid);
+  const nameI = i => teamNameText(rows[i].uid);
 
   /* ---- the swing of the week ---- */
   const big = PP.swings[0];
   if (big) {
     const b = el("div", "bigg");
     const line = (i, sw) => `<div class="side">${avatarHTML(rows[i].uid, "sm")}
-      <span class="n">${esc(nameI(i))}</span>
+      <span class="n">${teamLabelHTML(rows[i].uid)}</span>
       <b class="sw ${sw >= 0 ? "pos-t" : "neg-t"}">${esc(ppf(sw))}</b></div>`;
     b.innerHTML = `<div class="k">Biggest swing of week ${esc(String(PP.week))}</div>
       <div class="vs">${line(big.a, big.aSwing)}<span class="x">v</span>${line(big.b, big.bSwing)}</div>
@@ -8047,7 +8066,7 @@ function renderPicture(host, PP) {
       ...seedHeads, { label: "Out", num: 1, title: "Miss the playoffs" },
       { label: "What-if", num: 1, title: `Playoff odds if this team wins / loses its week ${PP.week} game` }],
     sorted.map(r => `<tr data-rid="${esc(String(r.rid))}">
-      <td><span class="nmcell">${avatarHTML(r.uid, "sm")}<span class="ppn"><span class="nm" title="${esc(nameOf(r.uid))}">${esc(nameOf(r.uid))}</span>${clinchBadge(r.clinch)}</span></span></td>
+      <td><span class="nmcell">${avatarHTML(r.uid, "sm")}<span class="ppn"><span class="nm">${teamLabelHTML(r.uid)}</span>${clinchBadge(r.clinch)}</span></span></td>
       <td class="num"><b>${esc(pctf(r.playoff))}</b></td>
       <td class="num">${r.w}–${r.l}${r.t ? `–${r.t}` : ""}</td>
       <td class="num">${f1(r.pf)}</td>
@@ -8066,7 +8085,7 @@ function renderPicture(host, PP) {
         { label: "Worth to the second", num: 1, title: "Playoff probability the second-named team gains by winning" },
         { label: "League-wide move", num: 1, title: "Percentage points of playoff probability that change hands across the league" }],
       PP.swings.map(g => `<tr>
-        <td>${esc(nameI(g.a))} v ${esc(nameI(g.b))}</td>
+        <td>${teamLabelHTML(rows[g.a].uid)} v ${teamLabelHTML(rows[g.b].uid)}</td>
         <td class="num ${g.aSwing >= 0 ? "pos-t" : "neg-t"}">${esc(ppf(g.aSwing))}</td>
         <td class="num ${g.bSwing >= 0 ? "pos-t" : "neg-t"}">${esc(ppf(g.bSwing))}</td>
         <td class="num"><b>${f1(g.total * 100)}</b></td></tr>`)));
@@ -8621,7 +8640,7 @@ function tradeCard(t) {
         `${esc(r.label)}${r.name ? ` → ${esc(r.name)}${r.pos ? ` <span class="pos">${esc(r.pos)}</span>` : ""}` : ""}`,
         r.pts, t.graded && r.priced, r.priced ? null : r.why))).join("");
     d.innerHTML = `<div class="who">${avatarHTML(sd.uid, "sm")}
-        <span class="n">${esc(sd.uid ? nameOf(sd.uid) : "roster " + sd.rid)}</span>
+        <span class="n">${sd.uid ? teamLabelHTML(sd.uid) : esc("roster " + sd.rid)}</span>
         ${t.graded ? `<b class="net ${sd.net >= 0 ? "pos-t" : "neg-t"}">${esc(sgnf(sd.net))}</b>` : ""}</div>
       ${lines ? `<ul class="tlist">${lines}</ul>` : `<div class="tpicks">gave everything, got nothing back</div>`}`;
     sides.appendChild(d);
@@ -8656,7 +8675,7 @@ function renderTrades(host, L, W) {
     const f = el("div", "fleece");
     f.innerHTML = `<div class="k">Biggest fleecing in league history</div>
       <div class="v">${esc(sgnf(t.margin))}</div>
-      <div class="w">${esc(nameOf(w.uid))} took ${esc(loser.uid ? nameOf(loser.uid) : "the other side")} — ${esc(t.season)}, ${t.week === 1 ? "preseason" : "week " + t.week}</div>
+      <div class="w">${esc(teamNameText(w.uid))} took ${esc(loser.uid ? teamNameText(loser.uid) : "the other side")} — ${esc(t.season)}, ${t.week === 1 ? "preseason" : "week " + t.week}</div>
       <div class="c">Got ${esc(got)} (${f1(w.gain)} pts from there on) for ${esc(gave)} (${f1(w.loss)}).</div>`;
     host.appendChild(f);
   }
@@ -8667,7 +8686,7 @@ function renderTrades(host, L, W) {
     { l: "Trades all-time", v: String(L.trades.length), n: `across ${L.seasons.length} season${L.seasons.length === 1 ? "" : "s"}` },
     { l: "Graded", v: String(L.graded.length), n: ungraded ? `${ungraded} can't be scored fairly` : "every one of them" },
     { l: "Points traded", v: f1(L.moved), n: `players after each deal, picks at what they drafted` },
-    { l: "Biggest margin", v: L.fleecing ? sgnf(L.fleecing.margin) : "—", n: L.fleecing ? `${nameOf(L.fleecing.winner.uid)}, ${L.fleecing.season}` : "nothing graded yet" },
+    { l: "Biggest margin", v: L.fleecing ? sgnf(L.fleecing.margin) : "—", n: L.fleecing ? `${teamNameText(L.fleecing.winner.uid)}, ${L.fleecing.season}` : "nothing graded yet" },
   ].map(t => `<div class="tile"><div class="l">${esc(t.l)}</div><div class="v">${esc(t.v)}</div><div class="n">${esc(t.n)}</div></div>`).join("");
   host.appendChild(tiles);
 
@@ -8683,7 +8702,7 @@ function renderTrades(host, L, W) {
       { label: "W–L", num: 1, title: "Trades won and lost by more than 25 points" },
       { label: "Best", cls: "deal" }, { label: "Worst", cls: "deal" }],
       L.byMgr.map(m => `<tr>
-        <td><span class="nmcell">${avatarHTML(m.uid, "sm")}${esc(nameOf(m.uid))}</span></td>
+        <td><span class="nmcell">${avatarHTML(m.uid, "sm")}${teamLabelHTML(m.uid)}</span></td>
         <td class="num">${m.n}</td>
         <td class="num ${m.net >= 0 ? "pos-t" : "neg-t"}"><b>${esc(sgnf(m.net))}</b></td>
         <td class="num ${m.playerNet >= 0 ? "pos-t" : "neg-t"}">${esc(sgnf(m.playerNet))}</td>
@@ -8708,7 +8727,7 @@ function renderTrades(host, L, W) {
         <td>${esc(r.label)}${r.times > 1 ? ` <span class="pos">×${r.times}</span>` : ""}</td>
         <td>${esc(r.name)}${r.pos ? ` <span class="pos">${esc(r.pos)}</span>` : ""}</td>
         <td class="num">${r.no}</td>
-        <td>${esc(nameOf(r.uid))}</td>
+        <td>${teamLabelHTML(r.uid)}</td>
         <td class="num">${esc(r.from)}</td>
         <td class="num"><b>${f1(r.pts)}</b></td></tr>`)));
   }
@@ -8728,32 +8747,32 @@ function renderTrades(host, L, W) {
       dead && {
         c: "down", l: "Most money for nothing", v: money(dead.bid),
         w: dead.players.map(x => x.name).join(", "),
-        x: `${nameOf(dead.uid)} won him in ${dead.season} week ${dead.week} with ${dead.weeksLeft} week${dead.weeksLeft === 1 ? "" : "s"} left, and he scored ${f1(dead.pts)}`,
+        x: `${teamNameText(dead.uid)} won him in ${dead.season} week ${dead.week} with ${dead.weeksLeft} week${dead.weeksLeft === 1 ? "" : "s"} left, and he scored ${f1(dead.pts)}`,
       },
       worst && worst.pts > 0 && {
         c: "down", l: "Biggest FAAB overpay", v: `${perPt(W.perPoint(worst))}/pt`,
         w: worst.players.map(x => x.name).join(", "),
-        x: `${nameOf(worst.uid)} paid ${money(worst.bid)} in ${worst.season} week ${worst.week} for ${f1(worst.pts)} points`,
+        x: `${teamNameText(worst.uid)} paid ${money(worst.bid)} in ${worst.season} week ${worst.week} for ${f1(worst.pts)} points`,
       },
       free && {
         c: "up", l: "Best free pickup", v: f1(free.pts),
         w: free.players.map(x => x.name).join(", "),
-        x: `${nameOf(free.uid)} claimed him for nothing, ${free.season} week ${free.week}`,
+        x: `${teamNameText(free.uid)} claimed him for nothing, ${free.season} week ${free.week}`,
       },
       buy && {
         c: "up", l: "Best money spent", v: `${perPt(W.perPoint(buy))}/pt`,
         w: buy.players.map(x => x.name).join(", "),
-        x: `${nameOf(buy.uid)} paid ${money(buy.bid)} for ${f1(buy.pts)} points, ${buy.season} week ${buy.week}`,
+        x: `${teamNameText(buy.uid)} paid ${money(buy.bid)} for ${f1(buy.pts)} points, ${buy.season} week ${buy.week}`,
       },
       { c: "up", l: "FAAB spent, all-time", v: money(W.totalSpent), w: "across the league", x: `${W.spend.length} managers have bid on somebody` },
     ].filter(Boolean).map(x =>
       `<div class="rec ${x.c}"><div class="l">${esc(x.l)}</div><div class="v">${esc(x.v)}</div>
-       <div class="w">${esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`).join("");
+       <div class="w">${x.wuid ? teamLabelHTML(x.wuid) : esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`).join("");
     host.appendChild(recs);
 
     const claimRow = c => `<tr>
       <td>${c.players.map(plabel).join(", ")}</td>
-      <td>${esc(nameOf(c.uid))}</td>
+      <td>${teamLabelHTML(c.uid)}</td>
       <td class="num">${esc(c.season)}</td>
       <td class="num">${c.week}</td>
       <td class="num">$${c.bid}</td>
@@ -8776,7 +8795,7 @@ function renderTrades(host, L, W) {
         { label: "Bid", num: 1 }, { label: "Weeks left", num: 1 }, { label: "Points after", num: 1 }],
         W.deadMoney.map(c => `<tr>
           <td>${c.players.map(plabel).join(", ")}</td>
-          <td>${esc(nameOf(c.uid))}</td>
+          <td>${teamLabelHTML(c.uid)}</td>
           <td class="num">${esc(c.season)}</td>
           <td class="num">${c.week}</td>
           <td class="num"><b>$${c.bid}</b></td>
@@ -8789,7 +8808,7 @@ function renderTrades(host, L, W) {
       [{ label: "Player" }, { label: "Claimed by" }, { label: "Season", num: 1 }, { label: "Wk", num: 1 }, { label: "Points after", num: 1 }],
       W.bestFree.map(c => `<tr>
         <td>${c.players.map(plabel).join(", ")}</td>
-        <td>${esc(nameOf(c.uid))}</td>
+        <td>${teamLabelHTML(c.uid)}</td>
         <td class="num">${esc(c.season)}</td>
         <td class="num">${c.week}</td>
         <td class="num"><b>${f1(c.pts)}</b></td></tr>`)));
@@ -8797,7 +8816,7 @@ function renderTrades(host, L, W) {
     if (W.spend.length) {
       host.appendChild(sechead("FAAB spent, by manager", "Every winning bid a manager has ever made, added up."));
       host.appendChild(barCard(
-        W.spend.map(x => ({ label: nameOf(x.uid), v: x.spent, claims: x.claims })),
+        W.spend.map(x => ({ label: teamNameText(x.uid), v: x.spent, claims: x.claims })),
         v => "$" + Math.round(v),
         it => `<b>${esc(it.label)}</b><br>$${Math.round(it.v)} across ${it.claims} winning bids`));
     }
@@ -9019,7 +9038,7 @@ function tmRosters(season, rostered, weeks, extra = new Map()) {
       const v = tmValue(season, pid, weeks);
       return { pid: String(pid), name: info.n || String(pid), pos: info.p || "?", club: info.t || "", ...v };
     }).sort((a, b) => b.avg - a.avg);
-    return { rid: r.roster_id, uid, name: nameOf(uid), players };
+    return { rid: r.roster_id, uid, name: nameOf(uid), label: teamNameText(uid), players };
   }).sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -9090,7 +9109,8 @@ function renderTradeMachine(host, ctx) {
       const r = rosters.find(x => x.rid === st[key]);
       box.innerHTML = `<div class="bhead"><span class="bt">${key === "a" ? "Team one sends" : "Team two sends"}</span></div>
         <div class="tmsel"><select aria-label="${key === "a" ? "Team one" : "Team two"}">${rosters.map(x =>
-          `<option value="${x.rid}"${x.rid === st[key] ? " selected" : ""}${x.rid === st[key === "a" ? "b" : "a"] ? " disabled" : ""}>${esc(x.name)}</option>`).join("")}</select></div>
+          `<option value="${x.rid}"${x.rid === st[key] ? " selected" : ""}${x.rid === st[key === "a" ? "b" : "a"] ? " disabled" : ""}>${esc(x.label)}</option>`).join("")}</select></div>
+        ${r ? `<div class="tmwho">${teamLabelHTML(r.uid)}</div>` : ""}
         <div class="tmlist">${r ? r.players.map(pl => `<label class="tmp${st[pick].has(pl.pid) ? " on" : ""}">
           <input type="checkbox" value="${esc(pl.pid)}"${st[pick].has(pl.pid) ? " checked" : ""}>
           <span class="pos">${esc(pl.pos)}</span><span class="nm">${esc(pl.name)}<span class="cl">${esc(pl.club)}</span></span>
@@ -9144,7 +9164,7 @@ function tradeResult(ra, rb, give, get, slots, L) {
     const p0 = P(base, i), p1 = P(after, i), t0 = T(base, i), t1 = T(after, i);
     const newIn = new Set(gets.map(p => p.pid));
     return `<div class="board tmres">
-      <div class="bhead"><span class="bt">${esc(r.name)}<span class="bs">gets ${gets.map(p => esc(p.name)).join(", ")} · sends ${gives.map(p => esc(p.name)).join(", ")}</span></span></div>
+      <div class="bhead"><span class="bt">${teamLabelHTML(r.uid)}<span class="bs">gets ${gets.map(p => esc(p.name)).join(", ")} · sends ${gives.map(p => esc(p.name)).join(", ")}</span></span></div>
       <div class="tmstats">
         <div><span class="k">Best lineup</span><span class="n">${f2(before.total)} → ${f2(aft.total)}</span><span class="d ${cls(d)}">${sg(d, 2)} a week</span></div>
         <div><span class="k">Playoffs</span><span class="n">${pc(p0)} → ${pc(p1)}</span><span class="d ${cls(p1 - p0)}">${sg((p1 - p0) * 100)} pts</span></div>
@@ -9155,7 +9175,7 @@ function tradeResult(ra, rb, give, get, slots, L) {
   };
   const wrap = el("div", "tmresults");
   const gA = P(after, ia) - P(base, ia), gB = P(after, ib) - P(base, ib);
-  const nA = esc(ra.name), nB = esc(rb.name), pts = x => `${sg(x * 100)} points`;
+  const nA = esc(ra.label), nB = esc(rb.label), pts = x => `${sg(x * 100)} points`;
   const verdict = gA > 0.005 && gB > 0.005 ? `On these numbers <b>both teams get better</b>: ${nA} ${pts(gA)} of playoff chance, ${nB} ${pts(gB)}.`
     : gA < -0.005 && gB < -0.005 ? `On these numbers <b>this trade makes both teams worse</b>: ${nA} ${pts(gA)} of playoff chance, ${nB} ${pts(gB)}.`
     : Math.abs(gA - gB) < 0.005 ? "On these numbers it is close to even for both teams."
@@ -9272,6 +9292,7 @@ async function boot() {
       powerRankings, weeklyScores, loadBlurbs, blurbFor, panelPower, moveHTML, rankSpark, projectedBoard,
       weekMovers, panelRecaps, allPowerRankings,
       playerModal, openPlayer, posClass, titleOf, ownerLine, coOf, PRIOR,
+      teamLabelHTML, teamNameText, managersText, handleLabelHTML,
       articleCard, articleBlock, articleTeaser, openArticle, articleBySlug, coverHTML, bracketHTML,
       coverSVG, coverKind, COVER_PALETTE,
       POWER_W, FORM_WEEKS, JARGON,

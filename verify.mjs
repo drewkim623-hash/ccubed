@@ -3992,7 +3992,7 @@ if (fxLive.ok) {
     const lb = [...document.querySelectorAll('#liveHost [data-board="live"]')]
       .find(b => /To win the C Cubed championship/.test(b.querySelector(".bt").textContent));
     const txt = r => [...r.querySelectorAll(".price")].map(x => x.querySelector(".o").textContent.trim() + "@" + x.querySelector(".tp").textContent.trim()).join(" ");
-    const board = new Map(lb ? [...lb.querySelectorAll(".orow")].map(r => [r.querySelector(".who .n").textContent.trim(), txt(r)]) : []);
+    const board = new Map(lb ? [...lb.querySelectorAll(".orow")].map(r => [window.__CCUBED.nameOf(r.querySelector(".who .tlab").dataset.uid), txt(r)]) : []);
     const fxm = [...document.querySelectorAll('.fxm .fxm-line-view[data-line="live"] .fxm-mkt[data-market="title"] .fxm-row')]
       .map(r => ({ name: r.dataset.name, t: txt(r) }));
     return { rewound, found: !!lb, n: board.size, fxn: fxm.length, off: fxm.filter(r => board.get(r.name) !== r.t).map(r => `${r.name}: ${r.t} vs ${board.get(r.name)}`) };
@@ -4008,7 +4008,7 @@ if (fxLive.ok) {
     const noteOf = s => { const m = (s || "").match(/ · (Injuries: .*)$/); return m ? m[1].trim() : ""; };
     const board = title => {
       const b = [...document.querySelectorAll('#liveHost [data-board="live"]')].find(x => x.querySelector(".bt").textContent.includes(title));
-      return new Map(b ? [...b.querySelectorAll(".orow")].map(r => [r.querySelector(".who .n").textContent.trim(), noteOf(r.querySelector(".who .s").textContent.replace(/\s+/g, " "))]) : []);
+      return new Map(b ? [...b.querySelectorAll(".orow")].map(r => [window.__CCUBED.nameOf(r.querySelector(".who .tlab").dataset.uid), noteOf(((r.querySelector(".who > .s") || {}).textContent || "").replace(/\s+/g, " "))]) : []);
     };
     const mine = mk => new Map([...document.querySelectorAll(`.fxm .fxm-line-view[data-line="live"] .fxm-mkt[data-market="${mk}"] .fxm-row`)]
       .map(r => [r.dataset.name, ((r.querySelector(".fxm-inj") || {}).textContent || "").replace(/\s+/g, " ").trim()]));
@@ -4959,7 +4959,8 @@ group("Position rooms");
     out.slotsRead = slots.join(",");
 
     // Hints name only real managers, never the manager themself, and only real bench players.
-    const names = new Set([...D.DB.mgr.values()].map(m => m.name));
+    // hints name a team the way the site labels it everywhere else
+    const names = new Set([...D.DB.mgr.keys()].map(D.teamNameText));
     const rostered = await D.loadRostered();
     const playerNames = new Set([...rostered.map.values()].map(p => p.n));
     const HEAD = /^Weakest room: (QB|RB|WR|TE|FLEX) \((\d+)(?:st|nd|rd|th)\)\.(?: (.+)\.)?$/;
@@ -4978,9 +4979,9 @@ group("Position rooms");
       clauses.forEach((c, i) => {
         const k = CLAUSE.exec(c);
         if (!k) { out.badHints.push(`${own}: unparsed clause "${c}"`); return; }
-        if (!names.has(k[1]) || k[1] === own) out.badHints.push(`${own}: names "${k[1]}"`);
+        if (!names.has(k[1]) || k[1] === D.teamNameText(r.uid)) out.badHints.push(`${own}: names "${k[1]}"`);
         if (k[2] !== m[1]) out.badHints.push(`${own}: partner bench is ${k[2]}, weakest is ${m[1]}`);
-        const partner = r.partners[i] && nameOf(r.partners[i]);
+        const partner = r.partners[i] && D.teamNameText(r.partners[i]);
         if (partner !== k[1]) out.badHints.push(`${own}: text names ${k[1]}, data ${partner}`);
         if (k[3] && !playerNames.has(k[3])) out.badHints.push(`${own}: "${k[3]}" is not a rostered player`);
         out.partnered++;
@@ -5130,17 +5131,17 @@ var owners = await page.evaluate(() => {
     total: uids.length,
     // a card must never print the same string twice
     noEcho: uids.every(u => titleOf(u) !== ownerLine(u)),
-    // where there is no team name the card falls back to the owner's handle
-    fallback: uids.filter(u => !teamOf(u)).every(u => titleOf(u) === nameOf(u)),
-    // and then the second line names the co-owner rather than repeating him
-    subs: uids.filter(u => !teamOf(u) && coOf(u).length).every(u => /^with /.test(ownerLine(u))),
+    // where there is no team name the card falls back to both managers' handles
+    fallback: uids.filter(u => !teamOf(u)).every(u => titleOf(u) === [nameOf(u), ...coOf(u)].join(" & ")),
+    // and then there is no second line to repeat them
+    subs: uids.filter(u => !teamOf(u)).every(u => ownerLine(u) === ""),
     named: uids.filter(u => teamOf(u)).every(u => ownerLine(u).includes(nameOf(u))),
   };
 });
 check("all twelve teams are run by two people", owners.withCo === 12, String(owners.withCo));
 check("a card never prints its own title twice", owners.noEcho);
-check("a team with no name falls back to its owner's handle", owners.fallback);
-check("an unnamed team credits its co-owner underneath", owners.subs);
+check("a team with no name falls back to its managers' handles", owners.fallback);
+check("an unnamed team has no second line", owners.subs);
 check("a named team lists both owners underneath", owners.named);
 
 var cards = await page.evaluate(() => {
@@ -5160,6 +5161,60 @@ check("its owners are named underneath",
 /* ------------------------------------------------ every section renders */
 } catch (e) {
   check(`group ran to completion: ${"Co-owned teams"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+}
+try {
+group("Team name labels");
+// Every team on every tab goes through teamLabelHTML(): the Sleeper team name
+// on top, both co-managers underneath. Its own page, so nothing it clicks
+// leaks into the groups after it.
+var lp = await ctx.newPage();
+await lp.goto(BASE, { waitUntil: "domcontentloaded" });
+await lp.waitForFunction(() => document.body.dataset.ready, null, { timeout: 90000 });
+var helper = await lp.evaluate(() => {
+  const { DB, teamLabelHTML, teamNameText, teamOf, nameOf, coOf } = window.__CCUBED;
+  const uids = [...DB.mgr.keys()];
+  const box = document.createElement("div");
+  return {
+    exposed: typeof teamLabelHTML === "function" && typeof teamNameText === "function",
+    ok: uids.every(u => {
+      box.innerHTML = teamLabelHTML(u);
+      const n = box.querySelector(".tlab .tlab-n"), m = box.querySelector(".tlab .tlab-m");
+      const both = [nameOf(u), ...coOf(u)].join(" & ");
+      return teamOf(u)
+        ? n.textContent === teamOf(u) && m && m.textContent === both && teamNameText(u) === teamOf(u)
+        : n.textContent === both && !m && teamNameText(u) === both;
+    }),
+  };
+});
+check("teamLabelHTML and teamNameText are exposed", helper.exposed);
+check("a label leads with the team name and names both managers underneath, once", helper.ok);
+
+var LABEL_TABS = ["home", "scores", "managers", "records", "matchups", "power", "odds", "picture", "draft", "trades", "trade", "recaps"];
+for (const width of [1280, 390]) {
+  await lp.setViewportSize({ width, height: 900 });
+  for (const t of LABEL_TABS) {
+    await lp.click(`#tabs button[data-tab="${t}"]`);
+    await lp.waitForTimeout(1500);
+    // News leads with its index; the team tables live inside the pieces.
+    if (t === "recaps") {
+      const teaser = await lp.$('[data-panel="recaps"] .teaser');
+      if (teaser) { await teaser.click(); await lp.waitForTimeout(1500); }
+    }
+    const r = await lp.evaluate(() => {
+      const vis = [...document.querySelectorAll(".tlab")].filter(e => e.offsetParent);
+      const subs = vis.map(e => e.querySelector(".tlab-m")).filter(Boolean)
+        .map(e => parseFloat(getComputedStyle(e).fontSize));
+      const de = document.documentElement;
+      return { labels: vis.length, subs: subs.length, minSub: subs.length ? Math.min(...subs) : 0, over: de.scrollWidth - de.clientWidth };
+    });
+    if (width === 1280) check(`${t}: teams are labelled by the shared helper`, r.labels > 0 && r.subs > 0, JSON.stringify(r));
+    if (width === 1280) check(`${t}: manager sub-line is at least 11px`, r.minSub >= 11, String(r.minSub));
+    check(`${t}: no horizontal overflow at ${width}px`, r.over <= 0, `${r.over}px`);
+  }
+}
+await lp.close();
+} catch (e) {
+  check(`group ran to completion: ${"Team name labels"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
 group("No DFFL content leaked in");
