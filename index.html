@@ -5263,7 +5263,7 @@ function injuryNote(inj, avail) {
 function panelInjuries() {
   const p = el("div", "panel"); p.dataset.panel = "injuries";
   p.appendChild(sechead("Injuries",
-    "Every rostered player carrying an injury status — bench, IR slot and taxi squad included — and what each one costs his team next week."));
+    "Every rostered player carrying an injury status — bench and IR slot included — and what each one costs his team next week."));
   const host = el("div"); host.id = "injHost";
   host.appendChild(el("div", "wskel", "Reading the injury report…"));
   p.appendChild(host);
@@ -7119,7 +7119,7 @@ const JARGON = {
   rating: `The number the board is sorted by: all-play ${pctW(POWER_W.allPlay)}, form ${pctW(POWER_W.form)}, points for ${pctW(POWER_W.points)} (league top scorer 1, bottom 0) and actual win rate ${pctW(POWER_W.record)}. 1.00 would be best at everything.`,
   po: "Playoff weeks: this score came after the regular season ended, in a playoff or consolation-bracket game.",
   otb: "Off the board: the game is so lopsided (favorite 99.5%+ after the house cut) that no sensible moneyline can be posted, so it's pulled. The spread and total still stand.",
-  injimpact: `How much a starter's absence cuts his team's projected strength next week, in the Odds model's own numbers: his share of the lineup's scoring, times the chance he sits, times the ${pctW(1 - REPLACEMENT)} a bench replacement doesn't make up. Starters only — bench, IR-slot and taxi players aren't in the lineup being priced, so they show 0%.`,
+  injimpact: `How much a starter's absence cuts his team's projected strength next week, in the Odds model's own numbers: his share of the lineup's scoring, times the chance he sits, times the ${pctW(1 - REPLACEMENT)} a bench replacement doesn't make up. Starters only — bench and IR-slot players aren't in the lineup being priced, so they show 0%.`,
   injstatus: `Sleeper's injury tags. Q is questionable (priced to play ${pctW(INJ_AVAIL.Questionable)} of the time), D is doubtful (${pctW(INJ_AVAIL.Doubtful)}), O is out. IR is injured reserve, PUP physically unable to perform, Sus suspended, NA not active, DNR did not report, COV the illness list — all priced as not playing.`,
 
 };
