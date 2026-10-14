@@ -79,6 +79,7 @@ sends anything, and you have no recipient list.
    d. a "teaser" on that article: plain text, at most 600 characters, no HTML or markdown, a
       punchy headline line, two or three lines that make someone tap, and as the last line
       exactly https://drewkim623-hash.github.io/ccubed/#news/<slug>.
+   Name teams as the contract's "Naming a team for a reader" section says.
    Never state a rank or a movement anywhere, including the teaser. Manager names are Sleeper
    display_names exactly as in the data files.
 5. Keep every existing article and week exactly as found. Before committing, save the old
@@ -120,7 +121,8 @@ This routine runs Thursday and Friday. The league gets ONE midweek piece a week,
 5. Write ONE article in recaps.json articles[] with "source": "watch", byline "C Cubed desk",
    and a "teaser": plain text, at most 600 characters, no HTML or markdown, a punchy headline
    line, two or three lines that make someone tap, and as the last line exactly
-   https://drewkim623-hash.github.io/ccubed/#news/<slug>. Never state a rank or a movement.
+   https://drewkim623-hash.github.io/ccubed/#news/<slug>.
+   Name teams as the contract's "Naming a team for a reader" section says. Never state a rank or a movement.
    Do not repeat an angle from any headline or dek already in articles[].
 6. Keep every existing article and week exactly as found. Save the old file
    (git show HEAD:recaps.json > /tmp/was.json), run `node check-recaps.mjs --was /tmp/was.json`
@@ -155,6 +157,7 @@ sends anything.
 4. Add a "teaser": plain text, at most 600 characters, no HTML or markdown, a punchy headline
    line, two or three lines that make someone tap, and as the last line exactly
    https://drewkim623-hash.github.io/ccubed/#news/<slug>.
+   Name teams as the contract's "Naming a team for a reader" section says.
 5. Keep every existing article and week exactly as found. Save the old file
    (git show HEAD:recaps.json > /tmp/was.json), run `node check-recaps.mjs --was /tmp/was.json`
    and fix anything it reports. Commit recaps.json to main and push to main.

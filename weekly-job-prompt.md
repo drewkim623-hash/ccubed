@@ -160,7 +160,14 @@ a toilet bowl in which you advance by LOSING.
 no "last year" to refer to — do not invent any. "The season so far" is the only history there is.
 
 Every team is run by two people (as Sleeper's co-owners read in October 2026). `manager` in the JSON must always be the primary
-owner's Sleeper display_name, spelled exactly as the API returns it. In prose you may name both.
+owner's Sleeper display_name, spelled exactly as the API returns it.
+
+**Naming a team for a reader** follows the site's own label (`teamNameText` in `index.html`): the
+Sleeper team name where one is set, otherwise both managers joined with " & " (e.g. "andychoe03 &
+NathKim"). Use that form in a teaser and the first time a team appears in an article; after that
+the primary display_name is fine. In `bars` rows and `cards` titles put the bare display_name: the
+site turns it into the full team label itself. Team names change, so take them from the
+`team` field of the newest data files, never from the list below.
 
 Teams (primary owner / co-owner / team name where set):
   drewkim / riadmammadov — Lucky Strike (cville)

@@ -56,12 +56,12 @@
    "dek": "andychoe03 and yojarshh swapped six players before week 5. On Sunday the receivers andychoe03 brought in scored 50.1 points, and andychoe03 won by 1.78. Every game in full, below.",
    "byline": "C Cubed desk",
    "standfirst": "6 games · 1,664.72 points · the season's first trade",
-   "teaser": "The Trade Showed Up Right Away\nandychoe03 sent Josh Allen, Saquon Barkley and Zay Flowers to yojarshh for Davante Adams, George Pickens and David Montgomery. On Sunday, Pickens and Adams scored 50.1, and andychoe03 won by 1.78.\nAlso in week 5: both unbeaten teams lost, and four clubs now sit at 4-1.\nhttps://drewkim623-hash.github.io/ccubed/#news/the-trade-showed-up-right-away",
+   "teaser": "The Trade Showed Up Right Away\nandychoe03 & NathKim sent Josh Allen, Saquon Barkley and Zay Flowers to S2? #jtw #imwallin (yojarshh & Jopesii) for Davante Adams, George Pickens and David Montgomery. On Sunday, Pickens and Adams scored 50.1, and andychoe03 & NathKim won by 1.78.\nAlso in week 5: both unbeaten teams lost, and four clubs now sit at 4-1.\nhttps://drewkim623-hash.github.io/ccubed/#news/the-trade-showed-up-right-away",
    "blocks": [
     {
      "type": "p",
      "lead": true,
-     "text": "The first trade of the C Cubed regular season went through in week 5, and it was settled on the scoreboard within days. andychoe03 sent Josh Allen, Saquon Barkley and Zay Flowers to yojarshh for Davante Adams, George Pickens and David Montgomery. On Sunday George Pickens scored 28 and Davante Adams 22.1 for andychoe03, who beat tonypng 127.28 to 125.50 — the closest game of the week."
+     "text": "The first trade of the C Cubed regular season went through in week 5, and it showed up on the scoreboard the same week. andychoe03 & NathKim sent Josh Allen, Saquon Barkley and Zay Flowers to S2? #jtw #imwallin, run by yojarshh and Jopesii, for Davante Adams, George Pickens and David Montgomery. On Sunday George Pickens scored 28 and Davante Adams 22.1 for andychoe03, who beat tonypng 127.28 to 125.50 — the closest game of the week."
     },
     {
      "type": "stat",
@@ -85,9 +85,9 @@
      "type": "cards",
      "items": [
       {
-       "title": "andychoe03 received",
+       "title": "andychoe03",
        "big": "51.2",
-       "sub": "all three started",
+       "sub": "received · all three started",
        "lead": true,
        "rows": [
         {
@@ -105,9 +105,9 @@
        ]
       },
       {
-       "title": "yojarshh received",
+       "title": "yojarshh",
        "big": "46.1",
-       "sub": "two of three started",
+       "sub": "received · two of three started",
        "rows": [
         {
          "label": "Josh Allen",

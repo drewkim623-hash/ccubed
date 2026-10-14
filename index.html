@@ -3235,7 +3235,7 @@ function articleBlock(b) {
     case "cards":
       return `<div class="acards">${(b.items || []).map(c => `
         <div class="acard${c.lead ? " lead" : ""}">
-          <div class="ct">${esc(c.title || "")}</div>
+          <div class="ct">${handleLabelHTML(c.title)}</div>
           <div class="cb">${esc(c.big || "")}</div>
           <div class="cs">${esc(c.sub || "")}</div>
           <div class="cr">${(c.rows || []).map(r =>
