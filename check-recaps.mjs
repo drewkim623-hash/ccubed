@@ -194,6 +194,23 @@ export function recapsProblems(j, was, weekFiles = {}) {
     if (n < TUESDAY_WORDS.min || n > TUESDAY_WORDS.max)
       out.push(`${a.slug}: the Tuesday article is ${n} words; it runs ${TUESDAY_WORDS.min}-${TUESDAY_WORDS.max}`);
   }
+  // A tiers block names its teams by manager handle; every one must be a manager in the week files.
+  const handles = new Set(Object.values(weekFiles).flatMap(w => (w.standings || []).map(s => String(s.manager).toLowerCase())));
+  for (const a of arts) for (const b of a.blocks || []) if (b && b.type === "tiers") {
+    const rows = (b.tiers || []).flatMap(t => (t && t.rows) || []);
+    if (!rows.length) out.push(`${a.slug}: a tiers block has no rows`);
+    for (const r of rows) {
+      if (typeof r.pct !== "number" || !(r.pct >= 0 && r.pct <= 100)) out.push(`${a.slug}: tiers row ${r.team} has pct ${JSON.stringify(r.pct)}, not 0-100`);
+      if (handles.size && !handles.has(String(r.team).toLowerCase())) out.push(`${a.slug}: tiers team ${JSON.stringify(r.team)} is not a manager`);
+      if (r.bye != null && (typeof r.bye !== "number" || !(r.bye >= 0 && r.bye <= 100))) out.push(`${a.slug}: tiers row ${r.team} has bye ${JSON.stringify(r.bye)}, not 0-100`);
+      if (r.status != null && !["bye", "in", "out"].includes(r.status)) out.push(`${a.slug}: tiers row ${r.team} has status ${JSON.stringify(r.status)}`);
+      if (r.seed != null && !(Number.isInteger(r.seed) && r.seed >= 1 && r.seed <= rows.length)) out.push(`${a.slug}: tiers row ${r.team} has seed ${JSON.stringify(r.seed)}`);
+    }
+    const seeds = rows.filter(r => r.seed != null).map(r => r.seed);
+    if (new Set(seeds).size !== seeds.length) out.push(`${a.slug}: a tiers block repeats a seed`);
+    if (b.href != null && !/^(https:\/\/|#)/.test(b.href)) out.push(`${a.slug}: tiers href must be https or #`);
+    if (b.cutAfter && !rows.some(r => r.team === b.cutAfter)) out.push(`${a.slug}: tiers cutAfter ${b.cutAfter} is not one of its rows`);
+  }
   for (const a of (was && was.articles) || [])
     if (!slugs.has(a.slug) && !aliases.has(a.slug)) out.push(`article ${a.slug} was in the old file and is gone`);
   if (!Array.isArray(j && j.weeks)) out.push("weeks[] is missing");
