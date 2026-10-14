@@ -34,52 +34,288 @@
     "h": "{type:'h', eyebrow, text}  - a section heading",
     "stat": "{type:'stat', n, text}  - a pull-out number",
     "bars": "{type:'bars', title, sub, rows:[{label, sub, value, group}]}  - diverging bars about zero; group 1-3 picks the colour",
+    "tiers": "{type:'tiers', kicker?, title, sub, tiers:[{name, range, rows:[{team, pct, rec, seed?, status?, bye?}]}], cutAfter, note, href?, link?}  - tier cards in the link-card style, one per tier: avatar, team label, record, a big Playoff % (pct 0-100, shown to one decimal) and a thin bar. team is a manager handle, as in bars labels. Optional per row: seed (1-12, today's), status ('bye' | 'in' | 'out', if the season ended today), bye (Bye %, 0-100, shown whole). cutAfter is the handle of the row the dashed playoff line sits under; href (https or #) and link add a link under the cards",
     "cards": "{type:'cards', items:[{title, big, sub, lead?, rows:[{label, value}]}]}",
     "picks": "{type:'picks', items:[{slot, name, sub, delta}]}",
-    "note": "{type:'note', text}  - a quiet footnote"
+    "note": "{type:'note', text}  - a quiet footnote",
+    "img": "{type:'img', src, alt, width?, height?, caption?, href?, link?, narrow?}  - an image from img/ in this repo, with alt text; href/link add a link under it; narrow is an optional img/ crop shown on phones (560px and under). Tapping the image opens it full size"
    },
-   "teaser": "plain text, at most 600 characters, no HTML: a headline line, two or three lines that make someone tap, and the piece's own link https://drewkim623-hash.github.io/ccubed/#news/<slug> as the last line",
+   "teaser": "plain text, at most 600 characters, no HTML, exactly these 10 lines: '🚨 C CUBED | WEEK n' (or PRESEASON), blank, the headline in capitals, blank, three lines that each open with an emoji and carry a stat printed in the article, blank, 'Full story 👇', and the card link https://drewkim623-hash.github.io/ccubed/news/<slug>.html (built by node build-cards.mjs)",
    "source": "which routine wrote it: tuesday (recap + column), watch (midweek: preview, odds, waivers, big trade), saturday (odds column)",
-   "kind": "optional: 'opinion' for a piece that argues; the index flags it as a column"
+   "kind": "optional: 'opinion' for a piece that argues; the index flags it as a column",
+   "aliases": "optional: older slugs that still open this piece (#news/<old>, #article/<old>, ?a=<old>). A replaced article keeps its old slug here so shared links keep working"
   }
  },
- "weeks": [],
+ "weeks": [
+  {
+   "season": "2026",
+   "week": 5,
+   "note": "",
+   "lede": "Week 5 was the highest-scoring week of C Cubed's season: 1,664.72 points, 49.18 more than week 4, with five teams past 150, more than in any earlier week. It also ended both unbeaten starts. AB x B (asierbelay) scored 152.36, the most anyone has scored in a loss this season, and fell to yerra x ecj (saiky7) by 6.08; Jug (Lee284) lost to Uzzz uzz uzz (jjnhwg) by 23.48. Four teams now sit at 4-1. The season's first trade, six players between andychoe03 & NathKim and S2? #jtw #imwallin, showed up in the closest game of the week, and Terrorists (edyun1) won for the first time.",
+   "games": [
+    {
+     "headline": "andychoe03 edges tonypng by 1.78 with the trade haul",
+     "winner": "andychoe03",
+     "winner_points": 127.28,
+     "loser": "tonypng",
+     "loser_points": 125.5,
+     "body": "George Pickens (28) and Davante Adams (22.1), both acquired in the week's six-player trade, joined Parker Washington's 30.4 and Jacoby Brissett's 26.28 at the top of the andychoe03 lineup; those four scored 106.78 of the 127.28. Joe Burrow's 24.6 led tonypng, and free-agent pickup Brian Robinson started and scored 1.6. The 1.78 margin is the second-closest of the season. Both teams are 3-2."
+    },
+    {
+     "headline": "saiky7 hands asierbelay its first loss in the week's shootout",
+     "winner": "saiky7",
+     "winner_points": 158.44,
+     "loser": "asierbelay",
+     "loser_points": 152.36,
+     "body": "The 310.8 combined points were the most of any game this week. saiky7 had no starter above Jaxon Smith-Njigba's 22.8, but eight of ten reached double figures. Drake Maye's 39.46 was the best score by any starter in the league and Jaylen Warren added 36.8, but CeeDee Lamb and Roman Wilson combined for 2.9, and asierbelay's 152.36 is the highest losing score of the season."
+    },
+    {
+     "headline": "jjnhwg ends Lee284's unbeaten start",
+     "winner": "jjnhwg",
+     "winner_points": 144.64,
+     "loser": "Lee284",
+     "loser_points": 121.16,
+     "body": "Jared Goff's 28.94, Tyler Warren's 21.4 and Derrick Henry's 21 led eight jjnhwg starters in double figures. Kicker Jason Myers's 23 was the best number for Lee284, ahead of Trey McBride's 21.6, and Trevor Lawrence's 22.74 sat on the bench behind Brock Purdy's 17.16. Both teams are 4-1."
+    },
+    {
+     "headline": "nikhil1123 posts the week's high score, 167.66",
+     "winner": "nikhil1123",
+     "winner_points": 167.66,
+     "loser": "drewkim",
+     "loser_points": 132.2,
+     "body": "Isaiah Likely's 32.4 and Jayden Daniels's 32.26 led five nikhil1123 starters at 18.6 or better, and the total is the third-highest of the season. Christian Watson's 32.3 and James Cook's 22.8 led drewkim, but Jalen Hurts managed 13 at quarterback and four starters finished under eight points. Both teams are 2-3."
+    },
+    {
+     "headline": "jiddyyyyyy wins by 35.76 with nobody at quarterback",
+     "winner": "jiddyyyyyy",
+     "winner_points": 151.4,
+     "loser": "bigmoneyjos",
+     "loser_points": 115.64,
+     "body": "jiddyyyyyy left the quarterback slot empty, and Kirk Cousins, claimed off waivers this week, scored 13.72 on the bench. Jahmyr Gibbs's 37.7, Bucky Irving's 31.5 and Malik Nabers's 29.1 more than covered it. Mike Evans's 26.3 led bigmoneyjos, whose 115.64 was the lowest score of the week; bigmoneyjos is 0-5, the only team without a win."
+    },
+    {
+     "headline": "edyun1's first win comes by the week's widest margin",
+     "winner": "edyun1",
+     "winner_points": 152.56,
+     "loser": "yojarshh",
+     "loser_points": 115.88,
+     "body": "Puka Nacua's 37.7 and Brock Bowers's 23 led seven edyun1 starters in double figures to a 36.68-point win, the widest of the week. Josh Allen scored 31.5 in his first week for yojarshh, but Matthew Stafford's 27.32 sat on the bench, part of the 59.52 points yojarshh left unused, the most of any manager this week. Both teams are 1-4."
+    }
+   ],
+   "around": [
+    {
+     "kind": "trade",
+     "headline": "andychoe03 and yojarshh make the season's first trade",
+     "body": "andychoe03 sent Josh Allen, Saquon Barkley and Zay Flowers to yojarshh for Davante Adams, George Pickens and David Montgomery, the first trade of the season. andychoe03 started all three and got 51.2 points from them; yojarshh started Allen and Flowers for 46.1, and Barkley scored 0 on the bench."
+    },
+    {
+     "kind": "injury",
+     "headline": "Both running backs in the trade are listed out",
+     "body": "Saquon Barkley, now with yojarshh, is out with a hamstring injury, and David Montgomery, now with andychoe03, is out with a groin injury. Montgomery started for andychoe03 and scored 1.1; Barkley sat on the bench and scored 0."
+    },
+    {
+     "kind": "waivers",
+     "headline": "Nobody paid for a player in week 5",
+     "body": "The week's two waiver claims, Kirk Cousins to jiddyyyyyy and Kalif Raymond to yojarshh, both cleared at $0. The biggest bid of the season is still nikhil1123's $55 for Ollie Gordon in week 3; Gordon started this week and scored 14.8."
+    },
+    {
+     "kind": "note",
+     "headline": "andychoe03 made six free-agent moves around the trade",
+     "body": "Besides the trade, andychoe03 added Tyler Higbee, Tre' Harris, Michael Mayer, Jacoby Brissett, the Dallas defense and Mike Washington as free agents. Brissett started at quarterback in Josh Allen's place and scored 26.28; Higbee scored 13.3 on the bench."
+    },
+    {
+     "kind": "race",
+     "headline": "Four teams at 4-1, one without a win",
+     "body": "saiky7, asierbelay, jjnhwg and Lee284 are tied at 4-1, and the site's odds board has all four between 87.9 and 93.2 percent to make the playoffs; the next team, tonypng, is at 66.4. bigmoneyjos is 0-5 and the only winless team after edyun1's first win."
+    }
+   ]
+  }
+ ],
  "articles": [
   {
    "season": "2026",
-   "slug": "the-trade-showed-up-right-away",
+   "slug": "four-teams-at-4-1-and-a-gap-behind-them",
+   "aliases": [
+    "the-trade-showed-up-right-away"
+   ],
    "date": "2026-10-13",
    "kind": "opinion",
    "source": "tuesday",
    "kicker": "2026 · week 5",
-   "headline": "The Trade Showed Up Right Away",
-   "dek": "andychoe03 and yojarshh swapped six players before week 5. On Sunday the receivers andychoe03 brought in scored 50.1 points, and andychoe03 won by 1.78. Every game in full, below.",
+   "headline": "Four Teams at 4-1, and a Gap Behind Them",
+   "dek": "Both unbeaten teams lost in week 5, the highest-scoring week of the season, and four clubs now sit at 4-1. The site's odds board gives each of them at least an 87.9 percent playoff chance and nobody else more than 66.4. Every game in full, below.",
    "byline": "C Cubed desk",
    "standfirst": "6 games · 1,664.72 points · the season's first trade",
-   "teaser": "The Trade Showed Up Right Away\nandychoe03 & NathKim sent Josh Allen, Saquon Barkley and Zay Flowers to S2? #jtw #imwallin (yojarshh & Jopesii) for Davante Adams, George Pickens and David Montgomery. On Sunday, Pickens and Adams scored 50.1, and andychoe03 & NathKim won by 1.78.\nAlso in week 5: both unbeaten teams lost, and four clubs now sit at 4-1.\nhttps://drewkim623-hash.github.io/ccubed/#news/the-trade-showed-up-right-away",
+   "teaser": "🚨 C CUBED | WEEK 5\n\nFOUR TEAMS AT 4-1, AND A GAP BEHIND THEM\n\n💥 Both unbeatens fell. AB x B scored 152.36 and still lost by 6.08\n📊 All four 4-1 teams are at 87.9% or better to make the playoffs. Nobody else tops 66.4%\n🔁 First trade of the year: Pickens 28, Adams 22.1, and andychoe03 won by 1.78\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/four-teams-at-4-1-and-a-gap-behind-them.html",
    "blocks": [
     {
      "type": "p",
      "lead": true,
-     "text": "The first trade of the C Cubed regular season went through in week 5, and it showed up on the scoreboard the same week. andychoe03 & NathKim sent Josh Allen, Saquon Barkley and Zay Flowers to S2? #jtw #imwallin, run by yojarshh and Jopesii, for Davante Adams, George Pickens and David Montgomery. On Sunday George Pickens scored 28 and Davante Adams 22.1 for andychoe03, who beat tonypng 127.28 to 125.50 — the closest game of the week."
+     "text": "Week 5 was the highest-scoring week of C Cubed's first season — 1,664.72 points across six games, 49.18 more than week 4 — and it ended both unbeaten starts. AB x B (asierbelay) scored 152.36, the most anyone has scored in a loss this season, and still went down to yerra x ecj (saiky7) by 6.08. Uzzz uzz uzz (jjnhwg) beat Jug (Lee284) by 23.48. That leaves four teams at 4-1 — saiky7, asierbelay, jjnhwg and Lee284 — and nobody else better than 3-2."
     },
     {
      "type": "stat",
-     "n": "50.1",
-     "text": "Points from George Pickens and Davante Adams in their first week for andychoe03. The winning margin over tonypng was 1.78."
+     "n": "87.9%",
+     "text": "Jug's chance to make the playoffs on the site's odds board after week 5, the lowest of the four 4-1 teams. No other team in the league is above 66.4 percent."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the top",
+     "text": "Both Unbeaten Teams Lost on the Same Sunday"
+    },
+    {
+     "type": "p",
+     "text": "asierbelay and Lee284 came into the week 4-0 and left it 4-1. asierbelay's loss was the harder one to take. Drake Maye's 39.46 was the best score by any starter in the league, Jaylen Warren added 36.8, and the lineup's 152.36 would have beaten three of the six winners on the slate. CeeDee Lamb and Roman Wilson combined for 2.9 points at receiver in a game decided by 6.08."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the board",
+     "text": "Four Teams Above 87 Percent, Then Nobody Above 67"
+    },
+    {
+     "type": "p",
+     "text": "The standings show four teams at 4-1 and two at 3-2. The odds board, read after the week was final, draws a sharper line. saiky7 is at 93.2 percent to make the playoffs, asierbelay at 90.0, jjnhwg at 88.2 and Lee284 at 87.9. The next team, Tshough (tonypng), is at 66.4, 21.5 points below the lowest of the four. andychoe03 & NathKim are at 47.3, and the other six teams are all at 40.3 or lower."
+    },
+    {
+     "type": "p",
+     "text": "Six of twelve teams make the playoffs, and there are nine regular-season weeks left. Nobody is mathematically in or out, and the board says so: 8 and thick (bigmoneyjos), the only team without a win, is still at 2.1 percent. But the four teams at 4-1 are priced as near-certainties, and only one other team is better than a coin flip."
+    },
+    {
+     "type": "tiers",
+     "kicker": "Week 5 · The playoff picture",
+     "title": "Four locks, one line",
+     "sub": "Big number: chance to make the playoffs. Seed and status are if the season ended today; the top two seeds get a bye, and Bye % is the chance of finishing in the top two.",
+     "tiers": [
+      {
+       "name": "Locks",
+       "range": "85% or better",
+       "rows": [
+        {
+         "team": "saiky7",
+         "pct": 93.2,
+         "rec": "4-1",
+         "seed": 1,
+         "status": "bye",
+         "bye": 46
+        },
+        {
+         "team": "asierbelay",
+         "pct": 90,
+         "rec": "4-1",
+         "seed": 2,
+         "status": "bye",
+         "bye": 47
+        },
+        {
+         "team": "jjnhwg",
+         "pct": 88.2,
+         "rec": "4-1",
+         "seed": 4,
+         "status": "in",
+         "bye": 35
+        },
+        {
+         "team": "Lee284",
+         "pct": 87.9,
+         "rec": "4-1",
+         "seed": 3,
+         "status": "in",
+         "bye": 41
+        }
+       ]
+      },
+      {
+       "name": "Bubble",
+       "range": "25% to 85%",
+       "rows": [
+        {
+         "team": "tonypng",
+         "pct": 66.4,
+         "rec": "3-2",
+         "seed": 5,
+         "status": "in",
+         "bye": 14
+        },
+        {
+         "team": "andychoe03",
+         "pct": 47.3,
+         "rec": "3-2",
+         "seed": 6,
+         "status": "in",
+         "bye": 7
+        },
+        {
+         "team": "jiddyyyyyy",
+         "pct": 40.3,
+         "rec": "2-3",
+         "seed": 7,
+         "status": "out"
+        },
+        {
+         "team": "drewkim",
+         "pct": 27.9,
+         "rec": "2-3",
+         "seed": 8,
+         "status": "out"
+        },
+        {
+         "team": "nikhil1123",
+         "pct": 27.3,
+         "rec": "2-3",
+         "seed": 9,
+         "status": "out"
+        }
+       ]
+      },
+      {
+       "name": "Long shots",
+       "range": "under 25%",
+       "rows": [
+        {
+         "team": "yojarshh",
+         "pct": 15.8,
+         "rec": "1-4",
+         "seed": 11,
+         "status": "out"
+        },
+        {
+         "team": "edyun1",
+         "pct": 13.7,
+         "rec": "1-4",
+         "seed": 10,
+         "status": "out"
+        },
+        {
+         "team": "bigmoneyjos",
+         "pct": 2.1,
+         "rec": "0-5",
+         "seed": 12,
+         "status": "out"
+        }
+       ]
+      }
+     ],
+     "cutAfter": "andychoe03",
+     "note": "Playoff % from the site's odds board after week 5; seeds and Bye % from the site's Playoff Picture board after week 5. Six of twelve teams make it; the line marks today's top six, not a clinch. Records from Sleeper.",
+     "href": "https://drewkim623-hash.github.io/ccubed/#picture",
+     "link": "See the live Playoff Picture"
     },
     {
      "type": "h",
      "eyebrow": "the trade",
-     "text": "Both Sides Started What They Got, Almost"
+     "text": "The Season's First Trade Decided a Game Right Away"
     },
     {
      "type": "p",
-     "text": "andychoe03 started all three players from the deal: Pickens 28, Adams 22.1 and Montgomery 1.1, a combined 51.2. yojarshh started two of them. Josh Allen scored 31.5, the best of any yojarshh starter, and Zay Flowers added 14.6. Saquon Barkley sat on yojarshh's bench and scored 0."
+     "text": "The first trade of C Cubed's season went through before week 5. andychoe03 & NathKim sent Josh Allen, Saquon Barkley and Zay Flowers to S2? #jtw #imwallin, run by yojarshh and Jopesii, for Davante Adams, George Pickens and David Montgomery."
     },
     {
      "type": "p",
-     "text": "The quarterback andychoe03 started in Allen's place, Jacoby Brissett, scored 26.28. yojarshh lost to edyun1 152.56 to 115.88, the widest margin of the week, and falls to 1-4. andychoe03 is 3-2."
+     "text": "andychoe03 started all three players from the deal: Pickens scored 28, Adams 22.1 and Montgomery 1.1; Montgomery is now out with a groin injury. Jacoby Brissett, picked up as a free agent the same week, scored 26.28 at quarterback in Allen's place, and andychoe03 beat tonypng by 1.78, the closest game of the week."
+    },
+    {
+     "type": "p",
+     "text": "yojarshh started two of the three. Allen scored 31.5, the best of any yojarshh starter, and Flowers 14.6; Barkley, listed out with a hamstring injury, sat on the bench and scored 0. yojarshh lost to Terrorists (edyun1) by 36.68 and falls to 1-4, with a 15.8 percent playoff chance. andychoe03 is 3-2, at 47.3."
     },
     {
      "type": "cards",
@@ -127,87 +363,7 @@
     },
     {
      "type": "p",
-     "text": "The site's odds board, read after the week was final, has andychoe03 at 47.3 percent to make the playoffs and yojarshh at 15.8. One week is one week; the trade has nine more regular-season weeks to settle."
-    },
-    {
-     "type": "h",
-     "eyebrow": "the top",
-     "text": "Nobody Is Unbeaten Any More"
-    },
-    {
-     "type": "p",
-     "text": "asierbelay and Lee284 came into the week as the league's only unbeaten teams, and both lost. asierbelay scored 152.36, the fourth-best total of the week and higher than eight of the other eleven teams, and still lost to saiky7 by 6.08. It is the only losing score of 150 or more in five weeks this season."
-    },
-    {
-     "type": "p",
-     "text": "That leaves four teams at 4-1 — saiky7, asierbelay, jjnhwg and Lee284 — and bigmoneyjos as the only team without a win. edyun1 won for the first time this season."
-    },
-    {
-     "type": "bars",
-     "title": "Week 5, every score",
-     "sub": "Winners in the first colour, losers in the second",
-     "rows": [
-      {
-       "label": "nikhil1123",
-       "value": 167.66,
-       "group": 1
-      },
-      {
-       "label": "saiky7",
-       "value": 158.44,
-       "group": 1
-      },
-      {
-       "label": "edyun1",
-       "value": 152.56,
-       "group": 1
-      },
-      {
-       "label": "asierbelay",
-       "value": 152.36,
-       "group": 2
-      },
-      {
-       "label": "jiddyyyyyy",
-       "value": 151.4,
-       "group": 1
-      },
-      {
-       "label": "jjnhwg",
-       "value": 144.64,
-       "group": 1
-      },
-      {
-       "label": "drewkim",
-       "value": 132.2,
-       "group": 2
-      },
-      {
-       "label": "andychoe03",
-       "value": 127.28,
-       "group": 1
-      },
-      {
-       "label": "tonypng",
-       "value": 125.5,
-       "group": 2
-      },
-      {
-       "label": "Lee284",
-       "value": 121.16,
-       "group": 2
-      },
-      {
-       "label": "yojarshh",
-       "value": 115.88,
-       "group": 2
-      },
-      {
-       "label": "bigmoneyjos",
-       "value": 115.64,
-       "group": 2
-      }
-     ]
+     "text": "One week settles nothing about a six-player trade. andychoe03 started every piece received and won by 1.78; yojarshh left one of the three on the bench and lost by 36.68."
     },
     {
      "type": "h",
@@ -216,73 +372,89 @@
     },
     {
      "type": "p",
-     "text": "Two games were decided by single digits and three by more than 35. In order of how close they finished:"
+     "text": "Six games produced 1,664.72 points, the most of any week this season, and five teams scored 150 or more, also a season high. Two games were decided by single digits and three by more than 35. They are below in order of how close they finished."
     },
     {
      "type": "h",
-     "eyebrow": "by 1.78",
-     "text": "andychoe03 Holds Off tonypng"
+     "eyebrow": "the closest",
+     "text": "The Trade Haul Holds Off Tshough by 1.78"
     },
     {
      "type": "p",
-     "text": "<b>andychoe03 127.28, tonypng 125.50.</b> Parker Washington led andychoe03 with 30.4, ahead of Pickens' 28, Brissett's 26.28 and Adams' 22.1. Three andychoe03 starters scored under two points, and Tyler Higbee's 13.3 sat on the bench."
+     "text": "<b>andychoe03 127.28, tonypng 125.50.</b> Parker Washington led andychoe03 with 30.4, ahead of George Pickens's 28, Jacoby Brissett's 26.28 and Davante Adams's 22.1. Those four scored 106.78 of the 127.28; the other six starters managed 20.5 between them, and Tyler Higbee's 13.3 sat on the bench."
     },
     {
      "type": "p",
-     "text": "Joe Burrow's 24.6 led tonypng, with D'Andre Swift at 17.3 and Ka'imi Fairbairn at 17. It is the second-closest game of the season, behind tonypng's own 0.94-point win over bigmoneyjos in week 4. Both teams are 3-2."
+     "text": "Joe Burrow's 24.6 led tonypng, with D'Andre Swift at 17.3, Ka'imi Fairbairn at 17 and the Denver defense at 15. Brian Robinson, added as a free agent this week, started and scored 1.6. The 1.78-point margin is the second-closest of the season, behind tonypng's own 0.94-point win over bigmoneyjos in week 4. Both teams are 3-2."
     },
     {
      "type": "h",
-     "eyebrow": "by 6.08",
-     "text": "saiky7 Wins the Week's Shootout"
+     "eyebrow": "the second-closest",
+     "text": "asierbelay Scores 152.36 and Loses"
     },
     {
      "type": "p",
-     "text": "<b>saiky7 158.44, asierbelay 152.36.</b> The 310.8 combined points were the most of any game this week. saiky7 had no starter above 22.8 — Jaxon Smith-Njigba — but seven starters scored at least 18.7, kicker Spencer Shrader's 21 among them."
+     "text": "<b>saiky7 158.44, asierbelay 152.36.</b> The 310.8 combined points were the most in any game this week. saiky7 had no starter above Jaxon Smith-Njigba's 22.8, but eight of ten reached double figures and seven scored at least 18.7, kicker Spencer Shrader's 21 among them."
     },
     {
      "type": "p",
-     "text": "Drake Maye's 39.46 was the best score by any starter in the league this week, and Jaylen Warren added 36.8. CeeDee Lamb scored 2.9 and Roman Wilson 0. Both teams are 4-1."
+     "text": "Maye and Warren gave asierbelay the two best individual scores in the game, and Garrett Wilson added 23.4. Nothing else in the lineup cleared 20, and the Rams defense managed 3. Both teams are 4-1."
     },
     {
      "type": "h",
-     "eyebrow": "by 23.48",
-     "text": "jjnhwg Hands Lee284 Its First Loss"
+     "eyebrow": "the third-closest",
+     "text": "Eight Uzzz uzz uzz Starters Reach Double Figures"
     },
     {
      "type": "p",
-     "text": "<b>jjnhwg 144.64, Lee284 121.16.</b> Jared Goff scored 28.94 for jjnhwg, with Tyler Warren at 21.4 and Derrick Henry at 21. Kicker Jason Myers led Lee284 with 23, ahead of Trey McBride's 21.6 and Ja'Marr Chase's 19.7, while Trevor Lawrence's 22.74 sat on the bench. Both teams are 4-1."
+     "text": "<b>jjnhwg 144.64, Lee284 121.16.</b> Jared Goff scored 28.94, Tyler Warren 21.4 and Derrick Henry 21, and the Houston defense added 16. Alvin Kamara's 2.6 was the only jjnhwg starter under 8.6."
+    },
+    {
+     "type": "p",
+     "text": "Kicker Jason Myers's 23 led Lee284, ahead of Trey McBride's 21.6 and Ja'Marr Chase's 19.7, while Trevor Lawrence scored 22.74 on the bench, 5.58 more than the starter, Brock Purdy. Lee284's bench held 39.34 points in all. Both teams are 4-1."
     },
     {
      "type": "h",
-     "eyebrow": "by 35.46",
-     "text": "nikhil1123 Posts the Week's High"
+     "eyebrow": "the fourth-closest",
+     "text": "n² Posts the Week's High, 167.66"
     },
     {
      "type": "p",
-     "text": "<b>nikhil1123 167.66, drewkim 132.20.</b> Isaiah Likely scored 32.4 and Jayden Daniels 32.26 in the best total of the week. Christian Watson's 32.3 and James Cook's 22.8 led drewkim. Both teams are 2-3."
+     "text": "<b>nikhil1123 167.66, drewkim 132.20.</b> Isaiah Likely scored 32.4 at tight end for n² (nikhil1123) and Jayden Daniels 32.26 at quarterback, and Justin Jefferson, Jameson Williams and Braelon Allen each added between 18.6 and 18.8. It is the best score of the week and the third-best of the season. Ollie Gordon, whose $55 claim in week 3 is still the biggest bid of the season, started and scored 14.8."
+    },
+    {
+     "type": "p",
+     "text": "Christian Watson's 32.3 and James Cook's 22.8 led Lucky Strike (drewkim), but Jalen Hurts managed 13 at quarterback and four starters finished under eight points. Both teams are 2-3."
     },
     {
      "type": "h",
-     "eyebrow": "by 35.76",
-     "text": "jiddyyyyyy Gets 98.3 From Three Starters"
+     "eyebrow": "the second-widest",
+     "text": "Team Meta/Bloomberg Wins With Nobody at Quarterback"
     },
     {
      "type": "p",
-     "text": "<b>jiddyyyyyy 151.40, bigmoneyjos 115.64.</b> Jahmyr Gibbs scored 37.7, Bucky Irving 31.5 and Malik Nabers 29.1. Mike Evans' 26.3 led bigmoneyjos, whose 115.64 was the lowest score of the week. jiddyyyyyy is 2-3; bigmoneyjos is 0-5."
+     "text": "<b>jiddyyyyyy 151.40, bigmoneyjos 115.64.</b> Team Meta/Bloomberg (jiddyyyyyy) started nobody at quarterback: Sleeper shows the slot empty and scoring 0, while Kirk Cousins, claimed off waivers this week for $0, scored 13.72 on the bench. It did not matter. Jahmyr Gibbs scored 37.7, Bucky Irving 31.5 and Malik Nabers 29.1, 98.3 points from three starters, and the San Francisco defense added 20."
+    },
+    {
+     "type": "p",
+     "text": "Mike Evans's 26.3 led bigmoneyjos, whose 115.64 was the lowest score of the week. bigmoneyjos is 0-5, the only team without a win; jiddyyyyyy is 2-3."
     },
     {
      "type": "h",
-     "eyebrow": "by 36.68",
-     "text": "edyun1 Gets Its First Win"
+     "eyebrow": "the widest",
+     "text": "Terrorists Get Their First Win"
     },
     {
      "type": "p",
-     "text": "<b>edyun1 152.56, yojarshh 115.88.</b> Puka Nacua scored 37.7 and Brock Bowers 23 in the widest margin of the week. Allen's 31.5 led yojarshh, and Matthew Stafford's 27.32 sat on the bench. Both teams are 1-4."
+     "text": "<b>edyun1 152.56, yojarshh 115.88.</b> Puka Nacua scored 37.7 and Brock Bowers 23 for edyun1, and seven starters reached double figures in the widest margin of the week, 36.68. It is edyun1's first win of the season."
+    },
+    {
+     "type": "p",
+     "text": "Allen's 31.5 led yojarshh in his first week on the roster, but Romeo Doubs, the Jacksonville defense and Kenyon Sadiq combined for 4.9, and Matthew Stafford's 27.32 sat on the bench. yojarshh's 59.52 bench points were the most any manager left unused this week. Both teams are 1-4."
     },
     {
      "type": "note",
-     "text": "Scores, lineups, records and the trade are from Sleeper for C Cubed's week 5. Playoff odds are the site's own odds board as of the snapshot taken after the week was final. Nobody is quoted."
+     "text": "Scores, lineups, records, transactions and the trade are from Sleeper for C Cubed's week 5; injury designations are from the site's injury report. Playoff odds, seeds and Bye % are the site's own board after the week was final. Nobody is quoted."
     }
    ]
   },
@@ -606,7 +778,7 @@
      "text": "Pre-draft prices are the Fantasy Football Calculator 12-team full-PPR board — 8,234 mock drafts sampled 23–30 August 2026, frozen on draft day and never updated, because the board that matters is the one that existed while people were picking. Twelve team defences and one tight end were not on it and are valued at the board's floor. Roster value counts each manager's best fifteen picks, one per round, so every team is priced on the same number of players. The projection those values feed is calibrated on a borrowed sample; the Odds board sets out exactly which, and why."
     }
    ],
-   "teaser": "Nobody Wanted a Quarterback\nSix backs, six receivers and two tight ends went at the turn, and a top-32 running back was still on the board at pick 101.\nThe C Cubed draft report, pick by pick.\nhttps://drewkim623-hash.github.io/ccubed/#news/2026-draft-report"
+   "teaser": "🚨 C CUBED | PRESEASON\n\nNOBODY WANTED A QUARTERBACK, AND JOSH JACOBS PAID FOR IT\n\n🏈 Josh Allen went at 34 as the first QB. The twelfth went at 122\n📉 Josh Jacobs fell 70 picks past his price, to saiky7 at 101\n⏱️ 26.6 seconds a pick, and 9.65 points a week between the best roster and the worst\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/2026-draft-report.html"
   },
   {
    "season": "2026",
@@ -917,7 +1089,7 @@
      "text": "Every number here comes off the same model the Odds and Power boards use — the same twenty thousand simulated seasons on the same fixed seed, so the figures in this piece and the prices on those boards are the same figures. Rosters are priced against the frozen pre-draft market; the calibration underneath is borrowed from another league's history because C Cubed has none of its own yet, and the Odds board explains what was borrowed and what it is worth. It gets refitted on C Cubed's own football the moment there is some."
     }
    ],
-   "teaser": "Three Divisions, Almost Nothing Between Them\nchaps drafted the best of it. tech drafted the closest. cville drafted the worst, and still owns a top-three seed.\nDivision by division, before a game was played.\nhttps://drewkim623-hash.github.io/ccubed/#news/2026-divisions"
+   "teaser": "🚨 C CUBED | PRESEASON\n\nTHREE DIVISIONS, SIX PLACES, AND ALMOST NOTHING BETWEEN THEM\n\n📊 Best playoff odds in the league: 60.4%. Worst: 41.4%\n🏆 yojarshh is the title favorite at +700\n⚖️ tech's top three: +230, +260 and +270 to win the division\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/2026-divisions.html"
   }
  ]
 }
