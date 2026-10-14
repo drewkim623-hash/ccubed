@@ -54,9 +54,17 @@
   .tabrow{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0}
   .tabrow::-webkit-scrollbar{display:none}
   nav.tabs .wrap{position:relative}
-  nav.tabs .wrap::after{content:"";position:absolute;top:0;bottom:0;right:var(--pad);width:32px;pointer-events:none;
-    background:linear-gradient(90deg,transparent,var(--plane));opacity:0;transition:opacity .14s}
-  nav.tabs .wrap.more::after{opacity:1}
+  /* Scroll hint: fades on whichever edge has more tabs past it, plus a chevron on the right.
+     Purely decorative, so none of it takes taps. Nothing shows unless the row overflows. */
+  nav.tabs .wrap::before,nav.tabs .wrap::after{content:"";position:absolute;top:0;bottom:0;width:48px;pointer-events:none;
+    opacity:0;transition:opacity .18s;z-index:1}
+  nav.tabs .wrap::before{left:var(--pad);background:linear-gradient(270deg,transparent,var(--plane) 80%)}
+  nav.tabs .wrap::after{right:var(--pad);background:linear-gradient(90deg,transparent,var(--plane) 70%)}
+  nav.tabs .wrap.more::after,nav.tabs .wrap.less::before{opacity:1}
+  .tabchev{position:absolute;top:50%;right:calc(var(--pad) + 2px);transform:translateY(-50%);z-index:2;pointer-events:none;
+    width:22px;height:22px;border-radius:999px;display:grid;place-items:center;font-size:17px;font-weight:700;line-height:1;
+    color:var(--ink-2);background:var(--raised);border:1px solid var(--grid);opacity:0;transition:opacity .18s}
+  nav.tabs .wrap.more .tabchev{opacity:1}
   .tabrow button{
     background:transparent;border:1px solid transparent;border-radius:999px;color:var(--muted);
     font-weight:650;font-size:14.5px;padding:8px 15px;cursor:pointer;white-space:nowrap;transition:.14s}
@@ -801,6 +809,23 @@
   .aby{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;font-size:11px;letter-spacing:.13em;
     text-transform:uppercase;color:var(--muted);font-weight:600}
   .aby b{color:var(--ink-2);font-weight:700}
+  /* The teaser: the few lines somebody pastes into the group chat, with the link. */
+  .ateaser{margin:18px 0 0;background:var(--raised);border:1px solid var(--ring);border-left:3px solid var(--blue);
+    border-radius:var(--rs);padding:13px 15px;max-width:66ch;min-width:0}
+  .ateaser .tk{font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;margin:0 0 7px}
+  .ateaser pre{margin:0 0 12px;font:inherit;font-size:14.5px;line-height:1.55;color:var(--ink-2);
+    white-space:pre-wrap;overflow-wrap:anywhere}
+  .ateaser .tact{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .copytxt{background:var(--blue);color:#fff;border:0;border-radius:999px;padding:10px 17px;min-height:44px;
+    font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+  .copytxt:hover{filter:brightness(1.08)}
+  .copytxt:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+  .ateaser .say{font-size:13.5px;color:var(--ink-2);font-weight:600}
+  .ateaser textarea{display:block;width:100%;box-sizing:border-box;margin-top:10px;font:inherit;font-size:14px;
+    line-height:1.5;padding:10px;border:1px solid var(--ring);border-radius:var(--rs);background:var(--surface);
+    color:var(--ink);resize:vertical}
+  .ateaser textarea[hidden]{display:none}
   .abd > .apara,.abd > .ahead,.abd > .astat,.abd > .anote{max-width:66ch}
   .apara{font-size:16.5px;line-height:1.7;color:var(--ink-2);margin:0 0 17px;text-wrap:pretty}
   .apara b{color:var(--ink);font-weight:750}
@@ -1147,7 +1172,7 @@
   </div>
 </header>
 
-<nav class="tabs"><div class="wrap"><div class="tabrow" id="tabs" role="tablist"></div></div></nav>
+<nav class="tabs"><div class="wrap"><div class="tabrow" id="tabs" role="tablist"></div><span class="tabchev" aria-hidden="true">›</span></div></nav>
 
 <main class="wrap">
   <div id="loader">
@@ -1814,7 +1839,7 @@ const TABS = [
 ];
 // Tabs that are gone, and where their old links land now. The Playoff Picture
 // replaced the Race tab; the Trade Machine was retired in favour of Trades.
-const TAB_ALIASES = { race: "picture", trade: "trades", machine: "trades" };
+const TAB_ALIASES = { race: "picture", trade: "trades", machine: "trades", "trade-machine": "trades" };
 function buildTabs() {
   const bar = $("#tabs"); bar.innerHTML = "";
   TABS.forEach(t => {
@@ -1828,12 +1853,38 @@ function buildTabs() {
     bar.dataset.hint = "1";
     bar.addEventListener("scroll", tabHint, { passive: true });
     window.addEventListener("resize", tabHint, { passive: true });
+    setTimeout(tabNudge, 700);
   }
 }
-/** Fades the right edge of the tab row while there are more tabs off to the right. */
+/**
+ * Fades whichever edge of the tab row has tabs past it: the right (with a
+ * chevron) until the row is scrolled to its end, the left once it's scrolled
+ * past its start. A row that fits shows neither.
+ */
 function tabHint() {
+  const bar = $("#tabs"), w = bar.parentElement;
+  const over = bar.scrollWidth > bar.clientWidth + 2;
+  w.classList.toggle("over", over);
+  w.classList.toggle("more", over && bar.scrollLeft + bar.clientWidth < bar.scrollWidth - 2);
+  w.classList.toggle("less", over && bar.scrollLeft > 2);
+}
+/**
+ * The first time somebody sees a row that scrolls, slide it a little and back
+ * so it's obvious there is more. Once per visitor, and never under reduced motion.
+ */
+const TAB_NUDGE_KEY = "tabNudgeSeen";
+function tabNudge() {
   const bar = $("#tabs");
-  bar.parentElement.classList.toggle("more", bar.scrollLeft + bar.clientWidth < bar.scrollWidth - 2);
+  if (bar.scrollWidth <= bar.clientWidth + 2) return;
+  let seen = false;
+  try { seen = localStorage.getItem(TAB_NUDGE_KEY) === "1"; } catch (e) { /* private mode: just nudge */ }
+  if (seen) { document.body.dataset.tabNudge = "seen"; return; }
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) { document.body.dataset.tabNudge = "reduced"; return; }
+  try { localStorage.setItem(TAB_NUDGE_KEY, "1"); } catch (e) { /* fine */ }
+  document.body.dataset.tabNudge = "ran";
+  const start = bar.scrollLeft;
+  bar.scrollTo({ left: start + 40, behavior: "smooth" });
+  setTimeout(() => bar.scrollTo({ left: start, behavior: "smooth" }), 550);
 }
 function show(id) {
   const prof = $('[data-panel="profile"]');
@@ -3289,7 +3340,7 @@ function articleBlock(b) {
     case "cards":
       return `<div class="acards">${(b.items || []).map(c => `
         <div class="acard${c.lead ? " lead" : ""}">
-          <div class="ct">${esc(c.title || "")}</div>
+          <div class="ct">${handleLabelHTML(c.title)}</div>
           <div class="cb">${esc(c.big || "")}</div>
           <div class="cs">${esc(c.sub || "")}</div>
           <div class="cr">${(c.rows || []).map(r =>
@@ -3328,8 +3379,9 @@ let LAST_TAB_ART = "recaps";
  * Open a piece, and give it an address.
  *
  * The weekly email links straight at an article, so an article has to be
- * something a URL can point at. #article/<slug> is that address: it survives a
+ * something a URL can point at. #news/<slug> is that address: it survives a
  * reload, it can be pasted into the league chat, and the back button leaves it.
+ * The older #article/<slug> and ?a=<slug> forms still open the same piece.
  */
 function openArticle(a, keepHash) {
   const cur = [...$("#app").children].find(c => !c.hidden);
@@ -3344,8 +3396,59 @@ function openArticle(a, keepHash) {
   $("#app").appendChild(p);
   for (const c of $("#app").children) c.hidden = c !== p;
   for (const b of $("#tabs").children) b.setAttribute("aria-selected", "false");
-  if (!keepHash && a.slug) history.replaceState(null, "", "#article/" + encodeURIComponent(a.slug));
+  if (!keepHash && a.slug) history.replaceState(null, "", "#news/" + encodeURIComponent(a.slug));
   scrollTo(0, 0);
+}
+
+/** The slug a location names, from #news/<slug>, #article/<slug> or ?a=<slug>; else null. */
+function articleSlugOf(loc) {
+  // The hash wins: once a ?a= piece is open the site stamps #news/<slug> on it,
+  // and a later hash is the newer of the two.
+  const m = /^#(?:news|article)\/(.+)$/.exec(loc.hash || "");
+  if (m) return decodeURIComponent(m[1]);
+  return new URLSearchParams(loc.search).get("a") || null;
+}
+
+/**
+ * The teaser: a headline, a couple of lines and the piece's own link, written
+ * to be pasted into the group chat as it stands. Plain text in, plain text out.
+ */
+function teaserBox(a) {
+  const box = el("div", "ateaser");
+  box.innerHTML = `<p class="tk">Teaser · for the group chat</p>
+    <pre></pre>
+    <div class="tact">
+      <button type="button" class="copytxt" aria-label="Copy the teaser for ${esc(a.headline || "this article")}">Copy teaser</button>
+      <span class="say" role="status" aria-live="polite"></span>
+    </div>
+    <textarea readonly hidden rows="6" aria-label="Teaser, selected for copying"></textarea>`;
+  box.querySelector("pre").textContent = a.teaser;
+  box.querySelector(".copytxt").onclick = () => copyTeaser(box, a.teaser);
+  return box;
+}
+
+/**
+ * Clipboard first. If the browser refuses (no permission, an insecure origin,
+ * an old WebView), show the text in a readonly textarea already selected, so
+ * one more copy gesture does it.
+ */
+async function copyTeaser(box, text) {
+  const say = box.querySelector(".say"), ta = box.querySelector("textarea");
+  say.textContent = "";
+  try {
+    if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error("no clipboard");
+    await navigator.clipboard.writeText(text);
+    ta.hidden = true;
+    say.textContent = "Copied. Paste it into the group chat.";
+  } catch (e) {
+    ta.value = text;
+    ta.rows = Math.min(12, text.split("\n").length + 1);
+    ta.hidden = false;
+    ta.focus();
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    say.textContent = "Couldn't copy automatically. The text below is selected: copy it now.";
+  }
 }
 
 /** Find a published piece by its slug, for a link that names one. */
@@ -3371,6 +3474,7 @@ function articleCard(a, full) {
         ${a.standfirst ? `<span>${esc(a.standfirst)}</span>` : ""}</div>
     </header>
     <div class="abd">${(a.blocks || []).map(articleBlock).join("")}</div>`;
+  if (full && a.teaser) box.querySelector(".ahdr").appendChild(teaserBox(a));
   const hero = box.querySelector(".cover.big");
   if (hero) hero._art = a;   // for the redraw when the window crosses COVER_WIDE_MQ
   return box;
@@ -9375,31 +9479,33 @@ async function boot() {
     // Two ways to name a piece. ?a=<slug> is what the email uses: Gmail proxies
     // every outbound link through google.com/url, and a bare fragment on the end
     // of that is what makes it stop and show a Redirect Notice instead of just
-    // going there. A query survives the round trip cleanly. #article/<slug> is
-    // what the site itself writes, so in-app links and anything already shared
-    // keep working.
-    const params = new URLSearchParams(location.search);
-    const q = params.get("a"), tab = params.get("t");
-    const want = q ? "article/" + q : (tab || location.hash.replace("#", ""));
-    if (want.startsWith("article/")) {
-      // A link out of the email names a piece. Show the index first so there is
-      // something behind the back button, then open the piece over it.
-      show("recaps");
-      const slug = decodeURIComponent(want.slice("article/".length));
-      // Stamp the article's own address back, so a reload of this link lands
-      // on the piece rather than dropping the reader on the index.
-      articleBySlug(slug).then(a => {
-        if (a) openArticle(a);
-        else show("recaps");
-      });
-    } else {
-      const tabId = TAB_ALIASES[want] || want;
+    // going there. A query survives the round trip cleanly. #news/<slug> is
+    // what the site itself writes and what a teaser links to; the older
+    // #article/<slug> still works, so anything already shared keeps working.
+    const route = () => {
+      const slug = articleSlugOf(location);
+      if (slug) {
+        // A link names a piece. Show the index first so there is something
+        // behind the back button, then open the piece over it, stamping its
+        // own #news/ address back so a reload lands on the piece.
+        show("recaps");
+        return articleBySlug(slug).then(a => {
+          if (a) openArticle(a);
+          else show("recaps");
+        });
+      }
+      const want = new URLSearchParams(location.search).get("t") || location.hash.replace("#", "");
+      const tabId = want === "news" ? "recaps" : (TAB_ALIASES[want] || want);
       show(TABS.some(t => t.id === tabId) ? tabId : "home");
-    }
-    // A retired tab's hash typed or followed while the page is open redirects too.
-    window.addEventListener("hashchange", () => {
-      const h = location.hash.replace("#", "");
-      if (TAB_ALIASES[h]) show(TAB_ALIASES[h]);
+    };
+    route();
+    // A #news/<slug> link pasted into a tab that already has the site open
+    // changes only the hash; follow it. replaceState (what the site itself
+    // uses) never fires this, so the tabs do not bounce.
+    addEventListener("hashchange", () => {
+      if (/^#(?:news|article)\//.test(location.hash)) route();
+      // A retired tab's hash (old Trade Machine, Race) redirects too.
+      else if (TAB_ALIASES[location.hash.slice(1)]) show(TAB_ALIASES[location.hash.slice(1)]);
     });
     $("#footNote").textContent = DB.state ? ` Currently NFL ${DB.state.season}, week ${DB.state.week}.` : "";
     window.__CCUBED = {
@@ -9415,6 +9521,7 @@ async function boot() {
       playerModal, openPlayer, posClass, titleOf, ownerLine, coOf, PRIOR,
       teamLabelHTML, teamNameText, managersText, handleLabelHTML,
       articleCard, articleBlock, articleTeaser, openArticle, articleBySlug, coverHTML, bracketHTML,
+      articleSlugOf, teaserBox, copyTeaser,
       coverSVG, coverKind, COVER_PALETTE,
       POWER_W, FORM_WEEKS, JARGON,
       positionRooms: roomsOnce().rows, positionRoomsOf, roomsOnce, roomsSection, ROOMS,
