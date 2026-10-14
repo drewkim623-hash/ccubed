@@ -4,7 +4,7 @@
  *
  *   data/odds-history.json = { _comment, generated,
  *     weeks: { "<season>-<week>": [ { at, a, b, pA, aPts, bPts, settled }, ... ] },
- *     teamWeeks: { "<season>-<week>": [ { at, uid, rid, manager, playoff, title }, ... ] } }
+ *     teams: { "<season>-<week>": [ { at, uid, manager, playoff, title }, ... ] } }
  *
  * No I/O here; test-odds-history.mjs exercises it directly.
  */
@@ -73,7 +73,7 @@ export function mergeHistory(existing, incoming) {
 
 // ---- each team's odds at the end of each finalized week ----------------------
 //
-//   teamWeeks: { "<season>-<week>": [ { at, uid, rid, manager, playoff, title }, ... ] }
+//   teams: { "<season>-<week>": [ { at, uid, manager, playoff, title }, ... ] }
 //
 // Beside weeks, not in it: weeks keeps the matchup rows exactly as DFFL writes
 // them. playoff and title are the snapshot's playoffNow and titleNow, copied
@@ -93,7 +93,7 @@ export function teamRowsFromSnapshot(snap) {
   const at = snap.generated || null;
   return {
     key: `${snap.season}-${week}`,
-    rows: teams.map(t => ({ at, uid: t.uid, rid: t.rid ?? null, manager: t.manager ?? null, playoff: t.playoffNow, title: t.titleNow })),
+    rows: teams.map(t => ({ at, uid: t.uid, manager: t.manager ?? null, playoff: t.playoffNow, title: t.titleNow })),
   };
 }
 
@@ -101,8 +101,8 @@ export function teamRowsFromSnapshot(snap) {
 // running a week again never duplicates it. Returns { out, changed }.
 export function setTeamWeek(existing, key, rows) {
   const base = existing && typeof existing === "object" ? existing : {};
-  const prev = base.teamWeeks && typeof base.teamWeeks === "object" && !Array.isArray(base.teamWeeks) ? base.teamWeeks : {};
+  const prev = base.teams && typeof base.teams === "object" && !Array.isArray(base.teams) ? base.teams : {};
   const next = { ...prev, [key]: rows.slice().sort((x, y) => String(x.uid).localeCompare(String(y.uid))) };
-  const out = { ...base, teamWeeks: Object.fromEntries(Object.keys(next).sort().map(k => [k, next[k]])) };
-  return { out, changed: JSON.stringify(prev[key]) !== JSON.stringify(out.teamWeeks[key]) };
+  const out = { ...base, teams: Object.fromEntries(Object.keys(next).sort().map(k => [k, next[k]])) };
+  return { out, changed: JSON.stringify(prev[key]) !== JSON.stringify(out.teams[key]) };
 }

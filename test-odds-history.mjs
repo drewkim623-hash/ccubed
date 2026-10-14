@@ -114,8 +114,8 @@ const BETWEEN = (generated, week, teams, over = {}) =>
 test("teamRowsFromSnapshot: only a between-weeks reading, keyed by the week just finished", () => {
   const teams = [TEAM("a", 0.6, 0.2), TEAM("b", 0.4, 0.1)];
   assert.deepEqual(teamRowsFromSnapshot(BETWEEN("T", 6, teams)), { key: "2026-5", rows: [
-    { at: "T", uid: "a", rid: 1, manager: "a", playoff: 0.6, title: 0.2 },
-    { at: "T", uid: "b", rid: 1, manager: "b", playoff: 0.4, title: 0.1 },
+    { at: "T", uid: "a", manager: "a", playoff: 0.6, title: 0.2 },
+    { at: "T", uid: "b", manager: "b", playoff: 0.4, title: 0.1 },
   ] });
   assert.equal(teamRowsFromSnapshot(BETWEEN("T", 6, teams, { liveWeek: 6 })), null, "a week is live");
   assert.equal(teamRowsFromSnapshot(BETWEEN("T", 6, teams, { decided: 4 })), null, "a game of week 5 is not decided");
@@ -125,15 +125,15 @@ test("teamRowsFromSnapshot: only a between-weeks reading, keyed by the week just
 });
 
 test("setTeamWeek replaces a week whole and leaves the rest of the file alone", () => {
-  const T = (uid, playoff) => ({ at: "t", uid, rid: 1, manager: uid, playoff, title: 0 });
+  const T = (uid, playoff) => ({ at: "t", uid, manager: uid, playoff, title: 0 });
   const existing = FILE({ "2026-5": [ROW("2026-10-01T00:00:00Z", "a", "b", 0.5)] });
   const one = setTeamWeek(existing, "2026-5", [T("b", 0.4), T("a", 0.6)]);
   assert.equal(one.changed, true);
   assert.deepEqual(one.out.weeks, existing.weeks);
-  assert.deepEqual(one.out.teamWeeks["2026-5"].map(x => x.uid), ["a", "b"]);
+  assert.deepEqual(one.out.teams["2026-5"].map(x => x.uid), ["a", "b"]);
   const two = setTeamWeek(one.out, "2026-5", [T("a", 0.9), T("b", 0.1)]);
   assert.equal(two.changed, true);
-  assert.deepEqual(two.out.teamWeeks["2026-5"].map(x => x.playoff), [0.9, 0.1]);
+  assert.deepEqual(two.out.teams["2026-5"].map(x => x.playoff), [0.9, 0.1]);
   const three = setTeamWeek(two.out, "2026-5", [T("b", 0.1), T("a", 0.9)]);
   assert.equal(three.changed, false);
   assert.equal(JSON.stringify(three.out), JSON.stringify(two.out));
@@ -218,13 +218,13 @@ test("end to end: a finalized week's team rows are written once and replaced on 
 
   write(repo, "data/odds-snapshot.json", BETWEEN("2026-10-14T11:00:00.000Z", 6, [TEAM("a", 0.7, 0.3), TEAM("b", 0.3, 0.05)]));
   assert.equal(run(repo).status, 0);
-  assert.deepEqual(hist().teamWeeks["2026-5"].map(x => [x.uid, x.playoff, x.at]),
+  assert.deepEqual(hist().teams["2026-5"].map(x => [x.uid, x.playoff, x.at]),
     [["a", 0.7, "2026-10-14T11:00:00.000Z"], ["b", 0.3, "2026-10-14T11:00:00.000Z"]]);
 
-  // Mid-week readings add nothing to teamWeeks.
+  // Mid-week readings add nothing to teams.
   write(repo, "data/odds-snapshot.json", SNAP("2026-10-16T01:00:00.000Z", 6, [G("a", "b", 0.5)]));
   assert.equal(run(repo).status, 0);
-  assert.deepEqual(Object.keys(hist().teamWeeks), ["2026-5"]);
+  assert.deepEqual(Object.keys(hist().teams), ["2026-5"]);
   assert.equal(hist().weeks["2026-6"].length, 1);
 }));
 
@@ -232,7 +232,7 @@ test("end to end: a corrupt history file is left untouched and the exit code is 
   const repo = join(tmp, "repo");
   initRepo(repo);
   write(repo, "data/odds-snapshot.json", SNAP("2026-09-20T12:00:00.000Z", 2, [G("a", "b", 0.5)]));
-  for (const bad of ['{ "weeks": { "2026-1": [', '{"_comment":"no weeks"}\n', "[]\n", '{"weeks":{"2026-1":{"at":"x"}}}\n', '{"weeks":{},"teamWeeks":{"2026-5":{}}}\n']) {
+  for (const bad of ['{ "weeks": { "2026-1": [', '{"_comment":"no weeks"}\n', "[]\n", '{"weeks":{"2026-1":{"at":"x"}}}\n', '{"weeks":{},"teams":{"2026-5":{}}}\n']) {
     write(repo, "data/odds-history.json", bad);
     const r = run(repo);
     assert.equal(r.status, 0, r.stderr);

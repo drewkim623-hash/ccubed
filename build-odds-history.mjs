@@ -10,9 +10,9 @@
  *
  *   data/odds-history.json = { _comment, generated,
  *     weeks: { "<season>-<week>": [ { at, a, b, pA, aPts, bPts, settled }, ... ] },
- *     teamWeeks: { "<season>-<week>": [ { at, uid, rid, manager, playoff, title }, ... ] } }
+ *     teams: { "<season>-<week>": [ { at, uid, manager, playoff, title }, ... ] } }
  *
- * teamWeeks is each team's playoff and title chance once a week is final, read
+ * teams is each team's playoff and title chance once a week is final, read
  * off the working-tree snapshot when it was taken between weeks (see
  * teamRowsFromSnapshot). Unlike weeks, a week there is REPLACED whole each time
  * it is read again, so it holds the latest between-weeks reading and never
@@ -56,9 +56,9 @@ if (existsSync(OUT)) {
   // replace it with an empty list, so leave everything alone instead.
   const badWeek = Object.keys(existing.weeks).find(k => !Array.isArray(existing.weeks[k]));
   if (badWeek) { warn(`${OUT} week ${badWeek} is not a list; left untouched.`); process.exit(0); }
-  const tw = existing.teamWeeks;
+  const tw = existing.teams;
   if (tw !== undefined && (!tw || typeof tw !== "object" || Array.isArray(tw) || Object.values(tw).some(w => !Array.isArray(w)))) {
-    warn(`${OUT} teamWeeks is not a map of lists; left untouched.`);
+    warn(`${OUT} teams is not a map of lists; left untouched.`);
     process.exit(0);
   }
 }
@@ -109,11 +109,11 @@ if (added > 0 || teamWeek) {
   out._comment = "Written by build-odds-history.mjs from data/odds-snapshot.json: every committed copy git can see plus the working-tree one. " +
     "weeks rows are merged across runs and never removed or rewritten. One row per matchup per snapshot; " +
     "pA is the chance manager a beats manager b as the site priced it at that moment. " +
-    "teamWeeks holds one row per team per finalized week: playoff and title are the site's playoffNow and titleNow " +
+    "teams holds one row per team per finalized week: playoff and title are the site's playoffNow and titleNow " +
     "from a snapshot taken between weeks, and a week there is replaced whole when read again.";
   out.generated = new Date().toISOString();
-  const { _comment, generated, weeks, teamWeeks, ...rest } = out;
-  writeFileSync(OUT, JSON.stringify({ _comment, generated, weeks, teamWeeks, ...rest }, null, 1) + "\n");
+  const { _comment, generated, weeks, teams, ...rest } = out;
+  writeFileSync(OUT, JSON.stringify({ _comment, generated, weeks, teams, ...rest }, null, 1) + "\n");
 }
 console.log(`odds history: ${before} existing rows, ${added} added, ${total} total` +
   (teamWeek ? `; team odds for ${teamWeek} written` : final ? `; team odds for ${final.key} unchanged` : "") +

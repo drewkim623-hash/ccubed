@@ -2979,7 +2979,7 @@ if (!sb.present) {
   check(`group ran to completion: ${"A week is only a result once it has been played"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
-group("Team odds per finalized week (odds-history teamWeeks)");
+group("Team odds per finalized week (odds-history teams)");
 
 /* The weekly job keeps each team's playoff and title chance at the end of each
  * finalized week, for the tier cards' change arrows. One row per team per week,
@@ -2993,32 +2993,32 @@ group("Team odds per finalized week (odds-history teamWeeks)");
 
   const hist = JSON.parse(await readFile(join(ROOT, "data/odds-history.json"), "utf8"));
   const snap = JSON.parse(await readFile(join(ROOT, "data/odds-snapshot.json"), "utf8"));
-  const tw = hist.teamWeeks || {};
+  const tw = hist.teams || {};
   const uids = new Set((snap.teams || []).map(t => t.uid));
   const bad = [];
   for (const [k, rows] of Object.entries(tw)) {
     if (!/^\d{4}-\d{1,2}$/.test(k) || !Array.isArray(rows)) { bad.push(k); continue; }
     const keys = rows.map(x => Object.keys(x).join(","));
-    if (keys.some(s => s !== "at,uid,rid,manager,playoff,title")) bad.push(`${k}: keys`);
+    if (keys.some(s => s !== "at,uid,manager,playoff,title")) bad.push(`${k}: keys`);
     if (rows.some(x => !uids.has(x.uid))) bad.push(`${k}: unknown uid`);
     if (new Set(rows.map(x => x.uid)).size !== rows.length || rows.length !== uids.size) bad.push(`${k}: ${rows.length} rows`);
     if (rows.some(x => !(x.playoff >= 0 && x.playoff <= 1 && x.title >= 0 && x.title <= x.playoff))) bad.push(`${k}: range`);
   }
-  check("every teamWeeks row is { at, uid, rid, manager, playoff, title }, one per team, title ≤ playoff ≤ 1",
+  check("every teams row is { at, uid, manager, playoff, title }, one per team, title ≤ playoff ≤ 1",
     bad.length === 0, bad.join("; "));
   check("the matchup rows (weeks) are still DFFL's shape", hist.weeks && typeof hist.weeks === "object" &&
     Object.values(hist.weeks).every(rows => Array.isArray(rows) && rows.every(x => Object.keys(x).join(",") === "at,a,b,pA,aPts,bPts,settled")));
 
   // Synthetic: write one week twice with different numbers.
-  const T = (uid, playoff, title) => ({ at: "t", uid, rid: 1, manager: uid, playoff, title });
-  const first = setTeamWeek({ weeks: {}, teamWeeks: { "2026-4": [T("a", 0.5, 0.1)] } }, "2026-5", [T("b", 0.4, 0.1), T("a", 0.6, 0.2)]);
+  const T = (uid, playoff, title) => ({ at: "t", uid, manager: uid, playoff, title });
+  const first = setTeamWeek({ weeks: {}, teams: { "2026-4": [T("a", 0.5, 0.1)] } }, "2026-5", [T("b", 0.4, 0.1), T("a", 0.6, 0.2)]);
   const again = setTeamWeek(first.out, "2026-5", [T("a", 0.7, 0.3), T("b", 0.3, 0.05)]);
   const same = setTeamWeek(again.out, "2026-5", [T("b", 0.3, 0.05), T("a", 0.7, 0.3)]);
   check("re-writing a week replaces its rows: no duplicates, new values, other weeks untouched",
-    first.changed && again.changed && again.out.teamWeeks["2026-5"].length === 2 &&
-    again.out.teamWeeks["2026-5"].find(x => x.uid === "a").playoff === 0.7 &&
-    JSON.stringify(again.out.teamWeeks["2026-4"]) === JSON.stringify([T("a", 0.5, 0.1)]) &&
-    Object.keys(again.out.teamWeeks).join() === "2026-4,2026-5", JSON.stringify(again.out.teamWeeks));
+    first.changed && again.changed && again.out.teams["2026-5"].length === 2 &&
+    again.out.teams["2026-5"].find(x => x.uid === "a").playoff === 0.7 &&
+    JSON.stringify(again.out.teams["2026-4"]) === JSON.stringify([T("a", 0.5, 0.1)]) &&
+    Object.keys(again.out.teams).join() === "2026-4,2026-5", JSON.stringify(again.out.teams));
   check("writing the same week with the same numbers is a no-op", !same.changed &&
     JSON.stringify(same.out) === JSON.stringify(again.out));
   check("a reading taken mid-week (a week live) records no team row",
@@ -3039,7 +3039,7 @@ group("Team odds per finalized week (odds-history teamWeeks)");
   }
 }
 } catch (e) {
-  check(`group ran to completion: ${"Team odds per finalized week (odds-history teamWeeks)"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+  check(`group ran to completion: ${"Team odds per finalized week (odds-history teams)"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
 group("The recap guard, and nothing sends");
