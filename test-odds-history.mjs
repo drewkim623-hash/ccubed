@@ -139,6 +139,15 @@ test("setTeamWeek replaces a week whole and leaves the rest of the file alone", 
   assert.equal(JSON.stringify(three.out), JSON.stringify(two.out));
 });
 
+test("week keys sort numerically: 1, 2, 10", () => {
+  const T = uid => ({ at: "t", uid, manager: uid, playoff: 0.5, title: 0 });
+  let file = FILE({});
+  for (const k of ["2026-10", "2026-2", "2026-1"]) file = setTeamWeek(file, k, [T("a")]).out;
+  assert.deepEqual(Object.keys(file.teams), ["2026-1", "2026-2", "2026-10"]);
+  const { out } = mergeHistory(FILE({}), ["2026-10", "2026-2", "2026-1"].map(key => ({ key, row: ROW("2026-09-13T00:00:00Z", "a", "b", 0.5) })));
+  assert.deepEqual(Object.keys(out.weeks), ["2026-1", "2026-2", "2026-10"]);
+});
+
 // ---- end to end -------------------------------------------------------------
 
 const git = (cwd, ...args) => execFileSync("git", args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
