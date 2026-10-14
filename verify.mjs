@@ -5205,10 +5205,13 @@ for (const width of [1280, 390]) {
       const subs = vis.map(e => e.querySelector(".tlab-m")).filter(Boolean)
         .map(e => parseFloat(getComputedStyle(e).fontSize));
       const de = document.documentElement;
-      return { labels: vis.length, subs: subs.length, minSub: subs.length ? Math.min(...subs) : 0, over: de.scrollWidth - de.clientWidth };
+      const cut = vis.map(e => e.querySelector(".tlab-m") || e.querySelector(".tlab-n.tlab-wrap")).filter(Boolean)
+        .filter(e => e.scrollWidth > e.clientWidth + 1 || getComputedStyle(e).textOverflow === "ellipsis").length;
+      return { cut, labels: vis.length, subs: subs.length, minSub: subs.length ? Math.min(...subs) : 0, over: de.scrollWidth - de.clientWidth };
     });
     if (width === 1280) check(`${t}: teams are labelled by the shared helper`, r.labels > 0 && r.subs > 0, JSON.stringify(r));
     if (width === 1280) check(`${t}: manager sub-line is at least 11px`, r.minSub >= 11, String(r.minSub));
+    check(`${t}: manager lines wrap rather than cut off at ${width}px`, r.cut === 0, `${r.cut} cut`);
     check(`${t}: no horizontal overflow at ${width}px`, r.over <= 0, `${r.over}px`);
   }
 }
