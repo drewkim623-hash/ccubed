@@ -5347,8 +5347,17 @@ const INJ_NAMES = ["injuries: the tab reads the published injuries.json and show
     "made-up roster — function and re-implementation agree", "made-up roster — no bench player covers two starters",
     "made-up roster — return date, season-ending and no estimate", "a missing projections file shows a clear empty state",
     "a hurt player projected at 0 uses his last projection above zero, else season PPG; a bye stays 0",
-    "hurt_fallback entries only fill weeks Sleeper projected at 0, with a named source",
-    "every hurt_fallback week a player is out is priced at the fallback (e.g. A.J. Brown, IR)",
+    "last_nonzero and ppg entries exist only for injured rostered players; byes cover every remaining week",
+    "the fallback is used only on 0 projections in non-bye weeks, and every such week a player is out is priced at it",
+    "a FLEX slot takes the best RB/WR/TE; a fixed RB/WR slot never takes another position",
+    "a bench injury that wouldn't start costs 0; one that would costs the lineup drop",
+    "a team with a no-estimate row marks its rest-of-season total partial",
+    "the highlight threshold is read from PTS_LOST",
+    "return info — a real ret date wins over retWeeks",
+    "return info — retWeeks alone gives that many weeks from this week, capped at the last regular-season week",
+    "return info — neither date nor retWeeks keeps the old behaviour",
+    "return info — rows carry retSource, estimated and retNote (null when absent)",
+    "return info — the tab labels each row's return source and tags estimates",
     "at 390px nothing overflows and no text is under 11px",
     "odds code (ODDS BOARD through live repricing) is byte-identical to origin/main",
     "INJ_AVAIL, REPLACEMENT, INJ_FLOOR and the odds functions match origin/main"].map(n => `points lost: ${n}`)];
@@ -5385,7 +5394,7 @@ const injData = await injPage.evaluate(async () => {
     if (!row) { out.missing.push(`${w.rec.n} (${pid})`); continue; }
     if (row.closest(".injteam").dataset.rid !== w.rid) out.misplaced.push(w.rec.n);
     const ret = row.querySelector(".ret").textContent.trim();
-    if (!w.rec.ret) { out.noRet++; if (ret !== "no estimate") out.noRetBad.push(`${w.rec.n}: ${ret}`); }
+    if (!w.rec.ret) { out.noRet++; if (ret !== "no estimate" && w.rec.retWeeks == null) out.noRetBad.push(`${w.rec.n}: ${ret}`); }
     else if (ret !== D.returnLabel(w.rec.ret)) out.retBad.push(`${w.rec.n}: ${ret}`);
   }
   for (const pid of shown.keys()) if (!want.has(pid)) out.extra.push(pid);
@@ -5454,63 +5463,94 @@ const PL = await injPage.evaluate(async () => {
   const season = D.DB.seasons[0], inj = file.map || {}, posMap = ros.map || {};
   const panel = document.querySelector('[data-panel="injuries"]');
   const week = D.DB.state && String(D.DB.state.season) === String(P.season) ? Number(D.DB.state.week) : P.current_week;
-  const FLEX = ["RB", "WR", "TE"];
+  const rosterPositions = season.rosterPositions || [];
+  const TAKES = { QB: ["QB"], RB: ["RB"], WR: ["WR"], TE: ["TE"], K: ["K"], DEF: ["DEF"], FLEX: ["RB", "WR", "TE"],
+    WRRB_FLEX: ["RB", "WR"], REC_FLEX: ["WR", "TE"], SUPER_FLEX: ["QB", "RB", "WR", "TE"] };
+  const takes = s => TAKES[s] || [s];
 
   // The re-implementation. Same definition, written independently of the page.
-  const ref = (r, I, week, opt = {}) => {
-    const last = P.playoff_week_start - 1, pub = Object.keys(P.weeks).map(Number);
+  // o: { P (projections), pos (pid -> position), rp (roster_positions), fallback }
+  const ref = (r, I, week, o = {}) => {
+    const PP = o.P || P, fallback = o.fallback !== false, rp = o.rp || rosterPositions;
+    const last = PP.playoff_week_start - 1, pub = Object.keys(PP.weeks).map(Number);
     const pts = (pid, w) => {
-      const u = P.weeks[w] ? w : (pub.some(x => x < w) ? Math.max(...pub.filter(x => x < w)) : Math.min(...pub));
-      return Number(P.weeks[u][pid] || 0);
+      const u = PP.weeks[w] ? w : (pub.some(x => x < w) ? Math.max(...pub.filter(x => x < w)) : Math.min(...pub));
+      return Number(PP.weeks[u][pid] || 0);
     };
-    // A hurt player at 0 takes the builder's hurt_fallback (last projection above zero, else PPG).
+    // A hurt player at 0 in a week his club plays: latest earlier week in the file above 0,
+    // else last_nonzero, else ppg. A bye stays 0.
     const hpts = (pid, w) => {
       const v = pts(pid, w);
-      if (v > 0) return v;
-      const f = P.hurt_fallback && P.hurt_fallback[pid] && P.hurt_fallback[pid][w];
-      return f ? Number(f[0]) : v;
+      if (v > 0 || !fallback) return v;
+      if (((PP.byes || {})[w] || []).includes(I[pid].t)) return v;
+      for (let u = w - 1; u >= Math.min(...pub); u--) if (PP.weeks[u] && PP.weeks[u][pid] > 0) return PP.weeks[u][pid];
+      if (PP.last_nonzero && PP.last_nonzero[pid] && PP.last_nonzero[pid].pts > 0) return PP.last_nonzero[pid].pts;
+      if (PP.ppg && PP.ppg[pid] > 0) return PP.ppg[pid];
+      return v;
     };
     const clean = a => (a || []).filter(x => x && x !== "0").map(String);
     const st = clean(r.starters), park = [...clean(r.reserve), ...clean(r.taxi)];
     const everyone = [...new Set([...st, ...clean(r.players), ...park])];
-    const pos = pid => (posMap[pid] && posMap[pid].p) || (I[pid] && I[pid].p) || "";
+    const pos = o.pos || (pid => (posMap[pid] && posMap[pid].p) || (I[pid] && I[pid].p) || "");
+    const named = rp.filter(s => s !== "BN" && s !== "IR" && s !== "TAXI");
+    const slotList = named.length ? named : (r.starters || []).filter(x => x && x !== "0").map(pos);
+    const slotOfPid = {};
+    (r.starters || []).forEach((p, i) => { if (p && p !== "0") slotOfPid[p] = named.length ? named[i] : pos(p); });
     const bench = everyone.filter(p => !st.includes(p) && !park.includes(p) && (!I[p] || !I[p].s || I[p].s === "Questionable"));
     const hurt = everyone.filter(p => I[p] && I[p].s);
     const weeksOut = pid => {
       const x = I[pid], ws = [];
       for (let w = week; w <= last; w++) ws.push(w);
-      if (x.ret) return ws.filter(w => P.sundays[w] < x.ret);
+      const isDate = /^\d{4}-\d{2}-\d{2}/.test(String(x.ret || ""));
+      if (!isDate && typeof x.retWeeks === "number") return ws.slice(0, Math.max(0, x.retWeeks));
+      if (isDate) return ws.filter(w => PP.sundays[w] < x.ret);
       if (x.s === "IR" || /season/i.test(x.sev || "")) return ws;
       return null;
     };
-    const assign = (list, w) => {
-      const taken = new Set(list), res = {};
-      const ordered = [...list].sort((a, b) => (st.includes(b) - st.includes(a)) || (hpts(b, w) - hpts(a, w)) || a.localeCompare(b));
-      for (const h of ordered) {
-        const free = bench.filter(b => !taken.has(b) && pts(b, w) > 0);
-        let c = free.filter(b => pos(b) === pos(h));
-        if (!c.length && FLEX.includes(pos(h))) c = free.filter(b => FLEX.includes(pos(b)));
-        c.sort((a, b) => (pts(b, w) - pts(a, w)) || a.localeCompare(b));
-        if (c[0]) taken.add(c[0]);
-        res[h] = { lost: Math.max(0, hpts(h, w) - (c[0] ? pts(c[0], w) : 0)), rep: c[0] || null, hurt: hpts(h, w), repPts: c[0] ? pts(c[0], w) : 0 };
+    // This week: hurt starters, most restrictive slot first, each takes the best unused eligible bench player.
+    const now = {}, taken = new Set();
+    for (const h of hurt.filter(p => st.includes(p)).sort((a, b) => (takes(slotOfPid[a]).length - takes(slotOfPid[b]).length)
+      || (hpts(b, week) - hpts(a, week)) || a.localeCompare(b))) {
+      const c = bench.filter(b => !taken.has(b) && pts(b, week) > 0 && takes(slotOfPid[h]).includes(pos(b)))
+        .sort((a, b) => (pts(b, week) - pts(a, week)) || a.localeCompare(b));
+      if (c[0]) taken.add(c[0]);
+      now[h] = { lost: Math.max(0, hpts(h, week) - (c[0] ? pts(c[0], week) : 0)), rep: c[0] || null, hurt: hpts(h, week),
+        repPts: c[0] ? pts(c[0], week) : 0 };
+    }
+    // Best lineup: slots by fewest eligible positions (then slot order), best unused player above 0.
+    const best = (cands, val) => {
+      const order = slotList.map((s, i) => i).sort((a, b) => (takes(slotList[a]).length - takes(slotList[b]).length) || a - b);
+      const used = new Set(), res = [];
+      for (const i of order) {
+        const c = cands.filter(p => !used.has(p) && val(p) > 0 && takes(slotList[i]).includes(pos(p)))
+          .sort((a, b) => (val(b) - val(a)) || a.localeCompare(b))[0];
+        if (c) used.add(c);
+        res[i] = c ? { pid: c, v: val(c) } : { pid: null, v: 0 };
       }
       return res;
     };
-    const now = assign(hurt.filter(p => st.includes(p)), week);
     const outs = Object.fromEntries(hurt.map(p => [p, weeksOut(p)]));
     const rosLost = Object.fromEntries(hurt.map(p => [p, outs[p] ? 0 : null]));
+    const startsIn = Object.fromEntries(hurt.map(p => [p, []]));
     for (let w = week; w <= last; w++) {
-      const a = assign(hurt.filter(p => outs[p] && outs[p].includes(w)), w);
-      for (const p in a) rosLost[p] += a[p].lost;
+      const out = hurt.filter(p => outs[p] && outs[p].includes(w));
+      if (!out.length) continue;
+      const avail = everyone.filter(p => !park.includes(p) && !out.includes(p));
+      const val = p => (out.includes(p) ? hpts(p, w) : pts(p, w));
+      const W1 = best([...avail, ...out], val), W0 = best(avail, val);
+      const drop = Math.max(0, W1.reduce((s, x) => s + x.v, 0) - W0.reduce((s, x) => s + x.v, 0));
+      const mine = W1.map((x, i) => [x, i]).filter(([x]) => out.includes(x.pid));
+      const m = mine.map(([x, i]) => Math.max(0, x.v - W0[i].v)), tot = m.reduce((s, v) => s + v, 0);
+      mine.forEach(([x], k) => { rosLost[x.pid] += tot > 0 ? drop * m[k] / tot : drop / mine.length; startsIn[x.pid].push(w); });
     }
     return hurt.map(p => ({ pid: p, starter: st.includes(p), tw: now[p] ? now[p].lost : 0, rep: now[p] ? now[p].rep : null,
-      hurtPts: now[p] ? now[p].hurt : hpts(p, week), repPts: now[p] ? now[p].repPts : 0,
-      ros: rosLost[p], nWeeks: outs[p] ? outs[p].length : null, status: I[p].s }));
+      hurtPts: now[p] ? now[p].hurt : hpts(p, week), repPts: now[p] ? now[p].repPts : 0, slot: slotOfPid[p] || null,
+      ros: rosLost[p], nWeeks: outs[p] ? outs[p].length : null, starts: startsIn[p], status: I[p].s }));
   };
   const fmt = v => (v > 0.05 ? "−" + v.toFixed(1) : "0.0");
   const close = (a, b) => (a == null && b == null) || (a != null && b != null && Math.abs(a - b) < 1e-9);
   const out = { week, sundaysOk: true, fnBad: [], domBad: [], totBad: [], sortBad: [], teamSort: [], noEstBad: [], benchBad: [],
-    qBad: [], rows: 0, noEst: 0, q: 0, all: [], wkLabel: true };
+    qBad: [], rows: 0, noEst: 0, q: 0, all: [], wkLabel: true, partialBad: [], biteBad: [] };
   for (let w = week; w < P.playoff_week_start; w++) if (!P.sundays[w]) out.sundaysOk = false;
 
   const teamEls = [...panel.querySelectorAll(".injteam")];
@@ -5518,7 +5558,7 @@ const PL = await injPage.evaluate(async () => {
   for (const r of season.rosters || []) {
     const mine = ref(r, inj, week);
     if (!mine.length) continue;
-    const fn = D.projectedPointsLost(r, new Map(Object.entries(inj)), P, { week, posOf: pid => posMap[pid] && posMap[pid].p });
+    const fn = D.projectedPointsLost(r, new Map(Object.entries(inj)), P, { week, posOf: pid => posMap[pid] && posMap[pid].p, rosterPositions });
     for (const m of mine) {
       const f = fn.rows.find(x => x.pid === m.pid);
       if (!f || !close(f.thisWeek.lost, m.tw) || !close(f.ros.lost, m.ros) || (f.thisWeek.repPid || null) !== m.rep)
@@ -5531,6 +5571,8 @@ const PL = await injPage.evaluate(async () => {
     if (tv !== fmt(twTot) || tr !== fmt(rosTot) || !close(fn.totals.thisWeek, twTot) || !close(fn.totals.ros, rosTot))
       out.totBad.push(`${r.roster_id}: ${tv}/${tr} vs ${fmt(twTot)}/${fmt(rosTot)}`);
     if (!card.querySelector(".tc .k").textContent.includes(`wk ${week}`)) out.wkLabel = false;
+    if (!!card.querySelector(".tc .part") !== mine.some(m => m.ros == null)) out.partialBad.push(r.roster_id);
+    if (card.querySelector(".tc").classList.contains("bite") !== (twTot >= D.PTS_LOST.highlightAt)) out.biteBad.push(r.roster_id);
     shownTeams.push({ el: card, tw: twTot, ros: rosTot });
     const rows = [...card.querySelectorAll(".injp")];
     const byPid = Object.fromEntries(mine.map(m => [m.pid, m]));
@@ -5550,8 +5592,9 @@ const PL = await injPage.evaluate(async () => {
       if (prev && (prev.tw < m.tw - 1e-9 || (close(prev.tw, m.tw) && (prev.ros ?? -1) < (m.ros ?? -1) - 1e-9)))
         out.sortBad.push(`${prev.pid} before ${m.pid}`);
       prev = m;
-      out.all.push({ team: card.querySelector(".bt").textContent, name: (inj[m.pid] || {}).n, pid: m.pid, status: m.status,
-        weeksOut: m.nWeeks, hurt: m.hurtPts, rep: m.rep && ((posMap[m.rep] || {}).n || m.rep), repPts: m.repPts, tw: m.tw, ros: m.ros });
+      out.all.push({ team: card.querySelector(".bt").textContent, rid: r.roster_id, name: (inj[m.pid] || {}).n, pid: m.pid, status: m.status,
+        slot: m.slot, starter: m.starter, weeksOut: m.nWeeks, starts: m.starts, hurt: m.hurtPts,
+        rep: m.rep && ((posMap[m.rep] || {}).n || m.rep), repPts: m.repPts, tw: m.tw, ros: m.ros });
     }
     if (rows.length !== mine.length) out.domBad.push(`${r.roster_id}: ${rows.length} rows vs ${mine.length}`);
   }
@@ -5569,10 +5612,11 @@ const PL = await injPage.evaluate(async () => {
   const [wa, wb, wc] = byPos("WR"), [ra, rb] = byPos("RB"), [qa] = byPos("QB");
   const retIso = P.sundays[week + 2] ? `${P.sundays[week + 2]}` : "2026-12-01";
   const fakeTeam = { starters: [wa, wb, qa], players: [wa, wb, qa, wc, ra, rb], reserve: [], taxi: [] };
+  const fakeRp = ["WR", "FLEX", "QB", "BN", "BN", "BN"];
   const fakeInj = { [wa]: { s: "Out", n: "A", ret: retIso }, [wb]: { s: "Questionable", n: "B" }, [qa]: { s: "Doubtful", n: "Q", sev: "Out for season" },
     [rb]: { s: "IR", n: "R" } };
-  const fr = ref(fakeTeam, fakeInj, week);
-  const ff = D.projectedPointsLost(fakeTeam, fakeInj, P, { week, posOf: pid => posMap[pid] && posMap[pid].p });
+  const fr = ref(fakeTeam, fakeInj, week, { rp: fakeRp });
+  const ff = D.projectedPointsLost(fakeTeam, fakeInj, P, { week, posOf: pid => posMap[pid] && posMap[pid].p, rosterPositions: fakeRp });
   const reps = ff.rows.filter(x => x.thisWeek.repPid).map(x => x.thisWeek.repPid);
   out.fake = {
     agree: fr.every(m => { const f = ff.rows.find(x => x.pid === m.pid); return f && close(f.thisWeek.lost, m.tw) && close(f.ros.lost, m.ros); }),
@@ -5585,45 +5629,138 @@ const PL = await injPage.evaluate(async () => {
     benchZero: (ff.rows.find(x => x.pid === rb) || {}).thisWeek?.lost === 0,
   };
 
-  // The hurt-player fallback, worked by hand: P (RB) and Q (WR) are IR starters
-  // projected at 0. P has a "wk 3" fallback of 14 in week 6 only (week 7 is his
-  // bye: no entry, stays 0); Q falls back to season PPG 11 in both weeks. Bench
-  // R (RB) 4 and S (WR) 3. Expected: this week 14-4 + 11-3 = 18; rest of season
-  // P 10 + 0, Q 8 + 8 = 26. With the setting off: 0 and 0.
+  const rowOf = (L, id) => L.rows.find(x => x.pid === id) || {};
+  const agrees = (L, R) => R.every(m => { const f = L.rows.find(x => x.pid === m.pid);
+    return f && close(f.thisWeek.lost, m.tw) && close(f.ros.lost, m.ros) && (f.thisWeek.repPid || null) === m.rep; });
+
+  // Slots, worked by hand (week 6 only). RB / WR / FLEX starters R1 10, W1 12,
+  // F1 (an RB) 8, all Out. Bench: W2 WR 9, T2 TE 6, T3 TE 4, K1 K 7 — no RB.
+  // The RB slot has nobody (10); the WR slot takes W2 (12-9 = 3), never a TE or
+  // K; the FLEX takes the best RB/WR/TE left, T2 (8-6 = 2), never K1. Total 15.
+  const slP = { season: P.season, current_week: 6, playoff_week_start: 7, sundays: { 6: "2026-10-18" },
+    weeks: { 6: { R1: 10, W1: 12, F1: 8, W2: 9, T2: 6, T3: 4, K1: 7 } } };
+  const slPos = { R1: "RB", W1: "WR", F1: "RB", W2: "WR", T2: "TE", T3: "TE", K1: "K" };
+  const slInj = { R1: { s: "Out", n: "R1" }, W1: { s: "Out", n: "W1" }, F1: { s: "Out", n: "F1" } };
+  const slTeam = { starters: ["R1", "W1", "F1"], players: ["R1", "W1", "F1", "W2", "T2", "T3", "K1"], reserve: [], taxi: [] };
+  const slRp = ["RB", "WR", "FLEX", "BN", "BN", "BN", "BN"];
+  const SL = D.projectedPointsLost(slTeam, slInj, slP, { week: 6, posOf: pid => slPos[pid], rosterPositions: slRp });
+  const SLr = ref(slTeam, slInj, 6, { P: slP, pos: pid => slPos[pid], rp: slRp });
+  out.slots = { agree: agrees(SL, SLr), tw: SL.totals.thisWeek, rb: rowOf(SL, "R1").thisWeek, wr: rowOf(SL, "W1").thisWeek,
+    flex: rowOf(SL, "F1").thisWeek, slot: [rowOf(SL, "R1").slot, rowOf(SL, "W1").slot, rowOf(SL, "F1").slot] };
+
+  // Bench injuries, worked by hand (week 6 only). Slots RB, FLEX; starters S1 RB
+  // 10 and S2 WR 8, both healthy; healthy bench Z RB 5. X (RB, IR slot) 12 and
+  // Y (WR, bench) 2 are out for the season. Best lineup with them: RB X 12, FLEX
+  // S1 10 = 22; without: RB S1 10, FLEX S2 8 = 18. Drop 4, all X's (he's the
+  // only out player in it); Y wouldn't start and costs 0. Both lose 0 this week.
+  const bnP = { season: P.season, current_week: 6, playoff_week_start: 7, sundays: { 6: "2026-10-18" },
+    weeks: { 6: { S1: 10, S2: 8, Z: 5, X: 12, Y: 2 } } };
+  const bnPos = { S1: "RB", S2: "WR", Z: "RB", X: "RB", Y: "WR" };
+  const bnInj = { X: { s: "IR", n: "X" }, Y: { s: "Out", n: "Y", sev: "Out for season" } };
+  const bnTeam = { starters: ["S1", "S2"], players: ["S1", "S2", "Z", "X", "Y"], reserve: ["X"], taxi: [] };
+  const bnRp = ["RB", "FLEX", "BN", "BN", "BN", "IR"];
+  const BN = D.projectedPointsLost(bnTeam, bnInj, bnP, { week: 6, posOf: pid => bnPos[pid], rosterPositions: bnRp });
+  const BNr = ref(bnTeam, bnInj, 6, { P: bnP, pos: pid => bnPos[pid], rp: bnRp });
+  out.bench = { agree: agrees(BN, BNr), X: rowOf(BN, "X").ros?.lost, Y: rowOf(BN, "Y").ros?.lost, tw: BN.totals.thisWeek,
+    ros: BN.totals.ros, xStarts: rowOf(BN, "X").ros?.byWeek?.[0]?.starts, yStarts: rowOf(BN, "Y").ros?.byWeek?.[0]?.starts };
+
+  // The hurt-player fallback, worked by hand: P (RB, club AAA) and Q (WR, club
+  // BBB) are IR starters projected at 0 in weeks 6 and 7. P's last projection
+  // above zero (last_nonzero) is 14, ahead of his PPG 9; week 7 is AAA's bye, so
+  // P stays 0 there. Q has no last_nonzero and falls back to PPG 11 both weeks.
+  // Bench R (RB) 4 and S (WR) 3. Expected: this week 14-4 + 11-3 = 18; rest of
+  // season P 10 + 0, Q 8 + 8 = 26. With the setting off: 0 and 0.
   const fbProj = { season: P.season, current_week: 6, playoff_week_start: 8, sundays: { 6: "2026-10-18", 7: "2026-10-25" },
     weeks: { 6: { P: 0, Q: 0, R: 4, S: 3 }, 7: { P: 0, Q: 0, R: 4, S: 3 } },
-    hurt_fallback: { P: { 6: [14, "wk 3"] }, Q: { 6: [11, "ppg"], 7: [11, "ppg"] } } };
-  const fbInj = { P: { s: "IR", n: "P", p: "RB" }, Q: { s: "IR", n: "Q", p: "WR" } };
+    last_nonzero: { P: { week: 3, pts: 14 } }, ppg: { P: 9, Q: 11 }, byes: { 6: [], 7: ["AAA"] } };
+  const fbInj = { P: { s: "IR", n: "P", p: "RB", t: "AAA" }, Q: { s: "IR", n: "Q", p: "WR", t: "BBB" } };
   const fbPos = { P: "RB", Q: "WR", R: "RB", S: "WR" };
   const fbTeam = { starters: ["P", "Q"], players: ["P", "Q", "R", "S"], reserve: [], taxi: [] };
-  const FB = D.projectedPointsLost(fbTeam, fbInj, fbProj, { week: 6, posOf: pid => fbPos[pid] });
+  const fbRp = ["RB", "WR", "BN", "BN"];
+  const FB = D.projectedPointsLost(fbTeam, fbInj, fbProj, { week: 6, posOf: pid => fbPos[pid], rosterPositions: fbRp });
+  const FBr = ref(fbTeam, fbInj, 6, { P: fbProj, pos: pid => fbPos[pid], rp: fbRp });
   const wasFb = D.PTS_LOST.hurtFallback;
   D.PTS_LOST.hurtFallback = false;
-  const FB0 = D.projectedPointsLost(fbTeam, fbInj, fbProj, { week: 6, posOf: pid => fbPos[pid] });
+  const FB0 = D.projectedPointsLost(fbTeam, fbInj, fbProj, { week: 6, posOf: pid => fbPos[pid], rosterPositions: fbRp });
   D.PTS_LOST.hurtFallback = wasFb;
-  const rowOf = (L, id) => L.rows.find(x => x.pid === id) || {};
   out.fallback = { tw: FB.totals.thisWeek, ros: FB.totals.ros, P: rowOf(FB, "P").ros?.lost, Q: rowOf(FB, "Q").ros?.lost,
+    pBye: rowOf(FB, "P").ros?.byWeek?.find(c => c.week === 7)?.hurt, agree: agrees(FB, FBr),
     off: [FB0.totals.thisWeek, FB0.totals.ros] };
-  // The real file: entries only on 0 weeks, named sources; and every fallback week
-  // a hurt player is out is priced at the fallback value.
+
+  // The real file: last_nonzero / ppg only for injured rostered players, sane
+  // values; byes for every remaining week; and the fallback used exactly on 0
+  // projections in non-bye weeks.
+  const rostered = new Set((season.rosters || []).flatMap(r => [...(r.players || []), ...(r.reserve || []), ...(r.taxi || [])]).map(String));
   out.fbBad = []; out.fbPriced = []; out.fbSeen = 0;
-  for (const [pid, byW] of Object.entries(P.hurt_fallback || {})) for (const [w, v] of Object.entries(byW)) {
-    const own = P.weeks[w] ? P.weeks[w][pid] : undefined;
-    if ((own || 0) > 0 || !(v[0] > 0) || !/^(wk \d+|ppg)$/.test(v[1]) || !(inj[pid] && inj[pid].s)
-      || (/^wk /.test(v[1]) && !(Number(v[1].slice(3)) < Number(w)))) out.fbBad.push(`${pid} wk ${w}`);
-  }
+  for (const [pid, v] of Object.entries(P.last_nonzero || {}))
+    if (!(inj[pid] && inj[pid].s && rostered.has(pid)) || !(v.pts > 0) || !(v.week < P.current_week)) out.fbBad.push(`last_nonzero ${pid}`);
+  for (const [pid, v] of Object.entries(P.ppg || {}))
+    if (!(inj[pid] && inj[pid].s && rostered.has(pid)) || !(v > 0)) out.fbBad.push(`ppg ${pid}`);
+  for (let w = P.current_week; w < P.playoff_week_start; w++) if (P.weeks[w] && !Array.isArray((P.byes || {})[w])) out.fbBad.push(`byes ${w}`);
+  if (!Object.keys(P.last_nonzero || {}).length && !Object.keys(P.ppg || {}).length) out.fbBad.push("no fallback data at all");
+  const pub = Object.keys(P.weeks).map(Number);
+  const raw = (pid, w) => { const u = P.weeks[w] ? w : Math.max(...pub.filter(x => x < w)); return Number(P.weeks[u][pid] || 0); };
   for (const r of season.rosters || []) {
-    const fn = D.projectedPointsLost(r, new Map(Object.entries(inj)), P, { week, posOf: pid => posMap[pid] && posMap[pid].p });
+    const fn = D.projectedPointsLost(r, new Map(Object.entries(inj)), P, { week, posOf: pid => posMap[pid] && posMap[pid].p, rosterPositions });
     for (const x of fn.rows) for (const c of (x.ros && x.ros.byWeek) || []) {
-      const f = P.hurt_fallback && P.hurt_fallback[x.pid] && P.hurt_fallback[x.pid][c.week];
-      if (!f) continue;
-      out.fbSeen++;
-      if (Math.abs(c.hurt - f[0]) > 1e-9) out.fbPriced.push(`${(inj[x.pid] || {}).n} wk ${c.week}: ${c.hurt} vs ${f[0]}`);
+      const v = raw(x.pid, c.week), bye = ((P.byes || {})[c.week] || []).includes(inj[x.pid].t);
+      if (v > 0 || bye) { if (Math.abs(c.hurt - v) > 1e-9) out.fbPriced.push(`${inj[x.pid].n} wk ${c.week}: ${c.hurt} vs raw ${v}`); continue; }
+      let f = null;
+      for (let u = c.week - 1; u >= Math.min(...pub) && f == null; u--) if (P.weeks[u] && P.weeks[u][x.pid] > 0) f = P.weeks[u][x.pid];
+      if (f == null) f = (P.last_nonzero && P.last_nonzero[x.pid] && P.last_nonzero[x.pid].pts) || (P.ppg && P.ppg[x.pid]) || 0;
+      if (f > 0) out.fbSeen++;
+      if (Math.abs(c.hurt - f) > 1e-9) out.fbPriced.push(`${inj[x.pid].n} wk ${c.week}: ${c.hurt} vs ${f}`);
     }
   }
-  const brown = Object.keys(inj).find(id => inj[id].n === "A.J. Brown");
-  out.brownRos = brown ? (season.rosters || []).map(r => D.projectedPointsLost(r, new Map(Object.entries(inj)), P,
-    { week, posOf: pid => posMap[pid] && posMap[pid].p }).rows.find(x => x.pid === brown)).find(Boolean)?.ros?.lost ?? null : null;
+  const lookup = name => { const id = Object.keys(inj).find(k => inj[k].n === name); if (!id) return null;
+    for (const r of season.rosters || []) {
+      const f = D.projectedPointsLost(r, new Map(Object.entries(inj)), P, { week, posOf: pid => posMap[pid] && posMap[pid].p, rosterPositions })
+        .rows.find(x => x.pid === id);
+      if (f) return { rid: r.roster_id, starter: f.starter, slot: f.slot, tw: f.thisWeek.lost, ros: f.ros.lost,
+        starts: f.ros.byWeek.filter(c => c.starts).map(c => c.week), hurt: f.ros.byWeek.map(c => c.hurt) };
+    }
+    return null; };
+  out.named = Object.fromEntries(["A.J. Brown", "Alec Pierce", "De'Von Achane"].map(n => [n, lookup(n)]));
+
+  // Partial tag and highlight threshold on a made-up report (fake starter, no estimate).
+  const sp0 = String(season.rosters.find(r => (r.starters || []).some(p => p && p !== "0")).starters.find(p => p && p !== "0"));
+  const fakeRep = { at: Date.now(), source: "file", map: new Map([[sp0, { s: "Out", n: "Fake Starter", p: "WR", t: "KC" }]]) };
+  const wasHi = D.PTS_LOST.highlightAt, hp = [];
+  for (const t of [0, 1e9]) {
+    D.PTS_LOST.highlightAt = t;
+    const h = document.createElement("div"); D.renderInjuries(h, fakeRep, P);
+    hp.push(!!h.querySelector(".injteam .tc.bite"));
+    if (t === 0) out.fakePartial = !!h.querySelector(".injteam .tc .part");
+  }
+  D.PTS_LOST.highlightAt = wasHi;
+  out.highlight = { at: wasHi, low: hp[0], high: hp[1] };
+
+  // Return info from Research's injury-returns builder, on a real roster's first
+  // four starters: A has a real date (2 weeks) AND retWeeks 1 — the date wins;
+  // B is IR with retWeeks 3 only (3 weeks, not the season); C has neither (old
+  // behaviour: Out, no date = no estimate); E is IR with retWeeks 99 (capped at
+  // the last regular-season week).
+  const rr = season.rosters.find(r => (r.starters || []).filter(p => p && p !== "0").length >= 4);
+  const [A, B, C, E] = rr.starters.filter(p => p && p !== "0").map(String);
+  const lastW = P.playoff_week_start - 1;
+  const rtInj = {
+    [A]: { s: "Out", n: "Ret A", ret: P.sundays[week + 2], retWeeks: 1, retSource: "espn-return-date", retEstimated: false, retChecked: "2026-10-13" },
+    [B]: { s: "IR", n: "Ret B", retWeeks: 3, retSource: "default", retEstimated: true, retNote: "IR default, no report", retChecked: "2026-10-13" },
+    [C]: { s: "Out", n: "Ret C" },
+    [E]: { s: "IR", n: "Ret E", retWeeks: 99, retSource: "report", retEstimated: true },
+  };
+  const RT = D.projectedPointsLost(rr, rtInj, P, { week, posOf: pid => posMap[pid] && posMap[pid].p, rosterPositions });
+  const RTr = ref(rr, rtInj, week);
+  const rw = id => rowOf(RT, id);
+  out.ret = { agree: agrees(RT, RTr),
+    A: [rw(A).ros?.kind, rw(A).ros?.weeks?.length], B: [rw(B).ros?.kind, rw(B).ros?.weeks?.join()],
+    C: [rw(C).ros?.kind, rw(C).ros?.lost], E: [rw(E).ros?.weeks?.length, lastW - week + 1],
+    fields: [rw(A).retSource, rw(A).estimated, rw(A).retNote, rw(B).retSource, rw(B).estimated, rw(B).retNote, rw(C).retSource, rw(C).estimated, rw(C).retNote] };
+  out.ret.weeksB = [week, week + 1, week + 2].join();
+  const rh = document.createElement("div");
+  D.renderInjuries(rh, { at: Date.now(), source: "file", map: new Map(Object.entries(rtInj)) }, P);
+  const rrow = id => rh.querySelector(`.injp[data-pid="${id}"]`);
+  out.ret.tab = [A, B, C, E].map(id => [rrow(id)?.querySelector(".rsrc")?.textContent || "", !!rrow(id)?.querySelector(".est")]);
   const missing = document.createElement("div");
   D.renderInjuries(missing, { at: Date.now(), source: "file", map: new Map(Object.entries(inj)) }, null);
   out.missingFile = /No projections on file/.test(missing.textContent) && !missing.querySelector(".injp");
@@ -5656,11 +5793,39 @@ check("points lost: made-up roster — return date, season-ending and no estimat
 check("points lost: a missing projections file shows a clear empty state", PL.missingFile);
 check("points lost: a hurt player projected at 0 uses his last projection above zero, else season PPG; a bye stays 0",
   Math.abs(PL.fallback.tw - 18) < 1e-9 && Math.abs(PL.fallback.ros - 26) < 1e-9 && Math.abs(PL.fallback.P - 10) < 1e-9
-    && Math.abs(PL.fallback.Q - 16) < 1e-9 && PL.fallback.off[0] === 0 && PL.fallback.off[1] === 0, JSON.stringify(PL.fallback));
-check("points lost: hurt_fallback entries only fill weeks Sleeper projected at 0, with a named source", PL.fbBad.length === 0,
-  PL.fbBad.slice(0, 4).join(", "));
-check("points lost: every hurt_fallback week a player is out is priced at the fallback (e.g. A.J. Brown, IR)",
-  PL.fbSeen > 0 && PL.fbPriced.length === 0 && PL.brownRos > 0, `${PL.fbSeen} weeks; Brown ros ${PL.brownRos}; ${PL.fbPriced.slice(0, 3).join(" ; ")}`);
+    && Math.abs(PL.fallback.Q - 16) < 1e-9 && PL.fallback.pBye === 0 && PL.fallback.agree
+    && PL.fallback.off[0] === 0 && PL.fallback.off[1] === 0, JSON.stringify(PL.fallback));
+check("points lost: last_nonzero and ppg entries exist only for injured rostered players; byes cover every remaining week",
+  PL.fbBad.length === 0, PL.fbBad.slice(0, 4).join(", "));
+check("points lost: the fallback is used only on 0 projections in non-bye weeks, and every such week a player is out is priced at it",
+  PL.fbSeen > 0 && PL.fbPriced.length === 0, `${PL.fbSeen} fallback weeks; ${PL.fbPriced.slice(0, 3).join(" ; ")}`);
+check("points lost: a FLEX slot takes the best RB/WR/TE; a fixed RB/WR slot never takes another position",
+  PL.slots.agree && PL.slots.rb.repPid === null && PL.slots.rb.lost === 10 && PL.slots.wr.repPid === "W2"
+    && PL.slots.flex.repPid === "T2" && Math.abs(PL.slots.tw - 15) < 1e-9 && PL.slots.slot.join() === "RB,WR,FLEX", JSON.stringify(PL.slots));
+check("points lost: a bench injury that wouldn't start costs 0; one that would costs the lineup drop",
+  PL.bench.agree && Math.abs(PL.bench.X - 4) < 1e-9 && PL.bench.Y === 0 && PL.bench.tw === 0 && PL.bench.xStarts === true
+    && PL.bench.yStarts === false, JSON.stringify(PL.bench));
+check("points lost: a team with a no-estimate row marks its rest-of-season total partial",
+  PL.fakePartial && PL.partialBad.length === 0, `fake ${PL.fakePartial}; ${PL.partialBad.join(",")}`);
+check("points lost: the highlight threshold is read from PTS_LOST",
+  PL.highlight.at === 5 && PL.highlight.low && !PL.highlight.high && PL.biteBad.length === 0, JSON.stringify(PL.highlight) + PL.biteBad.join(","));
+{
+  const R = PL.ret, j = JSON.stringify(R);
+  check("points lost: return info — a real ret date wins over retWeeks", R.A[0] === "date" && R.A[1] === 2 && R.agree, j);
+  check("points lost: return info — retWeeks alone gives that many weeks from this week, capped at the last regular-season week",
+    R.B[0] === "weeks" && R.B[1] === R.weeksB && R.E[0] === R.E[1], j);
+  check("points lost: return info — neither date nor retWeeks keeps the old behaviour", R.C[0] === "none" && R.C[1] === null, j);
+  check("points lost: return info — rows carry retSource, estimated and retNote (null when absent)",
+    JSON.stringify(R.fields) === JSON.stringify(["espn-return-date", false, null, "default", true, "IR default, no report", null, false, null]), j);
+  check("points lost: return info — the tab labels each row's return source and tags estimates",
+    JSON.stringify(R.tab) === JSON.stringify([["ESPN date", false], ["default", true], ["", false], ["report", true]]), j);
+}
+console.log(`    named players: ${JSON.stringify(PL.named)}`);
+const tops = [...PL.all].sort((a, b) => b.tw - a.tw).slice(0, 5);
+console.log(`    top rows: ${tops.map(x => `${x.team} | ${x.name} | ${x.slot} | ${x.hurt.toFixed(2)} | ${x.rep || "none"} ${x.repPts.toFixed(2)} | ${x.tw.toFixed(2)}`).join(" ;; ")}`);
+const teamTw = {};
+for (const x of PL.all) teamTw[x.team] = (teamTw[x.team] || 0) + x.tw;
+console.log(`    team this-week totals: ${Object.entries(teamTw).map(([t, v]) => `${t} ${v.toFixed(2)}`).join(", ")}`);
 check("points lost: at 390px nothing overflows and no text is under 11px",
   injNarrow.rows > 0 && injNarrow.over.length === 0 && injNarrow.doc <= injNarrow.W && injNarrow.small.length === 0,
   [...injNarrow.over, ...injNarrow.small].slice(0, 3).join(" | "));

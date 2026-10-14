@@ -1,14 +1,18 @@
 /**
- * Fallback projections for HURT players, for projectedPointsLost() (see
+ * Fallback data for HURT players, for projectedPointsLost() (see
  * PTS_LOST.hurtFallback in index.html). Read-only: Sleeper projections plus the
  * repo's own files. Sleeper projects many Out/IR players at 0 (or not at all),
- * which would make an injury cost nothing. For each injured rostered player and
- * each week from `cur` through playoff_week_start - 1 where his own projection
- * is 0 or missing and his NFL team is NOT on bye that week:
- *   1. his most recent earlier weekly projection above zero ("wk N"), else
- *   2. his season points per game from the week files ("ppg": points in the
- *      weeks he started for his DFFL/C Cubed team / those weeks).
- * A bye week stays 0 (no entry). Result: { [pid]: { [week]: [points, source] } }.
+ * which would make an injury cost nothing, so for every injured rostered player:
+ *   last_nonzero[pid] = { week, pts }  his most recent weekly projection above
+ *                                      zero before the current week (`cur`)
+ *   ppg[pid]          = pts            his season points per game from the week
+ *                                      files (points in the weeks he started for
+ *                                      his C Cubed team / those weeks)
+ * and for the league:
+ *   byes[week]        = [NFL teams]    clubs on bye that week (no player of
+ *                                      theirs projected above zero)
+ * The page decides when to use them: a hurt player at 0 in a week his club is
+ * not on bye. Result: { last_nonzero, ppg, byes }.
  */
 import { readFile, readdir } from "fs/promises";
 
@@ -25,11 +29,10 @@ export async function hurtFallback({ season, cur, pws, scoring, fetchJSON }) {
   const inj = JSON.parse(await readFile("injuries.json", "utf8")).map || {};
   const ros = JSON.parse(await readFile("rosters.json", "utf8")).map || {};
   const hurt = Object.keys(ros).filter(pid => inj[pid] && inj[pid].s);
-  if (!hurt.length) return {};
 
-  // Every week 1 .. pws-1: hurt players' scored projections, their clubs, and
-  // the clubs with anybody projected above zero (a club absent there is on bye).
-  const pts = {}, playing = {}, club = {};
+  // Every week 1 .. pws-1: hurt players' scored projections, and the clubs with
+  // anybody projected above zero (a club absent there is on bye).
+  const pts = {}, playing = {};
   for (let w = 1; w < pws; w++) {
     const rows = await fetchJSON(`https://api.sleeper.app/projections/nfl/${season}/${w}?season_type=regular`,
       { label: `projections/${season}/${w} (hurt fallback)` }).catch(() => null);
@@ -40,10 +43,20 @@ export async function hurtFallback({ season, cur, pws, scoring, fetchJSON }) {
       const s = scoreStats(r.stats, scoring);
       if (s > 0 && r.team) on.add(r.team);
       const pid = String(r.player_id || "");
-      if (want.has(pid)) { wk[pid] = s; if (r.team) (club[pid] ||= {})[w] = r.team; }
+      if (want.has(pid)) wk[pid] = s;
     }
     if (!on.size) continue;
     pts[w] = wk; playing[w] = on;
+  }
+  const clubs = new Set(Object.values(playing).flatMap(s => [...s]));
+  const byes = {};
+  for (const w of Object.keys(playing)) byes[w] = [...clubs].filter(t => !playing[w].has(t)).sort();
+
+  const last_nonzero = {};
+  for (const pid of hurt) {
+    for (let w = cur - 1; w >= 1; w--) {
+      if (pts[w] && (pts[w][pid] || 0) > 0) { last_nonzero[pid] = { week: w, pts: pts[w][pid] }; break; }
+    }
   }
 
   // Season points per game from the repo's week files, matched by name + position.
@@ -60,21 +73,7 @@ export async function hurtFallback({ season, cur, pws, scoring, fetchJSON }) {
   }
   for (const pid of hurt) {
     const a = acc.get(`${inj[pid].n}|${inj[pid].p}`);
-    if (a && a.n) ppg[pid] = Math.round((a.pts / a.n) * 100) / 100;
+    if (a && a.n && a.pts > 0) ppg[pid] = Math.round((a.pts / a.n) * 100) / 100;
   }
-
-  const out = {};
-  for (const pid of hurt) {
-    for (let w = cur; w < pws; w++) {
-      if (!pts[w]) continue;                                   // unpublished week: the page's own fallback applies
-      if ((pts[w][pid] || 0) > 0) continue;                    // a real projection
-      const team = (club[pid] && club[pid][w]) || inj[pid].t || ros[pid].t;
-      if (team && !playing[w].has(team)) continue;             // bye: stays 0
-      let v = null, src = null;
-      for (let x = w - 1; x >= 1; x--) if (pts[x] && (pts[x][pid] || 0) > 0) { v = pts[x][pid]; src = `wk ${x}`; break; }
-      if (v == null && ppg[pid] > 0) { v = ppg[pid]; src = "ppg"; }
-      if (v != null) (out[pid] ||= {})[w] = [v, src];
-    }
-  }
-  return out;
+  return { last_nonzero, ppg, byes };
 }

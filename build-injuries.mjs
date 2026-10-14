@@ -297,7 +297,7 @@ try {
   }
 
   // Hurt players Sleeper projects at 0: earlier projection above zero, else season PPG (byes stay 0).
-  const hurt_fallback = await hurtFallback({ season, cur, pws, scoring, fetchJSON })
+  const { last_nonzero = {}, ppg = {}, byes = {} } = await hurtFallback({ season, cur, pws, scoring, fetchJSON })
     .catch(e => { console.warn(`hurt fallback skipped (${e.message})`); return {}; });
   const proj = {
     _comment:
@@ -314,8 +314,13 @@ try {
     playoff_week_start: pws,
     sundays,
     weeks,
-    // hurt_fallback[pid][w] = [points, "wk N" | "ppg"] for a hurt player projected at 0 in week w (not a bye).
-    hurt_fallback,
+    // Injured rostered players only. last_nonzero[pid] = { week, pts }: his latest weekly
+    // projection above 0 before current_week; ppg[pid] = season points per game started.
+    // byes[w] = NFL clubs on bye in week w. The page uses them for a hurt player at 0 in a
+    // week his club plays.
+    last_nonzero,
+    ppg,
+    byes,
   };
   await writeFile("data/projections.json", JSON.stringify(proj) + "\n");
   console.log(`data/projections.json — weeks ${Object.keys(weeks).join(",") || "none"} · `
