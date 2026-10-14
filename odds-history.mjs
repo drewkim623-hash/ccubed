@@ -40,6 +40,11 @@ const time = row => {
   return Number.isNaN(t) ? Infinity : t;
 };
 
+const weekOrder = (x, y) => {
+  const [sx, wx] = x.split("-").map(Number), [sy, wy] = y.split("-").map(Number);
+  return sx - sy || wx - wy;
+};
+
 // existing: the parsed file (or null). incoming: [{ key, row }].
 // Existing rows are kept exactly as they are, even when an incoming row shares
 // their rowKey; only rows with a new rowKey are appended. Returns { out, added }.
@@ -66,7 +71,7 @@ export function mergeHistory(existing, incoming) {
   });
   const out = {
     ...(existing && typeof existing === "object" ? existing : {}),
-    weeks: Object.fromEntries(Object.keys(weeks).sort().map(k => [k, weeks[k]])),
+    weeks: Object.fromEntries(Object.keys(weeks).sort(weekOrder).map(k => [k, weeks[k]])),
   };
   return { out, added };
 }
@@ -103,6 +108,6 @@ export function setTeamWeek(existing, key, rows) {
   const base = existing && typeof existing === "object" ? existing : {};
   const prev = base.teams && typeof base.teams === "object" && !Array.isArray(base.teams) ? base.teams : {};
   const next = { ...prev, [key]: rows.slice().sort((x, y) => String(x.uid).localeCompare(String(y.uid))) };
-  const out = { ...base, teams: Object.fromEntries(Object.keys(next).sort().map(k => [k, next[k]])) };
+  const out = { ...base, teams: Object.fromEntries(Object.keys(next).sort(weekOrder).map(k => [k, next[k]])) };
   return { out, changed: JSON.stringify(prev[key]) !== JSON.stringify(out.teams[key]) };
 }
