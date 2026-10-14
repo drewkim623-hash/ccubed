@@ -1,11 +1,11 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-14T06:36:38.555Z",
+ "generated": "2026-10-14T08:11:51.328Z",
  "week": 6,
  "entries": {
   "2449": {
    "n": "Stefon Diggs",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-18",
    "retWeeks": null,
    "retSource": "report",
@@ -36,7 +36,7 @@
   },
   "4866": {
    "n": "Saquon Barkley",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -46,7 +46,7 @@
   },
   "4881": {
    "n": "Lamar Jackson",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -56,7 +56,7 @@
   },
   "4983": {
    "n": "DJ Moore",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-18",
    "retWeeks": null,
    "retSource": "report",
@@ -107,7 +107,7 @@
   },
   "5892": {
    "n": "David Montgomery",
-   "s": "Out",
+   "s": "Doubtful",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -138,7 +138,7 @@
   },
   "7525": {
    "n": "DeVonta Smith",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -170,7 +170,7 @@
   },
   "8155": {
    "n": "Breece Hall",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -251,7 +251,7 @@
   },
   "11560": {
    "n": "Caleb Williams",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-18",
    "retWeeks": null,
    "retSource": "report",
@@ -261,7 +261,7 @@
   },
   "11577": {
    "n": "Will Shipley",
-   "s": "Out",
+   "s": "Doubtful",
    "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
@@ -282,22 +282,12 @@
   },
   "11625": {
    "n": "Adonai Mitchell",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Finger. Ruled out Week 5; ESPN Q Week 6. Consensus: matches audit; uncertain (audit tiebreak wk 6).",
-   "retChecked": "2026-10-14"
-  },
-  "11628": {
-   "n": "Marvin Harrison",
-   "s": "Out",
-   "ret": "2026-10-18",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/story/_/id/50160631/texans-complete-trade-cardinals-wr-marvin-harrison-jr — None (Sleeper 'Coach's Decision' after trade to HOU). Not on Texans injury report; trade-related status, expected to play Week 6. Count 0 weeks; ESPN trade story not fetched. Consensus: matches audit; uncertain (audit tiebreak wk 6).",
    "retChecked": "2026-10-14"
   },
   "11630": {
@@ -322,7 +312,7 @@
   },
   "11646": {
    "n": "Jalen Coker",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-18",
    "retWeeks": null,
    "retSource": "report",
@@ -340,16 +330,6 @@
    "retNote": "https://www.espn.com/nfl/player/_/id/4711533/ollie-gordon-ii — Undisclosed (brief exit). ESPN lists Active; MIA bye Week 6. 0 games. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14"
   },
-  "12509": {
-   "n": "Tre' Harris",
-   "s": "Questionable",
-   "ret": "2026-10-25",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4686612/tre-harris — Hamstring. Harbaugh: week-to-week; LAC bye Week 7, eye on Week 8. Sleeper says Q, ESPN Doubtful. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14"
-  },
   "12512": {
    "n": "Quinshon Judkins",
    "s": "Questionable",
@@ -362,7 +342,7 @@
   },
   "12529": {
    "n": "TreVeyon Henderson",
-   "s": "Out",
+   "s": "Doubtful",
    "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
@@ -372,7 +352,7 @@
   },
   "12534": {
    "n": "Kyle Monangai",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -414,7 +394,7 @@
   },
   "13298": {
    "n": "KC Concepcion",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -424,13 +404,24 @@
   },
   "13330": {
    "n": "Kenyon Sadiq",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/5083315/kenyon-sadiq — Concussion. Left Week 5 with concussion; protocol. Consensus: matches audit; uncertain (audit tiebreak wk 6).",
    "retChecked": "2026-10-14"
+  },
+  "13345": {
+   "n": "Jonah Coleman",
+   "s": "IR",
+   "ret": null,
+   "retWeeks": 4,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: IR minimum 4 weeks, on IR since wk 6",
+   "retChecked": "2026-10-14",
+   "irSince": 6
   }
  }
 }
