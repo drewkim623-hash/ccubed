@@ -6,7 +6,9 @@
 #
 # Cron is UTC and does not follow daylight saving, so each slot is listed for
 # both EDT and EST and the gate below lets through only the one that lands
-# within seven minutes of the intended New York time:
+# within 30 minutes of the intended New York time (GitHub often starts
+# scheduled runs 10-30+ minutes late; the paired slots are 60 minutes apart,
+# so 30 still lets only one of each pair through):
 #   09:20 every day, 18:20 Monday and Thursday, 11:50 and 15:50 Sunday.
 #
 # The odds themselves are computed in the browser from index.html and these
@@ -29,6 +31,7 @@ on:
 
 permissions:
   contents: write
+  actions: read   # gh run list: skip while a weekly-data run is going (Sundays)
 
 concurrency:
   group: injury-refresh
@@ -53,10 +56,23 @@ jobs:
           go=false
           for t in $targets; do
             d=$((now - t)); [ $d -lt 0 ] && d=$((-d))
-            if [ $d -le 7 ]; then go=true; fi
+            if [ $d -le 30 ]; then go=true; fi
           done
           echo "New York $hh:$mm (day $dow): go=$go"
+          # Sundays: weekly-data (11:30 ET) also writes injuries.json and pushes.
+          # Its concurrency group stays separate on purpose, so instead skip this
+          # run while a weekly-data run is in progress or queued.
+          if [ "$go" = true ] && [ "$dow" = 7 ]; then
+            running=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow weekly-data.yml --status in_progress --json databaseId --jq length)
+            queued=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow weekly-data.yml --status queued --json databaseId --jq length)
+            if [ "$((${running:-0} + ${queued:-0}))" -gt 0 ]; then
+              echo "::notice::weekly-data is in progress ($running) or queued ($queued); skipping this injury refresh."
+              go=false
+            fi
+          fi
           echo "go=$go" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - if: steps.gate.outputs.go == 'true'
         uses: actions/checkout@v7
@@ -92,10 +108,25 @@ jobs:
             exit 0
           fi
           git commit -m "Data: injury refresh"
-          # Same no-loop, no-force push as weekly-data.yml.
-          if ! git pull --rebase origin "${GITHUB_REF_NAME:-main}"; then
-            git rebase --abort || true
-            echo "::error::Could not rebase the injury commit onto main; nothing pushed."
-            exit 1
+          # No force push. If the rebase fails (weekly-data pushed injuries.json
+          # meanwhile): abort, reset to the new origin, rerun the three data
+          # scripts, recommit, and try pull --rebase + push once more; then give up.
+          branch="${GITHUB_REF_NAME:-main}"
+          if git pull --rebase origin "$branch" && git push origin "HEAD:$branch"; then exit 0; fi
+          git rebase --abort 2>/dev/null || true
+          echo "::warning::Rebase or push failed; regenerating on top of origin/$branch and retrying once."
+          git fetch origin "$branch"
+          git reset --hard "origin/$branch"
+          node consensus.mjs
+          node build-injuries.mjs
+          node injury-returns.mjs
+          git add -A data injuries.json injury-returns.json injury-returns-cache.json
+          if git diff --staged --quiet; then
+            echo "Nothing changed after regenerating."
+            exit 0
           fi
-          git push origin "HEAD:${GITHUB_REF_NAME:-main}"
+          git commit -m "Data: injury refresh"
+          if git pull --rebase origin "$branch" && git push origin "HEAD:$branch"; then exit 0; fi
+          git rebase --abort 2>/dev/null || true
+          echo "::error::Could not rebase the injury commit onto $branch after one regenerate-and-retry; nothing pushed."
+          exit 1

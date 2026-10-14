@@ -28,7 +28,9 @@
  * Every fetch is cached in data/consensus-cache/. A failed fetch falls back to
  * that cache and the run is marked stale ("stale: <key>"); no cache = the
  * signal is missing. Without Sleeper's player file the injured list and names
- * come from injuries.json / rosters.json. The script always exits 0.
+ * come from injuries.json / rosters.json. When every fetch fell back to the
+ * cache, or no entry's weeks_list / weeks changed, nothing is written at all
+ * ("consensus: stale/no change, nothing written"). The script always exits 0.
  *
  * Options: --league ID  --audit path  --cache dir  --from W  --to W  --dry-run
  * URL overrides (verify.mjs points them at a dead port): CONSENSUS_SLEEPER_API,
@@ -100,7 +102,7 @@ async function main() {
 
   // Fetch with one retry; on failure the cached copy, marked stale. `slim`
   // trims a response before it is cached, so the cache stays small enough to commit.
-  const stale = [];
+  const stale = [], pending = [];
   const get = async (url, key, opts = {}) => {
     const f = path.join(CACHE, key.replace(/[^\w.-]/g, "_") + ".json");
     for (let t = 0; t < 2; t++) {
@@ -109,7 +111,8 @@ async function main() {
         if (r.status === 404 && opts.allow404) return null;
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         const j = await r.json();
-        fs.writeFileSync(f, JSON.stringify(opts.slim ? opts.slim(j) : j));
+        // Held until the end: a run that writes nothing leaves the cache alone too.
+        pending.push([f, JSON.stringify(opts.slim ? opts.slim(j) : j)]);
         return j;
       } catch (e) { /* retry once, then the cache */ }
     }
@@ -218,6 +221,9 @@ async function main() {
   // Decide.
   const auditFile = read(AUDIT, { entries: {} });
   const audit = auditFile.entries || (auditFile.entries = {});
+  // A change worth a write: some entry's weeks_list / weeks.
+  const outOf = e => JSON.stringify(e ? [e.weeks_list ?? null, e.weeks ?? null] : null);
+  const was = Object.fromEntries(Object.entries(audit).map(([pid, e]) => [pid, outOf(e)]));
   const players = [];
   for (const pid of hurt) {
     const me = info(pid), eid = espnIdOf(pid), ae = audit[pid];
@@ -255,7 +261,15 @@ async function main() {
     audit[pid] = e;
   }
 
+  // Only stale data (every fetch fell back to the cache) or no substantive change:
+  // nothing is written (audit, report or cache), so a refresh run commits nothing from here.
+  const moved = Object.entries(audit).some(([pid, e]) => outOf(e) !== (was[pid] ?? outOf(null)));
+  if (!pending.length || !moved) {
+    console.log("consensus: stale/no change, nothing written");
+    return;
+  }
   if (!DRY) {
+    for (const [f, body] of pending) fs.writeFileSync(f, body);
     fs.writeFileSync(AUDIT, JSON.stringify(auditFile, null, 2) + "\n");
     fs.writeFileSync(path.join("data", "consensus.json"), JSON.stringify({
       generated: new Date().toISOString(), league: LEAGUE, weeks: [FROM, TO], stale,

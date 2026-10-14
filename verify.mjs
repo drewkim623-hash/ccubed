@@ -6008,6 +6008,29 @@ const PL = await injPage.evaluate(async () => {
   const rrow = id => rh.querySelector(`.injp[data-pid="${id}"]`);
   out.ret.tab = [A, B, C, E].map(id => [rrow(id)?.querySelector(".rsrc")?.textContent || "", !!rrow(id)?.querySelector(".est")]);
   out.ret.label = [B, E, C, F].map(id => rrow(id)?.querySelector(".ret")?.textContent.trim());
+  // 0-week returns (a report with weeks 0 / weeks_list [] -> ret = this week's
+  // Sunday, or retWeeks 0): the tab, PTS_LOST and the odds all have him not out.
+  {
+    const sun0 = D.ptsSunday(P, week);
+    const zInj = {
+      [A]: { s: "Out", n: "Zero A", ret: sun0, retSource: "report", retEstimated: false, retChecked: "2026-10-14" },
+      [B]: { s: "Out", n: "Zero B", retWeeks: 0, retSource: "report", retEstimated: false, retChecked: "2026-10-14" },
+      [C]: { s: "Out", n: "Zero C", retWeeks: 2, retSource: "report", retEstimated: true },
+    };
+    const Z = D.projectedPointsLost(rr, zInj, P, { week, posOf: pid => posMap[pid] && posMap[pid].p, rosterPositions });
+    const zw = [week, week + 1, week + 2, week + 3], sunF = w => D.ptsSunday(P, w);
+    const imp = [A, B].map(id => D.injuryImpact(id, zInj[id], P, { weeks: zw, sun: sunF, pos: "WR" }).weeksOut);
+    const zh = document.createElement("div");
+    D.renderInjuries(zh, { at: Date.now(), source: "file", map: new Map(Object.entries(zInj)) }, P);
+    const zr = id => zh.querySelector(`.injp[data-pid="${id}"]`);
+    out.zero = {
+      shared: [A, B].map(id => D.injuryOutWeeks(zInj[id], zw, sunF).weeks.length),
+      lost: [A, B].map(id => [rowOf(Z, id).thisWeek?.lost, rowOf(Z, id).ros?.weeks?.length]),
+      imp, plays: [A, B].map(id => /plays this week/.test(zr(id)?.querySelector(".rep")?.textContent || "")),
+      pw: [A, B].map(id => zr(id)?.querySelector(".pw")?.textContent.trim()),
+      tags: [A, B, C].map(id => [!!zr(id)?.querySelector(".rptd"), !!zr(id)?.querySelector(".est")]),
+    };
+  }
 
   // Stand-in label, on the bench case above. X starts; without him S2 is the one
   // newcomer (healthy) -> "S2". S2 Questionable -> "shuffle". Per player: with Y
@@ -6151,6 +6174,13 @@ check("points lost: the highlight threshold is read from PTS_LOST",
   check("points lost: return info — retWeeks without a date reads ~N wk (est.), never no estimate",
     R.label[0] === "~3 wk (est.)" && R.label[2] === "no estimate", j);
   check("points lost: IR running to the season's end reads season (IR)", R.label[1] === "season (IR)" && R.label[3] === "season (IR)", j);
+  const Z0 = PL.zero || {}, jz = JSON.stringify(Z0);
+  check("0-week return: ret = this Sunday or retWeeks 0 -> no week out in injuryOutWeeks, PTS_LOST and the odds (injuryImpact)",
+    JSON.stringify(Z0.shared) === "[0,0]" && JSON.stringify(Z0.lost) === "[[0,0],[0,0]]" && JSON.stringify(Z0.imp) === "[0,0]", jz);
+  check("0-week return: the Injuries tab shows him playing this week, 0 points lost",
+    JSON.stringify(Z0.plays) === "[true,true]" && (Z0.pw || []).every(t => !/[1-9]/.test(t || "")), jz);
+  check("reported vs estimated: an exact report is tagged 'reported', a week count stays 'estimated'",
+    JSON.stringify(Z0.tags) === "[[true,false],[true,false],[false,true]]", jz);
   const FX = PL.fixture;
   check("points lost: shared fixture — this week, rest of season and stand-ins match the hand-worked values",
     FX.every(t => t.bad.length === 0), FX.map(t => t.bad.join("; ")).join(" | "));
@@ -6617,6 +6647,46 @@ group("Injury odds: lineup drop per out week (full value only without lineup slo
       old.retSource === "default" && /ignored: weeks_list/.test(old.retNote) && oldW.retSource === "default" && /ignored/.test(oldW.retNote)
       && live.retSource === "report" && JSON.stringify(live.retWeeksList) === "[11]",
       JSON.stringify([old, oldW, live]));
+    {
+      const wf = (await import("node:fs")).readFileSync(join(ROOT, ".github", "workflows", "injury-refresh.yml"), "utf8");
+      check("injury-refresh.yml: ±30 min ET gate, own concurrency group, Sunday skip while weekly-data runs (actions: read, GH_TOKEN)",
+        /\$d -le 30\b/.test(wf) && /group: injury-refresh/.test(wf) && /actions: read/.test(wf) && /GH_TOKEN: \$\{\{ github\.token \}\}/.test(wf)
+        && /--workflow weekly-data\.yml --status in_progress/.test(wf) && /--workflow weekly-data\.yml --status queued/.test(wf));
+      check("injury-refresh.yml: rebase failure -> abort, reset to origin, rerun the 3 scripts, retry once, no force push",
+        /git rebase --abort/.test(wf) && /git reset --hard "origin\/\$branch"/.test(wf) && (wf.match(/git pull --rebase/g) || []).length === 2
+        && /node consensus\.mjs[\s\S]*node build-injuries\.mjs[\s\S]*node injury-returns\.mjs[\s\S]*git commit/.test(wf.split("retrying once")[1] || "")
+        && !/push[^\n]*(--force|-f\b)/.test(wf));
+    }
+    // Exact reports (weeks_list, a dated ret) are not estimates; a bare week count is.
+    const rDated = rr({ kind: "report", ret: "2026-11-01", checked: "2026-10-14" }, 6);
+    const rCount = rr({ kind: "report", weeks: 2, checked: "2026-10-14" }, 6);
+    check("returns: a report with weeks_list or a dated ret is retEstimated false; a bare weeks count stays estimated",
+      r67.retEstimated === false && r68.retEstimated === false && r0.retEstimated === false && rDated.retEstimated === false
+      && rCount.retEstimated === true, JSON.stringify([r67, r0, rDated, rCount].map(x => x.retEstimated)));
+    // The IR/PUP 4-week default counts from irSince, not the coming week.
+    const ir = (week, irSince) => IR.resolveReturn({ rec: { s: "IR" }, week, lastReg: 14, sundayOf, irSince, today: "2026-10-14" });
+    const i6 = ir(6, 6), i8 = ir(8, 6), i10 = ir(10, 6), iPUP = IR.resolveReturn({ rec: { s: "PUP" }, week: 9, irSince: 7, sundayOf, today: "2026-10-14" });
+    check("returns: IR/PUP default = irSince + 4 - week (wk6->4, wk8->2, PUP since 7 at wk9->2); run out -> coming week only",
+      i6.retWeeks === 4 && i8.retWeeks === 2 && iPUP.retWeeks === 2 && i10.retWeeks === 1 && /ran out/.test(i10.retNote) && i10.retSource === "default",
+      JSON.stringify([i6, i8, i10, iPUP].map(x => [x.retWeeks, x.retNote])));
+    // The CLI carries irSince forward in the cache (ESPN down: defaults still recount).
+    const { spawnSync } = await import("node:child_process");
+    const fs = await import("node:fs"), os = await import("node:os");
+    const dir = fs.mkdtempSync(join(os.tmpdir(), "inj-ir-"));
+    for (const f of ["injury-returns.mjs", "fetch-json.mjs"]) fs.copyFileSync(join(ROOT, f), join(dir, f));
+    fs.mkdirSync(join(dir, "data"));
+    fs.writeFileSync(join(dir, "data", "projections.json"), JSON.stringify({ current_week: 8, playoff_week_start: 15,
+      sundays: { 6: "2026-10-18", 7: "2026-10-25", 8: "2026-11-01", 9: "2026-11-08" } }));
+    fs.writeFileSync(join(dir, "injuries.json"), JSON.stringify({ map: { 7: { n: "Old IR", s: "IR", p: "RB" }, 8: { n: "New IR", s: "IR", p: "WR" } } }));
+    fs.writeFileSync(join(dir, "injury-returns-cache.json"), JSON.stringify({ entries: { 7: { s: "IR", irSince: 6, retWeeks: 4, retSource: "default", retEstimated: true } } }));
+    const cr = spawnSync(process.execPath, ["injury-returns.mjs"], { cwd: dir, encoding: "utf8", timeout: 60000,
+      env: { ...process.env, ESPN_INJURIES_URL: "http://127.0.0.1:9/injuries" } });
+    const cm = JSON.parse(fs.readFileSync(join(dir, "injuries.json"), "utf8")).map;
+    const cc = JSON.parse(fs.readFileSync(join(dir, "injury-returns-cache.json"), "utf8")).entries;
+    fs.rmSync(dir, { recursive: true, force: true });
+    check("returns CLI: irSince persisted in injury-returns-cache.json and carried forward (since wk6 at wk8 -> 2; new IR -> since wk8, 4)",
+      cr.status === 0 && cm[7].retWeeks === 2 && cc[7].irSince === 6 && cm[8].retWeeks === 4 && cc[8].irSince === 8,
+      JSON.stringify([cr.status, cm, cc]));
   }
   {
     // consensus.mjs: importing it does not run it; the decision rules; a dead feed -> stale cache, exit 0.
@@ -6651,8 +6721,23 @@ group("Injury odds: lineup drop per out week (full value only without lineup slo
     fs.rmSync(dir, { recursive: true, force: true });
     check("consensus CLI: sources down -> stale cache used ('stale: ccubed-rosters'), missing cache noted, exit 0",
       run.status === 0 && /^stale: ccubed-rosters$/m.test(run.stdout) && /^stale: sleeper-players \(no cache\)$/m.test(run.stdout)
-      && /^consensus: \d+ injured/m.test(run.stdout) && after === before,
+      && after === before,
       JSON.stringify([run.status, run.stdout.slice(-300), run.stderr.slice(0, 200)]));
+    // Not a dry run: an all-stale run still writes nothing (no audit, report or cache change).
+    const dir2 = fs.mkdtempSync(join(os.tmpdir(), "consensus-"));
+    fs.mkdirSync(join(dir2, "cache"));
+    fs.copyFileSync(join(ROOT, "data", "consensus-cache", "ccubed-rosters.json"), join(dir2, "cache", "ccubed-rosters.json"));
+    fs.copyFileSync(join(ROOT, "injury-returns.json"), join(dir2, "audit.json"));
+    const rep = join(ROOT, "data", "consensus.json"), repBefore = fs.existsSync(rep) ? fs.readFileSync(rep, "utf8") : null;
+    const live = spawnSync(process.execPath, ["consensus.mjs", "--audit", join(dir2, "audit.json"), "--cache", join(dir2, "cache"), "--from", "6", "--to", "7"],
+      { cwd: ROOT, env, encoding: "utf8", timeout: 60000 });
+    const after2 = fs.readFileSync(join(dir2, "audit.json"), "utf8"), cacheFiles = fs.readdirSync(join(dir2, "cache"));
+    const repAfter = fs.existsSync(rep) ? fs.readFileSync(rep, "utf8") : null;
+    fs.rmSync(dir2, { recursive: true, force: true });
+    check("consensus CLI: only stale data -> 'stale/no change, nothing written', audit/report/cache untouched, exit 0",
+      live.status === 0 && /^consensus: stale\/no change, nothing written$/m.test(live.stdout) && after2 === before
+      && repAfter === repBefore && cacheFiles.join() === "ccubed-rosters.json",
+      JSON.stringify([live.status, live.stdout.slice(-200), cacheFiles]));
   }
   check("odds sim: points come off the mean (hurt team loses wins, nobody else does)",
     io.sim && io.sim.team0[1] < io.sim.team0[0] && io.sim.others === io.sim.n - 1, JSON.stringify(io.sim));

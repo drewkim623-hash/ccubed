@@ -367,7 +367,7 @@
   .injp .meta{grid-column:1;font-size:12px;color:var(--muted);line-height:1.45;overflow-wrap:anywhere}
   .injp .meta .st{font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
   .injp .meta .ret{color:var(--ink-2)}
-  .injp .meta .est{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  .injp .meta .est,.injp .meta .rptd{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
     padding:0 4px;border:1px solid var(--ring);border-radius:4px;white-space:nowrap}
   .injp .imp{grid-column:2;grid-row:1 / span 4;text-align:right;font-size:15px;font-weight:800;
     font-variant-numeric:tabular-nums;color:var(--red);line-height:1.15}
@@ -4961,14 +4961,12 @@ function injuryImpact(pid, rec, P, opts = {}) {
   };
   const isDate = v => /^\d{4}-\d{2}-\d{2}/.test(String(v || ""));
   const rw = Math.round(Number(rec.retWeeks));
-  const sevEnd = PTS_LOST.seasonSeverity.test(String(rec.sev || ""));
-  let outWeeks, seasonEnding = false;
-  // retWeeksList (injury-returns.json weeks_list with a gap): exactly those weeks.
-  if (Array.isArray(rec.retWeeksList)) outWeeks = weeks.filter(w => rec.retWeeksList.includes(w));
-  else if (isDate(rec.ret)) outWeeks = weeks.filter(w => opts.sun && opts.sun(w) && opts.sun(w) < rec.ret);
-  else if (rw > 0) { outWeeks = rw >= 99 ? weeks.slice() : weeks.slice(0, rw); seasonEnding = rw >= 99; }
-  else if (sevEnd || PTS_LOST.seasonStatuses.includes(rec.s)) { outWeeks = weeks.slice(); seasonEnding = true; }
-  else outWeeks = W0 != null ? [W0] : [];
+  // The same out-weeks rule as the Injuries tab (injuryOutWeeks); retWeeks 0 or
+  // a ret of this week's Sunday = back this week, no week out. retWeeks 99 runs
+  // through the playoffs. No estimate at all: the coming week only.
+  const ow = injuryOutWeeks(rec, weeks, opts.sun, PTS_LOST);
+  const outWeeks = ow.kind === "none" ? (W0 != null ? [W0] : []) : ow.weeks;
+  let seasonEnding = ow.kind === "season" || (ow.kind === "weeks" && rw >= 99 && !Array.isArray(rec.retWeeksList));
   if (outWeeks.length && outWeeks[outWeeks.length - 1] === weeks[weeks.length - 1]) seasonEnding = true;
   const weight = ((opts.statusWeights || {})[rec.s]) ?? 1;
   const perWeek = {};
@@ -6153,15 +6151,30 @@ function ptsSunday(projections, week) {
 function ptsWeeksOut(rec, week, lastWeek, projections, cfg = PTS_LOST) {
   const all = [];
   for (let w = week; w <= lastWeek; w++) all.push(w);
-  // retWeeksList (injury-returns.json weeks_list with a gap): exactly those weeks.
-  if (rec && Array.isArray(rec.retWeeksList)) return { kind: "weeks", weeks: all.filter(w => rec.retWeeksList.includes(w)) };
-  const n = rec && !cfg.dateRe.test(String(rec.ret || "")) ? Number(rec.retWeeks) : NaN;
-  if (Number.isFinite(n) && n >= 0) return { kind: "weeks", weeks: all.filter(w => cfg.retWeeksOut(w, week, n)) };
+  return injuryOutWeeks(rec, all, w => ptsSunday(projections, w), cfg);
+}
+
+/**
+ * The one out-weeks rule, shared by the odds (injuryImpact) and the Injuries
+ * tab (ptsWeeksOut): which of `weeks` (ascending, the first = the coming week)
+ * a record is out. sun(w) -> week w's Sunday. First hit wins:
+ *   retWeeksList  exactly those weeks              kind "weeks"
+ *   ret (a date)  every week whose Sunday is before it ("date"; ret = this
+ *                 week's Sunday -> back this week, no week out)
+ *   retWeeks >= 0 that many weeks from the first (0 = not out)  "weeks"
+ *   IR/PUP or a season-ending severity: all of them             "season"
+ *   else          no estimate                                    "none"
+ */
+function injuryOutWeeks(rec, weeks, sun, cfg = PTS_LOST) {
+  const W0 = weeks[0];
+  if (rec && Array.isArray(rec.retWeeksList)) return { kind: "weeks", weeks: weeks.filter(w => rec.retWeeksList.includes(w)) };
   if (rec && cfg.dateRe.test(String(rec.ret || ""))) {
-    return { kind: "date", weeks: all.filter(w => { const s = ptsSunday(projections, w); return s && s < rec.ret; }) };
+    return { kind: "date", weeks: weeks.filter(w => { const s = sun && sun(w); return s && s < rec.ret; }) };
   }
+  const n = rec && rec.retWeeks != null && rec.retWeeks !== "" ? Math.round(Number(rec.retWeeks)) : NaN;
+  if (Number.isFinite(n) && n >= 0) return { kind: "weeks", weeks: weeks.filter(w => cfg.retWeeksOut(w, W0, n)) };
   if (rec && (cfg.seasonStatuses.includes(rec.s) || cfg.seasonSeverity.test(String(rec.sev || "")))) {
-    return { kind: "season", weeks: all };
+    return { kind: "season", weeks: weeks.slice() };
   }
   return { kind: "none", weeks: [] };
 }
@@ -6318,7 +6331,11 @@ const ptsRowText = v => (v < PTS_LOST.displayFloor ? "—" : ptsLostText(v));
 /** Every team's projectedPointsLost(), injured teams only, biggest this-week loss first. */
 function injuryTeams(season, inj, proj) {
   const posOf = pid => { const r = ROSTERED && ROSTERED.map.get(String(pid)); return r && r.p; };
-  const week = Number(DB.state && String(DB.state.season) === String(proj.season) && DB.state.week) || proj.current_week;
+  // Never before the projections' coming week: the return fields (retWeeks, a
+  // ret of this week's Sunday) count from it, as the odds do, so a player back
+  // this week is not charged for a week Sleeper's state hasn't rolled past yet.
+  const sw = Number(DB.state && String(DB.state.season) === String(proj.season) && DB.state.week) || 0;
+  const week = Math.max(sw, Number(proj.current_week) || 0) || proj.current_week;
   return ((season && season.rosters) || []).map(r => ({ r, uid: season.uidOf.get(r.roster_id),
     pl: projectedPointsLost(r, inj.map, proj, { week, posOf, rosterPositions: season.rosterPositions }) }))
     .filter(x => x.pl.rows.length)
@@ -6392,7 +6409,8 @@ function renderInjuries(host, inj, proj) {
       const wks = x.ros.kind === "none" ? "" : `${x.ros.weeks.length} wk${x.ros.weeks.length === 1 ? "" : "s"} out`;
       const srcTxt = retSourceText(x);
       const srcTag = (srcTxt ? `${esc(dot)}<span class="rsrc">${esc(srcTxt)}</span>` : "")
-        + (x.estimated ? ` <span class="est">estimated</span>` : "");
+        + (x.estimated ? ` <span class="est">estimated</span>`
+          : x.retSource === "report" ? ` <span class="rptd">reported</span>` : "");
       if (x.retNote) row.title = [x.retNote, row.title].filter(Boolean).join(" — ");
       const tw = x.thisWeek;
       // A stand-in is named only when he is healthy; an injured one means the lineup reshuffles.
@@ -6403,7 +6421,7 @@ function renderInjuries(host, inj, proj) {
       const later = x.ros.byWeek.some(c => c.starts) ? `${esc(dot)}rest of season: <span class="sin">${esc(who(x.ros.standIn))}</span>` : "";
       // IR with no date that runs through the last regular-season week reads as the season.
       const irSeason = x.status === "IR" && !back && x.ros.weeks.includes(pl.lastWeek);
-      const retTxt = back || (irSeason ? "season (IR)" : x.ros.kind === "weeks" ? `~${Number(p.retWeeks)} wk (est.)` : "no estimate");
+      const retTxt = back || (irSeason ? "season (IR)" : x.ros.kind === "weeks" ? (x.estimated ? `~${Number(p.retWeeks)} wk (est.)` : `${Number(p.retWeeks)} wk`) : "no estimate");
       row.innerHTML = `<span class="nm">${esc(x.name)}</span>
         <span class="meta">${esc([x.pos, x.club].filter(Boolean).join(dot))}${detail ? esc(dot + detail) : ""}</span>
         <span class="meta"><span class="st st-${esc(String(x.status).toLowerCase())}">${esc(x.status)}</span>${esc(dot)}<span class="ret">${esc(retTxt)}</span>${wks ? `${esc(dot)}<span class="wo">${esc(wks)}</span>` : ""}${srcTag}</span>
@@ -10671,7 +10689,7 @@ async function boot() {
       weekIsFinal, allWeeks, effectiveState,
       loadInjuries, injPlayer, availability, livePosterior, weeksOf, liveState,
       injuryDetail, returnLabel, rosterInjuries, injCutText, ensureInjuries, renderInjuries,
-      PTS_LOST, projectedPointsLost, ptsProj, ptsSunday, ptsWeeksOut, ptsLostText, ptsRowText, ptsBestLineup, ptsSplitDrop, injuryTeams, loadProjections,
+      PTS_LOST, projectedPointsLost, ptsProj, ptsSunday, ptsWeeksOut, injuryOutWeeks, ptsLostText, ptsRowText, ptsBestLineup, ptsSplitDrop, injuryTeams, loadProjections,
       injuryPlan, injuryLossPlan, injuryLossTeam, injuryLostPts, attachLossPlan, pointsLostOpts, INJ_ODDS, retSourceText,
       injuryImpact, teamInjuryImpact, fmtInjuryDelta, injuryPlayoffDeltas, injuryDeltaJob, computeInjuryDeltas, pictureRun, injuryMult, injuryHurtMap, injuryLabel, injuryLabelText, injuryCharged, injuryFuturesNote,
       approxKickoff, lastNameOf, gameCardHTML,
