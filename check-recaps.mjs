@@ -11,7 +11,8 @@
  * and img/og/<slug>.png, written by build-cards.mjs).
  * Every weeks[] entry needs the full recap shape (lede, six games, 3-6 notebook
  * items) at the length the contract asks for, and scores that match the
- * committed week file.
+ * committed week file. "watch" articles: at most one per Wednesday-Monday week,
+ * none dated on a Tuesday, and a kind "preview" only on a Friday.
  */
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
@@ -172,6 +173,30 @@ export function weekProblems(w, file) {
   return out;
 }
 
+/** Day of the week of a "YYYY-MM-DD" date (already Eastern), 0 = Sunday; null when it is not one. */
+const dayOf = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d)) ? new Date(`${d}T12:00:00Z`).getUTCDay() : null;
+/** The Tuesday that opens the Wednesday-Monday fantasy week a date falls in. */
+const weekTuesday = d => {
+  const t = new Date(`${d}T12:00:00Z`);
+  t.setUTCDate(t.getUTCDate() - ((t.getUTCDay() + 5) % 7));
+  return t.toISOString().slice(0, 10);
+};
+
+/** The story watch files at most one piece per Wednesday-Monday week, never on a Tuesday, and a preview only on a Friday. */
+export function watchProblems(arts) {
+  const out = [], seen = new Map();
+  for (const a of arts || []) if (a && a.source === "watch") {
+    const day = dayOf(a.date);
+    if (day === null) { out.push(`${a.slug}: a watch piece needs a YYYY-MM-DD date`); continue; }
+    if (day === 2) out.push(`${a.slug}: a watch piece is dated ${a.date}, a Tuesday (the recap's day)`);
+    if (a.kind === "preview" && day !== 5) out.push(`${a.slug}: a preview is dated ${a.date}, not a Friday`);
+    const wk = weekTuesday(a.date);
+    if (seen.has(wk)) out.push(`${a.slug}: a second watch piece in the week after Tuesday ${wk} (${seen.get(wk)} is already filed)`);
+    else seen.set(wk, a.slug);
+  }
+  return out;
+}
+
 export function recapsProblems(j, was, weekFiles = {}) {
   const out = [];
   const arts = (j && j.articles) || [];
@@ -194,6 +219,7 @@ export function recapsProblems(j, was, weekFiles = {}) {
     if (n < TUESDAY_WORDS.min || n > TUESDAY_WORDS.max)
       out.push(`${a.slug}: the Tuesday article is ${n} words; it runs ${TUESDAY_WORDS.min}-${TUESDAY_WORDS.max}`);
   }
+  out.push(...watchProblems(arts));
   // A tiers block names its teams by manager handle; every one must be a manager in the week files.
   const handles = new Set(Object.values(weekFiles).flatMap(w => (w.standings || []).map(s => String(s.manager).toLowerCase())));
   for (const a of arts) for (const b of a.blocks || []) if (b && b.type === "tiers") {

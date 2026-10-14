@@ -3153,6 +3153,35 @@ group("The recap guard, and nothing sends");
       && /225-650/.test(blocks[1][2]) && /900-1,300/.test(blocks[1][2]) && /425-525/.test(blocks[2][2]));
   check("the Tuesday routine writes a full weeks[] entry every week",
     blocks.length === 3 && /FULL weeks\[\] entry/.test(blocks[0][2]) && /every week, never skipped/.test(blocks[0][2]));
+  /* The story watch runs daily at 9 AM ET, stands down on Tuesday, files at most
+   * one piece per Wednesday-Monday week, and only Friday may file the preview. */
+  const watch = (blocks.find(b => b[1] === "C Cubed story watch") || [])[2] || "";
+  const watchRow = (routines.match(/^\| C Cubed story watch \|[^\n]*/m) || [""])[0];
+  check("the story watch runs daily at 9:00 AM ET, in both EDT and EST",
+    /Daily 9:00 AM/.test(watchRow) && watchRow.includes("`0 13 * * *` (EDT)") && watchRow.includes("`0 14 * * *` (EST)")
+      && /every day at 9:00 AM Eastern/.test(watch), watchRow);
+  check("the story watch stops on a Tuesday before anything else",
+    /^1\. If today is Tuesday \(America\/New_York\), write nothing, commit nothing, send nothing/m.test(watch));
+  check("the story watch files at most one piece per week, counted from the most recent Tuesday",
+    /AT MOST ONE watch piece per\s+fantasy week/.test(watch)
+      && /"source": "watch" has a date after the\s+most recent Tuesday \(America\/New_York\)/.test(watch)
+      && /at most one/.test(prompt) && /dated after the most recent Tuesday/.test(prompt));
+  check("only Friday may file the preview",
+    /Only Friday may file a PREVIEW/.test(watch) && /PREVIEW: ONLY on a Friday/.test(watch) && !/Thursday/.test(watch)
+      && /only on a Friday, the \*\*preview\*\*/.test(prompt));
+  check("the story watch still emails Drew alone, after the push",
+    watch.includes(`To: ${SELF}`) && /No cc\. No bcc\. No other recipient, ever\./.test(watch)
+      && sendProblems(watch).length === 0 && watch.indexOf("push to main") < watch.indexOf("EMAIL DREW"));
+  {
+    const { watchProblems } = await import(join(ROOT, "check-recaps.mjs"));
+    const w = (slug, date, kind = "opinion") => ({ slug, date, kind, source: "watch" });
+    check("check-recaps rejects a second watch piece in a week, a Tuesday watch piece and a non-Friday preview",
+      watchProblems([w("a", "2026-10-14"), w("b", "2026-10-19")]).length === 1
+        && watchProblems([w("a", "2026-10-19"), w("b", "2026-10-21")]).length === 0
+        && watchProblems([w("a", "2026-10-20")]).length === 1
+        && watchProblems([w("a", "2026-10-15", "preview")]).length === 1
+        && watchProblems([w("a", "2026-10-16", "preview")]).length === 0);
+  }
   check("ROUTINES.md keeps the Gmail connector, for the self-email only",
     /keep Gmail connected/i.test(routines) && !/Remove Gmail/i.test(routines));
 
