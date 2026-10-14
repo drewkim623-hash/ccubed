@@ -5621,7 +5621,7 @@ check("points lost: at 390px nothing overflows and no text is under 11px",
   };
   const oddsMain = region(mainHtml, ["/* ================================================ INJURIES =="]);
   const oddsCur = region(curHtml, ["/* ================================ PROJECTED POINTS LOST", "/* ================================================ INJURIES =="]);
-  const fnSrc = (h, n) => { const i = h.indexOf(`\nfunction ${n}(`); return i < 0 ? null : h.slice(i, h.indexOf("\n}\n", i) + 3); };
+  const fnSrc = (h, n) => { const m = new RegExp(`\\n(?:async )?function ${n}\\(`).exec(h); const i = m ? m.index : -1; return i < 0 ? null : h.slice(i, h.indexOf("\n}\n", i) + 3); };
   const named = ["availability", "injuryPlan", "injuryCharged", "injuryMult", "injuryHurtMap", "approxKickoff",
     "rosterInjuries", "simulateSeason", "oddsModel", "loadInjuries"];
   const diff = named.filter(n => !fnSrc(mainHtml, n) || fnSrc(mainHtml, n) !== fnSrc(curHtml, n));
