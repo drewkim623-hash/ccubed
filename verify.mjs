@@ -2821,83 +2821,20 @@ if (!sb.present) {
   check(`group ran to completion: ${"A week is only a result once it has been played"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
-group("The blast ledger");
+group("The recap guard, and nothing sends");
 
-/* data/sent-emails.json is what stops the Saturday blast re-sending a column the
- * league already read. It fails open if it is malformed or if a slug in it does
- * not match anything in recaps.json — the guard would quietly decide nothing has
- * ever been sent. These are cheap and catch exactly that. */
-var ledgerFile = await page.evaluate(async () => {
-  const [l, r] = await Promise.all([
-    fetch("data/sent-emails.json", { cache: "no-cache" }).then(x => x.ok ? x.json() : null).catch(() => null),
-    fetch("recaps.json", { cache: "no-cache" }).then(x => x.json()),
-  ]);
-  if (!l) return { missing: true };
-  const slugs = new Set((r.articles || []).map(a => a.slug));
-  const weeks = new Set((r.weeks || []).map(w => `${w.season}w${w.week}`));
-  const refs = l.sent.flatMap(s => [s.lead, ...(s.alsoSent || [])]).filter(Boolean);
-  return {
-    missing: false,
-    n: l.sent.length,
-    shaped: l.sent.every(s => s.at && s.subject && typeof s.to === "number"),
-    chronological: l.sent.every((s, i, a) => i === 0 || String(a[i - 1].at) <= String(s.at)),
-    danglingSlugs: refs.filter(s => !slugs.has(s)),
-    danglingWeeks: l.sent.filter(s => s.recap).map(s => `${s.recap.season}w${s.recap.week}`)
-      .filter(w => !weeks.has(w)),
-    reachedTwelve: l.sent[l.sent.length - 1] ? l.sent[l.sent.length - 1].to : 0,
-    newestArticleSent: refs.includes(((r.articles || []).slice()
-      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))[0] || {}).slug),
-  };
-});
-if (ledgerFile.missing) {
-  check("the blast ledger is published", false, "data/sent-emails.json not found");
-} else {
-  check("the blast ledger is published and shaped", ledgerFile.shaped, `${ledgerFile.n} entries`);
-  check("its entries are in chronological order", ledgerFile.chronological);
-  check("every article it says was sent still exists",
-    ledgerFile.danglingSlugs.length === 0, ledgerFile.danglingSlugs.join(", "));
-  check("every week it says was blasted still exists",
-    ledgerFile.danglingWeeks.length === 0, ledgerFile.danglingWeeks.join(", "));
-  check("the most recent send reached all twelve", ledgerFile.reachedTwelve === 12,
-    `${ledgerFile.reachedTwelve} addresses`);
-  check("the guard can tell the newest piece has been sent",
-    typeof ledgerFile.newestArticleSent === "boolean", `${ledgerFile.newestArticleSent}`);
-}
-
-/* The subject says the upcoming week; the recap inside is the week just played.
- * Recording the subject's number once logged a recap that did not exist. These
- * run the recorder's week check against the real recaps.json, in node. */
-{
-  const { resolveRecapWeek, newestRecap } = await import(new URL("./email-week.mjs", import.meta.url));
-  const recaps = JSON.parse(await readFile(join(ROOT, "recaps.json"), "utf8"));
-  const newest = newestRecap(recaps);
-  const refused = weekArg => { try { resolveRecapWeek({ recaps, weekArg }); return false; } catch { return true; } };
-  if (!newest) {
-    for (const name of ["recording a send defaults to the recap the email carries",
-      "recording the subject's week instead of the recap's is refused",
-      "recording the newest recap by number is accepted"])
-      check(name, true, "recaps.json has no weeks yet");
-  } else {
-    const byDefault = resolveRecapWeek({ recaps });
-    check("recording a send defaults to the recap the email carries",
-      byDefault && byDefault.season === newest.season && byDefault.week === newest.week,
-      `${JSON.stringify(byDefault)}`);
-    check("recording the subject's week instead of the recap's is refused",
-      refused(String(newest.week + 1)), `--week ${newest.week + 1} with newest ${newest.season} week ${newest.week}`);
-    check("recording the newest recap by number is accepted",
-      !refused(String(newest.week)), `--week ${newest.week}`);
-  }
-}
-
-/* The Tuesday build and the "which week" guard. The unit tests run in node;
- * the prompt and the workflow are read as text. Nothing here requires today's
- * data/latest.json to carry final or generated_at yet — files written before
- * build-week.mjs learned to add them still pass, and the guard just says hold. */
+/* C Cubed has no email, blast, poll or send ledger. The scripts that composed,
+ * recorded or counted them are gone, and the prompt the routines follow must not
+ * bring them back. What stays is the read-only "which week" guard. */
 {
   const { spawnSync } = await import("node:child_process");
+  const { existsSync } = await import("node:fs");
   const node = args => spawnSync(process.execPath, args, { cwd: ROOT, encoding: "utf8", timeout: 60000 });
+  const gone = ["compose-email.mjs", "blast-status.mjs", "email-week.mjs", "poll-tally.mjs",
+    "test-email-week.mjs", "data/sent-emails.json", "build-email.mjs"].filter(f => existsSync(join(ROOT, f)));
+  check("no email, blast, poll or send-ledger file is shipped", gone.length === 0, gone.join(", "));
+
   for (const [file, name] of [
-    ["test-email-week.mjs", "the ledger-week and send-guard unit tests pass"],
     ["test-week-final.mjs", "the week-finality unit tests pass"],
     ["test-effective-week.mjs", "the effective-week unit tests pass, and index.html's copy matches"],
   ]) {
@@ -2907,17 +2844,26 @@ if (ledgerFile.missing) {
   }
 
   const prompt = await readFile(join(ROOT, "weekly-job-prompt.md"), "utf8");
-  const recordCmd = (prompt.match(/node blast-status\.mjs --record[^`]*/) || [""])[0];
-  check("the prompt's record command passes neither --season nor --week",
-    !!recordCmd && !/--(season|week)\b/.test(recordCmd), recordCmd.replace(/\s+/g, " ").slice(0, 140));
-  check("the prompt still says a refused --record means the email already went out",
-    /If `--record` exits 2, the\s+email has already been sent\. Do not send it again\./.test(prompt));
+  const routines = await readFile(join(ROOT, "ROUTINES.md"), "utf8").catch(() => "");
+  const sendy = /blast-status|compose-email|poll-tally|sent-emails|SendUserFile|--record\b|thread_id/;
+  check("the prompt and the routines carry no send, blast, poll or ledger step",
+    !sendy.test(prompt) && !sendy.test(routines), (prompt + routines).match(sendy)?.[0] || "");
   check("the prompt carries the which-week guard",
     /node recap-guard\.mjs/.test(prompt) && /"final": true/.test(prompt) && /latest\.week \+ 1/.test(prompt)
-      && /generated_at/.test(prompt) && /12 hours/.test(prompt) && /data\/sent-emails\.json/.test(prompt)
-      && /send nothing/i.test(prompt));
+      && /generated_at/.test(prompt) && /12 hours/.test(prompt) && /write no recap/i.test(prompt));
+  const blocks = [...routines.matchAll(/^## (C Cubed [^\n]+)\n+```\n([\s\S]*?)```/gm)];
+  check("ROUTINES.md has a prompt for each of the three routines", blocks.length === 3,
+    blocks.map(b => b[1]).join(" | "));
+  check("every routine prompt requires the teaser and its #news link",
+    blocks.length === 3 && blocks.every(b => /teaser/.test(b[2]) && /600 characters/.test(b[2])
+      && b[2].includes("https://drewkim623-hash.github.io/ccubed/#news/<slug>")));
+  check("every routine prompt says redraft, no keepers, and no invented history",
+    blocks.length === 3 && blocks.every(b => /REDRAFT/.test(b[2]) && /no keepers/.test(b[2]) && /Never invent history/.test(b[2])));
+  check("every routine prompt runs the teaser check before pushing",
+    blocks.length === 3 && blocks.every(b => /node check-recaps\.mjs --was/.test(b[2])));
 
   const wf = await readFile(join(ROOT, ".github/workflows/weekly-data.yml"), "utf8");
+  check("the workflow runs no email step", !/compose-email|blast|sendmail|smtp|poll-tally/i.test(wf.replace(/^\s*#.*$/gm, "")));
   const crons = [...wf.matchAll(/cron:\s*"([^"]+)"/g)].map(m => m[1]);
   check("the Tuesday build runs just after midnight ET in both EDT and EST",
     crons.includes("30 4 * * 2") && crons.includes("30 5 * * 2") && !crons.includes("30 12 * * 2"), crons.join(" | "));
@@ -2929,9 +2875,21 @@ if (ledgerFile.missing) {
   const g = node(["recap-guard.mjs", "--json"]);
   let verdict = null;
   try { verdict = JSON.parse(g.stdout); } catch {}
-  check("the send guard reads the real latest.json and ledger and names all four conditions",
-    (g.status === 0 || g.status === 1) && verdict && verdict.checks.length === 4 && verdict.ok === (g.status === 0),
-    verdict ? (verdict.ok ? "would send" : `would hold: ${verdict.failed.join(", ")}`) : String(g.stderr).slice(0, 200));
+  check("the recap guard reads the real latest.json and recaps.json and names all four conditions",
+    (g.status === 0 || g.status === 1) && verdict && verdict.checks.length === 4 && verdict.ok === (g.status === 0)
+      && verdict.checks.map(c => c.id).join() === "final,week,fresh,new",
+    verdict ? (verdict.ok ? "would write" : `would hold: ${verdict.failed.join(", ")}`) : String(g.stderr).slice(0, 200));
+  const { recapGuard } = await import(new URL("./recap-guard.mjs", import.meta.url));
+  const L = { season: "2026", week: 5, final: true, generated_at: new Date().toISOString(),
+    sleeper_state: { season: "2026", week: 6 } };
+  check("the guard writes a week nobody has written up",
+    recapGuard({ latest: L, recaps: { weeks: [], articles: [] } }).ok);
+  check("the guard refuses a week already in weeks[]",
+    !recapGuard({ latest: L, recaps: { weeks: [{ season: "2026", week: 5 }], articles: [] } }).ok);
+  check("the guard refuses a week that already has its Tuesday article",
+    !recapGuard({ latest: L, recaps: { weeks: [], articles: [{ slug: "x", source: "tuesday", kicker: "2026 · week 5" }] } }).ok);
+  check("the guard refuses a week that is not final",
+    !recapGuard({ latest: { ...L, final: false }, recaps: { weeks: [], articles: [] } }).ok);
 
   const latestNow = JSON.parse(await readFile(join(ROOT, "data/latest.json"), "utf8"));
   check("latest.json's new fields, where present, are well-formed",
@@ -2942,7 +2900,7 @@ if (ledgerFile.missing) {
 }
 
 } catch (e) {
-  check(`group ran to completion: ${"The blast ledger"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+  check(`group ran to completion: ${"The recap guard, and nothing sends"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
 group("Injuries");
@@ -3854,12 +3812,15 @@ check("no board posts an implausible hold",
   check(`group ran to completion: ${"A yes/no market is priced as one"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
-group("An emailed link opens the piece");
+group("A link opens the piece");
 
 for (const [url, want] of [
-  ["/?a=the-nine-game-difference", "The Nine-Game Difference"],
-  ["/?a=the-cpes-problem", "The CPES Problem"],
+  ["/#news/the-trade-showed-up-right-away", "The Trade Showed Up Right Away"],
+  ["/#article/2026-draft-report", "Nobody wanted a quarterback, and Josh Jacobs paid for it"],
+  ["/?a=2026-divisions", "Three divisions, six places, and almost nothing between them"],
+  ["/#news/nothing-by-this-name", null],
   ["/?a=nothing-by-this-name", null],
+  ["/#news", null],
   ["/?t=odds", null],
 ]) {
   const p2 = await ctx.newPage();
@@ -3887,7 +3848,121 @@ for (const [url, want] of [
  * drawn from) — through the page's own priceMarket / winTotals / fmtOdds.
  * ---------------------------------------------------------------------- */
 } catch (e) {
-  check(`group ran to completion: ${"An emailed link opens the piece"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+  check(`group ran to completion: ${"A link opens the piece"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+}
+try {
+group("Teasers: every article has one, and it copies");
+
+/* The teaser is what gets pasted into the group chat, so it is checked as text
+ * (length, no HTML, its own link last) and as a page: the link it carries opens
+ * that piece on a cold load and on a reload, the button copies exactly the
+ * teaser, and a refused clipboard leaves the text selected in a textarea. */
+{
+  const { recapsProblems, teaserProblems, teaserLink, TEASER_MAX } = await import(new URL("./check-recaps.mjs", import.meta.url));
+  const recaps = JSON.parse(await readFile(join(ROOT, "recaps.json"), "utf8"));
+  const arts = recaps.articles || [];
+  const slugs = new Set(arts.map(a => a.slug));
+  check("there are articles to check", arts.length > 0, `${arts.length}`);
+  check(`every teaser is at most ${TEASER_MAX} characters`,
+    arts.every(a => typeof a.teaser === "string" && a.teaser.length <= TEASER_MAX),
+    arts.filter(a => !(typeof a.teaser === "string" && a.teaser.length <= TEASER_MAX)).map(a => a.slug).join(", "));
+  check("no teaser contains HTML", arts.every(a => !/<\/?[a-z][^>]*>|&[a-z#0-9]+;/i.test(a.teaser || "")));
+  const linked = arts.map(a => ((a.teaser || "").match(/#news\/([^\s#?]+)\s*$/) || [])[1]);
+  check("every teaser's link names an article that exists", linked.every(s => s && slugs.has(s)),
+    arts.filter((a, i) => !(linked[i] && slugs.has(linked[i]))).map(a => a.slug).join(", "));
+  check("every teaser links to its own article, in the site's #news/ form",
+    arts.every(a => (a.teaser || "").trim().endsWith(teaserLink(a.slug))));
+  check("check-recaps.mjs finds nothing wrong with recaps.json", recapsProblems(recaps).length === 0,
+    recapsProblems(recaps).join(" | "));
+  check("check-recaps.mjs catches a long teaser, HTML and a link to nowhere",
+    teaserProblems({ slug: "a", teaser: "x".repeat(601) }, slugs).length > 0
+      && teaserProblems({ slug: "a", teaser: `<b>Hi</b>\nline\n${teaserLink("a")}` }, slugs).some(p => /HTML/.test(p))
+      && teaserProblems({ slug: "a", teaser: `Hi\nline\n${teaserLink("zzz")}` }, slugs).length > 0);
+
+  const newest = arts.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))[0];
+  for (const width of [390, 1280]) {
+    const tctx = await browser.newContext({ viewport: { width, height: width === 390 ? 844 : 900 } });
+    await tctx.grantPermissions(["clipboard-read", "clipboard-write"], { origin: BASE });
+    const tp = await tctx.newPage();
+    const terrs = [];
+    tp.on("pageerror", e => terrs.push(e.message));
+    const hash = "#news/" + newest.slug;
+    await tp.goto(BASE + "/" + hash, { waitUntil: "domcontentloaded" });
+    await tp.waitForFunction(() => document.body.dataset.ready === "1", null, { timeout: 90000 });
+    await tp.waitForSelector('[data-panel="article"] .ateaser', { timeout: 15000 }).catch(() => {});
+    const opened = async () => tp.evaluate(() => {
+      const a = document.querySelector('[data-panel="article"]');
+      return { headline: a && !a.hidden ? a.querySelector("h2").textContent : null, hash: location.hash,
+        teaser: (a && a.querySelector(".ateaser pre") || {}).textContent || null };
+    });
+    let got = await opened();
+    check(`${width}px: a cold load of ${hash} opens that article`, got.headline === newest.headline,
+      `headline=${got.headline}${terrs.length ? " ERR:" + terrs.join("|") : ""}`);
+    check(`${width}px: the article shows its teaser exactly`, got.teaser === newest.teaser);
+    check(`${width}px: the address stays on #news/<slug>`, got.hash === hash, got.hash);
+    await tp.reload({ waitUntil: "domcontentloaded" });
+    await tp.waitForFunction(() => document.body.dataset.ready === "1", null, { timeout: 90000 });
+    await tp.waitForSelector('[data-panel="article"] .ateaser', { timeout: 15000 }).catch(() => {});
+    got = await opened();
+    check(`${width}px: a reload stays on the article`, got.headline === newest.headline, `headline=${got.headline}`);
+
+    const btn = tp.locator('[data-panel="article"] .copytxt');
+    const box = await btn.boundingBox();
+    check(`${width}px: the Copy teaser button is on screen and big enough to tap`,
+      !!box && box.x >= 0 && box.x + box.width <= width && box.height >= 44, JSON.stringify(box));
+    const live = await tp.evaluate(() => {
+      const s = document.querySelector('[data-panel="article"] .ateaser .say');
+      return s && s.getAttribute("aria-live") === "polite" && s.getAttribute("role") === "status";
+    });
+    check(`${width}px: the confirmation is an aria-live status`, live);
+    await btn.click();
+    await tp.waitForFunction(() => /Copied/.test(document.querySelector('[data-panel="article"] .ateaser .say').textContent), null, { timeout: 5000 }).catch(() => {});
+    const clip = await tp.evaluate(() => navigator.clipboard.readText()).catch(e => "ERR " + e.message);
+    const say = await tp.evaluate(() => document.querySelector('[data-panel="article"] .ateaser .say').textContent);
+    check(`${width}px: Copy teaser puts exactly the teaser on the clipboard`, clip === newest.teaser, clip.slice(0, 80));
+    check(`${width}px: and says so`, /Copied/.test(say), say);
+    const overflow = await tp.evaluate(() => document.documentElement.scrollWidth - innerWidth);
+    check(`${width}px: the article page does not scroll sideways`, overflow <= 1, `${overflow}px`);
+
+    if (width === 390) {
+      const fp = await tctx.newPage();
+      await fp.addInitScript(() => {
+        navigator.clipboard.writeText = () => Promise.reject(new Error("denied"));
+      });
+      await fp.goto(BASE + "/" + hash, { waitUntil: "domcontentloaded" });
+      await fp.waitForFunction(() => document.body.dataset.ready === "1", null, { timeout: 90000 });
+      await fp.waitForSelector('[data-panel="article"] .copytxt', { timeout: 15000 });
+      await fp.click('[data-panel="article"] .copytxt');
+      await fp.waitForFunction(() => !document.querySelector('[data-panel="article"] .ateaser textarea').hidden, null, { timeout: 5000 }).catch(() => {});
+      const fb = await fp.evaluate(() => {
+        const ta = document.querySelector('[data-panel="article"] .ateaser textarea');
+        return { hidden: ta.hidden, readOnly: ta.readOnly, value: ta.value, focused: document.activeElement === ta,
+          selected: ta.selectionEnd - ta.selectionStart,
+          say: document.querySelector('[data-panel="article"] .ateaser .say').textContent,
+          wide: ta.getBoundingClientRect().right <= innerWidth };
+      });
+      check("390px: a refused clipboard shows the teaser in a readonly textarea",
+        !fb.hidden && fb.readOnly && fb.value === newest.teaser, JSON.stringify({ hidden: fb.hidden, readOnly: fb.readOnly }));
+      check("390px: and it is focused and fully selected", fb.focused && fb.selected === newest.teaser.length, `selected ${fb.selected}`);
+      check("390px: and the status says to copy it now", /copy it now/.test(fb.say), fb.say);
+      check("390px: and the textarea fits the screen", fb.wide);
+      await fp.close();
+    }
+    await tctx.close();
+  }
+
+  // A #news/ link pasted into a tab that already has the site open.
+  await page.evaluate(() => { location.hash = "#news/2026-divisions"; });
+  await page.waitForFunction(() => {
+    const a = document.querySelector('[data-panel="article"]');
+    return a && !a.hidden && /Three divisions/.test(a.querySelector("h2").textContent);
+  }, null, { timeout: 10000 }).then(() => true, () => false)
+    .then(ok => check("changing the hash to #news/<slug> in an open tab opens that piece", ok));
+  await page.evaluate(() => window.__CCUBED && document.querySelector('#tabs button[data-tab="home"]').click());
+}
+
+} catch (e) {
+  check(`group ran to completion: ${"Teasers: every article has one, and it copies"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
 group("Futures markets");
@@ -5233,8 +5308,6 @@ group("Safety: nothing points at another league");
   check("no email address appears in index.html", !/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}/.test(html.replace(/@media|@keyframes|@supports/g, "")));
   check("no member email address appears in any shipped file", hits.email.length === 0, hits.email.join(" | "));
   check("no keepers.json is shipped", !SHIPPED.includes("keepers.json"));
-  const poll = await rf(join(ROOT, "poll-tally.mjs"), "utf8").catch(() => "");
-  check("the poll recipient list is empty until Drew fills it in", /const LEAGUE = \[\];/.test(poll));
   const live = await page.evaluate(() => window.__CCUBED.DB.seasons.map(s => s.leagueId));
   check("the page only ever loaded C Cubed's league", live.length >= 1 && live.every(id => id === "1387595114829864960"), live.join(","));
 }
