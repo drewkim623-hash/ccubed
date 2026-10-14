@@ -873,6 +873,10 @@
   .astat .t{font-size:14.5px;line-height:1.5;color:var(--ink-2)}
   .anote{font-size:13px;line-height:1.6;color:var(--muted);border-top:1px solid var(--grid);
     padding-top:14px;margin:24px 0 0}
+  .aimg{margin:24px 0}
+  .aimg img{display:block;max-width:100%;height:auto;border-radius:12px;border:1px solid var(--grid)}
+  .aimg figcaption{font-size:13px;line-height:1.5;color:var(--muted);margin-top:9px}
+  .aimg figcaption a{display:inline-block;margin-top:4px;font-weight:750;color:var(--blue)}
 
   .abars{margin:24px 0;max-width:none}
   .abars .at{font-size:15px;font-weight:800;letter-spacing:-.01em}
@@ -3353,6 +3357,16 @@ function articleBlock(b) {
       return `<p class="anote">${artText(b.text)}</p>`;
     case "bracket":
       return bracketHTML(b);
+    case "img": {
+      // Only an image shipped in this repo's img/, and only an https or in-page link.
+      if (!/^img\/[\w.-]+\.(png|webp|jpe?g)$/.test(b.src || "")) return "";
+      const href = /^(https:\/\/|#)/.test(b.href || "") ? b.href : "";
+      const size = b.width && b.height ? ` width="${Number(b.width) || ""}" height="${Number(b.height) || ""}"` : "";
+      const cap = [b.caption ? esc(b.caption) : "",
+        href && b.link ? `<a href="${esc(href)}">${esc(b.link)} →</a>` : ""].filter(Boolean).join("<br>");
+      return `<figure class="aimg"><img src="${esc(b.src)}" alt="${esc(b.alt || "")}"${size} loading="lazy">
+        ${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
+    }
     case "bars": {
       // Diverging about zero, scaled to the biggest swing either way.
       const rows = b.rows || [];
@@ -3487,7 +3501,9 @@ async function copyTeaser(box, text) {
 async function articleBySlug(slug) {
   try {
     const j = await jget("recaps.json");
-    return ((j && j.articles) || []).find(a => a.slug === slug) || null;
+    // A rewritten piece lists its old slug in aliases, so links already shared still open it.
+    const arts = (j && j.articles) || [];
+    return arts.find(a => a.slug === slug) || arts.find(a => (a.aliases || []).includes(slug)) || null;
   } catch (e) { return null; }
 }
 
@@ -9785,10 +9801,11 @@ async function boot() {
     };
     route();
     // A #news/<slug> link pasted into a tab that already has the site open
-    // changes only the hash; follow it. replaceState (what the site itself
-    // uses) never fires this, so the tabs do not bounce.
+    // changes only the hash; follow it. So does a link inside an article to a
+    // tab (#picture). replaceState (what the site itself uses) never fires
+    // this, so the tabs do not bounce.
     addEventListener("hashchange", () => {
-      if (/^#(?:news|article)\//.test(location.hash)) route();
+      if (/^#(?:news|article)\//.test(location.hash) || TABS.some(t => "#" + t.id === location.hash)) route();
     });
     $("#footNote").textContent = DB.state ? ` Currently NFL ${DB.state.season}, week ${DB.state.week}.` : "";
     window.__CCUBED = {
