@@ -12,7 +12,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "nod
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { mergeHistory, rowKey, rowsFromSnapshot } from "./odds-history.mjs";
+import { mergeHistory, rowKey, rowsFromSnapshot, setTeamWeek, teamRowsFromSnapshot } from "./odds-history.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SCRIPT = join(HERE, "build-odds-history.mjs");
@@ -105,6 +105,40 @@ test("rows from different weeks land in the right week, weeks sorted, rows sorte
   assert.equal(out.weeks["2026-3"].length, 1);
 });
 
+// ---- team odds per finalized week ------------------------------------------
+
+const TEAM = (uid, playoffNow, titleNow) => ({ uid, rid: 1, manager: uid, playoffNow, titleNow, playoffWas: 0.5, titleWas: 0.1 });
+const BETWEEN = (generated, week, teams, over = {}) =>
+  ({ generated, season: "2026", week, liveWeek: null, decided: (week - 1) * teams.length / 2, teams, games: [], ...over });
+
+test("teamRowsFromSnapshot: only a between-weeks reading, keyed by the week just finished", () => {
+  const teams = [TEAM("a", 0.6, 0.2), TEAM("b", 0.4, 0.1)];
+  assert.deepEqual(teamRowsFromSnapshot(BETWEEN("T", 6, teams)), { key: "2026-5", rows: [
+    { at: "T", uid: "a", rid: 1, manager: "a", playoff: 0.6, title: 0.2 },
+    { at: "T", uid: "b", rid: 1, manager: "b", playoff: 0.4, title: 0.1 },
+  ] });
+  assert.equal(teamRowsFromSnapshot(BETWEEN("T", 6, teams, { liveWeek: 6 })), null, "a week is live");
+  assert.equal(teamRowsFromSnapshot(BETWEEN("T", 6, teams, { decided: 4 })), null, "a game of week 5 is not decided");
+  assert.equal(teamRowsFromSnapshot(BETWEEN("T", 1, teams)), null, "preseason");
+  assert.equal(teamRowsFromSnapshot(BETWEEN("T", 6, [TEAM("a", 0.6, 0.2), { uid: "b", playoffNow: null, titleNow: null }])), null);
+  assert.equal(teamRowsFromSnapshot(null), null);
+});
+
+test("setTeamWeek replaces a week whole and leaves the rest of the file alone", () => {
+  const T = (uid, playoff) => ({ at: "t", uid, rid: 1, manager: uid, playoff, title: 0 });
+  const existing = FILE({ "2026-5": [ROW("2026-10-01T00:00:00Z", "a", "b", 0.5)] });
+  const one = setTeamWeek(existing, "2026-5", [T("b", 0.4), T("a", 0.6)]);
+  assert.equal(one.changed, true);
+  assert.deepEqual(one.out.weeks, existing.weeks);
+  assert.deepEqual(one.out.teamWeeks["2026-5"].map(x => x.uid), ["a", "b"]);
+  const two = setTeamWeek(one.out, "2026-5", [T("a", 0.9), T("b", 0.1)]);
+  assert.equal(two.changed, true);
+  assert.deepEqual(two.out.teamWeeks["2026-5"].map(x => x.playoff), [0.9, 0.1]);
+  const three = setTeamWeek(two.out, "2026-5", [T("b", 0.1), T("a", 0.9)]);
+  assert.equal(three.changed, false);
+  assert.equal(JSON.stringify(three.out), JSON.stringify(two.out));
+});
+
 // ---- end to end -------------------------------------------------------------
 
 const git = (cwd, ...args) => execFileSync("git", args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
@@ -172,11 +206,33 @@ test("end to end: a --depth 1 clone keeps every committed row and adds the worki
   assert.equal(readFileSync(join(clone, "data/odds-history.json"), "utf8"), bytes, "second run is byte-identical");
 }));
 
+test("end to end: a finalized week's team rows are written once and replaced on a re-run", () => withTmp(tmp => {
+  const repo = join(tmp, "repo");
+  initRepo(repo);
+  const hist = () => JSON.parse(readFileSync(join(repo, "data/odds-history.json"), "utf8"));
+  write(repo, "data/odds-snapshot.json", BETWEEN("2026-10-13T05:00:00.000Z", 6, [TEAM("a", 0.6, 0.2), TEAM("b", 0.4, 0.1)]));
+  assert.match(run(repo).stdout, /team odds for 2026-5 written/);
+  const bytes = readFileSync(join(repo, "data/odds-history.json"), "utf8");
+  assert.match(run(repo).stdout, /unchanged \(file unchanged\)/);
+  assert.equal(readFileSync(join(repo, "data/odds-history.json"), "utf8"), bytes);
+
+  write(repo, "data/odds-snapshot.json", BETWEEN("2026-10-14T11:00:00.000Z", 6, [TEAM("a", 0.7, 0.3), TEAM("b", 0.3, 0.05)]));
+  assert.equal(run(repo).status, 0);
+  assert.deepEqual(hist().teamWeeks["2026-5"].map(x => [x.uid, x.playoff, x.at]),
+    [["a", 0.7, "2026-10-14T11:00:00.000Z"], ["b", 0.3, "2026-10-14T11:00:00.000Z"]]);
+
+  // Mid-week readings add nothing to teamWeeks.
+  write(repo, "data/odds-snapshot.json", SNAP("2026-10-16T01:00:00.000Z", 6, [G("a", "b", 0.5)]));
+  assert.equal(run(repo).status, 0);
+  assert.deepEqual(Object.keys(hist().teamWeeks), ["2026-5"]);
+  assert.equal(hist().weeks["2026-6"].length, 1);
+}));
+
 test("end to end: a corrupt history file is left untouched and the exit code is 0", () => withTmp(tmp => {
   const repo = join(tmp, "repo");
   initRepo(repo);
   write(repo, "data/odds-snapshot.json", SNAP("2026-09-20T12:00:00.000Z", 2, [G("a", "b", 0.5)]));
-  for (const bad of ['{ "weeks": { "2026-1": [', '{"_comment":"no weeks"}\n', "[]\n", '{"weeks":{"2026-1":{"at":"x"}}}\n']) {
+  for (const bad of ['{ "weeks": { "2026-1": [', '{"_comment":"no weeks"}\n', "[]\n", '{"weeks":{"2026-1":{"at":"x"}}}\n', '{"weeks":{},"teamWeeks":{"2026-5":{}}}\n']) {
     write(repo, "data/odds-history.json", bad);
     const r = run(repo);
     assert.equal(r.status, 0, r.stderr);

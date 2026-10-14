@@ -3,7 +3,8 @@
  * merge rows into the history without ever losing or rewriting one.
  *
  *   data/odds-history.json = { _comment, generated,
- *     weeks: { "<season>-<week>": [ { at, a, b, pA, aPts, bPts, settled }, ... ] } }
+ *     weeks: { "<season>-<week>": [ { at, a, b, pA, aPts, bPts, settled }, ... ] },
+ *     teamWeeks: { "<season>-<week>": [ { at, uid, rid, manager, playoff, title }, ... ] } }
  *
  * No I/O here; test-odds-history.mjs exercises it directly.
  */
@@ -68,4 +69,40 @@ export function mergeHistory(existing, incoming) {
     weeks: Object.fromEntries(Object.keys(weeks).sort().map(k => [k, weeks[k]])),
   };
   return { out, added };
+}
+
+// ---- each team's odds at the end of each finalized week ----------------------
+//
+//   teamWeeks: { "<season>-<week>": [ { at, uid, rid, manager, playoff, title }, ... ] }
+//
+// Beside weeks, not in it: weeks keeps the matchup rows exactly as DFFL writes
+// them. playoff and title are the snapshot's playoffNow and titleNow, copied
+// as they are (fractions, not rounded).
+
+// The finalized week a snapshot describes, as { key, rows }, or null. Only a
+// reading taken between weeks counts: no week live, and the games decided are
+// exactly every game of the weeks before snap.week. The week on such a reading
+// is the next one to be played, so the finished one is week - 1.
+export function teamRowsFromSnapshot(snap) {
+  if (!snap || typeof snap !== "object" || !snap.season || snap.liveWeek != null) return null;
+  const teams = Array.isArray(snap.teams) ? snap.teams : [];
+  const week = Number(snap.week) - 1;
+  if (!Number.isInteger(week) || week < 1 || !teams.length || teams.length % 2) return null;
+  if (snap.decided !== week * teams.length / 2) return null;
+  if (!teams.every(t => t && t.uid && typeof t.playoffNow === "number" && typeof t.titleNow === "number")) return null;
+  const at = snap.generated || null;
+  return {
+    key: `${snap.season}-${week}`,
+    rows: teams.map(t => ({ at, uid: t.uid, rid: t.rid ?? null, manager: t.manager ?? null, playoff: t.playoffNow, title: t.titleNow })),
+  };
+}
+
+// existing: the parsed file (or null). Replaces that one week's team rows, so
+// running a week again never duplicates it. Returns { out, changed }.
+export function setTeamWeek(existing, key, rows) {
+  const base = existing && typeof existing === "object" ? existing : {};
+  const prev = base.teamWeeks && typeof base.teamWeeks === "object" && !Array.isArray(base.teamWeeks) ? base.teamWeeks : {};
+  const next = { ...prev, [key]: rows.slice().sort((x, y) => String(x.uid).localeCompare(String(y.uid))) };
+  const out = { ...base, teamWeeks: Object.fromEntries(Object.keys(next).sort().map(k => [k, next[k]])) };
+  return { out, changed: JSON.stringify(prev[key]) !== JSON.stringify(out.teamWeeks[key]) };
 }
