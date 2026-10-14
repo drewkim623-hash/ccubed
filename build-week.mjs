@@ -23,11 +23,11 @@
  * every league matchup scored (see week-final.mjs). If it is not, nothing is
  * written — latest.json stays where it was and the workflow has nothing of
  * ours to commit — and the script still exits 0, printing a GitHub ::warning::.
- * --force writes anyway, marked final: false, which the send guard refuses.
+ * --force writes anyway, marked final: false, which the recap guard refuses.
  * If Sleeper's schedule feed cannot be read, nothing is written either, and
  * the rest of the workflow still runs. latest.json also carries
  * Sleeper's state as read at the time, `final`, and a `generated_at` UTC
- * timestamp, which is what the sending routine's "which week" check reads.
+ * timestamp, which is what the recap routine's "which week" check reads.
  */
 import { writeFile, mkdir } from "fs/promises";
 import { fetchJSON } from "./fetch-json.mjs";
@@ -111,7 +111,7 @@ if (!finality.final) {
     process.exit(0);
   }
   console.log(`::warning::build-week --force: WRITING WEEK ${target} ANYWAY, marked final: false. `
-    + `The send guard (recap-guard.mjs) will refuse it until a normal run marks it final.`);
+    + `The recap guard (recap-guard.mjs) will refuse it until a normal run marks it final.`);
 }
 
 const [users, rosters, txns, players] = await Promise.all([

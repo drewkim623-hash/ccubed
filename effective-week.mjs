@@ -1,12 +1,12 @@
 /**
- * The effective current week — one rule for the site and the email.
+ * The effective current week — one rule for the site and the odds snapshot.
  *
  * Sleeper advances state.week hours after Monday night's last game: every
  * week 2 game was final at 23:40 ET on 21 September and state.week still read
  * 2 after midnight; it read 3 by 07:03. Until it flips, the site used to treat
- * the finished week as live, and the email snapshot (build-email.mjs, which
- * reads the site) would title a 1 AM Tuesday email with the finished week and
- * show it as in progress.
+ * the finished week as live, and the odds snapshot (build-odds-snapshot.mjs,
+ * which reads the site) would record the finished week at 1 AM Tuesday as
+ * still in progress.
  *
  * build-week.mjs marks a week final in data/latest.json once every NFL game in
  * it is complete and every league matchup is scored. So: if latest.json says

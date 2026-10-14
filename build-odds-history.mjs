@@ -3,7 +3,7 @@
  *
  *   node build-odds-history.mjs [--root <dir>]
  *
- * data/odds-snapshot.json is rewritten by build-email.mjs several times a week,
+ * data/odds-snapshot.json is rewritten by build-odds-snapshot.mjs several times a week,
  * and every copy of it is a reading of what the site believed at that moment.
  * Nothing else keeps that record, so this adds each reading's matchup rows to
  * data/odds-history.json:

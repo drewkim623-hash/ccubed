@@ -1,23 +1,19 @@
 /**
- * Write the weekly email blast.
+ * Write down what the site's odds board says.
  *
- * The numbers in this email have to agree with the site exactly — a blast that
- * says 34% while the Odds tab says 29% is worse than no blast at all. Rather
- * than reimplement the model here and let the two drift, this drives the real
- * page in a headless browser and reads the numbers the site itself computed.
+ * The numbers an article quotes have to agree with the site exactly — a column
+ * that says 34% while the Odds tab says 29% is worse than no column at all.
+ * Rather than reimplement the model here and let the two drift, this drives the
+ * real page in a headless browser and reads the numbers the site itself computed.
  *
- *   node build-email.mjs                       # against the published site
- *   node build-email.mjs --local               # against ./index.html
- *   node build-email.mjs --out preview.html
+ *   node build-odds-snapshot.mjs               # against the published site
+ *   node build-odds-snapshot.mjs --local       # against ./index.html
  *
- * Writes data/odds-snapshot.json — the numbers, and nothing else.
+ * Writes data/odds-snapshot.json — the numbers, and nothing else. Sends nothing.
  *
- * This half needs a browser and the public site, so it runs in GitHub Actions.
- * The other half, compose-email.mjs, turns the snapshot into the email and runs
- * anywhere — which matters, because the routine that actually sends the thing
- * cannot reach either Sleeper or the site.
- *
- * The split exists so the email cannot invent a number: every figure in it was
+ * It needs a browser and the public site, so it runs in GitHub Actions. The
+ * article routines read the committed snapshot, because they can reach neither
+ * Sleeper nor the site, and so cannot invent a number: every figure was
  * computed by the page itself and written down here.
  */
 import { writeFile, mkdir } from "fs/promises";
@@ -71,7 +67,7 @@ const D = await page.evaluate(() => {
   const name = uid => { const m = F.DB.mgr.get(uid); return (m && m.name) || String(uid); };
 
   // The posted price, not just the probability. priceMarket applies the same 6%
-  // hold the board posts, so what lands in the email is the number the site
+  // hold the board posts, so what lands in an article is the number the site
   // shows rather than a percentage the reader has to convert in their head.
   const priced = (probs) => {
     const m = F.priceMarket(probs.map((p, i) => ({ i, p })));
@@ -144,9 +140,9 @@ if (server) server.close();
 /* ------------------------------------------------------------ snapshot */
 const snapshot = {
   _comment:
-    "Written by build-email.mjs, which drives the published site in a headless browser and reads "
-    + "the numbers the page itself computed. compose-email.mjs turns this into the weekly email. "
-    + "Nothing downstream recomputes a probability, so the email and the site cannot disagree.",
+    "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and "
+    + "reads the numbers the page itself computed. The article routines quote from this file. "
+    + "Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
   generated: new Date().toISOString(),
   at: Date.now(),
   ...D,
