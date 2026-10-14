@@ -202,7 +202,13 @@ export function recapsProblems(j, was, weekFiles = {}) {
     for (const r of rows) {
       if (typeof r.pct !== "number" || !(r.pct >= 0 && r.pct <= 100)) out.push(`${a.slug}: tiers row ${r.team} has pct ${JSON.stringify(r.pct)}, not 0-100`);
       if (handles.size && !handles.has(String(r.team).toLowerCase())) out.push(`${a.slug}: tiers team ${JSON.stringify(r.team)} is not a manager`);
+      if (r.bye != null && (typeof r.bye !== "number" || !(r.bye >= 0 && r.bye <= 100))) out.push(`${a.slug}: tiers row ${r.team} has bye ${JSON.stringify(r.bye)}, not 0-100`);
+      if (r.status != null && !["bye", "in", "out"].includes(r.status)) out.push(`${a.slug}: tiers row ${r.team} has status ${JSON.stringify(r.status)}`);
+      if (r.seed != null && !(Number.isInteger(r.seed) && r.seed >= 1 && r.seed <= rows.length)) out.push(`${a.slug}: tiers row ${r.team} has seed ${JSON.stringify(r.seed)}`);
     }
+    const seeds = rows.filter(r => r.seed != null).map(r => r.seed);
+    if (new Set(seeds).size !== seeds.length) out.push(`${a.slug}: a tiers block repeats a seed`);
+    if (b.href != null && !/^(https:\/\/|#)/.test(b.href)) out.push(`${a.slug}: tiers href must be https or #`);
     if (b.cutAfter && !rows.some(r => r.team === b.cutAfter)) out.push(`${a.slug}: tiers cutAfter ${b.cutAfter} is not one of its rows`);
   }
   for (const a of (was && was.articles) || [])

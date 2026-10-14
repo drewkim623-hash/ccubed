@@ -4057,58 +4057,62 @@ for (const [url, want] of [
   await p2.close();
 }
 
-/* The week 5 piece carries the Playoff Picture as an image: it loads, it has
- * alt text, it never runs wider than the column, and its link goes to the
- * live board — which, followed in-page, opens the Playoff Picture tab. */
+/* The week 5 piece carries the Playoff Picture as one tier-card graphic: Playoff %
+ * with seed, bye-or-in status and Bye %. Its numbers are checked against the block
+ * as written in recaps.json and the article's own teaser — not the live snapshot,
+ * which moves on every week. It never runs wider than the page, no team name breaks
+ * inside a word, and its link goes to the live board — which, followed in-page,
+ * opens the Playoff Picture tab. */
 for (const width of [390, 1280]) {
   const ictx = await browser.newContext({ viewport: { width, height: 900 } });
   const ip = await ictx.newPage();
   await ip.goto(BASE + "/#news/four-teams-at-4-1-and-a-gap-behind-them", { waitUntil: "domcontentloaded" });
   await ip.waitForFunction(() => document.body.dataset.ready === "1", null, { timeout: 90000 });
-  await ip.waitForSelector('[data-panel="article"] .aimg img', { timeout: 15000 }).catch(() => {});
-  await ip.evaluate(() => { const i = document.querySelector('[data-panel="article"] .aimg img'); if (i) { i.loading = "eager"; i.scrollIntoView(); } });
-  await ip.waitForFunction(() => { const i = document.querySelector('[data-panel="article"] .aimg img'); return i && i.complete; }, null, { timeout: 15000 }).catch(() => {});
-  const im = await ip.evaluate(() => {
-    const f = document.querySelector('[data-panel="article"] .aimg');
-    const i = f && f.querySelector("img"), a = f && f.querySelector("figcaption a");
-    const col = f && f.parentElement.getBoundingClientRect();
-    return i ? { src: i.getAttribute("src"), nw: i.naturalWidth, alt: i.alt, w: i.getBoundingClientRect().width,
-      colW: col.width, docOver: document.documentElement.scrollWidth > innerWidth + 1,
-      href: a && a.getAttribute("href"), link: a && a.textContent } : null;
-  });
-  check(`${width}px: the article shows the Playoff Picture image`, im && im.src === "img/playoff-picture-2026-w5.webp" && im.nw > 0,
-    JSON.stringify(im));
-  check(`${width}px: the image has alt text`, im && im.alt.length > 40, im ? im.alt.slice(0, 60) : "");
-  check(`${width}px: the image fits the column and the page does not scroll sideways`,
-    im && im.w <= im.colW + 0.5 && !im.docOver, im ? `${im.w} in ${im.colW}` : "");
-  check(`${width}px: the image links to the live Playoff Picture`,
-    im && im.href === "https://drewkim623-hash.github.io/ccubed/#picture" && /See the live Playoff Picture/.test(im.link || ""), im && im.href);
-  // The playoff odds are tier cards: twelve teams, each at the snapshot's own number,
-  // nothing wider than the page and no name broken inside a word.
+  await ip.waitForSelector('[data-panel="article"] .atiers', { timeout: 15000 }).catch(() => {});
   const tc = await ip.evaluate(async () => {
-    const snap = await (await fetch("data/odds-snapshot.json", { cache: "no-cache" })).json();
-    const want = Object.fromEntries(snap.teams.map(t => [t.manager.toLowerCase(), (Math.round(t.playoffNow * 1000) / 10).toFixed(1) + "%"]));
-    const rows = [...document.querySelectorAll('[data-panel="article"] .atiers .atrow')];
-    const off = rows.filter(r => r.querySelector(".pn").textContent.trim() !== want[r.dataset.team.toLowerCase()]).map(r => r.dataset.team);
+    const j = await (await fetch("recaps.json", { cache: "no-cache" })).json();
+    const art = j.articles.find(a => a.slug === "four-teams-at-4-1-and-a-gap-behind-them");
+    const blks = art.blocks.filter(b => b.type === "tiers");
+    const want = new Map(blks.flatMap(b => b.tiers.flatMap(t => t.rows)).map(r => [r.team.toLowerCase(), r]));
+    const A = document.querySelector('[data-panel="article"]');
+    const rows = [...A.querySelectorAll(".atiers .atrow")];
+    const off = rows.filter(r => {
+      const w = want.get(r.dataset.team.toLowerCase()), pb = r.querySelector(".pb");
+      return !w || r.querySelector(".pn").textContent.trim() !== Number(w.pct).toFixed(1) + "%"
+        || Number(r.dataset.seed) !== w.seed || (w.bye != null ? !pb || pb.textContent.replace(/\s/g, "") !== `BYE${w.bye}%` : !!pb);
+    }).map(r => r.dataset.team);
+    // the teaser's odds line quotes the same numbers the graphic shows
+    const odds = (art.teaser.split("\n").find(l => /playoffs/.test(l)) || "").match(/\d+\.\d%/g) || [];
+    const shown = new Set(rows.map(r => r.querySelector(".pn").textContent.trim()));
     const midWord = [];
-    for (const n of document.querySelectorAll('[data-panel="article"] .atiers .tlab-n, [data-panel="article"] .atiers .tlab-m')) {
+    for (const n of A.querySelectorAll(".atiers .tlab-n, .atiers .tlab-m")) {
       const t = n.firstChild; if (!t) continue;
       for (const m of t.textContent.matchAll(/\S+/g)) {
         const rg = document.createRange(); rg.setStart(t, m.index); rg.setEnd(t, m.index + m[0].length);
         if (new Set([...rg.getClientRects()].map(r => Math.round(r.top))).size > 1) midWord.push(m[0]);
       }
     }
-    const blk = document.querySelector('[data-panel="article"] .atiers');
-    return { blocks: document.querySelectorAll('[data-panel="article"] .atiers').length, rows: rows.length, off, midWord,
-      cut: document.querySelectorAll('[data-panel="article"] .atrow.cutafter').length,
+    const blk = A.querySelector(".atiers"), link = blk && blk.querySelector("a.alink");
+    return { blocks: A.querySelectorAll(".atiers").length, written: blks.length, rows: rows.length, off,
+      seeds: rows.map(r => Number(r.dataset.seed)).sort((a, b) => a - b).join(","),
+      byes: rows.filter(r => r.querySelector(".atst.bye")).map(r => r.dataset.seed).sort().join(","),
+      odds, oddsShown: odds.length > 0 && odds.every(p => shown.has(p)), midWord,
+      cut: A.querySelectorAll(".atrow.cutafter").length,
+      cutSeed: (A.querySelector(".atrow.cutafter") || { dataset: {} }).dataset.seed,
       over: document.documentElement.scrollWidth > innerWidth + 1 || (blk && blk.scrollWidth > blk.clientWidth + 1),
-      oldBars: [...document.querySelectorAll('[data-panel="article"] .abars .at')].some(x => /Playoff odds/.test(x.textContent)) };
+      img: A.querySelectorAll(".aimg").length, oldBars: A.querySelectorAll(".abars").length,
+      href: link && link.getAttribute("href"), link: link && link.textContent };
   });
-  check(`${width}px: week 5's playoff odds are one tiers block of 12 teams with one playoff line`,
-    tc.blocks === 1 && tc.rows === 12 && tc.cut === 1 && !tc.oldBars, JSON.stringify(tc));
-  check(`${width}px: every tier percent matches odds-snapshot`, tc.rows === 12 && tc.off.length === 0, tc.off.join(","));
+  check(`${width}px: week 5's playoff picture is one tiers graphic of 12 teams with one playoff line`,
+    tc.blocks === 1 && tc.written === 1 && tc.rows === 12 && tc.cut === 1 && tc.cutSeed === "6", JSON.stringify(tc));
+  check(`${width}px: the old Playoff Picture image and odds chart are gone from the article`, tc.img === 0 && tc.oldBars === 0, `${tc.img} img, ${tc.oldBars} bars`);
+  check(`${width}px: every Playoff %, seed and Bye % matches the block as written`, tc.rows === 12 && tc.off.length === 0, tc.off.join(","));
+  check(`${width}px: seeds run 1-12 and the top two hold the byes`, tc.seeds === "1,2,3,4,5,6,7,8,9,10,11,12" && tc.byes === "1,2", `${tc.seeds} byes=${tc.byes}`);
+  check(`${width}px: the teaser's odds (${tc.odds.join(", ")}) are on the graphic`, tc.oddsShown);
   check(`${width}px: the tier cards do not overflow sideways`, !tc.over);
   check(`${width}px: no team name in the tier cards breaks mid-word`, tc.midWord.length === 0, tc.midWord.join(","));
+  check(`${width}px: the graphic links to the live Playoff Picture`,
+    tc.href === "https://drewkim623-hash.github.io/ccubed/#picture" && /See the live Playoff Picture/.test(tc.link || ""), tc.href);
   if (width === 1280) {
     await ip.evaluate(() => { location.hash = "#picture"; });
     await ip.waitForTimeout(500);

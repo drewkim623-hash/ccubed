@@ -34,7 +34,7 @@
     "h": "{type:'h', eyebrow, text}  - a section heading",
     "stat": "{type:'stat', n, text}  - a pull-out number",
     "bars": "{type:'bars', title, sub, rows:[{label, sub, value, group}]}  - diverging bars about zero; group 1-3 picks the colour",
-    "tiers": "{type:'tiers', title, sub, tiers:[{name, range, rows:[{team, pct, rec}]}], cutAfter, note}  - tier cards, one per tier (blue, aqua, gold in order): avatar, team label, record, a big percent (pct 0-100, shown to one decimal) and a thin bar. team is a manager handle, as in bars labels; cutAfter is the handle of the row the dashed playoff line sits under",
+    "tiers": "{type:'tiers', kicker?, title, sub, tiers:[{name, range, rows:[{team, pct, rec, seed?, status?, bye?}]}], cutAfter, note, href?, link?}  - tier cards in the link-card style, one per tier: avatar, team label, record, a big Playoff % (pct 0-100, shown to one decimal) and a thin bar. team is a manager handle, as in bars labels. Optional per row: seed (1-12, today's), status ('bye' | 'in' | 'out', if the season ended today), bye (Bye %, 0-100, shown whole). cutAfter is the handle of the row the dashed playoff line sits under; href (https or #) and link add a link under the cards",
     "cards": "{type:'cards', items:[{title, big, sub, lead?, rows:[{label, value}]}]}",
     "picks": "{type:'picks', items:[{slot, name, sub, delta}]}",
     "note": "{type:'note', text}  - a quiet footnote",
@@ -182,8 +182,9 @@
     },
     {
      "type": "tiers",
-     "title": "Playoff odds after week 5",
-     "sub": "Three tiers. The big number is the chance to make the playoffs.",
+     "kicker": "Week 5 · The playoff picture",
+     "title": "Four locks, one line",
+     "sub": "Big number: chance to make the playoffs. Seed and status are if the season ended today; the top two seeds get a bye, and Bye % is the chance of finishing in the top two.",
      "tiers": [
       {
        "name": "Locks",
@@ -192,22 +193,34 @@
         {
          "team": "saiky7",
          "pct": 93.2,
-         "rec": "4-1"
+         "rec": "4-1",
+         "seed": 1,
+         "status": "bye",
+         "bye": 46
         },
         {
          "team": "asierbelay",
          "pct": 90,
-         "rec": "4-1"
+         "rec": "4-1",
+         "seed": 2,
+         "status": "bye",
+         "bye": 47
         },
         {
          "team": "jjnhwg",
          "pct": 88.2,
-         "rec": "4-1"
+         "rec": "4-1",
+         "seed": 4,
+         "status": "in",
+         "bye": 35
         },
         {
          "team": "Lee284",
          "pct": 87.9,
-         "rec": "4-1"
+         "rec": "4-1",
+         "seed": 3,
+         "status": "in",
+         "bye": 41
         }
        ]
       },
@@ -218,27 +231,39 @@
         {
          "team": "tonypng",
          "pct": 66.4,
-         "rec": "3-2"
+         "rec": "3-2",
+         "seed": 5,
+         "status": "in",
+         "bye": 14
         },
         {
          "team": "andychoe03",
          "pct": 47.3,
-         "rec": "3-2"
+         "rec": "3-2",
+         "seed": 6,
+         "status": "in",
+         "bye": 7
         },
         {
          "team": "jiddyyyyyy",
          "pct": 40.3,
-         "rec": "2-3"
+         "rec": "2-3",
+         "seed": 7,
+         "status": "out"
         },
         {
          "team": "drewkim",
          "pct": 27.9,
-         "rec": "2-3"
+         "rec": "2-3",
+         "seed": 8,
+         "status": "out"
         },
         {
          "team": "nikhil1123",
          "pct": 27.3,
-         "rec": "2-3"
+         "rec": "2-3",
+         "seed": 9,
+         "status": "out"
         }
        ]
       },
@@ -249,32 +274,29 @@
         {
          "team": "yojarshh",
          "pct": 15.8,
-         "rec": "1-4"
+         "rec": "1-4",
+         "seed": 11,
+         "status": "out"
         },
         {
          "team": "edyun1",
          "pct": 13.7,
-         "rec": "1-4"
+         "rec": "1-4",
+         "seed": 10,
+         "status": "out"
         },
         {
          "team": "bigmoneyjos",
          "pct": 2.1,
-         "rec": "0-5"
+         "rec": "0-5",
+         "seed": 12,
+         "status": "out"
         }
        ]
       }
      ],
      "cutAfter": "andychoe03",
-     "note": "Chance to make the playoffs from the site's odds board after week 5. Six of twelve teams make it; the line marks the top six by odds, not a clinch. Records from Sleeper."
-    },
-    {
-     "type": "img",
-     "src": "img/playoff-picture-2026-w5.webp",
-     "narrow": "img/playoff-picture-2026-w5-top.webp",
-     "width": 968,
-     "height": 1408,
-     "alt": "C Cubed's Playoff Picture board after week 5: yerra x ecj and AB x B in the two bye spots, Jug, Uzzz uzz uzz, Tshough and andychoe03 & NathKim in the other four playoff places, the bracket if the season ended today, and every team's Bye % and Playoff %.",
-     "caption": "The Playoff Picture as it stood after week 5: the bracket if the season ended today, with each team's Bye % and Playoff %.",
+     "note": "Playoff % from the site's odds board after week 5; seeds and Bye % from the site's Playoff Picture board after week 5. Six of twelve teams make it; the line marks today's top six, not a clinch. Records from Sleeper.",
      "href": "https://drewkim623-hash.github.io/ccubed/#picture",
      "link": "See the live Playoff Picture"
     },
@@ -432,7 +454,7 @@
     },
     {
      "type": "note",
-     "text": "Scores, lineups, records, transactions and the trade are from Sleeper for C Cubed's week 5; injury designations are from the site's injury report. Playoff odds and the Playoff Picture image are the site's own board after the week was final. Nobody is quoted."
+     "text": "Scores, lineups, records, transactions and the trade are from Sleeper for C Cubed's week 5; injury designations are from the site's injury report. Playoff odds, seeds and Bye % are the site's own board after the week was final. Nobody is quoted."
     }
    ]
   },

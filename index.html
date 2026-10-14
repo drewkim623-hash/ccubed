@@ -916,35 +916,55 @@
   .abar .v{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;
     text-align:right;color:var(--ink-2)}
 
-  .atiers{margin:24px 0;max-width:none}
-  .atiers .at{font-size:15px;font-weight:800;letter-spacing:-.01em}
-  .atiers .as{font-size:12.5px;color:var(--muted);margin:3px 0 14px;line-height:1.45}
-  .atiers .afoot{font-size:11.5px;color:var(--muted);margin-top:14px;line-height:1.5}
+  /* Tier cards, in the link-card look: near-black, a red stripe, Oswald, white type. */
+  @font-face{font-family:Oswald;src:url(fonts/Oswald.ttf) format("truetype");font-weight:200 700;font-display:swap}
+  .atiers{--tr:#e4002b;--tbg:#0b0f1a;margin:26px 0;max-width:none;position:relative;color:#fff;
+    padding:20px 16px 18px 22px;border-radius:4px;overflow:hidden;
+    background:radial-gradient(circle at 88% 0,#e4002b33,transparent 50%),linear-gradient(135deg,#0a0f1e,#000)}
+  .atiers:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--tr)}
+  .atiers .atk{font:700 13px/1 Oswald,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--tr)}
+  .atiers .at{font:700 30px/1.05 Oswald,sans-serif;text-transform:uppercase;letter-spacing:.01em;margin-top:8px}
+  .atiers .as{font-size:13px;color:#c9ccd6;margin:8px 0 16px;line-height:1.45}
+  .atiers .afoot{font-size:11.5px;color:#9aa0ae;margin-top:14px;line-height:1.5}
+  .atiers .alink{display:inline-block;margin-top:10px;font:600 15px/1.2 Oswald,sans-serif;letter-spacing:.06em;
+    text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:2px solid var(--tr);padding-bottom:2px}
+  .atiers .alink:focus-visible{outline:2px solid #fff;outline-offset:3px}
   .atgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
   @media(max-width:900px){.atgrid{grid-template-columns:1fr}}
-  .atier{background:var(--surface);border:1px solid var(--ring);border-radius:var(--rs);overflow:hidden}
-  .atier header{padding:12px 14px;border-bottom:1px solid var(--grid);background:var(--raised);
-    display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-  .atier header b{font-size:12px;text-transform:uppercase;letter-spacing:.1em}
-  .atier header span{font-size:11.5px;color:var(--muted);text-align:right}
-  .atrow{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:4px 10px;align-items:center;
-    padding:12px 14px;border-bottom:1px solid var(--grid)}
+  .atier{background:var(--tbg);border:1px solid rgba(255,255,255,.1);border-radius:3px}
+  .atier header{padding:11px 14px;border-bottom:2px solid var(--tr);display:flex;justify-content:space-between;
+    align-items:baseline;gap:8px}
+  .atier header b{font:700 20px/1 Oswald,sans-serif;text-transform:uppercase;letter-spacing:.08em}
+  .atier header span{font:500 13px/1.2 Oswald,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#9aa0ae;text-align:right}
+  .atrow{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:6px 10px;align-items:center;
+    padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
   .atrow:last-child{border-bottom:0}
-  .atrow .av{width:38px;height:38px}
+  .atrow .av{width:36px;height:36px;align-self:start}
   .atrow .who{min-width:0;line-height:1.25}
   .atrow .who .tlab{display:flex}
-  .atrow .who .tlab-n{font-weight:700;font-size:14.5px}
-  .atrow .who .tlab-m{font-size:11.5px}
+  .atrow .who .tlab-n{font:600 17px/1.15 Oswald,sans-serif;letter-spacing:.01em;color:#fff}
+  .atrow .who .tlab-m{font-size:11.5px;color:#9aa0ae;margin-top:2px}
   .atrow .who .tlab-n,.atrow .who .tlab-m{white-space:normal!important;overflow:visible!important;
     text-overflow:clip!important;overflow-wrap:normal;word-break:normal;hyphens:none}
-  .atrow .atrec{display:block;font-size:11.5px;color:var(--ink-2);font-family:var(--mono);margin-top:2px}
-  .atrow .pn{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:26px;font-weight:800;letter-spacing:-.02em}
-  .atrow .ln{grid-column:2/-1;height:4px;background:var(--mid);border-radius:2px;overflow:hidden}
-  .atrow .ln i{display:block;height:100%;background:var(--blue)}
-  .atier.g2 .ln i{background:var(--aqua)} .atier.g3 .ln i{background:var(--gold)}
-  .atrow.cutafter{border-bottom:2px dashed var(--red);position:relative}
-  .atrow.cutafter:after{content:"Playoff line";position:absolute;right:14px;bottom:-9px;background:var(--surface);
-    padding:0 6px;font-size:11px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:.08em}
+  .atrow .atmeta{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:5px;font:500 12px/1 Oswald,sans-serif;
+    letter-spacing:.08em;text-transform:uppercase;color:#c9ccd6}
+  .atrow .atmeta span{white-space:nowrap}
+  .atrow .atst{padding:3px 5px 2px;border:1px solid rgba(255,255,255,.35);color:#fff}
+  .atrow .atst.bye{background:var(--tr);border-color:var(--tr)}
+  .atrow .atst.out{border-color:rgba(255,255,255,.15);color:#9aa0ae}
+  .atrow .atn{text-align:right;align-self:start;font-family:Oswald,sans-serif}
+  .atrow .atn i{display:block;font:500 10.5px/1 Oswald,sans-serif;font-style:normal;letter-spacing:.18em;color:#9aa0ae}
+  .atrow .pn{font-weight:700;font-size:36px;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .atrow .pn small{font-size:.5em;color:var(--tr);margin-left:1px}
+  .atrow .pb{display:block;font-weight:600;font-size:14px;letter-spacing:.06em;color:#fff;margin-top:3px}
+  .atrow .pb em{font-style:normal;color:var(--tr);margin-right:4px;font-size:11px;letter-spacing:.14em}
+  .atrow .ln{grid-column:2/-1;height:4px;background:rgba(255,255,255,.12);overflow:hidden}
+  .atrow .ln i{display:block;height:100%;background:var(--tr)}
+  .atier.g2 .ln i{background:#fff} .atier.g3 .ln i{background:#6b7080}
+  .atrow.cutafter{border-bottom:2px dashed var(--tr);position:relative}
+  .atrow.cutafter + .atrow{padding-top:22px}
+  .atrow.cutafter:after{content:"Playoff line";position:absolute;right:12px;bottom:-10px;background:var(--tbg);
+    padding:0 6px;font:700 13px/18px Oswald,sans-serif;color:var(--tr);text-transform:uppercase;letter-spacing:.14em}
 
   .acards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;margin:22px 0}
   .acard{background:var(--raised);border:1px solid var(--ring);border-radius:var(--rs);padding:14px 15px}
@@ -3444,22 +3464,31 @@ function articleBlock(b) {
         ${b.sub ? `<div class="as">${esc(b.sub)}</div>` : ""}<div class="abody">${body}</div></div>`;
     }
     case "tiers": {
-      // Tier cards: one card per tier, a big percent and a thin bar per team, and a dashed
-      // playoff line under the row whose team is cutAfter.
+      // Tier cards: one card per tier, a big Playoff % and a thin bar per team, and a dashed
+      // playoff line under the row whose team is cutAfter. seed, status and bye are optional.
       const cut = String(b.cutAfter || "").toLowerCase();
+      const ST = { bye: "Bye", in: "In", out: "Out" };
+      const pct = v => Math.max(0, Math.min(100, Number(v) || 0));
       const cards = (b.tiers || []).map((t, i) => `<section class="atier g${Math.min(i, 2) + 1}">
         <header><b>${esc(t.name || "")}</b>${t.range ? `<span>${esc(t.range)}</span>` : ""}</header>
         ${(t.rows || []).map(r => {
-          const m = mgrByHandle(r.team), p = Math.max(0, Math.min(100, Number(r.pct) || 0));
-          return `<div class="atrow${cut && String(r.team).toLowerCase() === cut ? " cutafter" : ""}" data-team="${esc(r.team || "")}">
+          const m = mgrByHandle(r.team), p = pct(r.pct);
+          const meta = [r.rec ? `<span>${esc(r.rec)}</span>` : "",
+            r.seed ? `<span>Seed ${Number(r.seed) || ""}</span>` : "",
+            ST[r.status] ? `<span class="atst ${r.status}">${ST[r.status]}</span>` : ""].join("");
+          return `<div class="atrow${cut && String(r.team).toLowerCase() === cut ? " cutafter" : ""}" data-team="${esc(r.team || "")}"${
+              r.seed ? ` data-seed="${Number(r.seed) || ""}"` : ""}>
             ${m ? avatarHTML(m.uid) : `<span class="av"></span>`}
-            <div class="who">${handleLabelHTML(r.team)}${r.rec ? `<span class="atrec">${esc(r.rec)}</span>` : ""}</div>
-            <div class="pn">${f1(p)}%</div>
+            <div class="who">${handleLabelHTML(r.team)}${meta ? `<div class="atmeta">${meta}</div>` : ""}</div>
+            <div class="atn"><i>PLAYOFF</i><span class="pn">${f1(p)}<small>%</small></span>${
+              r.bye != null ? `<span class="pb"><em>BYE</em>${esc(String(Math.round(pct(r.bye))))}%</span>` : ""}</div>
             <div class="ln"><i style="width:${p.toFixed(1)}%"></i></div></div>`;
         }).join("")}</section>`).join("");
-      return `<div class="atiers"><div class="at">${esc(b.title || "")}</div>
+      const href = /^(https:\/\/|#)/.test(b.href || "") ? b.href : "";
+      return `<div class="atiers">${b.kicker ? `<div class="atk">${esc(b.kicker)}</div>` : ""}<div class="at">${esc(b.title || "")}</div>
         ${b.sub ? `<div class="as">${esc(b.sub)}</div>` : ""}<div class="atgrid">${cards}</div>
-        ${b.note ? `<div class="afoot">${esc(b.note)}</div>` : ""}</div>`;
+        ${b.note ? `<div class="afoot">${esc(b.note)}</div>` : ""}
+        ${href && b.link ? `<a class="alink" href="${esc(href)}">${esc(b.link)} →</a>` : ""}</div>`;
     }
     case "cards":
       return `<div class="acards">${(b.items || []).map(c => `
