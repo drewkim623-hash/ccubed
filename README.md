@@ -250,8 +250,9 @@ injury feed and the published page, and commits plain JSON: `data/week-*.json`,
 `rosters.json`, `injuries.json`. It needs no secrets beyond the default `GITHUB_TOKEN` (with
 `contents: write`) and sends no email. It only runs in `drewkim623-hash/ccubed`.
 
-The email scripts (`compose-email.mjs`, `email-week.mjs`, `blast-status.mjs`, `recap-guard.mjs`,
-`poll-tally.mjs`) only build or check files; none of them sends anything. **TODO (Drew):** there is
-no C Cubed recipient list. `poll-tally.mjs` has an empty `LEAGUE` list and
-`data/sent-emails.json` is an empty ledger. Nothing should be emailed until a C Cubed list is
-written down.
+C Cubed has no email, blast, poll or send ledger. The articles are written by the routines in
+[`ROUTINES.md`](ROUTINES.md) (contract in `weekly-job-prompt.md`), published in the News tab, and
+shared by hand: every article has its own link, `https://drewkim623-hash.github.io/ccubed/#news/<slug>`,
+and a plain-text teaser with a **Copy teaser** button for the group chat. `recap-guard.mjs` is a
+read-only check that a finished week has not been written up yet. `build-odds-snapshot.mjs` writes
+`data/odds-snapshot.json` so the articles quote the site's own odds.
