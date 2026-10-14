@@ -240,7 +240,8 @@ The harness was ported from the sibling site's (keeper checks removed, redraft c
 of its checks assume several seasons of history, a pre-draft board or a specific article; those
 fail honestly here and are listed in the port report. Each group runs in isolation, so one group
 that cannot apply fails as one named check instead of stopping the run. The last group sweeps
-every shipped file for another league's id, a `dffl` URL or any email address.
+every shipped file for another league's id, a `dffl` URL or any email address (the one exception is
+Drew's own, as the self-email recipient in `ROUTINES.md` and `weekly-job-prompt.md`).
 
 ## Data files and the weekly workflow
 
@@ -250,9 +251,14 @@ injury feed and the published page, and commits plain JSON: `data/week-*.json`,
 `rosters.json`, `injuries.json`. It needs no secrets beyond the default `GITHUB_TOKEN` (with
 `contents: write`) and sends no email. It only runs in `drewkim623-hash/ccubed`.
 
-C Cubed has no email, blast, poll or send ledger. The articles are written by the routines in
+C Cubed has no league email, blast, poll or send ledger. The articles are written by the routines in
 [`ROUTINES.md`](ROUTINES.md) (contract in `weekly-job-prompt.md`), published in the News tab, and
-shared by hand: every article has its own link, `https://drewkim623-hash.github.io/ccubed/#news/<slug>`,
-and a plain-text teaser with a **Copy teaser** button for the group chat. `recap-guard.mjs` is a
+shared by hand. The one send is a copy to Drew alone: after a routine pushes a new article it emails
+that article's teaser to Drew's own address through his Gmail connector, and to nobody else. The
+article is still shared by hand: every article opens at `https://drewkim623-hash.github.io/ccubed/#news/<slug>`,
+and has a link card, `news/<slug>.html` with its picture `img/og/<slug>.png` (written by
+`node build-cards.mjs`; `.nojekyll` makes Pages serve them as is), which unfurls in a chat and
+then opens the article. Its breaking-news teaser ends with that card link and has a **Copy
+teaser** button at the bottom of the article. `recap-guard.mjs` is a
 read-only check that a finished week has not been written up yet. `build-odds-snapshot.mjs` writes
 `data/odds-snapshot.json` so the articles quote the site's own odds.
