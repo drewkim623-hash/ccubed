@@ -1,5 +1,93 @@
 {
- "_comment": "Written by build-odds-history.mjs from data/odds-snapshot.json. Empty on purpose: C Cubed is a redraft league in its first season and no live matchup has been snapshotted yet. Rows appear as the weekly workflow records them.",
- "generated": null,
- "weeks": {}
+ "_comment": "Written by build-odds-history.mjs from data/odds-snapshot.json: every committed copy git can see plus the working-tree one. weeks rows are merged across runs and never removed or rewritten. One row per matchup per snapshot; pA is the chance manager a beats manager b as the site priced it at that moment. teams holds one row per team per finalized week: playoff and title are the site's playoffNow and titleNow from a snapshot taken between weeks, and a week there is replaced whole when read again.",
+ "generated": "2026-10-14T04:19:12.468Z",
+ "weeks": {},
+ "teams": {
+  "2026-5": [
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "1002352049469693952",
+    "manager": "saiky7",
+    "playoff": 0.932,
+    "title": 0.21425
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "1018665525720920064",
+    "manager": "bigmoneyjos",
+    "playoff": 0.0207,
+    "title": 0.00185
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "1035404182708203520",
+    "manager": "jiddyyyyyy",
+    "playoff": 0.40335,
+    "title": 0.0566
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "1057211129820213248",
+    "manager": "Lee284",
+    "playoff": 0.879,
+    "title": 0.1632
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "1257789215605788672",
+    "manager": "andychoe03",
+    "playoff": 0.47295,
+    "title": 0.0458
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "1260403115740368896",
+    "manager": "edyun1",
+    "playoff": 0.1369,
+    "title": 0.01525
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "1264454496394674176",
+    "manager": "asierbelay",
+    "playoff": 0.90045,
+    "title": 0.177
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "466018540445495296",
+    "manager": "nikhil1123",
+    "playoff": 0.2731,
+    "title": 0.02875
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "646481339029475328",
+    "manager": "drewkim",
+    "playoff": 0.2788,
+    "title": 0.0267
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "809500620536004608",
+    "manager": "jjnhwg",
+    "playoff": 0.88155,
+    "title": 0.1539
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "809957555957813248",
+    "manager": "tonypng",
+    "playoff": 0.66355,
+    "title": 0.0977
+   },
+   {
+    "at": "2026-10-13T19:03:38.500Z",
+    "uid": "997714306332491776",
+    "manager": "yojarshh",
+    "playoff": 0.15765,
+    "title": 0.019
+   }
+  ]
+ }
 }

@@ -83,7 +83,7 @@ check("__CCUBED internals exposed", await page.evaluate(() => !!window.__CCUBED)
 }
 try {
 group("Tabs");
-var EXPECT = ["home", "scores", "managers", "records", "matchups", "power", "odds", "injuries", "picture", "draft", "trades", "trade", "recaps"];
+var EXPECT = ["home", "scores", "managers", "records", "matchups", "power", "odds", "injuries", "picture", "draft", "trades", "recaps"];
 check("every tab present and in order", JSON.stringify(meta.tabs) === JSON.stringify(EXPECT), meta.tabs.join(","));
 for (const id of EXPECT) {
   await page.click(`#tabs button[data-tab="${id}"]`);
@@ -94,6 +94,29 @@ for (const id of EXPECT) {
   check(`${id}: panel renders and is selectable`, shown.exists && shown.visible && shown.selected && shown.kids > 0, JSON.stringify(shown));
 }
 check("hash routing follows the tab", (await page.evaluate(() => location.hash)) === "#recaps");
+
+// The Trade Machine is gone: no tab, no panel, and its old links land on Trades.
+check("no Trade Machine tab or panel", await page.evaluate(() =>
+  !document.querySelector('#tabs button[data-tab="trade"]') && !document.querySelector('[data-panel="trade"]') &&
+  ![...document.querySelectorAll("#tabs button")].some(b => /machine/i.test(b.textContent)) &&
+  typeof renderTradeMachine === "undefined" && typeof tradeResult === "undefined" && typeof tmRosters === "undefined"));
+const onTrades = p => p.evaluate(() => {
+  const t = document.querySelector('[data-panel="trades"]');
+  return location.hash === "#trades" && !!t && !t.hidden &&
+    document.querySelector('#tabs button[data-tab="trades"]').getAttribute("aria-selected") === "true" &&
+    [...document.querySelectorAll("#app > [data-panel]")].filter(x => !x.hidden).length === 1;
+});
+var rp = await ctx.newPage();
+for (const old of ["trade", "machine"]) {
+  await rp.goto(`${BASE}/#${old}`, { waitUntil: "domcontentloaded" });
+  await rp.waitForFunction(() => document.body.dataset.ready, null, { timeout: 90000 });
+  check(`#${old} on direct load lands on Trades`, await onTrades(rp), await rp.evaluate(() => location.hash));
+  await rp.click('#tabs button[data-tab="home"]');
+  await rp.evaluate(o => { location.hash = "#" + o; }, old);
+  await rp.waitForFunction(() => location.hash === "#trades", null, { timeout: 5000 }).catch(() => {});
+  check(`#${old} on hashchange lands on Trades`, await onTrades(rp), await rp.evaluate(() => location.hash));
+}
+await rp.close();
 
 } catch (e) {
   check(`group ran to completion: ${"Tabs"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
@@ -2979,6 +3002,69 @@ if (!sb.present) {
   check(`group ran to completion: ${"A week is only a result once it has been played"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
+group("Team odds per finalized week (odds-history teams)");
+
+/* The weekly job keeps each team's playoff and title chance at the end of each
+ * finalized week, for the tier cards' change arrows. One row per team per week,
+ * beside the matchup rows, and a week read twice is replaced, not doubled. */
+{
+  const { spawnSync } = await import("node:child_process");
+  const { setTeamWeek, teamRowsFromSnapshot } = await import(join(ROOT, "odds-history.mjs"));
+  const r = spawnSync(process.execPath, ["--test", "test-odds-history.mjs"], { cwd: ROOT, encoding: "utf8", timeout: 60000 });
+  const m = /# pass (\d+)[\s\S]*?# fail (\d+)/.exec(r.stdout || "");
+  check("the odds-history unit tests pass", r.status === 0, m ? `${m[1]} pass, ${m[2]} fail` : String(r.stderr || r.error || "").slice(0, 200));
+
+  const hist = JSON.parse(await readFile(join(ROOT, "data/odds-history.json"), "utf8"));
+  const snap = JSON.parse(await readFile(join(ROOT, "data/odds-snapshot.json"), "utf8"));
+  const tw = hist.teams || {};
+  const uids = new Set((snap.teams || []).map(t => t.uid));
+  const bad = [];
+  for (const [k, rows] of Object.entries(tw)) {
+    if (!/^\d{4}-\d{1,2}$/.test(k) || !Array.isArray(rows)) { bad.push(k); continue; }
+    const keys = rows.map(x => Object.keys(x).join(","));
+    if (keys.some(s => s !== "at,uid,manager,playoff,title")) bad.push(`${k}: keys`);
+    if (rows.some(x => !uids.has(x.uid))) bad.push(`${k}: unknown uid`);
+    if (new Set(rows.map(x => x.uid)).size !== rows.length || rows.length !== uids.size) bad.push(`${k}: ${rows.length} rows`);
+    if (rows.some(x => !(x.playoff >= 0 && x.playoff <= 1 && x.title >= 0 && x.title <= x.playoff))) bad.push(`${k}: range`);
+  }
+  check("every teams row is { at, uid, manager, playoff, title }, one per team, title ≤ playoff ≤ 1",
+    bad.length === 0, bad.join("; "));
+  check("the matchup rows (weeks) are still DFFL's shape", hist.weeks && typeof hist.weeks === "object" &&
+    Object.values(hist.weeks).every(rows => Array.isArray(rows) && rows.every(x => Object.keys(x).join(",") === "at,a,b,pA,aPts,bPts,settled")));
+
+  // Synthetic: write one week twice with different numbers.
+  const T = (uid, playoff, title) => ({ at: "t", uid, manager: uid, playoff, title });
+  const first = setTeamWeek({ weeks: {}, teams: { "2026-4": [T("a", 0.5, 0.1)] } }, "2026-5", [T("b", 0.4, 0.1), T("a", 0.6, 0.2)]);
+  const again = setTeamWeek(first.out, "2026-5", [T("a", 0.7, 0.3), T("b", 0.3, 0.05)]);
+  const same = setTeamWeek(again.out, "2026-5", [T("b", 0.3, 0.05), T("a", 0.7, 0.3)]);
+  check("re-writing a week replaces its rows: no duplicates, new values, other weeks untouched",
+    first.changed && again.changed && again.out.teams["2026-5"].length === 2 &&
+    again.out.teams["2026-5"].find(x => x.uid === "a").playoff === 0.7 &&
+    JSON.stringify(again.out.teams["2026-4"]) === JSON.stringify([T("a", 0.5, 0.1)]) &&
+    Object.keys(again.out.teams).join() === "2026-4,2026-5", JSON.stringify(again.out.teams));
+  check("writing the same week with the same numbers is a no-op", !same.changed &&
+    JSON.stringify(same.out) === JSON.stringify(again.out));
+  check("a reading taken mid-week (a week live) records no team row",
+    teamRowsFromSnapshot({ ...snap, liveWeek: snap.week }) === null &&
+    teamRowsFromSnapshot({ ...snap, decided: (snap.decided || 0) + 1 }) === null);
+
+  // The committed snapshot, when it was taken between weeks, is exactly the
+  // latest finalized week's row set.
+  const want = teamRowsFromSnapshot(snap);
+  if (want) {
+    const got = tw[want.key] || [];
+    const byUid = new Map(got.map(x => [x.uid, x]));
+    check(`the committed snapshot's finalized week (${want.key}) is recorded, number for number`,
+      got.length === want.rows.length && want.rows.every(x => JSON.stringify(byUid.get(x.uid)) === JSON.stringify(x)),
+      `${got.length} rows of ${want.rows.length}`);
+  } else {
+    check("the committed snapshot was taken mid-week, so it implies no finalized-week row", true);
+  }
+}
+} catch (e) {
+  check(`group ran to completion: ${"Team odds per finalized week (odds-history teams)"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+}
+try {
 group("The recap guard, and nothing sends");
 
 /* C Cubed has no email, blast, poll or send ledger. The scripts that composed,
@@ -4057,32 +4143,62 @@ for (const [url, want] of [
   await p2.close();
 }
 
-/* The week 5 piece carries the Playoff Picture as an image: it loads, it has
- * alt text, it never runs wider than the column, and its link goes to the
- * live board — which, followed in-page, opens the Playoff Picture tab. */
+/* The week 5 piece carries the Playoff Picture as one tier-card graphic: Playoff %
+ * with seed, bye-or-in status and Bye %. Its numbers are checked against the block
+ * as written in recaps.json and the article's own teaser — not the live snapshot,
+ * which moves on every week. It never runs wider than the page, no team name breaks
+ * inside a word, and its link goes to the live board — which, followed in-page,
+ * opens the Playoff Picture tab. */
 for (const width of [390, 1280]) {
   const ictx = await browser.newContext({ viewport: { width, height: 900 } });
   const ip = await ictx.newPage();
   await ip.goto(BASE + "/#news/four-teams-at-4-1-and-a-gap-behind-them", { waitUntil: "domcontentloaded" });
   await ip.waitForFunction(() => document.body.dataset.ready === "1", null, { timeout: 90000 });
-  await ip.waitForSelector('[data-panel="article"] .aimg img', { timeout: 15000 }).catch(() => {});
-  await ip.evaluate(() => { const i = document.querySelector('[data-panel="article"] .aimg img'); if (i) { i.loading = "eager"; i.scrollIntoView(); } });
-  await ip.waitForFunction(() => { const i = document.querySelector('[data-panel="article"] .aimg img'); return i && i.complete; }, null, { timeout: 15000 }).catch(() => {});
-  const im = await ip.evaluate(() => {
-    const f = document.querySelector('[data-panel="article"] .aimg');
-    const i = f && f.querySelector("img"), a = f && f.querySelector("figcaption a");
-    const col = f && f.parentElement.getBoundingClientRect();
-    return i ? { src: i.getAttribute("src"), nw: i.naturalWidth, alt: i.alt, w: i.getBoundingClientRect().width,
-      colW: col.width, docOver: document.documentElement.scrollWidth > innerWidth + 1,
-      href: a && a.getAttribute("href"), link: a && a.textContent } : null;
+  await ip.waitForSelector('[data-panel="article"] .atiers', { timeout: 15000 }).catch(() => {});
+  const tc = await ip.evaluate(async () => {
+    const j = await (await fetch("recaps.json", { cache: "no-cache" })).json();
+    const art = j.articles.find(a => a.slug === "four-teams-at-4-1-and-a-gap-behind-them");
+    const blks = art.blocks.filter(b => b.type === "tiers");
+    const want = new Map(blks.flatMap(b => b.tiers.flatMap(t => t.rows)).map(r => [r.team.toLowerCase(), r]));
+    const A = document.querySelector('[data-panel="article"]');
+    const rows = [...A.querySelectorAll(".atiers .atrow")];
+    const off = rows.filter(r => {
+      const w = want.get(r.dataset.team.toLowerCase()), pb = r.querySelector(".pb");
+      return !w || r.querySelector(".pn").textContent.trim() !== Number(w.pct).toFixed(1) + "%"
+        || Number(r.dataset.seed) !== w.seed || (w.bye != null ? !pb || pb.textContent.replace(/\s/g, "") !== `BYE${w.bye}%` : !!pb);
+    }).map(r => r.dataset.team);
+    // the teaser's odds line quotes the same numbers the graphic shows
+    const odds = (art.teaser.split("\n").find(l => /playoffs/.test(l)) || "").match(/\d+\.\d%/g) || [];
+    const shown = new Set(rows.map(r => r.querySelector(".pn").textContent.trim()));
+    const midWord = [];
+    for (const n of A.querySelectorAll(".atiers .tlab-n, .atiers .tlab-m")) {
+      const t = n.firstChild; if (!t) continue;
+      for (const m of t.textContent.matchAll(/\S+/g)) {
+        const rg = document.createRange(); rg.setStart(t, m.index); rg.setEnd(t, m.index + m[0].length);
+        if (new Set([...rg.getClientRects()].map(r => Math.round(r.top))).size > 1) midWord.push(m[0]);
+      }
+    }
+    const blk = A.querySelector(".atiers"), link = blk && blk.querySelector("a.alink");
+    return { blocks: A.querySelectorAll(".atiers").length, written: blks.length, rows: rows.length, off,
+      seeds: rows.map(r => Number(r.dataset.seed)).sort((a, b) => a - b).join(","),
+      byes: rows.filter(r => r.querySelector(".atst.bye")).map(r => r.dataset.seed).sort().join(","),
+      odds, oddsShown: odds.length > 0 && odds.every(p => shown.has(p)), midWord,
+      cut: A.querySelectorAll(".atrow.cutafter").length,
+      cutSeed: (A.querySelector(".atrow.cutafter") || { dataset: {} }).dataset.seed,
+      over: document.documentElement.scrollWidth > innerWidth + 1 || (blk && blk.scrollWidth > blk.clientWidth + 1),
+      img: A.querySelectorAll(".aimg").length, oldBars: A.querySelectorAll(".abars").length,
+      href: link && link.getAttribute("href"), link: link && link.textContent };
   });
-  check(`${width}px: the article shows the Playoff Picture image`, im && im.src === "img/playoff-picture-2026-w5.webp" && im.nw > 0,
-    JSON.stringify(im));
-  check(`${width}px: the image has alt text`, im && im.alt.length > 40, im ? im.alt.slice(0, 60) : "");
-  check(`${width}px: the image fits the column and the page does not scroll sideways`,
-    im && im.w <= im.colW + 0.5 && !im.docOver, im ? `${im.w} in ${im.colW}` : "");
-  check(`${width}px: the image links to the live Playoff Picture`,
-    im && im.href === "https://drewkim623-hash.github.io/ccubed/#picture" && /See the live Playoff Picture/.test(im.link || ""), im && im.href);
+  check(`${width}px: week 5's playoff picture is one tiers graphic of 12 teams with one playoff line`,
+    tc.blocks === 1 && tc.written === 1 && tc.rows === 12 && tc.cut === 1 && tc.cutSeed === "6", JSON.stringify(tc));
+  check(`${width}px: the old Playoff Picture image and odds chart are gone from the article`, tc.img === 0 && tc.oldBars === 0, `${tc.img} img, ${tc.oldBars} bars`);
+  check(`${width}px: every Playoff %, seed and Bye % matches the block as written`, tc.rows === 12 && tc.off.length === 0, tc.off.join(","));
+  check(`${width}px: seeds run 1-12 and the top two hold the byes`, tc.seeds === "1,2,3,4,5,6,7,8,9,10,11,12" && tc.byes === "1,2", `${tc.seeds} byes=${tc.byes}`);
+  check(`${width}px: the teaser's odds (${tc.odds.join(", ")}) are on the graphic`, tc.oddsShown);
+  check(`${width}px: the tier cards do not overflow sideways`, !tc.over);
+  check(`${width}px: no team name in the tier cards breaks mid-word`, tc.midWord.length === 0, tc.midWord.join(","));
+  check(`${width}px: the graphic links to the live Playoff Picture`,
+    tc.href === "https://drewkim623-hash.github.io/ccubed/#picture" && /See the live Playoff Picture/.test(tc.link || ""), tc.href);
   if (width === 1280) {
     await ip.evaluate(() => { location.hash = "#picture"; });
     await ip.waitForTimeout(500);
@@ -6968,7 +7084,7 @@ var helper = await lp.evaluate(() => {
 check("teamLabelHTML and teamNameText are exposed", helper.exposed);
 check("a label leads with the team name and names both managers underneath, once", helper.ok);
 
-var LABEL_TABS = ["home", "scores", "managers", "records", "matchups", "power", "odds", "picture", "draft", "trades", "trade", "recaps"];
+var LABEL_TABS = ["home", "scores", "managers", "records", "matchups", "power", "odds", "picture", "draft", "trades", "recaps"];
 for (const width of [1280, 390]) {
   await lp.setViewportSize({ width, height: 900 });
   for (const t of LABEL_TABS) {
