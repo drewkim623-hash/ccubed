@@ -34,6 +34,7 @@
     "h": "{type:'h', eyebrow, text}  - a section heading",
     "stat": "{type:'stat', n, text}  - a pull-out number",
     "bars": "{type:'bars', title, sub, rows:[{label, sub, value, group}]}  - diverging bars about zero; group 1-3 picks the colour",
+    "tiers": "{type:'tiers', title, sub, tiers:[{name, range, rows:[{team, pct, rec}]}], cutAfter, note}  - tier cards, one per tier (blue, aqua, gold in order): avatar, team label, record, a big percent (pct 0-100, shown to one decimal) and a thin bar. team is a manager handle, as in bars labels; cutAfter is the handle of the row the dashed playoff line sits under",
     "cards": "{type:'cards', items:[{title, big, sub, lead?, rows:[{label, value}]}]}",
     "picks": "{type:'picks', items:[{slot, name, sub, delta}]}",
     "note": "{type:'note', text}  - a quiet footnote",
@@ -180,71 +181,91 @@
      "text": "Six of twelve teams make the playoffs, and there are nine regular-season weeks left. Nobody is mathematically in or out, and the board says so: 8 and thick (bigmoneyjos), the only team without a win, is still at 2.1 percent. But the four teams at 4-1 are priced as near-certainties, and only one other team is better than a coin flip."
     },
     {
-     "type": "bars",
+     "type": "tiers",
      "title": "Playoff odds after week 5",
-     "sub": "Chance to make the playoffs, in percent, from the site's odds board",
-     "rows": [
+     "sub": "Three tiers. The big number is the chance to make the playoffs.",
+     "tiers": [
       {
-       "label": "saiky7",
-       "value": 93.2,
-       "group": 1
+       "name": "Locks",
+       "range": "85% or better",
+       "rows": [
+        {
+         "team": "saiky7",
+         "pct": 93.2,
+         "rec": "4-1"
+        },
+        {
+         "team": "asierbelay",
+         "pct": 90,
+         "rec": "4-1"
+        },
+        {
+         "team": "jjnhwg",
+         "pct": 88.2,
+         "rec": "4-1"
+        },
+        {
+         "team": "Lee284",
+         "pct": 87.9,
+         "rec": "4-1"
+        }
+       ]
       },
       {
-       "label": "asierbelay",
-       "value": 90,
-       "group": 1
+       "name": "Bubble",
+       "range": "25% to 85%",
+       "rows": [
+        {
+         "team": "tonypng",
+         "pct": 66.4,
+         "rec": "3-2"
+        },
+        {
+         "team": "andychoe03",
+         "pct": 47.3,
+         "rec": "3-2"
+        },
+        {
+         "team": "jiddyyyyyy",
+         "pct": 40.3,
+         "rec": "2-3"
+        },
+        {
+         "team": "drewkim",
+         "pct": 27.9,
+         "rec": "2-3"
+        },
+        {
+         "team": "nikhil1123",
+         "pct": 27.3,
+         "rec": "2-3"
+        }
+       ]
       },
       {
-       "label": "jjnhwg",
-       "value": 88.2,
-       "group": 1
-      },
-      {
-       "label": "Lee284",
-       "value": 87.9,
-       "group": 1
-      },
-      {
-       "label": "tonypng",
-       "value": 66.4,
-       "group": 2
-      },
-      {
-       "label": "andychoe03",
-       "value": 47.3,
-       "group": 2
-      },
-      {
-       "label": "jiddyyyyyy",
-       "value": 40.3,
-       "group": 3
-      },
-      {
-       "label": "drewkim",
-       "value": 27.9,
-       "group": 3
-      },
-      {
-       "label": "nikhil1123",
-       "value": 27.3,
-       "group": 3
-      },
-      {
-       "label": "yojarshh",
-       "value": 15.8,
-       "group": 3
-      },
-      {
-       "label": "edyun1",
-       "value": 13.7,
-       "group": 3
-      },
-      {
-       "label": "bigmoneyjos",
-       "value": 2.1,
-       "group": 3
+       "name": "Long shots",
+       "range": "under 25%",
+       "rows": [
+        {
+         "team": "yojarshh",
+         "pct": 15.8,
+         "rec": "1-4"
+        },
+        {
+         "team": "edyun1",
+         "pct": 13.7,
+         "rec": "1-4"
+        },
+        {
+         "team": "bigmoneyjos",
+         "pct": 2.1,
+         "rec": "0-5"
+        }
+       ]
       }
-     ]
+     ],
+     "cutAfter": "andychoe03",
+     "note": "Chance to make the playoffs from the site's odds board after week 5. Six of twelve teams make it; the line marks the top six by odds, not a clinch. Records from Sleeper."
     },
     {
      "type": "img",

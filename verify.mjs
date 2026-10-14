@@ -4083,6 +4083,32 @@ for (const width of [390, 1280]) {
     im && im.w <= im.colW + 0.5 && !im.docOver, im ? `${im.w} in ${im.colW}` : "");
   check(`${width}px: the image links to the live Playoff Picture`,
     im && im.href === "https://drewkim623-hash.github.io/ccubed/#picture" && /See the live Playoff Picture/.test(im.link || ""), im && im.href);
+  // The playoff odds are tier cards: twelve teams, each at the snapshot's own number,
+  // nothing wider than the page and no name broken inside a word.
+  const tc = await ip.evaluate(async () => {
+    const snap = await (await fetch("data/odds-snapshot.json", { cache: "no-cache" })).json();
+    const want = Object.fromEntries(snap.teams.map(t => [t.manager.toLowerCase(), (Math.round(t.playoffNow * 1000) / 10).toFixed(1) + "%"]));
+    const rows = [...document.querySelectorAll('[data-panel="article"] .atiers .atrow')];
+    const off = rows.filter(r => r.querySelector(".pn").textContent.trim() !== want[r.dataset.team.toLowerCase()]).map(r => r.dataset.team);
+    const midWord = [];
+    for (const n of document.querySelectorAll('[data-panel="article"] .atiers .tlab-n, [data-panel="article"] .atiers .tlab-m')) {
+      const t = n.firstChild; if (!t) continue;
+      for (const m of t.textContent.matchAll(/\S+/g)) {
+        const rg = document.createRange(); rg.setStart(t, m.index); rg.setEnd(t, m.index + m[0].length);
+        if (new Set([...rg.getClientRects()].map(r => Math.round(r.top))).size > 1) midWord.push(m[0]);
+      }
+    }
+    const blk = document.querySelector('[data-panel="article"] .atiers');
+    return { blocks: document.querySelectorAll('[data-panel="article"] .atiers').length, rows: rows.length, off, midWord,
+      cut: document.querySelectorAll('[data-panel="article"] .atrow.cutafter').length,
+      over: document.documentElement.scrollWidth > innerWidth + 1 || (blk && blk.scrollWidth > blk.clientWidth + 1),
+      oldBars: [...document.querySelectorAll('[data-panel="article"] .abars .at')].some(x => /Playoff odds/.test(x.textContent)) };
+  });
+  check(`${width}px: week 5's playoff odds are one tiers block of 12 teams with one playoff line`,
+    tc.blocks === 1 && tc.rows === 12 && tc.cut === 1 && !tc.oldBars, JSON.stringify(tc));
+  check(`${width}px: every tier percent matches odds-snapshot`, tc.rows === 12 && tc.off.length === 0, tc.off.join(","));
+  check(`${width}px: the tier cards do not overflow sideways`, !tc.over);
+  check(`${width}px: no team name in the tier cards breaks mid-word`, tc.midWord.length === 0, tc.midWord.join(","));
   if (width === 1280) {
     await ip.evaluate(() => { location.hash = "#picture"; });
     await ip.waitForTimeout(500);

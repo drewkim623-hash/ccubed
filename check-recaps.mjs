@@ -194,6 +194,17 @@ export function recapsProblems(j, was, weekFiles = {}) {
     if (n < TUESDAY_WORDS.min || n > TUESDAY_WORDS.max)
       out.push(`${a.slug}: the Tuesday article is ${n} words; it runs ${TUESDAY_WORDS.min}-${TUESDAY_WORDS.max}`);
   }
+  // A tiers block names its teams by manager handle; every one must be a manager in the week files.
+  const handles = new Set(Object.values(weekFiles).flatMap(w => (w.standings || []).map(s => String(s.manager).toLowerCase())));
+  for (const a of arts) for (const b of a.blocks || []) if (b && b.type === "tiers") {
+    const rows = (b.tiers || []).flatMap(t => (t && t.rows) || []);
+    if (!rows.length) out.push(`${a.slug}: a tiers block has no rows`);
+    for (const r of rows) {
+      if (typeof r.pct !== "number" || !(r.pct >= 0 && r.pct <= 100)) out.push(`${a.slug}: tiers row ${r.team} has pct ${JSON.stringify(r.pct)}, not 0-100`);
+      if (handles.size && !handles.has(String(r.team).toLowerCase())) out.push(`${a.slug}: tiers team ${JSON.stringify(r.team)} is not a manager`);
+    }
+    if (b.cutAfter && !rows.some(r => r.team === b.cutAfter)) out.push(`${a.slug}: tiers cutAfter ${b.cutAfter} is not one of its rows`);
+  }
   for (const a of (was && was.articles) || [])
     if (!slugs.has(a.slug) && !aliases.has(a.slug)) out.push(`article ${a.slug} was in the old file and is gone`);
   if (!Array.isArray(j && j.weeks)) out.push("weeks[] is missing");
