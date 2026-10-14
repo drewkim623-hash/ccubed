@@ -101,7 +101,7 @@ export function chooseTargetWeek({ stateWeek, stateWeekFinal }) {
  *
  * `week` and `season` at the top level are the finished week this points at.
  * Sleeper's own state lives under `sleeper_state`, as it read when the file
- * was written, because the routine that sends the email cannot reach Sleeper
+ * was written, because the routine that writes the recap cannot reach Sleeper
  * and has to judge "which week" from this file alone. `generated_at` is what
  * a freshness check reads: file mtimes in a git checkout mean nothing.
  */

@@ -1,9 +1,9 @@
 # Pull Sleeper and commit the result. C Cubed (league 1387595114829864960) only.
 #
-# Nothing in this workflow sends email. It reads Sleeper, ESPN's injury feed and
-# the published C Cubed page, and commits JSON. The Saturday "blast" schedule
-# carried by the league this was ported from is deliberately not here: C Cubed
-# has no recipient list yet (see poll-tally.mjs / weekly-job-prompt.md TODOs).
+# Nothing in this workflow sends anything. It reads Sleeper, ESPN's injury feed
+# and the published C Cubed page, and commits JSON. C Cubed has no email, blast,
+# poll or send ledger at all: articles are published on the site and shared by
+# hand with their teaser (see ROUTINES.md).
 #
 # This workflow exists to solve one problem: the scheduled Claude routine that
 # writes the recaps cannot reach api.sleeper.app. WebFetch there wants a per-URL
@@ -34,8 +34,7 @@ on:
     # Whichever one runs after the week is final writes it; the other finds the
     # week not final yet (nothing written) or rebuilds the same final week, and
     # rebuilding only refreshes timestamps — the same thing the daily 07:00 run
-    # does every day. In EST the 05:30 run is the one the 01:00 routine reads;
-    # in EDT the 04:30 run is, and the 05:30 one lands after the send.
+    # does every day. Both land well before the Tuesday recap routine (ROUTINES.md).
     - cron: "30 4 * * 2"    # Tue 00:30 EDT / Mon 23:30 EST
     - cron: "30 5 * * 2"    # Tue 01:30 EDT / Tue 00:30 EST
     - cron: "30 15 * * 0"   # Sun 11:30 America/New_York — inactives are in, kickoff is not
@@ -94,17 +93,17 @@ jobs:
       - name: Take the league's pulse
         run: node build-pulse.mjs
 
-      # The email's numbers must be the site's numbers, so they are read off the
+      # An article's odds must be the site's odds, so they are read off the
       # published page rather than recomputed. That needs a browser, which is
-      # why it happens here: the routine that sends the email can reach neither
-      # Sleeper nor the site, and composes from the snapshot this leaves behind.
+      # why it happens here: the article routines can reach neither Sleeper nor
+      # the site, and quote from the snapshot this leaves behind.
       - name: Install the browser for the odds snapshot
         run: |
           npm ci
           npx playwright install --with-deps chromium
 
       - name: Snapshot what the site is showing
-        run: node build-email.mjs
+        run: node build-odds-snapshot.mjs
 
       # The snapshot just written joins data/odds-history.json. The script
       # merges into the committed file (never rebuilds it), so the default
@@ -128,7 +127,7 @@ jobs:
               process.stdout.write('week ' + l.week + ' of ' + l.season);
             } catch (e) { process.stdout.write('injury refresh'); }
           ")"
-          # The routine commits to main too (recaps, the send ledger), and the
+          # The article routines commit to main too (recaps, rankings), and the
           # two Tuesday runs make a collision likelier. Replay this one commit
           # on top of whatever landed since checkout, then push once. No loop,
           # no force: if the rebase conflicts it is aborted and the step fails
