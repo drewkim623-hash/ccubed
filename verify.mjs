@@ -3165,6 +3165,11 @@ group("The recap guard, and nothing sends");
   check("the data push rebases onto main first and never forces",
     /git pull --rebase/.test(wf) && /git rebase --abort/.test(wf) && !/--force|\s-f\b|push\s+\+/.test(pushLines.join("\n"))
       && wf.indexOf("git pull --rebase") < wf.lastIndexOf("git push"), pushLines.map(l => l.trim()).join(" | "));
+  const pushStep = wf.slice(wf.indexOf("- name: Commit anything that changed"));
+  check("the data push regenerates on top of origin and retries the rebase once, never forcing",
+    (pushStep.match(/git pull --rebase origin "\$branch" && git push origin "HEAD:\$branch"/g) || []).length === 2
+      && /git reset --hard "origin\/\$branch"/.test(pushStep) && /node build-injuries\.mjs/.test(pushStep)
+      && /::error::/.test(pushStep) && !/--force|push\s+(-f\b|\+)/.test(pushStep));
 
   const g = node(["recap-guard.mjs", "--json"]);
   let verdict = null;
