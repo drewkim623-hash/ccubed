@@ -5568,6 +5568,8 @@ const PTS_LOST = {
   hurtFallback: true,
   // A team total of at least this many points lost this week is printed in red.
   highlightAt: 5,
+  // A per-row figure under this many points prints as "—" (team totals stay exact).
+  displayFloor: 0.5,
   // injuries.json `ret` counts as a return date only in this shape.
   dateRe: /^\d{4}-\d{2}-\d{2}/,
   // With no date, a record's `retWeeks` (weeks out, from Research's
@@ -5680,9 +5682,10 @@ function ptsWeeksOut(rec, week, lastWeek, projections, cfg = PTS_LOST) {
  *   { pid, name, pos, club, status, ret, starter, slot,
  *     thisWeek: { hurt, rep, repPid, lost },
  *     ros: { kind, weeks, lost (null = no estimate),
- *            byWeek: [{ week, hurt, rep, repPid, lost, starts }] } }
+ *            standIn, byWeek: [{ week, hurt, rep, repPid, lost, starts, standIn }] } }
  * In byWeek, starts = he makes that week's best lineup; rep/repPid = who fills
- * his slot without him.
+ * his slot without him; standIn = the one healthy player who enters the rebuilt
+ * lineup, "shuffle" (an injured entrant or several), or null (nobody enters).
  */
 function projectedPointsLost(team, injuries, projections, opts = {}) {
   const cfg = opts.cfg || PTS_LOST;
@@ -5738,10 +5741,16 @@ function projectedPointsLost(team, injuries, projections, opts = {}) {
     const sum = marg.reduce((s, m) => s + m, 0);
     const share = new Map(inL.map(({ c, i }, k) => [c.pid,
       { lost: sum > 0 ? drop * marg[k] / sum : drop / inL.length, rep: without[i] }]));
+    // Who actually enters the rebuilt lineup: exactly one healthy newcomer is
+    // named; an injured one (Questionable included) or several is a shuffle.
+    const inWith = new Set(withL.map(c => c.pid));
+    const entrants = without.map(c => c.pid).filter(pid => pid && !inWith.has(pid));
+    const standIn = !entrants.length ? null
+      : entrants.length === 1 && !(recOf(entrants[0]) || {}).s ? entrants[0] : "shuffle";
     for (const x of outNow) {
       const s = share.get(x.pid);
       ros.get(x.pid).push({ week: w, hurt: hurtPts(x, w), rep: s ? s.rep.pts : 0, repPid: s ? s.rep.pid : null,
-        lost: s ? s.lost : 0, starts: !!s });
+        lost: s ? s.lost : 0, starts: !!s, standIn: s ? standIn : null });
     }
   }
 
@@ -5752,6 +5761,8 @@ function projectedPointsLost(team, injuries, projections, opts = {}) {
       slot: x.slot, retSource: x.rec.retSource || null, estimated: x.rec.retEstimated === true,
       retNote: x.rec.retNote || null, thisWeek: tw,
       ros: { kind: x.out.kind, weeks: x.out.weeks, byWeek: by,
+        // The first week he'd start: the player who takes his place then, "shuffle", or null.
+        standIn: (by.find(c => c.starts) || {}).standIn ?? null,
         lost: x.out.kind === "none" ? null : Math.max(0, by.reduce((s, c) => s + c.lost, 0)) } };
   }).sort((a, b) => (b.thisWeek.lost - a.thisWeek.lost) || ((b.ros.lost ?? -1) - (a.ros.lost ?? -1))
     || a.name.localeCompare(b.name));
@@ -5798,6 +5809,8 @@ function ensureInjuries(full) {
 
 /** Points lost as printed: −11.2, or 0.0. */
 const ptsLostText = v => (v > 0.05 ? `−${v.toFixed(1)}` : "0.0");
+/** A row's points lost as printed: "—" under PTS_LOST.displayFloor. */
+const ptsRowText = v => (v < PTS_LOST.displayFloor ? "—" : ptsLostText(v));
 
 /** Every team's projectedPointsLost(), injured teams only, biggest this-week loss first. */
 function injuryTeams(season, inj, proj) {
@@ -5879,15 +5892,19 @@ function renderInjuries(host, inj, proj) {
         + (x.estimated ? ` <span class="est">estimated</span>` : "");
       if (x.retNote) row.title = [x.retNote, row.title].filter(Boolean).join(" — ");
       const tw = x.thisWeek;
+      // A stand-in is named only when he is healthy; an injured one means the lineup reshuffles.
+      const who = pid => (!pid ? "nobody" : pid === "shuffle" || (inj.map.get(pid) || {}).s ? "lineup shuffle" : nm(pid));
       const rep = !x.starter ? "bench this week"
-        : tw.repPid ? `Proj ${tw.hurt.toFixed(1)} · replaced by ${nm(tw.repPid)} (${tw.rep.toFixed(1)})`
+        : tw.repPid ? `Proj ${tw.hurt.toFixed(1)} · replaced by ${who(tw.repPid)} (${tw.rep.toFixed(1)})`
         : `Proj ${tw.hurt.toFixed(1)} · no bench replacement`;
+      const later = x.ros.byWeek.some(c => c.starts) ? `${esc(dot)}rest of season: <span class="sin">${esc(who(x.ros.standIn))}</span>` : "";
+      const retTxt = back || (x.ros.kind === "weeks" ? `~${Number(p.retWeeks)} wk (est.)` : "no estimate");
       row.innerHTML = `<span class="nm">${esc(x.name)}</span>
         <span class="meta">${esc([x.pos, x.club].filter(Boolean).join(dot))}${detail ? esc(dot + detail) : ""}</span>
-        <span class="meta"><span class="st st-${esc(String(x.status).toLowerCase())}">${esc(x.status)}</span>${esc(dot)}<span class="ret">${esc(back || "no estimate")}</span>${wks ? `${esc(dot)}<span class="wo">${esc(wks)}</span>` : ""}${srcTag}</span>
-        <span class="meta rep">${esc(rep)}</span>
-        <span class="imp"><span class="pw">${ptsLostText(tw.lost)}</span><span class="k">wk ${pl.week}</span>
-          <span class="pr">${x.ros.lost == null ? "no estimate" : ptsLostText(x.ros.lost)}</span><span class="k">rest of season</span></span>`;
+        <span class="meta"><span class="st st-${esc(String(x.status).toLowerCase())}">${esc(x.status)}</span>${esc(dot)}<span class="ret">${esc(retTxt)}</span>${wks ? `${esc(dot)}<span class="wo">${esc(wks)}</span>` : ""}${srcTag}</span>
+        <span class="meta rep">${esc(rep)}${later}</span>
+        <span class="imp"><span class="pw">${ptsRowText(tw.lost)}</span><span class="k">wk ${pl.week}</span>
+          <span class="pr">${x.ros.lost == null ? "no estimate" : ptsRowText(x.ros.lost)}</span><span class="k">rest of season</span></span>`;
       b.appendChild(row);
     }
     host.appendChild(b);
@@ -10122,7 +10139,7 @@ async function boot() {
       weekIsFinal, allWeeks, effectiveState,
       loadInjuries, injPlayer, availability, livePosterior, weeksOf, liveState,
       injuryDetail, returnLabel, rosterInjuries, injCutText, ensureInjuries, renderInjuries,
-      PTS_LOST, projectedPointsLost, ptsProj, ptsSunday, ptsWeeksOut, ptsLostText, injuryTeams, loadProjections,
+      PTS_LOST, projectedPointsLost, ptsProj, ptsSunday, ptsWeeksOut, ptsLostText, ptsRowText, injuryTeams, loadProjections,
       injuryPlan, injuryMult, injuryHurtMap, injuryLabel, injuryLabelText, injuryCharged, injuryFuturesNote,
       approxKickoff, lastNameOf, gameCardHTML,
       ensureLiveOdds, INJ_AVAIL, REPLACEMENT, INJ_FLOOR, INJ_KEY,

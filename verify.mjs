@@ -5358,6 +5358,9 @@ const INJ_NAMES = ["injuries: the tab reads the published injuries.json and show
     "return info — neither date nor retWeeks keeps the old behaviour",
     "return info — rows carry retSource, estimated and retNote (null when absent)",
     "return info — the tab labels each row's return source and tags estimates",
+    "return info — retWeeks without a date reads ~N wk (est.), never no estimate",
+    "stand-in names the one healthy player entering the lineup, else lineup shuffle",
+    "per-row values under PTS_LOST.displayFloor show —, team totals stay exact",
     "at 390px nothing overflows and no text is under 11px",
     "odds code (ODDS BOARD through live repricing) is byte-identical to origin/main",
     "INJ_AVAIL, REPLACEMENT, INJ_FLOOR and the odds functions match origin/main"].map(n => `points lost: ${n}`)];
@@ -5548,9 +5551,10 @@ const PL = await injPage.evaluate(async () => {
       ros: rosLost[p], nWeeks: outs[p] ? outs[p].length : null, starts: startsIn[p], status: I[p].s }));
   };
   const fmt = v => (v > 0.05 ? "−" + v.toFixed(1) : "0.0");
+  const rfmt = v => (v < 0.5 ? "—" : fmt(v)); // per-row figures: "—" under PTS_LOST.displayFloor
   const close = (a, b) => (a == null && b == null) || (a != null && b != null && Math.abs(a - b) < 1e-9);
   const out = { week, sundaysOk: true, fnBad: [], domBad: [], totBad: [], sortBad: [], teamSort: [], noEstBad: [], benchBad: [],
-    qBad: [], rows: 0, noEst: 0, q: 0, all: [], wkLabel: true, partialBad: [], biteBad: [] };
+    qBad: [], rows: 0, noEst: 0, q: 0, all: [], wkLabel: true, partialBad: [], biteBad: [], sinSeen: 0, sinBad: [] };
   for (let w = week; w < P.playoff_week_start; w++) if (!P.sundays[w]) out.sundaysOk = false;
 
   const teamEls = [...panel.querySelectorAll(".injteam")];
@@ -5559,6 +5563,7 @@ const PL = await injPage.evaluate(async () => {
     const mine = ref(r, inj, week);
     if (!mine.length) continue;
     const fn = D.projectedPointsLost(r, new Map(Object.entries(inj)), P, { week, posOf: pid => posMap[pid] && posMap[pid].p, rosterPositions });
+    const fnRows = fn.rows;
     for (const m of mine) {
       const f = fn.rows.find(x => x.pid === m.pid);
       if (!f || !close(f.thisWeek.lost, m.tw) || !close(f.ros.lost, m.ros) || (f.thisWeek.repPid || null) !== m.rep)
@@ -5582,9 +5587,16 @@ const PL = await injPage.evaluate(async () => {
       out.rows++;
       if (!m) { out.domBad.push(`${row.dataset.pid}: not expected`); continue; }
       const pw = row.querySelector(".pw").textContent.trim(), pr = row.querySelector(".pr").textContent.trim();
-      if (pw !== fmt(m.tw) || pr !== (m.ros == null ? "no estimate" : fmt(m.ros))) out.domBad.push(`${row.dataset.pid}: ${pw}/${pr} vs ${fmt(m.tw)}/${m.ros}`);
+      if (pw !== rfmt(m.tw) || pr !== (m.ros == null ? "no estimate" : rfmt(m.ros))) out.domBad.push(`${row.dataset.pid}: ${pw}/${pr} vs ${rfmt(m.tw)}/${m.ros}`);
+      const sinEl = row.querySelector(".sin");
+      if (sinEl) {
+        const f = fnRows.find(x => x.pid === m.pid), s = f && f.ros.standIn;
+        const want = !s ? "nobody" : s === "shuffle" || (inj[s] && inj[s].s) ? "lineup shuffle" : ((posMap[s] || {}).n || s);
+        out.sinSeen++;
+        if (sinEl.textContent.trim() !== want) out.sinBad.push(`${row.dataset.pid}: ${sinEl.textContent} vs ${want}`);
+      }
       if (m.ros == null) { out.noEst++; if (/\d/.test(pr) || row.querySelector(".wo")) out.noEstBad.push(row.dataset.pid); }
-      if (!m.starter && pw !== "0.0") out.benchBad.push(row.dataset.pid);
+      if (!m.starter && pw !== "—") out.benchBad.push(row.dataset.pid);
       if (m.status !== "Out" && m.status !== "IR") {
         out.q++;
         if (row.querySelector(".st").textContent.trim() !== m.status) out.qBad.push(row.dataset.pid);
@@ -5761,6 +5773,19 @@ const PL = await injPage.evaluate(async () => {
   D.renderInjuries(rh, { at: Date.now(), source: "file", map: new Map(Object.entries(rtInj)) }, P);
   const rrow = id => rh.querySelector(`.injp[data-pid="${id}"]`);
   out.ret.tab = [A, B, C, E].map(id => [rrow(id)?.querySelector(".rsrc")?.textContent || "", !!rrow(id)?.querySelector(".est")]);
+  out.ret.label = [B, E, C].map(id => rrow(id)?.querySelector(".ret")?.textContent.trim());
+
+  // Stand-in label, on the bench case above. X starts; without him S2 is the one
+  // newcomer (healthy) -> "S2". S2 Questionable -> "shuffle". Y at 11 also out
+  // and starting (RB X, FLEX Y) -> both S1 and S2 come in -> "shuffle".
+  const bnOpts = { week: 6, posOf: pid => bnPos[pid], rosterPositions: bnRp };
+  const sQ = D.projectedPointsLost(bnTeam, { ...bnInj, S2: { s: "Questionable", n: "S2" } }, bnP, bnOpts);
+  const bnP2 = { ...bnP, weeks: { 6: { ...bnP.weeks[6], Y: 11 } } };
+  const sMany = D.projectedPointsLost(bnTeam, bnInj, bnP2, bnOpts);
+  out.standIn = { one: rowOf(BN, "X").ros?.standIn, injured: rowOf(sQ, "X").ros?.standIn,
+    many: rowOf(sMany, "X").ros?.standIn, notStarting: rowOf(BN, "Y").ros?.standIn, seen: out.sinSeen, bad: out.sinBad.slice(0, 3) };
+  // Display floor: per-row "—" under 0.5, team totals exact.
+  out.floor = { cfg: D.PTS_LOST.displayFloor, low: D.ptsRowText(0.3), zero: D.ptsRowText(0), at: D.ptsRowText(0.5), tot: D.ptsLostText(0.3) };
   const missing = document.createElement("div");
   D.renderInjuries(missing, { at: Date.now(), source: "file", map: new Map(Object.entries(inj)) }, null);
   out.missingFile = /No projections on file/.test(missing.textContent) && !missing.querySelector(".injp");
@@ -5819,6 +5844,14 @@ check("points lost: the highlight threshold is read from PTS_LOST",
     JSON.stringify(R.fields) === JSON.stringify(["espn-return-date", false, null, "default", true, "IR default, no report", null, false, null]), j);
   check("points lost: return info — the tab labels each row's return source and tags estimates",
     JSON.stringify(R.tab) === JSON.stringify([["ESPN date", false], ["default", true], ["", false], ["report", true]]), j);
+  check("points lost: return info — retWeeks without a date reads ~N wk (est.), never no estimate",
+    JSON.stringify(R.label) === JSON.stringify(["~3 wk (est.)", "~99 wk (est.)", "no estimate"]), j);
+  const S = PL.standIn;
+  check("points lost: stand-in names the one healthy player entering the lineup, else lineup shuffle",
+    S.one === "S2" && S.injured === "shuffle" && S.many === "shuffle" && S.notStarting === null && S.bad.length === 0, JSON.stringify(S));
+  const F = PL.floor;
+  check("points lost: per-row values under PTS_LOST.displayFloor show —, team totals stay exact",
+    F.cfg === 0.5 && F.low === "—" && F.zero === "—" && F.at === "−0.5" && F.tot === "−0.3" && PL.totBad.length === 0, JSON.stringify(F));
 }
 console.log(`    named players: ${JSON.stringify(PL.named)}`);
 const tops = [...PL.all].sort((a, b) => b.tw - a.tw).slice(0, 5);
