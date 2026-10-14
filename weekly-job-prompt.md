@@ -62,6 +62,8 @@ committed straight to `main`.
 1. **`recaps.json` → `weeks[]`** (Tuesday) — the week's full write-up.
 2. **`rankings.json` → `weeks[]`** (Tuesday) — one sentence of colour per manager.
 3. **`recaps.json` → `articles[]`** (every routine) — one new article, with a teaser.
+4. **`news/<slug>.html` and `img/og/<slug>.png`** (every routine) — the new article's link card,
+   written by `node build-cards.mjs`. See **The link card** below.
 
 Then it emails that article's teaser to Drew, and only to Drew. See **The self-email** below.
 
@@ -177,13 +179,49 @@ else regenerates.
 
 Every article carries a `teaser`: the text somebody copies from the article page (there is a
 **Copy teaser** button) and pastes into the league group chat, and the body of the self-email.
-Plain text, **600 characters at most**, no HTML or markdown, lines separated by `\n`:
+Plain text, **600 characters at most**, no HTML or markdown, and exactly these ten lines,
+separated by `\n` (breaking-news style):
 
-1. a punchy headline (it may differ from the article's),
-2. two or three lines that make someone tap — the most surprising true number, the name involved,
-3. last line, exactly: `https://drewkim623-hash.github.io/ccubed/#news/<slug>` with the article's own slug.
+```
+🚨 C CUBED | WEEK n
+(blank line)
+HEADLINE IN CAPS
+(blank line)
+<emoji> stat line 1
+<emoji> stat line 2
+<emoji> stat line 3
+(blank line)
+Full story 👇
+https://drewkim623-hash.github.io/ccubed/news/<slug>.html
+```
+
+- Line 1: `🚨 C CUBED | WEEK n` with the week the piece is about (`🚨 C CUBED | PRESEASON` before week 1).
+- Line 3: the article's `headline`, exactly, in capitals.
+- Lines 5-7: each opens with one emoji and a space, and each carries at least one number. **Every
+  number on these lines must be printed in the article itself**, the same figure: the most
+  surprising true numbers in it, with the names involved.
+- Line 9: exactly `Full story 👇`.
+- Line 10: exactly `https://drewkim623-hash.github.io/ccubed/news/<slug>.html` with the article's
+  own slug: the link card page, which unfurls with a picture and then opens `#news/<slug>`.
 
 Same rules as the article: no rank or movement, no invented stat, no quote.
+`node check-recaps.mjs` fails a teaser out of this shape, over 600 characters, or with a number the
+article does not print.
+
+### The link card
+
+After the article is in `recaps.json`, run:
+
+```
+node build-cards.mjs
+```
+
+It is free and local (Playwright, already in `package.json`). For every article it writes
+`news/<slug>.html`, a static page with `og:` and `twitter:` tags (absolute URLs under
+`https://drewkim623-hash.github.io/ccubed/`) that sends the reader on to `../#news/<slug>`, and
+`img/og/<slug>.png`, the 1200x630 picture a pasted link shows. It only rewrites files whose bytes
+change. **Commit `news/<slug>.html` and `img/og/<slug>.png` with the article**, in the same push:
+without them the teaser's link is a 404. Never hand-edit either file.
 
 ## The two hard rules
 
@@ -204,8 +242,8 @@ Drew.** It uses Drew's Gmail connector to send exactly **one** email per new art
 - **To:** `drewkim623@gmail.com` — this one address, hard-coded. No other recipient, ever.
 - **No cc. No bcc.** No second address in any field.
 - **Subject:** `C Cubed: <headline>` — the article's `headline`, exactly as committed.
-- **Body:** the article's `teaser`, exactly as committed, as plain text. Nothing added, nothing
-  removed, no signature.
+- **Body:** the article's `teaser`, exactly as committed, as plain text — the ten-line
+  breaking-news teaser above, ending in the card link. Nothing added, nothing removed, no signature.
 
 Send only after `git push` has succeeded and the commit is on `origin/main`, so the link in the
 teaser already works. A run that files no article sends nothing. If the send fails, say so in the
@@ -257,8 +295,9 @@ node check-recaps.mjs --was /tmp/was.json
 ```
 
 It fails on a missing or broken teaser, a lost article, a `weeks[]` entry out of shape or out of
-length, a score that does not match the week file, and a Tuesday article outside its length. Fix
-everything it reports until it exits 0.
+length, a score that does not match the week file, a Tuesday article outside its length, and a
+missing or wrong link card (`news/<slug>.html`, `img/og/<slug>.png`). Fix everything it reports
+until it exits 0.
 
 ## C Cubed, the facts
 

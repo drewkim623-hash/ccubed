@@ -845,6 +845,7 @@
   /* The teaser: the few lines somebody pastes into the group chat, with the link. */
   .ateaser{margin:18px 0 0;background:var(--raised);border:1px solid var(--ring);border-left:3px solid var(--blue);
     border-radius:var(--rs);padding:13px 15px;max-width:66ch;min-width:0}
+  .artl > .ateaser{margin-top:26px}
   .ateaser .tk{font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
     font-weight:700;margin:0 0 7px}
   .ateaser pre{margin:0 0 12px;font:inherit;font-size:14.5px;line-height:1.55;color:var(--ink-2);
@@ -3522,7 +3523,8 @@ function articleCard(a, full) {
         ${a.standfirst ? `<span>${esc(a.standfirst)}</span>` : ""}</div>
     </header>
     <div class="abd">${(a.blocks || []).map(articleBlock).join("")}</div>`;
-  if (full && a.teaser) box.querySelector(".ahdr").appendChild(teaserBox(a));
+  // The teaser sits under the last block: read the piece, then share it.
+  if (full && a.teaser) box.appendChild(teaserBox(a));
   const hero = box.querySelector(".cover.big");
   if (hero) hero._art = a;   // for the redraw when the window crosses COVER_WIDE_MQ
   return box;

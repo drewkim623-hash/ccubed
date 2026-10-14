@@ -3039,9 +3039,19 @@ group("The recap guard, and nothing sends");
   const blocks = [...routines.matchAll(/^## (C Cubed [^\n]+)\n+```\n([\s\S]*?)```/gm)];
   check("ROUTINES.md has a prompt for each of the three routines", blocks.length === 3,
     blocks.map(b => b[1]).join(" | "));
-  check("every routine prompt requires the teaser and its #news link",
+  check("every routine prompt requires the breaking-news teaser and its card link",
     blocks.length === 3 && blocks.every(b => /teaser/.test(b[2]) && /600 characters/.test(b[2])
-      && b[2].includes("https://drewkim623-hash.github.io/ccubed/#news/<slug>")));
+      && b[2].includes("🚨 C CUBED | WEEK <n>") && b[2].includes("Full story 👇")
+      && /printed in the article itself/.test(b[2])
+      && b[2].includes("https://drewkim623-hash.github.io/ccubed/news/<slug>.html")));
+  check("every routine prompt builds the link card and commits it with the article",
+    blocks.length === 3 && blocks.every(b => /node build-cards\.mjs/.test(b[2])
+      && /Commit recaps\.json[\s\S]{0,40}news\/<slug>\.html and img\/og\/<slug>\.png/.test(b[2])
+      && b[2].indexOf("node build-cards.mjs") < b[2].indexOf("node check-recaps.mjs --was")));
+  check("the contract carries the teaser shape and the link card",
+    prompt.includes("🚨 C CUBED | WEEK n") && prompt.includes("Full story 👇") && /### The link card/.test(prompt)
+      && prompt.includes("https://drewkim623-hash.github.io/ccubed/news/<slug>.html")
+      && /Commit `news\/<slug>\.html` and `img\/og\/<slug>\.png`/.test(prompt));
   check("every routine prompt says redraft, no keepers, and no invented history",
     blocks.length === 3 && blocks.every(b => /REDRAFT/.test(b[2]) && /no keepers/.test(b[2]) && /Never invent history/.test(b[2])));
   check("every routine prompt runs the teaser check before pushing",
@@ -4164,7 +4174,9 @@ group("Teasers: every article has one, and it copies");
  * that piece on a cold load and on a reload, the button copies exactly the
  * teaser, and a refused clipboard leaves the text selected in a textarea. */
 {
-  const { recapsProblems, teaserProblems, teaserLink, TEASER_MAX } = await import(new URL("./check-recaps.mjs", import.meta.url));
+  const { recapsProblems, teaserProblems, teaserLink, TEASER_MAX, SITE: SITE_URL, cardUrl, ogImageUrl,
+    cardFileProblems, cardTagProblems, metaTags, pngSize } = await import(new URL("./check-recaps.mjs", import.meta.url));
+  const newestSlug = as => as.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))[0].slug;
   const recaps = JSON.parse(await readFile(join(ROOT, "recaps.json"), "utf8"));
   const arts = recaps.articles || [];
   const slugs = new Set(arts.map(a => a.slug));
@@ -4173,17 +4185,67 @@ group("Teasers: every article has one, and it copies");
     arts.every(a => typeof a.teaser === "string" && a.teaser.length <= TEASER_MAX),
     arts.filter(a => !(typeof a.teaser === "string" && a.teaser.length <= TEASER_MAX)).map(a => a.slug).join(", "));
   check("no teaser contains HTML", arts.every(a => !/<\/?[a-z][^>]*>|&[a-z#0-9]+;/i.test(a.teaser || "")));
-  const linked = arts.map(a => ((a.teaser || "").match(/#news\/([^\s#?]+)\s*$/) || [])[1]);
+  const linked = arts.map(a => ((a.teaser || "").match(/\/news\/([^\s#?/]+)\.html$/) || [])[1]);
   check("every teaser's link names an article that exists", linked.every(s => s && slugs.has(s)),
     arts.filter((a, i) => !(linked[i] && slugs.has(linked[i]))).map(a => a.slug).join(", "));
-  check("every teaser links to its own article, in the site's #news/ form",
-    arts.every(a => (a.teaser || "").trim().endsWith(teaserLink(a.slug))));
+  check("every teaser ends with its own card link, news/<slug>.html",
+    arts.every(a => (a.teaser || "").endsWith("\n" + teaserLink(a.slug))) && teaserLink("x") === SITE_URL + "news/x.html");
+  check("every teaser is in the breaking-news shape, its stats all printed in the article",
+    arts.every(a => teaserProblems(a, slugs).length === 0),
+    arts.flatMap(a => teaserProblems(a, slugs).map(p => `${a.slug}: ${p}`)).join(" | ").slice(0, 300));
   check("check-recaps.mjs finds nothing wrong with recaps.json", recapsProblems(recaps).length === 0,
     recapsProblems(recaps).join(" | "));
-  check("check-recaps.mjs catches a long teaser, HTML and a link to nowhere",
+  // Doctored copies of a real teaser: each must fail on exactly the thing broken.
+  const good = arts[0], bad = (f, re) => teaserProblems({ ...good, teaser: f(good.teaser) }, slugs).some(p => re.test(p));
+  check("check-recaps.mjs catches a long teaser, HTML, a wrong shape, a made-up stat and a link to nowhere",
     teaserProblems({ slug: "a", teaser: "x".repeat(601) }, slugs).length > 0
-      && teaserProblems({ slug: "a", teaser: `<b>Hi</b>\nline\n${teaserLink("a")}` }, slugs).some(p => /HTML/.test(p))
-      && teaserProblems({ slug: "a", teaser: `Hi\nline\n${teaserLink("zzz")}` }, slugs).length > 0);
+      && bad(t => t.replace(/\n\n/, "\n\n<b>x</b>"), /HTML|third line/)
+      && bad(t => t.replace("🚨 C CUBED | ", "C CUBED | "), /first line/)
+      && bad(t => t.replace("Full story 👇", "Read more"), /Full story/)
+      && bad(t => t.split("\n").filter((l, i) => i !== 6).join("\n"), /lines/)
+      && bad(t => t.split("\n").map((l, i) => i === 4 ? l.replace(/\d+(\.\d+)?/, "987.65") : l).join("\n"), /not in the article/)
+      && bad(t => t.replace(/\n[^\n]*$/, "\n" + teaserLink("zzz")), /not an article|last line/)
+      && bad(t => t.replace(/\n[^\n]*$/, "\nhttps://drewkim623-hash.github.io/ccubed/#news/" + good.slug), /last line/));
+
+  /* The link card: a page per slug and alias with absolute og:/twitter: tags,
+   * a 1200x630 picture per article, and .nojekyll so Pages serves both. */
+  const cardProbs = await cardFileProblems(recaps, ROOT);
+  check("every article and alias has its card page, and every article its 1200x630 og:image",
+    cardProbs.length === 0, cardProbs.join(" | ").slice(0, 300));
+  const allTags = [];
+  for (const a of arts) for (const s of [a.slug, ...(a.aliases || [])]) {
+    const t = metaTags(await readFile(join(ROOT, "news", s + ".html"), "utf8").catch(() => ""));
+    allTags.push({ s, t, a });
+  }
+  check("every card page carries og:title, og:description, og:image, twitter:card and a canonical, all absolute",
+    allTags.length > 0 && allTags.every(({ t }) => t["og:title"] && t["og:description"] && t["twitter:card"] === "summary_large_image"
+      && ["og:image", "og:url", "twitter:image", "canonical"].every(k => (t[k] || "").startsWith(SITE_URL))),
+    allTags.filter(({ t }) => !(t["og:image"] || "").startsWith(SITE_URL)).map(x => x.s).join(", "));
+  check("an old slug's card page opens the article it became",
+    arts.filter(a => (a.aliases || []).length).every(a => a.aliases.every(s => {
+      const x = allTags.find(y => y.s === s);
+      return x && x.t["og:url"] === cardUrl(a.slug) && x.t["og:image"] === ogImageUrl(a.slug);
+    })));
+  check("check-recaps.mjs catches a card page with a relative og:image and a missing twitter:card",
+    (() => {
+      const a = arts[0], html = `<link rel="canonical" href="${cardUrl(a.slug)}"><meta property="og:image" content="img/og/${a.slug}.png">`;
+      const p = cardTagProblems(html, a);
+      return p.some(x => /og:image is/.test(x)) && p.some(x => /no twitter:card/.test(x)) && p.some(x => /send the reader/.test(x));
+    })());
+  for (const s of [newestSlug(arts), ...(arts.find(a => (a.aliases || []).length)?.aliases || [])].slice(0, 2)) {
+    const cp = await browser.newPage();
+    await cp.goto(`${BASE}/news/${s}.html`, { waitUntil: "domcontentloaded" });
+    await cp.waitForFunction(() => document.body && document.body.dataset.ready === "1", null, { timeout: 90000 }).catch(() => {});
+    const landed = await cp.evaluate(() => location.pathname + location.hash);
+    const target = arts.find(a => a.slug === s || (a.aliases || []).includes(s));
+    check(`news/${s}.html sends a browser on to #news/${target.slug}`, landed === `/#news/${target.slug}`, landed);
+    await cp.close();
+  }
+  const imgRes = await fetch(`${BASE}/img/og/${newestSlug(arts)}.png`);
+  const sz = pngSize(Buffer.from(await imgRes.arrayBuffer()));
+  check("the newest article's og:image is served as a 1200x630 PNG",
+    imgRes.ok && /image\/png/.test(imgRes.headers.get("content-type") || "") && sz && sz.width === 1200 && sz.height === 630,
+    `${imgRes.status} ${JSON.stringify(sz)}`);
 
   const newest = arts.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))[0];
   for (const width of [390, 1280]) {
@@ -4206,6 +4268,14 @@ group("Teasers: every article has one, and it copies");
       `headline=${got.headline}${terrs.length ? " ERR:" + terrs.join("|") : ""}`);
     check(`${width}px: the article shows its teaser exactly`, got.teaser === newest.teaser);
     check(`${width}px: the address stays on #news/<slug>`, got.hash === hash, got.hash);
+    const placed = await tp.evaluate(() => {
+      const art = document.querySelector('[data-panel="article"] article.artl'), t = art && art.querySelector(".ateaser");
+      const body = art && art.querySelector(".abd");
+      return { last: !!t && art.lastElementChild === t, afterBody: !!t && !!body && t.previousElementSibling === body,
+        inHeader: !!(art && art.querySelector(".ahdr .ateaser")) };
+    });
+    check(`${width}px: the teaser box sits at the bottom, after the article's last block`,
+      placed.last && placed.afterBody && !placed.inHeader, JSON.stringify(placed));
     await tp.reload({ waitUntil: "domcontentloaded" });
     await tp.waitForFunction(() => document.body.dataset.ready === "1", null, { timeout: 90000 });
     await tp.waitForSelector('[data-panel="article"] .ateaser', { timeout: 15000 }).catch(() => {});

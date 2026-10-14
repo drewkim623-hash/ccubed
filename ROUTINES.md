@@ -37,9 +37,10 @@ zone, pick America/New_York and the Eastern times; if it only takes UTC cron, us
    - Repository: `drewkim623-hash/ccubed`, branch `main`.
    - Prompt: paste the fenced block under that heading, unchanged.
    - Schedule: the day and time from the table above (America/New_York).
-   - Environment: the default cloud environment is enough. It needs no network beyond GitHub — do
+   - Environment: the default cloud environment is enough. Beyond GitHub it needs only the npm
+     registry and Playwright's browser download, for `node build-cards.mjs` (the link card) — do
      not add `api.sleeper.app` (see *Why the job does not call Sleeper* in the contract).
-   - Connectors: **keep Gmail connected** (Drew's own Gmail). Each routine uses it for exactly one
+   - Connectors: **keep Gmail connected** (Drew's own Gmail; recipient drewkim623@gmail.com only). Each routine uses it for exactly one
      thing: the self-email of a new article's teaser to `drewkim623@gmail.com`. Remove any other
      connector the routine is offered; none is needed.
 3. **Branch policy: push straight to `main`.** In each routine's permissions, allow pushing to
@@ -53,8 +54,10 @@ zone, pick America/New_York and the Eastern times; if it only takes UTC cron, us
    sends you. The Tuesday one should stop at the recap guard this week, because week 5 is already
    written, and send nothing.
 5. **Share.** When an article lands, its teaser is already in your inbox: paste it into the group
-   chat (or open the article on the site and press **Copy teaser**). That is the only way the
-   league hears about it, by design.
+   chat (or open the article on the site and press **Copy teaser**, at the bottom of the piece).
+   Its last line is the article's card page, `news/<slug>.html`, which unfurls with the
+   `img/og/<slug>.png` picture and opens the article. That is the only way the league hears about
+   it, by design.
 
 ---
 
@@ -96,17 +99,29 @@ single self-email to Drew in step 8; nothing else is ever sent to anyone.
       finished, eyebrows "the closest" ... "the widest", each opening with the score in <b>),
       then a note on sources. About 1,100 words in 25-35 blocks; 850-1,500 is the allowed
       range. Do not repeat an angle from any headline or dek already in articles[].
-   d. a "teaser" on that article: plain text, at most 600 characters, no HTML or markdown, a
-      punchy headline line, two or three lines that make someone tap, and as the last line
-      exactly https://drewkim623-hash.github.io/ccubed/#news/<slug>.
+   d. a "teaser" on that article in the contract's breaking-news shape: plain text, at most
+      600 characters, no HTML or markdown, exactly these ten lines:
+        🚨 C CUBED | WEEK <n>
+        (blank line)
+        <THE ARTICLE'S HEADLINE, EXACTLY, IN CAPITALS>
+        (blank line)
+        <emoji> <stat line 1>
+        <emoji> <stat line 2>
+        <emoji> <stat line 3>
+        (blank line)
+        Full story 👇
+        https://drewkim623-hash.github.io/ccubed/news/<slug>.html
+      Every number on a stat line must be printed in the article itself.
    Name teams as the contract's "Naming a team for a reader" section says.
    Never state a rank or a movement anywhere, including the teaser. Manager names are Sleeper
    display_names exactly as in the data files.
-5. Keep every existing article and week exactly as found. Before committing, save the old
-   recaps.json (git show HEAD:recaps.json > /tmp/was.json) and run
-   `node check-recaps.mjs --was /tmp/was.json`. Fix anything it reports until it exits 0.
-6. Commit recaps.json and rankings.json to main with the message
-   "Week <n> recap: <headline>" and push to main. Confirm the commit is on origin/main.
+5. Run `node build-cards.mjs` (if Playwright has no browser, run `npm ci` and
+   `npx playwright install chromium` first). It writes the article's link card,
+   news/<slug>.html and img/og/<slug>.png. Keep every existing article and week exactly as
+   found. Before committing, save the old recaps.json (git show HEAD:recaps.json > /tmp/was.json)
+   and run `node check-recaps.mjs --was /tmp/was.json`. Fix anything it reports until it exits 0.
+6. Commit recaps.json, rankings.json, news/<slug>.html and img/og/<slug>.png to main with the
+   message "Week <n> recap: <headline>" and push to main. Confirm the commit is on origin/main.
 7. If the push failed, send nothing and finish with what went wrong.
 8. EMAIL DREW, the only send allowed. Only if this run pushed a new article, and only after
    the push succeeded: use the Gmail connector to send exactly ONE email for that article.
@@ -114,6 +129,7 @@ single self-email to Drew in step 8; nothing else is ever sent to anyone.
      No cc. No bcc. No other recipient, ever.
      Subject: C Cubed: <the article's headline, exactly as committed>
      Body: the article's teaser, exactly as committed, as plain text. Nothing added.
+           (The ten-line breaking-news teaser, ending in the news/<slug>.html card link.)
    Never send, reply, forward or draft to any other address, and never send a second email
    for the same article. If the send fails, retry at most once, then report it. Every other
    no-send rule stands: no league email, no group message, no poll, no record of sends.
@@ -154,15 +170,27 @@ This routine runs Thursday and Friday. The league gets ONE midweek piece a week,
    A trade or waivers piece: lead paragraph, stat, two or three h sections, cards or bars;
    about 400 words in 7-17 blocks (225-650). The preview: lead paragraph, stat, a cards block
    of the lines, an h per game with two or three paragraphs, bars, note; about 1,150 words
-   (900-1,300). Add a "teaser": plain text, at most 600 characters, no HTML or markdown, a
-   punchy headline line, two or three lines that make someone tap, and as the last line
-   exactly https://drewkim623-hash.github.io/ccubed/#news/<slug>.
+   (900-1,300). Add a "teaser" in the contract's breaking-news shape: plain text, at most
+   600 characters, no HTML or markdown, exactly these ten lines:
+     🚨 C CUBED | WEEK <n>
+     (blank line)
+     <THE ARTICLE'S HEADLINE, EXACTLY, IN CAPITALS>
+     (blank line)
+     <emoji> <stat line 1>
+     <emoji> <stat line 2>
+     <emoji> <stat line 3>
+     (blank line)
+     Full story 👇
+     https://drewkim623-hash.github.io/ccubed/news/<slug>.html
+   Every number on a stat line must be printed in the article itself.
    Name teams as the contract's "Naming a team for a reader" section says. Never state a rank
    or a movement. Do not repeat an angle from any headline or dek already in articles[].
-6. Keep every existing article and week exactly as found. Save the old file
+6. Run `node build-cards.mjs` (if Playwright has no browser, run `npm ci` and
+   `npx playwright install chromium` first); it writes news/<slug>.html and img/og/<slug>.png.
+   Keep every existing article and week exactly as found. Save the old file
    (git show HEAD:recaps.json > /tmp/was.json), run `node check-recaps.mjs --was /tmp/was.json`
-   and fix anything it reports. Commit recaps.json to main and push to main. Confirm the
-   commit is on origin/main.
+   and fix anything it reports. Commit recaps.json, news/<slug>.html and img/og/<slug>.png to
+   main and push to main. Confirm the commit is on origin/main.
 7. If the push failed, send nothing and finish with what went wrong.
 8. EMAIL DREW, the only send allowed. Only if this run pushed a new article, and only after
    the push succeeded: use the Gmail connector to send exactly ONE email for that article.
@@ -170,6 +198,7 @@ This routine runs Thursday and Friday. The league gets ONE midweek piece a week,
      No cc. No bcc. No other recipient, ever.
      Subject: C Cubed: <the article's headline, exactly as committed>
      Body: the article's teaser, exactly as committed, as plain text. Nothing added.
+           (The ten-line breaking-news teaser, ending in the news/<slug>.html card link.)
    Never send, reply, forward or draft to any other address, and never send a second email
    for the same article. If the send fails, retry at most once, then report it. Every other
    no-send rule stands: no league email, no group message, no poll, no record of sends.
@@ -202,14 +231,26 @@ single self-email to Drew in step 7; nothing else is ever sent to anyone.
    blocks (425-525). Quote odds exactly as the snapshot has them. Never state a power rank or
    a movement on the power board. Do not repeat an angle from any headline or dek already in
    articles[], in particular not this week's Tuesday or midweek piece.
-4. Add a "teaser": plain text, at most 600 characters, no HTML or markdown, a punchy headline
-   line, two or three lines that make someone tap, and as the last line exactly
-   https://drewkim623-hash.github.io/ccubed/#news/<slug>.
+4. Add a "teaser" in the contract's breaking-news shape: plain text, at most 600 characters,
+   no HTML or markdown, exactly these ten lines:
+     🚨 C CUBED | WEEK <n>
+     (blank line)
+     <THE ARTICLE'S HEADLINE, EXACTLY, IN CAPITALS>
+     (blank line)
+     <emoji> <stat line 1>
+     <emoji> <stat line 2>
+     <emoji> <stat line 3>
+     (blank line)
+     Full story 👇
+     https://drewkim623-hash.github.io/ccubed/news/<slug>.html
+   Every number on a stat line must be printed in the article itself.
    Name teams as the contract's "Naming a team for a reader" section says.
-5. Keep every existing article and week exactly as found. Save the old file
+5. Run `node build-cards.mjs` (if Playwright has no browser, run `npm ci` and
+   `npx playwright install chromium` first); it writes news/<slug>.html and img/og/<slug>.png.
+   Keep every existing article and week exactly as found. Save the old file
    (git show HEAD:recaps.json > /tmp/was.json), run `node check-recaps.mjs --was /tmp/was.json`
-   and fix anything it reports. Commit recaps.json to main and push to main. Confirm the
-   commit is on origin/main.
+   and fix anything it reports. Commit recaps.json, news/<slug>.html and img/og/<slug>.png to
+   main and push to main. Confirm the commit is on origin/main.
 6. If the push failed, send nothing and finish with what went wrong.
 7. EMAIL DREW, the only send allowed. Only if this run pushed a new article, and only after
    the push succeeded: use the Gmail connector to send exactly ONE email for that article.
@@ -217,6 +258,7 @@ single self-email to Drew in step 7; nothing else is ever sent to anyone.
      No cc. No bcc. No other recipient, ever.
      Subject: C Cubed: <the article's headline, exactly as committed>
      Body: the article's teaser, exactly as committed, as plain text. Nothing added.
+           (The ten-line breaking-news teaser, ending in the news/<slug>.html card link.)
    Never send, reply, forward or draft to any other address, and never send a second email
    for the same article. If the send fails, retry at most once, then report it. Every other
    no-send rule stands: no league email, no group message, no poll, no record of sends.

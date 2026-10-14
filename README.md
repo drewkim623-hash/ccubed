@@ -255,7 +255,10 @@ C Cubed has no league email, blast, poll or send ledger. The articles are writte
 [`ROUTINES.md`](ROUTINES.md) (contract in `weekly-job-prompt.md`), published in the News tab, and
 shared by hand. The one send is a copy to Drew alone: after a routine pushes a new article it emails
 that article's teaser to Drew's own address through his Gmail connector, and to nobody else. The
-article is still shared by hand: every article has its own link, `https://drewkim623-hash.github.io/ccubed/#news/<slug>`,
-and a plain-text teaser with a **Copy teaser** button for the group chat. `recap-guard.mjs` is a
+article is still shared by hand: every article opens at `https://drewkim623-hash.github.io/ccubed/#news/<slug>`,
+and has a link card, `news/<slug>.html` with its picture `img/og/<slug>.png` (written by
+`node build-cards.mjs`; `.nojekyll` makes Pages serve them as is), which unfurls in a chat and
+then opens the article. Its breaking-news teaser ends with that card link and has a **Copy
+teaser** button at the bottom of the article. `recap-guard.mjs` is a
 read-only check that a finished week has not been written up yet. `build-odds-snapshot.mjs` writes
 `data/odds-snapshot.json` so the articles quote the site's own odds.

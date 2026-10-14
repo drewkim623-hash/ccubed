@@ -4,8 +4,11 @@
  *   node check-recaps.mjs                  # exit 0 = fine, 1 = something to fix
  *   node check-recaps.mjs --was old.json   # also fail if any article in old.json is gone
  *
- * Every article needs a unique slug and a teaser: plain text, at most 600
- * characters, no HTML, whose last line is exactly the article's own link.
+ * Every article needs a unique slug and a teaser in the breaking-news shape
+ * (TEASER_SHAPE): plain text, at most 600 characters, no HTML, three stat lines
+ * whose numbers all appear in the article, and its own card link last. Run
+ * from the repo root it also checks each article's link card (news/<slug>.html
+ * and img/og/<slug>.png, written by build-cards.mjs).
  * Every weeks[] entry needs the full recap shape (lede, six games, 3-6 notebook
  * items) at the length the contract asks for, and scores that match the
  * committed week file.
@@ -15,7 +18,20 @@ import { existsSync } from "fs";
 
 export const SITE = "https://drewkim623-hash.github.io/ccubed/";
 export const TEASER_MAX = 600;
-export const teaserLink = slug => `${SITE}#news/${slug}`;
+/** The card page a teaser links to; it carries the og: tags and opens #news/<slug>. */
+export const cardUrl = slug => `${SITE}news/${slug}.html`;
+export const ogImageUrl = slug => `${SITE}img/og/${slug}.png`;
+export const teaserLink = cardUrl;
+export const TEASER_SHAPE = `🚨 C CUBED | WEEK n      (or PRESEASON before week 1)
+
+HEADLINE IN CAPS
+
+<emoji> stat line 1
+<emoji> stat line 2
+<emoji> stat line 3
+
+Full story 👇
+${SITE}news/<slug>.html`;
 /* Word counts are measured on the reference league's 2026 pieces, rounded out:
  * its weeks[] entries ran 613-942 words (average 745), its "tuesday" articles
  * 884-1,457 (average 1,120). */
@@ -36,17 +52,87 @@ export function articleWords(a) {
   return walk(a.blocks || []);
 }
 
+const plainText = o => typeof o === "string" ? o.replace(/<[^>]+>/g, " ")
+  : Array.isArray(o) ? o.map(plainText).join(" ") : o && typeof o === "object" ? Object.values(o).map(plainText).join(" ") : "";
+const NUM = /\d[\d,]*(?:\.\d+)?/g;
+const STAT_LINE = /^\p{Extended_Pictographic}️?\s+\S/u;
+
 /** Every problem with one article's teaser, as sentences; empty when it is fine. */
 export function teaserProblems(a, slugs) {
   const out = [], t = a && a.teaser;
   if (typeof t !== "string" || !t.trim()) return ["has no teaser"];
   if (t.length > TEASER_MAX) out.push(`teaser is ${t.length} characters (limit ${TEASER_MAX})`);
   if (/<\/?[a-z][^>]*>|&[a-z#0-9]+;/i.test(t)) out.push("teaser contains HTML");
-  const lines = t.split("\n").map(l => l.trim()).filter(Boolean);
-  if (lines.length < 3) out.push("teaser needs a headline, at least one line, and the link");
-  const m = /#news\/([^\s#?]+)$/.exec(lines[lines.length - 1] || "");
-  if (lines[lines.length - 1] !== teaserLink(a.slug)) out.push(`teaser's last line is not ${teaserLink(a.slug)}`);
+  const L = t.split("\n");
+  if (L.length !== 10) return [...out, `teaser has ${L.length} lines; the shape is these 10:\n${TEASER_SHAPE}`];
+  const head = /^🚨 C CUBED \| (?:WEEK (\d{1,2})|PRESEASON)$/.exec(L[0]);
+  if (!head) out.push(`teaser's first line is not "🚨 C CUBED | WEEK n" (or PRESEASON): ${JSON.stringify(L[0])}`);
+  const body = plainText([a.headline, a.dek, a.blocks]);
+  if (head && head[1] && !new RegExp(`\\bweek ${Number(head[1])}\\b`, "i").test(body))
+    out.push(`teaser says WEEK ${head[1]}, which the article never mentions`);
+  if (!L[2].trim() || L[2] !== plainText(a.headline || "").toUpperCase())
+    out.push("teaser's third line is not the headline in capitals");
+  for (const i of [1, 3, 7]) if (L[i] !== "") out.push(`teaser line ${i + 1} must be blank`);
+  // Every number on a stat line has to be one the article itself prints.
+  const nums = new Set((body.match(NUM) || []).map(n => n.replace(/,/g, "")));
+  for (const i of [4, 5, 6]) {
+    if (!STAT_LINE.test(L[i])) out.push(`teaser line ${i + 1} is not an emoji and a stat`);
+    const own = (L[i].match(NUM) || []).map(n => n.replace(/,/g, ""));
+    if (!own.length) out.push(`teaser line ${i + 1} carries no number`);
+    for (const n of own) if (!nums.has(n)) out.push(`teaser line ${i + 1} says ${n}, which is not in the article`);
+  }
+  if (L[8] !== "Full story 👇") out.push(`teaser line 9 is not "Full story 👇"`);
+  const m = /\/news\/([^\s#?/]+)\.html$/.exec(L[9]);
+  if (L[9] !== teaserLink(a.slug)) out.push(`teaser's last line is not ${teaserLink(a.slug)}`);
   if (m && slugs && !slugs.has(m[1])) out.push(`teaser links to ${m[1]}, which is not an article`);
+  return out;
+}
+
+/** Width and height of a PNG, off its IHDR chunk; null when it is not a PNG. */
+export function pngSize(buf) {
+  if (!buf || buf.length < 24 || buf.readUInt32BE(0) !== 0x89504e47 || buf.toString("latin1", 12, 16) !== "IHDR") return null;
+  return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+}
+
+/** The og:/twitter: tags and the canonical link in a card page, by name. */
+export function metaTags(html) {
+  const out = {};
+  for (const m of String(html).matchAll(/<meta\s+(?:property|name)="([^"]+)"\s+content="([^"]*)"/g)) out[m[1]] = m[2];
+  const c = /<link rel="canonical" href="([^"]+)"/.exec(html);
+  if (c) out.canonical = c[1];
+  return out;
+}
+
+/** Every problem with one card page; `a` is the article it opens. */
+export function cardTagProblems(html, a) {
+  const out = [], t = metaTags(html);
+  const want = { "og:title": true, "og:description": true, "og:image": ogImageUrl(a.slug), "og:url": cardUrl(a.slug),
+    "twitter:card": "summary_large_image", "twitter:image": ogImageUrl(a.slug), canonical: cardUrl(a.slug) };
+  for (const [k, v] of Object.entries(want)) {
+    if (!t[k]) out.push(`has no ${k}`);
+    else if (v !== true && t[k] !== v) out.push(`${k} is ${t[k]}, not ${v}`);
+  }
+  if (!html.includes(`url=../#news/${a.slug}"`) || !html.includes(`location.replace("../#news/${a.slug}")`))
+    out.push(`does not send the reader on to ../#news/${a.slug}`);
+  return out;
+}
+
+/** Every problem with the link cards under `root`: a page per slug and alias, an image per article. */
+export async function cardFileProblems(j, root = ".") {
+  const out = [];
+  for (const a of (j && j.articles) || []) {
+    for (const s of [a.slug, ...(a.aliases || [])]) {
+      const f = `${root}/news/${s}.html`;
+      if (!existsSync(f)) { out.push(`${s}: news/${s}.html is missing (run node build-cards.mjs)`); continue; }
+      for (const p of cardTagProblems(await readFile(f, "utf8"), a)) out.push(`${s}: news/${s}.html ${p}`);
+    }
+    const img = `${root}/img/og/${a.slug}.png`;
+    if (!existsSync(img)) { out.push(`${a.slug}: img/og/${a.slug}.png is missing (run node build-cards.mjs)`); continue; }
+    const sz = pngSize(await readFile(img));
+    if (!sz || sz.width !== 1200 || sz.height !== 630)
+      out.push(`${a.slug}: img/og/${a.slug}.png is ${sz ? `${sz.width}x${sz.height}` : "not a PNG"}, not 1200x630`);
+  }
+  if (!existsSync(`${root}/.nojekyll`)) out.push(".nojekyll is missing, so Pages may not serve news/ as is");
   return out;
 }
 
@@ -135,9 +221,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const j = JSON.parse(await readFile("recaps.json", "utf8"));
   const i = process.argv.indexOf("--was");
   const was = i > 0 ? JSON.parse(await readFile(process.argv[i + 1], "utf8")) : null;
-  const probs = recapsProblems(j, was, await loadWeekFiles(j));
+  const probs = [...recapsProblems(j, was, await loadWeekFiles(j)), ...await cardFileProblems(j)];
   for (const p of probs) console.log(`FAIL  ${p}`);
   console.log(probs.length ? `\n${probs.length} problem(s). Fix them before pushing.`
-    : `ok  ${j.articles.length} articles, every teaser in shape; ${j.weeks.length} week(s) in full recap shape`);
+    : `ok  ${j.articles.length} articles, every teaser in shape, every link card built; ${j.weeks.length} week(s) in full recap shape`);
   process.exit(probs.length ? 1 : 0);
 }

@@ -39,7 +39,7 @@
     "note": "{type:'note', text}  - a quiet footnote",
     "img": "{type:'img', src, alt, width?, height?, caption?, href?, link?}  - an image from img/ in this repo, with alt text; href/link add a link under it"
    },
-   "teaser": "plain text, at most 600 characters, no HTML: a headline line, two or three lines that make someone tap, and the piece's own link https://drewkim623-hash.github.io/ccubed/#news/<slug> as the last line",
+   "teaser": "plain text, at most 600 characters, no HTML, exactly these 10 lines: '🚨 C CUBED | WEEK n' (or PRESEASON), blank, the headline in capitals, blank, three lines that each open with an emoji and carry a stat printed in the article, blank, 'Full story 👇', and the card link https://drewkim623-hash.github.io/ccubed/news/<slug>.html (built by node build-cards.mjs)",
    "source": "which routine wrote it: tuesday (recap + column), watch (midweek: preview, odds, waivers, big trade), saturday (odds column)",
    "kind": "optional: 'opinion' for a piece that argues; the index flags it as a column",
    "aliases": "optional: older slugs that still open this piece (#news/<old>, #article/<old>, ?a=<old>). A replaced article keeps its old slug here so shared links keep working"
@@ -145,7 +145,7 @@
    "dek": "Both unbeaten teams lost in week 5, the highest-scoring week of the season, and four clubs now sit at 4-1. The site's odds board gives each of them at least an 87.9 percent playoff chance and nobody else more than 66.4. Every game in full, below.",
    "byline": "C Cubed desk",
    "standfirst": "6 games · 1,664.72 points · the season's first trade",
-   "teaser": "Four at 4-1, and a gap behind them\nBoth unbeatens lost in week 5. AB x B scored 152.36, the most in any loss this season, and still fell to yerra x ecj by 6.08.\nThe odds board has all four 4-1 teams at 87.9% or better to make the playoffs. Nobody else is above 66.4%.\nPlus: the season's first trade, and a win with an empty QB slot.\nhttps://drewkim623-hash.github.io/ccubed/#news/four-teams-at-4-1-and-a-gap-behind-them",
+   "teaser": "🚨 C CUBED | WEEK 5\n\nFOUR TEAMS AT 4-1, AND A GAP BEHIND THEM\n\n💥 Both unbeatens fell. AB x B scored 152.36 and still lost by 6.08\n📊 All four 4-1 teams are at 87.9% or better to make the playoffs. Nobody else tops 66.4%\n🔁 First trade of the year: Pickens 28, Adams 22.1, and andychoe03 won by 1.78\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/four-teams-at-4-1-and-a-gap-behind-them.html",
    "blocks": [
     {
      "type": "p",
@@ -734,7 +734,7 @@
      "text": "Pre-draft prices are the Fantasy Football Calculator 12-team full-PPR board — 8,234 mock drafts sampled 23–30 August 2026, frozen on draft day and never updated, because the board that matters is the one that existed while people were picking. Twelve team defences and one tight end were not on it and are valued at the board's floor. Roster value counts each manager's best fifteen picks, one per round, so every team is priced on the same number of players. The projection those values feed is calibrated on a borrowed sample; the Odds board sets out exactly which, and why."
     }
    ],
-   "teaser": "Nobody Wanted a Quarterback\nSix backs, six receivers and two tight ends went at the turn, and a top-32 running back was still on the board at pick 101.\nThe C Cubed draft report, pick by pick.\nhttps://drewkim623-hash.github.io/ccubed/#news/2026-draft-report"
+   "teaser": "🚨 C CUBED | PRESEASON\n\nNOBODY WANTED A QUARTERBACK, AND JOSH JACOBS PAID FOR IT\n\n🏈 Josh Allen went at 34 as the first QB. The twelfth went at 122\n📉 Josh Jacobs fell 70 picks past his price, to saiky7 at 101\n⏱️ 26.6 seconds a pick, and 9.65 points a week between the best roster and the worst\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/2026-draft-report.html"
   },
   {
    "season": "2026",
@@ -1045,7 +1045,7 @@
      "text": "Every number here comes off the same model the Odds and Power boards use — the same twenty thousand simulated seasons on the same fixed seed, so the figures in this piece and the prices on those boards are the same figures. Rosters are priced against the frozen pre-draft market; the calibration underneath is borrowed from another league's history because C Cubed has none of its own yet, and the Odds board explains what was borrowed and what it is worth. It gets refitted on C Cubed's own football the moment there is some."
     }
    ],
-   "teaser": "Three Divisions, Almost Nothing Between Them\nchaps drafted the best of it. tech drafted the closest. cville drafted the worst, and still owns a top-three seed.\nDivision by division, before a game was played.\nhttps://drewkim623-hash.github.io/ccubed/#news/2026-divisions"
+   "teaser": "🚨 C CUBED | PRESEASON\n\nTHREE DIVISIONS, SIX PLACES, AND ALMOST NOTHING BETWEEN THEM\n\n📊 Best playoff odds in the league: 60.4%. Worst: 41.4%\n🏆 yojarshh is the title favorite at +700\n⚖️ tech's top three: +230, +260 and +270 to win the division\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/2026-divisions.html"
   }
  ]
 }
