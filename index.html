@@ -5533,7 +5533,19 @@ const PTS_LOST = {
   benchOk: ["Questionable"],
   // Positions that may cover for one another once the same position runs out.
   flex: ["RB", "WR", "TE"],
+  // A HURT player projected at 0 (or missing) in a non-bye week uses his most
+  // recent projection above zero, else his season points per game — both
+  // precomputed by build-injuries.mjs into projections.hurt_fallback.
+  hurtFallback: true,
 };
+
+/** A hurt player's projection: ptsProj, or the hurt_fallback for a 0 week (bye weeks have none). */
+function ptsHurtProj(projections, pid, week, cfg = PTS_LOST) {
+  const v = ptsProj(projections, pid, week);
+  if (v > 0 || !cfg.hurtFallback || !projections || !projections.hurt_fallback) return v;
+  const f = projections.hurt_fallback[pid] && projections.hurt_fallback[pid][week];
+  return f ? Number(f[0]) || 0 : v;
+}
 
 /** A player's projected points in a week; an unpublished week falls back to the latest published one before it. */
 function ptsProj(projections, pid, week) {
@@ -5614,7 +5626,7 @@ function projectedPointsLost(team, injuries, projections, opts = {}) {
   const cover = (hurt, w) => {
     const used = new Set(hurt.map(h => h.pid)), got = new Map();
     const order = hurt.slice().sort((a, b) => (b.starter - a.starter)
-      || (ptsProj(projections, b.pid, w) - ptsProj(projections, a.pid, w)) || a.pid.localeCompare(b.pid));
+      || (ptsHurtProj(projections, b.pid, w) - ptsHurtProj(projections, a.pid, w)) || a.pid.localeCompare(b.pid));
     for (const h of order) {
       const free = bench.filter(b => !used.has(b.pid) && ptsProj(projections, b.pid, w) > 0);
       let pool = free.filter(b => b.pos === h.pos);
@@ -5622,7 +5634,7 @@ function projectedPointsLost(team, injuries, projections, opts = {}) {
       const best = pool.sort((a, b) => (ptsProj(projections, b.pid, w) - ptsProj(projections, a.pid, w))
         || a.pid.localeCompare(b.pid))[0];
       if (best) used.add(best.pid);
-      const hp = ptsProj(projections, h.pid, w), rp = best ? ptsProj(projections, best.pid, w) : 0;
+      const hp = ptsHurtProj(projections, h.pid, w), rp = best ? ptsProj(projections, best.pid, w) : 0;
       got.set(h.pid, { week: w, hurt: hp, rep: rp, repPid: best ? best.pid : null, lost: Math.max(0, hp - rp) });
     }
     return got;
@@ -5635,7 +5647,7 @@ function projectedPointsLost(team, injuries, projections, opts = {}) {
   }
 
   const out = rows.map(x => {
-    const tw = now.get(x.pid) || { week, hurt: ptsProj(projections, x.pid, week), rep: 0, repPid: null, lost: 0 };
+    const tw = now.get(x.pid) || { week, hurt: ptsHurtProj(projections, x.pid, week), rep: 0, repPid: null, lost: 0 };
     const by = ros.get(x.pid);
     return { pid: x.pid, name: x.name, pos: x.pos, club: x.club, status: x.status, ret: x.ret, starter: x.starter,
       thisWeek: tw,

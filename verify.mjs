@@ -5346,6 +5346,9 @@ const INJ_NAMES = ["injuries: the tab reads the published injuries.json and show
     "injured bench players lose 0.0 this week", "questionable/doubtful rows show their status tag",
     "made-up roster — function and re-implementation agree", "made-up roster — no bench player covers two starters",
     "made-up roster — return date, season-ending and no estimate", "a missing projections file shows a clear empty state",
+    "a hurt player projected at 0 uses his last projection above zero, else season PPG; a bye stays 0",
+    "hurt_fallback entries only fill weeks Sleeper projected at 0, with a named source",
+    "every hurt_fallback week a player is out is priced at the fallback (e.g. A.J. Brown, IR)",
     "at 390px nothing overflows and no text is under 11px",
     "odds code (ODDS BOARD through live repricing) is byte-identical to origin/main",
     "INJ_AVAIL, REPLACEMENT, INJ_FLOOR and the odds functions match origin/main"].map(n => `points lost: ${n}`)];
@@ -5460,6 +5463,13 @@ const PL = await injPage.evaluate(async () => {
       const u = P.weeks[w] ? w : (pub.some(x => x < w) ? Math.max(...pub.filter(x => x < w)) : Math.min(...pub));
       return Number(P.weeks[u][pid] || 0);
     };
+    // A hurt player at 0 takes the builder's hurt_fallback (last projection above zero, else PPG).
+    const hpts = (pid, w) => {
+      const v = pts(pid, w);
+      if (v > 0) return v;
+      const f = P.hurt_fallback && P.hurt_fallback[pid] && P.hurt_fallback[pid][w];
+      return f ? Number(f[0]) : v;
+    };
     const clean = a => (a || []).filter(x => x && x !== "0").map(String);
     const st = clean(r.starters), park = [...clean(r.reserve), ...clean(r.taxi)];
     const everyone = [...new Set([...st, ...clean(r.players), ...park])];
@@ -5475,14 +5485,14 @@ const PL = await injPage.evaluate(async () => {
     };
     const assign = (list, w) => {
       const taken = new Set(list), res = {};
-      const ordered = [...list].sort((a, b) => (st.includes(b) - st.includes(a)) || (pts(b, w) - pts(a, w)) || a.localeCompare(b));
+      const ordered = [...list].sort((a, b) => (st.includes(b) - st.includes(a)) || (hpts(b, w) - hpts(a, w)) || a.localeCompare(b));
       for (const h of ordered) {
         const free = bench.filter(b => !taken.has(b) && pts(b, w) > 0);
         let c = free.filter(b => pos(b) === pos(h));
         if (!c.length && FLEX.includes(pos(h))) c = free.filter(b => FLEX.includes(pos(b)));
         c.sort((a, b) => (pts(b, w) - pts(a, w)) || a.localeCompare(b));
         if (c[0]) taken.add(c[0]);
-        res[h] = { lost: Math.max(0, pts(h, w) - (c[0] ? pts(c[0], w) : 0)), rep: c[0] || null, hurt: pts(h, w), repPts: c[0] ? pts(c[0], w) : 0 };
+        res[h] = { lost: Math.max(0, hpts(h, w) - (c[0] ? pts(c[0], w) : 0)), rep: c[0] || null, hurt: hpts(h, w), repPts: c[0] ? pts(c[0], w) : 0 };
       }
       return res;
     };
@@ -5494,7 +5504,7 @@ const PL = await injPage.evaluate(async () => {
       for (const p in a) rosLost[p] += a[p].lost;
     }
     return hurt.map(p => ({ pid: p, starter: st.includes(p), tw: now[p] ? now[p].lost : 0, rep: now[p] ? now[p].rep : null,
-      hurtPts: now[p] ? now[p].hurt : pts(p, week), repPts: now[p] ? now[p].repPts : 0,
+      hurtPts: now[p] ? now[p].hurt : hpts(p, week), repPts: now[p] ? now[p].repPts : 0,
       ros: rosLost[p], nWeeks: outs[p] ? outs[p].length : null, status: I[p].s }));
   };
   const fmt = v => (v > 0.05 ? "−" + v.toFixed(1) : "0.0");
@@ -5575,6 +5585,45 @@ const PL = await injPage.evaluate(async () => {
     benchZero: (ff.rows.find(x => x.pid === rb) || {}).thisWeek?.lost === 0,
   };
 
+  // The hurt-player fallback, worked by hand: P (RB) and Q (WR) are IR starters
+  // projected at 0. P has a "wk 3" fallback of 14 in week 6 only (week 7 is his
+  // bye: no entry, stays 0); Q falls back to season PPG 11 in both weeks. Bench
+  // R (RB) 4 and S (WR) 3. Expected: this week 14-4 + 11-3 = 18; rest of season
+  // P 10 + 0, Q 8 + 8 = 26. With the setting off: 0 and 0.
+  const fbProj = { season: P.season, current_week: 6, playoff_week_start: 8, sundays: { 6: "2026-10-18", 7: "2026-10-25" },
+    weeks: { 6: { P: 0, Q: 0, R: 4, S: 3 }, 7: { P: 0, Q: 0, R: 4, S: 3 } },
+    hurt_fallback: { P: { 6: [14, "wk 3"] }, Q: { 6: [11, "ppg"], 7: [11, "ppg"] } } };
+  const fbInj = { P: { s: "IR", n: "P", p: "RB" }, Q: { s: "IR", n: "Q", p: "WR" } };
+  const fbPos = { P: "RB", Q: "WR", R: "RB", S: "WR" };
+  const fbTeam = { starters: ["P", "Q"], players: ["P", "Q", "R", "S"], reserve: [], taxi: [] };
+  const FB = D.projectedPointsLost(fbTeam, fbInj, fbProj, { week: 6, posOf: pid => fbPos[pid] });
+  const wasFb = D.PTS_LOST.hurtFallback;
+  D.PTS_LOST.hurtFallback = false;
+  const FB0 = D.projectedPointsLost(fbTeam, fbInj, fbProj, { week: 6, posOf: pid => fbPos[pid] });
+  D.PTS_LOST.hurtFallback = wasFb;
+  const rowOf = (L, id) => L.rows.find(x => x.pid === id) || {};
+  out.fallback = { tw: FB.totals.thisWeek, ros: FB.totals.ros, P: rowOf(FB, "P").ros?.lost, Q: rowOf(FB, "Q").ros?.lost,
+    off: [FB0.totals.thisWeek, FB0.totals.ros] };
+  // The real file: entries only on 0 weeks, named sources; and every fallback week
+  // a hurt player is out is priced at the fallback value.
+  out.fbBad = []; out.fbPriced = []; out.fbSeen = 0;
+  for (const [pid, byW] of Object.entries(P.hurt_fallback || {})) for (const [w, v] of Object.entries(byW)) {
+    const own = P.weeks[w] ? P.weeks[w][pid] : undefined;
+    if ((own || 0) > 0 || !(v[0] > 0) || !/^(wk \d+|ppg)$/.test(v[1]) || !(inj[pid] && inj[pid].s)
+      || (/^wk /.test(v[1]) && !(Number(v[1].slice(3)) < Number(w)))) out.fbBad.push(`${pid} wk ${w}`);
+  }
+  for (const r of season.rosters || []) {
+    const fn = D.projectedPointsLost(r, new Map(Object.entries(inj)), P, { week, posOf: pid => posMap[pid] && posMap[pid].p });
+    for (const x of fn.rows) for (const c of (x.ros && x.ros.byWeek) || []) {
+      const f = P.hurt_fallback && P.hurt_fallback[x.pid] && P.hurt_fallback[x.pid][c.week];
+      if (!f) continue;
+      out.fbSeen++;
+      if (Math.abs(c.hurt - f[0]) > 1e-9) out.fbPriced.push(`${(inj[x.pid] || {}).n} wk ${c.week}: ${c.hurt} vs ${f[0]}`);
+    }
+  }
+  const brown = Object.keys(inj).find(id => inj[id].n === "A.J. Brown");
+  out.brownRos = brown ? (season.rosters || []).map(r => D.projectedPointsLost(r, new Map(Object.entries(inj)), P,
+    { week, posOf: pid => posMap[pid] && posMap[pid].p }).rows.find(x => x.pid === brown)).find(Boolean)?.ros?.lost ?? null : null;
   const missing = document.createElement("div");
   D.renderInjuries(missing, { at: Date.now(), source: "file", map: new Map(Object.entries(inj)) }, null);
   out.missingFile = /No projections on file/.test(missing.textContent) && !missing.querySelector(".injp");
@@ -5605,6 +5654,13 @@ check("points lost: made-up roster — no bench player covers two starters", PL.
 check("points lost: made-up roster — return date, season-ending and no estimate", PL.fake.retWeeks && PL.fake.season && PL.fake.noEst
   && PL.fake.benchZero, JSON.stringify(PL.fake));
 check("points lost: a missing projections file shows a clear empty state", PL.missingFile);
+check("points lost: a hurt player projected at 0 uses his last projection above zero, else season PPG; a bye stays 0",
+  Math.abs(PL.fallback.tw - 18) < 1e-9 && Math.abs(PL.fallback.ros - 26) < 1e-9 && Math.abs(PL.fallback.P - 10) < 1e-9
+    && Math.abs(PL.fallback.Q - 16) < 1e-9 && PL.fallback.off[0] === 0 && PL.fallback.off[1] === 0, JSON.stringify(PL.fallback));
+check("points lost: hurt_fallback entries only fill weeks Sleeper projected at 0, with a named source", PL.fbBad.length === 0,
+  PL.fbBad.slice(0, 4).join(", "));
+check("points lost: every hurt_fallback week a player is out is priced at the fallback (e.g. A.J. Brown, IR)",
+  PL.fbSeen > 0 && PL.fbPriced.length === 0 && PL.brownRos > 0, `${PL.fbSeen} weeks; Brown ros ${PL.brownRos}; ${PL.fbPriced.slice(0, 3).join(" ; ")}`);
 check("points lost: at 390px nothing overflows and no text is under 11px",
   injNarrow.rows > 0 && injNarrow.over.length === 0 && injNarrow.doc <= injNarrow.W && injNarrow.small.length === 0,
   [...injNarrow.over, ...injNarrow.small].slice(0, 3).join(" | "));
