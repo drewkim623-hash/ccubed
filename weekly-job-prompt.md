@@ -32,6 +32,8 @@ the data arrives a different way:
   runs `build-week.mjs` and `build-injuries.mjs` at about 12:30 AM Eastern on Tuesday, refreshes
   `data/pulse.json` and the odds snapshot every morning at 7:00, and commits the result.
   `build-week.mjs` only moves `latest.json` once the week is truly over.
+  `injury-returns.mjs` runs right after `build-injuries.mjs` (return dates from ESPN onto `injuries.json`,
+  plus `injury-returns-cache.json`); it never fails the job, falling back to its cache if ESPN is down.
 - **The routine** clones the repo and reads those committed files. It needs no network at all.
 
 If the job ever finds itself reaching for `api.sleeper.app`, something has gone wrong: the answer is

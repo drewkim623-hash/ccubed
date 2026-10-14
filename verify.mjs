@@ -5586,9 +5586,8 @@ const INJ_NAMES = ["injuries: the tab reads the published injuries.json and show
     "return info — retWeeks without a date reads ~N wk (est.), never no estimate",
     "stand-in names the one healthy player entering the lineup, else lineup shuffle",
     "per-row values under PTS_LOST.displayFloor show —, team totals stay exact",
-    "at 390px nothing overflows and no text is under 11px",
-    "odds code (ODDS BOARD through live repricing) is byte-identical to origin/main",
-    "INJ_AVAIL, REPLACEMENT, INJ_FLOOR and the odds functions match origin/main"].map(n => `points lost: ${n}`)];
+    "at 390px nothing overflows and no text is under 11px"].map(n => `points lost: ${n}`),
+  "odds fallback: without projections the old multiplier path is origin/main's, byte for byte"];
 if (injDirect.timedOut || injReload.timedOut) {
   for (const n of INJ_NAMES) check(n, false, `skipped: ${injDirect.timedOut || injReload.timedOut}`);
 } else try {
@@ -6009,6 +6008,29 @@ const PL = await injPage.evaluate(async () => {
   const rrow = id => rh.querySelector(`.injp[data-pid="${id}"]`);
   out.ret.tab = [A, B, C, E].map(id => [rrow(id)?.querySelector(".rsrc")?.textContent || "", !!rrow(id)?.querySelector(".est")]);
   out.ret.label = [B, E, C, F].map(id => rrow(id)?.querySelector(".ret")?.textContent.trim());
+  // 0-week returns (a report with weeks 0 / weeks_list [] -> ret = this week's
+  // Sunday, or retWeeks 0): the tab, PTS_LOST and the odds all have him not out.
+  {
+    const sun0 = D.ptsSunday(P, week);
+    const zInj = {
+      [A]: { s: "Out", n: "Zero A", ret: sun0, retSource: "report", retEstimated: false, retChecked: "2026-10-14" },
+      [B]: { s: "Out", n: "Zero B", retWeeks: 0, retSource: "report", retEstimated: false, retChecked: "2026-10-14" },
+      [C]: { s: "Out", n: "Zero C", retWeeks: 2, retSource: "report", retEstimated: true },
+    };
+    const Z = D.projectedPointsLost(rr, zInj, P, { week, posOf: pid => posMap[pid] && posMap[pid].p, rosterPositions });
+    const zw = [week, week + 1, week + 2, week + 3], sunF = w => D.ptsSunday(P, w);
+    const imp = [A, B].map(id => D.injuryImpact(id, zInj[id], P, { weeks: zw, sun: sunF, pos: "WR" }).weeksOut);
+    const zh = document.createElement("div");
+    D.renderInjuries(zh, { at: Date.now(), source: "file", map: new Map(Object.entries(zInj)) }, P);
+    const zr = id => zh.querySelector(`.injp[data-pid="${id}"]`);
+    out.zero = {
+      shared: [A, B].map(id => D.injuryOutWeeks(zInj[id], zw, sunF).weeks.length),
+      lost: [A, B].map(id => [rowOf(Z, id).thisWeek?.lost, rowOf(Z, id).ros?.weeks?.length]),
+      imp, plays: [A, B].map(id => /plays this week/.test(zr(id)?.querySelector(".rep")?.textContent || "")),
+      pw: [A, B].map(id => zr(id)?.querySelector(".pw")?.textContent.trim()),
+      tags: [A, B, C].map(id => [!!zr(id)?.querySelector(".rptd"), !!zr(id)?.querySelector(".est")]),
+    };
+  }
 
   // Stand-in label, on the bench case above. X starts; without him S2 is the one
   // newcomer (healthy) -> "S2". S2 Questionable -> "shuffle". Per player: with Y
@@ -6146,11 +6168,19 @@ check("points lost: the highlight threshold is read from PTS_LOST",
   check("points lost: return info — neither date nor retWeeks keeps the old behaviour", R.C[0] === "none" && R.C[1] === null, j);
   check("points lost: return info — rows carry retSource, estimated and retNote (null when absent)",
     JSON.stringify(R.fields) === JSON.stringify(["espn-return-date", false, null, "default", true, "IR default, no report", null, false, null]), j);
+  // retSourceText: the source, with the day it was checked when the record has one.
   check("points lost: return info — the tab labels each row's return source and tags estimates",
-    JSON.stringify(R.tab) === JSON.stringify([["ESPN date", false], ["default", true], ["", false], ["report", true]]), j);
+    JSON.stringify(R.tab) === JSON.stringify([["ESPN date, checked Oct 13", false], ["default, checked Oct 13", true], ["", false], ["report", true]]), j);
   check("points lost: return info — retWeeks without a date reads ~N wk (est.), never no estimate",
     R.label[0] === "~3 wk (est.)" && R.label[2] === "no estimate", j);
   check("points lost: IR running to the season's end reads season (IR)", R.label[1] === "season (IR)" && R.label[3] === "season (IR)", j);
+  const Z0 = PL.zero || {}, jz = JSON.stringify(Z0);
+  check("0-week return: ret = this Sunday or retWeeks 0 -> no week out in injuryOutWeeks, PTS_LOST and the odds (injuryImpact)",
+    JSON.stringify(Z0.shared) === "[0,0]" && JSON.stringify(Z0.lost) === "[[0,0],[0,0]]" && JSON.stringify(Z0.imp) === "[0,0]", jz);
+  check("0-week return: the Injuries tab shows him playing this week, 0 points lost",
+    JSON.stringify(Z0.plays) === "[true,true]" && (Z0.pw || []).every(t => !/[1-9]/.test(t || "")), jz);
+  check("reported vs estimated: an exact report is tagged 'reported', a week count stays 'estimated'",
+    JSON.stringify(Z0.tags) === "[[true,false],[true,false],[false,true]]", jz);
   const FX = PL.fixture;
   check("points lost: shared fixture — this week, rest of season and stand-ins match the hand-worked values",
     FX.every(t => t.bad.length === 0), FX.map(t => t.bad.join("; ")).join(" | "));
@@ -6177,37 +6207,66 @@ check("points lost: at 390px nothing overflows and no text is under 11px",
   injNarrow.rows > 0 && injNarrow.over.length === 0 && injNarrow.doc <= injNarrow.W && injNarrow.small.length === 0,
   [...injNarrow.over, ...injNarrow.small].slice(0, 3).join(" | "));
 {
-  // The odds code, byte for byte: everything from the ODDS BOARD marker to the
-  // start of the points-lost section (origin/main: to the INJURIES section).
+  // This branch prices injuries in projected points when projections are
+  // published. Without them the OLD multiplier path must be exactly origin/main's:
+  // the untouched pieces byte-for-byte, and the ones that grew a loss-plan branch
+  // (injuryPlan/injuryCharged/injuryMult/injuryHurtMap, gameLinesData,
+  // simulateSeason) give byte-identical output to origin/main's own source on
+  // the same inputs, with no loss plan attached.
   const { execFileSync } = await import("node:child_process");
-  const mainHtml = execFileSync("git", ["show", "origin/main:index.html"], { cwd: ROOT, maxBuffer: 1 << 28 }).toString();
+  let mainHtml = null;
+  try { mainHtml = execFileSync("git", ["show", "origin/main:index.html"], { cwd: ROOT, maxBuffer: 1 << 28 }).toString(); } catch (e) { /* reported below */ }
   const curHtml = await readFile(join(ROOT, "index.html"), "utf8");
-  const region = (h, endMarks) => {
-    const a = h.indexOf("/* ================================ ODDS BOARD");
-    const b = Math.min(...endMarks.map(m => h.indexOf(m, a)).filter(i => i > a));
-    return a >= 0 && Number.isFinite(b) ? h.slice(a, b) : null;
-  };
-  const oddsMain = region(mainHtml, ["/* ================================================ INJURIES =="]);
-  const oddsCur = region(curHtml, ["/* ================================ PROJECTED POINTS LOST", "/* ================================================ INJURIES =="]);
   // A top-level function's source, `async` or not, from its declaration to the
   // first column-0 closing brace. Not found, or no closing brace: null — which
   // never matches, so a missing function fails the check rather than comparing
   // two empty strings.
   const fnSrc = (h, n) => {
-    const m = new RegExp(`\\n(?:async\\s+)?function\\s+${n}\\s*\\(`).exec(h);
+    const m = h && new RegExp(`\\n(?:async\\s+)?function\\s+${n}\\s*\\(`).exec(h);
     if (!m) return null;
     const end = h.indexOf("\n}\n", m.index);
     return end < 0 ? null : h.slice(m.index, end + 3);
   };
-  const named = ["availability", "injuryPlan", "injuryCharged", "injuryMult", "injuryHurtMap", "approxKickoff",
-    "rosterInjuries", "simulateSeason", "oddsModel", "loadInjuries"];
-  const diff = named.filter(n => { const a = fnSrc(mainHtml, n), b = fnSrc(curHtml, n); return a == null || b == null || a !== b; });
-  const constSrc = (h, n) => { const i = h.indexOf(`\nconst ${n} =`); return i < 0 ? null : h.slice(i, h.indexOf(";\n", i)); };
+  const SAME_FNS = ["availability", "approxKickoff", "injRetDate", "livePosterior", "injuryLabel", "injuryLabelText",
+    "injuryFuturesNote", "rosterInjuries", "oddsModel", "loadInjuries"];
+  const moved = SAME_FNS.filter(n => { const a = fnSrc(mainHtml, n), b = fnSrc(curHtml, n); return a == null || b == null || a !== b; });
+  const constSrc = (h, n) => { const i = h ? h.indexOf(`\nconst ${n} =`) : -1; return i < 0 ? null : h.slice(i, h.indexOf(";\n", i)); };
   const consts = ["INJ_AVAIL", "REPLACEMENT", "INJ_FLOOR"].filter(n => !constSrc(mainHtml, n) || constSrc(mainHtml, n) !== constSrc(curHtml, n));
-  check("points lost: odds code (ODDS BOARD through live repricing) is byte-identical to origin/main",
-    !!oddsMain && oddsMain === oddsCur, `${oddsMain && oddsMain.length} vs ${oddsCur && oddsCur.length}`);
-  check("points lost: INJ_AVAIL, REPLACEMENT, INJ_FLOOR and the odds functions match origin/main",
-    diff.length === 0 && consts.length === 0, [...diff, ...consts].join(", "));
+  const GREW = ["injuryPlan", "injuryCharged", "injuryMult", "injuryHurtMap", "gameLinesData", "simulateSeason"];
+  const mainFns = Object.fromEntries(GREW.map(n => [n, fnSrc(mainHtml, n)]));
+  const fb = !mainHtml || GREW.some(n => !mainFns[n]) ? { err: "origin/main source missing" } : await page.evaluate(async (src) => {
+    const D = window.__CCUBED;
+    // origin/main's versions, bound as a set so they call one another (globals otherwise).
+    const M = new Function(`${Object.values(src).join("\n")}\nreturn { ${Object.keys(src).join(", ")} };`)();
+    const { R } = await D.liveOnce();
+    const season = D.DB.seasons[0], inj = window.__INJ, model = window.__ODDS, now = new Date();
+    const strip = p => JSON.stringify(p, (k, v) => (typeof v === "function" ? undefined : v instanceof Map ? [...v] : v));
+    const pB = D.injuryPlan(season, inj, model, { now }), pM = M.injuryPlan(season, inj, model, { now });
+    const bad = [];
+    const keep = ["W0", "lastReg", "lastWeek", "teams"];
+    if (strip(Object.fromEntries(keep.map(k => [k, pB[k]]))) !== strip(Object.fromEntries(keep.map(k => [k, pM[k]])))) bad.push("injuryPlan");
+    for (const r of season.rosters) for (let w = pB.W0; w <= pB.lastWeek; w++) {
+      if (D.injuryMult(pB, r.roster_id, w) !== M.injuryMult(pM, r.roster_id, w)) bad.push(`injuryMult ${r.roster_id}/${w}`);
+      if (strip(D.injuryCharged(pB, r.roster_id, w)) !== strip(M.injuryCharged(pM, r.roster_id, w))) bad.push(`injuryCharged ${r.roster_id}/${w}`);
+      if (strip(D.injuryHurtMap(pB, r.roster_id, w)) !== strip(M.injuryHurtMap(pM, r.roster_id, w))) bad.push(`injuryHurtMap ${r.roster_id}/${w}`);
+    }
+    const glB = D.gameLinesData(R, null, pB), glM = M.gameLinesData(R, null, pM);
+    if (strip(glB.games.map(g => [g.open, g.a.inj, g.b.inj])) !== strip(glM.games.map(g => [g.open, g.a.inj, g.b.inj]))) bad.push("gameLinesData");
+    let sims = 0;
+    if (model && model.ok && window.__SIM) {
+      const avail = D.availability(season, inj);
+      const live = D.liveState(model, season, R, avail, window.__BOARD, null, pB);
+      if (live) {
+        const a = D.simulateSeason(model, 3000, live), b = M.simulateSeason(model, 3000, live);
+        sims = 3000;
+        for (const k of ["title", "playoff", "divWin", "bye", "wins", "seed"]) if (strip(a[k]) !== strip(b[k])) bad.push(`simulateSeason ${k}`);
+      }
+    }
+    return { bad, sims, games: glB.games.length, lossAttached: !!pB.loss };
+  }, mainFns);
+  check("odds fallback: without projections the old multiplier path is origin/main's, byte for byte",
+    !!mainHtml && moved.length === 0 && consts.length === 0 && !fb.err && fb.bad.length === 0 && !fb.lossAttached && fb.sims > 0,
+    mainHtml ? `changed: ${[...moved, ...consts].join(", ")} · ${JSON.stringify(fb).slice(0, 300)}` : "git show origin/main:index.html failed");
 }
 {
   const top = PL.all.slice().sort((a, b) => b.tw - a.tw || (b.ros ?? -1) - (a.ros ?? -1)).slice(0, 5);
@@ -6222,7 +6281,8 @@ await injPage.waitForFunction(() => document.body.dataset.liveReady, null, { tim
 const injBoard = await injPage.evaluate(() => {
   const D = window.__CCUBED, inj = window.__INJ, avail = window.__AVAIL;
   const season = D.DB.seasons[0];
-  const plan = inj ? D.injuryPlan(season, inj, window.__ODDS) : null;
+  // The plan the board prices from: the points-lost plan when projections are published.
+  const plan = inj ? (window.__PLAN || D.injuryPlan(season, inj, window.__ODDS)) : null;
   const out = { teams: 0, bench: 0, benchShown: 0, mismatch: [], cutBad: [], totalBad: [] };
   if (!inj || !avail) return { ...out, skipped: true };
   for (const r of season.rosters || []) {
@@ -6240,7 +6300,10 @@ const injBoard = await injPage.evaluate(() => {
     if (row) {
       const cost = row.querySelector(".cost"), k = cost.querySelector(".k").textContent;
       const got = cost.textContent.slice(0, -k.length).trim();
-      const sum = [...hurt.values()].reduce((s, x) => s + x.loss * x.scale, 0);
+      const T = D.injuryLossTeam(plan, r.roster_id);
+      const raw = [...hurt.values()].reduce((s, x) => s + x.loss * x.scale, 0);
+      // The loss plan caps a team-week at INJ_ODDS.cap of the level.
+      const sum = T ? Math.min(raw, D.INJ_ODDS.cap) : raw;
       const m = D.injuryMult(plan, r.roster_id, plan.W0);
       const exp = m < 1 ? `−${((1 - m) * 100).toFixed(1)}%` : "0%";
       // INJ_FLOOR aside, the total is the plain sum of the charged cuts.
@@ -6361,6 +6424,344 @@ group("Tab bar scroll hint");
   });
   check("tab hint: on desktop with a row that fits, no fade or chevron", !fit.over && !fit.cls && fit.after < 0.1 && fit.before < 0.1 && fit.chev < 0.1, JSON.stringify(fit));
   await dctx.close();
+}
+
+group("Injury odds: lineup drop per out week (full value only without lineup slots)");
+{
+  // injury-returns.mjs, in Node.
+  const IR = await import(new URL("./injury-returns.mjs", import.meta.url));
+  // Its failure path: ESPN dead (a closed port) -> falls back to the cache, exit 0;
+  // no injuries.json at all -> warning, exit 0, files untouched.
+  {
+    const { spawnSync } = await import("node:child_process");
+    const fs = await import("node:fs"), os = await import("node:os");
+    const dir = fs.mkdtempSync(join(os.tmpdir(), "inj-ret-"));
+    for (const f of ["injury-returns.mjs", "fetch-json.mjs"]) fs.copyFileSync(join(ROOT, f), join(dir, f));
+    const env = { ...process.env, ESPN_INJURIES_URL: "http://127.0.0.1:9/injuries" };
+    const run = () => spawnSync(process.execPath, ["injury-returns.mjs"], { cwd: dir, env, encoding: "utf8", timeout: 60000 });
+    const none = run();
+    fs.writeFileSync(join(dir, "injuries.json"), JSON.stringify({ map: { 9: { n: "Cached Guy", s: "Out", p: "WR" } } }));
+    fs.writeFileSync(join(dir, "injury-returns-cache.json"), JSON.stringify({ entries: { 9: { s: "Out", retWeeks: 3, retSource: "espn-outlook", retEstimated: true } } }));
+    const dead = run();
+    const rec = JSON.parse(fs.readFileSync(join(dir, "injuries.json"), "utf8")).map[9];
+    fs.rmSync(dir, { recursive: true, force: true });
+    check("returns CLI: no injuries.json -> warning, exit 0",
+      none.status === 0 && /skipped/.test(none.stderr), JSON.stringify([none.status, none.stderr.slice(0, 200)]));
+    check("returns CLI: ESPN unreachable -> warning, cached return reused, exit 0",
+      dead.status === 0 && /ESPN feed unavailable/.test(dead.stderr) && rec.retWeeks === 3 && rec.retSource === "espn-outlook",
+      JSON.stringify([dead.status, dead.stderr.slice(0, 200), rec]));
+  }
+  const today = "2026-10-13";
+  const ol = IR.resolveReturn({ rec: { s: "Out" }, notes: ["He is expected to miss 4-6 weeks with a sprained ankle."], week: 6, today });
+  check("returns: 'expected to miss 4-6 weeks' -> retWeeks 6, estimated, espn-outlook",
+    ol.retWeeks === 6 && ol.retEstimated === true && ol.retSource === "espn-outlook" && !ol.ret, JSON.stringify(ol));
+  const df = IR.resolveReturn({ rec: { s: "Out" }, notes: [], week: 6, lastReg: 14, today });
+  const dfIR = IR.resolveReturn({ rec: { s: "IR" }, notes: [], week: 6, lastReg: 14, today });
+  check("returns: default flagged estimated, retSource default (Out 1 week, IR minimum 4 weeks)",
+    df.retSource === "default" && df.retEstimated === true && df.retWeeks === 1 && dfIR.retWeeks === 4 && dfIR.retSource === "default",
+    JSON.stringify([df, dfIR]));
+  const es = IR.resolveReturn({ rec: { s: "IR", ret: "2026-11-20" }, notes: ["out for the season"], week: 6, today });
+  check("returns: an ESPN date wins and is not estimated",
+    es.retSource === "espn-return-date" && es.retEstimated === false && es.ret === "2026-11-20", JSON.stringify(es));
+  const rp = IR.resolveReturn({ rec: { s: "Out" }, notes: [], report: { ret: "2026-11-01", source: "beat", checked: "2026-10-12" }, week: 6, today });
+  check("returns: a report entry is used when ESPN says nothing", rp.retSource === "report" && rp.ret === "2026-11-01", JSON.stringify(rp));
+  check("returns: outlook parser reads season-ending, out until Week N, IR, week-to-week",
+    IR.parseOutlook("suffered a season-ending ACL tear").weeks === IR.SEASON && IR.parseOutlook("He is out until Week 9").untilWeek === 9
+    && IR.parseOutlook("was placed on IR Tuesday").weeks === 4 && IR.parseOutlook("considered week-to-week").weeks === 2);
+
+  const tm = IR.resolveReturn({ rec: { s: "Out", ret: "2026-11-20" }, notes: ["expected to miss 4-6 weeks"],
+    report: { kind: "team", weeks: 2, source: "club", checked: "2026-10-12" }, week: 6, today });
+  check("returns: a team timetable (kind team) wins over ESPN's date and prose, not estimated",
+    tm.retSource === "team" && tm.retEstimated === false && tm.retWeeks === 2 && !tm.ret, JSON.stringify(tm));
+  const sl = IR.resolveReturn({ rec: { s: "Out", ret: "2026-11-20" }, sleeperNotes: ["Coach says he will miss 3 weeks."], week: 6, today });
+  const slNone = IR.resolveReturn({ rec: { s: "Out", ret: "2026-11-20" }, sleeperNotes: [], week: 6, today });
+  check("returns: Sleeper outlook prose (stubbed) -> sleeper-outlook, estimated, ahead of ESPN; none -> ESPN",
+    sl.retSource === "sleeper-outlook" && sl.retEstimated === true && sl.retWeeks === 3 && slNone.retSource === "espn-return-date",
+    JSON.stringify([sl, slNone]));
+
+  const io = await page.evaluate(async () => {
+    const D = window.__CCUBED;
+    // Synthetic: weeks 6-14 regular, 15-17 playoffs. No replacement offset: full value per out week.
+    const reg = [6, 7, 8, 9, 10, 11, 12, 13, 14], all = [...reg, 15, 16, 17];
+    const sundays = Object.fromEntries(all.map((w, i) => [w, new Date(Date.UTC(2026, 9, 18 + 7 * i)).toISOString().slice(0, 10)]));
+    const P = { current_week: 6, playoff_week_start: 15, sundays: Object.fromEntries(reg.map(w => [w, sundays[w]])),
+      weeks: Object.fromEntries(reg.map(w => [w, { A: 20, BN: 15, B12: 12, Z: 0, L: 0, PP: 0, H: 20, Q: 3 }])),
+      last_nonzero: { L: { pts: 12 } }, ppg: { PP: 9, L: 4 }, byes: {} };
+    const base = { weeks: all, lastReg: 14, sun: w => sundays[w], pos: "WR" };
+    const imp = (rec, pid = "A") => D.injuryImpact(pid, rec, P, base);
+    const out = {};
+    const o = imp({ s: "Out", retWeeks: 1 });
+    out.full = [o.ptsPerWeek, o.weeksOut, o.totalLost, o.valueSource, "replLevel" in o, "varPerWeek" in o];
+    out.qd = ["Questionable", "Doubtful"].map(s => { const x = imp({ s, retWeeks: 1 }); return x.ptsPerWeek * x.weight; });
+    // Bench player projected 12, out 2 weeks -> 24; a zero projection out 2 weeks prices at last_nonzero (12) -> 24.
+    const b2 = D.teamInjuryImpact({ starters: ["A"], players: ["A", "B12"] }, { B12: { s: "Out", p: "WR", retWeeks: 2 } }, P, base).rows[0];
+    const l2 = D.injuryImpact("L", { s: "Out", retWeeks: 2 }, P, base);
+    out.two = [b2.bench, b2.ptsPerWeek, b2.weeksOut, b2.totalLost, l2.ptsPerWeek, l2.totalLost, l2.valueSource];
+    out.fmt = [0.49, -0.49, 0, 0.5, -1.234, 2, null].map(D.fmtInjuryDelta);
+    out.fb = [D.injuryImpact("L", { s: "Out", retWeeks: 1 }, P, base), D.injuryImpact("PP", { s: "Out", retWeeks: 1 }, P, base),
+      D.injuryImpact("Z", { s: "Out", retWeeks: 1 }, P, base)].map(x => [x.value, x.valueSource]);
+    out.date = imp({ s: "IR", ret: sundays[9], retSource: "espn-return-date" }).outWeeks;
+    const se = imp({ s: "IR" });
+    out.season = [se.outWeeks.join(","), se.seasonEnding];
+    out.ir14 = imp({ s: "IR", retWeeks: 9, retSource: "default" }).outWeeks.join(",");
+    out.low = D.injuryImpact("Q", { s: "Out", retWeeks: 1 }, P, base).totalLost;
+    // A team: starter A (20) and bench BN (15) both out a week.
+    const team = { roster_id: 1, starters: ["A"], players: ["A", "BN"], reserve: [], taxi: [] };
+    const inj = new Map([["A", { s: "Out", n: "A", p: "WR", retWeeks: 1 }], ["BN", { s: "Out", n: "BN", p: "WR", retWeeks: 1 }]]);
+    const player = pid => ({ n: pid, p: "WR" });
+    const TI = D.teamInjuryImpact(team, inj, P, { ...base, player });
+    const TN = D.teamInjuryImpact(team, inj, P, { ...base, player, includeBench: false });
+    out.team = { wk6: TI.byWeek[6], bench: TI.rows.find(r => r.pid === "BN").ptsPerWeek, benchFlag: TI.rows.find(r => r.pid === "BN").bench,
+      noBench: TN.byWeek[6], noBenchROS: TN.totalROS, benchROS: TN.benchROS };
+    // The loss plan on top: cap, scale, shape.
+    const plan0 = (scale = 1, level = 200) => ({ W0: 6, lastReg: 14, inFlight: false, ptsIn: () => 0,
+      scaleOf: () => ({ scale }), levelOf: () => level });
+    const season = { rosters: [team, { roster_id: 2, starters: ["H"], players: ["H"], reserve: [], taxi: [] }] };
+    const lp = (p = plan0()) => D.injuryLossPlan(season, inj, P, { plan: p, player, slots: ["WR", "BN"] });
+    const L1 = lp();
+    out.plan = { wk6: L1.byTeam.get(1).weekLoss(6), wk7: L1.byTeam.get(1).weekLoss(7), lost: L1.lost[6], source: L1.source,
+      cap: lp(plan0(1, 50)).byTeam.get(1).weekLoss(6), scale: lp(plan0(0.5)).byTeam.get(1).weekLoss(6) };
+    out.noProj = D.injuryLossPlan(season, inj, null, { plan: plan0(), player }) === null;
+    out.noRepl = !("replacementLevels" in D) && !("repl" in L1);
+
+    // The real board: totals, sims, deltas.
+    const model = window.__ODDS, live = window.__LIVE, plan = window.__PLAN;
+    out.realRows = plan && plan.loss ? [...plan.loss.byTeam.values()].flatMap(T => T.rows)
+      .filter(r => r.pricing !== "lineup-delta" ? Math.abs(r.totalLost - r.ptsPerWeek * r.weeksOut) > 1e-9
+        : Math.abs(r.totalLost - Object.values(r.perWeek).reduce((a, x) => a + x, 0)) > 1e-9).length : null;
+    if (model && model.ok && live) {
+      const n = live.teams.length, wk0 = live.weeks.length ? live.weeks[0].week : null;
+      const healthy = { ...live, multByWeek: new Map(), lostByWeek: new Map() };
+      const hurt = { ...live, multByWeek: new Map(), lostByWeek: new Map([[wk0, live.teams.map((t, i) => (i === 0 ? 25 : 0))]]) };
+      const a = D.simulateSeason(model, 2000, healthy), b = D.simulateSeason(model, 2000, hurt);
+      out.sim = { team0: [a.wins[0], b.wins[0]], others: live.teams.map((_, i) => i).slice(1)
+        .reduce((s, i) => s + (b.wins[i] >= a.wins[i] ? 1 : 0), 0), n };
+      if (plan) {
+        const keep = plan.loss; plan.loss = null;
+        const rid = live.teams[0].rid, w = plan.W0;
+        out.fallback = [D.injuryLostPts(plan, rid, w, 100), 100 * (1 - D.injuryMult(plan, rid, w))];
+        plan.loss = keep;
+      }
+      // Each injury's own effect, from the odds worker (started by liveOnce).
+      for (let i = 0; i < 120 && !D.injuryPlayoffDeltas(); i++) await new Promise(r => setTimeout(r, 500));
+      const M = D.injuryPlayoffDeltas();
+      out.deltas = M ? { n: M.size, worst: Math.min(...[...M.values()].map(d => d.playoffDelta)),
+        positive: [...M.values()].filter(d => d.playoffDelta > 0.05).length, sims: [...M.values()][0] && [...M.values()][0].sims } : null;
+      const row = plan && plan.loss && [...plan.loss.byTeam.values()].flatMap(T => T.rows).find(r => M && M.has(r.pid));
+      out.rowReads = row ? row.playoffDelta === M.get(row.pid).playoffDelta && row.titleDelta === M.get(row.pid).titleDelta : null;
+      // CRN: "removing" an injury while keeping its loss gives exactly the baseline.
+      const job = D.injuryDeltaJob(model, live, plan, 400);
+      const one = job && job.injuries.find(x => !x.noop);
+      if (one) {
+        const T = plan.loss.byTeam.get(one.rid);
+        const noop = { ...one, lost: one.lost.map(([w]) => [w, T.weekLoss(w)]) };
+        const r = D.pictureRun({ ...job, injuries: [noop, one] }).injuries;
+        out.crn = { noop: [r[0].playoffDelta, r[0].titleDelta], real: r[1].playoffDelta };
+      }
+    }
+    return out;
+  });
+  check("injury impact: full projected value per out week, no replacement offset (20 -> 20 a week)",
+    JSON.stringify(io.full) === JSON.stringify([20, 1, 20, "proj", false, false]), JSON.stringify(io.full));
+  check("injury impact: a low projection still costs its full value (3 -> 3)", io.low === 3, String(io.low));
+  check("injury impact: bench, projection 12, out 2 weeks -> 24; zero projection -> last_nonzero 12 x 2 -> 24",
+    JSON.stringify(io.two) === JSON.stringify([true, 12, 2, 24, 12, 24, "last_nonzero"]), JSON.stringify(io.two));
+  check("injury impact: Questionable and Doubtful charged in full", io.qd.every(x => x === 20), JSON.stringify(io.qd));
+  check("fmtInjuryDelta: '~0' under 0.5 pp, signed pp otherwise, '' unmeasured",
+    JSON.stringify(io.fmt) === JSON.stringify(["~0", "~0", "~0", "+0.5 pp", "−1.2 pp", "+2.0 pp", ""]), JSON.stringify(io.fmt));
+  check("odds loss: no replacement levels anywhere (replacementLevels gone, plan has no repl)", io.noRepl === true, String(io.noRepl));
+  check("injury impact: a zero projection falls back to last_nonzero, then ppg, else none",
+    JSON.stringify(io.fb) === JSON.stringify([[12, "last_nonzero"], [9, "ppg"], [0, "none"]]), JSON.stringify(io.fb));
+  check("injury impact: out-weeks stop at the return date", io.date.join(",") === "6,7,8", JSON.stringify(io.date));
+  check("injury impact: season-ending runs through the playoffs; IR default stops at week 14",
+    io.season[0] === "6,7,8,9,10,11,12,13,14,15,16,17" && io.season[1] === true && io.ir14 === "6,7,8,9,10,11,12,13,14",
+    JSON.stringify([io.season, io.ir14]));
+  check("injury impact: a bench player counts at full projected value",
+    io.team.bench === 15 && io.team.benchFlag === true && io.team.wk6 === 35, JSON.stringify(io.team));
+  check("injury impact: includeBench false leaves the bench out (benchROS still reported)",
+    io.team.noBench === 20 && io.team.noBenchROS === 20 && io.team.benchROS === 15, JSON.stringify(io.team));
+  // Lineup delta: starter A (20) is out with nobody to replace him (20); bench BN
+  // (15) would not start, so costs 0. Scale 0.5 -> 10.
+  check("odds loss: team-week loss is the lineup drop from teamInjuryImpact, lost[w][teamIdx], source projections",
+    io.plan.wk6 === 20 && io.plan.wk7 === 0 && JSON.stringify(io.plan.lost) === "[20,0]" && io.plan.source === "projections", JSON.stringify(io.plan));
+  check("odds loss: capped at 30% of the team's level", io.plan.cap === 15, String(io.plan.cap));
+  check("odds loss: injuryPlan's scale applied to the lineup drop", io.plan.scale === 10, String(io.plan.scale));
+  check("odds loss: no projections -> no loss plan", io.noProj);
+  check("odds loss: totalLost = the sum of its per-week lineup drops on every real row (ptsPerWeek × weeksOut without slots)", io.realRows === 0, String(io.realRows));
+  // The lineup-delta rule on its own synthetic teams (slots given, so not full value).
+  const ld = await page.evaluate(() => {
+    const D = window.__CCUBED;
+    const reg = [6, 7, 8, 9, 10, 11, 12, 13, 14], all = [...reg, 15, 16, 17];
+    const sundays = Object.fromEntries(all.map((w, i) => [w, new Date(Date.UTC(2026, 9, 18 + 7 * i)).toISOString().slice(0, 10)]));
+    const P = { current_week: 6, playoff_week_start: 15, sundays: Object.fromEntries(reg.map(w => [w, sundays[w]])),
+      weeks: Object.fromEntries(reg.map(w => [w, { A: w === 7 ? 0 : 20, BN: 15, B12: 12, H: 20, X: 10, Y: 1, Z: 0.9 }])), byes: { 7: ["KC"] } };
+    const player = pid => ({ n: pid, p: "WR", t: pid === "A" ? "KC" : "NYJ" });
+    const plan = { W0: 6, lastReg: 14, inFlight: false, ptsIn: () => 0, scaleOf: () => ({ scale: 1 }), levelOf: () => 1000 };
+    const other = { roster_id: 2, starters: ["H"], players: ["H"], reserve: [], taxi: [] };
+    const loss = (team, inj) => D.injuryLossPlan({ rosters: [team, other] }, new Map(Object.entries(inj)), P,
+      { plan, player, slots: ["WR", "BN"] }).byTeam.get(1);
+    const out = {};
+    // Healthy starter A, bench BN out: BN would not start, so the week costs 0.
+    out.bench = loss({ roster_id: 1, starters: ["A"], players: ["A", "BN"], reserve: [], taxi: [] },
+      { BN: { s: "Out", n: "BN", p: "WR", t: "NYJ", retWeeks: 1 } }).weekLoss(6);
+    // Starter A (20) out, healthy B12 (12) steps in: the lineup drops 8.
+    const st = loss({ roster_id: 1, starters: ["A"], players: ["A", "B12"], reserve: [], taxi: [] },
+      { A: { s: "Out", n: "A", p: "WR", t: "KC", retWeeks: 3 } });
+    out.starter = st.weekLoss(6);
+    // A's club KC is on bye in week 7: not charged; week 8 is.
+    out.bye = [st.weekLoss(7), st.weekLoss(8)];
+    // Shares: X (10) and Y (1) start, Z (0.9) is the only, also-injured, stand-in.
+    // Split by marginal drop, X's raw share is ~10.9 > his 10; capShare holds it to 10.
+    const team = { roster_id: 1, starters: ["X", "Y"], players: ["X", "Y", "Z"], reserve: [], taxi: [] };
+    const inj = Object.fromEntries(["X", "Y", "Z"].map(p => [p, { s: "Out", n: p, p: "WR", t: "NYJ", retWeeks: 1 }]));
+    const xLost = capShare => D.projectedPointsLost(team, inj, P, { week: 6, posOf: pid => player(pid).p, rosterPositions: ["WR", "WR"], capShare })
+      .rows.find(r => r.pid === "X").ros.byWeek[0].lost;
+    out.cap = [xLost(false), xLost(true)];
+    // weeks_list with a gap (retWeeksList) is charged on exactly those weeks.
+    const gap = { s: "IR", n: "A", p: "WR", t: "NYJ", retWeeks: 2, retWeeksList: [6, 8] };
+    out.listImpact = D.injuryImpact("A", gap, P, { weeks: all, lastReg: 14, sun: w => sundays[w] }).outWeeks.join(",");
+    out.listLost = (D.projectedPointsLost({ roster_id: 1, starters: ["A"], players: ["A"], reserve: [], taxi: [] }, { A: gap }, P,
+      { week: 6, posOf: pid => player(pid).p, rosterPositions: ["WR"] }).rows[0].ros.weeks || []).join(",");
+    return out;
+  });
+  check("odds loss: a bench injury that would not start costs 0 in the weekly line", ld.bench === 0, String(ld.bench));
+  check("odds loss: an injured starter costs the lineup drop (20 - 12 stand-in = 8)", near(ld.starter, 8, 1e-9), String(ld.starter));
+  check("odds loss: a bye week is not charged (bye 0, next week 8)", ld.bye[0] === 0 && near(ld.bye[1], 8, 1e-9), JSON.stringify(ld.bye));
+  check("odds loss: a player's share is capped at his own projection (capShare)",
+    ld.cap[0] > 10 && near(ld.cap[1], 10, 1e-9), JSON.stringify(ld.cap));
+  check("weeks_list: a gap list is charged on exactly those weeks (injuryImpact and PTS_LOST)",
+    ld.listImpact === "6,8" && ld.listLost === "6,8", JSON.stringify(ld));
+  {
+    const sundayOf = w => ({ 6: "2026-10-18", 7: "2026-10-25", 8: "2026-11-01", 9: "2026-11-08", 10: "2026-11-15", 11: "2026-11-22" })[w] || null;
+    const rr = (report, week) => IR.resolveReturn({ rec: { s: "Out", t: "NYJ" }, report, week, lastReg: 14, sundayOf, today: "2026-10-14" });
+    const r67 = rr({ kind: "report", weeks: 5, unit: "games", weeks_list: [6, 7], checked: "2026-10-14" }, 6);
+    const r68 = rr({ kind: "report", weeks: 2, weeks_list: [6, 8], checked: "2026-10-14" }, 6);
+    const r0 = rr({ kind: "report", weeks: 3, weeks_list: [], checked: "2026-10-14" }, 6);
+    check("weeks_list: wins over weeks/unit; contiguous -> ret the Sunday after; a gap -> retWeeksList; [] -> not out",
+      r67.ret === "2026-11-01" && r67.retWeeks == null && JSON.stringify(r68.retWeeksList) === "[6,8]" && r0.ret === "2026-10-18",
+      JSON.stringify([r67, r68, r0]));
+    const old = rr({ kind: "report", weeks_list: [6, 7], checked: "2026-10-14", note: "audit" }, 10);
+    const oldW = rr({ kind: "report", weeks: 2, checked: "2026-10-14" }, 10);
+    const live = rr({ kind: "report", weeks_list: [6, 11], checked: "2026-10-14" }, 10);
+    check("returns: a stale audit entry is ignored at (fake) week 10; one with a week still ahead holds",
+      old.retSource === "default" && /ignored: weeks_list/.test(old.retNote) && oldW.retSource === "default" && /ignored/.test(oldW.retNote)
+      && live.retSource === "report" && JSON.stringify(live.retWeeksList) === "[11]",
+      JSON.stringify([old, oldW, live]));
+    {
+      const wf = (await import("node:fs")).readFileSync(join(ROOT, ".github", "workflows", "injury-refresh.yml"), "utf8");
+      check("injury-refresh.yml: ±30 min ET gate, own concurrency group, Sunday skip while weekly-data runs (actions: read, GH_TOKEN)",
+        /\$d -le 30\b/.test(wf) && /group: injury-refresh/.test(wf) && /actions: read/.test(wf) && /GH_TOKEN: \$\{\{ github\.token \}\}/.test(wf)
+        && /--workflow weekly-data\.yml --status in_progress/.test(wf) && /--workflow weekly-data\.yml --status queued/.test(wf));
+      check("injury-refresh.yml: rebase failure -> abort, reset to origin, rerun the 3 scripts, retry once, no force push",
+        /git rebase --abort/.test(wf) && /git reset --hard "origin\/\$branch"/.test(wf) && (wf.match(/git pull --rebase/g) || []).length === 2
+        && /node consensus\.mjs[\s\S]*node build-injuries\.mjs[\s\S]*node injury-returns\.mjs[\s\S]*git commit/.test(wf.split("retrying once")[1] || "")
+        && !/push[^\n]*(--force|-f\b)/.test(wf));
+    }
+    // Exact reports (weeks_list, a dated ret) are not estimates; a bare week count is.
+    const rDated = rr({ kind: "report", ret: "2026-11-01", checked: "2026-10-14" }, 6);
+    const rCount = rr({ kind: "report", weeks: 2, checked: "2026-10-14" }, 6);
+    check("returns: a report with weeks_list or a dated ret is retEstimated false; a bare weeks count stays estimated",
+      r67.retEstimated === false && r68.retEstimated === false && r0.retEstimated === false && rDated.retEstimated === false
+      && rCount.retEstimated === true, JSON.stringify([r67, r0, rDated, rCount].map(x => x.retEstimated)));
+    // The IR/PUP 4-week default counts from irSince, not the coming week.
+    const ir = (week, irSince) => IR.resolveReturn({ rec: { s: "IR" }, week, lastReg: 14, sundayOf, irSince, today: "2026-10-14" });
+    const i6 = ir(6, 6), i8 = ir(8, 6), i10 = ir(10, 6), iPUP = IR.resolveReturn({ rec: { s: "PUP" }, week: 9, irSince: 7, sundayOf, today: "2026-10-14" });
+    check("returns: IR/PUP default = irSince + 4 - week (wk6->4, wk8->2, PUP since 7 at wk9->2); run out -> coming week only",
+      i6.retWeeks === 4 && i8.retWeeks === 2 && iPUP.retWeeks === 2 && i10.retWeeks === 1 && /ran out/.test(i10.retNote) && i10.retSource === "default",
+      JSON.stringify([i6, i8, i10, iPUP].map(x => [x.retWeeks, x.retNote])));
+    // The CLI carries irSince forward in the cache (ESPN down: defaults still recount).
+    const { spawnSync } = await import("node:child_process");
+    const fs = await import("node:fs"), os = await import("node:os");
+    const dir = fs.mkdtempSync(join(os.tmpdir(), "inj-ir-"));
+    for (const f of ["injury-returns.mjs", "fetch-json.mjs"]) fs.copyFileSync(join(ROOT, f), join(dir, f));
+    fs.mkdirSync(join(dir, "data"));
+    fs.writeFileSync(join(dir, "data", "projections.json"), JSON.stringify({ current_week: 8, playoff_week_start: 15,
+      sundays: { 6: "2026-10-18", 7: "2026-10-25", 8: "2026-11-01", 9: "2026-11-08" } }));
+    fs.writeFileSync(join(dir, "injuries.json"), JSON.stringify({ map: { 7: { n: "Old IR", s: "IR", p: "RB" }, 8: { n: "New IR", s: "IR", p: "WR" } } }));
+    fs.writeFileSync(join(dir, "injury-returns-cache.json"), JSON.stringify({ entries: { 7: { s: "IR", irSince: 6, retWeeks: 4, retSource: "default", retEstimated: true } } }));
+    const cr = spawnSync(process.execPath, ["injury-returns.mjs"], { cwd: dir, encoding: "utf8", timeout: 60000,
+      env: { ...process.env, ESPN_INJURIES_URL: "http://127.0.0.1:9/injuries" } });
+    const cm = JSON.parse(fs.readFileSync(join(dir, "injuries.json"), "utf8")).map;
+    const cc = JSON.parse(fs.readFileSync(join(dir, "injury-returns-cache.json"), "utf8")).entries;
+    fs.rmSync(dir, { recursive: true, force: true });
+    check("returns CLI: irSince persisted in injury-returns-cache.json and carried forward (since wk6 at wk8 -> 2; new IR -> since wk8, 4)",
+      cr.status === 0 && cm[7].retWeeks === 2 && cc[7].irSince === 6 && cm[8].retWeeks === 4 && cc[8].irSince === 8,
+      JSON.stringify([cr.status, cm, cc]));
+  }
+  {
+    // consensus.mjs: importing it does not run it; the decision rules; a dead feed -> stale cache, exit 0.
+    const C = await import(new URL("./consensus.mjs", import.meta.url));
+    const d = o => C.decideWeek(o).decision, b = o => C.decideWeek(o);
+    check("consensus: Sleeper + ESPN projections are one vote (in if either, out only if both)",
+      C.projectionVote("in", "out") === "in" && C.projectionVote("out", null) === null && C.projectionVote("out", "out") === "out"
+      && C.projectionVote(null, null) === null);
+    check("consensus: current week, props and the projection vote agree -> that, no flag",
+      d({ current: true, props: "out", sleeper: "out", espn: "out", auditOut: false }) === "out"
+      && d({ current: true, props: "in", sleeper: "in", espn: "out", auditOut: true }) === "in"
+      && !b({ current: true, props: "in", sleeper: "in", auditOut: true }).uncertain);
+    const tie = [b({ current: true, props: "out", sleeper: "in", auditOut: true }), b({ current: true, props: "in", sleeper: "out", espn: "out", auditOut: false })];
+    check("consensus: current week, props and the vote disagree -> the audit breaks the tie, flagged uncertain",
+      tie[0].decision === "out" && tie[1].decision === "in" && tie.every(x => x.uncertain && x.basis === "audit-tiebreak"), JSON.stringify(tie));
+    check("consensus: later weeks keep the audit unless BOTH projections say out",
+      d({ sleeper: "out", espn: null, auditOut: false }) === "in" && d({ sleeper: "in", espn: "in", auditOut: true }) === "out"
+      && d({ sleeper: "out", espn: "out", auditOut: false }) === "out" && d({ props: "out", sleeper: "out", auditOut: false }) === "in");
+    check("consensus: a bye is never out", d({ bye: true, sleeper: "out", espn: "out", auditOut: true }) === "bye");
+    const { spawnSync } = await import("node:child_process");
+    const fs = await import("node:fs"), os = await import("node:os");
+    const dir = fs.mkdtempSync(join(os.tmpdir(), "consensus-"));
+    fs.mkdirSync(join(dir, "cache"));
+    fs.copyFileSync(join(ROOT, "data", "consensus-cache", "ccubed-rosters.json"), join(dir, "cache", "ccubed-rosters.json"));
+    fs.copyFileSync(join(ROOT, "injury-returns.json"), join(dir, "audit.json"));
+    const before = fs.readFileSync(join(dir, "audit.json"), "utf8");
+    const env = { ...process.env, CONSENSUS_TIMEOUT_MS: "3000" };
+    for (const k of ["SLEEPER_API", "SLEEPER_PROJ", "ESPN_SITE", "ESPN_CORE", "ESPN_FANTASY"]) env[`CONSENSUS_${k}`] = "http://127.0.0.1:9";
+    const run = spawnSync(process.execPath, ["consensus.mjs", "--audit", join(dir, "audit.json"), "--cache", join(dir, "cache"), "--from", "6", "--to", "7", "--dry-run"],
+      { cwd: ROOT, env, encoding: "utf8", timeout: 60000 });
+    const after = fs.readFileSync(join(dir, "audit.json"), "utf8");
+    fs.rmSync(dir, { recursive: true, force: true });
+    check("consensus CLI: sources down -> stale cache used ('stale: ccubed-rosters'), missing cache noted, exit 0",
+      run.status === 0 && /^stale: ccubed-rosters$/m.test(run.stdout) && /^stale: sleeper-players \(no cache\)$/m.test(run.stdout)
+      && after === before,
+      JSON.stringify([run.status, run.stdout.slice(-300), run.stderr.slice(0, 200)]));
+    // Not a dry run: an all-stale run still writes nothing (no audit, report or cache change).
+    const dir2 = fs.mkdtempSync(join(os.tmpdir(), "consensus-"));
+    fs.mkdirSync(join(dir2, "cache"));
+    fs.copyFileSync(join(ROOT, "data", "consensus-cache", "ccubed-rosters.json"), join(dir2, "cache", "ccubed-rosters.json"));
+    fs.copyFileSync(join(ROOT, "injury-returns.json"), join(dir2, "audit.json"));
+    const rep = join(ROOT, "data", "consensus.json"), repBefore = fs.existsSync(rep) ? fs.readFileSync(rep, "utf8") : null;
+    const live = spawnSync(process.execPath, ["consensus.mjs", "--audit", join(dir2, "audit.json"), "--cache", join(dir2, "cache"), "--from", "6", "--to", "7"],
+      { cwd: ROOT, env, encoding: "utf8", timeout: 60000 });
+    const after2 = fs.readFileSync(join(dir2, "audit.json"), "utf8"), cacheFiles = fs.readdirSync(join(dir2, "cache"));
+    const repAfter = fs.existsSync(rep) ? fs.readFileSync(rep, "utf8") : null;
+    fs.rmSync(dir2, { recursive: true, force: true });
+    check("consensus CLI: only stale data -> 'stale/no change, nothing written', audit/report/cache untouched, exit 0",
+      live.status === 0 && /^consensus: stale\/no change, nothing written$/m.test(live.stdout) && after2 === before
+      && repAfter === repBefore && cacheFiles.join() === "ccubed-rosters.json",
+      JSON.stringify([live.status, live.stdout.slice(-200), cacheFiles]));
+  }
+  check("odds sim: points come off the mean (hurt team loses wins, nobody else does)",
+    io.sim && io.sim.team0[1] < io.sim.team0[0] && io.sim.others === io.sim.n - 1, JSON.stringify(io.sim));
+  check("odds fallback: without projections the old multiplier prices the loss",
+    io.fallback && Math.abs(io.fallback[0] - io.fallback[1]) < 1e-9, JSON.stringify(io.fallback));
+  check("injury deltas: computed in the worker for every injured player; removing one never lowers playoff %",
+    !!io.deltas && io.deltas.n > 0 && io.deltas.positive === 0 && io.deltas.sims === 2000, JSON.stringify(io.deltas));
+  check("injury deltas: rows read playoffDelta/titleDelta from injuryPlayoffDeltas()", io.rowReads === true, String(io.rowReads));
+  check("injury deltas: common random numbers — a no-op removal is exactly 0",
+    !!io.crn && io.crn.noop[0] === 0 && io.crn.noop[1] === 0, JSON.stringify(io.crn));
+
+  for (const [w, h] of [[390, 844], [1280, 900]]) {
+    await page.setViewportSize({ width: w, height: h });
+    await page.click('#tabs button[data-tab="odds"]');
+    await page.waitForTimeout(400);
+    const r = await page.evaluate(() => {
+      const p = document.querySelector('[data-panel="odds"]');
+      return { shown: !!(p && p.offsetParent), doc: document.documentElement.scrollWidth, W: window.innerWidth,
+        rule: !!document.querySelector('[data-inj-rule="points"]') };
+    });
+    check(`Odds tab at ${w}: renders, no horizontal overflow`, r.shown && r.doc <= r.W, JSON.stringify(r));
+    if (w === 1280) check("Odds tab: method text states the points-lost rule when projections are published", r.rule, JSON.stringify(r));
+  }
+  await page.setViewportSize({ width: 1280, height: 900 });
 }
 
 group("Screenshots");
