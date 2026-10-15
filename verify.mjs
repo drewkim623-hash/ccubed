@@ -1052,15 +1052,27 @@ var blurbs = await page.evaluate(async () => {
   // Whatever rankings.json holds, the board must render. Prove the lookup is a
   // pure miss when the file has nothing for the week on screen.
   const missing = D.blurbFor("1999", 99, [...D.DB.mgr.keys()][0]);
+  // The real rankings.json now covers C Cubed's finished weeks, so the week on
+  // screen has blurbs. Stub an empty file to get a board with none behind it,
+  // then put the real one back.
+  const realFetch = window.fetch;
+  window.fetch = u => String(u).includes("rankings.json")
+    ? Promise.resolve({ ok: true, json: () => Promise.resolve({ weeks: [] }) })
+    : realFetch(u);
+  await D.loadBlurbs(true);
+  window.fetch = realFetch;
   const panel = document.querySelector('[data-panel="power"]');
   const sel = panel.querySelectorAll("select")[1];
-  sel.value = "14"; sel.dispatchEvent(new Event("change"));
-  return {
+  sel.dispatchEvent(new Event("change"));
+  const out = {
     ...before, missing,
     rows: panel.querySelectorAll(".pwrow").length,
     fallbackLines: [...panel.querySelectorAll(".pwrow .id .s")].filter(n => n.textContent.trim().length).length,
     note: /rankings\.json/.test(panel.innerText),
   };
+  await D.loadBlurbs(true);
+  sel.dispatchEvent(new Event("change"));
+  return out;
 });
 check("a blurb lookup with nothing behind it returns nothing, not an error", blurbs.missing === null);
 check("the board renders in full without any blurbs", blurbs.rows === 12 && blurbs.fallbackLines === 12);
@@ -7579,7 +7591,23 @@ check("every weekly recap is a C Cubed week that has finished",
   leak.recapWeekIds.every(([s, w]) => s === "2026" && w >= 1 && w <= latestWk.week), JSON.stringify(leak.recapWeekIds));
 check("every article is a C Cubed season",
   leak.artSeasons.every(s => s === "2026"), leak.artSeasons.join(","));
-check("no DFFL power blurbs shipped", leak.rankWeeks === 0, String(leak.rankWeeks));
+// rankings.json is C Cubed's own now. Each week must be a finished 2026 week
+// whose twelve managers are exactly that week file's — a copied DFFL week would
+// name managers C Cubed doesn't have.
+var rankLeak = [];
+for (const w of JSON.parse(await readFile(join(ROOT, "rankings.json"), "utf8")).weeks || []) {
+  const key = `${w.season} w${w.week}`;
+  if (w.season !== "2026" || !(w.week >= 1 && w.week <= latestWk.week)) { rankLeak.push(`${key}: not a finished C Cubed week`); continue; }
+  let wf;
+  try { wf = JSON.parse(await readFile(join(ROOT, `data/week-2026-${String(w.week).padStart(2, "0")}.json`), "utf8")); }
+  catch { rankLeak.push(`${key}: no week file`); continue; }
+  const ours = new Set(wf.standings.map(s => s.manager.toLowerCase()));
+  const named = (w.teams || []).map(t => String(t.manager).toLowerCase());
+  const strangers = named.filter(m => !ours.has(m));
+  if (strangers.length) rankLeak.push(`${key}: ${strangers.join(", ")}`);
+  else if (new Set(named).size !== ours.size) rankLeak.push(`${key}: ${new Set(named).size}/${ours.size} managers`);
+}
+check("no DFFL power blurbs shipped", rankLeak.length === 0, rankLeak.slice(0, 3).join(" | ") || String(leak.rankWeeks));
 check("recaps.json mentions no other league", !leak.recapsHasDFFL);
 check("rankings.json mentions no other league", !leak.ranksHasDFFL);
 // DFFL is cited wherever a borrowed number is actually shown — the Odds and Power
