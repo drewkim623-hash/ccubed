@@ -11,8 +11,10 @@
 # so 30 still lets only one of each pair through):
 #   09:20 every day, 18:20 Monday and Thursday, 11:50 and 15:50 Sunday.
 #
-# The odds themselves are computed in the browser from index.html and these
-# files, so there is no odds step here; the next page load picks them up.
+# The odds are computed in the browser from index.html and these files, so the
+# refreshed injuries are read back off the site into data/odds-snapshot.json
+# (build-odds-snapshot.mjs only writes that file; it never sends) and the line
+# history.
 
 name: Injury refresh
 
@@ -33,8 +35,12 @@ permissions:
   contents: write
   actions: read   # gh run list: skip while a weekly-data run is going (Sundays)
 
+# Shared with sleeper-poll.yml: both write the same files and push to main.
+# weekly-data.yml keeps its own group so a queued poll can never cancel a
+# pending weekly-data run (GitHub keeps one pending run per group); the Sunday
+# gate above skips while weekly-data is queued or running.
 concurrency:
-  group: injury-refresh
+  group: sleeper-data
   cancel-in-progress: false
 
 jobs:
@@ -97,20 +103,44 @@ jobs:
         if: steps.gate.outputs.go == 'true'
         run: node injury-returns.mjs
 
+      - name: Install the browser for the odds snapshot
+        if: steps.gate.outputs.go == 'true'
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      # Writes data/odds-snapshot.json and nothing else; it never sends.
+      - name: Snapshot what the site is showing
+        if: steps.gate.outputs.go == 'true'
+        run: node build-odds-snapshot.mjs
+
+      - name: Add this run's odds reading to the line history
+        if: steps.gate.outputs.go == 'true'
+        run: node build-odds-history.mjs || echo "::warning::odds history not updated"
+
+      # So the next sleeper-poll.yml run does not redo this one's work.
+      - name: Record the Sleeper fingerprint
+        if: steps.gate.outputs.go == 'true'
+        run: node sleeper-fingerprint.mjs --write
+
       - name: Commit anything that changed
         if: steps.gate.outputs.go == 'true' && !(github.event_name == 'workflow_dispatch' && inputs.dry_run)
         run: |
           git config user.name  "ccubed-data[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data injuries.json injury-returns.json injury-returns-cache.json
-          if git diff --staged --quiet; then
+          commit() {
+            git add -A data injuries.json injury-returns.json injury-returns-cache.json \
+              data/odds-snapshot.json data/odds-history.json data/sleeper-fingerprint.json
+            if git diff --staged --quiet; then return 1; fi
+            git commit -m "Data: injury refresh"
+          }
+          if ! commit; then
             echo "Nothing changed."
             exit 0
           fi
-          git commit -m "Data: injury refresh"
-          # No force push. If the rebase fails (weekly-data pushed injuries.json
-          # meanwhile): abort, reset to the new origin, rerun the three data
-          # scripts, recommit, and try pull --rebase + push once more; then give up.
+          # No force push. If the rebase fails (weekly-data or the poll pushed
+          # meanwhile): abort, reset to the new origin, rerun the build steps
+          # above, recommit, and try pull --rebase + push once more; then give up.
           branch="${GITHUB_REF_NAME:-main}"
           if git pull --rebase origin "$branch" && git push origin "HEAD:$branch"; then exit 0; fi
           git rebase --abort 2>/dev/null || true
@@ -120,12 +150,13 @@ jobs:
           node consensus.mjs
           node build-injuries.mjs
           node injury-returns.mjs
-          git add -A data injuries.json injury-returns.json injury-returns-cache.json
-          if git diff --staged --quiet; then
+          node build-odds-snapshot.mjs
+          node build-odds-history.mjs || echo "::warning::odds history not updated"
+          node sleeper-fingerprint.mjs --write
+          if ! commit; then
             echo "Nothing changed after regenerating."
             exit 0
           fi
-          git commit -m "Data: injury refresh"
           if git pull --rebase origin "$branch" && git push origin "HEAD:$branch"; then exit 0; fi
           git rebase --abort 2>/dev/null || true
           echo "::error::Could not rebase the injury commit onto $branch after one regenerate-and-retry; nothing pushed."
