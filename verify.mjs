@@ -7089,8 +7089,13 @@ group("Trade-aware odds (data/roster-weeks.json)");
   const rost = JSON.parse(await readFile(join(ROOT, "rosters.json"), "utf8"));
   const posOf = p => (rost.map[p] || {}).p || "";
   const strengthOf = players => lineupStrength(players, P, posOf, rost.slots).strength;
-  const redo = RW ? Object.entries(cur).filter(([, r]) => strengthOf(r.players) !== r.strength).map(([rid]) => rid) : ["no file"];
-  check("roster-weeks.json: current strengths reproduce from lineupStrength() on data/projections.json", redo.length === 0, redo.join(","));
+  // Committed data can lag Sleeper: skip rosters holding a player unknown to
+  // every projections week or to rosters.json; the rest must reproduce exactly.
+  const known = p => !!rost.map[p] && Object.values(P.weeks || {}).some(w => w && p in w);
+  const stale = Object.entries(cur).filter(([, r]) => !(r.players || []).every(known)).map(([rid]) => rid);
+  const redo = RW ? Object.entries(cur).filter(([rid, r]) => !stale.includes(rid) && strengthOf(r.players) !== r.strength).map(([rid]) => rid) : ["no file"];
+  check("roster-weeks.json: current strengths reproduce from lineupStrength() on data/projections.json", redo.length === 0,
+    `${redo.join(",")}${stale.length ? ` · skipped (data lags Sleeper) ${stale.join(",")}` : ""}`);
 
   // Fixtures below: a roster whose players never changed (every week = today),
   // a league where nobody's did, and the week-5 trade undone. The fixture
