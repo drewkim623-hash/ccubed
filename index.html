@@ -67,10 +67,15 @@
   nav.tabs .wrap::before{left:var(--pad);background:linear-gradient(270deg,transparent,var(--plane) 80%)}
   nav.tabs .wrap::after{right:var(--pad);background:linear-gradient(90deg,transparent,var(--plane) 70%)}
   nav.tabs .wrap.more::after,nav.tabs .wrap.less::before{opacity:1}
-  .tabchev{position:absolute;top:50%;right:calc(var(--pad) + 2px);transform:translateY(-50%);z-index:2;pointer-events:none;
-    width:22px;height:22px;border-radius:999px;display:grid;place-items:center;font-size:17px;font-weight:700;line-height:1;
-    color:var(--ink-2);background:var(--raised);border:1px solid var(--grid);opacity:0;transition:opacity .18s}
-  nav.tabs .wrap.more .tabchev{opacity:1}
+  /* Arrow buttons: real controls that page the row, right while there is more, left once scrolled. */
+  .tabarr{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:34px;height:34px;padding:0;
+    border-radius:999px;display:grid;place-items:center;font-family:inherit;font-weight:700;font-size:20px;line-height:1;color:var(--ink);cursor:pointer;
+    background:var(--raised);border:1px solid var(--ring);box-shadow:0 2px 10px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
+  .tabarr:focus-visible{background:var(--blue);border-color:var(--blue);color:#fff}
+  @media (hover:hover){.tabarr:hover{background:var(--blue);border-color:var(--blue);color:#fff}}
+  .tabarr[hidden]{display:none}
+  .tabarr-r{right:calc(var(--pad) - 6px)}
+  .tabarr-l{left:calc(var(--pad) - 6px)}
   .tabrow button{
     background:transparent;border:1px solid transparent;border-radius:999px;color:var(--muted);
     font-weight:650;font-size:14.5px;padding:8px 15px;cursor:pointer;white-space:nowrap;transition:.14s}
@@ -189,6 +194,33 @@
   .rec .w{font-size:14.5px;font-weight:650}
   .rec .c{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.45}
   .rec.up .v{color:var(--blue)} .rec.down .v{color:var(--red)}
+
+  /* ============ waiver report card ============ */
+  .wrc{display:grid;grid-template-columns:1fr;gap:11px}
+  @media (min-width:720px){.wrc{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}
+  .wrc-team{background:var(--surface);border:1px solid var(--ring);border-radius:var(--r);padding:14px 15px;min-width:0}
+  .wrc-hero{display:flex;align-items:baseline;gap:12px;min-width:0}
+  .wrc-hero .g{font-size:44px;font-weight:900;letter-spacing:-.04em;line-height:1}
+  .wrc-hero .meta{min-width:0}
+  .wrc-hero .n{font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .wrc-hero .s{font-size:12px;color:var(--muted)}
+  @media (max-width:719px){
+    .wrc-hero{flex-direction:column;align-items:flex-start;gap:6px}
+    .wrc-hero .g{font-size:64px}
+    .wrc-hero .meta{width:100%}
+  }
+  .wrc-list{list-style:none;margin:10px 0 0;padding:0;border-top:1px solid var(--grid)}
+  .wrc-list li{display:grid;grid-template-columns:2.4em minmax(0,1fr) auto auto;gap:8px;align-items:baseline;
+    padding:7px 0;border-bottom:1px solid var(--grid);font-size:13.5px}
+  .wrc-list li:last-child{border-bottom:0}
+  .wrc-list .gr{font-weight:800}
+  .wrc-list .pl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .wrc-list .fb{color:var(--muted);font-family:var(--mono);font-size:12px}
+  .wrc-list .pt{font-variant-numeric:tabular-nums;font-weight:650;text-align:right;min-width:3.6em}
+  .wrc-list .early{color:var(--muted);font-weight:500;font-size:12px}
+  .wrc .gA{color:var(--plus)} .wrc .gB{color:var(--blue)} .wrc .gC{color:var(--ink-2)}
+  .wrc .gD{color:var(--gold)} .wrc .gF{color:var(--red)}
+  .wrc-note{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
 
   /* ============ tables ============ */
   .card{background:var(--surface);border:1px solid var(--ring);border-radius:var(--r);overflow:hidden}
@@ -513,7 +545,7 @@
   .bhead .bt{font-size:14.5px;font-weight:800;letter-spacing:-.01em;min-width:0}
   .bhead .bs{font-size:11.5px;color:var(--muted);font-weight:600;display:block;margin-top:2px;line-height:1.4}
   .bhead .hold{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
-    color:var(--hold);border:1px solid rgba(var(--a-rgb),.4);background:rgba(var(--a-rgb),.09);
+    color:var(--hold);border:1px solid rgba(185,140,255,.4);background:rgba(185,140,255,.09);
     border-radius:6px;padding:4px 7px;white-space:nowrap;font-weight:700;flex:none}
 
   .orow{display:grid;grid-template-columns:20px auto minmax(0,1fr) auto;align-items:center;gap:10px;
@@ -531,8 +563,8 @@
   .price{display:block;min-width:74px;border:1px solid var(--ring);background:var(--raised);
     border-radius:9px;padding:6px 9px;text-align:center;transition:border-color .13s,background .13s}
   .price .o{font-family:var(--mono);font-size:15.5px;font-weight:700;line-height:1.15;display:block;
-    font-variant-numeric:tabular-nums}
-  .price.plus .o{color:#fff}
+    font-variant-numeric:tabular-nums;color:var(--ink)}
+  .price.plus .o{color:var(--ink)}
   .price .tp{font-family:var(--mono);font-size:9.5px;color:var(--muted);display:block;margin-top:2px}
   .price .k{font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
     font-weight:700;display:block;margin-bottom:3px}
@@ -718,6 +750,44 @@
   .dp .nm{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .dp .nm .k{color:var(--gold);font-size:10.5px;font-weight:900}
   .dp .pts{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+  /* ---- draft tab, blend layout: hero, segmented view switch, list rows ---- */
+  .dhero{position:relative;overflow:hidden;border:1px solid rgba(var(--a-rgb),.35);border-radius:var(--r);
+    padding:20px 20px 18px;margin-bottom:11px;
+    background:radial-gradient(460px 240px at 100% 0,rgba(var(--a-rgb),.22),transparent 70%),
+      radial-gradient(400px 260px at 0 100%,rgba(185,140,255,.18),transparent 70%),
+      linear-gradient(160deg,var(--deep),var(--surface) 65%)}
+  .dhero::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;
+    background:linear-gradient(90deg,transparent,var(--a),transparent)}
+  .dhero .l{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .dhero .v{font:700 76px/1 var(--disp);letter-spacing:-.05em;color:var(--a);margin:10px 0 8px;
+    font-variant-numeric:tabular-nums;text-shadow:0 0 24px rgba(var(--a-rgb),.45)}
+  .dhero.down .v{color:var(--red);text-shadow:none}
+  .dhero .w{font:700 26px/1.1 var(--disp);overflow-wrap:anywhere}
+  .dhero .c{font-size:13.5px;color:var(--ink-2);margin-top:8px;line-height:1.45}
+  .dctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+  .dctl select{flex:0 1 180px;min-width:0}
+  .dseg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;flex:1 1 300px;max-width:460px;
+    background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:4px;gap:4px}
+  .dseg button{font:600 13.5px var(--body);color:var(--muted);background:transparent;border:0;
+    border-radius:9px;padding:9px 6px;cursor:pointer;white-space:nowrap}
+  .dseg button[aria-pressed="true"]{color:var(--ink);background:var(--raised);box-shadow:inset 0 -2px 0 var(--a)}
+  .dseg button:focus-visible{outline:2px solid var(--a);outline-offset:1px}
+  .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .dcard.lst{box-shadow:0 10px 30px -18px #000}
+  .dcard.lst .dh .n{font:700 12px var(--disp);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+  .dcard.lst .dp{grid-template-columns:38px minmax(0,1fr) auto;padding:10px 13px;position:relative}
+  .dcard.lst .dp:first-child::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:2px;
+    background:linear-gradient(var(--a),transparent)}
+  .dp .no{font:700 18px var(--disp);color:var(--a);font-variant-numeric:tabular-nums;text-align:center}
+  .dp .who{display:grid;gap:3px;min-width:0}
+  .dp .who .pos-dot{justify-self:start;height:17px;min-width:28px;font-size:10px}
+  .dp .val{display:grid;justify-items:end;gap:2px}
+  .dcard.lst .dp .pts{font:700 15px var(--disp);color:var(--ink);background:var(--raised);
+    border:1px solid var(--ring);border-radius:8px;padding:4px 9px}
+  .dp .rd{font-size:10.5px}
+  @media(prefers-reduced-motion:reduce){.dp{transition:none}}
+  @media(max-width:520px){.dhero .v{font-size:60px} .dhero .w{font-size:22px} .dctl select{flex:1 1 100%}}
 
   /* ============ player card ============ */
   .modal{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.66);backdrop-filter:blur(3px);
@@ -905,55 +975,61 @@
   .abar .v{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;
     text-align:right;color:var(--ink-2)}
 
-  /* Tier cards, in the link-card look: near-black, a red stripe, Oswald, white type. */
-  @font-face{font-family:Oswald;src:url(fonts/Oswald.ttf) format("truetype");font-weight:200 700;font-display:swap}
-  .atiers{--tr:#e4002b;--tbg:#0b0f1a;margin:26px 0;max-width:none;position:relative;color:#fff;
-    padding:20px 16px 18px 22px;border-radius:4px;overflow:hidden;
-    background:radial-gradient(circle at 88% 0,#e4002b33,transparent 50%),linear-gradient(135deg,#0a0f1e,#000)}
-  .atiers:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--tr)}
-  .atiers .atk{font:700 13px/1 Oswald,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--tr)}
-  .atiers .at{font:700 30px/1.05 Oswald,sans-serif;text-transform:uppercase;letter-spacing:.01em;margin-top:8px}
-  .atiers .as{font-size:13px;color:#c9ccd6;margin:8px 0 16px;line-height:1.45}
-  .atiers .afoot{font-size:11.5px;color:#9aa0ae;margin-top:14px;line-height:1.5}
-  .atiers .alink{display:inline-block;margin-top:10px;font:600 15px/1.2 Oswald,sans-serif;letter-spacing:.06em;
-    text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:2px solid var(--tr);padding-bottom:2px}
-  .atiers .alink:focus-visible{outline:2px solid #fff;outline-offset:3px}
+  /* Tier cards, in the blend tokens: surface cards, the accent stripe, display-face titles in
+     real case. The fallbacks hold until the blend tokens land on this page. */
+  .atiers{--tr:var(--a,#ffc23d);--tbg:var(--surface);margin:26px 0;max-width:none;position:relative;color:var(--ink);
+    padding:20px 16px 18px 22px;border-radius:var(--r);overflow:hidden;
+    background:var(--raised);border:1px solid var(--ring)}
+  .atiers:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--tr)}
+  .atiers .atk{font:700 12px/1 var(--disp,system-ui,sans-serif);letter-spacing:.16em;text-transform:uppercase;color:var(--tr)}
+  .atiers .at{font:700 26px/1.1 var(--disp,system-ui,sans-serif);letter-spacing:-.01em;margin-top:8px}
+  .atiers .as{font-size:13px;color:var(--ink-2);margin:8px 0 16px;line-height:1.45}
+  .atiers .afoot{font-size:11.5px;color:var(--muted);margin-top:14px;line-height:1.5}
+  .atiers .alink{display:inline-block;margin-top:10px;font:600 15px/1.2 var(--disp,system-ui,sans-serif);
+    color:var(--ink);text-decoration:none;border-bottom:2px solid var(--tr);padding-bottom:2px}
+  .atiers .alink:focus-visible{outline:2px solid var(--tr);outline-offset:3px}
   .atgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
   @media(max-width:900px){.atgrid{grid-template-columns:1fr}}
-  .atier{background:var(--tbg);border:1px solid rgba(255,255,255,.1);border-radius:3px}
+  .atier{background:var(--tbg);border:1px solid var(--ring);border-radius:var(--rs)}
   .atier header{padding:11px 14px;border-bottom:2px solid var(--tr);display:flex;justify-content:space-between;
     align-items:baseline;gap:8px}
-  .atier header b{font:700 20px/1 Oswald,sans-serif;text-transform:uppercase;letter-spacing:.08em}
-  .atier header span{font:500 13px/1.2 Oswald,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#9aa0ae;text-align:right}
+  .atier header b{font:700 18px/1.1 var(--disp,system-ui,sans-serif)}
+  .atier header span{font-size:12px;line-height:1.2;color:var(--muted);text-align:right}
   .atrow{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:6px 10px;align-items:center;
-    padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+    padding:12px 14px;border-bottom:1px solid var(--ring)}
   .atrow:last-child{border-bottom:0}
-  .atrow .av{width:36px;height:36px;align-self:start}
-  .atrow .who{min-width:0;line-height:1.25}
+  .atrow .av{width:36px;height:36px;align-self:start;font-size:12px}
+  .atrow .who{min-width:0;line-height:1.25;overflow-wrap:anywhere}
   .atrow .who .tlab{display:flex}
-  .atrow .who .tlab-n{font:600 17px/1.15 Oswald,sans-serif;letter-spacing:.01em;color:#fff}
-  .atrow .who .tlab-m{font-size:11.5px;color:#9aa0ae;margin-top:2px}
+  .atrow .who .tlab-n{font:600 16px/1.2 var(--disp,system-ui,sans-serif);color:var(--ink)}
+  .atrow .who .tlab-m{font-size:11.5px;color:var(--muted);margin-top:2px}
   .atrow .who .tlab-n,.atrow .who .tlab-m{white-space:normal!important;overflow:visible!important;
     text-overflow:clip!important;overflow-wrap:normal;word-break:normal;hyphens:none}
-  .atrow .atmeta{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:5px;font:500 12px/1 Oswald,sans-serif;
-    letter-spacing:.08em;text-transform:uppercase;color:#c9ccd6}
+  .atrow .atmeta{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:5px;font-size:12px;line-height:1;color:var(--ink-2)}
   .atrow .atmeta span{white-space:nowrap}
-  .atrow .atst{padding:3px 5px 2px;border:1px solid rgba(255,255,255,.35);color:#fff}
-  .atrow .atst.bye{background:var(--tr);border-color:var(--tr)}
-  .atrow .atst.out{border-color:rgba(255,255,255,.15);color:#9aa0ae}
-  .atrow .atn{text-align:right;align-self:start;font-family:Oswald,sans-serif}
-  .atrow .atn i{display:block;font:500 10.5px/1 Oswald,sans-serif;font-style:normal;letter-spacing:.18em;color:#9aa0ae}
-  .atrow .pn{font-weight:700;font-size:36px;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .atrow .atst{padding:3px 6px;border:1px solid var(--ring);border-radius:999px;color:var(--ink)}
+  .atrow .atst.bye{background:var(--tr);border-color:var(--tr);color:var(--on-a,#1a1000)}
+  .atrow .atst.out{color:var(--muted)}
+  .atrow .atn{text-align:right;align-self:start;font-family:var(--disp,system-ui,sans-serif)}
+  .atrow .atn i{display:block;font-size:10px;line-height:1;font-style:normal;letter-spacing:.14em;color:var(--muted)}
+  .atrow .pn{font-weight:700;font-size:32px;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
   .atrow .pn small{font-size:.5em;color:var(--tr);margin-left:1px}
-  .atrow .pb{display:block;font-weight:600;font-size:14px;letter-spacing:.06em;color:#fff;margin-top:3px}
-  .atrow .pb em{font-style:normal;color:var(--tr);margin-right:4px;font-size:11px;letter-spacing:.14em}
-  .atrow .ln{grid-column:2/-1;height:4px;background:rgba(255,255,255,.12);overflow:hidden}
+  .atrow .pb{display:block;font-weight:600;font-size:13px;color:var(--ink-2);margin-top:3px}
+  .atrow .pb em{font-style:normal;color:var(--tr);margin-right:4px;font-size:10px;letter-spacing:.12em}
+  .atrow .ln{grid-column:2/-1;height:4px;border-radius:2px;background:var(--grid);overflow:hidden}
   .atrow .ln i{display:block;height:100%;background:var(--tr)}
-  .atier.g2 .ln i{background:#fff} .atier.g3 .ln i{background:#6b7080}
+  .atier.g2 .ln i{background:var(--ink-2)} .atier.g3 .ln i{background:var(--muted)}
   .atrow.cutafter{border-bottom:2px dashed var(--tr);position:relative}
   .atrow.cutafter + .atrow{padding-top:22px}
   .atrow.cutafter:after{content:"Playoff line";position:absolute;right:12px;bottom:-10px;background:var(--tbg);
-    padding:0 6px;font:700 13px/18px Oswald,sans-serif;color:var(--tr);text-transform:uppercase;letter-spacing:.14em}
+    padding:0 6px;font:700 12px/18px var(--disp,system-ui,sans-serif);color:var(--tr);letter-spacing:.04em}
+  /* At phone width the name gets the room: tighter padding, a smaller big number. */
+  @media(max-width:480px){
+    .atiers{padding:16px 10px 14px 14px}
+    .atrow{grid-template-columns:32px minmax(0,1fr) auto;gap:6px 8px;padding:11px 10px}
+    .atrow .av{width:32px;height:32px}
+    .atrow .pn{font-size:26px}
+  }
 
   .acards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;margin:22px 0}
   .acard{background:var(--raised);border:1px solid var(--ring);border-radius:var(--rs);padding:14px 15px}
@@ -1149,7 +1225,7 @@
     border-radius:4px;padding:0 4px;margin-left:6px;vertical-align:2px}
   .ppv .pp-sd{flex:none;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;
     font:700 12px var(--mono);color:var(--ink-2);background:rgba(255,255,255,.06)}
-  .ppv .pp-sd.bye{color:#1a1200;background:radial-gradient(circle at 35% 30%,#ffd27a,var(--gold));box-shadow:0 0 12px rgba(var(--a-rgb),.55)}
+  .ppv .pp-sd.bye{color:var(--on-a);background:var(--a);box-shadow:0 0 12px rgba(var(--a-rgb),.55)}
   .ppv .pp-sd.div{color:var(--on-a);background:radial-gradient(circle at 35% 30%,#ffd57a,var(--blue));box-shadow:0 0 10px rgba(255,194,61,.5)}
   .ppv .pp-sd.wc{color:#ffe3a3;background:rgba(255,194,61,.16);box-shadow:inset 0 0 0 1px rgba(255,194,61,.6)}
   .ppv .av.pp-xs{width:20px;height:20px;font-size:11px}
@@ -1239,14 +1315,21 @@
   }
 
   /* ============ trades ============ */
-  .fleece{position:relative;overflow:hidden;border-radius:var(--r);padding:18px 20px;margin-top:18px;
-    background:linear-gradient(100deg,rgba(230,103,103,.17),rgba(230,103,103,.03) 58%,transparent);
-    border:1px solid rgba(230,103,103,.38)}
-  .fleece .k{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--red);font-weight:700}
-  .fleece .v{font-size:clamp(30px,9vw,42px);font-weight:900;letter-spacing:-.035em;line-height:1.05;margin:6px 0 2px;
-    font-variant-numeric:tabular-nums}
-  .fleece .w{font-size:16px;font-weight:750;letter-spacing:-.01em}
-  .fleece .c{font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.5;max-width:64ch}
+  /* hero card, mockup .hero: aubergine wash, gold edge on top, the margin in big gold */
+  .fleece{position:relative;overflow:hidden;border-radius:var(--r);padding:20px 20px 18px;margin-top:18px;
+    background:radial-gradient(460px 240px at 100% 0,rgba(var(--a-rgb),.20),transparent 70%),
+      radial-gradient(400px 260px at 0 100%,rgba(185,140,255,.16),transparent 70%),
+      linear-gradient(160deg,var(--deep,var(--raised)),var(--surface) 65%);
+    border:1px solid var(--ring)}
+  .fleece::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--a),transparent)}
+  .fleece .top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .fleece .k{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .fleece .v{font-family:var(--disp);font-size:clamp(52px,17vw,84px);font-weight:800;letter-spacing:-.05em;line-height:1;
+    margin:10px 0 8px;color:var(--a);font-variant-numeric:tabular-nums}
+  .fleece .pair{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .fleece .pair .vs{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .fleece .w{font-size:clamp(18px,5vw,24px);font-weight:750;letter-spacing:-.015em;line-height:1.2;overflow-wrap:break-word}
+  .fleece .c{font-size:13.5px;color:var(--ink-2);margin-top:7px;line-height:1.5;max-width:64ch}
 
   .trade{background:var(--surface);border:1px solid var(--ring);border-radius:var(--r);overflow:hidden;margin-bottom:11px}
   .thead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
@@ -1266,7 +1349,7 @@
   @media(max-width:560px){.tside + .tside{border-left:0}}
   .tside.won{background:linear-gradient(180deg,rgba(255,194,61,.09),transparent 70%)}
   .tside .who{display:flex;align-items:center;gap:9px;min-width:0}
-  .tside .who .n{font-weight:750;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+  .tside .who .n{font-weight:750;font-size:14.5px;line-height:1.25;white-space:normal;overflow-wrap:break-word;min-width:0}
   .tside .net{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:800;font-size:15px;flex:none}
   .tlist{list-style:none;margin:9px 0 0;padding:0;display:grid;gap:4px}
   .tline{display:flex;align-items:baseline;gap:8px;font-size:13.5px;min-width:0}
@@ -1277,11 +1360,25 @@
   .tline .sub{font-size:11px;color:var(--muted);font-style:normal;display:block;line-height:1.35}
   .tpicks{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.45}
   .tnote{padding:11px 14px;border-top:1px solid var(--grid);font-size:12.5px;color:var(--muted);line-height:1.5}
-  .tfilter{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;max-width:430px;margin:0 0 14px}
+  .tfilter{display:flex;flex-wrap:wrap;gap:4px;padding:4px;margin:0 0 14px;max-width:100%;
+    background:var(--surface);border:1px solid var(--ring);border-radius:12px}
+  .tfilter button{flex:1 1 auto;min-width:0;font:inherit;font-size:13.5px;font-weight:700;color:var(--ink-2);background:transparent;
+    border:0;border-radius:9px;padding:9px 12px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+  .tfilter button[aria-pressed="true"]{color:var(--ink);background:var(--raised);box-shadow:inset 0 -2px 0 var(--a)}
+  .tfilter button:focus-visible{outline:2px solid var(--a);outline-offset:1px}
+  @media(prefers-reduced-motion:reduce){.tfilter button{transition:none}}
+  .trade.decided{border-left:2px solid rgba(var(--a-rgb),.55)}
+  .tgrid{display:grid;grid-template-columns:1fr;gap:11px;align-items:start}
+  .tgrid .trade{margin-bottom:0}
+  .tgrid > .empty,.tgrid > .back.more{grid-column:1/-1}
+  @media(min-width:1000px){.tgrid{grid-template-columns:1fr 1fr}
+    .tgrid > .trade:not(:only-child) .tsides{grid-template-columns:1fr}
+    .tgrid > .trade:not(:only-child) .tside + .tside{border-left:0}
+    .tgrid > .trade:only-child{grid-column:1/-1}}
   .back.more{display:block;width:100%;margin:4px 0 0;text-align:center}
 
   /* ============ misc ============ */
-  select{background:var(--raised);color:var(--ink);border:1px solid var(--ring);border-radius:9px;
+  select{background:var(--raised);color:var(--ink);border:1px solid var(--edge);color-scheme:dark;border-radius:9px;
     padding:10px 11px;font:inherit;font-size:14px;width:100%;cursor:pointer}
   .empty{background:var(--surface);border:1px dashed var(--mid);border-radius:var(--r);padding:36px 20px;text-align:center;color:var(--muted)}
   .empty b{display:block;color:var(--ink-2);font-size:16px;margin-bottom:6px;font-weight:700}
@@ -1378,7 +1475,7 @@
   </div>
 </header>
 
-<nav class="tabs"><div class="wrap"><div class="tabrow" id="tabs" role="tablist"></div><span class="tabchev" aria-hidden="true">›</span></div></nav>
+<nav class="tabs"><div class="wrap"><div class="tabrow" id="tabs" role="tablist"></div><button type="button" class="tabarr tabarr-l" aria-label="Scroll tabs left" aria-controls="tabs" hidden>‹</button><button type="button" class="tabarr tabarr-r" aria-label="Scroll tabs right" aria-controls="tabs" hidden>›</button></div></nav>
 
 <main class="wrap">
   <div id="loader">
@@ -2075,12 +2172,16 @@ function buildTabs() {
     bar.dataset.hint = "1";
     bar.addEventListener("scroll", tabHint, { passive: true });
     window.addEventListener("resize", tabHint, { passive: true });
+    // Each arrow pages the row by most of its width.
+    const page = dir => bar.scrollBy({ left: dir * Math.max(120, bar.clientWidth * 0.8), behavior: "smooth" });
+    $(".tabarr-r").onclick = () => page(1);
+    $(".tabarr-l").onclick = () => page(-1);
     setTimeout(tabNudge, 700);
   }
 }
 /**
- * Fades whichever edge of the tab row has tabs past it: the right (with a
- * chevron) until the row is scrolled to its end, the left once it's scrolled
+ * Fades whichever edge of the tab row has tabs past it, and shows its arrow
+ * button: the right until the row is scrolled to its end, the left once it's scrolled
  * past its start. A row that fits shows neither.
  */
 function tabHint() {
@@ -2089,6 +2190,22 @@ function tabHint() {
   w.classList.toggle("over", over);
   w.classList.toggle("more", over && bar.scrollLeft + bar.clientWidth < bar.scrollWidth - 2);
   w.classList.toggle("less", over && bar.scrollLeft > 2);
+  const r = w.querySelector(".tabarr-r"), l = w.querySelector(".tabarr-l");
+  if (!r || !l) return;
+  // Hiding the focused arrow would drop keyboard focus to <body>; hand it to the other one.
+  const had = document.activeElement;
+  r.hidden = !w.classList.contains("more");
+  l.hidden = !w.classList.contains("less");
+  if (had === r && r.hidden && !l.hidden) l.focus();
+  else if (had === l && l.hidden && !r.hidden) r.focus();
+}
+/** Scrolls the tab row (only the row, never the page) so the selected tab sits in the middle. */
+function revealTab(id, smooth) {
+  const bar = $("#tabs"), b = bar && bar.querySelector(`[data-tab="${id}"]`);
+  if (!b || bar.scrollWidth <= bar.clientWidth + 2) return;
+  const br = b.getBoundingClientRect(), rr = bar.getBoundingClientRect();
+  const left = bar.scrollLeft + (br.left - rr.left) - (rr.width - br.width) / 2;
+  bar.scrollTo({ left: Math.max(0, left), behavior: smooth ? "smooth" : "auto" });
 }
 /**
  * The first time somebody sees a row that scrolls, slide it a little and back
@@ -2126,6 +2243,7 @@ function show(id) {
   const dp = $('[data-panel="draft"]');
   if (id === "draft" && dp && dp._draw && !dp.dataset.drawn) { dp.dataset.drawn = "1"; dp._draw(); }
   for (const b of $("#tabs").children) b.setAttribute("aria-selected", String(b.dataset.tab === id));
+  revealTab(id, document.body.dataset.ready === "1");
   for (const p of $("#app").children) p.hidden = p.dataset.panel !== id;
   history.replaceState(null, "", "#" + id);
   scrollTo(0, 0);
@@ -3535,6 +3653,33 @@ function bracketHTML(b) {
     <div class="scroll"><div class="brcols">${cols}</div></div></div>`;
 }
 
+/* A sample tiers block (the default odds graphic), opened at ?tierdemo. A
+ * fixture, not a published piece and not real odds. */
+const TIER_DEMO = {
+  slug: "tier-demo", kicker: "Sample · tier cards", headline: "Tier cards: the default odds graphic",
+  dek: "A fixture, not real odds. See docs/graphics-standard.md.", byline: "C Cubed desk",
+  blocks: [
+    { type: "p", text: "The block every article uses when it charts playoff or title odds." },
+    { type: "tiers", kicker: "Sample · the playoff picture", title: "Who gets in",
+      sub: "Big number: chance to make the playoffs.",
+      note: "Sample numbers. Six of twelve teams make it and the top two seeds get a bye; the line marks today's top six.",
+      cutAfter: "sixthseedsam", href: "#picture", link: "See the live Playoff Picture",
+      tiers: [
+        { name: "Locks", range: "85% or better", rows: [
+          { team: "topdog", pct: 98.6, rec: "5-0", seed: 1, status: "bye", bye: 71 },
+          { team: "secondslot", pct: 91.2, rec: "4-1", seed: 2, status: "bye", bye: 52 } ] },
+        { name: "Bubble", range: "25% to 85%", rows: [
+          { team: "bubbleboy", pct: 61.3, rec: "3-2", seed: 3, status: "in", bye: 9 },
+          { team: "coinflip", pct: 60.8, rec: "3-2", seed: 4, status: "in", bye: 9 },
+          { team: "maximiliano_fitzgerald_throckmorton", pct: 44, rec: "3-2", seed: 5, status: "in", bye: 2 },
+          { team: "sixthseedsam", pct: 37.2, rec: "2-3", seed: 6, status: "in" } ] },
+        { name: "Long shots", range: "under 25%", rows: [
+          { team: "hopeful", pct: 3.4, rec: "1-4", seed: 7, status: "out" },
+          { team: "basement", pct: 0.3, rec: "0-5", seed: 8, status: "out" } ] },
+      ] },
+  ],
+};
+
 function articleBlock(b) {
   switch (b && b.type) {
     case "p":
@@ -3595,7 +3740,7 @@ function articleBlock(b) {
             ST[r.status] ? `<span class="atst ${r.status}">${ST[r.status]}</span>` : ""].join("");
           return `<div class="atrow${cut && String(r.team).toLowerCase() === cut ? " cutafter" : ""}" data-team="${esc(r.team || "")}"${
               r.seed ? ` data-seed="${Number(r.seed) || ""}"` : ""}>
-            ${m ? avatarHTML(m.uid) : `<span class="av"></span>`}
+            ${m ? avatarHTML(m.uid) : `<span class="av">${esc(initials(r.team))}</span>`}
             <div class="who">${handleLabelHTML(r.team)}${meta ? `<div class="atmeta">${meta}</div>` : ""}</div>
             <div class="atn"><i>PLAYOFF</i><span class="pn">${f1(p)}<small>%</small></span>${
               r.bye != null ? `<span class="pb"><em>BYE</em>${esc(String(Math.round(pct(r.bye))))}%</span>` : ""}</div>
@@ -8245,9 +8390,22 @@ function panelDraft() {
   [["board", "The board"], ["mgr", "By manager"], ["list", "Full list"]].forEach(([v, t]) => {
     const o = el("option", null, t); o.value = v; viewSel.appendChild(o);
   });
-  picks.appendChild(sel); picks.appendChild(viewSel);
-  p.appendChild(picks);
+  picks.className = "dctl";
+  // The view select stays the source of truth (and what verify drives); the
+  // segmented control is the visible face of it.
+  viewSel.className = "vh"; viewSel.tabIndex = -1; viewSel.setAttribute("aria-hidden", "true");
+  const seg = el("div", "dseg"); seg.setAttribute("role", "group"); seg.setAttribute("aria-label", "Draft view");
+  [...viewSel.options].forEach(o => {
+    const b = el("button", null, esc(o.textContent)); b.type = "button"; b.dataset.view = o.value;
+    b.onclick = () => { viewSel.value = o.value; draw(); };
+    seg.appendChild(b);
+  });
+  const syncSeg = () => seg.querySelectorAll("button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.view === viewSel.value)));
+  syncSeg();
+  picks.appendChild(sel); picks.appendChild(seg); picks.appendChild(viewSel);
   const highlights = el("div"); p.appendChild(highlights);
+  p.appendChild(picks);
   const host = el("div"); p.appendChild(host);
 
   const pill = r => `${esc(r.name)}${r.pos ? ` <span class="badge">${esc(r.pos)}</span>` : ""}`;
@@ -8257,14 +8415,19 @@ function panelDraft() {
     if (!A) return;
     const steal = A.steals[0], bust = A.busts[0];
     const t = el("div", "recs");
-    t.innerHTML = [
+    const cards = [
       steal && { c: "up", l: "Steal of the draft", v: `+${steal.value}`, w: steal.name, x: `${teamNameText(steal.uid)} took him at ${steal.pick} — finished ${ord(steal.prodRank)} in scoring` },
       bust && { c: "down", l: "Bust of the draft", v: `${bust.value}`, w: bust.name, x: `${teamNameText(bust.uid)} took him at ${bust.pick} — finished ${ord(bust.prodRank)}` },
       A.byMgr[0] && { c: "up", l: "Best draft haul", v: f1(A.byMgr[0].pts), w: teamNameText(A.byMgr[0].uid), wuid: A.byMgr[0].uid, x: `most total points from his ${A.byMgr[0].n} picks` },
       A.byMgr[A.byMgr.length - 1] && { c: "down", l: "Worst draft haul", v: f1(A.byMgr[A.byMgr.length - 1].pts), w: teamNameText(A.byMgr[A.byMgr.length - 1].uid), wuid: A.byMgr[A.byMgr.length - 1].uid, x: "fewest total points drafted" },
-    ].filter(Boolean).map(x =>
-      `<div class="rec ${x.c}"><div class="l">${esc(x.l)}</div><div class="v">${esc(x.v)}</div>
-       <div class="w">${x.wuid ? teamLabelHTML(x.wuid) : esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`).join("");
+    ].filter(Boolean);
+    const card = (x, cls) =>
+      `<div class="${cls} ${x.c}"><div class="l">${esc(x.l)}</div><div class="v">${esc(x.v)}</div>
+       <div class="w">${x.wuid ? teamLabelHTML(x.wuid) : esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`;
+    // The first headline (the steal) leads as the hero; the rest sit under it.
+    if (!cards.length) return;
+    highlights.insertAdjacentHTML("beforeend", card(cards[0], "dhero"));
+    t.innerHTML = cards.slice(1).map(x => card(x, "rec")).join("");
     highlights.appendChild(t);
   }
 
@@ -8340,7 +8503,7 @@ function panelDraft() {
     const grid = el("div", "mgrid2");
     for (const m of A.byMgr) {
       const mine = A.rows.filter(r => r.uid === m.uid).sort((a, b) => a.pick - b.pick);
-      const c = el("div", "dcard");
+      const c = el("div", "dcard lst");
       c.innerHTML = `<div class="dh">${avatarHTML(m.uid, "sm")}
           <span class="n">${teamLabelHTML(m.uid)}</span>
           ${scored ? `<span class="tot">${f1(m.pts)}</span>` : ""}</div>`;
@@ -8348,10 +8511,10 @@ function panelDraft() {
       for (const r of mine) {
         const pk = s.picks.find(x => x.pick_no === r.pick);
         const b = el("button", "dp");
-        b.innerHTML = `<span class="rd">${r.round}</span>
-          <span class="pos-dot ${posClass(r.pos)}">${esc(r.pos || "?")}</span>
-          <span class="nm">${esc(r.name)}</span>
-          ${scored ? `<span class="pts">${f1(r.pts)}</span>` : ""}`;
+        b.innerHTML = `<span class="no">${r.pick}</span>
+          <span class="who"><span class="nm">${esc(r.name)}</span>
+          <span class="pos-dot ${posClass(r.pos)}">${esc(r.pos || "?")}</span></span>
+          <span class="val">${scored ? `<span class="pts">${f1(r.pts)}</span>` : ""}<span class="rd">Rd ${r.round}</span></span>`;
         if (pk) b.onclick = () => openPlayer(s, pk, A);
         ul.appendChild(b);
       }
@@ -8404,6 +8567,7 @@ function panelDraft() {
 
   async function draw() {
     const s = drafted.find(x => x.season === sel.value);
+    syncSeg();
 
     const A = draftAnalysis(s.picks, s.playerPts, s.uidOf);
     // If Sleeper didn't return per-player scoring, every value would be
@@ -10327,12 +10491,152 @@ function waiverReport(txs) {
   };
 }
 
+/* ------------------------------------------------- waiver report card */
+/*
+ * This season's pickups, graded. Unlike the tables below, a pickup here is
+ * credited only with what he did for the roster that claimed him: points he
+ * scored in that roster's starting lineup, in finished regular-season weeks
+ * from the claim week on, until that roster drops or trades him away.
+ * Bench points never helped anybody. FAAB cost plays no part in the grade.
+ *
+ * Grade bands are BORROWED from the trade-grade scale v2 — percentiles of
+ * |points added| across every graded pickup this season, sign picking the side:
+ *   below the 21.6th pct  → C
+ *   up to the 55.3rd pct  → B if positive, D if negative or zero
+ *   up to the 86.9th pct  → A / F
+ *   above                 → A+ / F-
+ */
+const WRC_BANDS = [0.216, 0.553, 0.869];
+const WRC_GPA = { "A+": 4.3, A: 4, B: 3, C: 2, D: 1, F: 0, "F-": -0.3 };
+const WRC_GRADES = Object.keys(WRC_GPA);
+const wrcCls = g => "g" + g[0];
+
+/** Linear-interpolated quantile of an ascending array. */
+function quantile(sorted, p) {
+  if (!sorted.length) return 0;
+  const i = (sorted.length - 1) * p, lo = Math.floor(i), hi = Math.ceil(i);
+  return sorted[lo] + (sorted[hi] - sorted[lo]) * (i - lo);
+}
+function wrcGrade(x, cuts) {
+  const a = Math.abs(x);
+  if (a < cuts[0]) return "C";
+  const up = x > 0;
+  if (a <= cuts[1]) return up ? "B" : "D";
+  if (a <= cuts[2]) return up ? "A" : "F";
+  return up ? "A+" : "F-";
+}
+/** A team's GPA mapped back onto the same letters, by nearest step. */
+function wrcLetter(gpa) {
+  let best = "C", d = Infinity;
+  for (const g of WRC_GRADES) { const e = Math.abs(WRC_GPA[g] - gpa); if (e < d) { d = e; best = g; } }
+  return best;
+}
+
+/**
+ * `season` defaults to the latest one; verify.mjs passes a synthetic season
+ * ({ season, pws, regEntries, rosters, userById }) to check the math.
+ */
+function waiverReportCard(txs, season) {
+  season = season || DB.seasons.slice().sort((a, b) => Number(b.season) - Number(a.season))[0];
+  if (!season) return null;
+  const lastReg = (season.pws || 15) - 1;
+  const done = [...(season.regEntries || new Map()).keys()].filter(w => w <= lastReg).sort((a, b) => a - b);
+  const isClaim = t => t.type === "waiver" || t.type === "free_agent";
+  const tx = txs.filter(t => t.season === season.season)
+    .map((t, i) => ({ t, i, wk: Number(t.leg) || 1, ts: t.status_updated || t.created || 0 }))
+    .sort((a, b) => (a.wk - b.wk) || (a.ts - b.ts) || (a.i - b.i));
+  // Each claim owns the finished weeks from the claim week on, up to and including the
+  // week that roster next drops or trades him away (he may have started before the
+  // drop), or up to (not including) its next claim of him. Only points in that roster's
+  // starting lineup count; a week with no lineup on record counts 0.
+  const credited = new Set();     // "rid|pid|week" already credited to an earlier claim
+  const addedFor = (rid, pid, k) => {
+    const wk = tx[k].wk;
+    let end = Infinity;
+    for (let j = k + 1; j < tx.length; j++) {
+      const t = tx[j].t;
+      if (Number((t.drops || {})[pid]) === rid) { end = tx[j].wk; break; }
+      if (isClaim(t) && Number((t.adds || {})[pid]) === rid) { end = tx[j].wk - 1; break; }
+    }
+    let tot = 0, n = 0;
+    for (const w of done) {
+      if (w < wk || w > end) continue;
+      const key = `${rid}|${pid}|${w}`;
+      if (credited.has(key)) continue;
+      credited.add(key);
+      n++;
+      const e = season.regEntries.get(w).find(x => Number(x.roster_id) === rid);
+      if (e && (e.starters || []).includes(pid)) tot += Number((e.players_points || {})[pid]) || 0;
+    }
+    return { pts: tot, weeks: n };
+  };
+
+  const rows = [];
+  tx.forEach(({ t, wk, ts }, k) => {
+    if (!isClaim(t)) return;
+    const bid = Number(t.settings && t.settings.waiver_bid) || 0;
+    Object.entries(t.adds || {}).forEach(([pid, rid], i) => {
+      rid = Number(rid);
+      const a = addedFor(rid, pid, k);
+      const p = pname(pid);
+      // One bid buys the whole claim, so it is shown once, on the first player.
+      rows.push({ rid, pid, wk, bid: i === 0 ? bid : null, type: t.type, ts,
+        name: p.name, pos: p.pos, pts: a.pts, early: a.weeks === 0 });
+    });
+  });
+  const graded = rows.filter(r => !r.early);
+  const abs = graded.map(r => Math.abs(r.pts)).sort((a, b) => a - b);
+  const cuts = WRC_BANDS.map(p => quantile(abs, p));
+  for (const r of graded) r.grade = wrcGrade(r.pts, cuts);
+
+  const teams = (season.rosters || []).map(r => {
+    const u = (season.userById && season.userById.get(r.owner_id)) || {};
+    const name = String((u.metadata && u.metadata.team_name) || "").trim() || u.display_name || `Roster ${r.roster_id}`;
+    const mine = rows.filter(x => x.rid === Number(r.roster_id))
+      .sort((a, b) => (b.wk - a.wk) || (b.ts - a.ts));
+    const g = mine.filter(x => x.grade);
+    const gpa = g.length ? g.reduce((s, x) => s + WRC_GPA[x.grade], 0) / g.length : null;
+    return { rid: r.roster_id, name, handle: u.display_name || "", rows: mine, n: g.length,
+      gpa, grade: gpa == null ? null : wrcLetter(gpa), net: g.reduce((s, x) => s + x.pts, 0) };
+  }).filter(t => t.rows.length)
+    .sort((a, b) => ((b.gpa ?? -9) - (a.gpa ?? -9)) || (b.net - a.net));
+  return { season: season.season, teams, rows, cuts, graded: graded.length, total: rows.length };
+}
+
 /* -------------------------------------------------------------- panel */
 const plabel = x => `${esc(x.name)}${x.pos ? ` <span class="pos">${esc(x.pos)}</span>` : ""}`;
 /** Everything a side received, players and picks, in plain words. */
 const gotNames = sd => [...sd.got.map(x => x.name),
   ...sd.picksIn.map(r => r.name ? `${r.label} → ${r.name}` : r.label)].join(", ") || "nothing";
 const sgnf = v => `${v >= 0 ? "+" : "−"}${f1(Math.abs(v))}`;
+
+function renderWaiverCard(host, R) {
+  host.appendChild(sechead(`${R.season} waiver report card`,
+    "Every pickup this season, graded on the points he put in the claiming team's starting lineup in finished weeks from the claim week on, until that team drops or trades him. Unlike the claims table below, bench points don't count."));
+  if (!R.teams.length) {
+    host.appendChild(el("div", "empty", "<b>No pickups yet this season</b>"));
+    return;
+  }
+  const wrap = el("div", "wrc");
+  wrap.id = "waiverCard";
+  for (const t of R.teams) {
+    const card = el("article", "wrc-team");
+    const items = t.rows.map(r => `<li>
+        <span class="gr ${r.grade ? wrcCls(r.grade) : ""}"${r.grade ? ` data-grade="${r.grade}"` : ""}>${r.grade || "–"}</span>
+        <span class="pl">${plabel(r)}</span>
+        <span class="fb">${r.bid == null ? "" : r.type === "free_agent" ? "FA" : "$" + r.bid}</span>
+        <span class="pt">${r.early ? `<span class="early">Too early</span>` : esc(sgnf(r.pts))}</span></li>`).join("");
+    card.innerHTML = `<div class="wrc-hero">
+        <span class="g ${t.grade ? wrcCls(t.grade) : ""}"${t.grade ? ` data-grade="${t.grade}"` : ""}>${t.grade || "–"}</span>
+        <div class="meta"><div class="n">${esc(t.name)}</div>
+          <div class="s">${t.n ? `GPA ${f2(t.gpa)} · ${esc(sgnf(t.net))} pts · ${t.n} graded` : "Too early to grade"}</div></div>
+      </div><ul class="wrc-list">${items}</ul>`;
+    wrap.appendChild(card);
+  }
+  host.appendChild(wrap);
+  host.appendChild(el("div", "wrc-note",
+    `Grades are percentile bands of |points added| across all ${R.graded} graded pickups this season, borrowed from the trade-grade v2 scale: under the 21.6th percentile is a C; to the 55.3rd a B (or D if he added nothing or less); to the 86.9th an A (or F); above that A+ (or F-). The team grade is the GPA of its pickups, rounded to the nearest letter. Points count from the claim week on, only while he was in the claiming team's starting lineup. A pickup with no finished week since the claim is “Too early”. Grades ignore FAAB cost: a $50 claim and a free add that score the same get the same letter. When many pickups score exactly 0, the bottom cut is 0 and every scoreless pickup is a D, so the C band can be empty.`));
+}
 
 function tradeCard(t) {
   const v = verdictOf(t);
@@ -10342,6 +10646,7 @@ function tradeCard(t) {
   // the winner's highlight is shown — a 23-point edge over fourteen weeks is
   // noise, and printing it next to "nobody won it" would argue with itself.
   const decided = t.graded && !!t.winner && v.cls !== "even";
+  if (decided) box.classList.add("decided");
   box.innerHTML = `<header class="thead">
       <span class="twhen">${esc(when)}${t.nTeams > 2 ? ` · ${t.nTeams}-team` : ""}</span>
       <span class="verd ${v.cls}">${esc(v.label)}${decided ? ` ${esc(sgnf(t.margin))}` : ""}</span>
@@ -10390,9 +10695,12 @@ function renderTrades(host, L, W) {
     const got = gotNames(w);
     const gave = [...w.sent.map(x => x.name),
       ...w.picksOut.map(r => r.name ? `${r.label} → ${r.name}` : r.label)].join(", ") || "nothing";
+    const v = verdictOf(t);
     const f = el("div", "fleece");
-    f.innerHTML = `<div class="k">Biggest fleecing in league history</div>
+    f.innerHTML = `<div class="top"><div class="k">Biggest fleecing in league history</div>
+        <span class="verd ${v.cls}">${esc(v.label)}</span></div>
       <div class="v">${esc(sgnf(t.margin))}</div>
+      <div class="pair">${avatarHTML(w.uid, "sm")}<span class="vs">over</span>${loser.uid ? avatarHTML(loser.uid, "sm") : ""}</div>
       <div class="w">${esc(teamNameText(w.uid))} took ${esc(loser.uid ? teamNameText(loser.uid) : "the other side")} — ${esc(t.season)}, ${t.week === 1 ? "preseason" : "week " + t.week}</div>
       <div class="c">Got ${esc(got)} (${f1(w.gain)} pts from there on) for ${esc(gave)} (${f1(w.loss)}).</div>`;
     host.appendChild(f);
@@ -10452,7 +10760,9 @@ function renderTrades(host, L, W) {
 
   /* ---- waivers ---- */
   host.appendChild(sechead("Waivers and FAAB",
-    "Every claim is credited with what the player scored from the week he was claimed onward. Same rule as the trades, and just as blind to whether anyone actually started him."));
+    "Every claim is credited with what the player scored from the week he was claimed onward. Same rule as the trades, and just as blind to whether anyone actually started him. (The report card counts only started points — see its note.)"));
+
+  if (W.card) renderWaiverCard(host, W.card);
 
   if (!W.claims.length) {
     host.appendChild(el("div", "empty", "<b>No waiver activity on record</b>"));
@@ -10546,15 +10856,27 @@ function renderTrades(host, L, W) {
   const PAGE = 20;
   host.appendChild(sechead("Every trade in league history",
     "Newest first. Each player is followed by what he scored from that week to the end of that regular season, and each pick by the player it became — the only points either side can claim."));
+  // The season filter is a segmented toggle; `sel` keeps the select's shape.
   const filt = el("div", "tfilter");
-  const sel = el("select");
-  sel.setAttribute("aria-label", "Filter trades by season");
-  const opt = (v, t) => { const o = el("option", null, t); o.value = v; sel.appendChild(o); };
-  opt("all", `All seasons (${L.trades.length})`);
+  filt.setAttribute("role", "group");
+  filt.setAttribute("aria-label", "Filter trades by season");
+  const sel = { value: "all" };
+  const opt = (v, t) => {
+    const b = el("button", null, esc(t));
+    b.type = "button"; b.dataset.season = v;
+    b.setAttribute("aria-pressed", String(v === sel.value));
+    b.onclick = () => {
+      if (sel.value === v) return;
+      sel.value = v;
+      for (const x of filt.children) x.setAttribute("aria-pressed", String(x.dataset.season === v));
+      shown = PAGE; drawList();
+    };
+    filt.appendChild(b);
+  };
+  opt("all", `All (${L.trades.length})`);
   for (const yr of L.seasons) opt(yr, `${yr} (${L.trades.filter(t => t.season === yr).length})`);
-  filt.appendChild(sel);
   host.appendChild(filt);
-  const list = el("div");
+  const list = el("div", "tgrid");
   host.appendChild(list);
 
   let shown = PAGE;
@@ -10573,7 +10895,6 @@ function renderTrades(host, L, W) {
       list.appendChild(more);
     }
   }
-  sel.onchange = () => { shown = PAGE; drawList(); };
   drawList();
 
   host.appendChild(glossary([
@@ -10630,6 +10951,7 @@ async function ensureTrades() {
     await loadPlayerNames(need);
     await loadDraftSlots();
     const L = tradeLedger(txs), W = waiverReport(txs);
+    W.card = waiverReportCard(txs);
     window.__TRADES = L; window.__WAIVERS = W; window.__TX = txs;
     renderTrades(host, L, W);
     document.body.dataset.tradesReady = "1";
@@ -10729,6 +11051,11 @@ async function boot() {
     // what the site itself writes and what a teaser links to; the older
     // #article/<slug> still works, so anything already shared keeps working.
     const route = () => {
+      if (new URLSearchParams(location.search).has("tierdemo")) {
+        // The tier-card sample (TIER_DEMO): a fixture, opened like an article.
+        show("recaps");
+        return openArticle(TIER_DEMO, true);
+      }
       const slug = articleSlugOf(location);
       if (slug) {
         // A link names a piece. Show the index first so there is something
@@ -10767,7 +11094,7 @@ async function boot() {
       weekMovers, panelRecaps, allPowerRankings,
       playerModal, openPlayer, posClass, titleOf, ownerLine, coOf, PRIOR,
       teamLabelHTML, teamNameText, managersText, handleLabelHTML,
-      articleCard, articleBlock, articleTeaser, openArticle, articleBySlug, coverHTML, bracketHTML,
+      articleCard, articleBlock, articleTeaser, openArticle, articleBySlug, coverHTML, bracketHTML, TIER_DEMO,
       articleSlugOf, teaserBox, copyTeaser,
       coverSVG, coverKind, COVER_PALETTE,
       POWER_W, FORM_WEEKS, JARGON,

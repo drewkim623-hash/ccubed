@@ -2646,6 +2646,129 @@ await page.waitForFunction(() => document.body.dataset.tradesReady, null, { time
 var tradesState = await page.evaluate(() => document.body.dataset.tradesReady);
 check("the trades tab loads its own data on first open", tradesState === "1", tradesState);
 
+} catch (e) {
+  check(`group ran to completion: ${"Trades: loading and shape"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+}
+try {
+group("Trades: waiver report card");
+const wrcRead = () => page.evaluate(() => {
+  const c = document.querySelector("#waiverCard");
+  const card = window.__WAIVERS && window.__WAIVERS.card;
+  if (!c) return { missing: true, empty: !!card && card.teams.length === 0 };
+  const over = [];
+  for (const n of c.querySelectorAll("*")) {
+    const r = n.getBoundingClientRect();
+    if (r.width && r.right > window.innerWidth + 1) over.push((n.className || n.tagName) + " → " + Math.round(r.right));
+  }
+  return {
+    teams: c.querySelectorAll(".wrc-team").length,
+    heroes: c.querySelectorAll(".wrc-hero .n").length,
+    names: [...c.querySelectorAll(".wrc-hero .n")].map(n => n.textContent.trim()),
+    expect: card ? card.teams.map(t => t.name) : [],
+    grades: [...c.querySelectorAll("[data-grade]")].map(g => [g.dataset.grade, g.textContent.trim()]),
+    cols: getComputedStyle(c).gridTemplateColumns.split(" ").length,
+    note: (c.nextElementSibling && c.nextElementSibling.textContent) || "",
+    over: over.slice(0, 6), docScroll: document.documentElement.scrollWidth, inner: innerWidth,
+    imgs: c.querySelectorAll("img").length,
+    graded: card ? card.graded : 0,
+    heroStack: (() => {
+      const h = c.querySelector(".wrc-hero"); if (!h) return null;
+      const g = h.querySelector(".g").getBoundingClientRect(), n = h.querySelector(".n").getBoundingClientRect();
+      return g.bottom <= n.top + 1;
+    })(),
+  };
+});
+// The points-added math, on a synthetic season (roster 1 and 2, weeks 1–5 final).
+var wrcFx = await page.evaluate(() => {
+  const E = (rid, starters, pts) => ({ roster_id: rid, ...(starters ? { starters } : {}), players: Object.keys(pts), players_points: pts });
+  const season = {
+    season: "2099", pws: 15,
+    userById: new Map([["u1", { display_name: "handle1", metadata: { team_name: "Team One" } }], ["u2", { display_name: "handle2", metadata: {} }]]),
+    rosters: [{ roster_id: 1, owner_id: "u1" }, { roster_id: 2, owner_id: "u2" }],
+    regEntries: new Map([
+      [1, [E(1, [], {}), E(2, ["b"], { b: 4 })]],
+      [2, [E(1, ["a"], { a: 10 }), E(2, [], { b: 9 })]],
+      [3, [E(1, null, { a: 50 }), E(2, ["b"], { b: 6 })]],
+      [4, [E(1, [], { a: 8 }), E(2, ["a", "b"], { a: 30, b: 7 })]],
+      [5, [E(1, ["a"], { a: 100 }), E(2, [], {})]],
+    ]),
+  };
+  const T = (type, leg, ts, adds, drops, bid) => ({ season: "2099", type, leg, status_updated: ts, adds, drops,
+    settings: bid == null ? {} : { waiver_bid: bid } });
+  const txs = [
+    T("free_agent", 1, 100, { b: 2 }, null),          // b: roster 2 adds…
+    T("waiver", 2, 200, { a: 1 }, null, 10),          // a: roster 1 claims in week 2
+    T("free_agent", 2, 300, null, { b: 2 }),          // b: …drops…
+    T("free_agent", 3, 400, { b: 2 }, null),          // b: …and re-adds
+    T("trade", 4, 500, { a: 2 }, { a: 1 }),           // a: traded away in week 4…
+    T("trade", 5, 600, { a: 1 }, { a: 2 }),           // a: …and back in week 5 (starts, 100 pts)
+    T("waiver", 6, 700, { c: 1 }, null, 3),           // c: no finished week yet
+  ];
+  const R = waiverReportCard(txs, season);
+  const rows = R.rows.map(r => ({ pid: r.pid, wk: r.wk, pts: r.pts, early: r.early, grade: r.grade || null, bid: r.bid }));
+  const names = R.teams.map(t => [t.rid, t.name]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
+  const g = (x, cuts) => wrcGrade(x, cuts);
+  const bands = [g(0.5, [1, 2, 3]), g(1, [1, 2, 3]), g(2, [1, 2, 3]), g(2.01, [1, 2, 3]), g(3, [1, 2, 3]), g(3.01, [1, 2, 3]),
+    g(-1, [1, 2, 3]), g(-2.5, [1, 2, 3]), g(-3.5, [1, 2, 3]), g(0, [0, 2, 3])];
+  // A season with no finished weeks and no transactions must not throw.
+  let empty;
+  try {
+    const R0 = waiverReportCard([], { season: "2098", pws: 15, regEntries: new Map(), rosters: season.rosters, userById: new Map() });
+    const R1 = waiverReportCard([T("waiver", 1, 1, { z: 1 }, null, 0)].map(t => ({ ...t, season: "2098" })),
+      { season: "2098", pws: 15, regEntries: new Map(), rosters: season.rosters, userById: new Map() });
+    empty = { ok: true, teams0: R0.teams.length, graded0: R0.graded, graded1: R1.graded,
+      early1: R1.rows.every(r => r.early), grade1: R1.teams[0] && R1.teams[0].grade, name1: R1.teams[0] && R1.teams[0].name };
+  } catch (e) { empty = { ok: false, err: String(e && e.message || e) }; }
+  return { rows, bands, names, empty };
+});
+const wrcRow = (pid, wk) => wrcFx.rows.find(r => r.pid === pid && r.wk === wk);
+check("waiver card: claim-week points count when started, bench / no-lineup weeks don't, and none after a trade away",
+  wrcRow("a", 2) && wrcRow("a", 2).pts === 10, JSON.stringify(wrcRow("a", 2)));
+check("waiver card: a drop + re-add by the same roster isn't double counted",
+  wrcRow("b", 1) && wrcRow("b", 1).pts === 4 && wrcRow("b", 3) && wrcRow("b", 3).pts === 13,
+  JSON.stringify([wrcRow("b", 1), wrcRow("b", 3)]));
+check("waiver card: a pickup with 0 finished weeks is Too early and ungraded",
+  wrcRow("c", 6) && wrcRow("c", 6).early && !wrcRow("c", 6).grade, JSON.stringify(wrcRow("c", 6)));
+check("waiver card: band boundaries (C <21.6th, B/D ≤55.3rd, A/F ≤86.9th, A+/F- above; 0 is a D when the C cut is 0)",
+  wrcFx.bands.join(" ") === "C B B A A A+ D F F- D", wrcFx.bands.join(" "));
+check("waiver card: team name first, Sleeper handle as the fallback",
+  wrcFx.names.join("|") === "Team One|handle2", wrcFx.names.join("|"));
+check("waiver card: an empty season (no finished weeks, no pickups) doesn't throw and grades nothing",
+  wrcFx.empty.ok && wrcFx.empty.teams0 === 0 && wrcFx.empty.graded0 === 0 && wrcFx.empty.graded1 === 0
+    && wrcFx.empty.early1 && wrcFx.empty.grade1 === null && wrcFx.empty.name1 === "Roster 1",
+  JSON.stringify(wrcFx.empty));
+const vp0 = page.viewportSize();
+const wrcWide = await wrcRead();
+const wrcEmpty = !!wrcWide && wrcWide.missing && wrcWide.empty;
+if (wrcEmpty) {
+  check("the waiver report card shows its empty state when nobody has picked anyone up", true);
+} else {
+  check("the waiver report card renders with a card per team", !!wrcWide && wrcWide.teams > 0 && wrcWide.heroes === wrcWide.teams, JSON.stringify(wrcWide && wrcWide.teams));
+  check("each waiver card is headed by the team's name", !!wrcWide && wrcWide.names.join("|") === wrcWide.expect.join("|"),
+    wrcWide && wrcWide.names.slice(0, 4).join(" | "));
+  const WRC_OK = new Set(["A+", "A", "B", "C", "D", "F", "F-"]);
+  check("every waiver grade comes from A+ A B C D F F-", !!wrcWide && (wrcWide.grades.length > 0 || wrcWide.graded === 0) && wrcWide.grades.every(([d, t]) => WRC_OK.has(d) && d === t),
+    wrcWide && wrcWide.grades.filter(([d, t]) => !WRC_OK.has(d) || d !== t).slice(0, 4).join(" "));
+  check("the card says its bands are borrowed from the trade-grade v2 scale", !!wrcWide && /borrowed from the trade-grade v2 scale/.test(wrcWide.note), wrcWide && wrcWide.note.slice(0, 80));
+  check("the card notes grades ignore FAAB and the C band can be empty", !!wrcWide && /ignore FAAB/.test(wrcWide.note) && /C band can be empty/.test(wrcWide.note));
+  check("the waiver card carries no player headshots", !!wrcWide && wrcWide.imgs === 0, String(wrcWide && wrcWide.imgs));
+  if (vp0 && vp0.width >= 720) check("the waiver card is a grid at desktop width", !!wrcWide && wrcWide.cols > 1, String(wrcWide && wrcWide.cols));
+  if (vp0 && vp0.width >= 720) check("the waiver card keeps the grade beside the team name at desktop width", !!wrcWide && wrcWide.heroStack === false, String(wrcWide && wrcWide.heroStack));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.waitForTimeout(150);
+  const wrc390 = await wrcRead();
+  check("the waiver card is one column at 390px", !!wrc390 && wrc390.cols === 1, String(wrc390 && wrc390.cols));
+  check("the waiver card stacks the hero grade above the team name at 390px", !!wrc390 && wrc390.heroStack === true, String(wrc390 && wrc390.heroStack));
+  check("the waiver card has no horizontal overflow at 390px", !!wrc390 && wrc390.over.length === 0 && wrc390.docScroll <= wrc390.inner,
+    wrc390 && `${(wrc390.over || []).join(" | ")} doc ${wrc390.docScroll}/${wrc390.inner}`);
+  if (vp0) await page.setViewportSize(vp0);
+}
+
+} catch (e) {
+  check(`group ran to completion: ${"Trades: waiver report card"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+}
+try {
+group("Trades: loading and shape (cont.)");
 var T = await page.evaluate(() => {
   const L = window.__TRADES, W = window.__WAIVERS, D = window.__CCUBED;
   const nums = [];
@@ -6575,17 +6698,20 @@ group("Tab bar scroll hint");
   await tp.waitForFunction(() => document.body.dataset.tabNudge, null, { timeout: 10000 }).catch(() => {});
   await tp.waitForTimeout(1400);
   const first = await tp.evaluate(() => {
-    const bar = document.querySelector("#tabs"), w = bar.parentElement, chev = w.querySelector(".tabchev");
+    const bar = document.querySelector("#tabs"), w = bar.parentElement, chev = w.querySelector(".tabarr-r");
     return { over: bar.scrollWidth > bar.clientWidth, more: w.classList.contains("more"), nudge: document.body.dataset.tabNudge || "",
       stored: localStorage.getItem("tabNudgeSeen"), left: bar.scrollLeft,
-      pe: [getComputedStyle(w, "::after").pointerEvents, getComputedStyle(w, "::before").pointerEvents, chev ? getComputedStyle(chev).pointerEvents : "missing"],
+      pe: [getComputedStyle(w, "::after").pointerEvents, getComputedStyle(w, "::before").pointerEvents],
+      arrow: chev ? { hidden: chev.hidden, label: chev.getAttribute("aria-label"), tag: chev.tagName, w: chev.getBoundingClientRect().width, h: chev.getBoundingClientRect().height } : null,
       sticky: getComputedStyle(document.querySelector("nav.tabs")).position };
   });
   check("tab hint: at 390 the tab row overflows", first.over);
   check("tab hint: the right fade shows when the row overflows", first.more && await op(tp, "nav.tabs .wrap", "::after") > 0.9);
-  check("tab hint: the chevron shows when the row overflows", await op(tp, ".tabchev") > 0.9);
+  check("tab hint: a right arrow button shows when the row overflows", first.arrow && !first.arrow.hidden && first.arrow.tag === "BUTTON" && first.arrow.label === "Scroll tabs right", JSON.stringify(first.arrow));
+  check("tab hint: the arrow is a 32px+ tap target", first.arrow && first.arrow.w >= 32 && first.arrow.h >= 32, JSON.stringify(first.arrow));
+  check("tab hint: no left arrow at the start", await tp.evaluate(() => document.querySelector(".tabarr-l").hidden));
   check("tab hint: no left fade at the start", await op(tp, "nav.tabs .wrap", "::before") < 0.1);
-  check("tab hint: fades and chevron never take taps", first.pe.every(v => v === "none"), first.pe.join(","));
+  check("tab hint: the fades never take taps", first.pe.every(v => v === "none"), first.pe.join(","));
   check("tab hint: the tab bar is still sticky", first.sticky === "sticky", first.sticky);
   check("tab hint: the first visit nudges once and remembers it", first.nudge === "ran" && first.stored === "1" && first.left < 2,
     `${first.nudge} ${first.stored} left=${first.left}`);
@@ -6602,6 +6728,17 @@ group("Tab bar scroll hint");
   }
   const tapped = lastVisible ? await tp.evaluate(t => document.querySelector(`#tabs button[data-tab="${t}"]`).getAttribute("aria-selected"), lastVisible) : null;
   check("tab hint: a tab under the right fade still takes a tap", tapped === "true", `${lastVisible} ${tapped}`);
+  const tapped0 = await tp.evaluate(() => document.querySelector('#tabs [aria-selected="true"]').dataset.tab);
+  // The right arrow pages the row; the left arrow pages it back.
+  await tp.evaluate(() => { const b = document.querySelector("#tabs"); b.scrollLeft = 0; b.dispatchEvent(new Event("scroll")); });
+  await tp.waitForTimeout(250);
+  await tp.click(".tabarr-r");
+  await tp.waitForTimeout(700);
+  const paged = await tp.evaluate(() => { const b = document.querySelector("#tabs"); return { left: b.scrollLeft, cw: b.clientWidth, sel: document.querySelector('#tabs [aria-selected="true"]').dataset.tab }; });
+  check("tab hint: tapping the right arrow pages the row and changes no tab", paged.left >= paged.cw * 0.5 && paged.sel === tapped0, JSON.stringify(paged));
+  await tp.click(".tabarr-l");
+  await tp.waitForTimeout(700);
+  check("tab hint: the left arrow pages it back", await tp.evaluate(l => document.querySelector("#tabs").scrollLeft < l, paged.left));
   // Scrolled partway: the left fade shows. Scrolled to the end: right fade and chevron hide.
   await tp.evaluate(() => { const b = document.querySelector("#tabs"); b.scrollLeft = 60; b.dispatchEvent(new Event("scroll")); });
   await tp.waitForTimeout(300);
@@ -6609,7 +6746,21 @@ group("Tab bar scroll hint");
   await tp.evaluate(() => { const b = document.querySelector("#tabs"); b.scrollLeft = b.scrollWidth; b.dispatchEvent(new Event("scroll")); });
   await tp.waitForTimeout(300);
   check("tab hint: at the end the right fade hides", await op(tp, "nav.tabs .wrap", "::after") < 0.1);
-  check("tab hint: at the end the chevron hides", await op(tp, ".tabchev") < 0.1);
+  check("tab hint: at the end the right arrow hides and the left one shows", await tp.evaluate(() => document.querySelector(".tabarr-r").hidden && !document.querySelector(".tabarr-l").hidden));
+  // A direct load of the last tab scrolls the row so that tab is in view.
+  const lastId = await tp.evaluate(() => [...document.querySelectorAll("#tabs button")].pop().dataset.tab);
+  const rp0 = await tctx.newPage();
+  await rp0.goto(BASE + "#" + lastId, { waitUntil: "domcontentloaded" });
+  await settle(rp0);
+  await rp0.waitForTimeout(1500);
+  const vis = await rp0.evaluate(id => { const bar = document.querySelector("#tabs"), b = bar.querySelector(`[data-tab="${id}"]`), r = b.getBoundingClientRect(), q = bar.getBoundingClientRect();
+    return { sel: b.getAttribute("aria-selected"), inView: r.left >= q.left - 1 && r.right <= q.right + 1, left: bar.scrollLeft }; }, lastId);
+  check("tab hint: on load the selected tab is scrolled into view", vis.sel === "true" && vis.inView && vis.left > 0, JSON.stringify(vis));
+  // Switching tabs keeps the new one in view.
+  await rp0.evaluate(() => document.querySelector('#tabs button[data-tab="home"]').click());
+  await rp0.waitForTimeout(700);
+  check("tab hint: changing tab scrolls the new one into view", await rp0.evaluate(() => { const b = document.querySelector('#tabs [aria-selected="true"]'), r = b.getBoundingClientRect(), q = document.querySelector("#tabs").getBoundingClientRect(); return b.dataset.tab === "home" && r.left >= q.left - 1 && r.right <= q.right + 1; }));
+  await rp0.close();
   // A second visit in the same browser: no nudge.
   await tp.reload({ waitUntil: "domcontentloaded" });
   await settle(tp);
@@ -6646,7 +6797,7 @@ group("Tab bar scroll hint");
     await new Promise(r => setTimeout(r, 300));
     const op = (n, p) => Number(getComputedStyle(n, p).opacity);
     return { over: bar.scrollWidth > bar.clientWidth + 2, cls: ["over", "more", "less"].filter(c => w.classList.contains(c)).join(","),
-      after: op(w, "::after"), before: op(w, "::before"), chev: op(w.querySelector(".tabchev")) };
+      after: op(w, "::after"), before: op(w, "::before"), chev: w.querySelector(".tabarr-r").hidden && w.querySelector(".tabarr-l").hidden ? 0 : 1 };
   });
   check("tab hint: on desktop with a row that fits, no fade or chevron", !fit.over && !fit.cls && fit.after < 0.1 && fit.before < 0.1 && fit.chev < 0.1, JSON.stringify(fit));
   await dctx.close();
@@ -7218,6 +7369,50 @@ for (const width of [1280, 390]) {
 await lp.close();
 } catch (e) {
   check(`group ran to completion: ${"Team name labels"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+}
+try {
+/* tiers is the default odds graphic for new articles. These checks render the
+ * TIER_DEMO fixture (opened at ?tierdemo), not anything in recaps.json. */
+group("Tier cards: the default odds graphic");
+{
+  const { tiersProblems } = await import(new URL("./check-recaps.mjs", import.meta.url));
+  const tp = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const tpage = await tp.newPage();
+  await tpage.goto(`${BASE}/?tierdemo`, { waitUntil: "domcontentloaded" });
+  await tpage.waitForSelector('[data-panel="article"] .atiers .atrow', { timeout: 90000 });
+  const t = await tpage.evaluate(() => {
+    const A = document.querySelector('[data-panel="article"]');
+    const rows = [...A.querySelectorAll(".atiers .atrow")];
+    return {
+      fixture: window.__CCUBED.TIER_DEMO.blocks.find(b => b.type === "tiers"),
+      rows: rows.length, cut: rows.filter(r => r.classList.contains("cutafter")).map(r => r.dataset.team),
+      over: document.documentElement.scrollWidth > innerWidth,
+    };
+  });
+  const fx = t.fixture;
+  check("the ?tierdemo fixture passes check-recaps' tiers rules", tiersProblems(fx).length === 0, tiersProblems(fx).join("; "));
+  check("?tierdemo renders every fixture row with the playoff line under cutAfter, no sideways overflow at 390",
+    t.rows === fx.tiers.flatMap(x => x.rows).length && t.cut.length === 1 && t.cut[0] === fx.cutAfter && !t.over,
+    JSON.stringify({ rows: t.rows, cut: t.cut, over: t.over }));
+  const bad = (f, re) => tiersProblems(f, new Set(fx.tiers.flatMap(x => x.rows).map(r => r.team))).some(p => re.test(p));
+  const row0 = fx.tiers[0].rows[0];
+  check("check-recaps refuses a tiers block with no title, an unnamed tier, a bad pct, a stranger, a repeated seed or a stray cutAfter",
+    bad({ ...fx, title: "" }, /no title/) && bad({ ...fx, tiers: [{ rows: [row0] }] }, /no name/)
+      && bad({ ...fx, tiers: [{ name: "x", rows: [{ ...row0, pct: 140 }] }] }, /pct/)
+      && bad({ ...fx, tiers: [{ name: "x", rows: [{ ...row0, team: "nobody" }] }] }, /not a manager/)
+      && bad({ ...fx, tiers: [{ name: "x", rows: [row0, { ...fx.tiers[0].rows[1], seed: row0.seed }] }] }, /repeats a seed/)
+      && bad({ ...fx, cutAfter: "nobody" }, /cutAfter/) && bad({ ...fx, href: "http://x" }, /href/));
+  await tp.close();
+
+  const doc = f => readFile(join(ROOT, f), "utf8").catch(() => "");
+  const [std, job, readme] = await Promise.all(["docs/graphics-standard.md", "weekly-job-prompt.md", "README.md"].map(doc));
+  check("tiers is documented as the default odds graphic (standard, job prompt, README)",
+    /default odds graphic/i.test(std) && /default odds graphic is a `tiers` block/i.test(job) && /default odds graphic/i.test(readme));
+  check("the job prompt points every article at docs/graphics-standard.md",
+    job.includes("docs/graphics-standard.md") && /390px/.test(std) && /two or three options/i.test(std));
+}
+} catch (e) {
+  check(`group ran to completion: ${"Tier cards: the default odds graphic"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
 group("No DFFL content leaked in");

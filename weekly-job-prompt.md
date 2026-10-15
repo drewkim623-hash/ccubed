@@ -175,6 +175,33 @@ committed under `img/` in this repo, with alt text that says what it shows; `hre
 under it, such as `https://drewkim623-hash.github.io/ccubed/#picture`. Use it only for an image that
 is already committed; a routine cannot take a screenshot.
 
+### Graphics
+
+Every article from every routine (the Tuesday article, the story watch's piece, the Saturday
+column) follows **[docs/graphics-standard.md](docs/graphics-standard.md)**: the broadcast look,
+tiers rather than raw lists, phone first, the hero number first, and the 390px check before
+pushing.
+
+**The default odds graphic is a `tiers` block (tier cards).** Any time a piece charts playoff or
+title odds, use `tiers`, not `bars`, `cards` or a hand-built list (the `bars` or `cards` block the
+contracts above ask for may be a `tiers` block when the chart is odds):
+
+```json
+{"type":"tiers","kicker":"…","title":"…","sub":"one short line","note":"method and sources",
+ "cutAfter":"<sixth seed's display_name>","href":"https://drewkim623-hash.github.io/ccubed/#picture","link":"See the live Playoff Picture",
+ "tiers":[{"name":"Locks","range":"85% or better","rows":[{"team":"<display_name>","pct":93.2,"rec":"4-1","seed":1,"status":"bye","bye":46}]}]}
+```
+
+- `team` is the bare display_name; the site draws the avatar and team label.
+- `pct` is a 0-100 percentage: `teams[].playoffNow` in `data/odds-snapshot.json` times 100
+  (title odds: `titleNow` times 100). Write the real value; the site prints one decimal. Give
+  `bye` only when you have it from the site's Playoff Picture board.
+- Keep `sub` short; method and sources go in `note`.
+- Group into tiers the numbers support, not a list of twelve.
+
+A graphic type the site has never printed needs two or three options first; if nobody answers,
+pick the best fit and file. `node check-recaps.mjs` validates every `tiers` block.
+
 If an article is ever rewritten under a new slug, keep the old slug in its `aliases` array so every
 link already shared still opens it.
 

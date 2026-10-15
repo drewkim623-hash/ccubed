@@ -199,6 +199,11 @@ empty — there is nothing to write about yet. Shape:
 }
 ```
 
+`articles[]` entries carry `blocks[]`. **`tiers` (tier cards) is the default odds graphic** for any
+piece that charts playoff or title odds; its fields and rules are in
+[docs/graphics-standard.md](docs/graphics-standard.md), and `node check-recaps.mjs` validates it.
+Open `?tierdemo` on the site for a sample.
+
 To publish a week, replace `recaps.json` in the repo. On GitHub you can do it in the browser: open
 the file, click the pencil icon, paste, commit.
 
@@ -214,6 +219,14 @@ the file, click the pencil icon, paste, commit.
   the season is well under way.
 - **Rate limits.** Sleeper allows about 1000 calls per minute per IP; a normal visit uses far
   fewer. If it ever trips, the page shows a clear error rather than a blank screen.
+- **Waiver report card (Trades tab).** Grades this season's waiver and free-agent pickups on the
+  points each player scored in the claiming team's starting lineup in finished weeks from the
+  claim week on, until that team drops or trades him away (a re-add starts a new window, so no
+  week is counted twice). Bench points never count, and neither does FAAB cost. The letter bands
+  are borrowed from the trade-grade v2 scale: percentiles of |points added| across all graded
+  pickups (below 21.6th = C; to 55.3rd = B/D; to 86.9th = A/F; above = A+/F-), with the sign
+  choosing the good or bad letter. Pickups with no finished week yet show "Too early". If more
+  than ~21.6% of pickups score exactly 0, the bottom cut is 0 and the C band empties.
 - **Nothing is cached.** Deliberate — stale fantasy stats are worse than a slow load. The site's
   own JSON is fetched with `no-cache` so a freshly published recap is never ten minutes stale.
 
