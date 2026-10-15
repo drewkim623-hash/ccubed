@@ -1014,8 +1014,9 @@
   .pwhero .k{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .pwhero .big{font:700 84px/1 var(--disp);letter-spacing:-.05em;color:#fff;margin:6px 0 10px;
     text-shadow:0 0 24px rgba(var(--a-rgb),.45);font-variant-numeric:tabular-nums}
-  .pwhero .tn{display:flex;align-items:center;gap:9px;font:700 26px/1.15 var(--disp);letter-spacing:-.02em;min-width:0}
-  .pwhero .tn span:last-child{min-width:0;overflow-wrap:anywhere}
+  .pwhero .k{display:flex;align-items:center;gap:9px}
+  .pwhero .tn{display:block;font:700 22px/1.2 var(--disp);letter-spacing:-.01em;min-width:0;
+    white-space:normal;overflow-wrap:normal;word-break:normal}
   .pwhero .hd{color:var(--muted);font-size:13.5px;margin-top:3px}
   .pwhero .ln{color:var(--ink-2);font-size:14.5px;margin-top:9px;font-variant-numeric:tabular-nums}
   .pwseg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin-bottom:14px;
@@ -1041,7 +1042,7 @@
   .pwrow .pr{font:700 19px/1 var(--disp);color:var(--gold);font-variant-numeric:tabular-nums;text-align:center;
     letter-spacing:-.02em}
   .pwrow .id .h,.lkrow .id .h{font-size:12.5px;color:var(--muted);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .lkrow .id{min-width:0} .lkrow .id .n{font-weight:750;font-size:15px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .lkrow .id{min-width:0}
   .pwrow .id .mv{text-align:left;margin-top:2px}
   .pwrow .val,.lkrow .val{display:flex;flex-direction:column;align-items:center;gap:4px}
   .val .tv{min-width:64px;text-align:center;padding:6px 8px;border-radius:10px;font:700 17px/1.1 var(--disp);
@@ -1067,14 +1068,14 @@
   .mv.up{color:var(--good)} .mv.down{color:var(--crit)}
   .mv.flat,.mv.none{color:var(--muted)}
   .pwrow .id{min-width:0}
-  .pwrow .id .n{font-weight:750;font-size:15px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pwrow .id .n,.lkrow .id .n{font-weight:750;font-size:15px;display:block;white-space:normal;overflow-wrap:normal;word-break:normal;line-height:1.25}
   .pwrow .id .s{font-size:12.5px;color:var(--muted);line-height:1.45}
   .pwrow .sp{display:flex;align-items:center;flex:none}
   .pwrow .sp:empty{display:none}
   .spark{display:block;max-width:100%}
   .pwrow .stats{display:flex;gap:7px;flex-wrap:wrap}
   .pwrow .stats .chip{flex:1;min-width:0}
-  @media(max-width:420px){.pwhero .big{font-size:68px}.pwhero .tn{font-size:22px}}
+  @media(max-width:420px){.pwhero .big{font-size:68px}}
 
   /* ============ position rooms ============ */
   .rooms{display:grid;gap:7px}
@@ -1968,14 +1969,16 @@ function handleLabelHTML(handle) {
   const m = mgrByHandle(handle);
   return m ? teamLabelHTML(m.uid) : esc(handle || "");
 }
-const initials = n => String(n || "?").replace(/[^a-zA-Z0-9]/g, "").slice(0, 2).toUpperCase();
+// Unicode-aware, never empty: an emoji or non-Latin name used to strip to "" and leave a blank circle.
+const initials = n => [...String(n || "").replace(/[^\p{L}\p{N}]/gu, "")].slice(0, 2).join("").toUpperCase() || "?";
 /** Team picture, then the user's, then initials: a failed load steps to the next, never a blank circle.
  *  Not lazy: the thumbs are tiny, and lazy ones were caught unloaded below the fold. */
 function avatarImg(m) {
-  const ini = esc(initials(m && m.name));
+  const ini = esc(initials(m && (m.name || m.team)));
   const srcs = [m && m.teamAvatar, m && m.avatar && `https://sleepercdn.com/avatars/thumbs/${m.avatar}`].filter(Boolean);
   if (!srcs.length) return ini;
-  return `<img src="${esc(srcs[0])}" alt="" data-alt="${esc(srcs[1] || "")}" data-ini="${ini}" onerror="avatarFail(this)">`;
+  // A "load" with no pixels (zero-size response) counts as a failure too.
+  return `<img src="${esc(srcs[0])}" alt="" loading="eager" data-alt="${esc(srcs[1] || "")}" data-ini="${ini}" onerror="avatarFail(this)" onload="if(!this.naturalWidth)avatarFail(this)">`;
 }
 function avatarFail(img) {
   if (img.dataset.alt) { img.src = img.dataset.alt; img.dataset.alt = ""; }
@@ -8861,14 +8864,16 @@ function projectedBoard(model, sim) {
 
 function panelPower(model, sim) {
   const p = el("div", "panel"); p.dataset.panel = "power";
-  p.appendChild(sechead("Power rankings",
-    "Not the standings. Every week each team is measured against the whole league rather than the one opponent it drew, and the board is rebuilt from scratch — so the arrows are real movement, not a hot take."));
+  // The #1 hero leads; the heading/intro sits below the board (appended at the end).
+  const intro = sechead("Power rankings",
+    "Not the standings. Every week each team is measured against the whole league rather than the one opponent it drew, and the board is rebuilt from scratch — so the arrows are real movement, not a hot take.");
 
   const proj = projectedBoard(model, sim);
   const all = allPowerRankings();
   if (!all.size && !proj) {
     p.appendChild(el("div", "empty",
       "<b>No weeks to rank yet</b>The board is built out of results, and there aren't any. It starts the week the season does."));
+    p.appendChild(intro);
     p.appendChild(roomsSection());
     return p;
   }
@@ -8900,15 +8905,16 @@ function panelPower(model, sim) {
   boardView.appendChild(picks);
   const host = el("div"); boardView.appendChild(host);
   luckView.appendChild(luckBoard());
+  p.appendChild(intro);
   // Always the season being played, whichever board is picked above.
   p.appendChild(roomsSection());
 
   // Team name big, both co-owners under it; an unnamed team leads with its owners.
   function drawHero(kicker, big, uid, line) {
     const sub = ownerLine(uid);
-    hero.innerHTML = `<div class="k">${esc(kicker)}</div>
+    hero.innerHTML = `<div class="k">${avatarHTML(uid, "sm")}<span>${esc(kicker)}</span></div>
       <div class="big">${esc(big)}</div>
-      <div class="tn">${avatarHTML(uid, "sm")}<span>${esc(titleOf(uid))}</span></div>
+      <div class="tn">${esc(titleOf(uid))}</div>
       ${sub ? `<div class="hd">${esc(sub)}</div>` : ""}
       <div class="ln">${line}</div>`;
   }
