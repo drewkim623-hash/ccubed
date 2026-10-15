@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-15T17:32:23.707Z",
- "at": 1792085543707,
+ "generated": "2026-10-15T21:49:04.925Z",
+ "at": 1792100944925,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -50,8 +50,7 @@
    "points_against": 614.56,
    "faab_spent": 0,
    "starters_hurt": [
-    "Quinshon Judkins (Questionable)",
-    "Josh Downs (Questionable)"
+    "Quinshon Judkins (Questionable)"
    ]
   },
   {
@@ -115,7 +114,6 @@
    "points_against": 715.78,
    "faab_spent": 12,
    "starters_hurt": [
-    "DJ Moore (Questionable)",
     "Brock Bowers (Questionable)"
    ]
   },
@@ -128,6 +126,7 @@
    "faab_spent": 33,
    "starters_hurt": [
     "Saquon Barkley (Questionable)",
+    "Zay Flowers (Questionable)",
     "Rashee Rice (Questionable)"
    ]
   },
@@ -138,7 +137,9 @@
    "points_for": 535.74,
    "points_against": 688.82,
    "faab_spent": 40,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Mike Evans (Questionable)"
+   ]
   }
  ],
  "this_week": [
@@ -249,7 +250,7 @@
      "name": "David Montgomery",
      "pos": "RB",
      "team": "HOU",
-     "status": "Doubtful",
+     "status": "Out",
      "to": "andychoe03"
     },
     {
@@ -263,7 +264,7 @@
      "name": "Zay Flowers",
      "pos": "WR",
      "team": "BAL",
-     "status": null,
+     "status": "Questionable",
      "to": "yojarshh"
     }
    ],
@@ -293,7 +294,7 @@
      "name": "David Montgomery",
      "pos": "RB",
      "team": "HOU",
-     "status": "Doubtful",
+     "status": "Out",
      "from": "yojarshh"
     },
     {
@@ -307,7 +308,7 @@
      "name": "Zay Flowers",
      "pos": "WR",
      "team": "BAL",
-     "status": null,
+     "status": "Questionable",
      "from": "andychoe03"
     }
    ],
@@ -417,5 +418,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 40
+ "free_agent_moves": 43
 }
