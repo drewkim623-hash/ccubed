@@ -1312,6 +1312,30 @@
     /* A full week is six games: three across fills the row instead of four-then-two. */
     .wstrip:has(> .wgame:nth-child(6):last-child){grid-template-columns:repeat(3,minmax(0,1fr))}
   }
+  /* Records: the all-time high as a gold hero, the book as a card grid (two across
+     on phones, three on laptops), champions on a solid gold badge. */
+  .rhero{position:relative;overflow:hidden;margin:4px 0 22px;padding:22px 20px 20px;border-radius:calc(var(--r) + 4px);
+    border:1px solid rgba(var(--a-rgb),.38);
+    background:radial-gradient(420px 220px at 100% 0,rgba(var(--a-rgb),.16),transparent 70%),
+      radial-gradient(380px 240px at 0 100%,rgba(185,140,255,.18),transparent 70%),linear-gradient(160deg,var(--deep),var(--surface));
+    box-shadow:0 18px 40px -22px rgba(var(--a-rgb),.45)}
+  .rhero::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--a),transparent)}
+  .rhero .l{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .rhero .v{font-family:var(--disp);font-weight:700;font-size:clamp(56px,17vw,96px);line-height:1;letter-spacing:-.05em;
+    margin:10px 0 12px;color:var(--a);font-variant-numeric:tabular-nums;text-shadow:0 0 28px rgba(var(--a-rgb),.35)}
+  .rhero .w{display:flex;align-items:center;gap:11px;min-width:0}
+  .rhero .w .nm{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:-.02em;min-width:0;overflow-wrap:anywhere}
+  .rhero .c{margin-top:10px;font-size:14px;color:var(--ink-2,var(--muted))}
+  .recs{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  @media (min-width:1000px){.recs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .rec{border-color:var(--edge);background:linear-gradient(var(--raised),var(--surface));min-width:0}
+  .rec .v{color:var(--ink)}
+  .rec.up .v{color:var(--a)}
+  .rec .w{display:flex;align-items:center;gap:8px;min-width:0;overflow-wrap:anywhere;line-height:1.3}
+  .rec .w > span:last-child{min-width:0}
+  @media (max-width:560px){.rec{padding:13px}.rec .v{font-size:26px}.rec .w{font-size:13.5px}.rec .w .av{display:none}}
+  .trophy{border-color:var(--edge)}
+  .trophy .ch{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--a);color:var(--on-a);letter-spacing:.1em}
   @keyframes blendrise{from{opacity:0;transform:translateY(10px)}}
   @media (prefers-reduced-motion:no-preference){
     .panel:not([hidden]){animation:blendrise .4s cubic-bezier(.2,.9,.2,1)}
@@ -2621,6 +2645,15 @@ function panelManagers(AT) {
 function panelRecords(RB) {
   const p = el("div", "panel"); p.dataset.panel = "records";
 
+  // The headline all-time record leads the tab, as a hero; the rest of the book follows.
+  if (DB.games.length && RB.high) {
+    const h = el("div", "rhero");
+    h.innerHTML = `<div class="l">Highest score ever</div><div class="v">${esc(f2(RB.high.pts))}</div>
+      <div class="w">${avatarHTML(RB.high.uid)}<span class="nm">${teamLabelHTML(RB.high.uid)}</span></div>
+      <div class="c">${esc(`${RB.high.season} · week ${RB.high.week}${RB.high.playoff ? " (playoffs)" : ""} · beat ${teamNameText(RB.high.opp.uid)}`)}</div>`;
+    p.appendChild(h);
+  }
+
   p.appendChild(sechead("Trophy case",
     "Final placements come from Sleeper's playoff and consolation brackets — so last place is whoever actually lost the toilet bowl, not just whoever had the worst record."));
   const grid = el("div", "trophies");
@@ -2654,7 +2687,6 @@ function panelRecords(RB) {
   const gwhen = x => `${x.g.season} · week ${x.g.week}${x.g.playoff ? " (playoffs)" : ""}`;
   const vs = x => `${teamNameText(x.g.a.uid)} ${f2(x.g.a.pts)} — ${f2(x.g.b.pts)} ${teamNameText(x.g.b.uid)}`;
   const cards = [
-    RB.high && { c: "up", l: "Highest score ever", v: f2(RB.high.pts), w: teamNameText(RB.high.uid), wuid: RB.high.uid, x: `${when(RB.high)} · beat ${teamNameText(RB.high.opp.uid)}` },
     RB.low && { c: "down", l: "Lowest score ever", v: f2(RB.low.pts), w: teamNameText(RB.low.uid), wuid: RB.low.uid, x: `${when(RB.low)} · vs ${teamNameText(RB.low.opp.uid)}` },
     RB.blowout && { c: "up", l: "Biggest blowout", v: "+" + f2(RB.blowout.margin), w: vs(RB.blowout), x: gwhen(RB.blowout) },
     RB.nailbiter && { c: "down", l: "Closest finish", v: f2(RB.nailbiter.margin), w: vs(RB.nailbiter), x: gwhen(RB.nailbiter) },
@@ -2670,7 +2702,7 @@ function panelRecords(RB) {
   const rg = el("div", "recs");
   rg.innerHTML = cards.map(c =>
     `<div class="rec ${c.c}"><div class="l">${esc(c.l)}</div><div class="v">${esc(c.v)}</div>
-     <div class="w">${c.wuid ? teamLabelHTML(c.wuid) : esc(c.w)}</div><div class="c">${esc(c.x)}</div></div>`).join("");
+     <div class="w">${c.wuid ? `${avatarHTML(c.wuid, "sm")}<span>${teamLabelHTML(c.wuid)}</span>` : esc(c.w)}</div><div class="c">${esc(c.x)}</div></div>`).join("");
   p.appendChild(rg);
 
   const row = s => `<tr>
