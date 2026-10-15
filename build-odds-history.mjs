@@ -9,9 +9,16 @@
  * data/odds-history.json:
  *
  *   data/odds-history.json = { _comment, generated,
- *     weeks: { "<season>-<week>": [ { at, a, b, pA, aPts, bPts, settled }, ... ] } }
+ *     weeks: { "<season>-<week>": [ { at, a, b, pA, aPts, bPts, settled }, ... ] },
+ *     teams: { "<season>-<week>": [ { at, uid, manager, playoff, title }, ... ] } }
  *
- * It MERGES: rows already in the file are never removed or rewritten, and new
+ * teams is each team's playoff and title chance once a week is final, read
+ * off the working-tree snapshot when it was taken between weeks (see
+ * teamRowsFromSnapshot). Unlike weeks, a week there is REPLACED whole each time
+ * it is read again, so it holds the latest between-weeks reading and never
+ * duplicates a team.
+ *
+ * weeks MERGES: rows already in the file are never removed or rewritten, and new
  * ones come from every commit of the snapshot git can see plus the working-tree
  * copy (in the data job, written moments before and not committed yet). So a
  * shallow checkout, which sees one commit or none, still only ever adds.
@@ -24,7 +31,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { mergeHistory, rowKey, rowsFromSnapshot } from "./odds-history.mjs";
+import { mergeHistory, rowKey, rowsFromSnapshot, setTeamWeek, teamRowsFromSnapshot } from "./odds-history.mjs";
 
 const argv = process.argv.slice(2);
 const at = argv.indexOf("--root");
@@ -49,6 +56,11 @@ if (existsSync(OUT)) {
   // replace it with an empty list, so leave everything alone instead.
   const badWeek = Object.keys(existing.weeks).find(k => !Array.isArray(existing.weeks[k]));
   if (badWeek) { warn(`${OUT} week ${badWeek} is not a list; left untouched.`); process.exit(0); }
+  const tw = existing.teams;
+  if (tw !== undefined && (!tw || typeof tw !== "object" || Array.isArray(tw) || Object.values(tw).some(w => !Array.isArray(w)))) {
+    warn(`${OUT} teams is not a map of lists; left untouched.`);
+    process.exit(0);
+  }
 }
 
 const incoming = [];
@@ -61,9 +73,10 @@ for (const line of log) {
   catch { /* an unreadable copy adds nothing */ }
 }
 const working = join(ROOT, SNAP);
+let workingSnap = null;
 if (existsSync(working)) {
   try {
-    const snap = JSON.parse(readFileSync(working, "utf8"));
+    const snap = workingSnap = JSON.parse(readFileSync(working, "utf8"));
     // Without its own clock a working copy has no stable time, and stamping it
     // with "now" would re-add the same reading on every run.
     if (snap && snap.generated) incoming.push(...rowsFromSnapshot(snap, snap.generated));
@@ -72,7 +85,15 @@ if (existsSync(working)) {
   catch (e) { warn(`working-tree ${SNAP} unreadable (${e.message}); skipped.`); }
 }
 
-const { out, added } = mergeHistory(existing, incoming);
+const merged = mergeHistory(existing, incoming);
+const { added } = merged;
+let out = merged.out, teamWeek = null;
+const final = teamRowsFromSnapshot(workingSnap);
+if (final) {
+  const set = setTeamWeek(out, final.key, final.rows);
+  out = set.out;
+  if (set.changed) teamWeek = final.key;
+}
 const count = h => Object.values(h?.weeks || {}).reduce((n, w) => n + (Array.isArray(w) ? w.length : 0), 0);
 const before = count(existing), total = count(out);
 
@@ -84,12 +105,16 @@ if (lost || total < before) {
   process.exit(0);
 }
 
-if (added > 0) {
+if (added > 0 || teamWeek) {
   out._comment = "Written by build-odds-history.mjs from data/odds-snapshot.json: every committed copy git can see plus the working-tree one. " +
-    "Rows are merged across runs and never removed or rewritten. One row per matchup per snapshot; " +
-    "pA is the chance manager a beats manager b as the site priced it at that moment.";
+    "weeks rows are merged across runs and never removed or rewritten. One row per matchup per snapshot; " +
+    "pA is the chance manager a beats manager b as the site priced it at that moment. " +
+    "teams holds one row per team per finalized week: playoff and title are the site's playoffNow and titleNow " +
+    "from a snapshot taken between weeks, and a week there is replaced whole when read again.";
   out.generated = new Date().toISOString();
-  const { _comment, generated, weeks, ...rest } = out;
-  writeFileSync(OUT, JSON.stringify({ _comment, generated, weeks, ...rest }, null, 1) + "\n");
+  const { _comment, generated, weeks, teams, ...rest } = out;
+  writeFileSync(OUT, JSON.stringify({ _comment, generated, weeks, teams, ...rest }, null, 1) + "\n");
 }
-console.log(`odds history: ${before} existing rows, ${added} added, ${total} total${added ? "" : " (file unchanged)"}`);
+console.log(`odds history: ${before} existing rows, ${added} added, ${total} total` +
+  (teamWeek ? `; team odds for ${teamWeek} written` : final ? `; team odds for ${final.key} unchanged` : "") +
+  (added || teamWeek ? "" : " (file unchanged)"));

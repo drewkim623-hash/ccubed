@@ -7,12 +7,13 @@ routine's prompt tells it to read this file first.
 
 ## The week's three pieces
 
-Every week the league gets exactly three articles:
+Every week the league gets two or three articles — the Tuesday and Saturday pieces always, the
+story watch's piece when the week has one:
 
 | When (ET) | Routine | The piece | `source` |
 |---|---|---|---|
 | Tuesday 8:00 AM | C Cubed Tuesday recap | **the recap and a column in one article**: an argument off the finished week up top, then every game in full; plus the week's `weeks[]` entry and `rankings.json` | `"tuesday"` |
-| Thursday or Friday 9:00 AM | C Cubed story watch | **one** midweek piece — never zero, never two: a big trade, a waiver splurge, or the week's preview. Thursday only for a genuine story; otherwise Friday files the preview | `"watch"` |
+| Daily 9:00 AM, except Tuesday | C Cubed story watch | **at most one** piece per fantasy week (Wednesday through Monday, counted from the most recent Tuesday), never two: a big trade or a waiver splurge on any day but Tuesday, or the week's preview on Friday only. Tuesday is the recap's day; the watch writes nothing then | `"watch"` |
 | Saturday 10:00 AM | C Cubed Saturday odds | the Saturday column, off the site's own odds board | `"saturday"` |
 
 Every routine pushes straight to `main`. None of them uses a session branch: a commit that is not on
@@ -32,6 +33,8 @@ the data arrives a different way:
   runs `build-week.mjs` and `build-injuries.mjs` at about 12:30 AM Eastern on Tuesday, refreshes
   `data/pulse.json` and the odds snapshot every morning at 7:00, and commits the result.
   `build-week.mjs` only moves `latest.json` once the week is truly over.
+  `injury-returns.mjs` runs right after `build-injuries.mjs` (return dates from ESPN onto `injuries.json`,
+  plus `injury-returns-cache.json`); it never fails the job, falling back to its cache if ESPN is down.
 - **The routine** clones the repo and reads those committed files. It needs no network at all.
 
 If the job ever finds itself reaching for `api.sleeper.app`, something has gone wrong: the answer is
@@ -130,9 +133,13 @@ One article, appended to `articles[]`, that is both the column and the recap —
 - **The story watch** writes one of: a **big-trade piece** (any completed trade in `pulse.json`
   `trades[]` that `articles[]` has not covered — who got what, what each side has started since,
   what the odds board says about both teams now); a **waivers piece** (a FAAB claim of $25 or
-  more, or the week's biggest spending); or, if neither, the **preview**: every game of the coming
-  week with the site's line from `data/odds-snapshot.json` `games`, and what each game is worth to
-  the playoff odds. A trade or waivers piece is a short column: lead paragraph, `stat`, two or
+  more, or the week's biggest spending); or, if neither and only on a Friday, the **preview**: every
+  game of the coming week with the site's line from `data/odds-snapshot.json` `games`, and what each
+  game is worth to the playoff odds. It runs daily at 9:00 AM ET but never files on a Tuesday, and
+  files at most one piece per fantasy week: if `articles[]` already has a `"source": "watch"` piece
+  dated after the most recent Tuesday (America/New_York), it stops. On a day with no trade or
+  waivers story that is not a Friday, it files nothing. Its `date` is that day's Eastern date; its
+  `kind` is `"preview"` for the preview and `"opinion"` otherwise. A trade or waivers piece is a short column: lead paragraph, `stat`, two or
   three `h` sections, `cards` or `bars`. The preview runs like "The Week in Full": a lead
   paragraph, a `stat`, a `cards` block of the lines, an `h` per game with two or three paragraphs,
   a `bars` block and a `note`.
