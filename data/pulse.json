@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-15T16:23:15.902Z",
- "at": 1792081395902,
+ "generated": "2026-10-15T17:32:23.707Z",
+ "at": 1792085543707,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -138,9 +138,7 @@
    "points_for": 535.74,
    "points_against": 688.82,
    "faab_spent": 40,
-   "starters_hurt": [
-    "TreVeyon Henderson (Questionable)"
-   ]
+   "starters_hurt": []
   }
  ],
  "this_week": [
@@ -419,5 +417,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 39
+ "free_agent_moves": 40
 }

@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-15T16:23:15.323Z",
+ "generated": "2026-10-15T17:32:23.053Z",
  "week": 6,
  "entries": {
   "2449": {
@@ -125,6 +125,16 @@
    "retNote": "https://www.espn.com/nfl/player/_/id/4035687/michael-pittman-jr — Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14",
    "irSince": 6
+  },
+  "6904": {
+   "n": "Jalen Hurts",
+   "s": "Out",
+   "ret": "2026-10-26",
+   "retWeeks": null,
+   "retSource": "espn-return-date",
+   "retEstimated": false,
+   "retNote": "ESPN return date",
+   "retChecked": "2026-10-15"
   },
   "7021": {
    "n": "Rico Dowdle",
