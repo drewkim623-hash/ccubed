@@ -17,7 +17,7 @@
     --grid:#30233f; --ring:rgba(255,255,255,.09);
     --blue:#ffc23d; --red:#e66767; --aqua:#199e70; --gold:var(--a); --violet:#b98cff;
     --good:#0ca30c; --crit:#d03b3b; --mid:#3a2d4a;
-    --plus:#3ad07f; --hold:var(--a);
+    --plus:#3ad07f; --hold:var(--a2);
     --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
     --r:14px; --rs:10px;
     /* blend theme: gold on aubergine, violet counter-glow, Space Grotesk over Inter */
@@ -127,7 +127,7 @@
 
   .badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;
     padding:2px 8px;border-radius:999px;border:1px solid var(--ring);white-space:nowrap}
-  .badge.gold{color:var(--gold);border-color:rgba(var(--a-rgb),.45);background:rgba(var(--a-rgb),.10)}
+  .badge.gold{color:var(--on-a);border-color:var(--a);background:var(--a)}
   .badge.blue{color:var(--blue);border-color:rgba(255,194,61,.45);background:rgba(255,194,61,.10)}
   .badge.red{color:var(--red);border-color:rgba(230,103,103,.45);background:rgba(230,103,103,.10)}
 
@@ -290,8 +290,8 @@
   .gfoot a{color:var(--blue);font-weight:700;text-decoration:none;white-space:nowrap}
   .gfoot a:hover{text-decoration:underline}
   /* A week still being played: ahead is not won, so it is never the win blue. */
-  .gside.lead{background:linear-gradient(90deg,rgba(var(--a-rgb),.12),transparent)}
-  .gside.lead:hover{background:linear-gradient(90deg,rgba(var(--a-rgb),.20),var(--hover))}
+  .gside.lead{background:linear-gradient(90deg,rgba(185,140,255,.12),transparent)}
+  .gside.lead:hover{background:linear-gradient(90deg,rgba(185,140,255,.20),var(--hover))}
   .gside.lead .gp{color:var(--gold)}
   .livenote{background:rgba(var(--a-rgb),.09);border:1px solid rgba(var(--a-rgb),.32);
     border-radius:var(--rs);padding:11px 13px;margin:0 0 12px;font-size:12.5px;
@@ -405,7 +405,7 @@
   .ws{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:7px;padding:8px 11px}
   .ws + .ws{border-top:1px solid var(--grid)}
   .ws.win{background:linear-gradient(90deg,rgba(255,194,61,.11),transparent)}
-  .ws.lead{background:linear-gradient(90deg,rgba(var(--a-rgb),.12),transparent)}
+  .ws.lead{background:linear-gradient(90deg,rgba(185,140,255,.12),transparent)}
   .ws .wn{font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .ws .wp{font-weight:800;font-size:14.5px;font-variant-numeric:tabular-nums}
   .ws.win .wp{color:var(--blue)} .ws.lead .wp{color:var(--gold)}
@@ -497,7 +497,7 @@
   .aw .ic{font-size:17px;width:22px;text-align:center}
 
   /* ============ odds board ============ */
-  .notice{border:1px solid rgba(var(--a-rgb),.42);background:rgba(var(--a-rgb),.07);border-radius:var(--r);
+  .notice{border:1px solid rgba(185,140,255,.42);background:rgba(185,140,255,.07);border-radius:var(--r);
     padding:14px 16px;margin-bottom:20px}
   .notice .nt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--hold);font-weight:700;margin-bottom:7px}
@@ -597,7 +597,7 @@
   .mode{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin:0 0 16px}
   .mode .pill{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
     font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap;flex:none}
-  .mode .pill.pre{color:var(--hold);border:1px solid rgba(var(--a-rgb),.45);background:rgba(var(--a-rgb),.10)}
+  .mode .pill.pre{color:var(--hold);border:1px solid rgba(185,140,255,.45);background:rgba(185,140,255,.10)}
   .mode .pill.post{color:var(--plus);border:1px solid rgba(58,208,127,.42);background:rgba(58,208,127,.10)}
   .mode .what{font-size:13.5px;color:var(--ink-2);line-height:1.55;min-width:0}
 
@@ -640,8 +640,7 @@
   .fxm-srctxt button{font:inherit;font-weight:700;color:var(--blue);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
   .fxm-blurb{margin:0 0 12px;color:var(--muted);font-size:13.5px;line-height:1.55;max-width:78ch}
   .fxm .price{border-radius:8px;background:var(--raised);min-height:42px;display:flex;flex-direction:column;justify-content:center}
-  .fxm .price .o{color:var(--blue)}
-  .fxm .price.plus .o{color:var(--plus)}
+  .fxm .price .o,.fxm .price.plus .o{color:var(--ink)}
   .fxm-th{display:flex;align-items:center;gap:10px;min-width:0}
   .fxm-tn{min-width:0;overflow:hidden;text-overflow:ellipsis}
   .fxm-prof{flex:none;font:inherit;font-size:12px;font-weight:700;color:var(--blue);background:transparent;
@@ -700,7 +699,7 @@
   .viax{display:inline;border:1px solid rgba(185,140,255,.45);background:rgba(185,140,255,.10);
     border-radius:5px;padding:2px 7px;font-size:10.5px}
   .dboard .bc.qb{border-left-color:#b98cff} .dboard .bc.rb{border-left-color:#199e70}
-  .dboard .bc.wr{border-left-color:#5aa9ff} .dboard .bc.te{border-left-color:#c98500}
+  .dboard .bc.wr{border-left-color:#5aa9ff} .dboard .bc.te{border-left-color:#ffc23d}
   .dboard .bc.def{border-left-color:#e66767} .dboard .bc.kk{border-left-color:var(--mid)}
 
   .mgrid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:11px}
@@ -1128,7 +1127,7 @@
   .ppv .pp-hero{display:flex;align-items:center;gap:14px;padding:16px;border-radius:18px;min-width:0;
     background:linear-gradient(135deg,rgba(var(--a-rgb),.22),rgba(var(--a-rgb),.04) 55%,rgba(255,255,255,.02));
     border:1px solid rgba(var(--a-rgb),.35);box-shadow:0 12px 40px -16px rgba(var(--a-rgb),.6)}
-  .ppv .pp-hero .av{width:52px;height:52px;font-size:17px;border:0;box-shadow:0 0 0 2px #e9a93a,0 0 18px rgba(var(--a-rgb),.6)}
+  .ppv .pp-hero .av{width:52px;height:52px;font-size:17px;border:0;box-shadow:0 0 0 2px var(--a),0 0 18px rgba(var(--a-rgb),.6)}
   .ppv .pp-hero .pp-eye{color:#ffd27a}
   .ppv .pp-hero .pp-nm{font-size:19px}
   .ppv .pp-hero .pp-bars{margin-left:auto}
@@ -1211,7 +1210,7 @@
     border-radius:999px;padding:4px 10px;white-space:nowrap;border:1px solid var(--ring);color:var(--ink-2)}
   .verd.even{color:var(--muted)}
   .verd.win{color:var(--blue);border-color:rgba(255,194,61,.45);background:rgba(255,194,61,.10)}
-  .verd.lop{color:var(--hold);border-color:rgba(var(--a-rgb),.45);background:rgba(var(--a-rgb),.10)}
+  .verd.lop{color:var(--hold);border-color:rgba(185,140,255,.45);background:rgba(185,140,255,.10)}
   .verd.fleeced{color:var(--red);border-color:rgba(230,103,103,.45);background:rgba(230,103,103,.10)}
   .verd.none{color:var(--muted);border-style:dashed}
 
