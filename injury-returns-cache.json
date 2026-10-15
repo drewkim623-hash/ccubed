@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-15T13:33:30.368Z",
+ "generated": "2026-10-15T16:23:15.323Z",
  "week": 6,
  "entries": {
   "2449": {
@@ -319,16 +319,6 @@
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
    "retChecked": "2026-10-15"
-  },
-  "11625": {
-   "n": "Adonai Mitchell",
-   "s": "Doubtful",
-   "ret": "2026-10-25",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Finger. Ruled out Week 5; ESPN Q Week 6. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14"
   },
   "11630": {
    "n": "Roman Wilson",
