@@ -900,55 +900,61 @@
   .abar .v{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;
     text-align:right;color:var(--ink-2)}
 
-  /* Tier cards, in the link-card look: near-black, a red stripe, Oswald, white type. */
-  @font-face{font-family:Oswald;src:url(fonts/Oswald.ttf) format("truetype");font-weight:200 700;font-display:swap}
-  .atiers{--tr:#e4002b;--tbg:#0b0f1a;margin:26px 0;max-width:none;position:relative;color:#fff;
-    padding:20px 16px 18px 22px;border-radius:4px;overflow:hidden;
-    background:radial-gradient(circle at 88% 0,#e4002b33,transparent 50%),linear-gradient(135deg,#0a0f1e,#000)}
-  .atiers:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--tr)}
-  .atiers .atk{font:700 13px/1 Oswald,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--tr)}
-  .atiers .at{font:700 30px/1.05 Oswald,sans-serif;text-transform:uppercase;letter-spacing:.01em;margin-top:8px}
-  .atiers .as{font-size:13px;color:#c9ccd6;margin:8px 0 16px;line-height:1.45}
-  .atiers .afoot{font-size:11.5px;color:#9aa0ae;margin-top:14px;line-height:1.5}
-  .atiers .alink{display:inline-block;margin-top:10px;font:600 15px/1.2 Oswald,sans-serif;letter-spacing:.06em;
-    text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:2px solid var(--tr);padding-bottom:2px}
-  .atiers .alink:focus-visible{outline:2px solid #fff;outline-offset:3px}
+  /* Tier cards, in the blend tokens: surface cards, the accent stripe, display-face titles in
+     real case. The fallbacks hold until the blend tokens land on this page. */
+  .atiers{--tr:var(--a,#ffc23d);--tbg:var(--surface);margin:26px 0;max-width:none;position:relative;color:var(--ink);
+    padding:20px 16px 18px 22px;border-radius:var(--r);overflow:hidden;
+    background:var(--raised);border:1px solid var(--ring)}
+  .atiers:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--tr)}
+  .atiers .atk{font:700 12px/1 var(--disp,system-ui,sans-serif);letter-spacing:.16em;text-transform:uppercase;color:var(--tr)}
+  .atiers .at{font:700 26px/1.1 var(--disp,system-ui,sans-serif);letter-spacing:-.01em;margin-top:8px}
+  .atiers .as{font-size:13px;color:var(--ink-2);margin:8px 0 16px;line-height:1.45}
+  .atiers .afoot{font-size:11.5px;color:var(--muted);margin-top:14px;line-height:1.5}
+  .atiers .alink{display:inline-block;margin-top:10px;font:600 15px/1.2 var(--disp,system-ui,sans-serif);
+    color:var(--ink);text-decoration:none;border-bottom:2px solid var(--tr);padding-bottom:2px}
+  .atiers .alink:focus-visible{outline:2px solid var(--tr);outline-offset:3px}
   .atgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
   @media(max-width:900px){.atgrid{grid-template-columns:1fr}}
-  .atier{background:var(--tbg);border:1px solid rgba(255,255,255,.1);border-radius:3px}
+  .atier{background:var(--tbg);border:1px solid var(--ring);border-radius:var(--rs)}
   .atier header{padding:11px 14px;border-bottom:2px solid var(--tr);display:flex;justify-content:space-between;
     align-items:baseline;gap:8px}
-  .atier header b{font:700 20px/1 Oswald,sans-serif;text-transform:uppercase;letter-spacing:.08em}
-  .atier header span{font:500 13px/1.2 Oswald,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#9aa0ae;text-align:right}
+  .atier header b{font:700 18px/1.1 var(--disp,system-ui,sans-serif)}
+  .atier header span{font-size:12px;line-height:1.2;color:var(--muted);text-align:right}
   .atrow{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:6px 10px;align-items:center;
-    padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+    padding:12px 14px;border-bottom:1px solid var(--ring)}
   .atrow:last-child{border-bottom:0}
-  .atrow .av{width:36px;height:36px;align-self:start}
-  .atrow .who{min-width:0;line-height:1.25}
+  .atrow .av{width:36px;height:36px;align-self:start;font-size:12px}
+  .atrow .who{min-width:0;line-height:1.25;overflow-wrap:anywhere}
   .atrow .who .tlab{display:flex}
-  .atrow .who .tlab-n{font:600 17px/1.15 Oswald,sans-serif;letter-spacing:.01em;color:#fff}
-  .atrow .who .tlab-m{font-size:11.5px;color:#9aa0ae;margin-top:2px}
+  .atrow .who .tlab-n{font:600 16px/1.2 var(--disp,system-ui,sans-serif);color:var(--ink)}
+  .atrow .who .tlab-m{font-size:11.5px;color:var(--muted);margin-top:2px}
   .atrow .who .tlab-n,.atrow .who .tlab-m{white-space:normal!important;overflow:visible!important;
     text-overflow:clip!important;overflow-wrap:normal;word-break:normal;hyphens:none}
-  .atrow .atmeta{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:5px;font:500 12px/1 Oswald,sans-serif;
-    letter-spacing:.08em;text-transform:uppercase;color:#c9ccd6}
+  .atrow .atmeta{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:5px;font-size:12px;line-height:1;color:var(--ink-2)}
   .atrow .atmeta span{white-space:nowrap}
-  .atrow .atst{padding:3px 5px 2px;border:1px solid rgba(255,255,255,.35);color:#fff}
-  .atrow .atst.bye{background:var(--tr);border-color:var(--tr)}
-  .atrow .atst.out{border-color:rgba(255,255,255,.15);color:#9aa0ae}
-  .atrow .atn{text-align:right;align-self:start;font-family:Oswald,sans-serif}
-  .atrow .atn i{display:block;font:500 10.5px/1 Oswald,sans-serif;font-style:normal;letter-spacing:.18em;color:#9aa0ae}
-  .atrow .pn{font-weight:700;font-size:36px;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .atrow .atst{padding:3px 6px;border:1px solid var(--ring);border-radius:999px;color:var(--ink)}
+  .atrow .atst.bye{background:var(--tr);border-color:var(--tr);color:var(--on-a,#1a1000)}
+  .atrow .atst.out{color:var(--muted)}
+  .atrow .atn{text-align:right;align-self:start;font-family:var(--disp,system-ui,sans-serif)}
+  .atrow .atn i{display:block;font-size:10px;line-height:1;font-style:normal;letter-spacing:.14em;color:var(--muted)}
+  .atrow .pn{font-weight:700;font-size:32px;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
   .atrow .pn small{font-size:.5em;color:var(--tr);margin-left:1px}
-  .atrow .pb{display:block;font-weight:600;font-size:14px;letter-spacing:.06em;color:#fff;margin-top:3px}
-  .atrow .pb em{font-style:normal;color:var(--tr);margin-right:4px;font-size:11px;letter-spacing:.14em}
-  .atrow .ln{grid-column:2/-1;height:4px;background:rgba(255,255,255,.12);overflow:hidden}
+  .atrow .pb{display:block;font-weight:600;font-size:13px;color:var(--ink-2);margin-top:3px}
+  .atrow .pb em{font-style:normal;color:var(--tr);margin-right:4px;font-size:10px;letter-spacing:.12em}
+  .atrow .ln{grid-column:2/-1;height:4px;border-radius:2px;background:var(--grid);overflow:hidden}
   .atrow .ln i{display:block;height:100%;background:var(--tr)}
-  .atier.g2 .ln i{background:#fff} .atier.g3 .ln i{background:#6b7080}
+  .atier.g2 .ln i{background:var(--ink-2)} .atier.g3 .ln i{background:var(--muted)}
   .atrow.cutafter{border-bottom:2px dashed var(--tr);position:relative}
   .atrow.cutafter + .atrow{padding-top:22px}
   .atrow.cutafter:after{content:"Playoff line";position:absolute;right:12px;bottom:-10px;background:var(--tbg);
-    padding:0 6px;font:700 13px/18px Oswald,sans-serif;color:var(--tr);text-transform:uppercase;letter-spacing:.14em}
+    padding:0 6px;font:700 12px/18px var(--disp,system-ui,sans-serif);color:var(--tr);letter-spacing:.04em}
+  /* At phone width the name gets the room: tighter padding, a smaller big number. */
+  @media(max-width:480px){
+    .atiers{padding:16px 10px 14px 14px}
+    .atrow{grid-template-columns:32px minmax(0,1fr) auto;gap:6px 8px;padding:11px 10px}
+    .atrow .av{width:32px;height:32px}
+    .atrow .pn{font-size:26px}
+  }
 
   .acards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;margin:22px 0}
   .acard{background:var(--raised);border:1px solid var(--ring);border-radius:var(--rs);padding:14px 15px}
@@ -3495,7 +3501,7 @@ function articleBlock(b) {
             ST[r.status] ? `<span class="atst ${r.status}">${ST[r.status]}</span>` : ""].join("");
           return `<div class="atrow${cut && String(r.team).toLowerCase() === cut ? " cutafter" : ""}" data-team="${esc(r.team || "")}"${
               r.seed ? ` data-seed="${Number(r.seed) || ""}"` : ""}>
-            ${m ? avatarHTML(m.uid) : `<span class="av"></span>`}
+            ${m ? avatarHTML(m.uid) : `<span class="av">${esc(initials(r.team))}</span>`}
             <div class="who">${handleLabelHTML(r.team)}${meta ? `<div class="atmeta">${meta}</div>` : ""}</div>
             <div class="atn"><i>PLAYOFF</i><span class="pn">${f1(p)}<small>%</small></span>${
               r.bye != null ? `<span class="pb"><em>BYE</em>${esc(String(Math.round(pct(r.bye))))}%</span>` : ""}</div>
