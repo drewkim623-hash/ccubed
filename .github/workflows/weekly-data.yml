@@ -49,6 +49,9 @@ on:
 permissions:
   contents: write
 
+# Its own group on purpose, not sleeper-data: GitHub keeps one pending run per
+# group and a newer pending run replaces it, so sharing with the 20-minute
+# sleeper-poll.yml would let a queued poll cancel a pending weekly-data run.
 concurrency:
   group: weekly-data
   cancel-in-progress: false
@@ -117,6 +120,10 @@ jobs:
       - name: Add this run's odds reading to the line history
         run: node build-odds-history.mjs || echo "::warning::odds history not updated"
 
+      # So the next sleeper-poll.yml run does not redo this one's work.
+      - name: Record the Sleeper fingerprint
+        run: node sleeper-fingerprint.mjs --write
+
       - name: Commit anything that changed
         run: |
           git config user.name  "ccubed-data[bot]"
@@ -157,6 +164,7 @@ jobs:
           node build-pulse.mjs
           node build-odds-snapshot.mjs
           node build-odds-history.mjs || echo "::warning::odds history not updated"
+          node sleeper-fingerprint.mjs --write
           commit_data || exit 0
           if git pull --rebase origin "$branch" && git push origin "HEAD:$branch"; then exit 0; fi
           git rebase --abort 2>/dev/null || true
