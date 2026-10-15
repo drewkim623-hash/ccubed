@@ -10,5 +10,96 @@
       }
     }
   },
-  "weeks": []
+  "weeks": [
+    {
+      "season": "2026",
+      "week": 1,
+      "teams": [
+        {"manager": "jjnhwg", "blurb": "The week's high score, 161.06, rode Caleb Williams' 37.26 past yojarshh, and another 40.94 points sat on the bench with Jared Goff's 16.44 among them."},
+        {"manager": "tonypng", "blurb": "Kenneth Walker's 34.1 carried a 157.16 that beat jiddyyyyyy by 19.80, with Tyler Shough's 25.2 sitting on the bench as a quarterback option that never got the call."},
+        {"manager": "asierbelay", "blurb": "Ashton Jeanty's 32.7 led a 140.82 win over drewkim for a 1-0 start, and the bench held 64.5 more points, Jaxson Dart's 26.6 included."},
+        {"manager": "jiddyyyyyy", "blurb": "Jahmyr Gibbs put up 33.6 and the team still lost by 19.80 to tonypng, with Kyle Pitts' zero at tight end the hole that 137.36 could not cover."},
+        {"manager": "nikhil1123", "blurb": "Justin Jefferson's 31.2 carried a 134.96 past saiky7 by 11.50, and Kyle Monangai's 20.4 on the bench was a cushion the win never needed."},
+        {"manager": "andychoe03", "blurb": "Josh Allen's 35.66 drove a 134.86 that beat bigmoneyjos by 34.36, the widest margin of week 1, and $20 of FAAB went on Devaughn Vele."},
+        {"manager": "Lee284", "blurb": "Trevor Lawrence's 26.1 beat edyun1 at 132.50 even with Ja'Marr Chase managing 3.2, and Brock Purdy put 22.1 on the bench behind him."},
+        {"manager": "yojarshh", "blurb": "Bijan Robinson's 31.3 was not enough against the week's high score, Matthew Stafford managed 5.1 at quarterback in a 128.70 loss, and $3 of FAAB went on Jordan Love."},
+        {"manager": "saiky7", "blurb": "Jaxon Smith-Njigba's 26.2 led a 123.46 that lost by 11.50 to nikhil1123, with Drake London's 5.5 in the lineup and 52.2 points, Dalton Kincaid's 18 among them, on the bench."},
+        {"manager": "edyun1", "blurb": "Jalen Coker scored 33.8 on the bench while the lineup managed 122.96, and the 71.2 points left unused dwarfed the 9.54 margin of the loss to Lee284."},
+        {"manager": "drewkim", "blurb": "Christian Watson's 32.7 led the way, but Jaylen Waddle's 1.2 and 55.04 points left on the bench added up to a 121.42 that fell 19.40 short of asierbelay."},
+        {"manager": "bigmoneyjos", "blurb": "The week's low score, 100.50, came with Colston Loveland's zero at tight end, and Nico Collins' 21.2 was the best number in a 34.36 loss to andychoe03."}
+      ]
+    },
+    {
+      "season": "2026",
+      "week": 2,
+      "teams": [
+        {"manager": "tonypng", "blurb": "The 176.88 was the week's high, built on Amon-Ra St. Brown's 35.2 in a 113.90-point win over edyun1 that took season points to 334.04 at 2-0."},
+        {"manager": "asierbelay", "blurb": "CeeDee Lamb's 35.3 carried a 139.90 past andychoe03 to make it 2-0, even with Jaxson Dart, the bench star of week 1, starting and scoring 0.8."},
+        {"manager": "Lee284", "blurb": "Brock Purdy started this time and scored 28.48 in a 137.18 win over jiddyyyyyy, getting to 2-0 even with Marvin Harrison's zero in the lineup."},
+        {"manager": "saiky7", "blurb": "Jaxon Smith-Njigba's 42.5 drove a 157.70 win over jjnhwg that evened the record at 1-1, with only 23.1 points left on the bench."},
+        {"manager": "jjnhwg", "blurb": "Jonathan Taylor's 29.2 led a 123.52 that fell to saiky7 by 34.18 while Jared Goff's 29.78 sat on the bench, leaving 284.58 season points at 1-1."},
+        {"manager": "drewkim", "blurb": "A 142.86 over bigmoneyjos evened the record at 1-1 on a spread-out lineup topped by Jaylen Waddle's 21.8, with George Kittle's 18 still on the bench."},
+        {"manager": "andychoe03", "blurb": "Josh Allen went for 40.82 and the team still lost 139.90 to 127.32 with Saquon Barkley's 3 the drag, and $26 of FAAB went on Tank Bigsby and Jonah Coleman."},
+        {"manager": "yojarshh", "blurb": "Davante Adams' 39.5 carried a 115.40 win over nikhil1123 for a 1-1 record, though 67.98 points stayed on the bench, Matthew Stafford's 27.98 among them."},
+        {"manager": "jiddyyyyyy", "blurb": "Patrick Mahomes' 28.98 was not enough in a 137.18 to 125.08 loss to Lee284 with Malik Nabers' 1.1 starting, and the team is 0-2 with 262.44 season points."},
+        {"manager": "nikhil1123", "blurb": "An 81.94 lost to yojarshh by 33.46 with Jayden Daniels' 14.74 the best number in the lineup, and $10 of FAAB went on Bryce Young."},
+        {"manager": "bigmoneyjos", "blurb": "Dak Prescott's 29.76 led a 94.56 that lost to drewkim by 48.30, with Travis Kelce's 25.1 on the bench and Colston Loveland's 1.3 starting at tight end."},
+        {"manager": "edyun1", "blurb": "A 62.98 was the week's low score, Jalen Coker's 14.6 the best of it and DJ Moore's -0.1 the worst, in a 113.90-point loss to tonypng that makes it 0-2."}
+      ]
+    },
+    {
+      "season": "2026",
+      "week": 3,
+      "teams": [
+        {"manager": "asierbelay", "blurb": "Garrett Wilson's 26.7 led a 132.56 win over bigmoneyjos for a 3-0 start, and with just 12.5 points on the bench the lineup calls were close to airtight."},
+        {"manager": "Lee284", "blurb": "Brock Purdy's 31.28 beat tonypng 144.78 to 118.00 for a 3-0 start, with Trevor Lawrence's 20.78 on the bench this time and Tetairoa McMillan's 3.7 the one soft spot in the lineup."},
+        {"manager": "saiky7", "blurb": "The week's high, 167.20, beat yojarshh by 29.90 behind Jaxon Smith-Njigba's 35.36, his third straight week as the lineup's top scorer, for two straight wins at 2-1."},
+        {"manager": "tonypng", "blurb": "The first loss came 144.78 to 118.00 against Lee284, with Tyler Shough's 24.8 the top score and Joe Burrow's 22.58 on the bench, though season points stand at 452.04."},
+        {"manager": "jjnhwg", "blurb": "Derrick Henry's 21.9 led a balanced 138.16 that beat nikhil1123 by 41.62, the widest margin of the week, and the record is 2-1."},
+        {"manager": "drewkim", "blurb": "A 131.32 over andychoe03 made it two straight wins at 2-1, George Kittle's 26.2 leading the lineup and Bo Nix's 25.14 on the bench."},
+        {"manager": "jiddyyyyyy", "blurb": "Jahmyr Gibbs' 41.4 delivered the first win, 134.04 over edyun1, and only 16 points sat on the bench in a week that made it 1-2."},
+        {"manager": "yojarshh", "blurb": "Bijan Robinson's 35.3 led a 137.30 that ran into the week's high score, and Michael Wilson's 25.9 was among 66.88 bench points in a loss that leaves it 1-2."},
+        {"manager": "andychoe03", "blurb": "Josh Allen managed 19.46 in a 103.46 loss to drewkim while Harold Fannin's 24.1 sat on the bench, and $6 of FAAB went on Kalif Raymond with the record at 1-2."},
+        {"manager": "nikhil1123", "blurb": "The week's low score, 96.54, came with De'Von Achane at 1.7 in a 41.62 loss to jjnhwg, and $55 went on Ollie Gordon, the largest FAAB bid of the season so far."},
+        {"manager": "edyun1", "blurb": "A 134.04 to 120.24 loss to jiddyyyyyy made it 0-3 despite Brock Bowers' 27.6, and $9 of FAAB went on Rachaad White and Keenan Allen."},
+        {"manager": "bigmoneyjos", "blurb": "Christian McCaffrey's 21.6 led a 98.84 that lost to asierbelay by 33.72, TreVeyon Henderson managed 3.9, and the team is 0-3 with 293.90 season points."}
+      ]
+    },
+    {
+      "season": "2026",
+      "week": 4,
+      "teams": [
+        {"manager": "asierbelay", "blurb": "CeeDee Lamb's 41.3 powered the week's high score, 172.66, past nikhil1123 for a 4-0 start and 585.94 season points, even with Ladd McConkey starting and scoring zero."},
+        {"manager": "Lee284", "blurb": "Tetairoa McMillan's 45.2, the biggest single-player score of the season so far, carried a 157.42 over yojarshh for a 4-0 start, with 55.98 more points sitting on the bench."},
+        {"manager": "saiky7", "blurb": "Kyren Williams' 36.7 led a 147.88 win over drewkim by 39.76, a third straight win that makes it 3-1 with 596.24 season points."},
+        {"manager": "jjnhwg", "blurb": "Alvin Kamara, a $1 waiver pickup in week 2, scored a team-best 22.8 in a 156.48 to 146.98 win over edyun1, and the record is now 3-1."},
+        {"manager": "tonypng", "blurb": "Kenneth Walker's 30.9 helped beat bigmoneyjos 127.14 to 126.20, the closest game of the week at 0.94, and Joe Burrow's 25.72 sat on the bench again."},
+        {"manager": "andychoe03", "blurb": "Zay Flowers' 25.8 led a 120.12 win over jiddyyyyyy that evened the record at 2-2, even with 70.7 points, Kirk Cousins' 23.6 among them, left on the bench."},
+        {"manager": "drewkim", "blurb": "George Kittle's 17 was the top number in a 108.12 loss to saiky7 that ended a two-game win streak, and the record is back to even at 2-2."},
+        {"manager": "jiddyyyyyy", "blurb": "Malik Nabers' 23.2 led a 113.60 that lost to andychoe03 by 6.52, and a $40 bid on Will Shipley was the week's biggest FAAB move with the record at 1-3."},
+        {"manager": "nikhil1123", "blurb": "Tee Higgins put up 26.7 but 135.06 ran into the week's high score, and Kyle Monangai's 28 on the bench came in a third straight loss that leaves it 1-3."},
+        {"manager": "yojarshh", "blurb": "The week's low score, 103.88, lost to Lee284 by 53.54 with Kenyon Sadiq at zero, and Romeo Doubs' 23.8 among 61.38 bench points made it two straight losses at 1-3."},
+        {"manager": "edyun1", "blurb": "A 146.98 was the team's best score of the season and still lost by 9.50 to jjnhwg, Puka Nacua's 27.7 wasted, leaving the record 0-4."},
+        {"manager": "bigmoneyjos", "blurb": "A 0.94 loss to tonypng, the closest game of the week, made it 0-4 despite Nico Collins' 30.8, and $20 of FAAB went on Keon Coleman."}
+      ]
+    },
+    {
+      "season": "2026",
+      "week": 5,
+      "teams": [
+        {"manager": "saiky7", "blurb": "A 158.44 to 152.36 win over asierbelay, Jaxon Smith-Njigba's 22.8 leading the lineup again, stretched the streak to four at 4-1 with 754.68 season points."},
+        {"manager": "jjnhwg", "blurb": "Jared Goff's 28.94 led a 144.64 win over Lee284 that ended that team's unbeaten start and made it three straight wins at 4-1."},
+        {"manager": "asierbelay", "blurb": "Drake Maye's 39.46 led a 152.36 that lost by 6.08 to saiky7, the first loss of the season, leaving the record 4-1 with 738.30 season points."},
+        {"manager": "Lee284", "blurb": "The unbeaten start ended at 4-0 in a 144.64 to 121.16 loss to jjnhwg, with kicker Jason Myers' 23 the top score and Trevor Lawrence's 22.74 on the bench."},
+        {"manager": "tonypng", "blurb": "A 1.78 loss to andychoe03 was the closest game of the week, with Joe Burrow back in the lineup for a team-best 24.6 in a 125.50, and the record is 3-2."},
+        {"manager": "andychoe03", "blurb": "In the week of the trade that sent Josh Allen, Saquon Barkley and Zay Flowers out for Davante Adams, David Montgomery and George Pickens, Parker Washington's 30.4 carried a 127.28 to 125.50 win over tonypng."},
+        {"manager": "jiddyyyyyy", "blurb": "Jahmyr Gibbs' 37.7 led a 151.40 over bigmoneyjos, his third week as the team's top scorer, and the record is 2-3 with 661.48 season points."},
+        {"manager": "nikhil1123", "blurb": "The week's high score, 167.66, came behind Isaiah Likely's 32.4 to beat drewkim by 35.46 and snap a three-game losing streak at 2-3."},
+        {"manager": "drewkim", "blurb": "Christian Watson's 32.3 led a 132.20 that ran into the week's high score, a second straight loss that leaves the record 2-3 with 635.92 season points."},
+        {"manager": "edyun1", "blurb": "Puka Nacua's 37.7 delivered the first win of the season, 152.56 over yojarshh, ending a four-game losing streak at 1-4 with 605.72 season points."},
+        {"manager": "yojarshh", "blurb": "Josh Allen, acquired from andychoe03 in the week's six-player trade, scored 31.5, but the 115.88 lost to edyun1 for a third straight loss at 1-4 with Matthew Stafford's 27.32 on the bench."},
+        {"manager": "bigmoneyjos", "blurb": "The week's low score, 115.64, lost to jiddyyyyyy despite Mike Evans' 26.3, and at 0-5 the team holds the only winless record in the league."}
+      ]
+    }
+  ]
 }

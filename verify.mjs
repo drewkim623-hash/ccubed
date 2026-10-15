@@ -1114,6 +1114,28 @@ check("teams the job didn't write about keep their fallback", /points for/.test(
 check("the blurb lookup matches on manager name", withBlurbs.caseInsensitive && withBlurbs.lookup !== null);
 check("the where-do-blurbs-come-from note steps aside once they arrive", withBlurbs.noteGone);
 
+// The real file, not a stub: the newest week rankings.json covers must put a
+// blurb on every row of that week's board, word for word.
+var realBlurbs = await page.evaluate(async () => {
+  const D = window.__CCUBED;
+  const panel = document.querySelector('[data-panel="power"]');
+  const file = await (await fetch("rankings.json", { cache: "no-store" })).json();
+  const last = (file.weeks || []).at(-1);
+  if (!last) return { skip: "rankings.json has no weeks" };
+  await D.loadBlurbs(true);
+  const [seasonSel, weekSel] = panel.querySelectorAll("select");
+  if (![...seasonSel.options].some(o => o.value === String(last.season))) return { skip: `no ${last.season} board` };
+  seasonSel.value = String(last.season); seasonSel.dispatchEvent(new Event("change"));
+  weekSel.value = String(last.week); weekSel.dispatchEvent(new Event("change"));
+  const want = new Set(last.teams.map(t => t.blurb));
+  const lines = [...panel.querySelectorAll(".pwrow .id .s")].map(n => n.textContent.trim());
+  return { key: `${last.season} w${last.week}`, rows: lines.length, shown: lines.filter(s => want.has(s)).length,
+    misses: lines.filter(s => !want.has(s)).slice(0, 2) };
+});
+check("Power rows show rankings.json's blurbs for the newest week it covers",
+  !realBlurbs.skip && realBlurbs.rows === 12 && realBlurbs.shown === 12,
+  realBlurbs.skip || `${realBlurbs.key}: ${realBlurbs.shown}/${realBlurbs.rows} rows blurbed; ${realBlurbs.misses.join(" | ")}`);
+
 } catch (e) {
   check(`group ran to completion: ${"Power rankings: blurbs degrade gracefully"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
