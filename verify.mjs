@@ -1062,7 +1062,13 @@ var blurbs = await page.evaluate(async () => {
   await D.loadBlurbs(true);
   window.fetch = realFetch;
   const panel = document.querySelector('[data-panel="power"]');
-  const sel = panel.querySelectorAll("select")[1];
+  // Pick a played season that is actually on offer and redraw through it.
+  // Earlier groups leave the picker wherever they pointed it — including a
+  // season with no option, which leaves the select on "" and makes every
+  // redraw throw, so the stale board (with the real blurbs) stays up.
+  const sel = panel.querySelectorAll("select")[0];
+  const played = [...sel.options].map(o => o.value).filter(v => v !== "__proj");
+  sel.value = played[0];
   sel.dispatchEvent(new Event("change"));
   const out = {
     ...before, missing,
