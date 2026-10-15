@@ -7094,7 +7094,7 @@ group("Trade-aware odds (data/roster-weeks.json)");
   const known = p => !!rost.map[p] && Object.values(P.weeks || {}).some(w => w && p in w);
   const stale = Object.entries(cur).filter(([, r]) => !(r.players || []).every(known)).map(([rid]) => rid);
   const redo = RW ? Object.entries(cur).filter(([rid, r]) => !stale.includes(rid) && strengthOf(r.players) !== r.strength).map(([rid]) => rid) : ["no file"];
-  check("roster-weeks.json: current strengths reproduce from lineupStrength() on data/projections.json", redo.length === 0,
+  check("roster-weeks.json: current strengths reproduce from lineupStrength() on data/projections.json", redo.length === 0 && Object.keys(cur).length - stale.length > 0 && stale.length * 2 <= Object.keys(cur).length,
     `${redo.join(",")}${stale.length ? ` · skipped (data lags Sleeper) ${stale.join(",")}` : ""}`);
 
   // Fixtures below: a roster whose players never changed (every week = today),
