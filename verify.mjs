@@ -934,8 +934,9 @@ var powerDom = await page.evaluate(() => {
     marks, arrows: marks.filter(m => /[▲▼]/.test(m)).length,
     // the colour is never the only carrier: an arrow and a number ride with it
     colourNotAlone: [...panel.querySelectorAll(".mv.up, .mv.down")].every(n => /[▲▼]\s*\d+/.test(n.textContent)),
-    weightsShown: /40%[\s\S]*25%[\s\S]*20%[\s\S]*15%/.test(panel.innerText),
-    namesWeights: /All-play win %[\s\S]*Form, last 3 weeks[\s\S]*Points for[\s\S]*Actual record/.test(panel.innerText),
+    // the methodology sits in a collapsed <details>, which innerText skips
+    weightsShown: /40%[\s\S]*25%[\s\S]*20%[\s\S]*15%/.test(panel.textContent),
+    namesWeights: /All-play win %[\s\S]*Form, last 3 weeks[\s\S]*Points for[\s\S]*Actual record/.test(panel.textContent),
     nan: /NaN|undefined|Infinity/.test(panel.innerText),
   };
 });
@@ -5267,6 +5268,8 @@ group("Jargon explainers");
     if (real) { sel.value = real.value; sel.dispatchEvent(new Event("change")); }
   });
   await page.waitForTimeout(150);
+  // the chips fold out of each row; open the first so its labels can be clicked
+  await page.locator('[data-panel="power"] .pwrow .pwx').first().click();
   for (const k of ["allplay", "form", "rating"]) {
     const L = await isLabel(page, `[data-panel="power"] .pwrow .cl button.jx[data-jx="${k}"]`);
     check(`Power: every ${k} chip label is a <button> with aria-expanded`, L.ok && L.n >= 12, `${L.n} labels`);
