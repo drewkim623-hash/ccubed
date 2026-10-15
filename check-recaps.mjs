@@ -12,7 +12,9 @@
  * Every weeks[] entry needs the full recap shape (lede, six games, 3-6 notebook
  * items) at the length the contract asks for, and scores that match the
  * committed week file. "watch" articles: at most one per Wednesday-Monday week,
- * none dated on a Tuesday, and a kind "preview" only on a Friday.
+ * none dated on a Tuesday, and a kind "preview" only on a Friday. A `tiers`
+ * block (tier cards, the default odds graphic) needs a title, named tiers, and
+ * rows whose team is a manager and whose pct is 0-100 (tiersProblems).
  */
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
@@ -222,21 +224,8 @@ export function recapsProblems(j, was, weekFiles = {}) {
   out.push(...watchProblems(arts));
   // A tiers block names its teams by manager handle; every one must be a manager in the week files.
   const handles = new Set(Object.values(weekFiles).flatMap(w => (w.standings || []).map(s => String(s.manager).toLowerCase())));
-  for (const a of arts) for (const b of a.blocks || []) if (b && b.type === "tiers") {
-    const rows = (b.tiers || []).flatMap(t => (t && t.rows) || []);
-    if (!rows.length) out.push(`${a.slug}: a tiers block has no rows`);
-    for (const r of rows) {
-      if (typeof r.pct !== "number" || !(r.pct >= 0 && r.pct <= 100)) out.push(`${a.slug}: tiers row ${r.team} has pct ${JSON.stringify(r.pct)}, not 0-100`);
-      if (handles.size && !handles.has(String(r.team).toLowerCase())) out.push(`${a.slug}: tiers team ${JSON.stringify(r.team)} is not a manager`);
-      if (r.bye != null && (typeof r.bye !== "number" || !(r.bye >= 0 && r.bye <= 100))) out.push(`${a.slug}: tiers row ${r.team} has bye ${JSON.stringify(r.bye)}, not 0-100`);
-      if (r.status != null && !["bye", "in", "out"].includes(r.status)) out.push(`${a.slug}: tiers row ${r.team} has status ${JSON.stringify(r.status)}`);
-      if (r.seed != null && !(Number.isInteger(r.seed) && r.seed >= 1 && r.seed <= rows.length)) out.push(`${a.slug}: tiers row ${r.team} has seed ${JSON.stringify(r.seed)}`);
-    }
-    const seeds = rows.filter(r => r.seed != null).map(r => r.seed);
-    if (new Set(seeds).size !== seeds.length) out.push(`${a.slug}: a tiers block repeats a seed`);
-    if (b.href != null && !/^(https:\/\/|#)/.test(b.href)) out.push(`${a.slug}: tiers href must be https or #`);
-    if (b.cutAfter && !rows.some(r => r.team === b.cutAfter)) out.push(`${a.slug}: tiers cutAfter ${b.cutAfter} is not one of its rows`);
-  }
+  for (const a of arts) for (const b of a.blocks || []) if (b && b.type === "tiers")
+    for (const p of tiersProblems(b, handles)) out.push(`${a.slug}: ${p}`);
   for (const a of (was && was.articles) || [])
     if (!slugs.has(a.slug) && !aliases.has(a.slug)) out.push(`article ${a.slug} was in the old file and is gone`);
   if (!Array.isArray(j && j.weeks)) out.push("weeks[] is missing");
@@ -247,6 +236,40 @@ export function recapsProblems(j, was, weekFiles = {}) {
     seen.add(k);
     out.push(...weekProblems(w, weekFiles[k]));
   }
+  return out;
+}
+
+const pct01 = v => typeof v === "number" && v >= 0 && v <= 100;
+
+/**
+ * Every problem with one tiers block (tier cards, the default odds graphic; see
+ * docs/graphics-standard.md). `handles`, when given, is the set of lowercased
+ * manager display_names a row's team must be one of.
+ */
+export function tiersProblems(b, handles) {
+  const out = [];
+  if (typeof b.title !== "string" || !b.title.trim()) out.push("a tiers block has no title");
+  for (const k of ["kicker", "sub", "note", "link"])
+    if (b[k] != null && typeof b[k] !== "string") out.push(`a tiers ${k} must be a string`);
+  if (b.href != null && !/^(https:\/\/|#)/.test(b.href)) out.push("tiers href must be https or #");
+  const tiers = Array.isArray(b.tiers) ? b.tiers : [];
+  if (!tiers.length) out.push("a tiers block has no tiers");
+  for (const t of tiers) if (!t || typeof t.name !== "string" || !t.name.trim()) out.push("a tier has no name");
+  const rows = tiers.flatMap(t => (t && t.rows) || []);
+  if (!rows.length) out.push("a tiers block has no rows");
+  for (const r of rows) {
+    if (typeof r.team !== "string" || !r.team.trim()) { out.push("a tiers row has no team"); continue; }
+    if (!pct01(r.pct)) out.push(`tiers row ${r.team} has pct ${JSON.stringify(r.pct)}, not 0-100`);
+    if (handles && handles.size && !handles.has(r.team.toLowerCase())) out.push(`tiers team ${JSON.stringify(r.team)} is not a manager`);
+    if (r.bye != null && !pct01(r.bye)) out.push(`tiers row ${r.team} has bye ${JSON.stringify(r.bye)}, not 0-100`);
+    if (r.status != null && !["bye", "in", "out"].includes(r.status)) out.push(`tiers row ${r.team} has status ${JSON.stringify(r.status)}`);
+    if (r.seed != null && !(Number.isInteger(r.seed) && r.seed >= 1 && r.seed <= rows.length)) out.push(`tiers row ${r.team} has seed ${JSON.stringify(r.seed)}`);
+  }
+  const seeds = rows.filter(r => r.seed != null).map(r => r.seed);
+  if (new Set(seeds).size !== seeds.length) out.push("a tiers block repeats a seed");
+  // The renderer matches cutAfter without case, so this does too.
+  if (b.cutAfter && !rows.some(r => String(r.team).toLowerCase() === String(b.cutAfter).toLowerCase()))
+    out.push(`tiers cutAfter ${b.cutAfter} is not one of its rows`);
   return out;
 }
 

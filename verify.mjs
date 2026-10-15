@@ -7340,6 +7340,50 @@ await lp.close();
   check(`group ran to completion: ${"Team name labels"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
 }
 try {
+/* tiers is the default odds graphic for new articles. These checks render the
+ * TIER_DEMO fixture (opened at ?tierdemo), not anything in recaps.json. */
+group("Tier cards: the default odds graphic");
+{
+  const { tiersProblems } = await import(new URL("./check-recaps.mjs", import.meta.url));
+  const tp = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const tpage = await tp.newPage();
+  await tpage.goto(`${BASE}/?tierdemo`, { waitUntil: "domcontentloaded" });
+  await tpage.waitForSelector('[data-panel="article"] .atiers .atrow', { timeout: 90000 });
+  const t = await tpage.evaluate(() => {
+    const A = document.querySelector('[data-panel="article"]');
+    const rows = [...A.querySelectorAll(".atiers .atrow")];
+    return {
+      fixture: window.__CCUBED.TIER_DEMO.blocks.find(b => b.type === "tiers"),
+      rows: rows.length, cut: rows.filter(r => r.classList.contains("cutafter")).map(r => r.dataset.team),
+      over: document.documentElement.scrollWidth > innerWidth,
+    };
+  });
+  const fx = t.fixture;
+  check("the ?tierdemo fixture passes check-recaps' tiers rules", tiersProblems(fx).length === 0, tiersProblems(fx).join("; "));
+  check("?tierdemo renders every fixture row with the playoff line under cutAfter, no sideways overflow at 390",
+    t.rows === fx.tiers.flatMap(x => x.rows).length && t.cut.length === 1 && t.cut[0] === fx.cutAfter && !t.over,
+    JSON.stringify({ rows: t.rows, cut: t.cut, over: t.over }));
+  const bad = (f, re) => tiersProblems(f, new Set(fx.tiers.flatMap(x => x.rows).map(r => r.team))).some(p => re.test(p));
+  const row0 = fx.tiers[0].rows[0];
+  check("check-recaps refuses a tiers block with no title, an unnamed tier, a bad pct, a stranger, a repeated seed or a stray cutAfter",
+    bad({ ...fx, title: "" }, /no title/) && bad({ ...fx, tiers: [{ rows: [row0] }] }, /no name/)
+      && bad({ ...fx, tiers: [{ name: "x", rows: [{ ...row0, pct: 140 }] }] }, /pct/)
+      && bad({ ...fx, tiers: [{ name: "x", rows: [{ ...row0, team: "nobody" }] }] }, /not a manager/)
+      && bad({ ...fx, tiers: [{ name: "x", rows: [row0, { ...fx.tiers[0].rows[1], seed: row0.seed }] }] }, /repeats a seed/)
+      && bad({ ...fx, cutAfter: "nobody" }, /cutAfter/) && bad({ ...fx, href: "http://x" }, /href/));
+  await tp.close();
+
+  const doc = f => readFile(join(ROOT, f), "utf8").catch(() => "");
+  const [std, job, readme] = await Promise.all(["docs/graphics-standard.md", "weekly-job-prompt.md", "README.md"].map(doc));
+  check("tiers is documented as the default odds graphic (standard, job prompt, README)",
+    /default odds graphic/i.test(std) && /default odds graphic is a `tiers` block/i.test(job) && /default odds graphic/i.test(readme));
+  check("the job prompt points every article at docs/graphics-standard.md",
+    job.includes("docs/graphics-standard.md") && /390px/.test(std) && /two or three options/i.test(std));
+}
+} catch (e) {
+  check(`group ran to completion: ${"Tier cards: the default odds graphic"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
+}
+try {
 group("No DFFL content leaked in");
 var leak = await page.evaluate(async () => {
   const out = { pages: {} };
