@@ -751,6 +751,44 @@
   .dp .nm .k{color:var(--gold);font-size:10.5px;font-weight:900}
   .dp .pts{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
 
+  /* ---- draft tab, blend layout: hero, segmented view switch, list rows ---- */
+  .dhero{position:relative;overflow:hidden;border:1px solid rgba(var(--a-rgb),.35);border-radius:var(--r);
+    padding:20px 20px 18px;margin-bottom:11px;
+    background:radial-gradient(460px 240px at 100% 0,rgba(var(--a-rgb),.22),transparent 70%),
+      radial-gradient(400px 260px at 0 100%,rgba(185,140,255,.18),transparent 70%),
+      linear-gradient(160deg,var(--deep),var(--surface) 65%)}
+  .dhero::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;
+    background:linear-gradient(90deg,transparent,var(--a),transparent)}
+  .dhero .l{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .dhero .v{font:700 76px/1 var(--disp);letter-spacing:-.05em;color:var(--a);margin:10px 0 8px;
+    font-variant-numeric:tabular-nums;text-shadow:0 0 24px rgba(var(--a-rgb),.45)}
+  .dhero.down .v{color:var(--red);text-shadow:none}
+  .dhero .w{font:700 26px/1.1 var(--disp);overflow-wrap:anywhere}
+  .dhero .c{font-size:13.5px;color:var(--ink-2);margin-top:8px;line-height:1.45}
+  .dctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+  .dctl select{flex:0 1 180px;min-width:0}
+  .dseg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;flex:1 1 300px;max-width:460px;
+    background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:4px;gap:4px}
+  .dseg button{font:600 13.5px var(--body);color:var(--muted);background:transparent;border:0;
+    border-radius:9px;padding:9px 6px;cursor:pointer;white-space:nowrap}
+  .dseg button[aria-pressed="true"]{color:var(--ink);background:var(--raised);box-shadow:inset 0 -2px 0 var(--a)}
+  .dseg button:focus-visible{outline:2px solid var(--a);outline-offset:1px}
+  .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .dcard.lst{box-shadow:0 10px 30px -18px #000}
+  .dcard.lst .dh .n{font:700 12px var(--disp);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+  .dcard.lst .dp{grid-template-columns:38px minmax(0,1fr) auto;padding:10px 13px;position:relative}
+  .dcard.lst .dp:first-child::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:2px;
+    background:linear-gradient(var(--a),transparent)}
+  .dp .no{font:700 18px var(--disp);color:var(--a);font-variant-numeric:tabular-nums;text-align:center}
+  .dp .who{display:grid;gap:3px;min-width:0}
+  .dp .who .pos-dot{justify-self:start;height:17px;min-width:28px;font-size:10px}
+  .dp .val{display:grid;justify-items:end;gap:2px}
+  .dcard.lst .dp .pts{font:700 15px var(--disp);color:var(--ink);background:var(--raised);
+    border:1px solid var(--ring);border-radius:8px;padding:4px 9px}
+  .dp .rd{font-size:10.5px}
+  @media(prefers-reduced-motion:reduce){.dp{transition:none}}
+  @media(max-width:520px){.dhero .v{font-size:60px} .dhero .w{font-size:22px} .dctl select{flex:1 1 100%}}
+
   /* ============ player card ============ */
   .modal{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.66);backdrop-filter:blur(3px);
     display:grid;place-items:center;padding:16px}
@@ -8304,9 +8342,22 @@ function panelDraft() {
   [["board", "The board"], ["mgr", "By manager"], ["list", "Full list"]].forEach(([v, t]) => {
     const o = el("option", null, t); o.value = v; viewSel.appendChild(o);
   });
-  picks.appendChild(sel); picks.appendChild(viewSel);
-  p.appendChild(picks);
+  picks.className = "dctl";
+  // The view select stays the source of truth (and what verify drives); the
+  // segmented control is the visible face of it.
+  viewSel.className = "vh"; viewSel.tabIndex = -1; viewSel.setAttribute("aria-hidden", "true");
+  const seg = el("div", "dseg"); seg.setAttribute("role", "group"); seg.setAttribute("aria-label", "Draft view");
+  [...viewSel.options].forEach(o => {
+    const b = el("button", null, esc(o.textContent)); b.type = "button"; b.dataset.view = o.value;
+    b.onclick = () => { viewSel.value = o.value; draw(); };
+    seg.appendChild(b);
+  });
+  const syncSeg = () => seg.querySelectorAll("button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.view === viewSel.value)));
+  syncSeg();
+  picks.appendChild(sel); picks.appendChild(seg); picks.appendChild(viewSel);
   const highlights = el("div"); p.appendChild(highlights);
+  p.appendChild(picks);
   const host = el("div"); p.appendChild(host);
 
   const pill = r => `${esc(r.name)}${r.pos ? ` <span class="badge">${esc(r.pos)}</span>` : ""}`;
@@ -8316,14 +8367,19 @@ function panelDraft() {
     if (!A) return;
     const steal = A.steals[0], bust = A.busts[0];
     const t = el("div", "recs");
-    t.innerHTML = [
+    const cards = [
       steal && { c: "up", l: "Steal of the draft", v: `+${steal.value}`, w: steal.name, x: `${teamNameText(steal.uid)} took him at ${steal.pick} — finished ${ord(steal.prodRank)} in scoring` },
       bust && { c: "down", l: "Bust of the draft", v: `${bust.value}`, w: bust.name, x: `${teamNameText(bust.uid)} took him at ${bust.pick} — finished ${ord(bust.prodRank)}` },
       A.byMgr[0] && { c: "up", l: "Best draft haul", v: f1(A.byMgr[0].pts), w: teamNameText(A.byMgr[0].uid), wuid: A.byMgr[0].uid, x: `most total points from his ${A.byMgr[0].n} picks` },
       A.byMgr[A.byMgr.length - 1] && { c: "down", l: "Worst draft haul", v: f1(A.byMgr[A.byMgr.length - 1].pts), w: teamNameText(A.byMgr[A.byMgr.length - 1].uid), wuid: A.byMgr[A.byMgr.length - 1].uid, x: "fewest total points drafted" },
-    ].filter(Boolean).map(x =>
-      `<div class="rec ${x.c}"><div class="l">${esc(x.l)}</div><div class="v">${esc(x.v)}</div>
-       <div class="w">${x.wuid ? teamLabelHTML(x.wuid) : esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`).join("");
+    ].filter(Boolean);
+    const card = (x, cls) =>
+      `<div class="${cls} ${x.c}"><div class="l">${esc(x.l)}</div><div class="v">${esc(x.v)}</div>
+       <div class="w">${x.wuid ? teamLabelHTML(x.wuid) : esc(x.w)}</div><div class="c">${esc(x.x)}</div></div>`;
+    // The first headline (the steal) leads as the hero; the rest sit under it.
+    if (!cards.length) return;
+    highlights.insertAdjacentHTML("beforeend", card(cards[0], "dhero"));
+    t.innerHTML = cards.slice(1).map(x => card(x, "rec")).join("");
     highlights.appendChild(t);
   }
 
@@ -8399,7 +8455,7 @@ function panelDraft() {
     const grid = el("div", "mgrid2");
     for (const m of A.byMgr) {
       const mine = A.rows.filter(r => r.uid === m.uid).sort((a, b) => a.pick - b.pick);
-      const c = el("div", "dcard");
+      const c = el("div", "dcard lst");
       c.innerHTML = `<div class="dh">${avatarHTML(m.uid, "sm")}
           <span class="n">${teamLabelHTML(m.uid)}</span>
           ${scored ? `<span class="tot">${f1(m.pts)}</span>` : ""}</div>`;
@@ -8407,10 +8463,10 @@ function panelDraft() {
       for (const r of mine) {
         const pk = s.picks.find(x => x.pick_no === r.pick);
         const b = el("button", "dp");
-        b.innerHTML = `<span class="rd">${r.round}</span>
-          <span class="pos-dot ${posClass(r.pos)}">${esc(r.pos || "?")}</span>
-          <span class="nm">${esc(r.name)}</span>
-          ${scored ? `<span class="pts">${f1(r.pts)}</span>` : ""}`;
+        b.innerHTML = `<span class="no">${r.pick}</span>
+          <span class="who"><span class="nm">${esc(r.name)}</span>
+          <span class="pos-dot ${posClass(r.pos)}">${esc(r.pos || "?")}</span></span>
+          <span class="val">${scored ? `<span class="pts">${f1(r.pts)}</span>` : ""}<span class="rd">Rd ${r.round}</span></span>`;
         if (pk) b.onclick = () => openPlayer(s, pk, A);
         ul.appendChild(b);
       }
@@ -8463,6 +8519,7 @@ function panelDraft() {
 
   async function draw() {
     const s = drafted.find(x => x.season === sel.value);
+    syncSeg();
 
     const A = draftAnalysis(s.picks, s.playerPts, s.uidOf);
     // If Sleeper didn't return per-player scoring, every value would be
