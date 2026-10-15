@@ -1193,14 +1193,21 @@
   }
 
   /* ============ trades ============ */
-  .fleece{position:relative;overflow:hidden;border-radius:var(--r);padding:18px 20px;margin-top:18px;
-    background:linear-gradient(100deg,rgba(230,103,103,.17),rgba(230,103,103,.03) 58%,transparent);
-    border:1px solid rgba(230,103,103,.38)}
-  .fleece .k{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--red);font-weight:700}
-  .fleece .v{font-size:clamp(30px,9vw,42px);font-weight:900;letter-spacing:-.035em;line-height:1.05;margin:6px 0 2px;
-    font-variant-numeric:tabular-nums}
-  .fleece .w{font-size:16px;font-weight:750;letter-spacing:-.01em}
-  .fleece .c{font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.5;max-width:64ch}
+  /* hero card, mockup .hero: aubergine wash, gold edge on top, the margin in big gold */
+  .fleece{position:relative;overflow:hidden;border-radius:var(--r);padding:20px 20px 18px;margin-top:18px;
+    background:radial-gradient(460px 240px at 100% 0,rgba(var(--a-rgb),.20),transparent 70%),
+      radial-gradient(400px 260px at 0 100%,rgba(185,140,255,.16),transparent 70%),
+      linear-gradient(160deg,var(--deep,var(--raised)),var(--surface) 65%);
+    border:1px solid var(--ring)}
+  .fleece::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--a),transparent)}
+  .fleece .top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .fleece .k{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .fleece .v{font-family:var(--disp);font-size:clamp(52px,17vw,84px);font-weight:800;letter-spacing:-.05em;line-height:1;
+    margin:10px 0 8px;color:var(--a);font-variant-numeric:tabular-nums}
+  .fleece .pair{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .fleece .pair .vs{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .fleece .w{font-size:clamp(18px,5vw,24px);font-weight:750;letter-spacing:-.015em;line-height:1.2;overflow-wrap:break-word}
+  .fleece .c{font-size:13.5px;color:var(--ink-2);margin-top:7px;line-height:1.5;max-width:64ch}
 
   .trade{background:var(--surface);border:1px solid var(--ring);border-radius:var(--r);overflow:hidden;margin-bottom:11px}
   .thead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
@@ -1220,7 +1227,7 @@
   @media(max-width:560px){.tside + .tside{border-left:0}}
   .tside.won{background:linear-gradient(180deg,rgba(255,194,61,.09),transparent 70%)}
   .tside .who{display:flex;align-items:center;gap:9px;min-width:0}
-  .tside .who .n{font-weight:750;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+  .tside .who .n{font-weight:750;font-size:14.5px;line-height:1.25;white-space:normal;overflow-wrap:break-word;min-width:0}
   .tside .net{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:800;font-size:15px;flex:none}
   .tlist{list-style:none;margin:9px 0 0;padding:0;display:grid;gap:4px}
   .tline{display:flex;align-items:baseline;gap:8px;font-size:13.5px;min-width:0}
@@ -1231,7 +1238,21 @@
   .tline .sub{font-size:11px;color:var(--muted);font-style:normal;display:block;line-height:1.35}
   .tpicks{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.45}
   .tnote{padding:11px 14px;border-top:1px solid var(--grid);font-size:12.5px;color:var(--muted);line-height:1.5}
-  .tfilter{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;max-width:430px;margin:0 0 14px}
+  .tfilter{display:flex;flex-wrap:wrap;gap:4px;padding:4px;margin:0 0 14px;max-width:100%;
+    background:var(--surface);border:1px solid var(--ring);border-radius:12px}
+  .tfilter button{flex:1 1 auto;min-width:0;font:inherit;font-size:13.5px;font-weight:700;color:var(--ink-2);background:transparent;
+    border:0;border-radius:9px;padding:9px 12px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+  .tfilter button[aria-pressed="true"]{color:var(--ink);background:var(--raised);box-shadow:inset 0 -2px 0 var(--a)}
+  .tfilter button:focus-visible{outline:2px solid var(--a);outline-offset:1px}
+  @media(prefers-reduced-motion:reduce){.tfilter button{transition:none}}
+  .trade.decided{border-left:2px solid rgba(var(--a-rgb),.55)}
+  .tgrid{display:grid;grid-template-columns:1fr;gap:11px;align-items:start}
+  .tgrid .trade{margin-bottom:0}
+  .tgrid > .empty,.tgrid > .back.more{grid-column:1/-1}
+  @media(min-width:1000px){.tgrid{grid-template-columns:1fr 1fr}
+    .tgrid > .trade:not(:only-child) .tsides{grid-template-columns:1fr}
+    .tgrid > .trade:not(:only-child) .tside + .tside{border-left:0}
+    .tgrid > .trade:only-child{grid-column:1/-1}}
   .back.more{display:block;width:100%;margin:4px 0 0;text-align:center}
 
   /* ============ misc ============ */
@@ -10211,6 +10232,7 @@ function tradeCard(t) {
   // the winner's highlight is shown — a 23-point edge over fourteen weeks is
   // noise, and printing it next to "nobody won it" would argue with itself.
   const decided = t.graded && !!t.winner && v.cls !== "even";
+  if (decided) box.classList.add("decided");
   box.innerHTML = `<header class="thead">
       <span class="twhen">${esc(when)}${t.nTeams > 2 ? ` · ${t.nTeams}-team` : ""}</span>
       <span class="verd ${v.cls}">${esc(v.label)}${decided ? ` ${esc(sgnf(t.margin))}` : ""}</span>
@@ -10259,9 +10281,12 @@ function renderTrades(host, L, W) {
     const got = gotNames(w);
     const gave = [...w.sent.map(x => x.name),
       ...w.picksOut.map(r => r.name ? `${r.label} → ${r.name}` : r.label)].join(", ") || "nothing";
+    const v = verdictOf(t);
     const f = el("div", "fleece");
-    f.innerHTML = `<div class="k">Biggest fleecing in league history</div>
+    f.innerHTML = `<div class="top"><div class="k">Biggest fleecing in league history</div>
+        <span class="verd ${v.cls}">${esc(v.label)}</span></div>
       <div class="v">${esc(sgnf(t.margin))}</div>
+      <div class="pair">${avatarHTML(w.uid, "sm")}<span class="vs">over</span>${loser.uid ? avatarHTML(loser.uid, "sm") : ""}</div>
       <div class="w">${esc(teamNameText(w.uid))} took ${esc(loser.uid ? teamNameText(loser.uid) : "the other side")} — ${esc(t.season)}, ${t.week === 1 ? "preseason" : "week " + t.week}</div>
       <div class="c">Got ${esc(got)} (${f1(w.gain)} pts from there on) for ${esc(gave)} (${f1(w.loss)}).</div>`;
     host.appendChild(f);
@@ -10415,15 +10440,27 @@ function renderTrades(host, L, W) {
   const PAGE = 20;
   host.appendChild(sechead("Every trade in league history",
     "Newest first. Each player is followed by what he scored from that week to the end of that regular season, and each pick by the player it became — the only points either side can claim."));
+  // The season filter is a segmented toggle; `sel` keeps the select's shape.
   const filt = el("div", "tfilter");
-  const sel = el("select");
-  sel.setAttribute("aria-label", "Filter trades by season");
-  const opt = (v, t) => { const o = el("option", null, t); o.value = v; sel.appendChild(o); };
-  opt("all", `All seasons (${L.trades.length})`);
+  filt.setAttribute("role", "group");
+  filt.setAttribute("aria-label", "Filter trades by season");
+  const sel = { value: "all" };
+  const opt = (v, t) => {
+    const b = el("button", null, esc(t));
+    b.type = "button"; b.dataset.season = v;
+    b.setAttribute("aria-pressed", String(v === sel.value));
+    b.onclick = () => {
+      if (sel.value === v) return;
+      sel.value = v;
+      for (const x of filt.children) x.setAttribute("aria-pressed", String(x.dataset.season === v));
+      shown = PAGE; drawList();
+    };
+    filt.appendChild(b);
+  };
+  opt("all", `All (${L.trades.length})`);
   for (const yr of L.seasons) opt(yr, `${yr} (${L.trades.filter(t => t.season === yr).length})`);
-  filt.appendChild(sel);
   host.appendChild(filt);
-  const list = el("div");
+  const list = el("div", "tgrid");
   host.appendChild(list);
 
   let shown = PAGE;
@@ -10442,7 +10479,6 @@ function renderTrades(host, L, W) {
       list.appendChild(more);
     }
   }
-  sel.onchange = () => { shown = PAGE; drawList(); };
   drawList();
 
   host.appendChild(glossary([
