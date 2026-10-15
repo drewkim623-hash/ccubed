@@ -45,8 +45,8 @@ export function cardPage(a, slug = a.slug) {
 <meta http-equiv="refresh" content="0; url=${to}">
 <script>location.replace(${JSON.stringify(to)});</script>
 </head>
-<body style="font-family:system-ui,sans-serif;background:#0b0b0f;color:#eee;padding:24px">
-<p><a href="${to}" style="color:#3987e5">${esc(title)}</a> · C Cubed</p>
+<body style="font-family:system-ui,sans-serif;background:#0b0710;color:#eee;padding:24px">
+<p><a href="${to}" style="color:#ffc23d">${esc(title)}</a> · C Cubed</p>
 </body>
 </html>
 `;
