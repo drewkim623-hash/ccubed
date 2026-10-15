@@ -3408,6 +3408,33 @@ function bracketHTML(b) {
     <div class="scroll"><div class="brcols">${cols}</div></div></div>`;
 }
 
+/* A sample tiers block (the default odds graphic), opened at ?tierdemo. A
+ * fixture, not a published piece and not real odds. */
+const TIER_DEMO = {
+  slug: "tier-demo", kicker: "Sample · tier cards", headline: "Tier cards: the default odds graphic",
+  dek: "A fixture, not real odds. See docs/graphics-standard.md.", byline: "C Cubed desk",
+  blocks: [
+    { type: "p", text: "The block every article uses when it charts playoff or title odds." },
+    { type: "tiers", kicker: "Sample · the playoff picture", title: "Who gets in",
+      sub: "Big number: chance to make the playoffs.",
+      note: "Sample numbers. Six of twelve teams make it and the top two seeds get a bye; the line marks today's top six.",
+      cutAfter: "sixthseedsam", href: "#picture", link: "See the live Playoff Picture",
+      tiers: [
+        { name: "Locks", range: "85% or better", rows: [
+          { team: "topdog", pct: 98.6, rec: "5-0", seed: 1, status: "bye", bye: 71 },
+          { team: "secondslot", pct: 91.2, rec: "4-1", seed: 2, status: "bye", bye: 52 } ] },
+        { name: "Bubble", range: "25% to 85%", rows: [
+          { team: "bubbleboy", pct: 61.3, rec: "3-2", seed: 3, status: "in", bye: 9 },
+          { team: "coinflip", pct: 60.8, rec: "3-2", seed: 4, status: "in", bye: 9 },
+          { team: "maximiliano_fitzgerald_throckmorton", pct: 44, rec: "3-2", seed: 5, status: "in", bye: 2 },
+          { team: "sixthseedsam", pct: 37.2, rec: "2-3", seed: 6, status: "in" } ] },
+        { name: "Long shots", range: "under 25%", rows: [
+          { team: "hopeful", pct: 3.4, rec: "1-4", seed: 7, status: "out" },
+          { team: "basement", pct: 0.3, rec: "0-5", seed: 8, status: "out" } ] },
+      ] },
+  ],
+};
+
 function articleBlock(b) {
   switch (b && b.type) {
     case "p":
@@ -10515,6 +10542,11 @@ async function boot() {
     // what the site itself writes and what a teaser links to; the older
     // #article/<slug> still works, so anything already shared keeps working.
     const route = () => {
+      if (new URLSearchParams(location.search).has("tierdemo")) {
+        // The tier-card sample (TIER_DEMO): a fixture, opened like an article.
+        show("recaps");
+        return openArticle(TIER_DEMO, true);
+      }
       const slug = articleSlugOf(location);
       if (slug) {
         // A link names a piece. Show the index first so there is something
@@ -10553,7 +10585,7 @@ async function boot() {
       weekMovers, panelRecaps, allPowerRankings,
       playerModal, openPlayer, posClass, titleOf, ownerLine, coOf, PRIOR,
       teamLabelHTML, teamNameText, managersText, handleLabelHTML,
-      articleCard, articleBlock, articleTeaser, openArticle, articleBySlug, coverHTML, bracketHTML,
+      articleCard, articleBlock, articleTeaser, openArticle, articleBySlug, coverHTML, bracketHTML, TIER_DEMO,
       articleSlugOf, teaserBox, copyTeaser,
       coverSVG, coverKind, COVER_PALETTE,
       POWER_W, FORM_WEEKS, JARGON,
