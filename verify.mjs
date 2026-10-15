@@ -1068,15 +1068,23 @@ var blurbs = await page.evaluate(async () => {
     ...before, missing,
     rows: panel.querySelectorAll(".pwrow").length,
     fallbackLines: [...panel.querySelectorAll(".pwrow .id .s")].filter(n => n.textContent.trim().length).length,
-    note: /rankings\.json/.test(panel.innerText),
   };
-  await D.loadBlurbs(true);
-  sel.dispatchEvent(new Event("change"));
+  // Leave the empty file in place: the note check below reads this board.
+  window.__restoreBlurbs = async () => { await D.loadBlurbs(true); sel.dispatchEvent(new Event("change")); };
   return out;
 });
 check("a blurb lookup with nothing behind it returns nothing, not an error", blurbs.missing === null);
 check("the board renders in full without any blurbs", blurbs.rows === 12 && blurbs.fallbackLines === 12);
-check("the page says where the blurbs come from", blurbs.note);
+// The empty-state note is a .method box under the board whose <code> names
+// rankings.json. In the full run the redraw can land after the evaluate above
+// returns, so wait for the box itself rather than reading the panel once; and
+// read textContent, since innerText skips the panel when another tab is open.
+var blurbNote = await page.waitForFunction(() =>
+  [...document.querySelectorAll('[data-panel="power"] .method code')]
+    .some(c => c.textContent.trim() === "rankings.json"),
+  null, { timeout: 5000 }).then(() => true, () => false);
+await page.evaluate(() => window.__restoreBlurbs());
+check("the page says where the blurbs come from", blurbNote);
 
 var noFile = await page.evaluate(async () => {
   // Simulate the file being absent entirely: the loader swallows it and the
