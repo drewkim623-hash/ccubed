@@ -273,6 +273,45 @@ export function tiersProblems(b, handles) {
   return out;
 }
 
+/* Words that only make sense as a power-board position. The board prints rank and movement itself. */
+const RANK_TALK = /\b(?:spots?|ranked|ranking|rankings|No\.\s*\d+|#\d+)\b/i;
+
+/**
+ * rankings.json against recaps.json: every week recaps.json writes up must have a rankings.json
+ * entry with one blurb for each of the twelve managers, named exactly as the week file names them
+ * (the site matches on that string and silently falls back to record and points when it misses).
+ */
+export function rankingsProblems(r, j, weekFiles = {}) {
+  const out = [];
+  if (!Array.isArray(r && r.weeks)) return ["rankings.json: weeks[] is missing"];
+  const byKey = new Map();
+  for (const w of r.weeks) {
+    const k = `${w && w.season}/${w && w.week}`;
+    if (byKey.has(k)) out.push(`rankings.json: week ${k} appears twice`);
+    byKey.set(k, w);
+  }
+  for (const rw of (j && j.weeks) || []) {
+    const k = `${rw.season}/${rw.week}`;
+    const w = byKey.get(k);
+    if (!w) { out.push(`rankings.json: no entry for week ${k}, which recaps.json writes up`); continue; }
+    const teams = w.teams || [];
+    const file = weekFiles[k];
+    const want = file ? (file.games || []).flatMap(g => (g.sides || []).map(s => s.manager)) : [];
+    const have = teams.map(t => t && t.manager);
+    if (teams.length !== 12) out.push(`rankings.json ${k}: ${teams.length} teams; it needs all 12`);
+    if (new Set(have).size !== have.length) out.push(`rankings.json ${k}: a manager appears twice`);
+    if (want.length) {
+      for (const m of have) if (!want.includes(m)) out.push(`rankings.json ${k}: "${m}" is not a manager in the week file (spelling must match exactly)`);
+      for (const m of want) if (!have.includes(m)) out.push(`rankings.json ${k}: no blurb for ${m}`);
+    }
+    for (const t of teams) {
+      if (!t || !String(t.blurb || "").trim()) { out.push(`rankings.json ${k}: ${t && t.manager} has an empty blurb`); continue; }
+      if (RANK_TALK.test(t.blurb)) out.push(`rankings.json ${k}: ${t.manager}'s blurb talks about rank or movement`);
+    }
+  }
+  return out;
+}
+
 /** The committed week files for every week recaps.json writes up, keyed "season/week". */
 export async function loadWeekFiles(j, root = ".") {
   const out = {};
@@ -287,9 +326,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const j = JSON.parse(await readFile("recaps.json", "utf8"));
   const i = process.argv.indexOf("--was");
   const was = i > 0 ? JSON.parse(await readFile(process.argv[i + 1], "utf8")) : null;
-  const probs = [...recapsProblems(j, was, await loadWeekFiles(j)), ...await cardFileProblems(j)];
+  const weekFiles = await loadWeekFiles(j);
+  const r = existsSync("rankings.json") ? JSON.parse(await readFile("rankings.json", "utf8")) : null;
+  const probs = [...recapsProblems(j, was, weekFiles), ...await cardFileProblems(j), ...rankingsProblems(r, j, weekFiles)];
   for (const p of probs) console.log(`FAIL  ${p}`);
   console.log(probs.length ? `\n${probs.length} problem(s). Fix them before pushing.`
-    : `ok  ${j.articles.length} articles, every teaser in shape, every link card built; ${j.weeks.length} week(s) in full recap shape`);
+    : `ok  ${j.articles.length} articles, every teaser in shape, every link card built; ${j.weeks.length} week(s) in full recap shape, each with 12 power blurbs`);
   process.exit(probs.length ? 1 : 0);
 }

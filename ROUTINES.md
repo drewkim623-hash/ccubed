@@ -90,7 +90,10 @@ single self-email to Drew in step 8; nothing else is ever sent to anyone.
       80-120 words, all six games (a headline, then 50-65 words each, scores exactly as in the
       week file), and 3-6 around items of 40-60 words. About 750 words in all; 600-950 is the
       allowed range.
-   b. a rankings.json entry with one sentence for each of the twelve managers;
+   b. a rankings.json weeks[] entry for the same week — every week, never skipped: one sentence
+      (25-40 words) for each of the twelve managers, "manager" spelled exactly as in the week
+      file, every number traceable to the data files, no rank and no movement. The commit is
+      incomplete without it, and check-recaps.mjs fails until it is there;
    c. ONE new article in recaps.json articles[] with "source": "tuesday", kind "opinion",
       kicker "<season> · week <n>", byline "C Cubed desk", standfirst
       "6 games · <total> points · <the week's hook>": the column first (lead paragraph, stat,
@@ -133,8 +136,9 @@ single self-email to Drew in step 8; nothing else is ever sent to anyone.
    Never send, reply, forward or draft to any other address, and never send a second email
    for the same article. If the send fails, retry at most once, then report it. Every other
    no-send rule stands: no league email, no group message, no poll, no record of sends.
-9. Finish with: the week covered, the article headline, the teaser exactly as committed, and
-   whether the self-email to drewkim623@gmail.com was sent.
+9. Finish with: the week covered, the article headline, the teaser exactly as committed, that
+   rankings.json has the week's twelve blurbs, and whether the self-email to
+   drewkim623@gmail.com was sent.
 ```
 
 ## C Cubed story watch

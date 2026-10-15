@@ -101,9 +101,33 @@ notebook of three to six items.
   says something the records do not). A quiet week gets three; a week with a trade and a $60 claim
   gets six. Never repeat in the notebook what a game recap already said.
 
+### The contract for `rankings.json`
+
+```json
+{"season":"2026","week":5,"teams":[{"manager":"saiky7","blurb":"…"}, …12…]}
+```
+
 `rankings.json` entries are `{"manager": "<Sleeper display_name, spelled exactly>", "blurb": "…"}`,
 all twelve managers, every week. The site matches on that string and falls back silently if it does
-not match.
+not match — which is how weeks 1-4 of 2026 went out with no blurbs at all and nobody noticed.
+
+**Every week gets a `rankings.json` entry, every week — in the same commit as the `weeks[]` recap.**
+A Tuesday commit without it is incomplete; `node check-recaps.mjs` fails until every week in
+`recaps.json` `weeks[]` has a twelve-team entry here with names matching the week file.
+
+Each blurb is one sentence of 25-40 words about that team's week, in the recap's voice: the score
+to the hundredth, the player who carried it or sank it (with his points), the record or streak
+afterwards, season points, a FAAB claim or trade when there was one. Every number comes from the
+data files. **No rank and no movement** (see the hard rules) — not "up two", not "the top spot",
+not "No. 3". Replace a week that already exists rather than duplicating it.
+
+### Before the Tuesday commit — checklist
+
+- [ ] `recaps.json` `weeks[]` has the week's full entry.
+- [ ] `rankings.json` `weeks[]` has the week's entry: twelve teams, names exactly as in the week file.
+- [ ] `recaps.json` `articles[]` has the one new `"tuesday"` article, with its teaser.
+- [ ] `node build-cards.mjs` has written `news/<slug>.html` and `img/og/<slug>.png`.
+- [ ] `node check-recaps.mjs --was /tmp/was.json` exits 0.
 
 ### The Tuesday article
 
@@ -330,7 +354,8 @@ node check-recaps.mjs --was /tmp/was.json
 
 It fails on a missing or broken teaser, a lost article, a `weeks[]` entry out of shape or out of
 length, a score that does not match the week file, a Tuesday article outside its length, and a
-missing or wrong link card (`news/<slug>.html`, `img/og/<slug>.png`). Fix everything it reports
+missing or wrong link card (`news/<slug>.html`, `img/og/<slug>.png`), and a recapped week with no
+twelve-team `rankings.json` entry (or a blurb that names a rank). Fix everything it reports
 until it exits 0.
 
 ## C Cubed, the facts

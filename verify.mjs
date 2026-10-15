@@ -935,9 +935,8 @@ var powerDom = await page.evaluate(() => {
     marks, arrows: marks.filter(m => /[▲▼]/.test(m)).length,
     // the colour is never the only carrier: an arrow and a number ride with it
     colourNotAlone: [...panel.querySelectorAll(".mv.up, .mv.down")].every(n => /[▲▼]\s*\d+/.test(n.textContent)),
-    // the methodology sits in a collapsed <details>, which innerText skips
-    weightsShown: /40%[\s\S]*25%[\s\S]*20%[\s\S]*15%/.test(panel.textContent),
-    namesWeights: /All-play win %[\s\S]*Form, last 3 weeks[\s\S]*Points for[\s\S]*Actual record/.test(panel.textContent),
+    weightsShown: /40%[\s\S]*25%[\s\S]*20%[\s\S]*15%/.test(panel.innerText),
+    namesWeights: /All-play win %[\s\S]*Form, last 3 weeks[\s\S]*Points for[\s\S]*Actual record/.test(panel.innerText),
     nan: /NaN|undefined|Infinity/.test(panel.innerText),
   };
 });
@@ -1053,19 +1052,45 @@ var blurbs = await page.evaluate(async () => {
   // Whatever rankings.json holds, the board must render. Prove the lookup is a
   // pure miss when the file has nothing for the week on screen.
   const missing = D.blurbFor("1999", 99, [...D.DB.mgr.keys()][0]);
+  // The real rankings.json now covers C Cubed's finished weeks, so the week on
+  // screen has blurbs. Stub an empty file to get a board with none behind it,
+  // then put the real one back.
+  const realFetch = window.fetch;
+  window.fetch = u => String(u).includes("rankings.json")
+    ? Promise.resolve({ ok: true, json: () => Promise.resolve({ weeks: [] }) })
+    : realFetch(u);
+  await D.loadBlurbs(true);
+  window.fetch = realFetch;
   const panel = document.querySelector('[data-panel="power"]');
-  const sel = panel.querySelectorAll("select")[1];
-  sel.value = "14"; sel.dispatchEvent(new Event("change"));
-  return {
+  // Pick a played season that is actually on offer and redraw through it.
+  // Earlier groups leave the picker wherever they pointed it — including a
+  // season with no option, which leaves the select on "" and makes every
+  // redraw throw, so the stale board (with the real blurbs) stays up.
+  const sel = panel.querySelectorAll("select")[0];
+  const played = [...sel.options].map(o => o.value).filter(v => v !== "__proj");
+  sel.value = played[0];
+  sel.dispatchEvent(new Event("change"));
+  const out = {
     ...before, missing,
     rows: panel.querySelectorAll(".pwrow").length,
     fallbackLines: [...panel.querySelectorAll(".pwrow .id .s")].filter(n => n.textContent.trim().length).length,
-    note: /rankings\.json/.test(panel.innerText),
   };
+  // Leave the empty file in place: the note check below reads this board.
+  window.__restoreBlurbs = async () => { await D.loadBlurbs(true); sel.dispatchEvent(new Event("change")); };
+  return out;
 });
 check("a blurb lookup with nothing behind it returns nothing, not an error", blurbs.missing === null);
 check("the board renders in full without any blurbs", blurbs.rows === 12 && blurbs.fallbackLines === 12);
-check("the page says where the blurbs come from", blurbs.note);
+// The empty-state note is a .method box under the board whose <code> names
+// rankings.json. In the full run the redraw can land after the evaluate above
+// returns, so wait for the box itself rather than reading the panel once; and
+// read textContent, since innerText skips the panel when another tab is open.
+var blurbNote = await page.waitForFunction(() =>
+  [...document.querySelectorAll('[data-panel="power"] .method code')]
+    .some(c => c.textContent.trim() === "rankings.json"),
+  null, { timeout: 5000 }).then(() => true, () => false);
+await page.evaluate(() => window.__restoreBlurbs());
+check("the page says where the blurbs come from", blurbNote);
 
 var noFile = await page.evaluate(async () => {
   // Simulate the file being absent entirely: the loader swallows it and the
@@ -1114,6 +1139,28 @@ check("a blurb written by the job replaces the fallback line", withBlurbs.first 
 check("teams the job didn't write about keep their fallback", /points for/.test(withBlurbs.other), withBlurbs.other);
 check("the blurb lookup matches on manager name", withBlurbs.caseInsensitive && withBlurbs.lookup !== null);
 check("the where-do-blurbs-come-from note steps aside once they arrive", withBlurbs.noteGone);
+
+// The real file, not a stub: the newest week rankings.json covers must put a
+// blurb on every row of that week's board, word for word.
+var realBlurbs = await page.evaluate(async () => {
+  const D = window.__CCUBED;
+  const panel = document.querySelector('[data-panel="power"]');
+  const file = await (await fetch("rankings.json", { cache: "no-store" })).json();
+  const last = (file.weeks || []).at(-1);
+  if (!last) return { skip: "rankings.json has no weeks" };
+  await D.loadBlurbs(true);
+  const [seasonSel, weekSel] = panel.querySelectorAll("select");
+  if (![...seasonSel.options].some(o => o.value === String(last.season))) return { skip: `no ${last.season} board` };
+  seasonSel.value = String(last.season); seasonSel.dispatchEvent(new Event("change"));
+  weekSel.value = String(last.week); weekSel.dispatchEvent(new Event("change"));
+  const want = new Set(last.teams.map(t => t.blurb));
+  const lines = [...panel.querySelectorAll(".pwrow .id .s")].map(n => n.textContent.trim());
+  return { key: `${last.season} w${last.week}`, rows: lines.length, shown: lines.filter(s => want.has(s)).length,
+    misses: lines.filter(s => !want.has(s)).slice(0, 2) };
+});
+check("Power rows show rankings.json's blurbs for the newest week it covers",
+  !realBlurbs.skip && realBlurbs.rows === 12 && realBlurbs.shown === 12,
+  realBlurbs.skip || `${realBlurbs.key}: ${realBlurbs.shown}/${realBlurbs.rows} rows blurbed; ${realBlurbs.misses.join(" | ")}`);
 
 } catch (e) {
   check(`group ran to completion: ${"Power rankings: blurbs degrade gracefully"}`, false, String(e && e.message || e).split("\n")[0].slice(0, 200));
@@ -5392,8 +5439,6 @@ group("Jargon explainers");
     if (real) { sel.value = real.value; sel.dispatchEvent(new Event("change")); }
   });
   await page.waitForTimeout(150);
-  // the chips fold out of each row; open the first so its labels can be clicked
-  await page.locator('[data-panel="power"] .pwrow .pwx').first().click();
   for (const k of ["allplay", "form", "rating"]) {
     const L = await isLabel(page, `[data-panel="power"] .pwrow .cl button.jx[data-jx="${k}"]`);
     check(`Power: every ${k} chip label is a <button> with aria-expanded`, L.ok && L.n >= 12, `${L.n} labels`);
@@ -7560,7 +7605,23 @@ check("every weekly recap is a C Cubed week that has finished",
   leak.recapWeekIds.every(([s, w]) => s === "2026" && w >= 1 && w <= latestWk.week), JSON.stringify(leak.recapWeekIds));
 check("every article is a C Cubed season",
   leak.artSeasons.every(s => s === "2026"), leak.artSeasons.join(","));
-check("no DFFL power blurbs shipped", leak.rankWeeks === 0, String(leak.rankWeeks));
+// rankings.json is C Cubed's own now. Each week must be a finished 2026 week
+// whose twelve managers are exactly that week file's — a copied DFFL week would
+// name managers C Cubed doesn't have.
+var rankLeak = [];
+for (const w of JSON.parse(await readFile(join(ROOT, "rankings.json"), "utf8")).weeks || []) {
+  const key = `${w.season} w${w.week}`;
+  if (w.season !== "2026" || !(w.week >= 1 && w.week <= latestWk.week)) { rankLeak.push(`${key}: not a finished C Cubed week`); continue; }
+  let wf;
+  try { wf = JSON.parse(await readFile(join(ROOT, `data/week-2026-${String(w.week).padStart(2, "0")}.json`), "utf8")); }
+  catch { rankLeak.push(`${key}: no week file`); continue; }
+  const ours = new Set(wf.standings.map(s => s.manager.toLowerCase()));
+  const named = (w.teams || []).map(t => String(t.manager).toLowerCase());
+  const strangers = named.filter(m => !ours.has(m));
+  if (strangers.length) rankLeak.push(`${key}: ${strangers.join(", ")}`);
+  else if (new Set(named).size !== ours.size) rankLeak.push(`${key}: ${new Set(named).size}/${ours.size} managers`);
+}
+check("no DFFL power blurbs shipped", rankLeak.length === 0, rankLeak.slice(0, 3).join(" | ") || String(leak.rankWeeks));
 check("recaps.json mentions no other league", !leak.recapsHasDFFL);
 check("rankings.json mentions no other league", !leak.ranksHasDFFL);
 // DFFL is cited wherever a borrowed number is actually shown — the Odds and Power
