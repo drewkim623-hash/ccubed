@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-15T22:30:05.729Z",
+ "generated": "2026-10-16T01:27:03.732Z",
  "week": 6,
  "entries": {
   "2216": {
@@ -11,7 +11,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   },
   "2449": {
    "n": "Stefon Diggs",
@@ -31,7 +31,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   },
   "4177": {
    "n": "Mack Hollins",
@@ -133,7 +133,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   },
   "6819": {
    "n": "Michael Pittman",
@@ -196,7 +196,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   },
   "8155": {
    "n": "Breece Hall",
@@ -246,7 +246,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   },
   "9508": {
    "n": "Tyjae Spears",
@@ -256,7 +256,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   },
   "9753": {
    "n": "Zach Charbonnet",
@@ -287,7 +287,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   },
   "10229": {
    "n": "Rashee Rice",
@@ -329,16 +329,6 @@
    "retNote": "https://www.nfl.com/news/panthers-rb-jonathon-brooks-surgery-out-six-weeks — Core muscle surgery. Canales: 6-8 weeks from Sep 23 => return Week 9-11; midpoint Week 10. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14",
    "irSince": 6
-  },
-  "11604": {
-   "n": "Brock Bowers",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
   },
   "11630": {
    "n": "Roman Wilson",
@@ -398,7 +388,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   },
   "12534": {
    "n": "Kyle Monangai",
@@ -440,7 +430,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   },
   "13296": {
    "n": "Caleb Douglas",
@@ -470,7 +460,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: IR minimum 4 weeks, on IR since wk 6",
-   "retChecked": "2026-10-15",
+   "retChecked": "2026-10-16",
    "irSince": 6
   },
   "13346": {
@@ -481,7 +471,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-15"
+   "retChecked": "2026-10-16"
   }
  }
 }

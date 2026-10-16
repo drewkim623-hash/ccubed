@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-15T21:49:04.925Z",
- "at": 1792100944925,
+ "generated": "2026-10-16T01:27:04.345Z",
+ "at": 1792114024345,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -37,8 +37,9 @@
    "points_against": 651.08,
    "faab_spent": 1,
    "starters_hurt": [
+    "Caleb Williams (Questionable)",
     "Chris Olave (Questionable)",
-    "Alvin Kamara (Questionable)",
+    "Terry McLaurin (Questionable)",
     "Denzel Boston (Questionable)"
    ]
   },
@@ -113,9 +114,7 @@
    "points_for": 605.72,
    "points_against": 715.78,
    "faab_spent": 12,
-   "starters_hurt": [
-    "Brock Bowers (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "yojarshh",
@@ -146,12 +145,12 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 0,
+    "points": 6.46,
     "startersLeftToPlay": 10
    },
    "b": {
     "manager": "edyun1",
-    "points": 0,
+    "points": 3,
     "startersLeftToPlay": 9
    }
   },
@@ -182,12 +181,12 @@
   {
    "a": {
     "manager": "saiky7",
-    "points": 0,
+    "points": 3.1,
     "startersLeftToPlay": 10
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 0,
+    "points": 9.5,
     "startersLeftToPlay": 10
    }
   },
@@ -195,11 +194,11 @@
    "a": {
     "manager": "jjnhwg",
     "points": 0,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "tonypng",
-    "points": 0,
+    "points": 12,
     "startersLeftToPlay": 10
    }
   },
@@ -211,7 +210,7 @@
    },
    "b": {
     "manager": "Lee284",
-    "points": 0,
+    "points": 5,
     "startersLeftToPlay": 10
    }
   }
@@ -418,5 +417,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 43
+ "free_agent_moves": 44
 }
