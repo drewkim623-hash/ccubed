@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-16T19:17:00.925Z",
- "at": 1792178220925,
+ "generated": "2026-10-16T20:20:28.482Z",
+ "at": 1792182028482,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -35,6 +35,7 @@
    "starters_hurt": [
     "Caleb Williams (Questionable)",
     "Chris Olave (Questionable)",
+    "Tyler Warren (Questionable)",
     "Terry McLaurin (Questionable)",
     "Denzel Boston (Questionable)"
    ]
@@ -122,8 +123,7 @@
    "points_against": 720.18,
    "faab_spent": 33,
    "starters_hurt": [
-    "Saquon Barkley (Questionable)",
-    "Zay Flowers (Questionable)"
+    "Jacory Croskey-Merritt (Questionable)"
    ]
   },
   {
@@ -179,7 +179,7 @@
    "a": {
     "manager": "saiky7",
     "points": 25.4,
-    "startersLeftToPlay": 8
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "bigmoneyjos",
@@ -232,7 +232,7 @@
      "name": "Saquon Barkley",
      "pos": "RB",
      "team": "PHI",
-     "status": "Questionable",
+     "status": "Out",
      "to": "yojarshh"
     },
     {
@@ -260,7 +260,7 @@
      "name": "Zay Flowers",
      "pos": "WR",
      "team": "BAL",
-     "status": "Questionable",
+     "status": null,
      "to": "yojarshh"
     }
    ],
@@ -276,7 +276,7 @@
      "name": "Saquon Barkley",
      "pos": "RB",
      "team": "PHI",
-     "status": "Questionable",
+     "status": "Out",
      "from": "andychoe03"
     },
     {
@@ -304,7 +304,7 @@
      "name": "Zay Flowers",
      "pos": "WR",
      "team": "BAL",
-     "status": "Questionable",
+     "status": null,
      "from": "andychoe03"
     }
    ],
@@ -379,7 +379,7 @@
      "name": "Tre' Harris",
      "pos": "WR",
      "team": "LAC",
-     "status": "Doubtful",
+     "status": "Out",
      "from": "andychoe03"
     }
    ],
@@ -414,5 +414,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 46
+ "free_agent_moves": 47
 }

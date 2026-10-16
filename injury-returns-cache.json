@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-16T19:17:00.317Z",
+ "generated": "2026-10-16T20:20:27.459Z",
  "week": 6,
  "entries": {
   "2216": {
@@ -56,7 +56,7 @@
   },
   "4866": {
    "n": "Saquon Barkley",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -83,6 +83,16 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Shoulder AC joint sprain. Missed Week 5; Q for Week 6. Coming week only. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14"
+  },
+  "5846": {
+   "n": "DK Metcalf",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-16"
   },
   "5850": {
    "n": "Josh Jacobs",
@@ -155,6 +165,16 @@
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
    "retChecked": "2026-10-15"
+  },
+  "7021": {
+   "n": "Rico Dowdle",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-16"
   },
   "7525": {
    "n": "DeVonta Smith",
@@ -289,16 +309,6 @@
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Hamstring soreness. MIN bye Week 6; ESPN return Oct 25. 0 games. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14"
   },
-  "9997": {
-   "n": "Zay Flowers",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
-  },
   "10229": {
    "n": "Rashee Rice",
    "s": "Out",
@@ -321,13 +331,14 @@
   },
   "11577": {
    "n": "Will Shipley",
-   "s": "Doubtful",
+   "s": "IR",
    "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/4431545/will-shipley — Partial plantar fascia tear. Could be sidelined multiple weeks (2 assumed). Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14"
+   "retChecked": "2026-10-14",
+   "irSince": 6
   },
   "11583": {
    "n": "Jonathon Brooks",
@@ -350,16 +361,6 @@
    "retNote": "https://www.espn.com/nfl/player/_/id/4431492/roman-wilson — Finger. Ruled out Week 6; expected to miss at least a couple weeks. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14"
   },
-  "11635": {
-   "n": "Ladd McConkey",
-   "s": "Questionable",
-   "ret": "2026-10-18",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Foot. Week-to-week; active but 0 snaps Week 5. Q = Week 6 only. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-15"
-  },
   "12495": {
    "n": "Ollie Gordon",
    "s": "Questionable",
@@ -379,6 +380,16 @@
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/4685702/quinshon-judkins — Ankle/foot tweak (walking boot). Monken: day-to-day, not ruled out for Week 6. Q = coming week only. Consensus: matches audit; uncertain (audit tiebreak wk 6).",
    "retChecked": "2026-10-14"
+  },
+  "12518": {
+   "n": "Tyler Warren",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-16"
   },
   "12529": {
    "n": "TreVeyon Henderson",
