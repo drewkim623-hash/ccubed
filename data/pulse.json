@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-16T11:13:26.209Z",
- "at": 1792149206209,
+ "generated": "2026-10-16T15:19:33.837Z",
+ "at": 1792163973837,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -114,7 +114,9 @@
    "points_for": 605.72,
    "points_against": 715.78,
    "faab_spent": 12,
-   "starters_hurt": []
+   "starters_hurt": [
+    "DJ Moore (Questionable)"
+   ]
   },
   {
    "manager": "yojarshh",
@@ -417,5 +419,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 44
+ "free_agent_moves": 45
 }
