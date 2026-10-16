@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-16T15:19:33.837Z",
- "at": 1792163973837,
+ "generated": "2026-10-16T18:24:28.022Z",
+ "at": 1792175068022,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -14,9 +14,7 @@
    "points_for": 754.68,
    "points_against": 656.26,
    "faab_spent": 25,
-   "starters_hurt": [
-    "Lamar Jackson (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "asierbelay",
@@ -25,9 +23,7 @@
    "points_for": 738.3,
    "points_against": 641.08,
    "faab_spent": 0,
-   "starters_hurt": [
-    "Dontayvion Wicks (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jjnhwg",
@@ -127,8 +123,7 @@
    "faab_spent": 33,
    "starters_hurt": [
     "Saquon Barkley (Questionable)",
-    "Zay Flowers (Questionable)",
-    "Rashee Rice (Questionable)"
+    "Zay Flowers (Questionable)"
    ]
   },
   {
