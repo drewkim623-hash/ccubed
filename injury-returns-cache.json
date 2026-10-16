@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-16T20:20:27.459Z",
+ "generated": "2026-10-16T20:50:53.189Z",
  "week": 6,
  "entries": {
   "2216": {
@@ -176,16 +176,6 @@
    "retNote": "default: Questionable = coming week only",
    "retChecked": "2026-10-16"
   },
-  "7525": {
-   "n": "DeVonta Smith",
-   "s": "Questionable",
-   "ret": "2026-10-25",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Hamstring. 'Has a shot' at Week 6; ESPN Q. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14"
-  },
   "7526": {
    "n": "Jaylen Waddle",
    "s": "Questionable",
@@ -267,16 +257,6 @@
    "retNote": "https://vikingswire.usatoday.com/story/sports/nfl/vikings/2026/10/12/vikings-expected-to-see-jordan-mason-come-off-ir-for-week-7/92226547007/ — Thumb fracture (surgery). Expected activated for Week 7; MIN bye Week 6 => 0 games missed. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14",
    "irSince": 6
-  },
-  "9486": {
-   "n": "Dontayvion Wicks",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
   },
   "9508": {
    "n": "Tyjae Spears",
@@ -473,16 +453,6 @@
    "retNote": "default: IR minimum 4 weeks, on IR since wk 6",
    "retChecked": "2026-10-16",
    "irSince": 6
-  },
-  "13346": {
-   "n": "Denzel Boston",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
   }
  }
 }

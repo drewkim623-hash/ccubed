@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-16T20:20:28.482Z",
- "at": 1792182028482,
+ "generated": "2026-10-16T20:50:54.044Z",
+ "at": 1792183854044,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -36,8 +36,7 @@
     "Caleb Williams (Questionable)",
     "Chris Olave (Questionable)",
     "Tyler Warren (Questionable)",
-    "Terry McLaurin (Questionable)",
-    "Denzel Boston (Questionable)"
+    "Terry McLaurin (Questionable)"
    ]
   },
   {
@@ -148,7 +147,7 @@
    "b": {
     "manager": "edyun1",
     "points": 5.2,
-    "startersLeftToPlay": 8
+    "startersLeftToPlay": 9
    }
   },
   {
@@ -414,5 +413,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 47
+ "free_agent_moves": 49
 }
