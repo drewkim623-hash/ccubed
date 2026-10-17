@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-17T16:49:00.666Z",
- "at": 1792255740666,
+ "generated": "2026-10-17T23:15:51.004Z",
+ "at": 1792278951004,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -35,8 +35,7 @@
    "starters_hurt": [
     "Caleb Williams (Questionable)",
     "Chris Olave (Questionable)",
-    "Tyler Warren (Questionable)",
-    "Terry McLaurin (Questionable)"
+    "Tyler Warren (Questionable)"
    ]
   },
   {
@@ -124,7 +123,7 @@
    "points_against": 720.18,
    "faab_spent": 33,
    "starters_hurt": [
-    "Jacory Croskey-Merritt (Questionable)"
+    "Jacory Croskey-Merritt (Out)"
    ]
   },
   {
@@ -197,7 +196,7 @@
    "b": {
     "manager": "tonypng",
     "points": 14,
-    "startersLeftToPlay": 8
+    "startersLeftToPlay": 9
    }
   },
   {
@@ -434,5 +433,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 52
+ "free_agent_moves": 53
 }
