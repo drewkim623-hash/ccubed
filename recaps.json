@@ -1179,6 +1179,161 @@
      "text": "Claims, prices and lineups are from the week 5 file Sleeper produced for C Cubed; playoff and title odds are the site's own board; injury designations are from the site's injury report. Nobody is quoted."
     }
    ]
+  },
+  {
+   "season": "2026",
+   "slug": "the-board-backs-terrorists-in-a-game-they-trail",
+   "aliases": [],
+   "date": "2026-10-17",
+   "kind": "opinion",
+   "source": "saturday",
+   "kicker": "2026 · week 6",
+   "headline": "The Board Backs Terrorists in a Game They Trail",
+   "dek": "Terrorists are 1-4 and gained 20.28 points of playoff chance on the board, in a game they trail 10.88 to 5.2; the week's four priced games, and who has moved.",
+   "byline": "C Cubed desk",
+   "standfirst": "Odds · 24.45% · 1-4",
+   "teaser": "🚨 C CUBED | WEEK 6\n\nTHE BOARD BACKS TERRORISTS IN A GAME THEY TRAIL\n\n📈 Terrorists (edyun1) are 1-4 and went from 4.17 to 24.45 percent to make the playoffs\n⚖️ Lucky Strike (drewkim) leads 10.88 to 5.2 and is 29.4 percent to win\n📉 n² (nikhil1123) fell from 38.45 to 21.10 percent\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/the-board-backs-terrorists-in-a-game-they-trail.html",
+   "blocks": [
+    {
+     "type": "p",
+     "text": "The largest move on the odds board belongs to a team that is 1-4. <b>Terrorists (edyun1)</b> were 4.17 percent to make the playoffs in the week 5 reading and are 24.45 percent now, with their week 6 game against <b>Lucky Strike (drewkim)</b> still being played. Terrorists trail it 10.88 to 5.2, and the board prices them at 70.6 percent to win it.",
+     "lead": true
+    },
+    {
+     "type": "stat",
+     "n": "+20.28",
+     "text": "points of playoff chance for Terrorists, from 4.17 to 24.45 percent since the week 5 reading, the biggest gain on the board. Their record is 1-4."
+    },
+    {
+     "type": "h",
+     "eyebrow": "records and odds",
+     "text": "A lead the board does not believe"
+    },
+    {
+     "type": "p",
+     "text": "Lucky Strike was 88.9 percent to win in the first reading of the week, at 6.46 points to 3. It leads 10.88 to 5.2 now and is at 29.4 percent. The history keeps each price and not the reason for it, so none is offered here. Lucky Strike is 2-3 with 635.92 points and 31.66 percent to make the playoffs; Terrorists are 1-4 with 605.72."
+    },
+    {
+     "type": "p",
+     "text": "Two teams at 3-2 show how far records and odds can sit apart. <b>Tshough (tonypng)</b> is at 80.99 percent, up 12.19 from 68.80, with 704.68 points scored. <b>andychoe03 & NathKim</b> are at 22.51 percent with 613.04, a gap of 91.64 points for. The sharpest falls went the other way: <b>n² (nikhil1123)</b> dropped from 38.45 to 21.10 percent, and <b>Team Meta/Bloomberg (jiddyyyyyy)</b> from 42.93 to 26.11."
+    },
+    {
+     "type": "p",
+     "text": "The top is settled enough that its prices have stopped separating teams. saiky7 and asierbelay both carry a playoff price of -19900, though one is at 96.86 percent and the other at 94.08. Lee284 is at -3800, jjnhwg at -2950 and tonypng at -610, while Lucky Strike, at 31.66 percent, is priced at +200."
+    },
+    {
+     "type": "tiers",
+     "kicker": "Week 6 · The playoff picture",
+     "title": "Five clear, six chasing",
+     "sub": "Big number: chance to make the playoffs on the board now.",
+     "note": "Playoff % from the site's odds board, Oct 17. Six of twelve make it; the top two get a bye.",
+     "href": "https://drewkim623-hash.github.io/ccubed/#picture",
+     "link": "See the live Playoff Picture",
+     "tiers": [
+      {
+       "name": "In the clear",
+       "range": "90% or better",
+       "rows": [
+        {
+         "team": "saiky7",
+         "pct": 96.86,
+         "rec": "4-1"
+        },
+        {
+         "team": "asierbelay",
+         "pct": 94.08,
+         "rec": "4-1"
+        },
+        {
+         "team": "Lee284",
+         "pct": 91.92,
+         "rec": "4-1"
+        },
+        {
+         "team": "jjnhwg",
+         "pct": 91.25,
+         "rec": "4-1"
+        }
+       ]
+      },
+      {
+       "name": "Favored",
+       "range": "80% to 90%",
+       "rows": [
+        {
+         "team": "tonypng",
+         "pct": 80.99,
+         "rec": "3-2"
+        }
+       ]
+      },
+      {
+       "name": "Chasing",
+       "range": "10% to 35%",
+       "rows": [
+        {
+         "team": "drewkim",
+         "pct": 31.66,
+         "rec": "2-3"
+        },
+        {
+         "team": "jiddyyyyyy",
+         "pct": 26.11,
+         "rec": "2-3"
+        },
+        {
+         "team": "edyun1",
+         "pct": 24.45,
+         "rec": "1-4"
+        },
+        {
+         "team": "andychoe03",
+         "pct": 22.51,
+         "rec": "3-2"
+        },
+        {
+         "team": "nikhil1123",
+         "pct": 21.1,
+         "rec": "2-3"
+        },
+        {
+         "team": "yojarshh",
+         "pct": 16.73,
+         "rec": "1-4"
+        }
+       ]
+      },
+      {
+       "name": "Out of reach",
+       "range": "under 10%",
+       "rows": [
+        {
+         "team": "bigmoneyjos",
+         "pct": 2.35,
+         "rec": "0-5"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "the coming lines",
+     "text": "Four games with a price"
+    },
+    {
+     "type": "p",
+     "text": "The board carries lines on four of the week's six games. <b>yerra x ecj (saiky7)</b> is the biggest favorite at 84.8 percent against <b>8 and thick (bigmoneyjos)</b>, ahead 25.4 to 13.6. Two 4-1 teams meet, <b>AB x B (asierbelay)</b> and <b>Jug (Lee284)</b>, and the board splits it 53.7 to 46.3 with Jug up 7 to 0."
+    },
+    {
+     "type": "p",
+     "text": "In the fourth, <b>Uzzz uzz uzz (jjnhwg)</b> is 4-1 and the underdog at 24.2 percent to Tshough's 75.8, behind 14 to 0. The board's injury list has four jjnhwg starters questionable: Chris Olave, Tyler Warren, Caleb Williams and Terry McLaurin. Tshough has 8 starters left to play, jjnhwg 9. At the top, saiky7 is 23.94 percent to win the title at +290, ahead of asierbelay at 17.64 percent (+430) and Lee284 at 16.19 percent (+480)."
+    },
+    {
+     "type": "note",
+     "text": "Moves are measured against the week 5 reading in the odds history (Oct 15), the only between-weeks reading it holds; it has none from last Saturday. Odds, scores and injuries are from the site's own board on Oct 17. Nobody is quoted."
+    }
+   ]
   }
  ]
 }
