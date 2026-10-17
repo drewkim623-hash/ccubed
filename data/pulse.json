@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-16T23:29:42.745Z",
- "at": 1792193382745,
+ "generated": "2026-10-17T00:50:36.170Z",
+ "at": 1792198236170,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -45,7 +45,7 @@
    "losses": 1,
    "points_for": 693.04,
    "points_against": 614.56,
-   "faab_spent": 0,
+   "faab_spent": 1,
    "starters_hurt": [
     "Quinshon Judkins (Questionable)"
    ]
@@ -383,6 +383,25 @@
     }
    ],
    "faab": 2,
+   "picks": []
+  },
+  {
+   "week": 6,
+   "type": "waiver",
+   "managers": [
+    "Lee284"
+   ],
+   "adds": [
+    {
+     "name": "Tre Tucker",
+     "pos": "WR",
+     "team": "LV",
+     "status": null,
+     "to": "Lee284"
+    }
+   ],
+   "drops": [],
+   "faab": 1,
    "picks": []
   },
   {

@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-16T23:29:41.980Z",
+ "generated": "2026-10-17T00:50:35.608Z",
  "week": 6,
  "entries": {
   "2216": {
@@ -11,7 +11,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "2449": {
    "n": "Stefon Diggs",
@@ -31,7 +31,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "4177": {
    "n": "Mack Hollins",
@@ -92,7 +92,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "5850": {
    "n": "Josh Jacobs",
@@ -143,7 +143,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "6819": {
    "n": "Michael Pittman",
@@ -174,7 +174,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "7526": {
    "n": "Jaylen Waddle",
@@ -184,7 +184,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "7543": {
    "n": "Travis Etienne",
@@ -216,7 +216,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "8155": {
    "n": "Breece Hall",
@@ -266,7 +266,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "9753": {
    "n": "Zach Charbonnet",
@@ -369,7 +369,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "12529": {
    "n": "TreVeyon Henderson",
@@ -389,7 +389,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-16"
+   "retChecked": "2026-10-17"
   },
   "12534": {
    "n": "Kyle Monangai",
@@ -426,12 +426,12 @@
   "13287": {
    "n": "Jeremiyah Love",
    "s": "Out",
-   "ret": "2026-10-25",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-10-16"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Out = coming week only",
+   "retChecked": "2026-10-17"
   },
   "13296": {
    "n": "Caleb Douglas",
@@ -451,7 +451,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: IR minimum 4 weeks, on IR since wk 6",
-   "retChecked": "2026-10-16",
+   "retChecked": "2026-10-17",
    "irSince": 6
   }
  }
