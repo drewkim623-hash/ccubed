@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-10-17T00:51:12.018Z",
- "at": 1792198272018,
+ "generated": "2026-10-17T11:11:14.267Z",
+ "at": 1792235474268,
  "season": "2026",
  "week": 6,
  "liveWeek": 6,
@@ -16,7 +16,7 @@
    "titleNow": 0.00205,
    "playoffWas": 0.5453,
    "playoffNow": 0.0236,
-   "wins": 3.5884,
+   "wins": 3.58835,
    "titleOdds": 45920,
    "titleOddsOpen": 890,
    "playoffOdds": 3900
@@ -68,7 +68,7 @@
    "titleNow": 0.0287,
    "playoffWas": 0.61815,
    "playoffNow": 0.1674,
-   "wins": 5.5157,
+   "wins": 5.51565,
    "titleOdds": 3190,
    "titleOddsOpen": 660,
    "playoffOdds": 460
@@ -91,11 +91,11 @@
    "rid": 4,
    "manager": "nikhil1123",
    "titleWas": 0.07905,
-   "titleNow": 0.026,
+   "titleNow": 0.02605,
    "playoffWas": 0.48995,
-   "playoffNow": 0.21105,
-   "wins": 5.8528,
-   "titleOdds": 3530,
+   "playoffNow": 0.2112,
+   "wins": 5.85325,
+   "titleOdds": 3520,
    "titleOddsOpen": 1090,
    "playoffOdds": 350
   },
@@ -106,8 +106,8 @@
    "titleWas": 0.069,
    "titleNow": 0.14815,
    "playoffWas": 0.44665,
-   "playoffNow": 0.9126,
-   "wins": 8.6264,
+   "playoffNow": 0.91255,
+   "wins": 8.62635,
    "titleOdds": 540,
    "titleOddsOpen": 1270,
    "playoffOdds": -2960
@@ -120,7 +120,7 @@
    "titleNow": 0.16185,
    "playoffWas": 0.56245,
    "playoffNow": 0.91905,
-   "wins": 8.8267,
+   "wins": 8.8266,
    "titleOdds": 480,
    "titleOddsOpen": 840,
    "playoffOdds": -3770
@@ -133,7 +133,7 @@
    "titleNow": 0.031,
    "playoffWas": 0.53045,
    "playoffNow": 0.26095,
-   "wins": 5.91715,
+   "wins": 5.91705,
    "titleOdds": 2940,
    "titleOddsOpen": 970,
    "playoffOdds": 260
@@ -143,9 +143,9 @@
    "rid": 5,
    "manager": "edyun1",
    "titleWas": 0.0921,
-   "titleNow": 0.02615,
+   "titleNow": 0.0261,
    "playoffWas": 0.52675,
-   "playoffNow": 0.24515,
+   "playoffNow": 0.24505,
    "wins": 5.60085,
    "titleOdds": 3510,
    "titleOddsOpen": 920,
@@ -159,7 +159,7 @@
    "titleNow": 0.12075,
    "playoffWas": 0.4209,
    "playoffNow": 0.8099,
-   "wins": 7.8129,
+   "wins": 7.8128,
    "titleOdds": 680,
    "titleOddsOpen": 1520,
    "playoffOdds": -610
@@ -210,8 +210,8 @@
    "b": "bigmoneyjos",
    "aPts": 25.4,
    "bPts": 13.6,
-   "pA": 0.8476843414202175,
-   "pB": 0.15231565857978246,
+   "pA": 0.8476843414202176,
+   "pB": 0.15231565857978235,
    "settled": false,
    "aLeft": 9,
    "bLeft": 9,
@@ -328,7 +328,7 @@
   "pre": 13,
   "live": 0,
   "post": 1,
-  "at": 1792198270744
+  "at": 1792235472437
  },
  "articles": [
   {
