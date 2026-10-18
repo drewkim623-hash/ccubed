@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-18T14:49:21.414Z",
- "at": 1792334961415,
+ "generated": "2026-10-18T15:17:43.404Z",
+ "at": 1792336663404,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -132,7 +132,8 @@
    "points_against": 688.82,
    "faab_spent": 40,
    "starters_hurt": [
-    "Mike Evans (Questionable)"
+    "Mike Evans (Questionable)",
+    "A.J. Brown (Questionable)"
    ]
   }
  ],
@@ -164,7 +165,7 @@
   {
    "a": {
     "manager": "yojarshh",
-    "points": 4,
+    "points": 1,
     "startersLeftToPlay": 10
    },
    "b": {
@@ -181,19 +182,19 @@
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 19.8,
+    "points": 20.8,
     "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 6,
+    "points": 3,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "tonypng",
-    "points": 29.8,
+    "points": 38,
     "startersLeftToPlay": 9
    }
   },
