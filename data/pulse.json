@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-18T15:38:08.871Z",
- "at": 1792337888871,
+ "generated": "2026-10-18T15:49:27.581Z",
+ "at": 1792338567581,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -34,8 +34,7 @@
    "faab_spent": 1,
    "starters_hurt": [
     "Caleb Williams (Questionable)",
-    "Chris Olave (Questionable)",
-    "Tyler Warren (Questionable)"
+    "Tyler Warren (Out)"
    ]
   },
   {
@@ -54,9 +53,7 @@
    "points_for": 704.68,
    "points_against": 598.6,
    "faab_spent": 0,
-   "starters_hurt": [
-    "Pat Freiermuth (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "andychoe03",
@@ -96,9 +93,7 @@
    "points_for": 616.16,
    "points_against": 681.88,
    "faab_spent": 65,
-   "starters_hurt": [
-    "Kyle Monangai (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "edyun1",
@@ -130,8 +125,7 @@
    "points_against": 688.82,
    "faab_spent": 40,
    "starters_hurt": [
-    "Mike Evans (Questionable)",
-    "A.J. Brown (Questionable)"
+    "Mike Evans (Questionable)"
    ]
   }
  ],
@@ -157,7 +151,7 @@
    "b": {
     "manager": "nikhil1123",
     "points": 0,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    }
   },
   {
@@ -430,5 +424,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 54
+ "free_agent_moves": 57
 }
