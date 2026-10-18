@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-18T15:17:43.404Z",
- "at": 1792336663404,
+ "generated": "2026-10-18T15:38:08.871Z",
+ "at": 1792337888871,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -45,9 +45,7 @@
    "points_for": 693.04,
    "points_against": 614.56,
    "faab_spent": 1,
-   "starters_hurt": [
-    "Quinshon Judkins (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "tonypng",
@@ -165,12 +163,12 @@
   {
    "a": {
     "manager": "yojarshh",
-    "points": 1,
+    "points": 0,
     "startersLeftToPlay": 10
    },
    "b": {
     "manager": "jiddyyyyyy",
-    "points": 2.8,
+    "points": 4.7,
     "startersLeftToPlay": 10
    }
   },
@@ -194,7 +192,7 @@
    },
    "b": {
     "manager": "tonypng",
-    "points": 38,
+    "points": 39.3,
     "startersLeftToPlay": 9
    }
   },
