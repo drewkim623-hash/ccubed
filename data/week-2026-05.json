@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 5,
- "generated": "2026-10-17T11:10:42.805Z",
- "generated_at": "2026-10-17T11:10:42.805Z",
+ "generated": "2026-10-18T11:10:56.726Z",
+ "generated_at": "2026-10-18T11:10:56.726Z",
  "final": true,
  "standings_through_week": 5,
  "standings_folded": false,
@@ -392,7 +392,7 @@
    "sides": [
     {
      "manager": "edyun1",
-     "team": "Terrorists",
+     "team": "BOWSER",
      "roster_id": 5,
      "points": 152.56,
      "starters": [
@@ -1215,7 +1215,7 @@
   },
   {
    "manager": "edyun1",
-   "team": "Terrorists",
+   "team": "BOWSER",
    "roster_id": 5,
    "wins": 1,
    "losses": 4,
@@ -2315,7 +2315,7 @@
    "sides": [
     {
      "manager": "edyun1",
-     "team": "Terrorists",
+     "team": "BOWSER",
      "roster_id": 5,
      "points": 152.56,
      "starters": [
