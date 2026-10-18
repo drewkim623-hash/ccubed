@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-18T15:54:50.432Z",
+ "generated": "2026-10-18T19:49:41.795Z",
  "week": 6,
  "entries": {
   "2216": {
@@ -22,6 +22,16 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Hamstring. Ruled out Week 5; ESPN lists Q for Week 6 (return Oct 19). Coming week only. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14"
+  },
+  "4035": {
+   "n": "Alvin Kamara",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-18"
   },
   "4177": {
    "n": "Mack Hollins",
@@ -66,7 +76,7 @@
   },
   "4983": {
    "n": "DJ Moore",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-10-18",
    "retWeeks": null,
    "retSource": "report",
@@ -147,6 +157,16 @@
    "retChecked": "2026-10-14",
    "irSince": 6
   },
+  "8121": {
+   "n": "Romeo Doubs",
+   "s": "Out",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Out = coming week only",
+   "retChecked": "2026-10-18"
+  },
   "8142": {
    "n": "Alec Pierce",
    "s": "IR",
@@ -197,16 +217,6 @@
    "retNote": "https://vikingswire.usatoday.com/story/sports/nfl/vikings/2026/10/12/vikings-expected-to-see-jordan-mason-come-off-ir-for-week-7/92226547007/ — Thumb fracture (surgery). Expected activated for Week 7; MIN bye Week 6 => 0 games missed. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14",
    "irSince": 6
-  },
-  "9508": {
-   "n": "Tyjae Spears",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-18"
   },
   "9753": {
    "n": "Zach Charbonnet",
@@ -353,6 +363,16 @@
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-10-17"
+  },
+  "13294": {
+   "n": "Makai Lemon",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-18"
   },
   "13296": {
    "n": "Caleb Douglas",

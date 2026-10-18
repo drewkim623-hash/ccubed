@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-18T15:49:27.581Z",
- "at": 1792338567581,
+ "generated": "2026-10-18T19:49:42.507Z",
+ "at": 1792352982507,
  "season": "2026",
  "nfl_week": 6,
  "season_type": "regular",
@@ -33,7 +33,6 @@
    "points_against": 651.08,
    "faab_spent": 1,
    "starters_hurt": [
-    "Caleb Williams (Questionable)",
     "Tyler Warren (Out)"
    ]
   },
@@ -62,9 +61,7 @@
    "points_for": 613.04,
    "points_against": 610.82,
    "faab_spent": 55,
-   "starters_hurt": [
-    "Tyjae Spears (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jiddyyyyyy",
@@ -73,7 +70,9 @@
    "points_for": 661.48,
    "points_against": 650.34,
    "faab_spent": 40,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Makai Lemon (Questionable)"
+   ]
   },
   {
    "manager": "drewkim",
@@ -103,7 +102,7 @@
    "points_against": 715.78,
    "faab_spent": 12,
    "starters_hurt": [
-    "DJ Moore (Questionable)"
+    "DJ Moore (Out)"
    ]
   },
   {
@@ -114,7 +113,7 @@
    "points_against": 720.18,
    "faab_spent": 33,
    "starters_hurt": [
-    "Jacory Croskey-Merritt (Out)"
+    "Romeo Doubs (Out)"
    ]
   },
   {
@@ -133,72 +132,72 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 10.88,
+    "points": 42.38,
     "startersLeftToPlay": 8
    },
    "b": {
     "manager": "edyun1",
-    "points": 5.2,
+    "points": 46.78,
     "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 8.4,
-    "startersLeftToPlay": 10
+    "points": 24.4,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "nikhil1123",
-    "points": 0,
-    "startersLeftToPlay": 9
+    "points": 88.5,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "yojarshh",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 50.9,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "jiddyyyyyy",
-    "points": 4.7,
-    "startersLeftToPlay": 10
+    "points": 65.8,
+    "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "saiky7",
-    "points": 25.4,
+    "points": 60.84,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 20.8,
-    "startersLeftToPlay": 9
+    "points": 49.2,
+    "startersLeftToPlay": 7
    }
   },
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 3,
+    "points": 63.14,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "tonypng",
-    "points": 39.3,
-    "startersLeftToPlay": 9
+    "points": 106.86,
+    "startersLeftToPlay": 7
    }
   },
   {
    "a": {
     "manager": "asierbelay",
-    "points": 0,
+    "points": 54.7,
     "startersLeftToPlay": 10
    },
    "b": {
     "manager": "Lee284",
-    "points": 7,
+    "points": 42.9,
     "startersLeftToPlay": 9
    }
   }
@@ -424,5 +423,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 57
+ "free_agent_moves": 58
 }
