@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-18T19:54:30.011Z",
+ "generated": "2026-10-19T11:13:24.779Z",
  "week": 6,
  "entries": {
   "2216": {
@@ -11,7 +11,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-18"
+   "retChecked": "2026-10-19"
   },
   "2449": {
    "n": "Stefon Diggs",
@@ -26,12 +26,12 @@
   "4035": {
    "n": "Alvin Kamara",
    "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
+   "ret": "2026-11-01",
+   "retWeeks": null,
+   "retSource": "espn-outlook",
    "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-18"
+   "retNote": "eligible to come off IR after a Week 8",
+   "retChecked": "2026-10-19"
   },
   "4177": {
    "n": "Mack Hollins",
@@ -144,7 +144,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-18"
+   "retChecked": "2026-10-19"
   },
   "7543": {
    "n": "Travis Etienne",
@@ -165,7 +165,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-10-18"
+   "retChecked": "2026-10-19"
   },
   "8142": {
    "n": "Alec Pierce",
@@ -218,6 +218,16 @@
    "retChecked": "2026-10-14",
    "irSince": 6
   },
+  "9486": {
+   "n": "Dontayvion Wicks",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-19"
+  },
   "9753": {
    "n": "Zach Charbonnet",
    "s": "PUP",
@@ -248,6 +258,26 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Hamstring. Conflict: Rapoport (Oct 5) 'relatively minor', may play after bye; NBC (Oct 13) 'several-week absence'. Counted Week 6 only. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14"
+  },
+  "10236": {
+   "n": "Dalton Kincaid",
+   "s": "Questionable",
+   "ret": "2026-11-01",
+   "retWeeks": null,
+   "retSource": "espn-return-date",
+   "retEstimated": false,
+   "retNote": "ESPN return date",
+   "retChecked": "2026-10-19"
+  },
+  "11058": {
+   "n": "Blake Grupe",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-19"
   },
   "11577": {
    "n": "Will Shipley",
@@ -281,6 +311,16 @@
    "retNote": "https://www.espn.com/nfl/player/_/id/4431492/roman-wilson — Finger. Ruled out Week 6; expected to miss at least a couple weeks. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-18",
    "irSince": 6
+  },
+  "11635": {
+   "n": "Ladd McConkey",
+   "s": "Out",
+   "ret": "2026-10-18",
+   "retWeeks": null,
+   "retSource": "report",
+   "retEstimated": false,
+   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Foot. Week-to-week; active but 0 snaps Week 5. Q = Week 6 only. Consensus: matches audit; consensus.",
+   "retChecked": "2026-10-15"
   },
   "12495": {
    "n": "Ollie Gordon",
@@ -372,7 +412,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-18"
+   "retChecked": "2026-10-19"
   },
   "13296": {
    "n": "Caleb Douglas",
@@ -392,7 +432,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: IR minimum 4 weeks, on IR since wk 6",
-   "retChecked": "2026-10-18",
+   "retChecked": "2026-10-19",
    "irSince": 6
   }
  }
