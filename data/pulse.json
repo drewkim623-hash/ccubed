@@ -1,9 +1,9 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-19T11:13:25.353Z",
- "at": 1792408405353,
+ "generated": "2026-10-20T04:24:17.787Z",
+ "at": 1792470257787,
  "season": "2026",
- "nfl_week": 6,
+ "nfl_week": 7,
  "season_type": "regular",
  "week_in_progress": true,
  "standings": [
@@ -35,7 +35,8 @@
    "points_against": 651.08,
    "faab_spent": 1,
    "starters_hurt": [
-    "Tyler Warren (Out)"
+    "Tyler Warren (Out)",
+    "Terry McLaurin (Out)"
    ]
   },
   {
@@ -63,7 +64,9 @@
    "points_for": 613.04,
    "points_against": 610.82,
    "faab_spent": 55,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Davante Adams (Out)"
+   ]
   },
   {
    "manager": "jiddyyyyyy",
@@ -95,7 +98,7 @@
    "points_against": 681.88,
    "faab_spent": 65,
    "starters_hurt": [
-    "Blake Grupe (Questionable)"
+    "Blake Grupe (IR)"
    ]
   },
   {
@@ -117,7 +120,7 @@
    "points_against": 720.18,
    "faab_spent": 33,
    "starters_hurt": [
-    "Romeo Doubs (Out)"
+    "Romeo Doubs (IR)"
    ]
   },
   {
@@ -128,7 +131,8 @@
    "points_against": 688.82,
    "faab_spent": 40,
    "starters_hurt": [
-    "Mike Evans (Questionable)"
+    "Mike Evans (Out)",
+    "A.J. Brown (Questionable)"
    ]
   }
  ],
@@ -136,250 +140,78 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 95.38,
-    "startersLeftToPlay": 1
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "edyun1",
-    "points": 78.98,
-    "startersLeftToPlay": 0
+    "manager": "Lee284",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 93.84,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "nikhil1123",
-    "points": 114.9,
-    "startersLeftToPlay": 1
+    "manager": "saiky7",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "yojarshh",
-    "points": 93.1,
-    "startersLeftToPlay": 1
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "jiddyyyyyy",
-    "points": 109.88,
-    "startersLeftToPlay": 1
+    "manager": "tonypng",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
-    "manager": "saiky7",
-    "points": 113.52,
-    "startersLeftToPlay": 0
+    "manager": "nikhil1123",
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 87.42,
-    "startersLeftToPlay": 2
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "edyun1",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "asierbelay",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 77.6,
-    "startersLeftToPlay": 1
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "tonypng",
-    "points": 160.86,
-    "startersLeftToPlay": 1
-   }
-  },
-  {
-   "a": {
-    "manager": "asierbelay",
-    "points": 112.7,
-    "startersLeftToPlay": 0
-   },
-   "b": {
-    "manager": "Lee284",
-    "points": 83.2,
-    "startersLeftToPlay": 1
+    "manager": "jiddyyyyyy",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   }
  ],
- "trades": [
-  {
-   "week": 5,
-   "type": "trade",
-   "managers": [
-    "andychoe03",
-    "yojarshh"
-   ],
-   "adds": [
-    {
-     "name": "Davante Adams",
-     "pos": "WR",
-     "team": "LAR",
-     "status": null,
-     "to": "andychoe03"
-    },
-    {
-     "name": "Saquon Barkley",
-     "pos": "RB",
-     "team": "PHI",
-     "status": "Out",
-     "to": "yojarshh"
-    },
-    {
-     "name": "Josh Allen",
-     "pos": "QB",
-     "team": "BUF",
-     "status": null,
-     "to": "yojarshh"
-    },
-    {
-     "name": "David Montgomery",
-     "pos": "RB",
-     "team": "HOU",
-     "status": "Out",
-     "to": "andychoe03"
-    },
-    {
-     "name": "George Pickens",
-     "pos": "WR",
-     "team": "DAL",
-     "status": null,
-     "to": "andychoe03"
-    },
-    {
-     "name": "Zay Flowers",
-     "pos": "WR",
-     "team": "BAL",
-     "status": null,
-     "to": "yojarshh"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Davante Adams",
-     "pos": "WR",
-     "team": "LAR",
-     "status": null,
-     "from": "yojarshh"
-    },
-    {
-     "name": "Saquon Barkley",
-     "pos": "RB",
-     "team": "PHI",
-     "status": "Out",
-     "from": "andychoe03"
-    },
-    {
-     "name": "Josh Allen",
-     "pos": "QB",
-     "team": "BUF",
-     "status": null,
-     "from": "andychoe03"
-    },
-    {
-     "name": "David Montgomery",
-     "pos": "RB",
-     "team": "HOU",
-     "status": "Out",
-     "from": "yojarshh"
-    },
-    {
-     "name": "George Pickens",
-     "pos": "WR",
-     "team": "DAL",
-     "status": null,
-     "from": "yojarshh"
-    },
-    {
-     "name": "Zay Flowers",
-     "pos": "WR",
-     "team": "BAL",
-     "status": null,
-     "from": "andychoe03"
-    }
-   ],
-   "faab": null,
-   "picks": []
-  }
- ],
+ "trades": [],
  "waivers": [
-  {
-   "week": 5,
-   "type": "waiver",
-   "managers": [
-    "saiky7"
-   ],
-   "adds": [
-    {
-     "name": "MarShawn Lloyd",
-     "pos": "RB",
-     "team": "GB",
-     "status": null,
-     "to": "saiky7"
-    }
-   ],
-   "drops": [],
-   "faab": 25,
-   "picks": []
-  },
-  {
-   "week": 5,
-   "type": "waiver",
-   "managers": [
-    "yojarshh"
-   ],
-   "adds": [
-    {
-     "name": "Germie Bernard",
-     "pos": "WR",
-     "team": "PIT",
-     "status": null,
-     "to": "yojarshh"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Kimani Vidal",
-     "pos": "RB",
-     "team": "LAC",
-     "status": null,
-     "from": "yojarshh"
-    }
-   ],
-   "faab": 21,
-   "picks": []
-  },
-  {
-   "week": 5,
-   "type": "waiver",
-   "managers": [
-    "andychoe03"
-   ],
-   "adds": [
-    {
-     "name": "Jordan Love",
-     "pos": "QB",
-     "team": "GB",
-     "status": null,
-     "to": "andychoe03"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Tre' Harris",
-     "pos": "WR",
-     "team": "LAC",
-     "status": "Out",
-     "from": "andychoe03"
-    }
-   ],
-   "faab": 2,
-   "picks": []
-  },
   {
    "week": 6,
    "type": "waiver",
@@ -398,34 +230,7 @@
    "drops": [],
    "faab": 1,
    "picks": []
-  },
-  {
-   "week": 5,
-   "type": "waiver",
-   "managers": [
-    "andychoe03"
-   ],
-   "adds": [
-    {
-     "name": "Kansas City Chiefs",
-     "pos": "DEF",
-     "team": "KC",
-     "status": null,
-     "to": "andychoe03"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Dallas Cowboys",
-     "pos": "DEF",
-     "team": "DAL",
-     "status": null,
-     "from": "andychoe03"
-    }
-   ],
-   "faab": 1,
-   "picks": []
   }
  ],
- "free_agent_moves": 58
+ "free_agent_moves": 34
 }
