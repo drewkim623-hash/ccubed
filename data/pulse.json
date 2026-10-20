@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-20T11:13:39.290Z",
- "at": 1792494819290,
+ "generated": "2026-10-20T13:23:49.032Z",
+ "at": 1792502629033,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -109,7 +109,8 @@
    "points_against": 835.06,
    "faab_spent": 33,
    "starters_hurt": [
-    "Romeo Doubs (IR)"
+    "Saquon Barkley (Out)",
+    "Rashee Rice (Out)"
    ]
   },
   {

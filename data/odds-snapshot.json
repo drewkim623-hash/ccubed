@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-10-20T11:14:07.648Z",
- "at": 1792494847648,
+ "generated": "2026-10-20T13:24:19.798Z",
+ "at": 1792502659798,
  "season": "2026",
  "week": 7,
  "liveWeek": null,
@@ -13,37 +13,37 @@
    "rid": 12,
    "manager": "bigmoneyjos",
    "titleWas": 0.0951,
-   "titleNow": 0.00445,
+   "titleNow": 0.0043,
    "playoffWas": 0.5413,
-   "playoffNow": 0.04725,
-   "wins": 4.7007,
-   "titleOdds": 21100,
+   "playoffNow": 0.0452,
+   "wins": 4.6666,
+   "titleOdds": 21840,
    "titleOddsOpen": 890,
-   "playoffOdds": 1900
+   "playoffOdds": 1990
   },
   {
    "uid": "1257789215605788672",
    "rid": 2,
    "manager": "andychoe03",
    "titleWas": 0.08105,
-   "titleNow": 0.0065,
+   "titleNow": 0.00635,
    "playoffWas": 0.49275,
-   "playoffNow": 0.1038,
-   "wins": 5.6236,
-   "titleOdds": 14410,
+   "playoffNow": 0.1003,
+   "wins": 5.60145,
+   "titleOdds": 14760,
    "titleOddsOpen": 1060,
-   "playoffOdds": 810
+   "playoffOdds": 840
   },
   {
    "uid": "1264454496394674176",
    "rid": 9,
    "manager": "asierbelay",
    "titleWas": 0.0652,
-   "titleNow": 0.18425,
+   "titleNow": 0.18185,
    "playoffWas": 0.4454,
-   "playoffNow": 0.94795,
-   "wins": 9.2342,
-   "titleOdds": 410,
+   "playoffNow": 0.9465,
+   "wins": 9.2048,
+   "titleOdds": 420,
    "titleOddsOpen": 1350,
    "playoffOdds": -19900
   },
@@ -54,86 +54,86 @@
    "titleWas": 0.05745,
    "titleNow": 0.03555,
    "playoffWas": 0.4063,
-   "playoffNow": 0.36865,
-   "wins": 6.6359,
+   "playoffNow": 0.3662,
+   "wins": 6.634,
    "titleOdds": 2550,
    "titleOddsOpen": 1540,
-   "playoffOdds": 155
+   "playoffOdds": 160
   },
   {
    "uid": "997714306332491776",
    "rid": 3,
    "manager": "yojarshh",
    "titleWas": 0.12025,
-   "titleNow": 0.0578,
+   "titleNow": 0.0634,
    "playoffWas": 0.61065,
-   "playoffNow": 0.2641,
-   "wins": 5.93095,
-   "titleOdds": 1530,
+   "playoffNow": 0.2841,
+   "wins": 6.01335,
+   "titleOdds": 1390,
    "titleOddsOpen": 680,
-   "playoffOdds": 260
+   "playoffOdds": 230
   },
   {
    "uid": "1002352049469693952",
    "rid": 6,
    "manager": "saiky7",
    "titleWas": 0.09035,
-   "titleNow": 0.18605,
+   "titleNow": 0.1852,
    "playoffWas": 0.5235,
-   "playoffNow": 0.8901,
-   "wins": 8.54735,
+   "playoffNow": 0.8886,
+   "wins": 8.54505,
    "titleOdds": 410,
    "titleOddsOpen": 940,
-   "playoffOdds": -1670
+   "playoffOdds": -1620
   },
   {
    "uid": "466018540445495296",
    "rid": 4,
    "manager": "nikhil1123",
    "titleWas": 0.081,
-   "titleNow": 0.02625,
+   "titleNow": 0.02585,
    "playoffWas": 0.4919,
-   "playoffNow": 0.3107,
-   "wins": 6.45795,
-   "titleOdds": 3490,
+   "playoffNow": 0.30875,
+   "wins": 6.459,
+   "titleOdds": 3550,
    "titleOddsOpen": 1060,
-   "playoffOdds": 200
+   "playoffOdds": 210
   },
   {
    "uid": "809500620536004608",
    "rid": 7,
    "manager": "jjnhwg",
    "titleWas": 0.071,
-   "titleNow": 0.12165,
+   "titleNow": 0.12125,
    "playoffWas": 0.4514,
-   "playoffNow": 0.80165,
-   "wins": 8.27145,
+   "playoffNow": 0.8007,
+   "wins": 8.27245,
    "titleOdds": 680,
    "titleOddsOpen": 1230,
-   "playoffOdds": -570
+   "playoffOdds": -560
   },
   {
    "uid": "1057211129820213248",
    "rid": 10,
    "manager": "Lee284",
    "titleWas": 0.09895,
-   "titleNow": 0.1311,
+   "titleNow": 0.1303,
    "playoffWas": 0.55805,
-   "playoffNow": 0.81525,
-   "wins": 8.40055,
+   "playoffNow": 0.81365,
+   "wins": 8.40025,
    "titleOdds": 620,
    "titleOddsOpen": 850,
-   "playoffOdds": -640
+   "playoffOdds": -630
   },
   {
    "uid": "1035404182708203520",
    "rid": 8,
    "manager": "jiddyyyyyy",
    "titleWas": 0.0893,
-   "titleNow": 0.077,
+   "titleNow": 0.0764,
    "playoffWas": 0.5292,
-   "playoffNow": 0.5372,
-   "wins": 7.08875,
+   "playoffNow": 0.5345,
+   "wins": 7.08725,
    "titleOdds": 1130,
    "titleOddsOpen": 960,
    "playoffOdds": -130
@@ -143,26 +143,26 @@
    "rid": 5,
    "manager": "edyun1",
    "titleWas": 0.0903,
-   "titleNow": 0.0086,
+   "titleNow": 0.00895,
    "playoffWas": 0.5234,
-   "playoffNow": 0.0674,
-   "wins": 4.8843,
-   "titleOdds": 10870,
+   "playoffNow": 0.06805,
+   "wins": 4.8996,
+   "titleOdds": 10440,
    "titleOddsOpen": 940,
-   "playoffOdds": 1300
+   "playoffOdds": 1290
   },
   {
    "uid": "809957555957813248",
    "rid": 11,
    "manager": "tonypng",
    "titleWas": 0.06005,
-   "titleNow": 0.1608,
+   "titleNow": 0.1606,
    "playoffWas": 0.42615,
-   "playoffNow": 0.84595,
-   "wins": 8.2243,
+   "playoffNow": 0.84345,
+   "wins": 8.2162,
    "titleOdds": 490,
    "titleOddsOpen": 1470,
-   "playoffOdds": -870
+   "playoffOdds": -840
   }
  ],
  "games": [],
@@ -207,11 +207,15 @@
   },
   {
    "manager": "yojarshh",
-   "cost": 0.04001132468168467,
+   "cost": 0.04321201435677857,
    "players": [
     {
-     "name": "Romeo Doubs",
-     "status": "IR"
+     "name": "Rashee Rice",
+     "status": "Out"
+    },
+    {
+     "name": "Saquon Barkley",
+     "status": "Out"
     }
    ]
   },
@@ -270,6 +274,14 @@
  "nfl": null,
  "articles": [
   {
+   "slug": "the-six-losers-left-233-points-on-the-bench",
+   "kicker": "2026 · week 6",
+   "headline": "The Six Losers Left 233.02 Points on the Bench",
+   "dek": "Week 6 was the lowest-scoring of the season at 1,353.14 points. The six losing teams left 233.02 points on their benches and the six winners 78.90. Every game in full, below.",
+   "byline": "C Cubed desk",
+   "date": "2026-10-20"
+  },
+  {
    "slug": "the-board-backs-terrorists-in-a-game-they-trail",
    "kicker": "2026 · week 6",
    "headline": "The Board Backs Terrorists in a Game They Trail",
@@ -284,14 +296,6 @@
    "dek": "saiky7 spent $25 on MarShawn Lloyd after the week 5 scoring closed; only Ollie Gordon at $55 and Will Shipley at $40 cost more, and $271 has changed hands in all.",
    "byline": "C Cubed desk",
    "date": "2026-10-14"
-  },
-  {
-   "slug": "four-teams-at-4-1-and-a-gap-behind-them",
-   "kicker": "2026 · week 5",
-   "headline": "Four Teams at 4-1, and a Gap Behind Them",
-   "dek": "Both unbeaten teams lost in week 5, the highest-scoring week of the season, and four clubs now sit at 4-1. The site's odds board gives each of them at least an 87.9 percent playoff chance and nobody else more than 66.4. Every game in full, below.",
-   "byline": "C Cubed desk",
-   "date": "2026-10-13"
   }
  ]
 }
