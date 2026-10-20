@@ -1,38 +1,47 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-20T04:40:31.258Z",
- "at": 1792471231258,
+ "generated": "2026-10-20T05:42:41.632Z",
+ "at": 1792474961632,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
  "week_in_progress": true,
  "standings": [
   {
+   "manager": "asierbelay",
+   "wins": 5,
+   "losses": 1,
+   "points_for": 851,
+   "points_against": 741.64,
+   "faab_spent": 0,
+   "starters_hurt": []
+  },
+  {
+   "manager": "tonypng",
+   "wins": 4,
+   "losses": 2,
+   "points_for": 873.54,
+   "points_against": 679.9,
+   "faab_spent": 0,
+   "starters_hurt": []
+  },
+  {
    "manager": "saiky7",
    "wins": 4,
-   "losses": 1,
-   "points_for": 754.68,
-   "points_against": 656.26,
+   "losses": 2,
+   "points_for": 868.2,
+   "points_against": 786.78,
    "faab_spent": 25,
    "starters_hurt": [
     "Dalton Kincaid (Questionable)"
    ]
   },
   {
-   "manager": "asierbelay",
-   "wins": 4,
-   "losses": 1,
-   "points_for": 738.3,
-   "points_against": 641.08,
-   "faab_spent": 0,
-   "starters_hurt": []
-  },
-  {
    "manager": "jjnhwg",
    "wins": 4,
-   "losses": 1,
-   "points_for": 723.86,
-   "points_against": 651.08,
+   "losses": 2,
+   "points_for": 805.16,
+   "points_against": 819.94,
    "faab_spent": 1,
    "starters_hurt": [
     "Tyler Warren (Out)",
@@ -42,93 +51,84 @@
   {
    "manager": "Lee284",
    "wins": 4,
-   "losses": 1,
-   "points_for": 693.04,
-   "points_against": 614.56,
+   "losses": 2,
+   "points_for": 793.6,
+   "points_against": 727.26,
    "faab_spent": 1,
    "starters_hurt": []
   },
   {
-   "manager": "tonypng",
-   "wins": 3,
-   "losses": 2,
-   "points_for": 704.68,
-   "points_against": 598.6,
-   "faab_spent": 0,
-   "starters_hurt": []
-  },
-  {
-   "manager": "andychoe03",
-   "wins": 3,
-   "losses": 2,
-   "points_for": 613.04,
-   "points_against": 610.82,
-   "faab_spent": 55,
-   "starters_hurt": [
-    "Davante Adams (Out)"
-   ]
-  },
-  {
    "manager": "jiddyyyyyy",
-   "wins": 2,
+   "wins": 3,
    "losses": 3,
-   "points_for": 661.48,
-   "points_against": 650.34,
+   "points_for": 776.36,
+   "points_against": 759.14,
    "faab_spent": 40,
    "starters_hurt": [
     "Makai Lemon (Questionable)"
    ]
   },
   {
-   "manager": "drewkim",
-   "wins": 2,
-   "losses": 3,
-   "points_for": 635.92,
-   "points_against": 654.38,
-   "faab_spent": 0,
-   "starters_hurt": [
-    "Jaylen Waddle (Questionable)"
-   ]
-  },
-  {
    "manager": "nikhil1123",
-   "wins": 2,
+   "wins": 3,
    "losses": 3,
-   "points_for": 616.16,
-   "points_against": 681.88,
+   "points_for": 752.06,
+   "points_against": 775.72,
    "faab_spent": 65,
    "starters_hurt": [
     "Blake Grupe (IR)"
    ]
   },
   {
-   "manager": "edyun1",
-   "wins": 1,
-   "losses": 4,
-   "points_for": 605.72,
-   "points_against": 715.78,
-   "faab_spent": 12,
+   "manager": "drewkim",
+   "wins": 3,
+   "losses": 3,
+   "points_for": 749.2,
+   "points_against": 733.36,
+   "faab_spent": 0,
    "starters_hurt": [
-    "DJ Moore (Out)"
+    "Jaylen Waddle (Questionable)"
+   ]
+  },
+  {
+   "manager": "andychoe03",
+   "wins": 3,
+   "losses": 3,
+   "points_for": 706.88,
+   "points_against": 746.72,
+   "faab_spent": 55,
+   "starters_hurt": [
+    "Davante Adams (Out)"
    ]
   },
   {
    "manager": "yojarshh",
    "wins": 1,
-   "losses": 4,
-   "points_for": 601.16,
-   "points_against": 720.18,
+   "losses": 5,
+   "points_for": 709.96,
+   "points_against": 835.06,
    "faab_spent": 33,
    "starters_hurt": [
     "Romeo Doubs (IR)"
    ]
   },
   {
-   "manager": "bigmoneyjos",
-   "wins": 0,
+   "manager": "edyun1",
+   "wins": 1,
    "losses": 5,
-   "points_for": 535.74,
-   "points_against": 688.82,
+   "points_for": 684.7,
+   "points_against": 829.06,
+   "faab_spent": 12,
+   "starters_hurt": [
+    "DJ Moore (Out)"
+   ]
+  },
+  {
+   "manager": "bigmoneyjos",
+   "wins": 1,
+   "losses": 5,
+   "points_for": 666.26,
+   "points_against": 802.34,
    "faab_spent": 40,
    "starters_hurt": [
     "Mike Evans (Out)",
