@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-10-20T14:22:52.958Z",
- "at": 1792506172958,
+ "generated": "2026-10-20T15:21:58.424Z",
+ "at": 1792509718425,
  "season": "2026",
  "week": 7,
  "liveWeek": null,
@@ -255,7 +255,7 @@
   },
   {
    "manager": "nikhil1123",
-   "cost": 0.004565515142291865,
+   "cost": 0.0045678323098005125,
    "players": [
     {
      "name": "Blake Grupe",
