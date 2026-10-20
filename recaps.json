@@ -129,6 +129,89 @@
      "body": "saiky7, asierbelay, jjnhwg and Lee284 are tied at 4-1, and the site's odds board has all four between 87.9 and 93.2 percent to make the playoffs; the next team, tonypng, is at 66.4. bigmoneyjos is 0-5 and the only winless team after edyun1's first win."
     }
    ]
+  },
+  {
+   "season": "2026",
+   "week": 6,
+   "note": "",
+   "lede": "Week 6 was the lowest-scoring of C Cubed's first season: 1,353.14 points across six games, 311.58 fewer than week 5, and no team but one reached 136. Tshough (tonypng) scored 168.86, the third-highest score of the year, and beat Uzzz uzz uzz (jjnhwg) by 87.56, the second-widest margin of the season; jjnhwg's 81.3 was the third-lowest score of the year. The closest game was 6.08, Team Meta/Bloomberg (jiddyyyyyy) over S2? #jtw #imwallin (yojarshh). 8 and thick (bigmoneyjos) won for the first time, so every team now has a win. AB x B (asierbelay) is 5-1, four teams are 4-2, and only one waiver claim went through, for $1.",
+   "games": [
+    {
+     "headline": "tonypng scores 168.86 and wins by 87.56",
+     "winner": "tonypng",
+     "winner_points": 168.86,
+     "loser": "jjnhwg",
+     "loser_points": 81.3,
+     "body": "Kenneth Walker's 27.9, Tyler Shough's 26.96 and Bhayshul Tuten's 24.7 led tonypng, and nine of ten starters scored 8 or more; only tight end Pat Freiermuth, at 3.1, did not. jjnhwg got 21.1 from Jonathan Taylor, but Tyler Warren scored 0 and Terry McLaurin 3.7. Both teams are 4-2."
+    },
+    {
+     "headline": "bigmoneyjos wins for the first time",
+     "winner": "bigmoneyjos",
+     "winner_points": 130.52,
+     "loser": "saiky7",
+     "loser_points": 113.52,
+     "body": "Christian McCaffrey scored 30.7 for bigmoneyjos, with Keon Coleman at 15.9 and J.K. Dobbins at 13.6. saiky7 had 25.4 from Jaxon Smith-Njigba and 22.4 from Matthew Golden, but Juwan Johnson scored 0 at tight end and MarShawn Lloyd, the $25 claim, scored 1. bigmoneyjos is 1-5 and saiky7 is 4-2."
+    },
+    {
+     "headline": "nikhil1123 beats andychoe03 by 42.06 on free-agent adds",
+     "winner": "nikhil1123",
+     "winner_points": 135.9,
+     "loser": "andychoe03",
+     "loser_points": 93.84,
+     "body": "Isaiah Likely's 23.9 led nikhil1123, and Omar Cooper added 22.3 and DeMario Douglas 19.6, both free-agent pickups this week. Jordan Love scored 21.24 and the Kansas City defense 16 for andychoe03, but Tyjae Spears and Kenny Gainwell combined for 5.2 at running back. Both teams are 3-3."
+    },
+    {
+     "headline": "jiddyyyyyy holds off yojarshh by 6.08",
+     "winner": "jiddyyyyyy",
+     "winner_points": 114.88,
+     "loser": "yojarshh",
+     "loser_points": 108.8,
+     "body": "Malik Nabers scored 28.5 for jiddyyyyyy, Carnell Tate 19 and Roschon Johnson, a free-agent add this week, 14.5. Germie Bernard's 25.7 and Rachaad White's 15.7 led yojarshh, but kicker Nick Folk and the Jacksonville defense scored 1 each. The 6.08 margin matches week 5's closest finish but one. jiddyyyyyy is 3-3; yojarshh is 1-5."
+    },
+    {
+     "headline": "asierbelay beats Lee284 and reaches 5-1",
+     "winner": "asierbelay",
+     "winner_points": 112.7,
+     "loser": "Lee284",
+     "loser_points": 100.56,
+     "body": "Drake Maye scored 23.8 for asierbelay, with Chuba Hubbard at 19.1, CeeDee Lamb at 16 and Ashton Jeanty at 15.8, enough to cover Mark Andrews's 1.4 at tight end. Lee284 started Brock Purdy's 17.36 at quarterback while Trevor Lawrence's 28.34 sat on the bench, part of 61.44 points left there. asierbelay is 5-1; Lee284 is 4-2."
+    },
+    {
+     "headline": "drewkim beats edyun1 by 34.3",
+     "winner": "drewkim",
+     "winner_points": 113.28,
+     "loser": "edyun1",
+     "loser_points": 78.98,
+     "body": "James Cook scored 24.3 for drewkim, George Kittle 17.9 and Emeka Egbuka 17.8, and kicker Harrison Butker, a free-agent add, scored 11. edyun1's 78.98 was the second-lowest score of the season: kicker Chris Boswell's 17 was its best, DJ Moore scored 0, and DK Metcalf's 20.3 sat on the bench. drewkim is 3-3 and edyun1 is 1-5."
+    }
+   ],
+   "around": [
+    {
+     "kind": "waivers",
+     "headline": "One claim, $1, in a week of free-agent moves",
+     "body": "Lee284 paid $1 for Tre Tucker, the only waiver claim of week 6, and did not start him. The other 34 of the week's 35 transactions were free-agent moves. Season FAAB spending runs from $0 for asierbelay, tonypng and drewkim to $65 for nikhil1123."
+    },
+    {
+     "kind": "waivers",
+     "headline": "Five free-agent adds started for nikhil1123",
+     "body": "nikhil1123 started all five players added as free agents this week: Omar Cooper (22.3), DeMario Douglas (19.6), Kendre Miller (9), Blake Grupe (4) and Najee Harris (0.2). Together they scored 55.1 of the 135.9. Grupe is now on injured reserve."
+    },
+    {
+     "kind": "note",
+     "headline": "Kyle Pitts scores 23 on andychoe03's bench",
+     "body": "andychoe03 added Kyle Pitts as a free agent this week and started Harold Fannin at tight end instead. Fannin scored 1.9 and Pitts 23, a 21.1-point gap in a game andychoe03 lost by 42.06."
+    },
+    {
+     "kind": "injury",
+     "headline": "Two jjnhwg starters are listed Out",
+     "body": "Tyler Warren (0) and Terry McLaurin (3.7) started for jjnhwg in week 6 and both are listed Out on the site's injury report. Davante Adams of andychoe03 and Mike Evans of bigmoneyjos, who scored 12.4 this week, are also Out."
+    },
+    {
+     "kind": "race",
+     "headline": "Five teams at 4-2 or better; none winless",
+     "body": "asierbelay is 5-1 and tonypng, saiky7, jjnhwg and Lee284 are each 4-2. The odds board has asierbelay at 94.8 percent to make the playoffs, saiky7 at 89.0, tonypng at 84.6, Lee284 at 81.5 and jjnhwg at 80.2. Three teams are 1-5."
+    }
+   ]
   }
  ],
  "articles": [
@@ -1332,6 +1415,229 @@
     {
      "type": "note",
      "text": "Moves are measured against the week 5 reading in the odds history (Oct 15), the only between-weeks reading it holds; it has none from last Saturday. Odds, scores and injuries are from the site's own board on Oct 17. Nobody is quoted."
+    }
+   ]
+  },
+  {
+   "season": "2026",
+   "slug": "the-six-losers-left-233-points-on-the-bench",
+   "date": "2026-10-20",
+   "kind": "opinion",
+   "source": "tuesday",
+   "kicker": "2026 · week 6",
+   "headline": "The Six Losers Left 233.02 Points on the Bench",
+   "dek": "Week 6 was the lowest-scoring of the season at 1,353.14 points. The six losing teams left 233.02 points on their benches and the six winners 78.90. Every game in full, below.",
+   "byline": "C Cubed desk",
+   "standfirst": "6 games · 1,353.14 points · the season's lowest-scoring week",
+   "teaser": "🚨 C CUBED | WEEK 6\n\nTHE SIX LOSERS LEFT 233.02 POINTS ON THE BENCH\n\n🪑 Losing teams left 233.02 points on the bench. Winners left 78.90\n💥 Tshough scored 168.86 and beat Uzzz uzz uzz by 87.56\n⚠️ Jug left 61.44 on the bench, Trevor Lawrence's 28.34 among it, and lost by 12.14\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/the-six-losers-left-233-points-on-the-bench.html",
+   "blocks": [
+    {
+     "type": "p",
+     "lead": true,
+     "text": "Week 6 was the lowest-scoring week of C Cubed's first season — 1,353.14 points across six games, 311.58 fewer than week 5 — and the six teams that lost left 233.02 points on their benches, against 78.90 for the six that won. Tshough (tonypng) scored 168.86, the only score of the week above 136, and beat Uzzz uzz uzz (jjnhwg) by 87.56. 8 and thick (bigmoneyjos) won for the first time, so no team is winless."
+    },
+    {
+     "type": "stat",
+     "n": "233.02",
+     "text": "Points left on the bench by the six losing teams in week 6. The six winning teams left 78.90 between them."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the column",
+     "text": "Winners Kept Their Best Players in the Lineup"
+    },
+    {
+     "type": "p",
+     "text": "Bench points are scored by players a manager did not start, and the split by result is lopsided. Of the 78.90 the winners left, n² (nikhil1123) accounted for none and tonypng for 3, from the Seattle defense. The two winners with the most unused, bigmoneyjos at 28.10 and Lucky Strike (drewkim) at 24.70, won anyway, by 17 and 34.3."
+    },
+    {
+     "type": "p",
+     "text": "A bench total overstates what a lineup change could have captured, because only a player at the right position can take a slot. The better test is one player against the starter he would replace, and by that test the three losing benches that outscored their margin tell three different stories."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the bench",
+     "text": "Three Losses Where the Bench Outscored the Margin"
+    },
+    {
+     "type": "p",
+     "text": "Jug (Lee284) left 61.44 points on the bench, the most of any team, and lost by 12.14. S2? #jtw #imwallin (yojarshh) left 37.88 and lost by 6.08. BOWSER (edyun1) left 45.40 and lost by 34.30. The other three losers — jjnhwg, andychoe03 & NathKim and yerra x ecj (saiky7) — left 37.50, 36.20 and 14.60 against margins of 87.56, 42.06 and 17."
+    },
+    {
+     "type": "p",
+     "text": "Lee284's case is the nearest to a swap. Trevor Lawrence scored 28.34 on the bench while Brock Purdy scored 17.36 in the quarterback slot, a 10.98-point difference in a game lost by 12.14. The one-for-one swap leaves Lee284 1.16 short."
+    },
+    {
+     "type": "p",
+     "text": "edyun1's is the cleanest at one position. DJ Moore scored 0 in the lineup and DK Metcalf scored 20.3 on the bench, both receivers. That swap puts edyun1 at 99.28, still 14 short of drewkim's 113.28, in a week when 78.98 was the second-lowest score of the season."
+    },
+    {
+     "type": "p",
+     "text": "yojarshh's is the opposite. The best bench player, Matthew Stafford, scored 16.88, but Josh Allen scored 18.3 in the quarterback slot, so the bench total here is not a missed swap. The 6.08 went elsewhere: Nick Folk at kicker and the Jacksonville defense scored 1 each."
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "title": "The six losing teams",
+       "big": "233.02",
+       "sub": "points left on the bench",
+       "lead": true,
+       "rows": [
+        {
+         "label": "Lee284",
+         "value": "61.44"
+        },
+        {
+         "label": "edyun1",
+         "value": "45.4"
+        },
+        {
+         "label": "yojarshh",
+         "value": "37.88"
+        },
+        {
+         "label": "jjnhwg",
+         "value": "37.5"
+        },
+        {
+         "label": "andychoe03",
+         "value": "36.2"
+        },
+        {
+         "label": "saiky7",
+         "value": "14.6"
+        }
+       ]
+      },
+      {
+       "title": "The six winning teams",
+       "big": "78.90",
+       "sub": "points left on the bench",
+       "rows": [
+        {
+         "label": "bigmoneyjos",
+         "value": "28.1"
+        },
+        {
+         "label": "drewkim",
+         "value": "24.7"
+        },
+        {
+         "label": "jiddyyyyyy",
+         "value": "11.8"
+        },
+        {
+         "label": "asierbelay",
+         "value": "11.3"
+        },
+        {
+         "label": "tonypng",
+         "value": "3"
+        },
+        {
+         "label": "nikhil1123",
+         "value": "0"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "the week",
+     "text": "The Lowest-Scoring Week Still Had a Blowout"
+    },
+    {
+     "type": "p",
+     "text": "Week 6 averaged 112.76 points a team. Week 2, the next lowest, averaged 123.78 (1,485.32 across the six games), and week 5 averaged 138.73 (1,664.72). Three teams scored under 100: andychoe03 at 93.84, jjnhwg at 81.30 and edyun1 at 78.98."
+    },
+    {
+     "type": "p",
+     "text": "Scoring fell and margins widened. The average margin was 33.19 points, against 23.21 in week 5, driven by the 87.56-point win by tonypng over jjnhwg, the second-widest margin of the season behind week 2's 113.90. The other five games averaged 22.32."
+    },
+    {
+     "type": "p",
+     "text": "The odds board, read after the week was final, has AB x B (asierbelay) at 94.8 percent to make the playoffs, saiky7 at 89.0, tonypng at 84.6, Lee284 at 81.5 and jjnhwg at 80.2. No one else is above 53.7: Team Meta/Bloomberg (jiddyyyyyy) is at 53.7, and drewkim at 36.9."
+    },
+    {
+     "type": "h",
+     "eyebrow": "every game",
+     "text": "The Week in Full"
+    },
+    {
+     "type": "p",
+     "text": "Six games produced 1,353.14 points. Three finished within 17 points and three were decided by more than 34. They are below in order of how close they finished."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the closest",
+     "text": "jiddyyyyyy Holds Off yojarshh by 6.08"
+    },
+    {
+     "type": "p",
+     "text": "<b>jiddyyyyyy 114.88, yojarshh 108.80.</b> Malik Nabers scored 28.5 for jiddyyyyyy, Carnell Tate 19, and Roschon Johnson, a free-agent add this week, 14.5. Germie Bernard's 25.7 and Rachaad White's 15.7, another new add, led yojarshh."
+    },
+    {
+     "type": "p",
+     "text": "The 6.08 margin matches saiky7's win over asierbelay in week 5; only 0.94 and 1.78 have been closer this season. jiddyyyyyy is 3-3; yojarshh is 1-5."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the second-closest",
+     "text": "asierbelay Beats Lee284 and Reaches 5-1"
+    },
+    {
+     "type": "p",
+     "text": "<b>asierbelay 112.70, Lee284 100.56.</b> Drake Maye scored 23.8 for asierbelay, with Chuba Hubbard at 19.1, CeeDee Lamb at 16 and Ashton Jeanty at 15.8, enough to cover Mark Andrews's 1.4 at tight end and Brandon Aubrey's 1 at kicker. Lee284 got 17.36 from Purdy and 14.6 from Tetairoa McMillan. The 12.14 margin makes asierbelay 5-1 and Lee284 4-2."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the third-closest",
+     "text": "bigmoneyjos Gets Its First Win"
+    },
+    {
+     "type": "p",
+     "text": "<b>bigmoneyjos 130.52, saiky7 113.52.</b> Christian McCaffrey scored 30.7 for bigmoneyjos, Keon Coleman 15.9, J.K. Dobbins 13.6 and Dak Prescott 13.02. saiky7 had 25.4 from Jaxon Smith-Njigba and 22.4 from Matthew Golden, but Juwan Johnson scored 0 at tight end and MarShawn Lloyd, the $25 claim, scored 1. bigmoneyjos is 1-5; saiky7 is 4-2."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the third-widest",
+     "text": "drewkim Beats edyun1 by 34.3"
+    },
+    {
+     "type": "p",
+     "text": "<b>drewkim 113.28, edyun1 78.98.</b> James Cook scored 24.3 for drewkim, George Kittle 17.9 and Emeka Egbuka 17.8, and kicker Harrison Butker, a free-agent add, scored 11, while Bo Nix managed 4.48 at quarterback. edyun1 got 17 from kicker Chris Boswell and 15.7 from Jalen Coker. drewkim is 3-3 and edyun1 is 1-5."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the second-widest",
+     "text": "nikhil1123 Starts Five Free-Agent Adds and Wins by 42.06"
+    },
+    {
+     "type": "p",
+     "text": "<b>nikhil1123 135.90, andychoe03 93.84.</b> Isaiah Likely scored 23.9 for nikhil1123, Omar Cooper 22.3, Jayden Daniels 21 and DeMario Douglas 19.6. Cooper and Douglas were free-agent adds this week, as were Kendre Miller, Najee Harris and Blake Grupe, and all five started. andychoe03 got 21.24 from Jordan Love and 16 from the Kansas City defense. Both teams are 3-3."
+    },
+    {
+     "type": "p",
+     "text": "Kyle Pitts, added by andychoe03 as a free agent this week, scored 23 on the bench while Harold Fannin scored 1.9 at tight end."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the widest",
+     "text": "tonypng Scores 168.86 and Wins by 87.56"
+    },
+    {
+     "type": "p",
+     "text": "<b>tonypng 168.86, jjnhwg 81.30.</b> Nine of ten tonypng starters scored 8 or more: Kenneth Walker 27.9, Tyler Shough 26.96, Bhayshul Tuten 24.7, D'Andre Swift 23 and DeVonta Smith 20.5 led the way. The 168.86 is the third-highest score of the season, behind 176.88 and 172.66."
+    },
+    {
+     "type": "p",
+     "text": "jjnhwg had 21.1 from Jonathan Taylor and 16.5 from Caleb Williams, but Tyler Warren scored 0 and Terry McLaurin 3.7, and both are listed Out. The 81.30 is the third-lowest score of the season. Both teams are 4-2."
+    },
+    {
+     "type": "note",
+     "text": "Scores, lineups, bench points, records and transactions are from Sleeper for C Cubed's week 6; playoff odds are the site's own odds board after the week was final, and injury designations are from the site's injury report. Nobody is quoted."
     }
    ]
   }

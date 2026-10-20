@@ -100,6 +100,24 @@
         {"manager": "yojarshh", "blurb": "Josh Allen, acquired from andychoe03 in the week's six-player trade, scored 31.5, but the 115.88 lost to edyun1 for a third straight loss at 1-4 with Matthew Stafford's 27.32 on the bench."},
         {"manager": "bigmoneyjos", "blurb": "The week's low score, 115.64, lost to jiddyyyyyy despite Mike Evans' 26.3, and at 0-5 the team holds the only winless record in the league."}
       ]
+    },
+    {
+      "season": "2026",
+      "week": 6,
+      "teams": [
+        {"manager": "tonypng", "blurb": "A 168.86 behind Kenneth Walker's 27.9 and Tyler Shough's 26.96 beat jjnhwg by 87.56 and made the record 4-2, with 873.54 season points."},
+        {"manager": "asierbelay", "blurb": "Drake Maye's 23.8 led a 112.70 win over Lee284 that made the record 5-1, with 851.00 season points and Mark Andrews' 1.4 at tight end."},
+        {"manager": "saiky7", "blurb": "A 113.52 lost to bigmoneyjos by 17, with Jaxon Smith-Njigba's 25.4 leading and Juwan Johnson's 0 at tight end, leaving the record 4-2 with 868.20 season points."},
+        {"manager": "jjnhwg", "blurb": "An 81.30 lost by 87.56 to tonypng, with Jonathan Taylor's 21.1 the one big score and Tyler Warren's 0 at tight end; the record is 4-2 with 805.16 season points."},
+        {"manager": "Lee284", "blurb": "A 100.56 lost to asierbelay by 12.14 while 61.44 points sat on the bench, Trevor Lawrence's 28.34 among them; the record is 4-2 with 793.60 season points."},
+        {"manager": "jiddyyyyyy", "blurb": "Malik Nabers' 28.5 led a 114.88 win over yojarshh by 6.08, and free-agent add Roschon Johnson's 14.5 started; the record is 3-3 with 776.36 season points."},
+        {"manager": "nikhil1123", "blurb": "A 135.90 beat andychoe03 by 42.06, Isaiah Likely's 23.9 leading and five free-agent adds starting for 55.10 of it; the record is 3-3 with 752.06 season points."},
+        {"manager": "drewkim", "blurb": "James Cook's 24.3 led a 113.28 win over edyun1 by 34.3, with Stefon Diggs' 16.4 left on the bench; the record is 3-3 with 749.20 season points."},
+        {"manager": "andychoe03", "blurb": "A 93.84 lost to nikhil1123 by 42.06 with Kyle Pitts' 23 on the bench against Harold Fannin's 1.9 in the lineup; the record is 3-3 with 706.88 season points."},
+        {"manager": "yojarshh", "blurb": "Germie Bernard's 25.7 led a 108.80 that lost by 6.08 to jiddyyyyyy, with Matthew Stafford's 16.88 on the bench; the record is 1-5 with 709.96 season points."},
+        {"manager": "edyun1", "blurb": "A 78.98 lost to drewkim by 34.3, with kicker Chris Boswell's 17 the best score and DK Metcalf's 20.3 on the bench; the record is 1-5 with 684.70 season points."},
+        {"manager": "bigmoneyjos", "blurb": "The first win of the season, 130.52 over saiky7 by 17, came behind Christian McCaffrey's 30.7; the record is 1-5 with 666.26 season points."}
+      ]
     }
   ]
 }
