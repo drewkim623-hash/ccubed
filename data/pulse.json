@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-20T13:23:49.032Z",
- "at": 1792502629033,
+ "generated": "2026-10-20T14:22:17.633Z",
+ "at": 1792506137633,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -33,7 +33,8 @@
    "points_against": 786.78,
    "faab_spent": 25,
    "starters_hurt": [
-    "Dalton Kincaid (Questionable)"
+    "Lamar Jackson (Out)",
+    "Josh Jacobs (NA)"
    ]
   },
   {
