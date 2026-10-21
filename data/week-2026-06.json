@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 6,
- "generated": "2026-10-20T11:13:35.607Z",
- "generated_at": "2026-10-20T11:13:35.607Z",
+ "generated": "2026-10-21T11:12:58.133Z",
+ "generated_at": "2026-10-21T11:12:58.133Z",
  "final": true,
  "standings_through_week": 6,
  "standings_folded": false,
@@ -453,7 +453,7 @@
       {
        "name": "Najee Harris",
        "pos": "RB",
-       "team": "NYG",
+       "team": "FA",
        "points": 0.2
       }
      ],
@@ -466,7 +466,7 @@
      "bust": {
       "name": "Najee Harris",
       "pos": "RB",
-      "team": "NYG",
+      "team": "FA",
       "points": 0.2
      },
      "benchBest": {
@@ -1151,7 +1151,7 @@
    "ties": 0,
    "points_for": 868.2,
    "points_against": 786.78,
-   "waiver_budget_used": 25
+   "waiver_budget_used": 40
   },
   {
    "manager": "jjnhwg",
@@ -1206,7 +1206,7 @@
    "ties": 0,
    "points_for": 749.2,
    "points_against": 733.36,
-   "waiver_budget_used": 0
+   "waiver_budget_used": 11
   },
   {
    "manager": "andychoe03",
@@ -1228,7 +1228,7 @@
    "ties": 0,
    "points_for": 709.96,
    "points_against": 835.06,
-   "waiver_budget_used": 33
+   "waiver_budget_used": 39
   },
   {
    "manager": "edyun1",
@@ -1254,6 +1254,160 @@
   }
  ],
  "transactions": [
+  {
+   "type": "waiver",
+   "managers": [
+    "nikhil1123"
+   ],
+   "adds": [
+    {
+     "name": "New York Jets",
+     "pos": "DEF",
+     "team": "NYJ",
+     "to": "nikhil1123"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Atlanta Falcons",
+     "pos": "DEF",
+     "team": "ATL",
+     "from": "nikhil1123"
+    }
+   ],
+   "faab": 0,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "yojarshh"
+   ],
+   "adds": [
+    {
+     "name": "Tank Dell",
+     "pos": "WR",
+     "team": "HOU",
+     "to": "yojarshh"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Kimani Vidal",
+     "pos": "RB",
+     "team": "LAC",
+     "from": "yojarshh"
+    }
+   ],
+   "faab": 6,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "nikhil1123"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Najee Harris",
+     "pos": "RB",
+     "team": "FA",
+     "from": "nikhil1123"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Cleveland Browns",
+     "pos": "DEF",
+     "team": "CLE",
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Brian Thomas",
+     "pos": "WR",
+     "team": "JAX",
+     "from": "saiky7"
+    }
+   ],
+   "faab": 0,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Malik Washington",
+     "pos": "WR",
+     "team": "MIA",
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "MarShawn Lloyd",
+     "pos": "RB",
+     "team": "GB",
+     "from": "saiky7"
+    }
+   ],
+   "faab": 5,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Bryce Young",
+     "pos": "QB",
+     "team": "CAR",
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Aaron Rodgers",
+     "pos": "QB",
+     "team": "PIT",
+     "from": "saiky7"
+    }
+   ],
+   "faab": 10,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "drewkim"
+   ],
+   "adds": [
+    {
+     "name": "C.J. Stroud",
+     "pos": "QB",
+     "team": "HOU",
+     "to": "drewkim"
+    }
+   ],
+   "drops": [],
+   "faab": 11,
+   "picks": []
+  },
   {
    "type": "free_agent",
    "managers": [
@@ -1321,7 +1475,7 @@
     {
      "name": "Najee Harris",
      "pos": "RB",
-     "team": "NYG",
+     "team": "FA",
      "to": "nikhil1123"
     }
    ],
