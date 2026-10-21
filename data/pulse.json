@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-20T15:21:31.573Z",
- "at": 1792509691573,
+ "generated": "2026-10-21T02:30:03.721Z",
+ "at": 1792549803721,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -99,7 +99,7 @@
    "points_against": 746.72,
    "faab_spent": 55,
    "starters_hurt": [
-    "Davante Adams (Out)"
+    "David Montgomery (Out)"
    ]
   },
   {
@@ -121,9 +121,7 @@
    "points_for": 684.7,
    "points_against": 829.06,
    "faab_spent": 12,
-   "starters_hurt": [
-    "DJ Moore (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "bigmoneyjos",
@@ -155,7 +153,7 @@
    "a": {
     "manager": "andychoe03",
     "points": 0,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "saiky7",
