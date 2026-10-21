@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-21T02:30:03.721Z",
- "at": 1792549803721,
+ "generated": "2026-10-21T07:29:15.711Z",
+ "at": 1792567755711,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -31,10 +31,9 @@
    "losses": 2,
    "points_for": 868.2,
    "points_against": 786.78,
-   "faab_spent": 25,
+   "faab_spent": 40,
    "starters_hurt": [
-    "Lamar Jackson (Out)",
-    "Josh Jacobs (NA)"
+    "Lamar Jackson (Questionable)"
    ]
   },
   {
@@ -45,7 +44,7 @@
    "points_against": 819.94,
    "faab_spent": 1,
    "starters_hurt": [
-    "Tyler Warren (Out)",
+    "Tyler Warren (Questionable)",
     "Terry McLaurin (Out)"
    ]
   },
@@ -65,9 +64,7 @@
    "points_for": 776.36,
    "points_against": 759.14,
    "faab_spent": 40,
-   "starters_hurt": [
-    "Makai Lemon (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "nikhil1123",
@@ -86,10 +83,8 @@
    "losses": 3,
    "points_for": 749.2,
    "points_against": 733.36,
-   "faab_spent": 0,
-   "starters_hurt": [
-    "Jaylen Waddle (Questionable)"
-   ]
+   "faab_spent": 11,
+   "starters_hurt": []
   },
   {
    "manager": "andychoe03",
@@ -99,7 +94,7 @@
    "points_against": 746.72,
    "faab_spent": 55,
    "starters_hurt": [
-    "David Montgomery (Out)"
+    "David Montgomery (Questionable)"
    ]
   },
   {
@@ -108,10 +103,10 @@
    "losses": 5,
    "points_for": 709.96,
    "points_against": 835.06,
-   "faab_spent": 33,
+   "faab_spent": 39,
    "starters_hurt": [
-    "Saquon Barkley (Out)",
-    "Rashee Rice (Out)"
+    "Saquon Barkley (Questionable)",
+    "Rashee Rice (Questionable)"
    ]
   },
   {
@@ -131,7 +126,7 @@
    "points_against": 802.34,
    "faab_spent": 40,
    "starters_hurt": [
-    "Mike Evans (Out)",
+    "Mike Evans (Questionable)",
     "A.J. Brown (Questionable)"
    ]
   }
@@ -177,7 +172,7 @@
    "a": {
     "manager": "nikhil1123",
     "points": 0,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "bigmoneyjos",
@@ -216,6 +211,106 @@
    "week": 6,
    "type": "waiver",
    "managers": [
+    "drewkim"
+   ],
+   "adds": [
+    {
+     "name": "C.J. Stroud",
+     "pos": "QB",
+     "team": "HOU",
+     "status": null,
+     "to": "drewkim"
+    }
+   ],
+   "drops": [],
+   "faab": 11,
+   "picks": []
+  },
+  {
+   "week": 6,
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Bryce Young",
+     "pos": "QB",
+     "team": "CAR",
+     "status": null,
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Aaron Rodgers",
+     "pos": "QB",
+     "team": "PIT",
+     "status": null,
+     "from": "saiky7"
+    }
+   ],
+   "faab": 10,
+   "picks": []
+  },
+  {
+   "week": 6,
+   "type": "waiver",
+   "managers": [
+    "yojarshh"
+   ],
+   "adds": [
+    {
+     "name": "Tank Dell",
+     "pos": "WR",
+     "team": "HOU",
+     "status": "IR",
+     "to": "yojarshh"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Kimani Vidal",
+     "pos": "RB",
+     "team": "LAC",
+     "status": null,
+     "from": "yojarshh"
+    }
+   ],
+   "faab": 6,
+   "picks": []
+  },
+  {
+   "week": 6,
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Malik Washington",
+     "pos": "WR",
+     "team": "MIA",
+     "status": null,
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "MarShawn Lloyd",
+     "pos": "RB",
+     "team": "GB",
+     "status": null,
+     "from": "saiky7"
+    }
+   ],
+   "faab": 5,
+   "picks": []
+  },
+  {
+   "week": 6,
+   "type": "waiver",
+   "managers": [
     "Lee284"
    ],
    "adds": [
@@ -232,5 +327,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 35
+ "free_agent_moves": 37
 }

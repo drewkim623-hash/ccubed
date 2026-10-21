@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-21T02:30:03.102Z",
+ "generated": "2026-10-21T07:29:15.302Z",
  "week": 7,
  "entries": {
   "2133": {
@@ -21,22 +21,12 @@
   },
   "2216": {
    "n": "Mike Evans",
-   "s": "Out",
+   "s": "Questionable",
    "ret": null,
    "retWeeks": 1,
    "retSource": "default",
    "retEstimated": true,
-   "retNote": "default: Out = coming week only",
-   "retChecked": "2026-10-21"
-  },
-  "4035": {
-   "n": "Alvin Kamara",
-   "s": "Questionable",
-   "ret": "2026-11-01",
-   "retWeeks": null,
-   "retSource": "espn-outlook",
-   "retEstimated": true,
-   "retNote": "eligible to come off IR after a Week 8",
+   "retNote": "default: Questionable = coming week only",
    "retChecked": "2026-10-21"
   },
   "4177": {
@@ -50,19 +40,9 @@
    "retChecked": "2026-10-14",
    "irSince": 6
   },
-  "4199": {
-   "n": "Aaron Jones",
-   "s": "Questionable",
-   "ret": "2026-10-25",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/3042519/aaron-jones-sr — Leg (brief exit). Finished game, ESPN Active; MIN bye Week 6. 0 games. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14"
-  },
   "4866": {
    "n": "Saquon Barkley",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -72,7 +52,7 @@
   },
   "4881": {
    "n": "Lamar Jackson",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -89,16 +69,6 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Shoulder AC joint sprain. Missed Week 5; Q for Week 6. Coming week only. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-18"
-  },
-  "5850": {
-   "n": "Josh Jacobs",
-   "s": "NA",
-   "ret": "2026-10-25",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Commissioner exempt list (not an injury). No return date; possible 4-6 game suspension after activation. Default 1 week used but true absence could be much longer. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14"
   },
   "5859": {
    "n": "A.J. Brown",
@@ -122,7 +92,7 @@
   },
   "5892": {
    "n": "David Montgomery",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -150,16 +120,6 @@
    "retNote": "https://www.espn.com/nfl/player/_/id/4035687/michael-pittman-jr — Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14",
    "irSince": 6
-  },
-  "7526": {
-   "n": "Jaylen Waddle",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-21"
   },
   "7543": {
    "n": "Travis Etienne",
@@ -196,7 +156,7 @@
   },
   "8155": {
    "n": "Breece Hall",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -226,15 +186,16 @@
    "retChecked": "2026-10-14",
    "irSince": 6
   },
-  "9486": {
-   "n": "Dontayvion Wicks",
-   "s": "Questionable",
+  "9502": {
+   "n": "Tank Dell",
+   "s": "IR",
    "ret": null,
    "retWeeks": 99,
-   "retSource": "espn-outlook",
+   "retSource": "default",
    "retEstimated": true,
-   "retNote": "out for the rest of the season",
-   "retChecked": "2026-10-21"
+   "retNote": "default: IR with Knee - ACL + MCL Surgery = rest of season",
+   "retChecked": "2026-10-21",
+   "irSince": 7
   },
   "9753": {
    "n": "Zach Charbonnet",
@@ -249,7 +210,7 @@
   },
   "9756": {
    "n": "Jordan Addison",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -259,7 +220,7 @@
   },
   "10229": {
    "n": "Rashee Rice",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -331,19 +292,9 @@
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Foot. Week-to-week; active but 0 snaps Week 5. Q = Week 6 only. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-15"
   },
-  "12495": {
-   "n": "Ollie Gordon",
-   "s": "Questionable",
-   "ret": "2026-10-25",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4711533/ollie-gordon-ii — Undisclosed (brief exit). ESPN lists Active; MIA bye Week 6. 0 games. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14"
-  },
   "12512": {
    "n": "Quinshon Judkins",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -353,7 +304,7 @@
   },
   "12518": {
    "n": "Tyler Warren",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -379,7 +330,7 @@
   },
   "12534": {
    "n": "Kyle Monangai",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -411,7 +362,7 @@
   },
   "13287": {
    "n": "Jeremiyah Love",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -419,19 +370,9 @@
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-10-17"
   },
-  "13294": {
-   "n": "Makai Lemon",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-21"
-  },
   "13296": {
    "n": "Caleb Douglas",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
