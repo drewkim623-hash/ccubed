@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-10-21T11:13:42.395Z",
- "at": 1792581222395,
+ "generated": "2026-10-21T11:35:20.527Z",
+ "at": 1792582520527,
  "season": "2026",
  "week": 7,
  "liveWeek": null,
@@ -16,7 +16,7 @@
    "titleNow": 0.0045,
    "playoffWas": 0.5413,
    "playoffNow": 0.0463,
-   "wins": 4.68835,
+   "wins": 4.68855,
    "titleOdds": 20860,
    "titleOddsOpen": 890,
    "playoffOdds": 1940
@@ -28,7 +28,7 @@
    "titleWas": 0.08105,
    "titleNow": 0.0065,
    "playoffWas": 0.49275,
-   "playoffNow": 0.1077,
+   "playoffNow": 0.10775,
    "wins": 5.6557,
    "titleOdds": 14410,
    "titleOddsOpen": 1060,
@@ -42,7 +42,7 @@
    "titleNow": 0.1809,
    "playoffWas": 0.4454,
    "playoffNow": 0.9438,
-   "wins": 9.20155,
+   "wins": 9.2015,
    "titleOdds": 420,
    "titleOddsOpen": 1350,
    "playoffOdds": -19900
@@ -52,10 +52,10 @@
    "rid": 1,
    "manager": "drewkim",
    "titleWas": 0.05745,
-   "titleNow": 0.044,
+   "titleNow": 0.04405,
    "playoffWas": 0.4063,
-   "playoffNow": 0.4076,
-   "wins": 6.7756,
+   "playoffNow": 0.4075,
+   "wins": 6.7755,
    "titleOdds": 2040,
    "titleOddsOpen": 1540,
    "playoffOdds": 130
@@ -65,10 +65,10 @@
    "rid": 3,
    "manager": "yojarshh",
    "titleWas": 0.12025,
-   "titleNow": 0.06405,
+   "titleNow": 0.0641,
    "playoffWas": 0.61065,
-   "playoffNow": 0.28445,
-   "wins": 6.02285,
+   "playoffNow": 0.2845,
+   "wins": 6.0229,
    "titleOdds": 1370,
    "titleOddsOpen": 680,
    "playoffOdds": 230
@@ -78,7 +78,7 @@
    "rid": 6,
    "manager": "saiky7",
    "titleWas": 0.09035,
-   "titleNow": 0.1931,
+   "titleNow": 0.19305,
    "playoffWas": 0.5235,
    "playoffNow": 0.891,
    "wins": 8.54225,
@@ -91,11 +91,11 @@
    "rid": 4,
    "manager": "nikhil1123",
    "titleWas": 0.081,
-   "titleNow": 0.02285,
+   "titleNow": 0.02275,
    "playoffWas": 0.4919,
-   "playoffNow": 0.2847,
-   "wins": 6.37345,
-   "titleOdds": 4030,
+   "playoffNow": 0.2846,
+   "wins": 6.373,
+   "titleOdds": 4050,
    "titleOddsOpen": 1060,
    "playoffOdds": 230
   },
@@ -104,10 +104,10 @@
    "rid": 7,
    "manager": "jjnhwg",
    "titleWas": 0.071,
-   "titleNow": 0.112,
+   "titleNow": 0.1121,
    "playoffWas": 0.4514,
-   "playoffNow": 0.79115,
-   "wins": 8.2248,
+   "playoffNow": 0.79125,
+   "wins": 8.225,
    "titleOdds": 740,
    "titleOddsOpen": 1230,
    "playoffOdds": -520
@@ -120,7 +120,7 @@
    "titleNow": 0.12885,
    "playoffWas": 0.55805,
    "playoffNow": 0.8048,
-   "wins": 8.3542,
+   "wins": 8.3543,
    "titleOdds": 630,
    "titleOddsOpen": 850,
    "playoffOdds": -580
@@ -146,7 +146,7 @@
    "titleNow": 0.00815,
    "playoffWas": 0.5234,
    "playoffNow": 0.0657,
-   "wins": 4.87505,
+   "wins": 4.875,
    "titleOdds": 11480,
    "titleOddsOpen": 940,
    "playoffOdds": 1340
@@ -156,10 +156,10 @@
    "rid": 11,
    "manager": "tonypng",
    "titleWas": 0.06005,
-   "titleNow": 0.1616,
+   "titleNow": 0.16155,
    "playoffWas": 0.42615,
    "playoffNow": 0.84315,
-   "wins": 8.212,
+   "wins": 8.2121,
    "titleOdds": 480,
    "titleOddsOpen": 1470,
    "playoffOdds": -840
@@ -196,6 +196,16 @@
    ]
   },
   {
+   "manager": "nikhil1123",
+   "cost": 0.011977969692617108,
+   "players": [
+    {
+     "name": "Kyle Monangai",
+     "status": "Questionable"
+    }
+   ]
+  },
+  {
    "manager": "saiky7",
    "cost": 0.011638933388455341,
    "players": [
@@ -226,16 +236,6 @@
     {
      "name": "David Montgomery",
      "status": "Questionable"
-    }
-   ]
-  },
-  {
-   "manager": "nikhil1123",
-   "cost": 0.004786470244109942,
-   "players": [
-    {
-     "name": "Blake Grupe",
-     "status": "IR"
     }
    ]
   }

@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-21T11:13:01.896Z",
- "at": 1792581181897,
+ "generated": "2026-10-21T11:34:48.476Z",
+ "at": 1792582488476,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -74,7 +74,7 @@
    "points_against": 775.72,
    "faab_spent": 65,
    "starters_hurt": [
-    "Blake Grupe (IR)"
+    "Kyle Monangai (Questionable)"
    ]
   },
   {
@@ -172,7 +172,7 @@
    "a": {
     "manager": "nikhil1123",
     "points": 0,
-    "startersLeftToPlay": 9
+    "startersLeftToPlay": 10
    },
    "b": {
     "manager": "bigmoneyjos",
@@ -327,5 +327,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 37
+ "free_agent_moves": 38
 }
