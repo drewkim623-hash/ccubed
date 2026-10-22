@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 6,
- "generated": "2026-10-21T11:12:58.133Z",
- "generated_at": "2026-10-21T11:12:58.133Z",
+ "generated": "2026-10-22T11:12:55.573Z",
+ "generated_at": "2026-10-22T11:12:55.573Z",
  "final": true,
  "standings_through_week": 6,
  "standings_folded": false,
@@ -29,7 +29,7 @@
      "points": 168.86,
      "starters": [
       {
-       "name": "Kenneth Walker",
+       "name": "Kenneth Walker III",
        "pos": "RB",
        "team": "KC",
        "points": 27.9
@@ -90,7 +90,7 @@
       }
      ],
      "top": {
-      "name": "Kenneth Walker",
+      "name": "Kenneth Walker III",
       "pos": "RB",
       "team": "KC",
       "points": 27.9
@@ -403,7 +403,7 @@
        "points": 23.9
       },
       {
-       "name": "Omar Cooper",
+       "name": "Omar Cooper Jr.",
        "pos": "WR",
        "team": "NYJ",
        "points": 22.3
@@ -421,7 +421,7 @@
        "points": 19.6
       },
       {
-       "name": "Luther Burden",
+       "name": "Luther Burden III",
        "pos": "WR",
        "team": "CHI",
        "points": 17.5
@@ -470,7 +470,7 @@
       "points": 0.2
      },
      "benchBest": {
-      "name": "Ollie Gordon",
+      "name": "Ollie Gordon II",
       "pos": "RB",
       "team": "MIA",
       "points": 0
@@ -532,7 +532,7 @@
        "points": 3.4
       },
       {
-       "name": "Harold Fannin",
+       "name": "Harold Fannin Jr.",
        "pos": "TE",
        "team": "CLE",
        "points": 1.9
@@ -557,7 +557,7 @@
       "points": 1.8
      },
      "benchBest": {
-      "name": "Kyle Pitts",
+      "name": "Kyle Pitts Sr.",
       "pos": "TE",
       "team": "ATL",
       "points": 23
@@ -654,7 +654,7 @@
       "points": 4.9
      },
      "benchBest": {
-      "name": "KC Concepcion",
+      "name": "KC Concepcion Jr.",
       "pos": "WR",
       "team": "CLE",
       "points": 7.9
@@ -949,7 +949,7 @@
      "points": 113.28,
      "starters": [
       {
-       "name": "James Cook",
+       "name": "James Cook III",
        "pos": "RB",
        "team": "BUF",
        "points": 24.3
@@ -1010,7 +1010,7 @@
       }
      ],
      "top": {
-      "name": "James Cook",
+      "name": "James Cook III",
       "pos": "RB",
       "team": "BUF",
       "points": 24.3
@@ -1334,7 +1334,7 @@
    ],
    "drops": [
     {
-     "name": "Brian Thomas",
+     "name": "Brian Thomas Jr.",
      "pos": "WR",
      "team": "JAX",
      "from": "saiky7"
@@ -1497,7 +1497,7 @@
    ],
    "adds": [
     {
-     "name": "Omar Cooper",
+     "name": "Omar Cooper Jr.",
      "pos": "WR",
      "team": "NYJ",
      "to": "nikhil1123"
@@ -1570,7 +1570,7 @@
    ],
    "drops": [
     {
-     "name": "Brian Robinson",
+     "name": "Brian Robinson Jr.",
      "pos": "RB",
      "team": "ATL",
      "from": "yojarshh"
@@ -1661,7 +1661,7 @@
    ],
    "adds": [
     {
-     "name": "Brian Robinson",
+     "name": "Brian Robinson Jr.",
      "pos": "RB",
      "team": "ATL",
      "to": "yojarshh"
@@ -1720,7 +1720,7 @@
    "adds": [],
    "drops": [
     {
-     "name": "Efton Chism",
+     "name": "Efton Chism III",
      "pos": "WR",
      "team": "NE",
      "from": "Lee284"
@@ -1900,7 +1900,7 @@
    ],
    "adds": [
     {
-     "name": "Kyle Pitts",
+     "name": "Kyle Pitts Sr.",
      "pos": "TE",
      "team": "ATL",
      "to": "andychoe03"
@@ -1990,7 +1990,7 @@
    ],
    "drops": [
     {
-     "name": "Kyle Pitts",
+     "name": "Kyle Pitts Sr.",
      "pos": "TE",
      "team": "ATL",
      "from": "asierbelay"
@@ -2006,7 +2006,7 @@
    ],
    "adds": [
     {
-     "name": "Kyle Pitts",
+     "name": "Kyle Pitts Sr.",
      "pos": "TE",
      "team": "ATL",
      "to": "asierbelay"
@@ -2131,7 +2131,7 @@
    "points": 168.86,
    "starters": [
     {
-     "name": "Kenneth Walker",
+     "name": "Kenneth Walker III",
      "pos": "RB",
      "team": "KC",
      "points": 27.9
@@ -2192,7 +2192,7 @@
     }
    ],
    "top": {
-    "name": "Kenneth Walker",
+    "name": "Kenneth Walker III",
     "pos": "RB",
     "team": "KC",
     "points": 27.9
@@ -2386,7 +2386,7 @@
       "points": 4.9
      },
      "benchBest": {
-      "name": "KC Concepcion",
+      "name": "KC Concepcion Jr.",
       "pos": "WR",
       "team": "CLE",
       "points": 7.9
@@ -2497,7 +2497,7 @@
      "points": 168.86,
      "starters": [
       {
-       "name": "Kenneth Walker",
+       "name": "Kenneth Walker III",
        "pos": "RB",
        "team": "KC",
        "points": 27.9
@@ -2558,7 +2558,7 @@
       }
      ],
      "top": {
-      "name": "Kenneth Walker",
+      "name": "Kenneth Walker III",
       "pos": "RB",
       "team": "KC",
       "points": 27.9
@@ -2681,7 +2681,7 @@
      "points": 168.86,
      "starters": [
       {
-       "name": "Kenneth Walker",
+       "name": "Kenneth Walker III",
        "pos": "RB",
        "team": "KC",
        "points": 27.9
@@ -2742,7 +2742,7 @@
       }
      ],
      "top": {
-      "name": "Kenneth Walker",
+      "name": "Kenneth Walker III",
       "pos": "RB",
       "team": "KC",
       "points": 27.9
