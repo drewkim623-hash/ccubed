@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-21T15:53:09.391Z",
- "at": 1792597989391,
+ "generated": "2026-10-22T02:31:00.270Z",
+ "at": 1792636260270,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -33,7 +33,8 @@
    "points_against": 786.78,
    "faab_spent": 40,
    "starters_hurt": [
-    "Lamar Jackson (Questionable)"
+    "Lamar Jackson (Questionable)",
+    "Matthew Golden (Questionable)"
    ]
   },
   {
@@ -45,7 +46,7 @@
    "faab_spent": 1,
    "starters_hurt": [
     "Tyler Warren (Questionable)",
-    "Terry McLaurin (Out)"
+    "Denzel Boston (Questionable)"
    ]
   },
   {
@@ -55,7 +56,9 @@
    "points_for": 793.6,
    "points_against": 727.26,
    "faab_spent": 1,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Quinshon Judkins (Questionable)"
+   ]
   },
   {
    "manager": "jiddyyyyyy",
@@ -64,7 +67,10 @@
    "points_for": 776.36,
    "points_against": 759.14,
    "faab_spent": 40,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Bucky Irving (Questionable)",
+    "Dalton Schultz (Questionable)"
+   ]
   },
   {
    "manager": "nikhil1123",
@@ -74,7 +80,8 @@
    "points_against": 775.72,
    "faab_spent": 65,
    "starters_hurt": [
-    "Kyle Monangai (Questionable)"
+    "Kyle Monangai (Out)",
+    "Justin Jefferson (Questionable)"
    ]
   },
   {
@@ -84,7 +91,12 @@
    "points_for": 749.2,
    "points_against": 733.36,
    "faab_spent": 11,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Rico Dowdle (Questionable)",
+    "Jaylen Waddle (Questionable)",
+    "Christian Watson (Questionable)",
+    "Emeka Egbuka (Questionable)"
+   ]
   },
   {
    "manager": "andychoe03",
@@ -94,6 +106,7 @@
    "points_against": 746.72,
    "faab_spent": 55,
    "starters_hurt": [
+    "Jordan Love (Questionable)",
     "David Montgomery (Questionable)"
    ]
   },
@@ -116,7 +129,9 @@
    "points_for": 684.7,
    "points_against": 829.06,
    "faab_spent": 12,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Brock Bowers (Questionable)"
+   ]
   },
   {
    "manager": "bigmoneyjos",
@@ -127,7 +142,7 @@
    "faab_spent": 40,
    "starters_hurt": [
     "Mike Evans (Questionable)",
-    "A.J. Brown (Questionable)"
+    "Travis Kelce (Questionable)"
    ]
   }
  ],
@@ -148,7 +163,7 @@
    "a": {
     "manager": "andychoe03",
     "points": 0,
-    "startersLeftToPlay": 9
+    "startersLeftToPlay": 10
    },
    "b": {
     "manager": "saiky7",
@@ -327,5 +342,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 43
+ "free_agent_moves": 44
 }
