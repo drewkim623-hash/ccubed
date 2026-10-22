@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-22T11:12:58.706Z",
- "at": 1792667578706,
+ "generated": "2026-10-22T18:25:01.833Z",
+ "at": 1792693501833,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -80,7 +80,6 @@
    "points_against": 775.72,
    "faab_spent": 65,
    "starters_hurt": [
-    "Kyle Monangai (Out)",
     "Justin Jefferson (Questionable)"
    ]
   },
@@ -106,8 +105,7 @@
    "points_against": 746.72,
    "faab_spent": 55,
    "starters_hurt": [
-    "Jordan Love (Questionable)",
-    "David Montgomery (Questionable)"
+    "Jordan Love (Questionable)"
    ]
   },
   {
@@ -141,7 +139,6 @@
    "points_against": 802.34,
    "faab_spent": 40,
    "starters_hurt": [
-    "Mike Evans (Questionable)",
     "Travis Kelce (Questionable)"
    ]
   }
@@ -342,5 +339,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 44
+ "free_agent_moves": 47
 }
