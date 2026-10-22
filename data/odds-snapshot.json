@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-10-22T11:13:25.032Z",
- "at": 1792667605032,
+ "generated": "2026-10-22T13:34:58.266Z",
+ "at": 1792676098266,
  "season": "2026",
  "week": 7,
  "liveWeek": null,
@@ -15,11 +15,11 @@
    "titleWas": 0.0951,
    "titleNow": 0.0043,
    "playoffWas": 0.5413,
-   "playoffNow": 0.04285,
-   "wins": 4.61995,
+   "playoffNow": 0.0425,
+   "wins": 4.61825,
    "titleOdds": 21840,
    "titleOddsOpen": 890,
-   "playoffOdds": 2100
+   "playoffOdds": 2120
   },
   {
    "uid": "1257789215605788672",
@@ -42,7 +42,7 @@
    "titleNow": 0.1822,
    "playoffWas": 0.4454,
    "playoffNow": 0.9592,
-   "wins": 9.38295,
+   "wins": 9.38315,
    "titleOdds": 420,
    "titleOddsOpen": 1350,
    "playoffOdds": -19900
@@ -54,8 +54,8 @@
    "titleWas": 0.05745,
    "titleNow": 0.0369,
    "playoffWas": 0.4063,
-   "playoffNow": 0.33415,
-   "wins": 6.5336,
+   "playoffNow": 0.33405,
+   "wins": 6.53375,
    "titleOdds": 2460,
    "titleOddsOpen": 1540,
    "playoffOdds": 180
@@ -67,7 +67,7 @@
    "titleWas": 0.12025,
    "titleNow": 0.0582,
    "playoffWas": 0.61065,
-   "playoffNow": 0.27275,
+   "playoffNow": 0.27285,
    "wins": 5.9363,
    "titleOdds": 1520,
    "titleOddsOpen": 680,
@@ -78,10 +78,10 @@
    "rid": 6,
    "manager": "saiky7",
    "titleWas": 0.09035,
-   "titleNow": 0.19825,
+   "titleNow": 0.19815,
    "playoffWas": 0.5235,
-   "playoffNow": 0.9098,
-   "wins": 8.69465,
+   "playoffNow": 0.90985,
+   "wins": 8.6945,
    "titleOdds": 380,
    "titleOddsOpen": 940,
    "playoffOdds": -2710
@@ -91,10 +91,10 @@
    "rid": 4,
    "manager": "nikhil1123",
    "titleWas": 0.081,
-   "titleNow": 0.03655,
+   "titleNow": 0.0366,
    "playoffWas": 0.4919,
-   "playoffNow": 0.3764,
-   "wins": 6.6759,
+   "playoffNow": 0.3767,
+   "wins": 6.67765,
    "titleOdds": 2480,
    "titleOddsOpen": 1060,
    "playoffOdds": 150
@@ -107,7 +107,7 @@
    "titleNow": 0.1158,
    "playoffWas": 0.4514,
    "playoffNow": 0.8143,
-   "wins": 8.3556,
+   "wins": 8.35545,
    "titleOdds": 710,
    "titleOddsOpen": 1230,
    "playoffOdds": -630
@@ -117,10 +117,10 @@
    "rid": 10,
    "manager": "Lee284",
    "titleWas": 0.09895,
-   "titleNow": 0.1391,
+   "titleNow": 0.13915,
    "playoffWas": 0.55805,
    "playoffNow": 0.84925,
-   "wins": 8.5834,
+   "wins": 8.5836,
    "titleOdds": 580,
    "titleOddsOpen": 850,
    "playoffOdds": -900
@@ -130,10 +130,10 @@
    "rid": 8,
    "manager": "jiddyyyyyy",
    "titleWas": 0.0893,
-   "titleNow": 0.06725,
+   "titleNow": 0.0673,
    "playoffWas": 0.5292,
-   "playoffNow": 0.4697,
-   "wins": 6.86335,
+   "playoffNow": 0.4696,
+   "wins": 6.86295,
    "titleOdds": 1300,
    "titleOddsOpen": 960,
    "playoffOdds": 100
@@ -145,8 +145,8 @@
    "titleWas": 0.0903,
    "titleNow": 0.00615,
    "playoffWas": 0.5234,
-   "playoffNow": 0.0521,
-   "wins": 4.7207,
+   "playoffNow": 0.05215,
+   "wins": 4.7208,
    "titleOdds": 15240,
    "titleOddsOpen": 940,
    "playoffOdds": 1710
@@ -156,9 +156,9 @@
    "rid": 11,
    "manager": "tonypng",
    "titleWas": 0.06005,
-   "titleNow": 0.14975,
+   "titleNow": 0.1497,
    "playoffWas": 0.42615,
-   "playoffNow": 0.83245,
+   "playoffNow": 0.8325,
    "wins": 8.12265,
    "titleOdds": 530,
    "titleOddsOpen": 1470,
@@ -167,20 +167,6 @@
  ],
  "games": [],
  "hurt": [
-  {
-   "manager": "nikhil1123",
-   "cost": 0.060778601694915224,
-   "players": [
-    {
-     "name": "Kyle Monangai",
-     "status": "Out"
-    },
-    {
-     "name": "Justin Jefferson",
-     "status": "Questionable"
-    }
-   ]
-  },
   {
    "manager": "drewkim",
    "cost": 0.05610515752802181,
@@ -279,6 +265,16 @@
    "players": [
     {
      "name": "Brock Bowers",
+     "status": "Questionable"
+    }
+   ]
+  },
+  {
+   "manager": "nikhil1123",
+   "cost": 0.014144100580270824,
+   "players": [
+    {
+     "name": "Justin Jefferson",
      "status": "Questionable"
     }
    ]
