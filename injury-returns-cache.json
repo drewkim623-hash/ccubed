@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-22T18:40:02.492Z",
+ "generated": "2026-10-22T19:50:15.656Z",
  "week": 7,
  "entries": {
   "1466": {
@@ -43,17 +43,6 @@
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
    "retChecked": "2026-10-22"
-  },
-  "4177": {
-   "n": "Mack Hollins",
-   "s": "IR",
-   "ret": "2026-11-08",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.espn.com.sg/nfl/story/_/id/50150455/patriots-place-veteran-wr-mack-hollins-ir-calf-injury — Calf. IR Oct 10, eligible Week 9 Nov 8. Report-based minimum, not fetched-confirmed. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14",
-   "irSince": 6
   },
   "4866": {
    "n": "Saquon Barkley",
@@ -107,7 +96,7 @@
   },
   "5892": {
    "n": "David Montgomery",
-   "s": "Questionable",
+   "s": "Doubtful",
    "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
