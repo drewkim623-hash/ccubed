@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-23T11:13:25.125Z",
+ "generated": "2026-10-23T12:29:37.615Z",
  "week": 7,
  "entries": {
   "1466": {
@@ -310,17 +310,6 @@
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
    "retChecked": "2026-10-23"
-  },
-  "11058": {
-   "n": "Blake Grupe",
-   "s": "IR",
-   "ret": "2027-02-15",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-10-23",
-   "irSince": 6
   },
   "11577": {
    "n": "Will Shipley",
