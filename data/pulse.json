@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-23T06:35:21.239Z",
- "at": 1792737321240,
+ "generated": "2026-10-23T07:04:29.512Z",
+ "at": 1792739069512,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -129,7 +129,8 @@
    "points_against": 829.06,
    "faab_spent": 12,
    "starters_hurt": [
-    "Puka Nacua (Questionable)"
+    "Puka Nacua (Questionable)",
+    "Breece Hall (Questionable)"
    ]
   },
   {
@@ -359,5 +360,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 50
+ "free_agent_moves": 52
 }
