@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-23T15:22:01.406Z",
- "at": 1792768921406,
+ "generated": "2026-10-23T22:19:17.441Z",
+ "at": 1792793957441,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -35,8 +35,7 @@
    "points_against": 786.78,
    "faab_spent": 40,
    "starters_hurt": [
-    "Lamar Jackson (Questionable)",
-    "Matthew Golden (Questionable)"
+    "Lamar Jackson (Questionable)"
    ]
   },
   {
@@ -47,8 +46,7 @@
    "points_against": 819.94,
    "faab_spent": 1,
    "starters_hurt": [
-    "Tyler Warren (Questionable)",
-    "Denzel Boston (Questionable)"
+    "Tyler Warren (Out)"
    ]
   },
   {
@@ -58,9 +56,7 @@
    "points_for": 793.6,
    "points_against": 727.26,
    "faab_spent": 1,
-   "starters_hurt": [
-    "Quinshon Judkins (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jiddyyyyyy",
@@ -69,10 +65,7 @@
    "points_for": 776.36,
    "points_against": 759.14,
    "faab_spent": 40,
-   "starters_hurt": [
-    "Bucky Irving (Questionable)",
-    "Dalton Schultz (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "nikhil1123",
@@ -92,9 +85,7 @@
    "faab_spent": 11,
    "starters_hurt": [
     "Rico Dowdle (Questionable)",
-    "Jaylen Waddle (Questionable)",
-    "Christian Watson (Questionable)",
-    "Emeka Egbuka (Questionable)",
+    "Emeka Egbuka (Out)",
     "Dallas Goedert (Questionable)"
    ]
   },
@@ -105,9 +96,7 @@
    "points_for": 706.88,
    "points_against": 746.72,
    "faab_spent": 56,
-   "starters_hurt": [
-    "George Pickens (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "yojarshh",
@@ -117,8 +106,7 @@
    "points_against": 835.06,
    "faab_spent": 39,
    "starters_hurt": [
-    "Saquon Barkley (Questionable)",
-    "Rashee Rice (Questionable)"
+    "Saquon Barkley (Questionable)"
    ]
   },
   {
@@ -140,9 +128,7 @@
    "points_for": 666.26,
    "points_against": 802.34,
    "faab_spent": 40,
-   "starters_hurt": [
-    "Travis Kelce (Questionable)"
-   ]
+   "starters_hurt": []
   }
  ],
  "this_week": [
@@ -360,5 +346,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 54
+ "free_agent_moves": 56
 }
