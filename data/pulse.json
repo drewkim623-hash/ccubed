@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-22T19:50:16.335Z",
- "at": 1792698616335,
+ "generated": "2026-10-23T06:35:21.239Z",
+ "at": 1792737321240,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -23,7 +23,9 @@
    "points_for": 873.54,
    "points_against": 679.9,
    "faab_spent": 0,
-   "starters_hurt": []
+   "starters_hurt": [
+    "DeVonta Smith (Questionable)"
+   ]
   },
   {
    "manager": "saiky7",
@@ -79,9 +81,7 @@
    "points_for": 752.06,
    "points_against": 775.72,
    "faab_spent": 65,
-   "starters_hurt": [
-    "Justin Jefferson (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "drewkim",
@@ -94,7 +94,8 @@
     "Rico Dowdle (Questionable)",
     "Jaylen Waddle (Questionable)",
     "Christian Watson (Questionable)",
-    "Emeka Egbuka (Questionable)"
+    "Emeka Egbuka (Questionable)",
+    "Dallas Goedert (Questionable)"
    ]
   },
   {
@@ -103,9 +104,9 @@
    "losses": 3,
    "points_for": 706.88,
    "points_against": 746.72,
-   "faab_spent": 55,
+   "faab_spent": 56,
    "starters_hurt": [
-    "Jordan Love (Questionable)"
+    "George Pickens (Questionable)"
    ]
   },
   {
@@ -128,7 +129,7 @@
    "points_against": 829.06,
    "faab_spent": 12,
    "starters_hurt": [
-    "Brock Bowers (Questionable)"
+    "Puka Nacua (Questionable)"
    ]
   },
   {
@@ -159,8 +160,8 @@
   {
    "a": {
     "manager": "andychoe03",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 10.9,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "saiky7",
@@ -176,44 +177,44 @@
    },
    "b": {
     "manager": "tonypng",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 19,
+    "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 23.7,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 32,
+    "startersLeftToPlay": 7
    }
   },
   {
    "a": {
     "manager": "edyun1",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 22.5,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "asierbelay",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 28.44,
+    "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 22.12,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "jiddyyyyyy",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 1.3,
+    "startersLeftToPlay": 9
    }
   }
  ],
@@ -317,6 +318,25 @@
     }
    ],
    "faab": 5,
+   "picks": []
+  },
+  {
+   "week": 7,
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Aaron Rodgers",
+     "pos": "QB",
+     "team": "PIT",
+     "status": null,
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [],
+   "faab": 1,
    "picks": []
   },
   {
