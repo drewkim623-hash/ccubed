@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-24T13:28:07.132Z",
+ "generated": "2026-10-24T19:49:27.810Z",
  "week": 7,
  "entries": {
   "2133": {
@@ -36,7 +36,7 @@
   },
   "4881": {
    "n": "Lamar Jackson",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-10-25",
    "retWeeks": null,
    "retSource": "report",
@@ -194,10 +194,10 @@
    "n": "Dontayvion Wicks",
    "s": "Questionable",
    "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
+   "retWeeks": 3,
+   "retSource": "espn-outlook",
    "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
+   "retNote": "miss all three Week",
    "retChecked": "2026-10-24"
   },
   "9493": {
