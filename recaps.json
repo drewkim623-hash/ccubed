@@ -1900,6 +1900,158 @@
      "text": "Lines, playoff chances and starters left are from the site's odds board on Friday morning; the win chance for each matchup counts points already scored. Records, points and claims are from the week 6 file and the waiver log Sleeper produced for C Cubed; injury designations are from the site's injury report. Nobody is quoted."
     }
    ]
+  },
+  {
+   "season": "2026",
+   "slug": "four-teams-at-3-3-sit-44-5-points-of-playoff-chance-apart",
+   "aliases": [],
+   "date": "2026-10-24",
+   "kind": "opinion",
+   "source": "saturday",
+   "kicker": "2026 · week 7",
+   "headline": "Four Teams at 3-3 Sit 44.5 Points of Playoff Chance Apart",
+   "dek": "Four 3-3 teams run from 56.48 to 12.0 percent to make the playoffs on the board, Jug lost 20.5 points of chance since Oct 22, and a 1-5 team is a favorite in its game.",
+   "byline": "C Cubed desk",
+   "standfirst": "Odds · 44.5 points · 3-3",
+   "teaser": "🚨 C CUBED | WEEK 7\n\nFOUR TEAMS AT 3-3 SIT 44.5 POINTS OF PLAYOFF CHANCE APART\n\n📊 n² (nikhil1123) is 56.48 percent to make the playoffs and andychoe03 & NathKim (andychoe03) 12.0, both at 3-3\n📉 Jug (Lee284) fell from 84.95 to 64.4 percent since Oct 22\n⚖️ S2? #jtw #imwallin (yojarshh) is 1-5 and 30.5 percent to make the playoffs\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/four-teams-at-3-3-sit-44-5-points-of-playoff-chance-apart.html",
+   "blocks": [
+    {
+     "type": "p",
+     "lead": true,
+     "text": "Four teams are 3-3, and the site's odds board has them 44.5 points of playoff chance apart. <b>n² (nikhil1123)</b> is at 56.48 percent and <b>andychoe03 & NathKim (andychoe03)</b> at 12.0, with <b>Team Meta/Bloomberg (jiddyyyyyy)</b> at 49.0 and <b>Lucky Strike (drewkim)</b> at 23.5 between them. Week 7 has only just started, and the board is already moving."
+    },
+    {
+     "type": "stat",
+     "n": "44.5",
+     "text": "points of playoff chance between n² (56.48 percent, 752.06 points for) and andychoe03 & NathKim (12.0 percent, 706.88 points for). Both are 3-3."
+    },
+    {
+     "type": "h",
+     "eyebrow": "who moved",
+     "text": "Two readings, two directions"
+    },
+    {
+     "type": "p",
+     "text": "The odds history holds a between-weeks reading from Oct 15 and another from Oct 22, after week 6 closed; it has none from last Saturday itself. Between the two, <b>Tshough (tonypng)</b> gained the most, 14.48 points, from 68.80 to 83.28 percent, after its 168.86 to 81.3 win over <b>Uzzz uzz uzz (jjnhwg)</b>. The largest fall was andychoe03's, 17.83 points, from 25.99 to 8.16. jjnhwg slipped from 87.59 to 81.42. The history keeps each price and not the reason for it."
+    },
+    {
+     "type": "p",
+     "text": "Since Oct 22 the board has moved again, this time on week 7. <b>Jug (Lee284)</b>, 4-2, went from 84.95 to 64.4 percent, a fall of 20.5 points. n² rose from 37.66 to 56.48 while trailing <b>8 and thick (bigmoneyjos)</b> 23.7 to 32. Lucky Strike fell from 33.37 to 23.5. Lucky Strike and Jug play each other, and the board prints no line for that game."
+    },
+    {
+     "type": "tiers",
+     "kicker": "Week 7 · The playoff picture",
+     "title": "Same record, four different prices",
+     "sub": "Big number: chance to make the playoffs on the board now.",
+     "note": "Playoff % from the site's odds board, Oct 24; records through week 6. Six of twelve make it; the top two get a bye.",
+     "href": "https://drewkim623-hash.github.io/ccubed/#picture",
+     "link": "See the live Playoff Picture",
+     "cutAfter": "Lee284",
+     "tiers": [
+      {
+       "name": "Likely",
+       "range": "85% or better",
+       "rows": [
+        {
+         "team": "asierbelay",
+         "pct": 96.98,
+         "rec": "5-1"
+        },
+        {
+         "team": "saiky7",
+         "pct": 88.88,
+         "rec": "4-2"
+        },
+        {
+         "team": "tonypng",
+         "pct": 85.665,
+         "rec": "4-2"
+        }
+       ]
+      },
+      {
+       "name": "Favored",
+       "range": "55% to 85%",
+       "rows": [
+        {
+         "team": "jjnhwg",
+         "pct": 82.36,
+         "rec": "4-2"
+        },
+        {
+         "team": "Lee284",
+         "pct": 64.415,
+         "rec": "4-2"
+        },
+        {
+         "team": "nikhil1123",
+         "pct": 56.48,
+         "rec": "3-3"
+        }
+       ]
+      },
+      {
+       "name": "Chasing",
+       "range": "10% to 55%",
+       "rows": [
+        {
+         "team": "jiddyyyyyy",
+         "pct": 49.005,
+         "rec": "3-3"
+        },
+        {
+         "team": "yojarshh",
+         "pct": 30.495,
+         "rec": "1-5"
+        },
+        {
+         "team": "drewkim",
+         "pct": 23.465,
+         "rec": "3-3"
+        },
+        {
+         "team": "andychoe03",
+         "pct": 11.965,
+         "rec": "3-3"
+        }
+       ]
+      },
+      {
+       "name": "Out of reach",
+       "range": "under 10%",
+       "rows": [
+        {
+         "team": "edyun1",
+         "pct": 5.775,
+         "rec": "1-5"
+        },
+        {
+         "team": "bigmoneyjos",
+         "pct": 4.515,
+         "rec": "1-5"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "the coming lines",
+     "text": "Five priced games, and a 1-5 favorite"
+    },
+    {
+     "type": "p",
+     "text": "The board prices five of the six games, and the lines have shifted since the Friday reading. n² is 74.8 percent against bigmoneyjos while behind on points, up from 54.1. jjnhwg is down to 67.8 percent over jiddyyyyyy, from 83.2, with a 22.12 to 1.3 lead. <b>AB x B (asierbelay)</b> is 74.1 percent over <b>BOWSER (edyun1)</b>, and <b>yerra x ecj (saiky7)</b> is 71.2 over andychoe03, who lead 10.9 to 0."
+    },
+    {
+     "type": "p",
+     "text": "The oddest line belongs to <b>S2? #jtw #imwallin (yojarshh)</b>, 1-5 and 55.7 percent to beat Tshough while trailing 19 to 0. yojarshh is at 30.5 percent to make the playoffs, ahead of both 3-3 teams at the bottom of the tier above, Lucky Strike (23.5) and andychoe03 (12.0), and has 835.06 points against, the most in the league. At the top, saiky7 is 19.64 percent to win the title at +380, with asierbelay at 18.68 (+410)."
+    },
+    {
+     "type": "note",
+     "text": "Moves are measured against the Oct 15 and Oct 22 between-weeks readings in the odds history; it holds none from last Saturday. Odds, lines and scores are from the site's own board on Oct 24, with week 7 in progress, so every line will move. Records and points are from the week 6 file. Nobody is quoted."
+    }
+   ]
   }
  ]
 }
