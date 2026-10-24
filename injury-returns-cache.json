@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-23T22:19:16.776Z",
+ "generated": "2026-10-24T11:11:10.768Z",
  "week": 7,
  "entries": {
   "2133": {
@@ -62,7 +62,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-23"
+   "retChecked": "2026-10-24"
   },
   "5872": {
    "n": "Deebo Samuel Sr.",
@@ -92,7 +92,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-23"
+   "retChecked": "2026-10-24"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -113,7 +113,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-23"
+   "retChecked": "2026-10-24"
   },
   "7525": {
    "n": "DeVonta Smith",
@@ -198,7 +198,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-23"
+   "retChecked": "2026-10-24"
   },
   "9493": {
    "n": "Puka Nacua",
@@ -208,7 +208,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-23"
+   "retChecked": "2026-10-24"
   },
   "9502": {
    "n": "Tank Dell",
@@ -218,7 +218,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: IR with Knee - ACL + MCL Surgery = rest of season",
-   "retChecked": "2026-10-23",
+   "retChecked": "2026-10-24",
    "irSince": 7
   },
   "9753": {
@@ -249,7 +249,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-23"
+   "retChecked": "2026-10-24"
   },
   "11577": {
    "n": "Will Shipley",
@@ -297,12 +297,12 @@
   "12514": {
    "n": "Emeka Egbuka",
    "s": "Out",
-   "ret": "2026-11-01",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-10-23"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Out = coming week only",
+   "retChecked": "2026-10-24"
   },
   "12518": {
    "n": "Tyler Warren",
@@ -380,7 +380,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-23"
+   "retChecked": "2026-10-24"
   },
   "13345": {
    "n": "Jonah Coleman",
