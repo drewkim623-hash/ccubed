@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-25T11:11:20.446Z",
- "at": 1792926680446,
+ "generated": "2026-10-25T14:18:23.911Z",
+ "at": 1792937903912,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -32,9 +32,7 @@
    "points_for": 868.2,
    "points_against": 786.78,
    "faab_spent": 40,
-   "starters_hurt": [
-    "Lamar Jackson (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jjnhwg",
@@ -134,14 +132,14 @@
    },
    "b": {
     "manager": "Lee284",
-    "points": 0,
+    "points": 14,
     "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 10.9,
+    "points": 13.3,
     "startersLeftToPlay": 9
    },
    "b": {
@@ -153,7 +151,7 @@
   {
    "a": {
     "manager": "yojarshh",
-    "points": 0,
+    "points": 1.6,
     "startersLeftToPlay": 10
    },
    "b": {
@@ -177,19 +175,19 @@
   {
    "a": {
     "manager": "edyun1",
-    "points": 22.5,
+    "points": 27,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "asierbelay",
-    "points": 28.44,
+    "points": 37.14,
     "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 22.12,
+    "points": 25.62,
     "startersLeftToPlay": 9
    },
    "b": {
@@ -340,5 +338,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 61
+ "free_agent_moves": 62
 }
