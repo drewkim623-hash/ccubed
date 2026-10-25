@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-25T15:39:25.436Z",
+ "generated": "2026-10-25T15:54:44.297Z",
  "week": 7,
  "entries": {
   "2133": {
@@ -130,7 +130,7 @@
   },
   "8155": {
    "n": "Breece Hall",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
