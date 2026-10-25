@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-24T20:19:20.163Z",
- "at": 1792873160163,
+ "generated": "2026-10-25T02:30:37.245Z",
+ "at": 1792895437245,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -23,9 +23,7 @@
    "points_for": 873.54,
    "points_against": 679.9,
    "faab_spent": 0,
-   "starters_hurt": [
-    "DeVonta Smith (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "saiky7",
@@ -84,8 +82,7 @@
    "points_against": 733.36,
    "faab_spent": 11,
    "starters_hurt": [
-    "Rico Dowdle (Questionable)",
-    "Emeka Egbuka (Out)"
+    "Rico Dowdle (Questionable)"
    ]
   },
   {
@@ -263,7 +260,7 @@
      "name": "Tank Dell",
      "pos": "WR",
      "team": "HOU",
-     "status": "IR",
+     "status": null,
      "to": "yojarshh"
     }
    ],
@@ -345,5 +342,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 57
+ "free_agent_moves": 60
 }

@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-24T20:19:19.715Z",
+ "generated": "2026-10-25T02:30:36.631Z",
  "week": 7,
  "entries": {
   "2133": {
@@ -82,7 +82,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-24"
+   "retChecked": "2026-10-25"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -103,7 +103,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-24"
+   "retChecked": "2026-10-25"
   },
   "7525": {
    "n": "DeVonta Smith",
@@ -169,17 +169,6 @@
    "retChecked": "2026-10-14",
    "irSince": 6
   },
-  "8408": {
-   "n": "Jordan Mason",
-   "s": "IR",
-   "ret": "2026-10-25",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://vikingswire.usatoday.com/story/sports/nfl/vikings/2026/10/12/vikings-expected-to-see-jordan-mason-come-off-ir-for-week-7/92226547007/ — Thumb fracture (surgery). Expected activated for Week 7; MIN bye Week 6 => 0 games missed. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14",
-   "irSince": 6
-  },
   "9486": {
    "n": "Dontayvion Wicks",
    "s": "Out",
@@ -188,7 +177,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-10-24"
+   "retChecked": "2026-10-25"
   },
   "9493": {
    "n": "Puka Nacua",
@@ -198,18 +187,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-24"
-  },
-  "9502": {
-   "n": "Tank Dell",
-   "s": "IR",
-   "ret": null,
-   "retWeeks": 99,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: IR with Knee - ACL + MCL Surgery = rest of season",
-   "retChecked": "2026-10-24",
-   "irSince": 7
+   "retChecked": "2026-10-25"
   },
   "9753": {
    "n": "Zach Charbonnet",
@@ -239,7 +217,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-24"
+   "retChecked": "2026-10-25"
   },
   "11577": {
    "n": "Will Shipley",
@@ -370,18 +348,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-24"
-  },
-  "13345": {
-   "n": "Jonah Coleman",
-   "s": "IR",
-   "ret": "2026-10-25",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-22",
-   "irSince": 6
+   "retChecked": "2026-10-25"
   }
  }
 }
