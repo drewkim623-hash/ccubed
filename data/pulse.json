@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-25T02:30:37.245Z",
- "at": 1792895437245,
+ "generated": "2026-10-25T06:59:34.568Z",
+ "at": 1792911574569,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -81,9 +81,7 @@
    "points_for": 749.2,
    "points_against": 733.36,
    "faab_spent": 11,
-   "starters_hurt": [
-    "Rico Dowdle (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "andychoe03",
@@ -342,5 +340,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 60
+ "free_agent_moves": 61
 }
