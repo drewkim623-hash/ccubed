@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-25T14:18:23.911Z",
- "at": 1792937903912,
+ "generated": "2026-10-25T15:32:08.582Z",
+ "at": 1792942328582,
  "season": "2026",
  "nfl_week": 7,
  "season_type": "regular",
@@ -41,9 +41,7 @@
    "points_for": 805.16,
    "points_against": 819.94,
    "faab_spent": 1,
-   "starters_hurt": [
-    "Tyler Warren (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "Lee284",
@@ -109,8 +107,7 @@
    "points_against": 829.06,
    "faab_spent": 12,
    "starters_hurt": [
-    "Puka Nacua (Questionable)",
-    "Breece Hall (Questionable)"
+    "Puka Nacua (Questionable)"
    ]
   },
   {
@@ -132,31 +129,31 @@
    },
    "b": {
     "manager": "Lee284",
-    "points": 14,
+    "points": 6,
     "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 13.3,
+    "points": 27.3,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "saiky7",
-    "points": 0,
+    "points": 1.6,
     "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "yojarshh",
-    "points": 1.6,
+    "points": 4.6,
     "startersLeftToPlay": 10
    },
    "b": {
     "manager": "tonypng",
-    "points": 19,
+    "points": 20.9,
     "startersLeftToPlay": 9
    }
   },
@@ -175,19 +172,19 @@
   {
    "a": {
     "manager": "edyun1",
-    "points": 27,
+    "points": 38.1,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "asierbelay",
-    "points": 37.14,
+    "points": 42.84,
     "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 25.62,
+    "points": 29.22,
     "startersLeftToPlay": 9
    },
    "b": {
@@ -338,5 +335,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 62
+ "free_agent_moves": 66
 }

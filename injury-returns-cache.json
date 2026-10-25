@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-25T14:18:23.433Z",
+ "generated": "2026-10-25T15:32:07.970Z",
  "week": 7,
  "entries": {
   "2133": {
@@ -73,16 +73,6 @@
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/4035538/david-montgomery — Groin. Ryans: week-to-week; trending to miss Week 6. HOU bye Week 8; could extend to Week 7. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-22"
-  },
-  "5927": {
-   "n": "Terry McLaurin",
-   "s": "Out",
-   "ret": "2027-02-15",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-10-25"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -217,17 +207,6 @@
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/4431545/will-shipley — Partial plantar fascia tear. Could be sidelined multiple weeks (2 assumed). Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14",
-   "irSince": 6
-  },
-  "11583": {
-   "n": "Jonathon Brooks",
-   "s": "IR",
-   "ret": "2026-11-15",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.nfl.com/news/panthers-rb-jonathon-brooks-surgery-out-six-weeks — Core muscle surgery. Canales: 6-8 weeks from Sep 23 => return Week 9-11; midpoint Week 10. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14",
    "irSince": 6
   },
