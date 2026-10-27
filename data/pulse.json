@@ -1,9 +1,9 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-26T11:13:55.811Z",
- "at": 1793013235812,
+ "generated": "2026-10-27T04:24:52.999Z",
+ "at": 1793075092999,
  "season": "2026",
- "nfl_week": 7,
+ "nfl_week": 8,
  "season_type": "regular",
  "week_in_progress": true,
  "standings": [
@@ -23,7 +23,9 @@
    "points_for": 873.54,
    "points_against": 679.9,
    "faab_spent": 0,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Amon-Ra St. Brown (Questionable)"
+   ]
   },
   {
    "manager": "saiky7",
@@ -34,6 +36,7 @@
    "faab_spent": 40,
    "starters_hurt": [
     "Drake London (Questionable)",
+    "Matthew Golden (Questionable)",
     "Aaron Jones Sr. (Questionable)"
    ]
   },
@@ -114,7 +117,8 @@
    "points_against": 829.06,
    "faab_spent": 12,
    "starters_hurt": [
-    "Woody Marks (Questionable)"
+    "Woody Marks (Questionable)",
+    "Jalen Coker (Questionable)"
    ]
   },
   {
@@ -133,178 +137,78 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 73.92,
-    "startersLeftToPlay": 1
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "Lee284",
-    "points": 164.52,
-    "startersLeftToPlay": 1
+    "manager": "tonypng",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 101.66,
-    "startersLeftToPlay": 1
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "saiky7",
-    "points": 120.72,
-    "startersLeftToPlay": 0
-   }
-  },
-  {
-   "a": {
     "manager": "yojarshh",
-    "points": 129.6,
-    "startersLeftToPlay": 1
-   },
-   "b": {
-    "manager": "tonypng",
-    "points": 115.08,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 155.38,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "bigmoneyjos",
-    "points": 80.3,
-    "startersLeftToPlay": 1
+    "manager": "Lee284",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "edyun1",
-    "points": 129.6,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "asierbelay",
-    "points": 88.64,
-    "startersLeftToPlay": 2
+    "manager": "saiky7",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 82.72,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
+    "manager": "bigmoneyjos",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
     "manager": "jiddyyyyyy",
-    "points": 100.6,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "asierbelay",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   }
  ],
  "trades": [],
  "waivers": [
-  {
-   "week": 6,
-   "type": "waiver",
-   "managers": [
-    "drewkim"
-   ],
-   "adds": [
-    {
-     "name": "C.J. Stroud",
-     "pos": "QB",
-     "team": "HOU",
-     "status": null,
-     "to": "drewkim"
-    }
-   ],
-   "drops": [],
-   "faab": 11,
-   "picks": []
-  },
-  {
-   "week": 6,
-   "type": "waiver",
-   "managers": [
-    "saiky7"
-   ],
-   "adds": [
-    {
-     "name": "Bryce Young",
-     "pos": "QB",
-     "team": "CAR",
-     "status": null,
-     "to": "saiky7"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Aaron Rodgers",
-     "pos": "QB",
-     "team": "PIT",
-     "status": null,
-     "from": "saiky7"
-    }
-   ],
-   "faab": 10,
-   "picks": []
-  },
-  {
-   "week": 6,
-   "type": "waiver",
-   "managers": [
-    "yojarshh"
-   ],
-   "adds": [
-    {
-     "name": "Tank Dell",
-     "pos": "WR",
-     "team": "HOU",
-     "status": null,
-     "to": "yojarshh"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Kimani Vidal",
-     "pos": "RB",
-     "team": "LAC",
-     "status": null,
-     "from": "yojarshh"
-    }
-   ],
-   "faab": 6,
-   "picks": []
-  },
-  {
-   "week": 6,
-   "type": "waiver",
-   "managers": [
-    "saiky7"
-   ],
-   "adds": [
-    {
-     "name": "Malik Washington",
-     "pos": "WR",
-     "team": "MIA",
-     "status": null,
-     "to": "saiky7"
-    }
-   ],
-   "drops": [
-    {
-     "name": "MarShawn Lloyd",
-     "pos": "RB",
-     "team": "GB",
-     "status": null,
-     "from": "saiky7"
-    }
-   ],
-   "faab": 5,
-   "picks": []
-  },
   {
    "week": 7,
    "type": "waiver",
@@ -323,26 +227,7 @@
    "drops": [],
    "faab": 1,
    "picks": []
-  },
-  {
-   "week": 6,
-   "type": "waiver",
-   "managers": [
-    "Lee284"
-   ],
-   "adds": [
-    {
-     "name": "Tre Tucker",
-     "pos": "WR",
-     "team": "LV",
-     "status": null,
-     "to": "Lee284"
-    }
-   ],
-   "drops": [],
-   "faab": 1,
-   "picks": []
   }
  ],
- "free_agent_moves": 66
+ "free_agent_moves": 29
 }

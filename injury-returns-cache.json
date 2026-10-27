@@ -1,7 +1,7 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-26T22:32:47.716Z",
- "week": 7,
+ "generated": "2026-10-27T04:24:52.346Z",
+ "week": 8,
  "entries": {
   "2133": {
    "n": "Davante Adams",
@@ -32,12 +32,12 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "4199": {
    "n": "Aaron Jones Sr.",
    "s": "Questionable",
-   "ret": "2026-10-25",
+   "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -47,7 +47,7 @@
   "4866": {
    "n": "Saquon Barkley",
    "s": "Questionable",
-   "ret": "2026-10-25",
+   "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -67,7 +67,7 @@
   "4983": {
    "n": "DJ Moore",
    "s": "Out",
-   "ret": "2026-10-25",
+   "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -123,7 +123,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "7543": {
    "n": "Travis Etienne Jr.",
@@ -144,7 +144,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "7567": {
    "n": "Kenny Gainwell",
@@ -154,7 +154,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "8112": {
    "n": "Drake London",
@@ -164,7 +164,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -247,7 +247,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "11577": {
    "n": "Will Shipley",
@@ -263,7 +263,7 @@
   "11635": {
    "n": "Ladd McConkey",
    "s": "Out",
-   "ret": "2026-10-25",
+   "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -273,7 +273,7 @@
   "11646": {
    "n": "Jalen Coker",
    "s": "Questionable",
-   "ret": "2026-10-25",
+   "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -288,7 +288,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "12474": {
    "n": "Woody Marks",
@@ -298,7 +298,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "12481": {
    "n": "Cam Skattebo",
@@ -308,7 +308,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "12487": {
    "n": "Terrance Ferguson",
@@ -329,7 +329,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "12514": {
    "n": "Emeka Egbuka",
@@ -354,13 +354,8 @@
   "12533": {
    "n": "Jacory Croskey-Merritt",
    "s": "IR",
-   "ret": null,
-   "retWeeks": 3,
-   "retWeeksList": [
-    8,
-    9,
-    10
-   ],
+   "ret": "2026-11-22",
+   "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
@@ -385,7 +380,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-26"
+   "retChecked": "2026-10-27"
   },
   "13281": {
    "n": "Jordyn Tyson",
