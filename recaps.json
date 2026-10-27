@@ -212,6 +212,84 @@
      "body": "asierbelay is 5-1 and tonypng, saiky7, jjnhwg and Lee284 are each 4-2. The odds board has asierbelay at 94.8 percent to make the playoffs, saiky7 at 89.0, tonypng at 84.6, Lee284 at 81.5 and jjnhwg at 80.2. Three teams are 1-5."
     }
    ]
+  },
+  {
+   "season": "2026",
+   "week": 7,
+   "note": "",
+   "lede": "Week 7 produced the highest score of C Cubed's first season and its second-widest margin. Jug (Lee284) scored 186.02, 9.14 above the previous high, and beat Lucky Strike (drewkim), who scored 83.72, by 102.30. Two other games finished 2.56 and 3.36 apart, the third- and fourth-closest of the year, and the six games totaled 1,466.52 points, 113.38 more than week 6. Three teams are now 5-2: Lee284, asierbelay and saiky7. bigmoneyjos is 1-6, and only two waiver claims went through, for $1 and $0.",
+   "games": [
+    {
+     "headline": "edyun1 edges asierbelay by 2.56",
+     "winner": "edyun1",
+     "winner_points": 129.6,
+     "loser": "asierbelay",
+     "loser_points": 127.04,
+     "body": "Rhamondre Stevenson scored 22.5 for BOWSER, Puka Nacua 21.8 and Emanuel Wilson 18.5. Drake Maye's 28.44, CeeDee Lamb's 24.4 and Ashton Jeanty's 21.6 led AB x B, but tight end Sam LaPorta scored 2.8 and Konata Mumpfield, a free-agent add this week, 2.5. edyun1 is 2-5 and asierbelay is 5-2."
+    },
+    {
+     "headline": "saiky7 holds off andychoe03 by 3.36",
+     "winner": "saiky7",
+     "winner_points": 120.72,
+     "loser": "andychoe03",
+     "loser_points": 117.36,
+     "body": "Jaxon Smith-Njigba scored 31.3 for yerra x ecj, with Josh Jacobs at 20.1 and Drake London at 19.6, though Juwan Johnson managed 1.7 at tight end. Jordan Love's 17.96 and Devaughn Vele's 16.4 led the if team, which started two tight ends, Kyle Pitts at 13.2 and Harold Fannin at 13.1. saiky7 is 5-2; andychoe03 is 3-4."
+    },
+    {
+     "headline": "jiddyyyyyy beats jjnhwg by 17.88",
+     "winner": "jiddyyyyyy",
+     "winner_points": 100.6,
+     "loser": "jjnhwg",
+     "loser_points": 82.72,
+     "body": "Bucky Irving scored 24 for Team Meta/Bloomberg, Malik Nabers 18.1 and Jahmyr Gibbs 17.3. Uzzz uzz uzz got 22.12 from Caleb Williams and 19 from Jonathan Taylor, but Cade Otton, a free-agent add this week, scored 0 at tight end. Both teams are 4-3."
+    },
+    {
+     "headline": "yojarshh beats tonypng by 29.62",
+     "winner": "yojarshh",
+     "winner_points": 144.7,
+     "loser": "tonypng",
+     "loser_points": 115.08,
+     "body": "Zay Flowers scored 27.7 for S2? #jtw #imwallin, with Matthew Stafford at 18.5, Bijan Robinson at 17.2 and Blake Corum at 17.1, and the team left only 5.5 points on its bench. Joe Burrow's 28.88 and Amon-Ra St. Brown's 24.2 led Tshough, but Kenneth Walker scored 9.7. yojarshh is 2-5; tonypng is 4-3."
+    },
+    {
+     "headline": "nikhil1123 scores 155.38 and wins by 51.80",
+     "winner": "nikhil1123",
+     "winner_points": 155.38,
+     "loser": "bigmoneyjos",
+     "loser_points": 103.58,
+     "body": "Tee Higgins scored 26.8 for n², Jameson Williams 26.1, Geno Smith 24.48 and Luther Burden 23.7. Smith was a free-agent add this week. Dak Prescott's 23.28 and Christian McCaffrey's 22 led 8 and thick, but Nico Collins scored 2.6 and the Baltimore defense -2. nikhil1123 is 4-3; bigmoneyjos is 1-6."
+    },
+    {
+     "headline": "Lee284 scores a season-high 186.02 and wins by 102.30",
+     "winner": "Lee284",
+     "winner_points": 186.02,
+     "loser": "drewkim",
+     "loser_points": 83.72,
+     "body": "Tony Pollard scored 36.5 for Jug, Trey McBride 27.1, Quinshon Judkins 23.4 and Javonte Williams 21.5, and all ten starters scored 8 or more. C.J. Stroud's 16.52 led Lucky Strike, whose Carolina defense, a $0 claim, scored -3, while Bo Nix scored 26.28 on the bench. Lee284 is 5-2; drewkim is 3-4."
+    }
+   ],
+   "around": [
+    {
+     "kind": "race",
+     "headline": "Three teams at 5-2, and two with the points",
+     "body": "Lee284, asierbelay and saiky7 are 5-2. saiky7 leads the league with 988.92 points and tonypng, at 4-3, has 988.62, 0.30 behind. The board puts asierbelay at 93.2 percent to make the playoffs, Lee284 at 92.0 and saiky7 at 87.7."
+    },
+    {
+     "kind": "slider",
+     "headline": "jjnhwg's odds fall as nikhil1123's rise",
+     "body": "On the site's board, jjnhwg's playoff chance fell from 81.4 percent after week 6 to 59.9 after an 82.72 and a loss, while nikhil1123's rose from 37.7 to 61.0 on a 155.38. Both teams are 4-3."
+    },
+    {
+     "kind": "waivers",
+     "headline": "Two claims, $1 and $0",
+     "body": "andychoe03 paid $1 for Aaron Rodgers, who scored 13.08 on the bench, and drewkim claimed Carolina's defense for $0 and started it for -3. nikhil1123 has spent $65 in all and andychoe03 $56."
+    },
+    {
+     "kind": "note",
+     "headline": "edyun1 wins with 53.6 points on the bench",
+     "body": "BOWSER left more on the bench than any other team in week 7, including 20.4 from Kirk Cousins, a free-agent add this week, and still won by 2.56. jiddyyyyyy left 47, with KC Concepcion's 23.2 unused while Roschon Johnson started and scored 1.3."
+    }
+   ]
   }
  ],
  "articles": [
@@ -2050,6 +2128,240 @@
     {
      "type": "note",
      "text": "Moves are measured against the Oct 15 and Oct 22 between-weeks readings in the odds history; it holds none from last Saturday. Odds, lines and scores are from the site's own board on Oct 24, with week 7 in progress, so every line will move. Records and points are from the week 6 file. Nobody is quoted."
+    }
+   ]
+  },
+  {
+   "season": "2026",
+   "slug": "jug-scores-186-02-the-season-high-and-two-games-end-inside-four-points",
+   "date": "2026-10-27",
+   "kind": "opinion",
+   "source": "tuesday",
+   "kicker": "2026 · week 7",
+   "headline": "Jug Scores 186.02, the Season High, and Two Games End Inside Four Points",
+   "dek": "Jug's 186.02 beat the previous season high by 9.14, and Lucky Strike's 83.72 lost by 102.30, the second-widest margin of the season. Two other games finished 2.56 and 3.36 apart. Every game in full, below.",
+   "byline": "C Cubed desk",
+   "standfirst": "6 games · 1,466.52 points · the season's high score and two of its closest finishes",
+   "teaser": "🚨 C CUBED | WEEK 7\n\nJUG SCORES 186.02, THE SEASON HIGH, AND TWO GAMES END INSIDE FOUR POINTS\n\n💥 Jug (Lee284) scored 186.02, 9.14 above the old season high\n📏 Lucky Strike (drewkim) lost by 102.30, the second-widest margin of the year\n⚖️ Two games ended 2.56 and 3.36 apart\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/jug-scores-186-02-the-season-high-and-two-games-end-inside-four-points.html",
+   "blocks": [
+    {
+     "type": "p",
+     "lead": true,
+     "text": "Week 7 set the season's scoring high and came within 11.60 points of its widest margin. Jug (Lee284) scored 186.02, 9.14 above the previous best of 176.88, and beat Lucky Strike (drewkim), who scored 83.72, by 102.30, a margin exceeded only by the 113.90 of week 2. The week also held the third- and fourth-closest finishes of the season, 2.56 and 3.36 points. The six games totaled 1,466.52 points, the second-lowest week of the seven."
+    },
+    {
+     "type": "stat",
+     "n": "186.02",
+     "text": "Jug's score in week 7, the highest of the 84 team scores this season. Every one of its ten starters scored 8 or more."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the column",
+     "text": "A 103.30-Point Spread Between the High and the Low"
+    },
+    {
+     "type": "p",
+     "text": "The week's scores ran from 186.02 to 82.72, a spread of 103.30 points. Six of the twelve teams scored 120 or more and four scored under 105: bigmoneyjos at 103.58, jiddyyyyyy at 100.60, drewkim at 83.72 and jjnhwg at 82.72. The last two are the sixth- and fifth-lowest scores of the season. The lowest is still edyun1's 62.98 in week 2."
+    },
+    {
+     "type": "p",
+     "text": "Jug's 186.02 had no weak spot. Tony Pollard scored 36.5, Trey McBride 27.1, Quinshon Judkins 23.4, Javonte Williams 21.5 and Tre Tucker 21.3, and the two lowest of the ten starters, Tetairoa McMillan and kicker Jason Myers, scored 8 each. The best bench player, Tyler Allgeier, scored 7.9, so no one Lee284 left unused would have outscored a starter."
+    },
+    {
+     "type": "p",
+     "text": "Neither low score is mainly a bench story. Bo Nix scored 26.28 on Lucky Strike's bench against C.J. Stroud's 16.52 at quarterback, a 9.76-point swap that would have put drewkim at 93.48, still 92.54 short of Jug. Uzzz uzz uzz (jjnhwg) started Cade Otton, a free-agent add this week, at tight end for 0, and the rest of its lineup scored 6.7 (Chris Godwin), 5.9 (Derrick Henry) and 5.7 (Denzel Boston) at the bottom."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the close ones",
+     "text": "Two Finishes Inside Four Points"
+    },
+    {
+     "type": "p",
+     "text": "Two games ended 2.56 and 3.36 apart. Before this week the closest finishes of the season were 0.94 in week 4 and 1.78 in week 5, so week 7 now holds the third- and fourth-closest margins, ahead of the two 6.08 finishes in weeks 5 and 6."
+    },
+    {
+     "type": "p",
+     "text": "The winner of the 2.56 game, edyun1, left 53.6 points on the bench, the most of any team in week 7, including Kirk Cousins's 20.4. The loser, asierbelay, left 11.3. In the 3.36 game, saiky7 left 36 and andychoe03 24.58, with Aaron Rodgers, a $1 claim, scoring 13.08 on the bench."
+    },
+    {
+     "type": "p",
+     "text": "The results moved the standings in opposite directions. asierbelay's loss makes it 5-2 and saiky7's win makes it 5-2, so three teams, with Lee284, share the best record. andychoe03 is 3-4."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the board",
+     "text": "Four Teams at 4-3, and a Points Table Tighter Than the Standings"
+    },
+    {
+     "type": "p",
+     "text": "Points scored are closer than records. saiky7 leads the league with 988.92 points, tonypng has 988.62 at 4-3, Lee284 has 979.62 and asierbelay 978.04. The four are within 10.88 of each other, and the next team, nikhil1123, has 907.44, 70.60 behind asierbelay."
+    },
+    {
+     "type": "p",
+     "text": "The odds board, read after the week was final, has asierbelay at 93.2 percent to make the playoffs, Lee284 at 92.0 and saiky7 at 87.7. The four teams at 4-3 run from 72.9 (tonypng) to 55.5 (jiddyyyyyy), a range of 17.4. Two of them moved the most: nikhil1123 rose from 37.7 to 61.0 after scoring 155.38, and jjnhwg fell from 81.4 to 59.9 after scoring 82.72."
+    },
+    {
+     "type": "tiers",
+     "kicker": "Week 7 · The playoff picture",
+     "title": "Three clear, four close behind",
+     "sub": "Big number: chance to make the playoffs on the board now.",
+     "note": "Playoff % from the site's odds board after week 7 was final. Six of twelve make it; the top two get a bye. Records from Sleeper.",
+     "href": "https://drewkim623-hash.github.io/ccubed/#picture",
+     "link": "See the live Playoff Picture",
+     "tiers": [
+      {
+       "name": "Likely",
+       "range": "85% or better",
+       "rows": [
+        {
+         "team": "asierbelay",
+         "pct": 93.195,
+         "rec": "5-2"
+        },
+        {
+         "team": "Lee284",
+         "pct": 91.995,
+         "rec": "5-2"
+        },
+        {
+         "team": "saiky7",
+         "pct": 87.675,
+         "rec": "5-2"
+        }
+       ]
+      },
+      {
+       "name": "Favored",
+       "range": "55% to 75%",
+       "rows": [
+        {
+         "team": "tonypng",
+         "pct": 72.905,
+         "rec": "4-3"
+        },
+        {
+         "team": "nikhil1123",
+         "pct": 61,
+         "rec": "4-3"
+        },
+        {
+         "team": "jjnhwg",
+         "pct": 59.945,
+         "rec": "4-3"
+        },
+        {
+         "team": "jiddyyyyyy",
+         "pct": 55.5,
+         "rec": "4-3"
+        }
+       ]
+      },
+      {
+       "name": "Chasing",
+       "range": "10% to 35%",
+       "rows": [
+        {
+         "team": "yojarshh",
+         "pct": 33.94,
+         "rec": "2-5"
+        },
+        {
+         "team": "drewkim",
+         "pct": 23.395,
+         "rec": "3-4"
+        },
+        {
+         "team": "edyun1",
+         "pct": 11.145,
+         "rec": "2-5"
+        }
+       ]
+      },
+      {
+       "name": "Out of reach",
+       "range": "under 10%",
+       "rows": [
+        {
+         "team": "andychoe03",
+         "pct": 7.77,
+         "rec": "3-4"
+        },
+        {
+         "team": "bigmoneyjos",
+         "pct": 1.535,
+         "rec": "1-6"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "every game",
+     "text": "The Week in Full"
+    },
+    {
+     "type": "p",
+     "text": "Six games produced 1,466.52 points, an average of 122.21 a team. Two finished within 4 points, one within 18 and three by more than 29. The margins averaged 34.59, second only to week 2's 42.42. They are below in order of how close they finished."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the closest",
+     "text": "edyun1 Edges asierbelay by 2.56"
+    },
+    {
+     "type": "p",
+     "text": "<b>edyun1 129.60, asierbelay 127.04.</b> Rhamondre Stevenson scored 22.5 for BOWSER, Puka Nacua 21.8 and Emanuel Wilson 18.5, and kicker Chris Boswell added 11. Drake Maye's 28.44, CeeDee Lamb's 24.4 and Ashton Jeanty's 21.6 led AB x B, but tight end Sam LaPorta scored 2.8 and Konata Mumpfield, a free-agent add this week, 2.5. edyun1 is 2-5 and asierbelay is 5-2."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the second-closest",
+     "text": "saiky7 Holds Off andychoe03 by 3.36"
+    },
+    {
+     "type": "p",
+     "text": "<b>saiky7 120.72, andychoe03 117.36.</b> Jaxon Smith-Njigba scored 31.3 for yerra x ecj, Josh Jacobs 20.1 and Drake London 19.6, while Juwan Johnson managed 1.7 at tight end. Jordan Love's 17.96 and Devaughn Vele's 16.4 led the if team, which started two tight ends, Kyle Pitts at 13.2 and Harold Fannin at 13.1. saiky7 is 5-2 and andychoe03 is 3-4."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the third-closest",
+     "text": "jiddyyyyyy Beats jjnhwg by 17.88"
+    },
+    {
+     "type": "p",
+     "text": "<b>jiddyyyyyy 100.60, jjnhwg 82.72.</b> Bucky Irving scored 24 for Team Meta/Bloomberg, Malik Nabers 18.1 and Jahmyr Gibbs 17.3, though Roschon Johnson scored 1.3 and KC Concepcion's 23.2 sat on the bench. Caleb Williams's 22.12 and Jonathan Taylor's 19 were most of what Uzzz uzz uzz had. Both teams are 4-3."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the third-widest",
+     "text": "yojarshh Beats tonypng by 29.62"
+    },
+    {
+     "type": "p",
+     "text": "<b>yojarshh 144.70, tonypng 115.08.</b> Zay Flowers scored 27.7 for S2? #jtw #imwallin, with Matthew Stafford at 18.5, Bijan Robinson at 17.2 and Blake Corum at 17.1, and the team left only 5.5 points on its bench. Joe Burrow's 28.88 and Amon-Ra St. Brown's 24.2 led Tshough, but Kenneth Walker scored 9.7. yojarshh is 2-5 and tonypng is 4-3."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the second-widest",
+     "text": "nikhil1123 Scores 155.38 and Wins by 51.80"
+    },
+    {
+     "type": "p",
+     "text": "<b>nikhil1123 155.38, bigmoneyjos 103.58.</b> Tee Higgins scored 26.8 for n², Jameson Williams 26.1, Geno Smith 24.48 and Luther Burden 23.7. Smith was a free-agent add this week. Dak Prescott's 23.28 and Christian McCaffrey's 22 led 8 and thick, but Nico Collins scored 2.6 and the Baltimore defense -2. nikhil1123 is 4-3 and bigmoneyjos is 1-6."
+    },
+    {
+     "type": "h",
+     "eyebrow": "the widest",
+     "text": "Lee284 Scores a Season-High 186.02 and Wins by 102.30"
+    },
+    {
+     "type": "p",
+     "text": "<b>Lee284 186.02, drewkim 83.72.</b> Pollard, McBride, Judkins and Williams scored 108.5 between them, and all ten Jug starters scored 8 or more. C.J. Stroud's 16.52 and George Kittle's 14.8 led Lucky Strike, whose Carolina defense, a $0 claim, scored -3. The 102.30 margin is the second-widest of the season. Lee284 is 5-2 and drewkim is 3-4."
+    },
+    {
+     "type": "note",
+     "text": "Scores, lineups, bench points, records and transactions are from Sleeper for C Cubed's week 7; playoff odds are the site's own odds board after the week was final, with the earlier reading from its odds history. Nobody is quoted."
     }
    ]
   }

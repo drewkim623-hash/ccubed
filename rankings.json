@@ -118,6 +118,24 @@
         {"manager": "edyun1", "blurb": "A 78.98 lost to drewkim by 34.3, with kicker Chris Boswell's 17 the best score and DK Metcalf's 20.3 on the bench; the record is 1-5 with 684.70 season points."},
         {"manager": "bigmoneyjos", "blurb": "The first win of the season, 130.52 over saiky7 by 17, came behind Christian McCaffrey's 30.7; the record is 1-5 with 666.26 season points."}
       ]
+    },
+    {
+      "season": "2026",
+      "week": 7,
+      "teams": [
+        {"manager": "Lee284", "blurb": "A 186.02, the season high, beat drewkim by 102.30 behind Tony Pollard's 36.5 and Trey McBride's 27.1, making the record 5-2 with 979.62 season points."},
+        {"manager": "nikhil1123", "blurb": "A 155.38 beat bigmoneyjos by 51.80, with Tee Higgins' 26.8 and free-agent add Geno Smith's 24.48 leading; the record is 4-3 with 907.44 season points."},
+        {"manager": "yojarshh", "blurb": "A 144.70 beat tonypng by 29.62, led by Zay Flowers' 27.7 with only 5.5 left on the bench, and the record is 2-5 with 854.66 season points."},
+        {"manager": "edyun1", "blurb": "A 129.60 edged asierbelay by 2.56 on Rhamondre Stevenson's 22.5 and Puka Nacua's 21.8 while 53.6 sat on the bench; the record is 2-5 with 814.30 season points."},
+        {"manager": "asierbelay", "blurb": "A 127.04 lost to edyun1 by 2.56 despite Drake Maye's 28.44 and CeeDee Lamb's 24.4, leaving the record 5-2 with 978.04 season points."},
+        {"manager": "saiky7", "blurb": "Jaxon Smith-Njigba's 31.3 led a 120.72 win over andychoe03 by 3.36 even with Juwan Johnson's 1.7 at tight end; the record is 5-2 with 988.92 season points."},
+        {"manager": "andychoe03", "blurb": "A 117.36 lost to saiky7 by 3.36, with Jordan Love's 17.96 leading and $1 claim Aaron Rodgers' 13.08 on the bench; the record is 3-4 with 824.24 season points."},
+        {"manager": "tonypng", "blurb": "Joe Burrow's 28.88 and Amon-Ra St. Brown's 24.2 led a 115.08 that lost to yojarshh by 29.62, leaving the record 4-3 with 988.62 season points."},
+        {"manager": "jiddyyyyyy", "blurb": "A 100.60 beat jjnhwg by 17.88 on Bucky Irving's 24, with 47 points left on the bench; the record is 4-3 with 876.96 season points."},
+        {"manager": "jjnhwg", "blurb": "An 82.72 lost to jiddyyyyyy by 17.88, with Cade Otton's 0 at tight end and 38.02 on the bench; the record is 4-3 with 887.88 season points."},
+        {"manager": "drewkim", "blurb": "An 83.72 lost to Lee284 by 102.30, with C.J. Stroud's 16.52 leading and Bo Nix's 26.28 on the bench; the record is 3-4 with 832.92 season points."},
+        {"manager": "bigmoneyjos", "blurb": "A 103.58 lost to nikhil1123 by 51.80 despite Dak Prescott's 23.28 and Christian McCaffrey's 22; the record is 1-6 with 769.84 season points."}
+      ]
     }
   ]
 }
