@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-28T11:09:42.625Z",
- "at": 1793185782625,
+ "generated": "2026-10-28T14:49:37.564Z",
+ "at": 1793198977564,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -45,6 +45,7 @@
    "points_against": 824.6,
    "faab_spent": 0,
    "starters_hurt": [
+    "DeVonta Smith (Questionable)",
     "Amon-Ra St. Brown (Questionable)"
    ]
   },
@@ -347,5 +348,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 31
+ "free_agent_moves": 32
 }
