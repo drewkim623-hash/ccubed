@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 7,
- "generated": "2026-10-27T11:13:08.345Z",
- "generated_at": "2026-10-27T11:13:08.345Z",
+ "generated": "2026-10-28T11:09:38.701Z",
+ "generated_at": "2026-10-28T11:09:38.701Z",
  "final": true,
  "standings_through_week": 7,
  "standings_folded": false,
@@ -192,9 +192,9 @@
       "name": "Bo Nix",
       "pos": "QB",
       "team": "DEN",
-      "points": 26.28
+      "points": 26.18
      },
-     "benchLeft": 26.28
+     "benchLeft": 26.18
     }
    ]
   },
@@ -1129,7 +1129,7 @@
    "ties": 0,
    "points_for": 988.92,
    "points_against": 904.14,
-   "waiver_budget_used": 40
+   "waiver_budget_used": 59
   },
   {
    "manager": "Lee284",
@@ -1228,7 +1228,7 @@
    "ties": 0,
    "points_for": 854.66,
    "points_against": 950.14,
-   "waiver_budget_used": 39
+   "waiver_budget_used": 44
   },
   {
    "manager": "edyun1",
@@ -1250,10 +1250,116 @@
    "ties": 0,
    "points_for": 769.84,
    "points_against": 957.72,
-   "waiver_budget_used": 40
+   "waiver_budget_used": 58
   }
  ],
  "transactions": [
+  {
+   "type": "waiver",
+   "managers": [
+    "yojarshh"
+   ],
+   "adds": [
+    {
+     "name": "Jonah Coleman",
+     "pos": "RB",
+     "team": "DEN",
+     "to": "yojarshh"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Tennessee Titans",
+     "pos": "DEF",
+     "team": "TEN",
+     "from": "yojarshh"
+    }
+   ],
+   "faab": 5,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Jakobi Meyers",
+     "pos": "WR",
+     "team": "JAX",
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Malik Washington",
+     "pos": "WR",
+     "team": "MIA",
+     "from": "saiky7"
+    }
+   ],
+   "faab": 7,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Seattle Seahawks",
+     "pos": "DEF",
+     "team": "SEA",
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Cleveland Browns",
+     "pos": "DEF",
+     "team": "CLE",
+     "from": "saiky7"
+    }
+   ],
+   "faab": 12,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "bigmoneyjos"
+   ],
+   "adds": [
+    {
+     "name": "Rico Dowdle",
+     "pos": "RB",
+     "team": "PIT",
+     "to": "bigmoneyjos"
+    }
+   ],
+   "drops": [],
+   "faab": 15,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "bigmoneyjos"
+   ],
+   "adds": [
+    {
+     "name": "Devin Singletary",
+     "pos": "RB",
+     "team": "NYG",
+     "to": "bigmoneyjos"
+    }
+   ],
+   "drops": [],
+   "faab": 3,
+   "picks": []
+  },
   {
    "type": "free_agent",
    "managers": [
@@ -2386,9 +2492,9 @@
       "name": "Bo Nix",
       "pos": "QB",
       "team": "DEN",
-      "points": 26.28
+      "points": 26.18
      },
-     "benchLeft": 26.28
+     "benchLeft": 26.18
     }
    ]
   },
@@ -2570,9 +2676,9 @@
       "name": "Bo Nix",
       "pos": "QB",
       "team": "DEN",
-      "points": 26.28
+      "points": 26.18
      },
-     "benchLeft": 26.28
+     "benchLeft": 26.18
     }
    ]
   },
