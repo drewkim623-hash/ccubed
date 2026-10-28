@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-27T11:13:12.214Z",
- "at": 1793099592214,
+ "generated": "2026-10-28T07:17:32.220Z",
+ "at": 1793171852221,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -13,9 +13,8 @@
    "losses": 2,
    "points_for": 988.92,
    "points_against": 904.14,
-   "faab_spent": 40,
+   "faab_spent": 59,
    "starters_hurt": [
-    "Drake London (Questionable)",
     "Matthew Golden (Questionable)",
     "Aaron Jones Sr. (Questionable)"
    ]
@@ -84,7 +83,7 @@
    "points_against": 919.38,
    "faab_spent": 11,
    "starters_hurt": [
-    "Tyrone Tracy Jr. (Questionable)",
+    "Tyrone Tracy Jr. (IR)",
     "Jaylen Waddle (Questionable)",
     "Jaylin Noel (Questionable)"
    ]
@@ -104,9 +103,10 @@
    "losses": 5,
    "points_for": 854.66,
    "points_against": 950.14,
-   "faab_spent": 39,
+   "faab_spent": 44,
    "starters_hurt": [
-    "Saquon Barkley (Questionable)"
+    "Saquon Barkley (Questionable)",
+    "Rashee Rice (Questionable)"
    ]
   },
   {
@@ -117,8 +117,7 @@
    "points_against": 956.1,
    "faab_spent": 12,
    "starters_hurt": [
-    "Woody Marks (Questionable)",
-    "Jalen Coker (Questionable)"
+    "Woody Marks (Questionable)"
    ]
   },
   {
@@ -127,7 +126,7 @@
    "losses": 6,
    "points_for": 769.84,
    "points_against": 957.72,
-   "faab_spent": 40,
+   "faab_spent": 58,
    "starters_hurt": [
     "Christian McCaffrey (Questionable)"
    ]
@@ -209,6 +208,125 @@
  ],
  "trades": [],
  "waivers": [
+  {
+   "week": 7,
+   "type": "waiver",
+   "managers": [
+    "bigmoneyjos"
+   ],
+   "adds": [
+    {
+     "name": "Rico Dowdle",
+     "pos": "RB",
+     "team": "PIT",
+     "status": null,
+     "to": "bigmoneyjos"
+    }
+   ],
+   "drops": [],
+   "faab": 15,
+   "picks": []
+  },
+  {
+   "week": 7,
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Seattle Seahawks",
+     "pos": "DEF",
+     "team": "SEA",
+     "status": null,
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Cleveland Browns",
+     "pos": "DEF",
+     "team": "CLE",
+     "status": null,
+     "from": "saiky7"
+    }
+   ],
+   "faab": 12,
+   "picks": []
+  },
+  {
+   "week": 7,
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Jakobi Meyers",
+     "pos": "WR",
+     "team": "JAX",
+     "status": null,
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Malik Washington",
+     "pos": "WR",
+     "team": "MIA",
+     "status": null,
+     "from": "saiky7"
+    }
+   ],
+   "faab": 7,
+   "picks": []
+  },
+  {
+   "week": 7,
+   "type": "waiver",
+   "managers": [
+    "yojarshh"
+   ],
+   "adds": [
+    {
+     "name": "Jonah Coleman",
+     "pos": "RB",
+     "team": "DEN",
+     "status": null,
+     "to": "yojarshh"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Tennessee Titans",
+     "pos": "DEF",
+     "team": "TEN",
+     "status": null,
+     "from": "yojarshh"
+    }
+   ],
+   "faab": 5,
+   "picks": []
+  },
+  {
+   "week": 7,
+   "type": "waiver",
+   "managers": [
+    "bigmoneyjos"
+   ],
+   "adds": [
+    {
+     "name": "Devin Singletary",
+     "pos": "RB",
+     "team": "NYG",
+     "status": null,
+     "to": "bigmoneyjos"
+    }
+   ],
+   "drops": [],
+   "faab": 3,
+   "picks": []
+  },
   {
    "week": 7,
    "type": "waiver",
