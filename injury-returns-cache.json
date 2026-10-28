@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-28T07:17:31.601Z",
+ "generated": "2026-10-28T07:30:04.987Z",
  "week": 8,
  "entries": {
   "2133": {
