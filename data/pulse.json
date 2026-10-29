@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-28T20:16:45.597Z",
- "at": 1793218605597,
+ "generated": "2026-10-29T11:09:58.971Z",
+ "at": 1793272198971,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -16,7 +16,8 @@
    "faab_spent": 59,
    "starters_hurt": [
     "Lamar Jackson (Questionable)",
-    "Matthew Golden (Questionable)"
+    "Matthew Golden (Questionable)",
+    "Dalton Kincaid (Questionable)"
    ]
   },
   {
@@ -26,7 +27,9 @@
    "points_for": 979.62,
    "points_against": 810.98,
    "faab_spent": 1,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Ja'Marr Chase (Questionable)"
+   ]
   },
   {
    "manager": "asierbelay",
@@ -65,7 +68,7 @@
    "wins": 4,
    "losses": 3,
    "points_for": 887.88,
-   "points_against": 920.54,
+   "points_against": 921.54,
    "faab_spent": 1,
    "starters_hurt": []
   },
@@ -73,11 +76,12 @@
    "manager": "jiddyyyyyy",
    "wins": 4,
    "losses": 3,
-   "points_for": 876.96,
+   "points_for": 877.96,
    "points_against": 841.86,
    "faab_spent": 40,
    "starters_hurt": [
-    "Carnell Tate (Questionable)"
+    "Carnell Tate (Questionable)",
+    "Jahmyr Gibbs (Questionable)"
    ]
   },
   {
@@ -89,6 +93,7 @@
    "faab_spent": 11,
    "starters_hurt": [
     "Jaylen Waddle (Questionable)",
+    "Stefon Diggs (Questionable)",
     "Emeka Egbuka (Questionable)"
    ]
   },
@@ -99,7 +104,9 @@
    "points_for": 824.24,
    "points_against": 867.44,
    "faab_spent": 56,
-   "starters_hurt": []
+   "starters_hurt": [
+    "George Pickens (Questionable)"
+   ]
   },
   {
    "manager": "yojarshh",
@@ -110,6 +117,7 @@
    "faab_spent": 44,
    "starters_hurt": [
     "Saquon Barkley (Questionable)",
+    "Michael Wilson (Questionable)",
     "Rashee Rice (Questionable)"
    ]
   },
@@ -122,6 +130,7 @@
    "faab_spent": 12,
    "starters_hurt": [
     "Breece Hall (Questionable)",
+    "Brock Bowers (Questionable)",
     "DJ Moore (Questionable)"
    ]
   },
@@ -133,7 +142,8 @@
    "points_against": 957.72,
    "faab_spent": 58,
    "starters_hurt": [
-    "Christian McCaffrey (Questionable)"
+    "Christian McCaffrey (Questionable)",
+    "A.J. Brown (Questionable)"
    ]
   }
  ],
@@ -270,7 +280,7 @@
      "name": "Jakobi Meyers",
      "pos": "WR",
      "team": "JAX",
-     "status": null,
+     "status": "Questionable",
      "to": "saiky7"
     }
    ],
@@ -279,7 +289,7 @@
      "name": "Malik Washington",
      "pos": "WR",
      "team": "MIA",
-     "status": null,
+     "status": "Questionable",
      "from": "saiky7"
     }
    ],

@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 7,
- "generated": "2026-10-28T11:09:38.701Z",
- "generated_at": "2026-10-28T11:09:38.701Z",
+ "generated": "2026-10-29T11:09:54.390Z",
+ "generated_at": "2026-10-29T11:09:54.390Z",
  "final": true,
  "standings_through_week": 7,
  "standings_folded": false,
@@ -936,17 +936,17 @@
   },
   {
    "winner": "jiddyyyyyy",
-   "winner_points": 100.6,
+   "winner_points": 101.6,
    "loser": "jjnhwg",
    "loser_points": 82.72,
-   "margin": 17.88,
-   "total": 183.32,
+   "margin": 18.88,
+   "total": 184.32,
    "sides": [
     {
      "manager": "jiddyyyyyy",
      "team": "Team Meta/Bloomberg",
      "roster_id": 8,
-     "points": 100.6,
+     "points": 101.6,
      "starters": [
       {
        "name": "Bucky Irving",
@@ -1006,7 +1006,7 @@
        "name": "San Francisco 49ers",
        "pos": "DEF",
        "team": "SF",
-       "points": -1
+       "points": 0
       }
      ],
      "top": {
@@ -1183,7 +1183,7 @@
    "losses": 3,
    "ties": 0,
    "points_for": 887.88,
-   "points_against": 920.54,
+   "points_against": 921.54,
    "waiver_budget_used": 1
   },
   {
@@ -1193,7 +1193,7 @@
    "wins": 4,
    "losses": 3,
    "ties": 0,
-   "points_for": 876.96,
+   "points_for": 877.96,
    "points_against": 841.86,
    "waiver_budget_used": 40
   },
