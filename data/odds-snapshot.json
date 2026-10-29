@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-10-29T13:27:23.370Z",
- "at": 1793280443370,
+ "generated": "2026-10-29T15:30:04.122Z",
+ "at": 1793287804122,
  "season": "2026",
  "week": 8,
  "liveWeek": null,
@@ -168,6 +168,24 @@
  "games": [],
  "hurt": [
   {
+   "manager": "jiddyyyyyy",
+   "cost": 0.04839022498060508,
+   "players": [
+    {
+     "name": "Jahmyr Gibbs",
+     "status": "Questionable"
+    },
+    {
+     "name": "Carnell Tate",
+     "status": "Questionable"
+    },
+    {
+     "name": "Jeremiyah Love",
+     "status": "Questionable"
+    }
+   ]
+  },
+  {
    "manager": "drewkim",
    "cost": 0.03562796318676209,
    "players": [
@@ -181,20 +199,6 @@
     },
     {
      "name": "Jaylen Waddle",
-     "status": "Questionable"
-    }
-   ]
-  },
-  {
-   "manager": "jiddyyyyyy",
-   "cost": 0.03458174457759733,
-   "players": [
-    {
-     "name": "Jahmyr Gibbs",
-     "status": "Questionable"
-    },
-    {
-     "name": "Carnell Tate",
      "status": "Questionable"
     }
    ]

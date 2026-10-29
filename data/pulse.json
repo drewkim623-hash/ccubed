@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-29T11:09:58.971Z",
- "at": 1793272198971,
+ "generated": "2026-10-29T15:29:36.005Z",
+ "at": 1793287776005,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -80,6 +80,7 @@
    "points_against": 841.86,
    "faab_spent": 40,
    "starters_hurt": [
+    "Jeremiyah Love (Questionable)",
     "Carnell Tate (Questionable)",
     "Jahmyr Gibbs (Questionable)"
    ]
@@ -362,5 +363,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 38
+ "free_agent_moves": 40
 }
