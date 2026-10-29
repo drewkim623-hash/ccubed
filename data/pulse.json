@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-29T16:18:47.973Z",
- "at": 1793290727973,
+ "generated": "2026-10-29T21:14:26.439Z",
+ "at": 1793308466440,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -27,9 +27,7 @@
    "points_for": 979.62,
    "points_against": 810.98,
    "faab_spent": 1,
-   "starters_hurt": [
-    "Ja'Marr Chase (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "asierbelay",
@@ -48,8 +46,7 @@
    "points_against": 824.6,
    "faab_spent": 0,
    "starters_hurt": [
-    "DeVonta Smith (Questionable)",
-    "Amon-Ra St. Brown (Questionable)"
+    "DeVonta Smith (Questionable)"
    ]
   },
   {
@@ -59,9 +56,7 @@
    "points_for": 907.44,
    "points_against": 879.3,
    "faab_spent": 65,
-   "starters_hurt": [
-    "Braelon Allen (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jjnhwg",
@@ -81,8 +76,7 @@
    "faab_spent": 40,
    "starters_hurt": [
     "Jeremiyah Love (Questionable)",
-    "Carnell Tate (Questionable)",
-    "Jahmyr Gibbs (Questionable)"
+    "Carnell Tate (Questionable)"
    ]
   },
   {
@@ -131,7 +125,6 @@
    "faab_spent": 12,
    "starters_hurt": [
     "Breece Hall (Questionable)",
-    "Brock Bowers (Questionable)",
     "DJ Moore (Questionable)"
    ]
   },
@@ -144,7 +137,9 @@
    "faab_spent": 58,
    "starters_hurt": [
     "Christian McCaffrey (Questionable)",
-    "A.J. Brown (Questionable)"
+    "A.J. Brown (Questionable)",
+    "Travis Kelce (Questionable)",
+    "TreVeyon Henderson (Questionable)"
    ]
   }
  ],
@@ -363,5 +358,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 40
+ "free_agent_moves": 41
 }
