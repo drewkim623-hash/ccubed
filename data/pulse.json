@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-30T17:49:11.975Z",
- "at": 1793382551975,
+ "generated": "2026-10-30T23:48:28.088Z",
+ "at": 1793404108088,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -43,9 +43,7 @@
    "points_for": 988.62,
    "points_against": 824.6,
    "faab_spent": 0,
-   "starters_hurt": [
-    "DeVonta Smith (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "nikhil1123",
@@ -73,8 +71,7 @@
    "points_against": 841.86,
    "faab_spent": 40,
    "starters_hurt": [
-    "Jeremiyah Love (Questionable)",
-    "Carnell Tate (Questionable)"
+    "Carnell Tate (Out)"
    ]
   },
   {
@@ -86,8 +83,7 @@
    "faab_spent": 11,
    "starters_hurt": [
     "Jaylen Waddle (Questionable)",
-    "Christian Watson (Questionable)",
-    "Malik Washington (Questionable)"
+    "Christian Watson (Questionable)"
    ]
   },
   {
@@ -108,11 +104,7 @@
    "points_for": 854.66,
    "points_against": 950.14,
    "faab_spent": 44,
-   "starters_hurt": [
-    "Saquon Barkley (Questionable)",
-    "Michael Wilson (Questionable)",
-    "Rashee Rice (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "edyun1",
@@ -136,7 +128,7 @@
    "starters_hurt": [
     "Christian McCaffrey (Questionable)",
     "A.J. Brown (Questionable)",
-    "Travis Kelce (Questionable)",
+    "Colston Loveland (Questionable)",
     "TreVeyon Henderson (Questionable)"
    ]
   }
@@ -283,7 +275,7 @@
      "name": "Malik Washington",
      "pos": "WR",
      "team": "MIA",
-     "status": "Questionable",
+     "status": null,
      "from": "saiky7"
     }
    ],
