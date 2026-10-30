@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-30T14:31:08.492Z",
- "at": 1793370668492,
+ "generated": "2026-10-30T17:49:11.975Z",
+ "at": 1793382551975,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -15,7 +15,6 @@
    "points_against": 904.14,
    "faab_spent": 59,
    "starters_hurt": [
-    "Lamar Jackson (Questionable)",
     "Dalton Kincaid (Questionable)"
    ]
   },
@@ -64,9 +63,7 @@
    "points_for": 887.88,
    "points_against": 921.54,
    "faab_spent": 1,
-   "starters_hurt": [
-    "Tyler Warren (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jiddyyyyyy",
@@ -90,7 +87,7 @@
    "starters_hurt": [
     "Jaylen Waddle (Questionable)",
     "Christian Watson (Questionable)",
-    "Emeka Egbuka (Questionable)"
+    "Malik Washington (Questionable)"
    ]
   },
   {
@@ -197,7 +194,7 @@
    "a": {
     "manager": "jjnhwg",
     "points": 2,
-    "startersLeftToPlay": 8
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "bigmoneyjos",
@@ -359,5 +356,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 43
+ "free_agent_moves": 45
 }
