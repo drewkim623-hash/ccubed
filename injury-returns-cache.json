@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-29T22:25:19.622Z",
+ "generated": "2026-10-30T06:41:22.971Z",
  "week": 8,
  "entries": {
   "1466": {
@@ -11,7 +11,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "2133": {
    "n": "Davante Adams",
@@ -42,7 +42,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "4199": {
    "n": "Aaron Jones Sr.",
@@ -122,7 +122,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -153,7 +153,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "7543": {
    "n": "Travis Etienne Jr.",
@@ -185,7 +185,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-29",
+   "retChecked": "2026-10-30",
    "irSince": 8
   },
   "8132": {
@@ -196,7 +196,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "8137": {
    "n": "George Pickens",
@@ -206,7 +206,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "8142": {
    "n": "Alec Pierce",
@@ -228,6 +228,16 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Quadriceps. Week-to-week, ruled out Weeks 4-5; ESPN Q Week 6. Consensus: matches audit; uncertain (audit tiebreak wk 7).",
    "retChecked": "2026-10-25"
+  },
+  "8167": {
+   "n": "Christian Watson",
+   "s": "Questionable",
+   "ret": "2026-11-08",
+   "retWeeks": null,
+   "retSource": "espn-return-date",
+   "retEstimated": false,
+   "retNote": "ESPN return date",
+   "retChecked": "2026-10-30"
   },
   "8205": {
    "n": "Isiah Pacheco",
@@ -278,7 +288,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "10236": {
    "n": "Dalton Kincaid",
@@ -288,7 +298,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "11577": {
    "n": "Will Shipley",
@@ -319,7 +329,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-29",
+   "retChecked": "2026-10-30",
    "irSince": 8
   },
   "12474": {
@@ -330,7 +340,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "12481": {
    "n": "Cam Skattebo",
@@ -340,7 +350,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "12487": {
    "n": "Terrance Ferguson",
@@ -361,17 +371,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
-  },
-  "12501": {
-   "n": "Matthew Golden",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "12514": {
    "n": "Emeka Egbuka",
@@ -432,7 +432,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-29"
+   "retChecked": "2026-10-30"
   },
   "13281": {
    "n": "Jordyn Tyson",

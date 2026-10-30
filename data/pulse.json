@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-29T21:28:40.886Z",
- "at": 1793309320886,
+ "generated": "2026-10-30T06:41:23.456Z",
+ "at": 1793342483457,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -16,7 +16,6 @@
    "faab_spent": 59,
    "starters_hurt": [
     "Lamar Jackson (Questionable)",
-    "Matthew Golden (Questionable)",
     "Dalton Kincaid (Questionable)"
    ]
   },
@@ -65,7 +64,9 @@
    "points_for": 887.88,
    "points_against": 921.54,
    "faab_spent": 1,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Tyler Warren (Questionable)"
+   ]
   },
   {
    "manager": "jiddyyyyyy",
@@ -88,7 +89,7 @@
    "faab_spent": 11,
    "starters_hurt": [
     "Jaylen Waddle (Questionable)",
-    "Stefon Diggs (Questionable)",
+    "Christian Watson (Questionable)",
     "Emeka Egbuka (Questionable)"
    ]
   },
@@ -147,8 +148,8 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 17.3,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "tonypng",
@@ -164,8 +165,8 @@
    },
    "b": {
     "manager": "yojarshh",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 17.3,
+    "startersLeftToPlay": 9
    }
   },
   {
@@ -176,32 +177,32 @@
    },
    "b": {
     "manager": "Lee284",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 11.8,
+    "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "edyun1",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 9.6,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "saiky7",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 44.1,
+    "startersLeftToPlay": 8
    }
   },
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 2,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "bigmoneyjos",
     "points": 0,
-    "startersLeftToPlay": 9
+    "startersLeftToPlay": 10
    }
   },
   {
@@ -212,8 +213,8 @@
    },
    "b": {
     "manager": "asierbelay",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 24.9,
+    "startersLeftToPlay": 9
    }
   }
  ],
