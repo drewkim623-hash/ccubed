@@ -234,8 +234,8 @@
       ],
       "source": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more",
       "checked": "2026-10-25",
-      "note": "Quadriceps. Week-to-week, ruled out Weeks 4-5; ESPN Q Week 6. Consensus: matches audit; uncertain (audit tiebreak wk 7).",
-      "flag": "uncertain"
+      "note": "Quadriceps. Week-to-week, ruled out Weeks 4-5; ESPN Q Week 6. Consensus: matches audit; consensus.",
+      "flag": "consensus"
     },
     "8205": {
       "kind": "report",
@@ -289,8 +289,8 @@
       ],
       "source": "https://www.espn.com/nfl/player/_/id/4426385/zach-charbonnet",
       "checked": "2026-10-24",
-      "note": "Knee - ACL (Jan 2026 tear) rehab, PUP. Practice window open, limited; long shot for Week 6 TNF, Week 7 Oct 25 more likely. Consensus: matches audit; uncertain (audit tiebreak wk 7).",
-      "flag": "uncertain"
+      "note": "Knee - ACL (Jan 2026 tear) rehab, PUP. Practice window open, limited; long shot for Week 6 TNF, Week 7 Oct 25 more likely. Consensus: matches audit; consensus.",
+      "flag": "consensus"
     },
     "9756": {
       "kind": "report",
@@ -309,8 +309,8 @@
       ],
       "source": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more",
       "checked": "2026-10-24",
-      "note": "Hamstring. Conflict: Rapoport (Oct 5) 'relatively minor', may play after bye; NBC (Oct 13) 'several-week absence'. Counted Week 6 only. Consensus: matches audit; uncertain (audit tiebreak wk 7).",
-      "flag": "uncertain"
+      "note": "Hamstring. Conflict: Rapoport (Oct 5) 'relatively minor', may play after bye; NBC (Oct 13) 'several-week absence'. Counted Week 6 only. Consensus: matches audit; consensus.",
+      "flag": "consensus"
     },
     "11560": {
       "kind": "report",
@@ -397,6 +397,20 @@
       "note": "Quad strain. Canales: 'on track' to play Week 6; practiced Tuesday. Sleeper still says Out -> count 0 weeks. Consensus: matches audit; consensus.",
       "flag": "consensus"
     },
+    "11655": {
+      "kind": "report",
+      "source": "consensus.mjs",
+      "weeks_list": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "weeks": 4,
+      "checked": "2026-10-30",
+      "flag": "consensus",
+      "note": "Consensus: changed from audit []; consensus."
+    },
     "12487": {
       "kind": "report",
       "source": "consensus.mjs",
@@ -437,8 +451,8 @@
       ],
       "weeks": 1,
       "checked": "2026-10-24",
-      "flag": "uncertain",
-      "note": "Consensus: matches audit; uncertain (audit tiebreak wk 7)."
+      "flag": "consensus",
+      "note": "Consensus: matches audit; consensus."
     },
     "12518": {
       "kind": "report",
@@ -448,8 +462,8 @@
       ],
       "weeks": 1,
       "checked": "2026-10-24",
-      "flag": "uncertain",
-      "note": "Consensus: matches audit; uncertain (audit tiebreak wk 7)."
+      "flag": "consensus",
+      "note": "Consensus: matches audit; consensus."
     },
     "12529": {
       "kind": "report",
@@ -459,7 +473,7 @@
       ],
       "source": "https://www.espn.com/nfl/player/_/id/4432710/treveyon-henderson",
       "checked": "2026-10-18",
-      "note": "High-ankle sprain (right). Expected to miss multiple weeks; no surgery. Exact length unknown (2 weeks assumed from 'multiple'). Consensus: changed from audit [6,7]; consensus.",
+      "note": "High-ankle sprain (right). Expected to miss multiple weeks; no surgery. Exact length unknown (2 weeks assumed from 'multiple'). Consensus: matches audit; consensus.",
       "flag": "consensus"
     },
     "12533": {
@@ -483,8 +497,8 @@
       ],
       "source": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more",
       "checked": "2026-10-22",
-      "note": "Toe sprain / thumb. Day-to-day; ruled out Week 5; ESPN Q Week 6. Consensus: matches audit; consensus.",
-      "flag": "consensus"
+      "note": "Toe sprain / thumb. Day-to-day; ruled out Week 5; ESPN Q Week 6. Consensus: matches audit; uncertain (audit tiebreak wk 8).",
+      "flag": "uncertain"
     },
     "13281": {
       "kind": "report",
@@ -507,8 +521,8 @@
       ],
       "source": "https://www.nfl.com/news/seahawks-placing-rb-jadarian-price-chest-on-injured-reserve",
       "checked": "2026-10-26",
-      "note": "Chest. IR Week 4; earliest Week 8 Nov 2. Minimum only. Consensus: changed from audit [7]; consensus.",
-      "flag": "consensus"
+      "note": "Chest. IR Week 4; earliest Week 8 Nov 2. Minimum only. Consensus: matches audit; uncertain (audit tiebreak wk 8).",
+      "flag": "uncertain"
     },
     "13287": {
       "kind": "report",
@@ -518,8 +532,8 @@
       ],
       "weeks": 1,
       "checked": "2026-10-22",
-      "flag": "uncertain",
-      "note": "Consensus: matches audit; uncertain (audit tiebreak wk 7)."
+      "flag": "consensus",
+      "note": "Consensus: matches audit; consensus."
     },
     "13296": {
       "kind": "report",
