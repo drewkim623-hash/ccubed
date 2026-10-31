@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-30T23:48:28.088Z",
- "at": 1793404108088,
+ "generated": "2026-10-31T11:07:34.789Z",
+ "at": 1793444854790,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -126,10 +126,8 @@
    "points_against": 957.72,
    "faab_spent": 58,
    "starters_hurt": [
-    "Christian McCaffrey (Questionable)",
     "A.J. Brown (Questionable)",
-    "Colston Loveland (Questionable)",
-    "TreVeyon Henderson (Questionable)"
+    "Colston Loveland (Questionable)"
    ]
   }
  ],

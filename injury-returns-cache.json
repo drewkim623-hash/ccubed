@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-30T23:48:27.564Z",
+ "generated": "2026-10-31T11:07:34.298Z",
  "week": 8,
  "entries": {
   "2133": {
@@ -27,12 +27,12 @@
   "4034": {
    "n": "Christian McCaffrey",
    "s": "Questionable",
-   "ret": "2026-11-08",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-10-30"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-31"
   },
   "4983": {
    "n": "DJ Moore",
@@ -82,7 +82,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-30"
+   "retChecked": "2026-10-31"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -113,7 +113,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-30"
+   "retChecked": "2026-10-31"
   },
   "7543": {
    "n": "Travis Etienne Jr.",
@@ -145,7 +145,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-30",
+   "retChecked": "2026-10-31",
    "irSince": 8
   },
   "8137": {
@@ -156,7 +156,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-30"
+   "retChecked": "2026-10-31"
   },
   "8142": {
    "n": "Alec Pierce",
@@ -182,12 +182,12 @@
   "8167": {
    "n": "Christian Watson",
    "s": "Questionable",
-   "ret": "2026-11-08",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-10-30"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-31"
   },
   "8205": {
    "n": "Isiah Pacheco",
@@ -228,7 +228,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-30"
+   "retChecked": "2026-10-31"
   },
   "11577": {
    "n": "Will Shipley",
@@ -249,17 +249,17 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-30"
+   "retChecked": "2026-10-31"
   },
   "12481": {
    "n": "Cam Skattebo",
    "s": "Questionable",
-   "ret": "2026-11-08",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-10-30"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-10-31"
   },
   "12487": {
    "n": "Terrance Ferguson",
@@ -275,12 +275,12 @@
   "12489": {
    "n": "RJ Harvey",
    "s": "Out",
-   "ret": "2026-11-08",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-10-30"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Out = coming week only",
+   "retChecked": "2026-10-31"
   },
   "12514": {
    "n": "Emeka Egbuka",
@@ -300,7 +300,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-30"
+   "retChecked": "2026-10-31"
   },
   "12529": {
    "n": "TreVeyon Henderson",
@@ -341,7 +341,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-30"
+   "retChecked": "2026-10-31"
   },
   "13281": {
    "n": "Jordyn Tyson",
