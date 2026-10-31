@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-31T11:07:34.789Z",
- "at": 1793444854790,
+ "generated": "2026-10-31T18:48:57.472Z",
+ "at": 1793472537472,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -126,7 +126,7 @@
    "points_against": 957.72,
    "faab_spent": 58,
    "starters_hurt": [
-    "A.J. Brown (Questionable)",
+    "A.J. Brown (Out)",
     "Colston Loveland (Questionable)"
    ]
   }
@@ -346,5 +346,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 45
+ "free_agent_moves": 48
 }

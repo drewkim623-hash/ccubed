@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-31T13:24:00.437Z",
+ "generated": "2026-10-31T18:48:56.913Z",
  "week": 8,
  "entries": {
   "2133": {
@@ -46,7 +46,7 @@
   },
   "5859": {
    "n": "A.J. Brown",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
@@ -304,7 +304,7 @@
   },
   "12529": {
    "n": "TreVeyon Henderson",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
@@ -325,7 +325,7 @@
   },
   "12534": {
    "n": "Kyle Monangai",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-11-01",
    "retWeeks": null,
    "retSource": "report",
