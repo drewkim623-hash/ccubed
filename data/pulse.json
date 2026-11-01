@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-10-31T18:48:57.472Z",
- "at": 1793472537472,
+ "generated": "2026-11-01T11:07:43.836Z",
+ "at": 1793531263836,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -125,10 +125,7 @@
    "points_for": 769.84,
    "points_against": 957.72,
    "faab_spent": 58,
-   "starters_hurt": [
-    "A.J. Brown (Out)",
-    "Colston Loveland (Questionable)"
-   ]
+   "starters_hurt": []
   }
  ],
  "this_week": [

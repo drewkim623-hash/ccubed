@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-10-31T18:48:56.913Z",
+ "generated": "2026-11-01T11:07:43.355Z",
  "week": 8,
  "entries": {
   "2133": {
@@ -32,7 +32,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-11-01"
   },
   "4983": {
    "n": "DJ Moore",
@@ -82,7 +82,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-11-01"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -113,7 +113,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-11-01"
   },
   "7543": {
    "n": "Travis Etienne Jr.",
@@ -145,7 +145,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-10-31",
+   "retChecked": "2026-11-01",
    "irSince": 8
   },
   "8137": {
@@ -156,7 +156,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-11-01"
   },
   "8142": {
    "n": "Alec Pierce",
@@ -187,7 +187,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-11-01"
   },
   "8205": {
    "n": "Isiah Pacheco",
@@ -210,16 +210,6 @@
    "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
    "retChecked": "2026-10-31"
   },
-  "9753": {
-   "n": "Zach Charbonnet",
-   "s": "Questionable",
-   "ret": "2026-11-01",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4426385/zach-charbonnet — Knee - ACL (Jan 2026 tear) rehab, PUP. Practice window open, limited; long shot for Week 6 TNF, Week 7 Oct 25 more likely. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-24"
-  },
   "10236": {
    "n": "Dalton Kincaid",
    "s": "Questionable",
@@ -228,7 +218,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-11-01"
   },
   "11577": {
    "n": "Will Shipley",
@@ -249,7 +239,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-11-01"
   },
   "12481": {
    "n": "Cam Skattebo",
@@ -259,7 +249,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-11-01"
   },
   "12487": {
    "n": "Terrance Ferguson",
@@ -274,13 +264,14 @@
   },
   "12489": {
    "n": "RJ Harvey",
-   "s": "Out",
+   "s": "IR",
    "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-10-31",
+   "irSince": 8
   },
   "12514": {
    "n": "Emeka Egbuka",
@@ -290,16 +281,6 @@
    "retSource": "report",
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
-   "retChecked": "2026-10-31"
-  },
-  "12517": {
-   "n": "Colston Loveland",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
    "retChecked": "2026-10-31"
   },
   "12529": {
