@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-01T15:36:19.132Z",
- "at": 1793547379132,
+ "generated": "2026-11-01T17:10:38.441Z",
+ "at": 1793553038441,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
@@ -14,9 +14,7 @@
    "points_for": 988.92,
    "points_against": 904.14,
    "faab_spent": 59,
-   "starters_hurt": [
-    "Dalton Kincaid (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "Lee284",
@@ -93,9 +91,7 @@
    "points_for": 824.24,
    "points_against": 867.44,
    "faab_spent": 56,
-   "starters_hurt": [
-    "George Pickens (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "yojarshh",
@@ -113,10 +109,7 @@
    "points_for": 814.3,
    "points_against": 956.1,
    "faab_spent": 12,
-   "starters_hurt": [
-    "Breece Hall (Questionable)",
-    "DJ Moore (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "bigmoneyjos",
@@ -261,7 +254,7 @@
      "name": "Jakobi Meyers",
      "pos": "WR",
      "team": "JAX",
-     "status": "Questionable",
+     "status": null,
      "to": "saiky7"
     }
    ],
@@ -343,5 +336,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 48
+ "free_agent_moves": 50
 }
