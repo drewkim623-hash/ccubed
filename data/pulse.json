@@ -1,48 +1,36 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-03T05:36:49.582Z",
- "at": 1793684209583,
+ "generated": "2026-11-03T11:09:13.886Z",
+ "at": 1793704153886,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
  "week_in_progress": true,
  "standings": [
   {
-   "manager": "saiky7",
-   "wins": 5,
-   "losses": 2,
-   "points_for": 988.92,
-   "points_against": 904.14,
-   "faab_spent": 59,
-   "starters_hurt": [
-    "Lamar Jackson (Out)",
-    "Drake London (Questionable)"
-   ]
-  },
-  {
    "manager": "Lee284",
-   "wins": 5,
+   "wins": 6,
    "losses": 2,
-   "points_for": 979.62,
-   "points_against": 810.98,
+   "points_for": 1126.42,
+   "points_against": 933.96,
    "faab_spent": 1,
    "starters_hurt": []
   },
   {
    "manager": "asierbelay",
-   "wins": 5,
+   "wins": 6,
    "losses": 2,
-   "points_for": 978.04,
-   "points_against": 871.24,
+   "points_for": 1125,
+   "points_against": 984.38,
    "faab_spent": 0,
    "starters_hurt": []
   },
   {
    "manager": "tonypng",
-   "wins": 4,
+   "wins": 5,
    "losses": 3,
-   "points_for": 988.62,
-   "points_against": 824.6,
+   "points_for": 1162.6,
+   "points_against": 952.12,
    "faab_spent": 0,
    "starters_hurt": [
     "Bhayshul Tuten (Questionable)",
@@ -50,29 +38,41 @@
    ]
   },
   {
-   "manager": "nikhil1123",
-   "wins": 4,
+   "manager": "saiky7",
+   "wins": 5,
    "losses": 3,
-   "points_for": 907.44,
-   "points_against": 879.3,
-   "faab_spent": 65,
-   "starters_hurt": []
+   "points_for": 1114.92,
+   "points_against": 1035.74,
+   "faab_spent": 59,
+   "starters_hurt": [
+    "Lamar Jackson (Out)",
+    "Drake London (Questionable)"
+   ]
   },
   {
    "manager": "jjnhwg",
-   "wins": 4,
+   "wins": 5,
    "losses": 3,
-   "points_for": 887.88,
-   "points_against": 921.54,
+   "points_for": 975.76,
+   "points_against": 1001.04,
    "faab_spent": 1,
+   "starters_hurt": []
+  },
+  {
+   "manager": "nikhil1123",
+   "wins": 4,
+   "losses": 4,
+   "points_for": 1030.42,
+   "points_against": 1026.1,
+   "faab_spent": 65,
    "starters_hurt": []
   },
   {
    "manager": "jiddyyyyyy",
    "wins": 4,
-   "losses": 3,
-   "points_for": 877.96,
-   "points_against": 841.86,
+   "losses": 4,
+   "points_for": 991.1,
+   "points_against": 988.82,
    "faab_spent": 40,
    "starters_hurt": [
     "Jeremiyah Love (Out)",
@@ -80,11 +80,22 @@
    ]
   },
   {
+   "manager": "yojarshh",
+   "wins": 3,
+   "losses": 5,
+   "points_for": 992.62,
+   "points_against": 1020.2,
+   "faab_spent": 44,
+   "starters_hurt": [
+    "Michael Wilson (Questionable)"
+   ]
+  },
+  {
    "manager": "drewkim",
    "wins": 3,
-   "losses": 4,
-   "points_for": 832.92,
-   "points_against": 919.38,
+   "losses": 5,
+   "points_for": 960.44,
+   "points_against": 1093.36,
    "faab_spent": 11,
    "starters_hurt": [
     "James Cook III (Questionable)",
@@ -92,34 +103,11 @@
    ]
   },
   {
-   "manager": "andychoe03",
-   "wins": 3,
-   "losses": 4,
-   "points_for": 824.24,
-   "points_against": 867.44,
-   "faab_spent": 56,
-   "starters_hurt": [
-    "Zonovan Knight (Out)",
-    "Hunter Henry (Out)"
-   ]
-  },
-  {
-   "manager": "yojarshh",
-   "wins": 2,
-   "losses": 5,
-   "points_for": 854.66,
-   "points_against": 950.14,
-   "faab_spent": 44,
-   "starters_hurt": [
-    "Michael Wilson (Questionable)"
-   ]
-  },
-  {
    "manager": "edyun1",
-   "wins": 2,
+   "wins": 3,
    "losses": 5,
-   "points_for": 814.3,
-   "points_against": 956.1,
+   "points_for": 945.9,
+   "points_against": 1082.1,
    "faab_spent": 12,
    "starters_hurt": [
     "Kyler Murray (Questionable)",
@@ -127,11 +115,23 @@
    ]
   },
   {
+   "manager": "andychoe03",
+   "wins": 3,
+   "losses": 5,
+   "points_for": 894.3,
+   "points_against": 1005.4,
+   "faab_spent": 56,
+   "starters_hurt": [
+    "Zonovan Knight (Out)",
+    "Hunter Henry (Out)"
+   ]
+  },
+  {
    "manager": "bigmoneyjos",
    "wins": 1,
-   "losses": 6,
-   "points_for": 769.84,
-   "points_against": 957.72,
+   "losses": 7,
+   "points_for": 849.34,
+   "points_against": 1045.6,
    "faab_spent": 58,
    "starters_hurt": []
   }
