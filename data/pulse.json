@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-03T13:28:52.979Z",
- "at": 1793712532979,
+ "generated": "2026-11-03T16:49:24.458Z",
+ "at": 1793724564458,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -121,8 +121,7 @@
    "points_against": 1005.4,
    "faab_spent": 56,
    "starters_hurt": [
-    "Zonovan Knight (Out)",
-    "Hunter Henry (Out)"
+    "David Montgomery (Out)"
    ]
   },
   {
@@ -211,5 +210,5 @@
  ],
  "trades": [],
  "waivers": [],
- "free_agent_moves": 21
+ "free_agent_moves": 23
 }
