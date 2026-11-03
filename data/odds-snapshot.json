@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-11-03T16:50:00.426Z",
- "at": 1793724600426,
+ "generated": "2026-11-03T19:49:59.222Z",
+ "at": 1793735399222,
  "season": "2026",
  "week": 9,
  "liveWeek": null,
@@ -13,10 +13,10 @@
    "rid": 9,
    "manager": "asierbelay",
    "titleWas": 0.1294,
-   "titleNow": 0.2247,
+   "titleNow": 0.2242,
    "playoffWas": 0.6876,
-   "playoffNow": 0.9956,
-   "wins": 9.85305,
+   "playoffNow": 0.996,
+   "wins": 9.87245,
    "titleOdds": 320,
    "titleOddsOpen": 630,
    "playoffOdds": -19900
@@ -26,26 +26,26 @@
    "rid": 1,
    "manager": "drewkim",
    "titleWas": 0.03565,
-   "titleNow": 0.00635,
+   "titleNow": 0.0072,
    "playoffWas": 0.3367,
-   "playoffNow": 0.11165,
-   "wins": 5.6947,
-   "titleOdds": 14760,
+   "playoffNow": 0.12005,
+   "wins": 5.71925,
+   "titleOdds": 13000,
    "titleOddsOpen": 2550,
-   "playoffOdds": 740
+   "playoffOdds": 690
   },
   {
    "uid": "1257789215605788672",
    "rid": 2,
    "manager": "andychoe03",
    "titleWas": 0.03185,
-   "titleNow": 0.00095,
+   "titleNow": 0.00105,
    "playoffWas": 0.31065,
-   "playoffNow": 0.029,
-   "wins": 5.11635,
-   "titleOdds": 99200,
+   "playoffNow": 0.03205,
+   "wins": 5.14415,
+   "titleOdds": 89750,
    "titleOddsOpen": 2860,
-   "playoffOdds": 3150
+   "playoffOdds": 2840
   },
   {
    "uid": "1018665525720920064",
@@ -54,35 +54,35 @@
    "titleWas": 0.02415,
    "titleNow": 0.00005,
    "playoffWas": 0.28745,
-   "playoffNow": 0.00055,
-   "wins": 3.1898,
+   "playoffNow": 0.0006,
+   "wins": 3.1729,
    "titleOdds": 1886690,
    "titleOddsOpen": 3810,
-   "playoffOdds": 171430
+   "playoffOdds": 157130
   },
   {
    "uid": "1002352049469693952",
    "rid": 6,
    "manager": "saiky7",
    "titleWas": 0.1493,
-   "titleNow": 0.15965,
+   "titleNow": 0.16925,
    "playoffWas": 0.6938,
-   "playoffNow": 0.86465,
-   "wins": 8.13635,
-   "titleOdds": 490,
+   "playoffNow": 0.88495,
+   "wins": 8.24225,
+   "titleOdds": 460,
    "titleOddsOpen": 530,
-   "playoffOdds": -1100
+   "playoffOdds": -1510
   },
   {
    "uid": "997714306332491776",
    "rid": 3,
    "manager": "yojarshh",
    "titleWas": 0.09295,
-   "titleNow": 0.0756,
+   "titleNow": 0.0716,
    "playoffWas": 0.55885,
-   "playoffNow": 0.46475,
-   "wins": 6.7278,
-   "titleOdds": 1150,
+   "playoffNow": 0.46305,
+   "wins": 6.7039,
+   "titleOdds": 1220,
    "titleOddsOpen": 910,
    "playoffOdds": 105
   },
@@ -91,36 +91,36 @@
    "rid": 4,
    "manager": "nikhil1123",
    "titleWas": 0.07735,
-   "titleNow": 0.05055,
+   "titleNow": 0.0538,
    "playoffWas": 0.5139,
-   "playoffNow": 0.51035,
-   "wins": 6.9403,
-   "titleOdds": 1770,
+   "playoffNow": 0.54655,
+   "wins": 7.0263,
+   "titleOdds": 1650,
    "titleOddsOpen": 1120,
-   "playoffOdds": -120
+   "playoffOdds": -140
   },
   {
    "uid": "809500620536004608",
    "rid": 7,
    "manager": "jjnhwg",
    "titleWas": 0.0454,
-   "titleNow": 0.03855,
+   "titleNow": 0.038,
    "playoffWas": 0.3743,
-   "playoffNow": 0.60725,
-   "wins": 7.6998,
-   "titleOdds": 2350,
+   "playoffNow": 0.61505,
+   "wins": 7.7026,
+   "titleOdds": 2380,
    "titleOddsOpen": 1980,
-   "playoffOdds": -180
+   "playoffOdds": -185
   },
   {
    "uid": "1057211129820213248",
    "rid": 10,
    "manager": "Lee284",
    "titleWas": 0.1657,
-   "titleNow": 0.2266,
+   "titleNow": 0.22485,
    "playoffWas": 0.72665,
-   "playoffNow": 0.99015,
-   "wins": 9.8367,
+   "playoffNow": 0.99105,
+   "wins": 9.8283,
    "titleOdds": 320,
    "titleOddsOpen": 470,
    "playoffOdds": -19900
@@ -130,53 +130,61 @@
    "rid": 11,
    "manager": "tonypng",
    "titleWas": 0.13695,
-   "titleNow": 0.17505,
+   "titleNow": 0.17725,
    "playoffWas": 0.67135,
-   "playoffNow": 0.88915,
-   "wins": 8.1538,
-   "titleOdds": 440,
+   "playoffNow": 0.90005,
+   "wins": 8.1987,
+   "titleOdds": 430,
    "titleOddsOpen": 590,
-   "playoffOdds": -1640
+   "playoffOdds": -2080
   },
   {
    "uid": "1035404182708203520",
    "rid": 8,
    "manager": "jiddyyyyyy",
    "titleWas": 0.0661,
-   "titleNow": 0.0332,
+   "titleNow": 0.02375,
    "playoffWas": 0.45965,
-   "playoffNow": 0.41385,
-   "wins": 6.8727,
-   "titleOdds": 2740,
+   "playoffNow": 0.32275,
+   "wins": 6.61105,
+   "titleOdds": 3870,
    "titleOddsOpen": 1330,
-   "playoffOdds": 130
+   "playoffOdds": 190
   },
   {
    "uid": "1260403115740368896",
    "rid": 5,
    "manager": "edyun1",
    "titleWas": 0.0452,
-   "titleNow": 0.00875,
+   "titleNow": 0.009,
    "playoffWas": 0.3791,
-   "playoffNow": 0.12305,
-   "wins": 5.77865,
-   "titleOdds": 10680,
+   "playoffNow": 0.12785,
+   "wins": 5.77815,
+   "titleOdds": 10380,
    "titleOddsOpen": 1990,
-   "playoffOdds": 670
+   "playoffOdds": 640
   }
  ],
  "games": [],
  "hurt": [
   {
-   "manager": "drewkim",
-   "cost": 0.041304677406596824,
+   "manager": "edyun1",
+   "cost": 0.051466065138598194,
    "players": [
     {
-     "name": "Christian Watson",
+     "name": "Breece Hall",
+     "status": "Out"
+    },
+    {
+     "name": "Cam Skattebo",
      "status": "Questionable"
     },
     {
-     "name": "James Cook III",
+     "name": "Kyler Murray",
+     "status": "Questionable"
+    },
+    {
+     "name": "DJ Moore",
      "status": "Questionable"
     }
    ]
@@ -191,6 +199,20 @@
     },
     {
      "name": "Tyler Loop",
+     "status": "Questionable"
+    }
+   ]
+  },
+  {
+   "manager": "drewkim",
+   "cost": 0.03921111583900683,
+   "players": [
+    {
+     "name": "Christian Watson",
+     "status": "Questionable"
+    },
+    {
+     "name": "James Cook III",
      "status": "Questionable"
     }
    ]
@@ -216,20 +238,6 @@
     {
      "name": "David Montgomery",
      "status": "Out"
-    }
-   ]
-  },
-  {
-   "manager": "edyun1",
-   "cost": 0.01767459345806832,
-   "players": [
-    {
-     "name": "Kyler Murray",
-     "status": "Questionable"
-    },
-    {
-     "name": "DJ Moore",
-     "status": "Questionable"
     }
    ]
   },
