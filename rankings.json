@@ -136,6 +136,24 @@
         {"manager": "drewkim", "blurb": "An 83.72 lost to Lee284 by 102.30, with C.J. Stroud's 16.52 leading and Bo Nix's 26.28 on the bench; the record is 3-4 with 832.92 season points."},
         {"manager": "bigmoneyjos", "blurb": "A 103.58 lost to nikhil1123 by 51.80 despite Dak Prescott's 23.28 and Christian McCaffrey's 22; the record is 1-6 with 769.84 season points."}
       ]
+    },
+    {
+      "season": "2026",
+      "week": 8,
+      "teams": [
+        {"manager": "Lee284", "blurb": "A 146.80 beat nikhil1123 by 23.82 behind Ja'Marr Chase's 31.1 and Tony Pollard's 28.7, despite 50.8 left on the bench; the record is 6-2 with 1,126.42 season points."},
+        {"manager": "nikhil1123", "blurb": "A 122.98 lost to Lee284 by 23.82 despite Tee Higgins's 37.5, with the Jets defense at -3 and Geno Smith's 19 on the bench; the record is 4-4 with 1,030.42 season points."},
+        {"manager": "yojarshh", "blurb": "A 137.96 beat andychoe03 by 67.9 on Josh Allen's 27.56 and Michael Wilson's 26.8 with the Jaguars defense at 20, making the record 3-5 with 992.62 season points."},
+        {"manager": "edyun1", "blurb": "A 131.60 edged saiky7 by 5.6 on Brock Bowers's 28.2, Puka Nacua's 25 and Kyler Murray's 20.9, with Kirk Cousins's 28.18 on the bench; the record is 3-5 with 945.9 season points."},
+        {"manager": "asierbelay", "blurb": "A 146.96 beat jiddyyyyyy by 33.82 behind Chuba Hubbard's 24.9 and Drake Maye's 22.46 with 17.8 left on the bench, making the record 6-2 with 1,125 season points."},
+        {"manager": "saiky7", "blurb": "A 126 lost to edyun1 by 5.6 with Lamar Jackson scoring 0 at quarterback and Bryce Young's 11.36 on the bench; the record is 5-3 with 1,114.92 season points and $59 of FAAB used."},
+        {"manager": "andychoe03", "blurb": "A 70.06, the second-lowest score of the season, lost to yojarshh by 67.9, with Harold Fannin Jr.'s 23.4 on the bench and Kyle Pitts at 2.6; the record is 3-5 with 894.3 season points."},
+        {"manager": "tonypng", "blurb": "A 173.98, the third-highest score of the season, beat drewkim by 46.46 on Joe Burrow's 42.48 and Bhayshul Tuten's 29.9; the record is 5-3 with a league-high 1,162.6 season points."},
+        {"manager": "jiddyyyyyy", "blurb": "A 113.14 lost to asierbelay by 33.82 despite Patrick Mahomes's 25.44 and Jahmyr Gibbs's 24.8, with no other starter above Bucky Irving's 21; the record is 4-4 with 991.1 season points."},
+        {"manager": "jjnhwg", "blurb": "An 87.88 beat bigmoneyjos by 8.38 as free-agent add Tampa Bay's defense scored 18 and Wan'Dale Robinson 15.7, making the record 5-3 with 975.76 season points."},
+        {"manager": "drewkim", "blurb": "A 127.52 lost to tonypng by 46.46 even with Sam Darnold's 18.52 and the Washington defense's 14, and Bo Nix's 19.28 stayed on the bench; the record is 3-5 with 960.44 season points."},
+        {"manager": "bigmoneyjos", "blurb": "A 79.5 lost to jjnhwg by 8.38 behind Dak Prescott's 19.8 with nothing left on the bench, and the record is 1-7 with 849.34 season points and $58 of FAAB used."}
+      ]
     }
   ]
 }
