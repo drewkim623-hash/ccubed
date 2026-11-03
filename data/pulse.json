@@ -1,11 +1,11 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-03T04:33:56.122Z",
- "at": 1793680436122,
+ "generated": "2026-11-03T05:14:40.231Z",
+ "at": 1793682880231,
  "season": "2026",
- "nfl_week": 8,
+ "nfl_week": 9,
  "season_type": "regular",
- "week_in_progress": false,
+ "week_in_progress": true,
  "standings": [
   {
    "manager": "saiky7",
@@ -140,216 +140,77 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 127.52,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "tonypng",
-    "points": 173.98,
-    "startersLeftToPlay": 0
+    "manager": "jiddyyyyyy",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 70.06,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
+    "manager": "jjnhwg",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
     "manager": "yojarshh",
-    "points": 137.96,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "bigmoneyjos",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 122.98,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "edyun1",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "saiky7",
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
     "manager": "Lee284",
-    "points": 146.8,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
-    "manager": "edyun1",
-    "points": 131.6,
-    "startersLeftToPlay": 0
-   },
-   "b": {
-    "manager": "saiky7",
-    "points": 126,
-    "startersLeftToPlay": 0
-   }
-  },
-  {
-   "a": {
-    "manager": "jjnhwg",
-    "points": 87.88,
-    "startersLeftToPlay": 0
-   },
-   "b": {
-    "manager": "bigmoneyjos",
-    "points": 79.5,
-    "startersLeftToPlay": 0
-   }
-  },
-  {
-   "a": {
-    "manager": "jiddyyyyyy",
-    "points": 113.14,
-    "startersLeftToPlay": 0
-   },
-   "b": {
     "manager": "asierbelay",
-    "points": 146.96,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "tonypng",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   }
  ],
  "trades": [],
- "waivers": [
-  {
-   "week": 7,
-   "type": "waiver",
-   "managers": [
-    "bigmoneyjos"
-   ],
-   "adds": [
-    {
-     "name": "Rico Dowdle",
-     "pos": "RB",
-     "team": "PIT",
-     "status": null,
-     "to": "bigmoneyjos"
-    }
-   ],
-   "drops": [],
-   "faab": 15,
-   "picks": []
-  },
-  {
-   "week": 7,
-   "type": "waiver",
-   "managers": [
-    "saiky7"
-   ],
-   "adds": [
-    {
-     "name": "Seattle Seahawks",
-     "pos": "DEF",
-     "team": "SEA",
-     "status": null,
-     "to": "saiky7"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Cleveland Browns",
-     "pos": "DEF",
-     "team": "CLE",
-     "status": null,
-     "from": "saiky7"
-    }
-   ],
-   "faab": 12,
-   "picks": []
-  },
-  {
-   "week": 7,
-   "type": "waiver",
-   "managers": [
-    "saiky7"
-   ],
-   "adds": [
-    {
-     "name": "Jakobi Meyers",
-     "pos": "WR",
-     "team": "JAX",
-     "status": "Questionable",
-     "to": "saiky7"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Malik Washington",
-     "pos": "WR",
-     "team": "MIA",
-     "status": null,
-     "from": "saiky7"
-    }
-   ],
-   "faab": 7,
-   "picks": []
-  },
-  {
-   "week": 7,
-   "type": "waiver",
-   "managers": [
-    "yojarshh"
-   ],
-   "adds": [
-    {
-     "name": "Jonah Coleman",
-     "pos": "RB",
-     "team": "DEN",
-     "status": null,
-     "to": "yojarshh"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Tennessee Titans",
-     "pos": "DEF",
-     "team": "TEN",
-     "status": null,
-     "from": "yojarshh"
-    }
-   ],
-   "faab": 5,
-   "picks": []
-  },
-  {
-   "week": 7,
-   "type": "waiver",
-   "managers": [
-    "bigmoneyjos"
-   ],
-   "adds": [
-    {
-     "name": "Devin Singletary",
-     "pos": "RB",
-     "team": "NYG",
-     "status": null,
-     "to": "bigmoneyjos"
-    }
-   ],
-   "drops": [],
-   "faab": 3,
-   "picks": []
-  },
-  {
-   "week": 7,
-   "type": "waiver",
-   "managers": [
-    "andychoe03"
-   ],
-   "adds": [
-    {
-     "name": "Aaron Rodgers",
-     "pos": "QB",
-     "team": "PIT",
-     "status": null,
-     "to": "andychoe03"
-    }
-   ],
-   "drops": [],
-   "faab": 1,
-   "picks": []
-  }
- ],
- "free_agent_moves": 50
+ "waivers": [],
+ "free_agent_moves": 21
 }
