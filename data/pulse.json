@@ -1,11 +1,11 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-02T11:09:05.850Z",
- "at": 1793617745850,
+ "generated": "2026-11-03T04:33:56.122Z",
+ "at": 1793680436122,
  "season": "2026",
  "nfl_week": 8,
  "season_type": "regular",
- "week_in_progress": true,
+ "week_in_progress": false,
  "standings": [
   {
    "manager": "saiky7",
@@ -45,6 +45,7 @@
    "points_against": 824.6,
    "faab_spent": 0,
    "starters_hurt": [
+    "Bhayshul Tuten (Questionable)",
     "Amon-Ra St. Brown (Questionable)"
    ]
   },
@@ -74,7 +75,8 @@
    "points_against": 841.86,
    "faab_spent": 40,
    "starters_hurt": [
-    "Jeremiyah Love (Out)"
+    "Jeremiyah Love (Out)",
+    "Tyler Loop (Questionable)"
    ]
   },
   {
@@ -138,20 +140,20 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 109,
-    "startersLeftToPlay": 1
+    "points": 127.52,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "tonypng",
-    "points": 146.08,
-    "startersLeftToPlay": 1
+    "points": 173.98,
+    "startersLeftToPlay": 0
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 57.36,
-    "startersLeftToPlay": 1
+    "points": 70.06,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "yojarshh",
@@ -162,13 +164,13 @@
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 104.38,
-    "startersLeftToPlay": 1
+    "points": 122.98,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "Lee284",
-    "points": 145.8,
-    "startersLeftToPlay": 1
+    "points": 146.8,
+    "startersLeftToPlay": 0
    }
   },
   {
@@ -179,20 +181,20 @@
    },
    "b": {
     "manager": "saiky7",
-    "points": 102.2,
-    "startersLeftToPlay": 1
+    "points": 126,
+    "startersLeftToPlay": 0
    }
   },
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 73.9,
-    "startersLeftToPlay": 1
+    "points": 87.88,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 62.1,
-    "startersLeftToPlay": 2
+    "points": 79.5,
+    "startersLeftToPlay": 0
    }
   },
   {
@@ -267,7 +269,7 @@
      "name": "Jakobi Meyers",
      "pos": "WR",
      "team": "JAX",
-     "status": null,
+     "status": "Questionable",
      "to": "saiky7"
     }
    ],

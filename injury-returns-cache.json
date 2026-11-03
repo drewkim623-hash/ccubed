@@ -1,7 +1,7 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-02T23:24:22.561Z",
- "week": 8,
+ "generated": "2026-11-03T04:33:55.652Z",
+ "week": 9,
  "entries": {
   "421": {
    "n": "Matthew Stafford",
@@ -11,7 +11,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "2133": {
    "n": "Davante Adams",
@@ -27,7 +27,7 @@
   "2216": {
    "n": "Mike Evans",
    "s": "Out",
-   "ret": "2026-11-01",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -42,7 +42,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "4034": {
    "n": "Christian McCaffrey",
@@ -52,7 +52,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "4454": {
    "n": "Kendrick Bourne",
@@ -62,12 +62,12 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "4881": {
    "n": "Lamar Jackson",
    "s": "Out",
-   "ret": "2026-11-01",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -77,7 +77,7 @@
   "4983": {
    "n": "DJ Moore",
    "s": "Questionable",
-   "ret": "2026-11-01",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -92,7 +92,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "5859": {
    "n": "A.J. Brown",
@@ -107,7 +107,7 @@
   "5872": {
    "n": "Deebo Samuel Sr.",
    "s": "Out",
-   "ret": "2026-11-01",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -117,12 +117,22 @@
   "5892": {
    "n": "David Montgomery",
    "s": "Out",
-   "ret": "2026-11-01",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/4035538/david-montgomery — Groin. Ryans: week-to-week; trending to miss Week 6. HOU bye Week 8; could extend to Week 7. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-22"
+  },
+  "5947": {
+   "n": "Jakobi Meyers",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-03"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -148,7 +158,7 @@
   "7543": {
    "n": "Travis Etienne Jr.",
    "s": "IR",
-   "ret": "2026-11-01",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -164,7 +174,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "8112": {
    "n": "Drake London",
@@ -174,7 +184,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -195,7 +205,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "8129": {
    "n": "Dameon Pierce",
@@ -205,7 +215,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-02",
+   "retChecked": "2026-11-03",
    "irSince": 8
   },
   "8138": {
@@ -216,7 +226,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "8142": {
    "n": "Alec Pierce",
@@ -247,7 +257,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "8205": {
    "n": "Isiah Pacheco",
@@ -278,12 +288,12 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "11577": {
    "n": "Will Shipley",
    "s": "IR",
-   "ret": "2026-11-01",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -299,7 +309,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "12481": {
    "n": "Cam Skattebo",
@@ -309,7 +319,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-02"
+   "retChecked": "2026-11-03"
   },
   "12487": {
    "n": "Terrance Ferguson",
@@ -326,9 +336,8 @@
    "n": "RJ Harvey",
    "s": "IR",
    "ret": null,
-   "retWeeks": 4,
+   "retWeeks": 3,
    "retWeeksList": [
-    8,
     9,
     11,
     12
@@ -338,6 +347,16 @@
    "retNote": "consensus.mjs — Consensus: changed from audit [8]; consensus.",
    "retChecked": "2026-11-01",
    "irSince": 8
+  },
+  "12490": {
+   "n": "Bhayshul Tuten",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-03"
   },
   "12514": {
    "n": "Emeka Egbuka",
@@ -380,6 +399,16 @@
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Toe sprain / thumb. Day-to-day; ruled out Week 5; ESPN Q Week 6. Consensus: matches audit; consensus.",
    "retChecked": "2026-11-01"
   },
+  "12711": {
+   "n": "Tyler Loop",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 4,
+   "retSource": "espn-outlook",
+   "retEstimated": true,
+   "retNote": "lands on injured reserve",
+   "retChecked": "2026-11-03"
+  },
   "13279": {
    "n": "Carnell Tate",
    "s": "Out",
@@ -393,7 +422,7 @@
   "13281": {
    "n": "Jordyn Tyson",
    "s": "IR",
-   "ret": "2026-11-01",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -404,7 +433,7 @@
   "13287": {
    "n": "Jeremiyah Love",
    "s": "Out",
-   "ret": "2026-11-01",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
