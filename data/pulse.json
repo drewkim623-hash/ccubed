@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-03T19:49:29.743Z",
- "at": 1793735369743,
+ "generated": "2026-11-04T08:18:37.921Z",
+ "at": 1793780317922,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -33,8 +33,7 @@
    "points_against": 952.12,
    "faab_spent": 0,
    "starters_hurt": [
-    "Bhayshul Tuten (Questionable)",
-    "Amon-Ra St. Brown (Questionable)"
+    "Bhayshul Tuten (Questionable)"
    ]
   },
   {
@@ -44,9 +43,7 @@
    "points_for": 1114.92,
    "points_against": 1035.74,
    "faab_spent": 59,
-   "starters_hurt": [
-    "Drake London (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jjnhwg",
@@ -74,8 +71,8 @@
    "points_against": 988.82,
    "faab_spent": 40,
    "starters_hurt": [
-    "Jeremiyah Love (Out)",
-    "Tyler Loop (Questionable)"
+    "Jeremiyah Love (IR)",
+    "Tyler Loop (IR)"
    ]
   },
   {
@@ -97,7 +94,6 @@
    "points_against": 1093.36,
    "faab_spent": 11,
    "starters_hurt": [
-    "James Cook III (Questionable)",
     "Christian Watson (Questionable)"
    ]
   },
@@ -111,7 +107,7 @@
    "starters_hurt": [
     "Kyler Murray (Questionable)",
     "Cam Skattebo (Questionable)",
-    "Breece Hall (Out)",
+    "Breece Hall (Questionable)",
     "DJ Moore (Questionable)"
    ]
   },
@@ -121,9 +117,9 @@
    "losses": 5,
    "points_for": 894.3,
    "points_against": 1005.4,
-   "faab_spent": 56,
+   "faab_spent": 62,
    "starters_hurt": [
-    "David Montgomery (Out)"
+    "David Montgomery (Questionable)"
    ]
   },
   {
@@ -182,7 +178,7 @@
    "b": {
     "manager": "edyun1",
     "points": 0,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    }
   },
   {
@@ -211,6 +207,61 @@
   }
  ],
  "trades": [],
- "waivers": [],
- "free_agent_moves": 25
+ "waivers": [
+  {
+   "week": 8,
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Malik Willis",
+     "pos": "QB",
+     "team": "MIA",
+     "status": null,
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Zonovan Knight",
+     "pos": "RB",
+     "team": "ARI",
+     "status": "Questionable",
+     "from": "andychoe03"
+    }
+   ],
+   "faab": 4,
+   "picks": []
+  },
+  {
+   "week": 8,
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Mike Gesicki",
+     "pos": "TE",
+     "team": "CIN",
+     "status": null,
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Jacoby Brissett",
+     "pos": "QB",
+     "team": "ARI",
+     "status": null,
+     "from": "andychoe03"
+    }
+   ],
+   "faab": 2,
+   "picks": []
+  }
+ ],
+ "free_agent_moves": 28
 }
