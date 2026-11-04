@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-04T20:14:31.700Z",
- "at": 1793823271700,
+ "generated": "2026-11-04T22:12:45.380Z",
+ "at": 1793830365381,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -35,7 +35,8 @@
    "points_against": 952.12,
    "faab_spent": 0,
    "starters_hurt": [
-    "Bhayshul Tuten (Questionable)"
+    "Bhayshul Tuten (Questionable)",
+    "Amon-Ra St. Brown (Questionable)"
    ]
   },
   {
@@ -73,7 +74,7 @@
    "points_against": 988.82,
    "faab_spent": 40,
    "starters_hurt": [
-    "Jeremiyah Love (IR)",
+    "Mason Taylor (Questionable)",
     "Tyler Loop (IR)"
    ]
   },
@@ -85,7 +86,8 @@
    "points_against": 1020.2,
    "faab_spent": 44,
    "starters_hurt": [
-    "Michael Wilson (Questionable)"
+    "Michael Wilson (Questionable)",
+    "Rashee Rice (Questionable)"
    ]
   },
   {
@@ -121,7 +123,8 @@
    "points_against": 1005.4,
    "faab_spent": 62,
    "starters_hurt": [
-    "David Montgomery (Questionable)",
+    "David Montgomery (Out)",
+    "George Pickens (Questionable)",
     "Deebo Samuel Sr. (Questionable)"
    ]
   },
@@ -132,7 +135,9 @@
    "points_for": 849.34,
    "points_against": 1045.6,
    "faab_spent": 58,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Travis Kelce (Questionable)"
+   ]
   }
  ],
  "this_week": [
@@ -258,7 +263,7 @@
      "name": "Jacoby Brissett",
      "pos": "QB",
      "team": "ARI",
-     "status": "Out",
+     "status": null,
      "from": "andychoe03"
     }
    ],
@@ -266,5 +271,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 34
+ "free_agent_moves": 35
 }
