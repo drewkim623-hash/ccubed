@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-04T14:15:47.540Z",
- "at": 1793801747540,
+ "generated": "2026-11-04T18:15:33.579Z",
+ "at": 1793816133579,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -23,7 +23,9 @@
    "points_for": 1125,
    "points_against": 984.38,
    "faab_spent": 0,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Garrett Wilson (Questionable)"
+   ]
   },
   {
    "manager": "tonypng",
@@ -264,5 +266,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 32
+ "free_agent_moves": 33
 }
