@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-04T13:49:24.114Z",
- "at": 1793800164114,
+ "generated": "2026-11-04T14:15:47.540Z",
+ "at": 1793801747540,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -119,7 +119,8 @@
    "points_against": 1005.4,
    "faab_spent": 62,
    "starters_hurt": [
-    "David Montgomery (Questionable)"
+    "David Montgomery (Questionable)",
+    "Deebo Samuel Sr. (Questionable)"
    ]
   },
   {
@@ -263,5 +264,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 31
+ "free_agent_moves": 32
 }

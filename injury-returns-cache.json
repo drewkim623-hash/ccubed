@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-04T13:49:23.502Z",
+ "generated": "2026-11-04T14:15:46.946Z",
  "week": 9,
  "entries": {
   "421": {
@@ -33,16 +33,6 @@
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: matches audit; uncertain (audit tiebreak wk 9).",
    "retChecked": "2026-10-21"
-  },
-  "3214": {
-   "n": "Hunter Henry",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-04"
   },
   "4034": {
    "n": "Christian McCaffrey",
