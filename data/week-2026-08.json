@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 8,
- "generated": "2026-11-03T11:09:10.975Z",
- "generated_at": "2026-11-03T11:09:10.975Z",
+ "generated": "2026-11-04T11:09:37.606Z",
+ "generated_at": "2026-11-04T11:09:37.606Z",
  "final": true,
  "standings_through_week": 8,
  "standings_folded": false,
@@ -1239,7 +1239,7 @@
    "ties": 0,
    "points_for": 894.3,
    "points_against": 1005.4,
-   "waiver_budget_used": 56
+   "waiver_budget_used": 62
   },
   {
    "manager": "bigmoneyjos",
@@ -1254,6 +1254,180 @@
   }
  ],
  "transactions": [
+  {
+   "type": "waiver",
+   "managers": [
+    "nikhil1123"
+   ],
+   "adds": [
+    {
+     "name": "Chris Rodriguez Jr.",
+     "pos": "RB",
+     "team": "JAX",
+     "to": "nikhil1123"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Geno Smith",
+     "pos": "QB",
+     "team": "NYJ",
+     "from": "nikhil1123"
+    }
+   ],
+   "faab": 0,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "edyun1"
+   ],
+   "adds": [
+    {
+     "name": "Tyler Bass",
+     "pos": "K",
+     "team": "BUF",
+     "to": "edyun1"
+    }
+   ],
+   "drops": [],
+   "faab": 0,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "edyun1"
+   ],
+   "adds": [
+    {
+     "name": "Kaelon Black",
+     "pos": "RB",
+     "team": "SF",
+     "to": "edyun1"
+    }
+   ],
+   "drops": [],
+   "faab": 0,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "edyun1"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Samaje Perine",
+     "pos": "RB",
+     "team": "CIN",
+     "from": "edyun1"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "edyun1"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Emanuel Wilson",
+     "pos": "RB",
+     "team": "SEA",
+     "from": "edyun1"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "tonypng"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Kansas City Chiefs",
+     "pos": "DEF",
+     "team": "KC",
+     "from": "tonypng"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "tonypng"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Kendrick Bourne",
+     "pos": "WR",
+     "team": "ARI",
+     "from": "tonypng"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Malik Willis",
+     "pos": "QB",
+     "team": "MIA",
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Zonovan Knight",
+     "pos": "RB",
+     "team": "ARI",
+     "from": "andychoe03"
+    }
+   ],
+   "faab": 4,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Mike Gesicki",
+     "pos": "TE",
+     "team": "CIN",
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Jacoby Brissett",
+     "pos": "QB",
+     "team": "ARI",
+     "from": "andychoe03"
+    }
+   ],
+   "faab": 2,
+   "picks": []
+  },
   {
    "type": "free_agent",
    "managers": [
