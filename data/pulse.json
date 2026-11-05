@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-04T22:12:45.380Z",
- "at": 1793830365381,
+ "generated": "2026-11-05T11:08:47.683Z",
+ "at": 1793876927683,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -55,7 +55,9 @@
    "points_for": 975.76,
    "points_against": 1001.04,
    "faab_spent": 1,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Denzel Boston (Questionable)"
+   ]
   },
   {
    "manager": "nikhil1123",
@@ -86,6 +88,7 @@
    "points_against": 1020.2,
    "faab_spent": 44,
    "starters_hurt": [
+    "Saquon Barkley (Questionable)",
     "Michael Wilson (Questionable)",
     "Rashee Rice (Questionable)"
    ]
@@ -109,9 +112,7 @@
    "points_against": 1082.1,
    "faab_spent": 12,
    "starters_hurt": [
-    "Kyler Murray (Questionable)",
     "Cam Skattebo (Questionable)",
-    "Breece Hall (Questionable)",
     "DJ Moore (Questionable)"
    ]
   },
@@ -123,7 +124,6 @@
    "points_against": 1005.4,
    "faab_spent": 62,
    "starters_hurt": [
-    "David Montgomery (Out)",
     "George Pickens (Questionable)",
     "Deebo Samuel Sr. (Questionable)"
    ]
@@ -186,7 +186,7 @@
    "b": {
     "manager": "edyun1",
     "points": 0,
-    "startersLeftToPlay": 9
+    "startersLeftToPlay": 10
    }
   },
   {
