@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-06T01:49:07.128Z",
- "at": 1793929747129,
+ "generated": "2026-11-06T03:16:19.498Z",
+ "at": 1793934979499,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -136,7 +136,7 @@
    "points_against": 1045.6,
    "faab_spent": 58,
    "starters_hurt": [
-    "Keon Coleman (Questionable)"
+    "Christian McCaffrey (Questionable)"
    ]
   }
  ],
@@ -156,24 +156,24 @@
   {
    "a": {
     "manager": "andychoe03",
-    "points": 2.1,
+    "points": 14.1,
     "startersLeftToPlay": 10
    },
    "b": {
     "manager": "jjnhwg",
-    "points": 2.08,
+    "points": 4.88,
     "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "yojarshh",
-    "points": 8.6,
+    "points": 15.3,
     "startersLeftToPlay": 10
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 8,
+    "points": 10,
     "startersLeftToPlay": 10
    }
   },
@@ -197,7 +197,7 @@
    },
    "b": {
     "manager": "Lee284",
-    "points": 4,
+    "points": 12.06,
     "startersLeftToPlay": 10
    }
   },
@@ -209,7 +209,7 @@
    },
    "b": {
     "manager": "tonypng",
-    "points": 7.6,
+    "points": 8.4,
     "startersLeftToPlay": 10
    }
   }
@@ -271,5 +271,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 39
+ "free_agent_moves": 40
 }
