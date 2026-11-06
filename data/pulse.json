@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-06T11:08:47.039Z",
- "at": 1793963327039,
+ "generated": "2026-11-06T21:28:21.131Z",
+ "at": 1794000501131,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -24,7 +24,7 @@
    "points_against": 984.38,
    "faab_spent": 0,
    "starters_hurt": [
-    "Garrett Wilson (Questionable)"
+    "Garrett Wilson (Out)"
    ]
   },
   {
@@ -56,9 +56,7 @@
    "points_for": 975.76,
    "points_against": 1001.04,
    "faab_spent": 1,
-   "starters_hurt": [
-    "Denzel Boston (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "nikhil1123",
@@ -88,7 +86,6 @@
    "points_against": 1020.2,
    "faab_spent": 44,
    "starters_hurt": [
-    "Saquon Barkley (Questionable)",
     "Michael Wilson (Questionable)"
    ]
   },
@@ -99,9 +96,7 @@
    "points_for": 960.44,
    "points_against": 1093.36,
    "faab_spent": 11,
-   "starters_hurt": [
-    "Christian Watson (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "edyun1",
@@ -124,7 +119,6 @@
    "faab_spent": 62,
    "starters_hurt": [
     "George Pickens (Questionable)",
-    "Harold Fannin Jr. (Questionable)",
     "Deebo Samuel Sr. (Questionable)"
    ]
   },
@@ -236,7 +230,7 @@
      "name": "Zonovan Knight",
      "pos": "RB",
      "team": "ARI",
-     "status": "Questionable",
+     "status": "Out",
      "from": "andychoe03"
     }
    ],
@@ -262,7 +256,7 @@
     {
      "name": "Jacoby Brissett",
      "pos": "QB",
-     "team": "ARI",
+     "team": "BAL",
      "status": null,
      "from": "andychoe03"
     }
@@ -271,5 +265,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 40
+ "free_agent_moves": 42
 }
