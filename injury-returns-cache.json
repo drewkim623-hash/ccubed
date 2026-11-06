@@ -1,18 +1,8 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-05T14:24:46.551Z",
+ "generated": "2026-11-06T00:34:22.755Z",
  "week": 9,
  "entries": {
-  "1466": {
-   "n": "Travis Kelce",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
-  },
   "2133": {
    "n": "Davante Adams",
    "s": "IR",
@@ -42,7 +32,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
+   "retChecked": "2026-11-06"
   },
   "4035": {
    "n": "Alvin Kamara",
@@ -52,7 +42,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
+   "retChecked": "2026-11-06"
   },
   "4866": {
    "n": "Saquon Barkley",
@@ -66,13 +56,14 @@
   },
   "4881": {
    "n": "Lamar Jackson",
-   "s": "Out",
+   "s": "IR",
    "ret": "2026-12-06",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Ankle sprain (left). Minter unsure he practices Wednesday; ESPN Q Week 6. Coming week only. Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-03"
+   "retChecked": "2026-11-03",
+   "irSince": 9
   },
   "4943": {
    "n": "Sam Darnold",
@@ -98,11 +89,11 @@
    "n": "Kyler Murray",
    "s": "Questionable",
    "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
+   "retWeeks": 2,
+   "retSource": "espn-outlook",
    "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
+   "retNote": "week-to-week",
+   "retChecked": "2026-11-06"
   },
   "5859": {
    "n": "A.J. Brown",
@@ -174,7 +165,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
+   "retChecked": "2026-11-06"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -195,7 +186,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: IR minimum 4 weeks, on IR since wk 8",
-   "retChecked": "2026-11-05",
+   "retChecked": "2026-11-06",
    "irSince": 8
   },
   "8137": {
@@ -206,7 +197,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
+   "retChecked": "2026-11-06"
   },
   "8142": {
    "n": "Alec Pierce",
@@ -227,17 +218,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
-  },
-  "8155": {
-   "n": "Breece Hall",
-   "s": "Questionable",
-   "ret": "2026-11-08",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Quadriceps. Week-to-week, ruled out Weeks 4-5; ESPN Q Week 6. Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-01"
+   "retChecked": "2026-11-06"
   },
   "8167": {
    "n": "Christian Watson",
@@ -247,7 +228,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
+   "retChecked": "2026-11-06"
   },
   "8205": {
    "n": "Isiah Pacheco",
@@ -270,16 +251,6 @@
    "retNote": "consensus.mjs — Consensus: matches audit; uncertain (audit tiebreak wk 9).",
    "retChecked": "2026-10-31"
   },
-  "10229": {
-   "n": "Rashee Rice",
-   "s": "Questionable",
-   "ret": "2026-11-08",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Hamstring. Conflict: Rapoport (Oct 5) 'relatively minor', may play after bye; NBC (Oct 13) 'several-week absence'. Counted Week 6 only. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-24"
-  },
   "10232": {
    "n": "Michael Wilson",
    "s": "Questionable",
@@ -288,7 +259,17 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
+   "retChecked": "2026-11-06"
+  },
+  "10236": {
+   "n": "Dalton Kincaid",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-06"
   },
   "11577": {
    "n": "Will Shipley",
@@ -301,6 +282,26 @@
    "retChecked": "2026-10-14",
    "irSince": 6
   },
+  "11632": {
+   "n": "Malik Nabers",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 99,
+   "retSource": "espn-outlook",
+   "retEstimated": true,
+   "retNote": "ACL tear",
+   "retChecked": "2026-11-06"
+  },
+  "11637": {
+   "n": "Keon Coleman",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-06"
+  },
   "12481": {
    "n": "Cam Skattebo",
    "s": "Questionable",
@@ -309,7 +310,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
+   "retChecked": "2026-11-06"
   },
   "12487": {
    "n": "Terrance Ferguson",
@@ -338,35 +339,15 @@
    "retChecked": "2026-11-01",
    "irSince": 8
   },
-  "12490": {
-   "n": "Bhayshul Tuten",
+  "12506": {
+   "n": "Harold Fannin Jr.",
    "s": "Questionable",
    "ret": null,
    "retWeeks": 1,
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
-  },
-  "12498": {
-   "n": "Mason Taylor",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
-  },
-  "12514": {
-   "n": "Emeka Egbuka",
-   "s": "Questionable",
-   "ret": "2026-11-08",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-31"
+   "retChecked": "2026-11-06"
   },
   "12529": {
    "n": "TreVeyon Henderson",
@@ -398,17 +379,6 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Toe sprain / thumb. Day-to-day; ruled out Week 5; ESPN Q Week 6. Consensus: matches audit; uncertain (audit tiebreak wk 9).",
    "retChecked": "2026-11-01"
-  },
-  "12711": {
-   "n": "Tyler Loop",
-   "s": "IR",
-   "ret": "2026-12-13",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-11-05",
-   "irSince": 9
   },
   "13279": {
    "n": "Carnell Tate",
@@ -450,7 +420,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-05"
+   "retChecked": "2026-11-06"
   }
  }
 }
