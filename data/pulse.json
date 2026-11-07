@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-07T11:07:33.250Z",
- "at": 1794049653250,
+ "generated": "2026-11-07T22:48:32.570Z",
+ "at": 1794091712570,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -99,9 +99,7 @@
    "points_for": 945.9,
    "points_against": 1082.1,
    "faab_spent": 12,
-   "starters_hurt": [
-    "DJ Moore (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "andychoe03",
@@ -111,8 +109,7 @@
    "points_against": 1005.4,
    "faab_spent": 62,
    "starters_hurt": [
-    "George Pickens (Questionable)",
-    "Deebo Samuel Sr. (Out)"
+    "George Pickens (Questionable)"
    ]
   },
   {
@@ -256,5 +253,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 44
+ "free_agent_moves": 46
 }

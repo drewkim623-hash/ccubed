@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-07T14:23:26.004Z",
+ "generated": "2026-11-07T22:48:32.099Z",
  "week": 9,
  "entries": {
   "2133": {
@@ -24,17 +24,6 @@
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-06"
   },
-  "3286": {
-   "n": "Demarcus Robinson",
-   "s": "IR",
-   "ret": null,
-   "retWeeks": 4,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: IR minimum 4 weeks, on IR since wk 9",
-   "retChecked": "2026-11-07",
-   "irSince": 9
-  },
   "4881": {
    "n": "Lamar Jackson",
    "s": "IR",
@@ -45,26 +34,6 @@
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Ankle sprain (left). Minter unsure he practices Wednesday; ESPN Q Week 6. Coming week only. Consensus: matches audit; consensus.",
    "retChecked": "2026-11-03",
    "irSince": 9
-  },
-  "4983": {
-   "n": "DJ Moore",
-   "s": "Questionable",
-   "ret": "2026-11-08",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Shoulder AC joint sprain. Missed Week 5; Q for Week 6. Coming week only. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-18"
-  },
-  "5849": {
-   "n": "Kyler Murray",
-   "s": "Questionable",
-   "ret": "2026-11-15",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-06"
   },
   "5859": {
    "n": "A.J. Brown",
@@ -302,14 +271,13 @@
   },
   "13281": {
    "n": "Jordyn Tyson",
-   "s": "IR",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/4880281/jordyn-tyson — Hamstring strain. Practice window not opened; return after NO Week 8 bye 'probably more realistic' (analyst estimate, no team timetable). Consensus: matches audit; uncertain (audit tiebreak wk 9).",
-   "retChecked": "2026-11-03",
-   "irSince": 6
+   "retChecked": "2026-11-03"
   },
   "13287": {
    "n": "Jeremiyah Love",
