@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 8,
- "generated": "2026-11-06T11:08:43.390Z",
- "generated_at": "2026-11-06T11:08:43.390Z",
+ "generated": "2026-11-07T11:07:29.552Z",
+ "generated_at": "2026-11-07T11:07:29.552Z",
  "final": true,
  "standings_through_week": 8,
  "standings_folded": false,
@@ -890,7 +890,7 @@
       {
        "name": "Jacoby Brissett",
        "pos": "QB",
-       "team": "ARI",
+       "team": "BAL",
        "points": 4.46
       },
       {
@@ -1421,7 +1421,7 @@
     {
      "name": "Jacoby Brissett",
      "pos": "QB",
-     "team": "ARI",
+     "team": "BAL",
      "from": "andychoe03"
     }
    ],
@@ -1792,7 +1792,7 @@
     {
      "name": "Jacoby Brissett",
      "pos": "QB",
-     "team": "ARI",
+     "team": "BAL",
      "to": "andychoe03"
     }
    ],
@@ -1975,7 +1975,7 @@
     {
      "name": "Jacoby Brissett",
      "pos": "QB",
-     "team": "ARI",
+     "team": "BAL",
      "points": 4.46
     },
     {
@@ -2341,7 +2341,7 @@
       {
        "name": "Jacoby Brissett",
        "pos": "QB",
-       "team": "ARI",
+       "team": "BAL",
        "points": 4.46
       },
       {
