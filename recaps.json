@@ -3405,6 +3405,224 @@
      "text": "Lines, playoff chances and starters left are from the site's odds board on Friday morning; the win chance for each matchup counts points already scored. Records, points and claims are from the week 8 file and the waiver log Sleeper produced for C Cubed; injury designations are from the site's injury report. Nobody is quoted."
     }
    ]
+  },
+  {
+   "season": "2026",
+   "slug": "team-meta-bloomberg-lost-30-05-points-of-playoff-chance-while-a-3-5-team-gained-19-27",
+   "aliases": [],
+   "date": "2026-11-07",
+   "kind": "opinion",
+   "source": "saturday",
+   "kicker": "2026 · week 9",
+   "headline": "Team Meta/Bloomberg Lost 30.05 Points of Playoff Chance While a 3-5 Team Gained 19.27",
+   "dek": "Team Meta/Bloomberg (jiddyyyyyy) fell from 52.91 to 22.86 percent to make the playoffs since Oct 29, the largest drop on the board, while S2? #jtw #imwallin (yojarshh), 3-5, rose 19.27 to 51.44. Three other 3-5 teams sit at 8.75 or less.",
+   "byline": "C Cubed desk",
+   "standfirst": "4 teams at 3-5 · 43.95 points apart · week 9 lines",
+   "teaser": "🚨 C CUBED | WEEK 9\n\nTEAM META/BLOOMBERG LOST 30.05 POINTS OF PLAYOFF CHANCE WHILE A 3-5 TEAM GAINED 19.27\n\n📉 Team Meta/Bloomberg (jiddyyyyyy) fell from 52.91 to 22.86 percent to make the playoffs since Oct 29\n📈 S2? #jtw #imwallin (yojarshh), 3-5, rose 19.27 points to 51.44 percent\n⚖️ Four 3-5 teams sit 43.95 points apart, from 7.49 to 51.44 percent\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/team-meta-bloomberg-lost-30-05-points-of-playoff-chance-while-a-3-5-team-gained-19-27.html",
+   "blocks": [
+    {
+     "type": "p",
+     "text": "The site's odds board has <b>Team Meta/Bloomberg (jiddyyyyyy)</b> at 22.86 percent to make the playoffs, down 30.05 points from 52.91 on Oct 29, the largest fall of any team. <b>S2? #jtw #imwallin (yojarshh)</b>, 3-5, went the other way, up 19.27 to 51.44, and is now priced ahead of both 4-4 teams.",
+     "lead": true
+    },
+    {
+     "type": "stat",
+     "n": "30.05",
+     "text": "points of playoff chance lost by Team Meta/Bloomberg since Oct 29, from 52.91 to 22.86 percent. Its title chance went from 6.91 to 1.92 percent."
+    },
+    {
+     "type": "h",
+     "eyebrow": "who moved",
+     "text": "Two big gains, three big falls"
+    },
+    {
+     "type": "p",
+     "text": "The team history holds readings on Oct 29 and Nov 6, so the comparison runs from Oct 29, the last reading before last Saturday, to the board now. That spans all of week 8. jiddyyyyyy, 4-4, lost 146.96 to 113.14 to <b>AB x B (asierbelay)</b>, 6-2, now at 99.695 percent. <b>Tshough (tonypng)</b> beat <b>Lucky Strike (drewkim)</b> 173.98 to 127.52, moved to 5-3 and rose 19.25, from 74.22 to 93.47."
+    },
+    {
+     "type": "p",
+     "text": "yojarshh beat <b>the if team (andychoe03)</b> 137.96 to 70.06 and is still 3-5. <b>n² (nikhil1123)</b> lost 146.8 to 122.98 to <b>Jug (Lee284)</b> and fell 13.46, from 60.70 to 47.24; drewkim fell 15.83, from 24.45 to 8.62. The history keeps each price and not the reason for it."
+    },
+    {
+     "type": "tiers",
+     "kicker": "Week 9 · The playoff picture",
+     "title": "Four near-locks, and a 3-5 team in the field",
+     "sub": "Big number: chance to make the playoffs on the board now.",
+     "note": "Playoff % from the site's odds board, Nov 7; records through week 8. Six of twelve make it; the top two get a bye.",
+     "href": "https://drewkim623-hash.github.io/ccubed/#picture",
+     "link": "See the live Playoff Picture",
+     "cutAfter": "yojarshh",
+     "tiers": [
+      {
+       "name": "Near-locks",
+       "range": "85% or better",
+       "rows": [
+        {
+         "team": "asierbelay",
+         "pct": 99.695,
+         "rec": "6-2"
+        },
+        {
+         "team": "Lee284",
+         "pct": 99.6,
+         "rec": "6-2"
+        },
+        {
+         "team": "saiky7",
+         "pct": 94.575,
+         "rec": "5-3"
+        },
+        {
+         "team": "tonypng",
+         "pct": 93.465,
+         "rec": "5-3"
+        }
+       ]
+      },
+      {
+       "name": "Favored",
+       "range": "50% to 85%",
+       "rows": [
+        {
+         "team": "jjnhwg",
+         "pct": 65.945,
+         "rec": "5-3"
+        },
+        {
+         "team": "yojarshh",
+         "pct": 51.445,
+         "rec": "3-5"
+        }
+       ]
+      },
+      {
+       "name": "Chasing",
+       "range": "10% to 50%",
+       "rows": [
+        {
+         "team": "nikhil1123",
+         "pct": 47.245,
+         "rec": "4-4"
+        },
+        {
+         "team": "jiddyyyyyy",
+         "pct": 22.865,
+         "rec": "4-4"
+        }
+       ]
+      },
+      {
+       "name": "Out of reach",
+       "range": "under 10%",
+       "rows": [
+        {
+         "team": "andychoe03",
+         "pct": 8.75,
+         "rec": "3-5"
+        },
+        {
+         "team": "drewkim",
+         "pct": 8.615,
+         "rec": "3-5"
+        },
+        {
+         "team": "edyun1",
+         "pct": 7.49,
+         "rec": "3-5"
+        },
+        {
+         "team": "bigmoneyjos",
+         "pct": 0.31,
+         "rec": "1-7"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "record vs odds",
+     "text": "Four 3-5 teams, and the lines for week 9"
+    },
+    {
+     "type": "p",
+     "text": "Four teams are 3-5 and the board puts them 43.95 points apart: yojarshh at 51.44, andychoe03 at 8.75, drewkim at 8.62 and <b>BOWSER (edyun1)</b> at 7.49. yojarshh is priced at -120 to make the playoffs, ahead of 4-4 n² at 47.24 (-100) and 4-4 Team Meta/Bloomberg at 22.86 (+310). The board shows the price, not the reason."
+    },
+    {
+     "type": "p",
+     "text": "Week 9 is live and the lines are tight. yojarshh is the 57.6 percent favorite over <b>8 and thick (bigmoneyjos)</b>, 1-7, while trailing 19 to 16.3; on Nov 6 the same game stood at 85.3. <b>yerra x ecj (saiky7)</b> is 59.0 over Lee284 and asierbelay 61.9 over tonypng, and both trail. andychoe03 is 66.4 over <b>Uzzz uzz uzz (jjnhwg)</b>. Two games carry no line, including drewkim against jiddyyyyyy."
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "title": "Lee284",
+       "big": "+310",
+       "sub": "22.93 percent to win the title",
+       "lead": true,
+       "rows": [
+        {
+         "label": "Playoffs",
+         "value": "99.6 percent"
+        },
+        {
+         "label": "Record",
+         "value": "6-2"
+        }
+       ]
+      },
+      {
+       "title": "asierbelay",
+       "big": "+350",
+       "sub": "20.95 percent to win the title",
+       "rows": [
+        {
+         "label": "Playoffs",
+         "value": "99.695 percent"
+        },
+        {
+         "label": "Record",
+         "value": "6-2"
+        }
+       ]
+      },
+      {
+       "title": "saiky7",
+       "big": "+410",
+       "sub": "18.61 percent to win the title",
+       "rows": [
+        {
+         "label": "Playoffs",
+         "value": "94.575 percent"
+        },
+        {
+         "label": "Record",
+         "value": "5-3"
+        }
+       ]
+      },
+      {
+       "title": "tonypng",
+       "big": "+440",
+       "sub": "17.62 percent to win the title",
+       "rows": [
+        {
+         "label": "Playoffs",
+         "value": "93.465 percent"
+        },
+        {
+         "label": "Record",
+         "value": "5-3"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "text": "Odds from the site's odds board on Nov 7 and its odds history (Oct 29 reading); records and scores through week 8, week 9 scores are partial. Title prices as the board lists them. Nobody is quoted."
+    }
+   ]
   }
  ]
 }
