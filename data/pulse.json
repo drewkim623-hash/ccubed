@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-07T02:17:46.478Z",
- "at": 1794017866478,
+ "generated": "2026-11-07T05:49:18.573Z",
+ "at": 1794030558573,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -100,7 +100,6 @@
    "points_against": 1082.1,
    "faab_spent": 12,
    "starters_hurt": [
-    "Cam Skattebo (Doubtful)",
     "DJ Moore (Questionable)"
    ]
   },
@@ -257,5 +256,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 43
+ "free_agent_moves": 44
 }

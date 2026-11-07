@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-07T02:17:46.044Z",
+ "generated": "2026-11-07T05:49:18.020Z",
  "week": 9,
  "entries": {
   "2133": {
@@ -148,16 +148,6 @@
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-10-20",
    "irSince": 6
-  },
-  "8129": {
-   "n": "Dameon Pierce",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-07"
   },
   "8137": {
    "n": "George Pickens",
