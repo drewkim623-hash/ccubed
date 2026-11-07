@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-11-07T11:07:58.004Z",
- "at": 1794049678004,
+ "generated": "2026-11-07T14:23:44.596Z",
+ "at": 1794061424596,
  "season": "2026",
  "week": 9,
  "liveWeek": 9,
@@ -13,10 +13,10 @@
    "rid": 9,
    "manager": "asierbelay",
    "titleWas": 0.1294,
-   "titleNow": 0.20945,
+   "titleNow": 0.2095,
    "playoffWas": 0.6876,
    "playoffNow": 0.99695,
-   "wins": 9.73095,
+   "wins": 9.73145,
    "titleOdds": 350,
    "titleOddsOpen": 630,
    "playoffOdds": -19900
@@ -28,11 +28,11 @@
    "titleWas": 0.03565,
    "titleNow": 0.005,
    "playoffWas": 0.3367,
-   "playoffNow": 0.08615,
-   "wins": 5.4059,
+   "playoffNow": 0.0862,
+   "wins": 5.40605,
    "titleOdds": 18770,
    "titleOddsOpen": 2550,
-   "playoffOdds": 1000
+   "playoffOdds": 990
   },
   {
    "uid": "1257789215605788672",
@@ -41,8 +41,8 @@
    "titleWas": 0.03185,
    "titleNow": 0.0014,
    "playoffWas": 0.31065,
-   "playoffNow": 0.0875,
-   "wins": 5.3867,
+   "playoffNow": 0.08745,
+   "wins": 5.38665,
    "titleOdds": 67290,
    "titleOddsOpen": 2860,
    "playoffOdds": 980
@@ -65,9 +65,9 @@
    "rid": 6,
    "manager": "saiky7",
    "titleWas": 0.1493,
-   "titleNow": 0.18605,
+   "titleNow": 0.1859,
    "playoffWas": 0.6938,
-   "playoffNow": 0.94575,
+   "playoffNow": 0.9457,
    "wins": 8.4053,
    "titleOdds": 410,
    "titleOddsOpen": 530,
@@ -94,7 +94,7 @@
    "titleNow": 0.0553,
    "playoffWas": 0.5139,
    "playoffNow": 0.47245,
-   "wins": 6.5925,
+   "wins": 6.59215,
    "titleOdds": 1610,
    "titleOddsOpen": 1120,
    "playoffOdds": -100
@@ -106,8 +106,8 @@
    "titleWas": 0.0454,
    "titleNow": 0.0384,
    "playoffWas": 0.3743,
-   "playoffNow": 0.65945,
-   "wins": 7.32495,
+   "playoffNow": 0.6595,
+   "wins": 7.325,
    "titleOdds": 2360,
    "titleOddsOpen": 1980,
    "playoffOdds": -230
@@ -117,7 +117,7 @@
    "rid": 10,
    "manager": "Lee284",
    "titleWas": 0.1657,
-   "titleNow": 0.2293,
+   "titleNow": 0.2294,
    "playoffWas": 0.72665,
    "playoffNow": 0.996,
    "wins": 9.62685,
@@ -130,24 +130,24 @@
    "rid": 11,
    "manager": "tonypng",
    "titleWas": 0.13695,
-   "titleNow": 0.1762,
+   "titleNow": 0.17615,
    "playoffWas": 0.67135,
-   "playoffNow": 0.93465,
-   "wins": 8.1897,
+   "playoffNow": 0.93455,
+   "wins": 8.1893,
    "titleOdds": 440,
    "titleOddsOpen": 590,
-   "playoffOdds": -10690
+   "playoffOdds": -10560
   },
   {
    "uid": "1035404182708203520",
    "rid": 8,
    "manager": "jiddyyyyyy",
    "titleWas": 0.0661,
-   "titleNow": 0.0192,
+   "titleNow": 0.01925,
    "playoffWas": 0.45965,
-   "playoffNow": 0.22865,
-   "wins": 6.09145,
-   "titleOdds": 4810,
+   "playoffNow": 0.22875,
+   "wins": 6.09155,
+   "titleOdds": 4800,
    "titleOddsOpen": 1330,
    "playoffOdds": 310
   },
@@ -184,8 +184,8 @@
    "b": "Lee284",
    "aPts": 0,
    "bPts": 13.58,
-   "pA": 0.5899151019420604,
-   "pB": 0.4100848980579396,
+   "pA": 0.5899120481502029,
+   "pB": 0.41008795184979707,
    "settled": false,
    "aLeft": 10,
    "bLeft": 9,
@@ -197,8 +197,8 @@
    "b": "tonypng",
    "aPts": 0,
    "bPts": 8.9,
-   "pA": 0.6189282630268744,
-   "pB": 0.3810717369731256,
+   "pA": 0.6194071536610517,
+   "pB": 0.3805928463389483,
    "settled": false,
    "aLeft": 10,
    "bLeft": 9,
@@ -210,8 +210,8 @@
    "b": "jjnhwg",
    "aPts": 14.1,
    "bPts": 5.58,
-   "pA": 0.6636948088978094,
-   "pB": 0.3363051911021906,
+   "pA": 0.6636572614099219,
+   "pB": 0.3363427385900781,
    "settled": false,
    "aLeft": 9,
    "bLeft": 8,
@@ -270,9 +270,17 @@
   "pre": 14,
   "live": 0,
   "post": 1,
-  "at": 1794049676699
+  "at": 1794061423711
  },
  "articles": [
+  {
+   "slug": "team-meta-bloomberg-lost-30-05-points-of-playoff-chance-while-a-3-5-team-gained-19-27",
+   "kicker": "2026 · week 9",
+   "headline": "Team Meta/Bloomberg Lost 30.05 Points of Playoff Chance While a 3-5 Team Gained 19.27",
+   "dek": "Team Meta/Bloomberg (jiddyyyyyy) fell from 52.91 to 22.86 percent to make the playoffs since Oct 29, the largest drop on the board, while S2? #jtw #imwallin (yojarshh), 3-5, rose 19.27 to 51.44. Three other 3-5 teams sit at 8.75 or less.",
+   "byline": "C Cubed desk",
+   "date": "2026-11-07"
+  },
   {
    "slug": "three-of-four-priced-week-9-favorites-trail-and-two-games-have-no-line",
    "kicker": "2026 · week 9",
@@ -288,14 +296,6 @@
    "dek": "Joe Burrow's 42.48, Tee Higgins's 37.5 and Ja'Marr Chase's 31.1 were the week's three highest individual scores, and Higgins's team lost by 23.82. Every game in full, below.",
    "byline": "C Cubed desk",
    "date": "2026-11-03"
-  },
-  {
-   "slug": "uzzz-uzz-uzz-lost-29-4-points-of-playoff-chance-and-is-now-an-underdog-to-a-1-6-team",
-   "kicker": "2026 · week 8",
-   "headline": "Uzzz Uzz Uzz Lost 29.4 Points of Playoff Chance and Is Now an Underdog to a 1-6 Team",
-   "dek": "Uzzz uzz uzz lost 29.4 points of playoff chance since Oct 22 while n² gained 25.7, and a 1-6 team is the 54.9 percent favorite against a 4-3 team that leads.",
-   "byline": "C Cubed desk",
-   "date": "2026-10-31"
   }
  ]
 }
