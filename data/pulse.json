@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-06T21:28:21.131Z",
- "at": 1794000501131,
+ "generated": "2026-11-07T02:17:46.478Z",
+ "at": 1794017866478,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -45,9 +45,7 @@
    "points_for": 1114.92,
    "points_against": 1035.74,
    "faab_spent": 59,
-   "starters_hurt": [
-    "Dalton Kincaid (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jjnhwg",
@@ -74,9 +72,7 @@
    "points_for": 991.1,
    "points_against": 988.82,
    "faab_spent": 40,
-   "starters_hurt": [
-    "Malik Nabers (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "yojarshh",
@@ -85,9 +81,7 @@
    "points_for": 992.62,
    "points_against": 1020.2,
    "faab_spent": 44,
-   "starters_hurt": [
-    "Michael Wilson (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "drewkim",
@@ -106,7 +100,7 @@
    "points_against": 1082.1,
    "faab_spent": 12,
    "starters_hurt": [
-    "Cam Skattebo (Questionable)",
+    "Cam Skattebo (Doubtful)",
     "DJ Moore (Questionable)"
    ]
   },
@@ -119,7 +113,7 @@
    "faab_spent": 62,
    "starters_hurt": [
     "George Pickens (Questionable)",
-    "Deebo Samuel Sr. (Questionable)"
+    "Deebo Samuel Sr. (Out)"
    ]
   },
   {
@@ -129,9 +123,7 @@
    "points_for": 849.34,
    "points_against": 1045.6,
    "faab_spent": 58,
-   "starters_hurt": [
-    "Christian McCaffrey (Questionable)"
-   ]
+   "starters_hurt": []
   }
  ],
  "this_week": [
@@ -265,5 +257,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 42
+ "free_agent_moves": 43
 }
