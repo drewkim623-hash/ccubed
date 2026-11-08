@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-08T17:10:59.157Z",
- "at": 1794157859158,
+ "generated": "2026-11-08T17:49:10.723Z",
+ "at": 1794160150723,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -122,20 +122,20 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 9,
-    "startersLeftToPlay": 10
+    "points": 13,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "jiddyyyyyy",
     "points": 4,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 29.5,
-    "startersLeftToPlay": 9
+    "points": 31.7,
+    "startersLeftToPlay": 6
    },
    "b": {
     "manager": "jjnhwg",
@@ -147,7 +147,7 @@
    "a": {
     "manager": "yojarshh",
     "points": 43,
-    "startersLeftToPlay": 8
+    "startersLeftToPlay": 7
    },
    "b": {
     "manager": "bigmoneyjos",
@@ -159,7 +159,7 @@
    "a": {
     "manager": "nikhil1123",
     "points": 20.2,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "edyun1",
@@ -171,12 +171,12 @@
    "a": {
     "manager": "saiky7",
     "points": 11.8,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "Lee284",
-    "points": 42.98,
-    "startersLeftToPlay": 9
+    "points": 45.08,
+    "startersLeftToPlay": 8
    }
   },
   {
@@ -187,8 +187,8 @@
    },
    "b": {
     "manager": "tonypng",
-    "points": 38.1,
-    "startersLeftToPlay": 9
+    "points": 38.44,
+    "startersLeftToPlay": 8
    }
   }
  ],
@@ -249,5 +249,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 49
+ "free_agent_moves": 50
 }
