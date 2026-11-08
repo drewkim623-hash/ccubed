@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-07T22:48:32.099Z",
+ "generated": "2026-11-08T11:07:43.273Z",
  "week": 9,
  "entries": {
   "2133": {
@@ -105,7 +105,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-07"
+   "retChecked": "2026-11-08"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -126,7 +126,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-07"
+   "retChecked": "2026-11-08"
   },
   "8142": {
    "n": "Alec Pierce",
