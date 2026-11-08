@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-08T11:07:44.026Z",
- "at": 1794136064027,
+ "generated": "2026-11-08T14:49:05.151Z",
+ "at": 1794149345151,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
@@ -23,9 +23,7 @@
    "points_for": 1125,
    "points_against": 984.38,
    "faab_spent": 0,
-   "starters_hurt": [
-    "Garrett Wilson (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "tonypng",
@@ -131,14 +129,14 @@
    },
    "b": {
     "manager": "jiddyyyyyy",
-    "points": 0,
+    "points": 1,
     "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 14.1,
+    "points": 18.1,
     "startersLeftToPlay": 9
    },
    "b": {
@@ -150,7 +148,7 @@
   {
    "a": {
     "manager": "yojarshh",
-    "points": 16.3,
+    "points": 22.2,
     "startersLeftToPlay": 8
    },
    "b": {
@@ -191,7 +189,7 @@
    },
    "b": {
     "manager": "tonypng",
-    "points": 8.9,
+    "points": 9.7,
     "startersLeftToPlay": 9
    }
   }
@@ -253,5 +251,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 46
+ "free_agent_moves": 47
 }
