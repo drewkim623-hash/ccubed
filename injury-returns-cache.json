@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-08T11:07:43.273Z",
+ "generated": "2026-11-08T14:23:17.989Z",
  "week": 9,
  "entries": {
   "2133": {
@@ -146,7 +146,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
+   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-07"
   },
   "8205": {
@@ -188,7 +188,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
+   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-07"
   },
   "12487": {
@@ -198,7 +198,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; uncertain (audit tiebreak wk 9).",
+   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-03",
    "irSince": 7
   },
@@ -235,7 +235,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4432710/treveyon-henderson — High-ankle sprain (right). Expected to miss multiple weeks; no surgery. Exact length unknown (2 weeks assumed from 'multiple'). Consensus: changed from audit []; consensus.",
+   "retNote": "https://www.espn.com/nfl/player/_/id/4432710/treveyon-henderson — High-ankle sprain (right). Expected to miss multiple weeks; no surgery. Exact length unknown (2 weeks assumed from 'multiple'). Consensus: matches audit; consensus.",
    "retChecked": "2026-11-07"
   },
   "12533": {
@@ -272,12 +272,12 @@
   "13281": {
    "n": "Jordyn Tyson",
    "s": "Questionable",
-   "ret": "2026-11-15",
+   "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4880281/jordyn-tyson — Hamstring strain. Practice window not opened; return after NO Week 8 bye 'probably more realistic' (analyst estimate, no team timetable). Consensus: matches audit; uncertain (audit tiebreak wk 9).",
-   "retChecked": "2026-11-03"
+   "retNote": "https://www.espn.com/nfl/player/_/id/4880281/jordyn-tyson — Hamstring strain. Practice window not opened; return after NO Week 8 bye 'probably more realistic' (analyst estimate, no team timetable). Consensus: changed from audit [9]; consensus.",
+   "retChecked": "2026-11-08"
   },
   "13287": {
    "n": "Jeremiyah Love",
