@@ -163,7 +163,7 @@
       "weeks": "season",
       "checked": "2026-11-09",
       "flag": "consensus",
-      "note": "Consensus: changed from audit []; consensus."
+      "note": "Consensus: matches audit; consensus."
     },
     "5859": {
       "kind": "report",
@@ -504,12 +504,13 @@
       "kind": "report",
       "source": "consensus.mjs",
       "weeks_list": [
-        9
+        9,
+        10
       ],
-      "weeks": 1,
-      "checked": "2026-11-03",
+      "weeks": 2,
+      "checked": "2026-11-09",
       "flag": "uncertain",
-      "note": "Consensus: matches audit; uncertain (audit tiebreak wk 9)."
+      "note": "Consensus: changed from audit [9]; uncertain (audit tiebreak wk 9)."
     },
     "12489": {
       "kind": "report",

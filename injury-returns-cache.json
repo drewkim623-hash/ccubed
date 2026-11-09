@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-09T14:25:35.271Z",
+ "generated": "2026-11-09T23:23:53.026Z",
  "week": 9,
  "entries": {
   "2133": {
@@ -47,7 +47,7 @@
   },
   "5850": {
    "n": "Josh Jacobs",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-11-08",
    "retWeeks": null,
    "retSource": "report",
@@ -71,7 +71,7 @@
    ],
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
+   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-09"
   },
   "5859": {
@@ -233,10 +233,20 @@
    "n": "Puka Nacua",
    "s": "Questionable",
    "ret": null,
-   "retWeeks": 99,
-   "retSource": "espn-outlook",
+   "retWeeks": 1,
+   "retSource": "default",
    "retEstimated": true,
-   "retNote": "torn ACL",
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-09"
+  },
+  "10232": {
+   "n": "Michael Wilson",
+   "s": "Out",
+   "ret": "2027-02-15",
+   "retWeeks": null,
+   "retSource": "espn-return-date",
+   "retEstimated": false,
+   "retNote": "ESPN return date",
    "retChecked": "2026-11-09"
   },
   "11577": {
@@ -283,12 +293,12 @@
   "12487": {
    "n": "Terrance Ferguson",
    "s": "IR",
-   "ret": "2026-11-15",
+   "ret": "2026-11-22",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; uncertain (audit tiebreak wk 9).",
-   "retChecked": "2026-11-03",
+   "retNote": "consensus.mjs — Consensus: changed from audit [9]; uncertain (audit tiebreak wk 9).",
+   "retChecked": "2026-11-09",
    "irSince": 7
   },
   "12489": {
