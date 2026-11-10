@@ -4,10 +4,7 @@
     "weeks[]": {
       "season": "4-digit year as a string",
       "week": "integer 1-17",
-      "teams[]": {
-        "manager": "manager display name, exactly as Sleeper spells it",
-        "blurb": "one sentence, ESPN house style. No score recaps - those live in recaps.json. Say something about the team's week or where it is heading."
-      }
+      "teams[]": {"manager": "manager display name, exactly as Sleeper spells it", "blurb": "one sentence, ESPN house style. No score recaps - those live in recaps.json. Say something about the team's week or where it is heading."}
     }
   },
   "weeks": [
@@ -153,6 +150,24 @@
         {"manager": "jjnhwg", "blurb": "An 87.88 beat bigmoneyjos by 8.38 as free-agent add Tampa Bay's defense scored 18 and Wan'Dale Robinson 15.7, making the record 5-3 with 975.76 season points."},
         {"manager": "drewkim", "blurb": "A 127.52 lost to tonypng by 46.46 even with Sam Darnold's 18.52 and the Washington defense's 14, and Bo Nix's 19.28 stayed on the bench; the record is 3-5 with 960.44 season points."},
         {"manager": "bigmoneyjos", "blurb": "A 79.5 lost to jjnhwg by 8.38 behind Dak Prescott's 19.8 with nothing left on the bench, and the record is 1-7 with 849.34 season points and $58 of FAAB used."}
+      ]
+    },
+    {
+      "season": "2026",
+      "week": 9,
+      "teams": [
+        {"manager": "tonypng", "blurb": "A 137.74 beat asierbelay by 15.68 on Kenneth Walker III's 36.3, with Tyler Shough's 19.7 left on the bench; the record is 6-3 with 1,300.34 season points."},
+        {"manager": "Lee284", "blurb": "A 128.08 lost to saiky7 by 0.26 despite Ja'Marr Chase's 31.5, with Brock Purdy's 26.28 on the bench; the record is 6-3 with 1,254.5 season points."},
+        {"manager": "asierbelay", "blurb": "A 122.06 lost to tonypng by 15.68 despite CeeDee Lamb's 33.5, with Ladd McConkey at 0 in the lineup; the record is 6-3 with 1,247.06 season points."},
+        {"manager": "saiky7", "blurb": "A 128.34 beat Lee284 by 0.26 on Matthew Golden's 32.4 and Bryce Young's 21.34, making the record 6-3 with 1,243.26 season points and $59 of FAAB spent."},
+        {"manager": "jjnhwg", "blurb": "A 108.84 beat andychoe03 by 37.42 with free-agent adds the Giants defense (14) and Drew Stevens (8), making the record 6-3 with 1,084.6 season points."},
+        {"manager": "jiddyyyyyy", "blurb": "A 147.18, the week's high, beat drewkim by 7.82 on Bucky Irving's 28.5, the 49ers defense's 19 and KC Concepcion Jr.'s 18.8; the record is 5-4 with 1,138.28 season points."},
+        {"manager": "nikhil1123", "blurb": "A 119.36 lost to edyun1 by 20.68 despite Luther Burden III's 20.7, with 49.6 points on the bench; the record is 4-5 with 1,149.78 season points and $65 of FAAB spent."},
+        {"manager": "edyun1", "blurb": "A 140.04 beat nikhil1123 by 20.68 behind Puka Nacua's 35, with only 12 points left on the bench; the record is 4-5 with 1,085.94 season points."},
+        {"manager": "yojarshh", "blurb": "A 116.66 lost to bigmoneyjos by 15.24 despite Bijan Robinson's 26.7, with 51.42 points on the bench; the record is 3-6 with 1,109.28 season points."},
+        {"manager": "drewkim", "blurb": "A 139.36 lost to jiddyyyyyy by 7.82 despite C.J. Stroud's 36.36 and Christian Watson's 30.1, with 58.08 points on the bench; the record is 3-6 with 1,099.8 season points."},
+        {"manager": "andychoe03", "blurb": "A 71.42 lost to jjnhwg by 37.42, with George Pickens at 0 and Jordan Love's 36.18 on the bench; the record is 3-6 with 965.72 season points and $62 of FAAB spent."},
+        {"manager": "bigmoneyjos", "blurb": "A 131.9 beat yojarshh by 15.24 on Christian McCaffrey's 22.7, with only 3.2 left on the bench, for a second win; the record is 2-7 with 981.24 season points."}
       ]
     }
   ]
