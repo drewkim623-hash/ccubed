@@ -1,7 +1,7 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-09T23:23:53.026Z",
- "week": 9,
+ "generated": "2026-11-10T04:33:36.921Z",
+ "week": 10,
  "entries": {
   "2133": {
    "n": "Davante Adams",
@@ -32,7 +32,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-09"
+   "retChecked": "2026-11-10"
   },
   "4881": {
    "n": "Lamar Jackson",
@@ -48,7 +48,7 @@
   "5850": {
    "n": "Josh Jacobs",
    "s": "Out",
-   "ret": "2026-11-08",
+   "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -107,7 +107,7 @@
   "6819": {
    "n": "Michael Pittman Jr.",
    "s": "IR",
-   "ret": "2026-11-08",
+   "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -133,7 +133,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-09"
+   "retChecked": "2026-11-10"
   },
   "7543": {
    "n": "Travis Etienne Jr.",
@@ -154,7 +154,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-09"
+   "retChecked": "2026-11-10"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -206,7 +206,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-09"
+   "retChecked": "2026-11-10"
   },
   "8205": {
    "n": "Isiah Pacheco",
@@ -237,7 +237,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-09"
+   "retChecked": "2026-11-10"
   },
   "10232": {
    "n": "Michael Wilson",
@@ -247,12 +247,12 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-09"
+   "retChecked": "2026-11-10"
   },
   "11577": {
    "n": "Will Shipley",
    "s": "IR",
-   "ret": "2026-11-08",
+   "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -268,12 +268,12 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-09"
+   "retChecked": "2026-11-10"
   },
   "11635": {
    "n": "Ladd McConkey",
    "s": "Questionable",
-   "ret": "2026-11-08",
+   "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -305,9 +305,8 @@
    "n": "RJ Harvey",
    "s": "IR",
    "ret": null,
-   "retWeeks": 3,
+   "retWeeks": 2,
    "retWeeksList": [
-    9,
     11,
     12
    ],
@@ -325,7 +324,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-09"
+   "retChecked": "2026-11-10"
   },
   "12529": {
    "n": "TreVeyon Henderson",
@@ -361,7 +360,7 @@
   "13279": {
    "n": "Carnell Tate",
    "s": "Out",
-   "ret": "2026-11-08",
+   "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -382,7 +381,7 @@
   "13298": {
    "n": "KC Concepcion Jr.",
    "s": "Questionable",
-   "ret": "2026-11-08",
+   "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,

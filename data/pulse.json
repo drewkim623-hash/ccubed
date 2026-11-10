@@ -1,11 +1,11 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-09T11:08:37.519Z",
- "at": 1794222517519,
+ "generated": "2026-11-10T04:33:37.361Z",
+ "at": 1794285217361,
  "season": "2026",
  "nfl_week": 9,
  "season_type": "regular",
- "week_in_progress": true,
+ "week_in_progress": false,
  "standings": [
   {
    "manager": "Lee284",
@@ -44,7 +44,7 @@
    "points_against": 1035.74,
    "faab_spent": 59,
    "starters_hurt": [
-    "Josh Jacobs (Questionable)"
+    "Josh Jacobs (Out)"
    ]
   },
   {
@@ -87,7 +87,9 @@
    "points_for": 992.62,
    "points_against": 1020.2,
    "faab_spent": 44,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Michael Wilson (Out)"
+   ]
   },
   {
    "manager": "drewkim",
@@ -120,6 +122,7 @@
    "points_against": 1005.4,
    "faab_spent": 62,
    "starters_hurt": [
+    "Malik Willis (Questionable)",
     "George Pickens (Out)"
    ]
   },
@@ -137,8 +140,8 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 122.66,
-    "startersLeftToPlay": 1
+    "points": 139.36,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "jiddyyyyyy",
@@ -154,15 +157,15 @@
    },
    "b": {
     "manager": "jjnhwg",
-    "points": 102.64,
-    "startersLeftToPlay": 1
+    "points": 108.84,
+    "startersLeftToPlay": 0
    }
   },
   {
    "a": {
     "manager": "yojarshh",
-    "points": 93.8,
-    "startersLeftToPlay": 2
+    "points": 116.66,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "bigmoneyjos",
@@ -173,20 +176,20 @@
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 110.56,
-    "startersLeftToPlay": 1
+    "points": 119.36,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "edyun1",
-    "points": 114.44,
-    "startersLeftToPlay": 3
+    "points": 140.04,
+    "startersLeftToPlay": 0
    }
   },
   {
    "a": {
     "manager": "saiky7",
-    "points": 115.24,
-    "startersLeftToPlay": 2
+    "points": 128.34,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "Lee284",
@@ -197,8 +200,8 @@
   {
    "a": {
     "manager": "asierbelay",
-    "points": 107.56,
-    "startersLeftToPlay": 2
+    "points": 122.06,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "tonypng",
@@ -220,7 +223,7 @@
      "name": "Malik Willis",
      "pos": "QB",
      "team": "MIA",
-     "status": null,
+     "status": "Questionable",
      "to": "andychoe03"
     }
    ],

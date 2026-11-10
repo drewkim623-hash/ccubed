@@ -1,0 +1,2524 @@
+{
+ "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
+ "season": "2026",
+ "week": 9,
+ "generated": "2026-11-10T04:33:34.098Z",
+ "generated_at": "2026-11-10T04:33:34.098Z",
+ "final": true,
+ "standings_through_week": 9,
+ "standings_folded": true,
+ "league": {
+  "id": "1387595114829864960",
+  "name": "C Cubed",
+  "playoff_week_start": 15
+ },
+ "is_playoffs": false,
+ "games": [
+  {
+   "winner": "jiddyyyyyy",
+   "winner_points": 147.18,
+   "loser": "drewkim",
+   "loser_points": 139.36,
+   "margin": 7.82,
+   "total": 286.54,
+   "sides": [
+    {
+     "manager": "jiddyyyyyy",
+     "team": "Team Meta/Bloomberg",
+     "roster_id": 8,
+     "points": 147.18,
+     "starters": [
+      {
+       "name": "Bucky Irving",
+       "pos": "RB",
+       "team": "TB",
+       "points": 28.5
+      },
+      {
+       "name": "San Francisco 49ers",
+       "pos": "DEF",
+       "team": "SF",
+       "points": 19
+      },
+      {
+       "name": "KC Concepcion Jr.",
+       "pos": "WR",
+       "team": "CLE",
+       "points": 18.8
+      },
+      {
+       "name": "Patrick Mahomes",
+       "pos": "QB",
+       "team": "KC",
+       "points": 16.48
+      },
+      {
+       "name": "Courtland Sutton",
+       "pos": "WR",
+       "team": "DEN",
+       "points": 15.5
+      },
+      {
+       "name": "Jahmyr Gibbs",
+       "pos": "RB",
+       "team": "DET",
+       "points": 13.4
+      },
+      {
+       "name": "Juwan Johnson",
+       "pos": "TE",
+       "team": "NO",
+       "points": 11.4
+      },
+      {
+       "name": "Xavier Worthy",
+       "pos": "WR",
+       "team": "KC",
+       "points": 10.8
+      },
+      {
+       "name": "Malik Nabers",
+       "pos": "WR",
+       "team": "NYG",
+       "points": 9.3
+      },
+      {
+       "name": "Nick Folk",
+       "pos": "K",
+       "team": "ATL",
+       "points": 4
+      }
+     ],
+     "top": {
+      "name": "Bucky Irving",
+      "pos": "RB",
+      "team": "TB",
+      "points": 28.5
+     },
+     "bust": {
+      "name": "Malik Nabers",
+      "pos": "WR",
+      "team": "NYG",
+      "points": 9.3
+     },
+     "benchBest": {
+      "name": "Makai Lemon",
+      "pos": "WR",
+      "team": "PHI",
+      "points": 12.1
+     },
+     "benchLeft": 20.4
+    },
+    {
+     "manager": "drewkim",
+     "team": "Lucky Strike",
+     "roster_id": 1,
+     "points": 139.36,
+     "starters": [
+      {
+       "name": "C.J. Stroud",
+       "pos": "QB",
+       "team": "HOU",
+       "points": 36.36
+      },
+      {
+       "name": "Christian Watson",
+       "pos": "WR",
+       "team": "GB",
+       "points": 30.1
+      },
+      {
+       "name": "James Cook III",
+       "pos": "RB",
+       "team": "BUF",
+       "points": 16.7
+      },
+      {
+       "name": "Evan McPherson",
+       "pos": "K",
+       "team": "CIN",
+       "points": 13
+      },
+      {
+       "name": "Kansas City Chiefs",
+       "pos": "DEF",
+       "team": "KC",
+       "points": 12
+      },
+      {
+       "name": "George Kittle",
+       "pos": "TE",
+       "team": "SF",
+       "points": 9.8
+      },
+      {
+       "name": "Stefon Diggs",
+       "pos": "WR",
+       "team": "WAS",
+       "points": 8.1
+      },
+      {
+       "name": "Omarion Hampton",
+       "pos": "RB",
+       "team": "LAC",
+       "points": 6
+      },
+      {
+       "name": "Malik Washington",
+       "pos": "WR",
+       "team": "MIA",
+       "points": 4.1
+      },
+      {
+       "name": "Jaylen Waddle",
+       "pos": "WR",
+       "team": "DEN",
+       "points": 3.2
+      }
+     ],
+     "top": {
+      "name": "C.J. Stroud",
+      "pos": "QB",
+      "team": "HOU",
+      "points": 36.36
+     },
+     "bust": {
+      "name": "Jaylen Waddle",
+      "pos": "WR",
+      "team": "DEN",
+      "points": 3.2
+     },
+     "benchBest": {
+      "name": "Bo Nix",
+      "pos": "QB",
+      "team": "DEN",
+      "points": 16.68
+     },
+     "benchLeft": 58.08
+    }
+   ]
+  },
+  {
+   "winner": "tonypng",
+   "winner_points": 137.74,
+   "loser": "asierbelay",
+   "loser_points": 122.06,
+   "margin": 15.68,
+   "total": 259.8,
+   "sides": [
+    {
+     "manager": "tonypng",
+     "team": "Tshough",
+     "roster_id": 11,
+     "points": 137.74,
+     "starters": [
+      {
+       "name": "Kenneth Walker III",
+       "pos": "RB",
+       "team": "KC",
+       "points": 36.3
+      },
+      {
+       "name": "Joe Burrow",
+       "pos": "QB",
+       "team": "CIN",
+       "points": 29.54
+      },
+      {
+       "name": "Ka'imi Fairbairn",
+       "pos": "K",
+       "team": "HOU",
+       "points": 17
+      },
+      {
+       "name": "Amon-Ra St. Brown",
+       "pos": "WR",
+       "team": "DET",
+       "points": 16.6
+      },
+      {
+       "name": "Denver Broncos",
+       "pos": "DEF",
+       "team": "DEN",
+       "points": 9
+      },
+      {
+       "name": "Bhayshul Tuten",
+       "pos": "RB",
+       "team": "JAX",
+       "points": 8.9
+      },
+      {
+       "name": "Ryan Flournoy",
+       "pos": "WR",
+       "team": "DAL",
+       "points": 7.3
+      },
+      {
+       "name": "Keenan Allen",
+       "pos": "WR",
+       "team": "IND",
+       "points": 6.6
+      },
+      {
+       "name": "Greg Dulcich",
+       "pos": "TE",
+       "team": "MIA",
+       "points": 3.4
+      },
+      {
+       "name": "D'Andre Swift",
+       "pos": "RB",
+       "team": "CHI",
+       "points": 3.1
+      }
+     ],
+     "top": {
+      "name": "Kenneth Walker III",
+      "pos": "RB",
+      "team": "KC",
+      "points": 36.3
+     },
+     "bust": {
+      "name": "D'Andre Swift",
+      "pos": "RB",
+      "team": "CHI",
+      "points": 3.1
+     },
+     "benchBest": {
+      "name": "Tyler Shough",
+      "pos": "QB",
+      "team": "NO",
+      "points": 19.7
+     },
+     "benchLeft": 40
+    },
+    {
+     "manager": "asierbelay",
+     "team": "AB x B",
+     "roster_id": 9,
+     "points": 122.06,
+     "starters": [
+      {
+       "name": "CeeDee Lamb",
+       "pos": "WR",
+       "team": "DAL",
+       "points": 33.5
+      },
+      {
+       "name": "Drake Maye",
+       "pos": "QB",
+       "team": "NE",
+       "points": 21.26
+      },
+      {
+       "name": "Los Angeles Rams",
+       "pos": "DEF",
+       "team": "LAR",
+       "points": 16
+      },
+      {
+       "name": "Chuba Hubbard",
+       "pos": "RB",
+       "team": "CAR",
+       "points": 13.6
+      },
+      {
+       "name": "Khalil Shakir",
+       "pos": "WR",
+       "team": "BUF",
+       "points": 9.8
+      },
+      {
+       "name": "Brandon Aubrey",
+       "pos": "K",
+       "team": "DAL",
+       "points": 9
+      },
+      {
+       "name": "Sam LaPorta",
+       "pos": "TE",
+       "team": "DET",
+       "points": 7.2
+      },
+      {
+       "name": "Ashton Jeanty",
+       "pos": "RB",
+       "team": "LV",
+       "points": 7
+      },
+      {
+       "name": "Keon Coleman",
+       "pos": "WR",
+       "team": "BUF",
+       "points": 4.7
+      },
+      {
+       "name": "Ladd McConkey",
+       "pos": "WR",
+       "team": "LAC",
+       "points": 0
+      }
+     ],
+     "top": {
+      "name": "CeeDee Lamb",
+      "pos": "WR",
+      "team": "DAL",
+      "points": 33.5
+     },
+     "bust": {
+      "name": "Ladd McConkey",
+      "pos": "WR",
+      "team": "LAC",
+      "points": 0
+     },
+     "benchBest": {
+      "name": "Seth McGowan",
+      "pos": "RB",
+      "team": "IND",
+      "points": 11.2
+     },
+     "benchLeft": 11.2
+    }
+   ]
+  },
+  {
+   "winner": "edyun1",
+   "winner_points": 140.04,
+   "loser": "nikhil1123",
+   "loser_points": 119.36,
+   "margin": 20.68,
+   "total": 259.4,
+   "sides": [
+    {
+     "manager": "edyun1",
+     "team": "BOWSER",
+     "roster_id": 5,
+     "points": 140.04,
+     "starters": [
+      {
+       "name": "Puka Nacua",
+       "pos": "WR",
+       "team": "LAR",
+       "points": 35
+      },
+      {
+       "name": "Brock Bowers",
+       "pos": "TE",
+       "team": "LV",
+       "points": 22.3
+      },
+      {
+       "name": "Kirk Cousins",
+       "pos": "QB",
+       "team": "LV",
+       "points": 15.64
+      },
+      {
+       "name": "Rhamondre Stevenson",
+       "pos": "RB",
+       "team": "NE",
+       "points": 14.8
+      },
+      {
+       "name": "Tyler Bass",
+       "pos": "K",
+       "team": "BUF",
+       "points": 13
+      },
+      {
+       "name": "Breece Hall",
+       "pos": "RB",
+       "team": "NYJ",
+       "points": 11.7
+      },
+      {
+       "name": "Woody Marks",
+       "pos": "RB",
+       "team": "HOU",
+       "points": 8.4
+      },
+      {
+       "name": "Jalen Coker",
+       "pos": "WR",
+       "team": "CAR",
+       "points": 6.6
+      },
+      {
+       "name": "DJ Moore",
+       "pos": "WR",
+       "team": "BUF",
+       "points": 6.6
+      },
+      {
+       "name": "Minnesota Vikings",
+       "pos": "DEF",
+       "team": "MIN",
+       "points": 6
+      }
+     ],
+     "top": {
+      "name": "Puka Nacua",
+      "pos": "WR",
+      "team": "LAR",
+      "points": 35
+     },
+     "bust": {
+      "name": "DJ Moore",
+      "pos": "WR",
+      "team": "BUF",
+      "points": 6.6
+     },
+     "benchBest": {
+      "name": "Kaelon Black",
+      "pos": "RB",
+      "team": "SF",
+      "points": 7
+     },
+     "benchLeft": 12
+    },
+    {
+     "manager": "nikhil1123",
+     "team": "n²",
+     "roster_id": 4,
+     "points": 119.36,
+     "starters": [
+      {
+       "name": "Luther Burden III",
+       "pos": "WR",
+       "team": "CHI",
+       "points": 20.7
+      },
+      {
+       "name": "Tee Higgins",
+       "pos": "WR",
+       "team": "CIN",
+       "points": 20.2
+      },
+      {
+       "name": "Isaiah Likely",
+       "pos": "TE",
+       "team": "NYG",
+       "points": 16.3
+      },
+      {
+       "name": "Jayden Daniels",
+       "pos": "QB",
+       "team": "WAS",
+       "points": 14.56
+      },
+      {
+       "name": "Houston Texans",
+       "pos": "DEF",
+       "team": "HOU",
+       "points": 13
+      },
+      {
+       "name": "Justin Jefferson",
+       "pos": "WR",
+       "team": "MIN",
+       "points": 8.8
+      },
+      {
+       "name": "Brandon McManus",
+       "pos": "K",
+       "team": "LAR",
+       "points": 8
+      },
+      {
+       "name": "Ollie Gordon II",
+       "pos": "RB",
+       "team": "MIA",
+       "points": 7.4
+      },
+      {
+       "name": "Braelon Allen",
+       "pos": "RB",
+       "team": "NYJ",
+       "points": 5.4
+      },
+      {
+       "name": "Jameson Williams",
+       "pos": "WR",
+       "team": "DET",
+       "points": 5
+      }
+     ],
+     "top": {
+      "name": "Luther Burden III",
+      "pos": "WR",
+      "team": "CHI",
+      "points": 20.7
+     },
+     "bust": {
+      "name": "Jameson Williams",
+      "pos": "WR",
+      "team": "DET",
+      "points": 5
+     },
+     "benchBest": {
+      "name": "DeMario Douglas",
+      "pos": "WR",
+      "team": "NE",
+      "points": 15.2
+     },
+     "benchLeft": 49.6
+    }
+   ]
+  },
+  {
+   "winner": "saiky7",
+   "winner_points": 128.34,
+   "loser": "Lee284",
+   "loser_points": 128.08,
+   "margin": 0.26,
+   "total": 256.42,
+   "sides": [
+    {
+     "manager": "saiky7",
+     "team": "yerra x ecj",
+     "roster_id": 6,
+     "points": 128.34,
+     "starters": [
+      {
+       "name": "Matthew Golden",
+       "pos": "WR",
+       "team": "GB",
+       "points": 32.4
+      },
+      {
+       "name": "Bryce Young",
+       "pos": "QB",
+       "team": "CAR",
+       "points": 21.34
+      },
+      {
+       "name": "Spencer Shrader",
+       "pos": "K",
+       "team": "IND",
+       "points": 16
+      },
+      {
+       "name": "Jaxon Smith-Njigba",
+       "pos": "WR",
+       "team": "SEA",
+       "points": 12.1
+      },
+      {
+       "name": "Seattle Seahawks",
+       "pos": "DEF",
+       "team": "SEA",
+       "points": 12
+      },
+      {
+       "name": "Drake London",
+       "pos": "WR",
+       "team": "ATL",
+       "points": 11.8
+      },
+      {
+       "name": "Kyren Williams",
+       "pos": "RB",
+       "team": "LAR",
+       "points": 9.1
+      },
+      {
+       "name": "T.J. Hockenson",
+       "pos": "TE",
+       "team": "MIN",
+       "points": 7.3
+      },
+      {
+       "name": "Dalton Kincaid",
+       "pos": "TE",
+       "team": "BUF",
+       "points": 5.8
+      },
+      {
+       "name": "Josh Jacobs",
+       "pos": "RB",
+       "team": "GB",
+       "points": 0.5
+      }
+     ],
+     "top": {
+      "name": "Matthew Golden",
+      "pos": "WR",
+      "team": "GB",
+      "points": 32.4
+     },
+     "bust": {
+      "name": "Josh Jacobs",
+      "pos": "RB",
+      "team": "GB",
+      "points": 0.5
+     },
+     "benchBest": {
+      "name": "Drew Lock",
+      "pos": "QB",
+      "team": "SEA",
+      "points": 12.6
+     },
+     "benchLeft": 38
+    },
+    {
+     "manager": "Lee284",
+     "team": "Jug",
+     "roster_id": 10,
+     "points": 128.08,
+     "starters": [
+      {
+       "name": "Ja'Marr Chase",
+       "pos": "WR",
+       "team": "CIN",
+       "points": 31.5
+      },
+      {
+       "name": "Javonte Williams",
+       "pos": "RB",
+       "team": "DAL",
+       "points": 22.4
+      },
+      {
+       "name": "Tetairoa McMillan",
+       "pos": "WR",
+       "team": "CAR",
+       "points": 15.6
+      },
+      {
+       "name": "Trevor Lawrence",
+       "pos": "QB",
+       "team": "JAX",
+       "points": 13.58
+      },
+      {
+       "name": "Trey McBride",
+       "pos": "TE",
+       "team": "ARI",
+       "points": 12.4
+      },
+      {
+       "name": "Tre Tucker",
+       "pos": "WR",
+       "team": "LV",
+       "points": 9.5
+      },
+      {
+       "name": "Tyler Allgeier",
+       "pos": "RB",
+       "team": "ARI",
+       "points": 6.6
+      },
+      {
+       "name": "Jason Myers",
+       "pos": "K",
+       "team": "SEA",
+       "points": 6
+      },
+      {
+       "name": "Quinshon Judkins",
+       "pos": "RB",
+       "team": "CLE",
+       "points": 5.5
+      },
+      {
+       "name": "New Orleans Saints",
+       "pos": "DEF",
+       "team": "NO",
+       "points": 5
+      }
+     ],
+     "top": {
+      "name": "Ja'Marr Chase",
+      "pos": "WR",
+      "team": "CIN",
+      "points": 31.5
+     },
+     "bust": {
+      "name": "Quinshon Judkins",
+      "pos": "RB",
+      "team": "CLE",
+      "points": 5.5
+     },
+     "benchBest": {
+      "name": "Brock Purdy",
+      "pos": "QB",
+      "team": "SF",
+      "points": 26.28
+     },
+     "benchLeft": 35.68
+    }
+   ]
+  },
+  {
+   "winner": "bigmoneyjos",
+   "winner_points": 131.9,
+   "loser": "yojarshh",
+   "loser_points": 116.66,
+   "margin": 15.24,
+   "total": 248.56,
+   "sides": [
+    {
+     "manager": "bigmoneyjos",
+     "team": "8 and thick",
+     "roster_id": 12,
+     "points": 131.9,
+     "starters": [
+      {
+       "name": "Christian McCaffrey",
+       "pos": "RB",
+       "team": "SF",
+       "points": 22.7
+      },
+      {
+       "name": "Dak Prescott",
+       "pos": "QB",
+       "team": "DAL",
+       "points": 19.5
+      },
+      {
+       "name": "Travis Kelce",
+       "pos": "TE",
+       "team": "KC",
+       "points": 17.3
+      },
+      {
+       "name": "Cam Little",
+       "pos": "K",
+       "team": "JAX",
+       "points": 17
+      },
+      {
+       "name": "Nico Collins",
+       "pos": "WR",
+       "team": "HOU",
+       "points": 15.5
+      },
+      {
+       "name": "Caleb Douglas",
+       "pos": "WR",
+       "team": "MIA",
+       "points": 13
+      },
+      {
+       "name": "Zach Charbonnet",
+       "pos": "RB",
+       "team": "SEA",
+       "points": 9.6
+      },
+      {
+       "name": "Colston Loveland",
+       "pos": "TE",
+       "team": "CHI",
+       "points": 9.4
+      },
+      {
+       "name": "Devin Singletary",
+       "pos": "RB",
+       "team": "NYG",
+       "points": 5.9
+      },
+      {
+       "name": "Baltimore Ravens",
+       "pos": "DEF",
+       "team": "BAL",
+       "points": 2
+      }
+     ],
+     "top": {
+      "name": "Christian McCaffrey",
+      "pos": "RB",
+      "team": "SF",
+      "points": 22.7
+     },
+     "bust": {
+      "name": "Devin Singletary",
+      "pos": "RB",
+      "team": "NYG",
+      "points": 5.9
+     },
+     "benchBest": {
+      "name": "J.K. Dobbins",
+      "pos": "RB",
+      "team": "DEN",
+      "points": 3.2
+     },
+     "benchLeft": 3.2
+    },
+    {
+     "manager": "yojarshh",
+     "team": "S2? #jtw #imwallin",
+     "roster_id": 3,
+     "points": 116.66,
+     "starters": [
+      {
+       "name": "Bijan Robinson",
+       "pos": "RB",
+       "team": "ATL",
+       "points": 26.7
+      },
+      {
+       "name": "Jonah Coleman",
+       "pos": "RB",
+       "team": "DEN",
+       "points": 18.8
+      },
+      {
+       "name": "Josh Allen",
+       "pos": "QB",
+       "team": "BUF",
+       "points": 13.86
+      },
+      {
+       "name": "Michael Wilson",
+       "pos": "WR",
+       "team": "ARI",
+       "points": 12
+      },
+      {
+       "name": "Jacksonville Jaguars",
+       "pos": "DEF",
+       "team": "JAX",
+       "points": 11
+      },
+      {
+       "name": "Rashee Rice",
+       "pos": "WR",
+       "team": "KC",
+       "points": 9.9
+      },
+      {
+       "name": "Will Reichard",
+       "pos": "K",
+       "team": "MIN",
+       "points": 9
+      },
+      {
+       "name": "Saquon Barkley",
+       "pos": "RB",
+       "team": "PHI",
+       "points": 8.2
+      },
+      {
+       "name": "Zay Flowers",
+       "pos": "WR",
+       "team": "BAL",
+       "points": 5.3
+      },
+      {
+       "name": "Tucker Kraft",
+       "pos": "TE",
+       "team": "GB",
+       "points": 1.9
+      }
+     ],
+     "top": {
+      "name": "Bijan Robinson",
+      "pos": "RB",
+      "team": "ATL",
+      "points": 26.7
+     },
+     "bust": {
+      "name": "Tucker Kraft",
+      "pos": "TE",
+      "team": "GB",
+      "points": 1.9
+     },
+     "benchBest": {
+      "name": "Tank Dell",
+      "pos": "WR",
+      "team": "HOU",
+      "points": 20.5
+     },
+     "benchLeft": 51.42
+    }
+   ]
+  },
+  {
+   "winner": "jjnhwg",
+   "winner_points": 108.84,
+   "loser": "andychoe03",
+   "loser_points": 71.42,
+   "margin": 37.42,
+   "total": 180.26,
+   "sides": [
+    {
+     "manager": "jjnhwg",
+     "team": "Uzzz uzz uzz ",
+     "roster_id": 7,
+     "points": 108.84,
+     "starters": [
+      {
+       "name": "Chris Olave",
+       "pos": "WR",
+       "team": "NO",
+       "points": 16.8
+      },
+      {
+       "name": "Caleb Williams",
+       "pos": "QB",
+       "team": "CHI",
+       "points": 16.76
+      },
+      {
+       "name": "Denzel Boston",
+       "pos": "WR",
+       "team": "CLE",
+       "points": 15.8
+      },
+      {
+       "name": "New York Giants",
+       "pos": "DEF",
+       "team": "NYG",
+       "points": 14
+      },
+      {
+       "name": "Jonathan Taylor",
+       "pos": "RB",
+       "team": "IND",
+       "points": 9.4
+      },
+      {
+       "name": "Tyler Warren",
+       "pos": "TE",
+       "team": "IND",
+       "points": 8.4
+      },
+      {
+       "name": "Drew Stevens",
+       "pos": "K",
+       "team": "WAS",
+       "points": 8
+      },
+      {
+       "name": "Alvin Kamara",
+       "pos": "RB",
+       "team": "NO",
+       "points": 7.9
+      },
+      {
+       "name": "Jordan Mason",
+       "pos": "RB",
+       "team": "MIN",
+       "points": 6.2
+      },
+      {
+       "name": "Derrick Henry",
+       "pos": "RB",
+       "team": "BAL",
+       "points": 5.58
+      }
+     ],
+     "top": {
+      "name": "Chris Olave",
+      "pos": "WR",
+      "team": "NO",
+      "points": 16.8
+     },
+     "bust": {
+      "name": "Derrick Henry",
+      "pos": "RB",
+      "team": "BAL",
+      "points": 5.58
+     },
+     "benchBest": {
+      "name": "Jared Goff",
+      "pos": "QB",
+      "team": "DET",
+      "points": 6.3
+     },
+     "benchLeft": 15.3
+    },
+    {
+     "manager": "andychoe03",
+     "team": "the if team",
+     "roster_id": 2,
+     "points": 71.42,
+     "starters": [
+      {
+       "name": "Rome Odunze",
+       "pos": "WR",
+       "team": "CHI",
+       "points": 16
+      },
+      {
+       "name": "Parker Washington",
+       "pos": "WR",
+       "team": "JAX",
+       "points": 14.1
+      },
+      {
+       "name": "Harold Fannin Jr.",
+       "pos": "TE",
+       "team": "CLE",
+       "points": 12.2
+      },
+      {
+       "name": "Chase Brown",
+       "pos": "RB",
+       "team": "CIN",
+       "points": 10.5
+      },
+      {
+       "name": "Matt Gay",
+       "pos": "K",
+       "team": "LV",
+       "points": 7
+      },
+      {
+       "name": "Malik Willis",
+       "pos": "QB",
+       "team": "MIA",
+       "points": 4.82
+      },
+      {
+       "name": "Cincinnati Bengals",
+       "pos": "DEF",
+       "team": "CIN",
+       "points": 4
+      },
+      {
+       "name": "Mike Gesicki",
+       "pos": "TE",
+       "team": "CIN",
+       "points": 3.1
+      },
+      {
+       "name": "George Pickens",
+       "pos": "WR",
+       "team": "DAL",
+       "points": 0
+      },
+      {
+       "name": "Mike Washington Jr.",
+       "pos": "RB",
+       "team": "LV",
+       "points": -0.3
+      }
+     ],
+     "top": {
+      "name": "Rome Odunze",
+      "pos": "WR",
+      "team": "CHI",
+      "points": 16
+     },
+     "bust": {
+      "name": "Mike Washington Jr.",
+      "pos": "RB",
+      "team": "LV",
+      "points": -0.3
+     },
+     "benchBest": {
+      "name": "Jordan Love",
+      "pos": "QB",
+      "team": "GB",
+      "points": 36.18
+     },
+     "benchLeft": 45.18
+    }
+   ]
+  }
+ ],
+ "standings": [
+  {
+   "manager": "tonypng",
+   "team": "Tshough",
+   "roster_id": 11,
+   "wins": 6,
+   "losses": 3,
+   "ties": 0,
+   "points_for": 1300.34,
+   "points_against": 1074.18,
+   "waiver_budget_used": 0
+  },
+  {
+   "manager": "Lee284",
+   "team": "Jug",
+   "roster_id": 10,
+   "wins": 6,
+   "losses": 3,
+   "ties": 0,
+   "points_for": 1254.5,
+   "points_against": 1062.3,
+   "waiver_budget_used": 1
+  },
+  {
+   "manager": "asierbelay",
+   "team": "AB x B",
+   "roster_id": 9,
+   "wins": 6,
+   "losses": 3,
+   "ties": 0,
+   "points_for": 1247.06,
+   "points_against": 1122.12,
+   "waiver_budget_used": 0
+  },
+  {
+   "manager": "saiky7",
+   "team": "yerra x ecj",
+   "roster_id": 6,
+   "wins": 6,
+   "losses": 3,
+   "ties": 0,
+   "points_for": 1243.26,
+   "points_against": 1163.82,
+   "waiver_budget_used": 59
+  },
+  {
+   "manager": "jjnhwg",
+   "team": "Uzzz uzz uzz ",
+   "roster_id": 7,
+   "wins": 6,
+   "losses": 3,
+   "ties": 0,
+   "points_for": 1084.6,
+   "points_against": 1072.46,
+   "waiver_budget_used": 1
+  },
+  {
+   "manager": "jiddyyyyyy",
+   "team": "Team Meta/Bloomberg",
+   "roster_id": 8,
+   "wins": 5,
+   "losses": 4,
+   "ties": 0,
+   "points_for": 1138.28,
+   "points_against": 1128.18,
+   "waiver_budget_used": 40
+  },
+  {
+   "manager": "nikhil1123",
+   "team": "n²",
+   "roster_id": 4,
+   "wins": 4,
+   "losses": 5,
+   "ties": 0,
+   "points_for": 1149.78,
+   "points_against": 1166.14,
+   "waiver_budget_used": 65
+  },
+  {
+   "manager": "edyun1",
+   "team": "BOWSER",
+   "roster_id": 5,
+   "wins": 4,
+   "losses": 5,
+   "ties": 0,
+   "points_for": 1085.94,
+   "points_against": 1201.46,
+   "waiver_budget_used": 12
+  },
+  {
+   "manager": "yojarshh",
+   "team": "S2? #jtw #imwallin",
+   "roster_id": 3,
+   "wins": 3,
+   "losses": 6,
+   "ties": 0,
+   "points_for": 1109.28,
+   "points_against": 1152.1,
+   "waiver_budget_used": 44
+  },
+  {
+   "manager": "drewkim",
+   "team": "Lucky Strike",
+   "roster_id": 1,
+   "wins": 3,
+   "losses": 6,
+   "ties": 0,
+   "points_for": 1099.8,
+   "points_against": 1240.54,
+   "waiver_budget_used": 11
+  },
+  {
+   "manager": "andychoe03",
+   "team": "the if team",
+   "roster_id": 2,
+   "wins": 3,
+   "losses": 6,
+   "ties": 0,
+   "points_for": 965.72,
+   "points_against": 1114.24,
+   "waiver_budget_used": 62
+  },
+  {
+   "manager": "bigmoneyjos",
+   "team": "8 and thick",
+   "roster_id": 12,
+   "wins": 2,
+   "losses": 7,
+   "ties": 0,
+   "points_for": 981.24,
+   "points_against": 1162.26,
+   "waiver_budget_used": 58
+  }
+ ],
+ "transactions": [
+  {
+   "type": "free_agent",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Drew Lock",
+     "pos": "QB",
+     "team": "SEA",
+     "to": "saiky7"
+    }
+   ],
+   "drops": [],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "jjnhwg"
+   ],
+   "adds": [
+    {
+     "name": "Drew Stevens",
+     "pos": "K",
+     "team": "WAS",
+     "to": "jjnhwg"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Trey Smack",
+     "pos": "K",
+     "team": "GB",
+     "from": "jjnhwg"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "jjnhwg"
+   ],
+   "adds": [
+    {
+     "name": "New York Giants",
+     "pos": "DEF",
+     "team": "NYG",
+     "to": "jjnhwg"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Tampa Bay Buccaneers",
+     "pos": "DEF",
+     "team": "TB",
+     "from": "jjnhwg"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "asierbelay"
+   ],
+   "adds": [
+    {
+     "name": "Keon Coleman",
+     "pos": "WR",
+     "team": "BUF",
+     "to": "asierbelay"
+    }
+   ],
+   "drops": [],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "nikhil1123"
+   ],
+   "adds": [
+    {
+     "name": "Emmett Johnson",
+     "pos": "RB",
+     "team": "KC",
+     "to": "nikhil1123"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Kendre Miller",
+     "pos": "RB",
+     "team": "FA",
+     "from": "nikhil1123"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "edyun1"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Kyler Murray",
+     "pos": "QB",
+     "team": "MIN",
+     "from": "edyun1"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "edyun1"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Dameon Pierce",
+     "pos": "RB",
+     "team": "FA",
+     "from": "edyun1"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "tonypng"
+   ],
+   "adds": [
+    {
+     "name": "Ryan Flournoy",
+     "pos": "WR",
+     "team": "DAL",
+     "to": "tonypng"
+    }
+   ],
+   "drops": [],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "drewkim"
+   ],
+   "adds": [
+    {
+     "name": "Corey Kiner",
+     "pos": "RB",
+     "team": "NE",
+     "to": "drewkim"
+    }
+   ],
+   "drops": [],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "drewkim"
+   ],
+   "adds": [
+    {
+     "name": "Demarcus Robinson",
+     "pos": "WR",
+     "team": "SF",
+     "to": "drewkim"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Sam Darnold",
+     "pos": "QB",
+     "team": "SEA",
+     "from": "drewkim"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "bigmoneyjos"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Keon Coleman",
+     "pos": "WR",
+     "team": "BUF",
+     "from": "bigmoneyjos"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "Lee284"
+   ],
+   "adds": [
+    {
+     "name": "New Orleans Saints",
+     "pos": "DEF",
+     "team": "NO",
+     "to": "Lee284"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Tyler Higbee",
+     "pos": "TE",
+     "team": "LAR",
+     "from": "Lee284"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "drewkim"
+   ],
+   "adds": [
+    {
+     "name": "Kansas City Chiefs",
+     "pos": "DEF",
+     "team": "KC",
+     "to": "drewkim"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Washington Commanders",
+     "pos": "DEF",
+     "team": "WAS",
+     "from": "drewkim"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "jiddyyyyyy"
+   ],
+   "adds": [
+    {
+     "name": "Juwan Johnson",
+     "pos": "TE",
+     "team": "NO",
+     "to": "jiddyyyyyy"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Las Vegas Raiders",
+     "pos": "DEF",
+     "team": "LV",
+     "from": "jiddyyyyyy"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "jiddyyyyyy"
+   ],
+   "adds": [
+    {
+     "name": "Nick Folk",
+     "pos": "K",
+     "team": "ATL",
+     "to": "jiddyyyyyy"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Tyler Loop",
+     "pos": "K",
+     "team": "BAL",
+     "from": "jiddyyyyyy"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "tonypng"
+   ],
+   "adds": [
+    {
+     "name": "Greg Dulcich",
+     "pos": "TE",
+     "team": "MIA",
+     "to": "tonypng"
+    }
+   ],
+   "drops": [],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "drewkim"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Chig Okonkwo",
+     "pos": "TE",
+     "team": "WAS",
+     "from": "drewkim"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "jjnhwg"
+   ],
+   "adds": [
+    {
+     "name": "Adonai Mitchell",
+     "pos": "WR",
+     "team": "NYJ",
+     "to": "jjnhwg"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Cade Otton",
+     "pos": "TE",
+     "team": "TB",
+     "from": "jjnhwg"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Hunter Henry",
+     "pos": "TE",
+     "team": "NE",
+     "from": "andychoe03"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "nikhil1123"
+   ],
+   "adds": [
+    {
+     "name": "Kendre Miller",
+     "pos": "RB",
+     "team": "FA",
+     "to": "nikhil1123"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Mark Andrews",
+     "pos": "TE",
+     "team": "BAL",
+     "from": "nikhil1123"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "nikhil1123"
+   ],
+   "adds": [
+    {
+     "name": "Houston Texans",
+     "pos": "DEF",
+     "team": "HOU",
+     "to": "nikhil1123"
+    }
+   ],
+   "drops": [
+    {
+     "name": "New York Jets",
+     "pos": "DEF",
+     "team": "NYJ",
+     "from": "nikhil1123"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "asierbelay"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Konata Mumpfield",
+     "pos": "WR",
+     "team": "LAR",
+     "from": "asierbelay"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  }
+ ],
+ "marquee": {
+  "high": {
+   "manager": "jiddyyyyyy",
+   "team": "Team Meta/Bloomberg",
+   "roster_id": 8,
+   "points": 147.18,
+   "starters": [
+    {
+     "name": "Bucky Irving",
+     "pos": "RB",
+     "team": "TB",
+     "points": 28.5
+    },
+    {
+     "name": "San Francisco 49ers",
+     "pos": "DEF",
+     "team": "SF",
+     "points": 19
+    },
+    {
+     "name": "KC Concepcion Jr.",
+     "pos": "WR",
+     "team": "CLE",
+     "points": 18.8
+    },
+    {
+     "name": "Patrick Mahomes",
+     "pos": "QB",
+     "team": "KC",
+     "points": 16.48
+    },
+    {
+     "name": "Courtland Sutton",
+     "pos": "WR",
+     "team": "DEN",
+     "points": 15.5
+    },
+    {
+     "name": "Jahmyr Gibbs",
+     "pos": "RB",
+     "team": "DET",
+     "points": 13.4
+    },
+    {
+     "name": "Juwan Johnson",
+     "pos": "TE",
+     "team": "NO",
+     "points": 11.4
+    },
+    {
+     "name": "Xavier Worthy",
+     "pos": "WR",
+     "team": "KC",
+     "points": 10.8
+    },
+    {
+     "name": "Malik Nabers",
+     "pos": "WR",
+     "team": "NYG",
+     "points": 9.3
+    },
+    {
+     "name": "Nick Folk",
+     "pos": "K",
+     "team": "ATL",
+     "points": 4
+    }
+   ],
+   "top": {
+    "name": "Bucky Irving",
+    "pos": "RB",
+    "team": "TB",
+    "points": 28.5
+   },
+   "bust": {
+    "name": "Malik Nabers",
+    "pos": "WR",
+    "team": "NYG",
+    "points": 9.3
+   },
+   "benchBest": {
+    "name": "Makai Lemon",
+    "pos": "WR",
+    "team": "PHI",
+    "points": 12.1
+   },
+   "benchLeft": 20.4
+  },
+  "low": {
+   "manager": "andychoe03",
+   "team": "the if team",
+   "roster_id": 2,
+   "points": 71.42,
+   "starters": [
+    {
+     "name": "Rome Odunze",
+     "pos": "WR",
+     "team": "CHI",
+     "points": 16
+    },
+    {
+     "name": "Parker Washington",
+     "pos": "WR",
+     "team": "JAX",
+     "points": 14.1
+    },
+    {
+     "name": "Harold Fannin Jr.",
+     "pos": "TE",
+     "team": "CLE",
+     "points": 12.2
+    },
+    {
+     "name": "Chase Brown",
+     "pos": "RB",
+     "team": "CIN",
+     "points": 10.5
+    },
+    {
+     "name": "Matt Gay",
+     "pos": "K",
+     "team": "LV",
+     "points": 7
+    },
+    {
+     "name": "Malik Willis",
+     "pos": "QB",
+     "team": "MIA",
+     "points": 4.82
+    },
+    {
+     "name": "Cincinnati Bengals",
+     "pos": "DEF",
+     "team": "CIN",
+     "points": 4
+    },
+    {
+     "name": "Mike Gesicki",
+     "pos": "TE",
+     "team": "CIN",
+     "points": 3.1
+    },
+    {
+     "name": "George Pickens",
+     "pos": "WR",
+     "team": "DAL",
+     "points": 0
+    },
+    {
+     "name": "Mike Washington Jr.",
+     "pos": "RB",
+     "team": "LV",
+     "points": -0.3
+    }
+   ],
+   "top": {
+    "name": "Rome Odunze",
+    "pos": "WR",
+    "team": "CHI",
+    "points": 16
+   },
+   "bust": {
+    "name": "Mike Washington Jr.",
+    "pos": "RB",
+    "team": "LV",
+    "points": -0.3
+   },
+   "benchBest": {
+    "name": "Jordan Love",
+    "pos": "QB",
+    "team": "GB",
+    "points": 36.18
+   },
+   "benchLeft": 45.18
+  },
+  "closest": {
+   "winner": "saiky7",
+   "winner_points": 128.34,
+   "loser": "Lee284",
+   "loser_points": 128.08,
+   "margin": 0.26,
+   "total": 256.42,
+   "sides": [
+    {
+     "manager": "saiky7",
+     "team": "yerra x ecj",
+     "roster_id": 6,
+     "points": 128.34,
+     "starters": [
+      {
+       "name": "Matthew Golden",
+       "pos": "WR",
+       "team": "GB",
+       "points": 32.4
+      },
+      {
+       "name": "Bryce Young",
+       "pos": "QB",
+       "team": "CAR",
+       "points": 21.34
+      },
+      {
+       "name": "Spencer Shrader",
+       "pos": "K",
+       "team": "IND",
+       "points": 16
+      },
+      {
+       "name": "Jaxon Smith-Njigba",
+       "pos": "WR",
+       "team": "SEA",
+       "points": 12.1
+      },
+      {
+       "name": "Seattle Seahawks",
+       "pos": "DEF",
+       "team": "SEA",
+       "points": 12
+      },
+      {
+       "name": "Drake London",
+       "pos": "WR",
+       "team": "ATL",
+       "points": 11.8
+      },
+      {
+       "name": "Kyren Williams",
+       "pos": "RB",
+       "team": "LAR",
+       "points": 9.1
+      },
+      {
+       "name": "T.J. Hockenson",
+       "pos": "TE",
+       "team": "MIN",
+       "points": 7.3
+      },
+      {
+       "name": "Dalton Kincaid",
+       "pos": "TE",
+       "team": "BUF",
+       "points": 5.8
+      },
+      {
+       "name": "Josh Jacobs",
+       "pos": "RB",
+       "team": "GB",
+       "points": 0.5
+      }
+     ],
+     "top": {
+      "name": "Matthew Golden",
+      "pos": "WR",
+      "team": "GB",
+      "points": 32.4
+     },
+     "bust": {
+      "name": "Josh Jacobs",
+      "pos": "RB",
+      "team": "GB",
+      "points": 0.5
+     },
+     "benchBest": {
+      "name": "Drew Lock",
+      "pos": "QB",
+      "team": "SEA",
+      "points": 12.6
+     },
+     "benchLeft": 38
+    },
+    {
+     "manager": "Lee284",
+     "team": "Jug",
+     "roster_id": 10,
+     "points": 128.08,
+     "starters": [
+      {
+       "name": "Ja'Marr Chase",
+       "pos": "WR",
+       "team": "CIN",
+       "points": 31.5
+      },
+      {
+       "name": "Javonte Williams",
+       "pos": "RB",
+       "team": "DAL",
+       "points": 22.4
+      },
+      {
+       "name": "Tetairoa McMillan",
+       "pos": "WR",
+       "team": "CAR",
+       "points": 15.6
+      },
+      {
+       "name": "Trevor Lawrence",
+       "pos": "QB",
+       "team": "JAX",
+       "points": 13.58
+      },
+      {
+       "name": "Trey McBride",
+       "pos": "TE",
+       "team": "ARI",
+       "points": 12.4
+      },
+      {
+       "name": "Tre Tucker",
+       "pos": "WR",
+       "team": "LV",
+       "points": 9.5
+      },
+      {
+       "name": "Tyler Allgeier",
+       "pos": "RB",
+       "team": "ARI",
+       "points": 6.6
+      },
+      {
+       "name": "Jason Myers",
+       "pos": "K",
+       "team": "SEA",
+       "points": 6
+      },
+      {
+       "name": "Quinshon Judkins",
+       "pos": "RB",
+       "team": "CLE",
+       "points": 5.5
+      },
+      {
+       "name": "New Orleans Saints",
+       "pos": "DEF",
+       "team": "NO",
+       "points": 5
+      }
+     ],
+     "top": {
+      "name": "Ja'Marr Chase",
+      "pos": "WR",
+      "team": "CIN",
+      "points": 31.5
+     },
+     "bust": {
+      "name": "Quinshon Judkins",
+      "pos": "RB",
+      "team": "CLE",
+      "points": 5.5
+     },
+     "benchBest": {
+      "name": "Brock Purdy",
+      "pos": "QB",
+      "team": "SF",
+      "points": 26.28
+     },
+     "benchLeft": 35.68
+    }
+   ]
+  },
+  "blowout": {
+   "winner": "jjnhwg",
+   "winner_points": 108.84,
+   "loser": "andychoe03",
+   "loser_points": 71.42,
+   "margin": 37.42,
+   "total": 180.26,
+   "sides": [
+    {
+     "manager": "jjnhwg",
+     "team": "Uzzz uzz uzz ",
+     "roster_id": 7,
+     "points": 108.84,
+     "starters": [
+      {
+       "name": "Chris Olave",
+       "pos": "WR",
+       "team": "NO",
+       "points": 16.8
+      },
+      {
+       "name": "Caleb Williams",
+       "pos": "QB",
+       "team": "CHI",
+       "points": 16.76
+      },
+      {
+       "name": "Denzel Boston",
+       "pos": "WR",
+       "team": "CLE",
+       "points": 15.8
+      },
+      {
+       "name": "New York Giants",
+       "pos": "DEF",
+       "team": "NYG",
+       "points": 14
+      },
+      {
+       "name": "Jonathan Taylor",
+       "pos": "RB",
+       "team": "IND",
+       "points": 9.4
+      },
+      {
+       "name": "Tyler Warren",
+       "pos": "TE",
+       "team": "IND",
+       "points": 8.4
+      },
+      {
+       "name": "Drew Stevens",
+       "pos": "K",
+       "team": "WAS",
+       "points": 8
+      },
+      {
+       "name": "Alvin Kamara",
+       "pos": "RB",
+       "team": "NO",
+       "points": 7.9
+      },
+      {
+       "name": "Jordan Mason",
+       "pos": "RB",
+       "team": "MIN",
+       "points": 6.2
+      },
+      {
+       "name": "Derrick Henry",
+       "pos": "RB",
+       "team": "BAL",
+       "points": 5.58
+      }
+     ],
+     "top": {
+      "name": "Chris Olave",
+      "pos": "WR",
+      "team": "NO",
+      "points": 16.8
+     },
+     "bust": {
+      "name": "Derrick Henry",
+      "pos": "RB",
+      "team": "BAL",
+      "points": 5.58
+     },
+     "benchBest": {
+      "name": "Jared Goff",
+      "pos": "QB",
+      "team": "DET",
+      "points": 6.3
+     },
+     "benchLeft": 15.3
+    },
+    {
+     "manager": "andychoe03",
+     "team": "the if team",
+     "roster_id": 2,
+     "points": 71.42,
+     "starters": [
+      {
+       "name": "Rome Odunze",
+       "pos": "WR",
+       "team": "CHI",
+       "points": 16
+      },
+      {
+       "name": "Parker Washington",
+       "pos": "WR",
+       "team": "JAX",
+       "points": 14.1
+      },
+      {
+       "name": "Harold Fannin Jr.",
+       "pos": "TE",
+       "team": "CLE",
+       "points": 12.2
+      },
+      {
+       "name": "Chase Brown",
+       "pos": "RB",
+       "team": "CIN",
+       "points": 10.5
+      },
+      {
+       "name": "Matt Gay",
+       "pos": "K",
+       "team": "LV",
+       "points": 7
+      },
+      {
+       "name": "Malik Willis",
+       "pos": "QB",
+       "team": "MIA",
+       "points": 4.82
+      },
+      {
+       "name": "Cincinnati Bengals",
+       "pos": "DEF",
+       "team": "CIN",
+       "points": 4
+      },
+      {
+       "name": "Mike Gesicki",
+       "pos": "TE",
+       "team": "CIN",
+       "points": 3.1
+      },
+      {
+       "name": "George Pickens",
+       "pos": "WR",
+       "team": "DAL",
+       "points": 0
+      },
+      {
+       "name": "Mike Washington Jr.",
+       "pos": "RB",
+       "team": "LV",
+       "points": -0.3
+      }
+     ],
+     "top": {
+      "name": "Rome Odunze",
+      "pos": "WR",
+      "team": "CHI",
+      "points": 16
+     },
+     "bust": {
+      "name": "Mike Washington Jr.",
+      "pos": "RB",
+      "team": "LV",
+      "points": -0.3
+     },
+     "benchBest": {
+      "name": "Jordan Love",
+      "pos": "QB",
+      "team": "GB",
+      "points": 36.18
+     },
+     "benchLeft": 45.18
+    }
+   ]
+  },
+  "shootout": {
+   "winner": "jiddyyyyyy",
+   "winner_points": 147.18,
+   "loser": "drewkim",
+   "loser_points": 139.36,
+   "margin": 7.82,
+   "total": 286.54,
+   "sides": [
+    {
+     "manager": "jiddyyyyyy",
+     "team": "Team Meta/Bloomberg",
+     "roster_id": 8,
+     "points": 147.18,
+     "starters": [
+      {
+       "name": "Bucky Irving",
+       "pos": "RB",
+       "team": "TB",
+       "points": 28.5
+      },
+      {
+       "name": "San Francisco 49ers",
+       "pos": "DEF",
+       "team": "SF",
+       "points": 19
+      },
+      {
+       "name": "KC Concepcion Jr.",
+       "pos": "WR",
+       "team": "CLE",
+       "points": 18.8
+      },
+      {
+       "name": "Patrick Mahomes",
+       "pos": "QB",
+       "team": "KC",
+       "points": 16.48
+      },
+      {
+       "name": "Courtland Sutton",
+       "pos": "WR",
+       "team": "DEN",
+       "points": 15.5
+      },
+      {
+       "name": "Jahmyr Gibbs",
+       "pos": "RB",
+       "team": "DET",
+       "points": 13.4
+      },
+      {
+       "name": "Juwan Johnson",
+       "pos": "TE",
+       "team": "NO",
+       "points": 11.4
+      },
+      {
+       "name": "Xavier Worthy",
+       "pos": "WR",
+       "team": "KC",
+       "points": 10.8
+      },
+      {
+       "name": "Malik Nabers",
+       "pos": "WR",
+       "team": "NYG",
+       "points": 9.3
+      },
+      {
+       "name": "Nick Folk",
+       "pos": "K",
+       "team": "ATL",
+       "points": 4
+      }
+     ],
+     "top": {
+      "name": "Bucky Irving",
+      "pos": "RB",
+      "team": "TB",
+      "points": 28.5
+     },
+     "bust": {
+      "name": "Malik Nabers",
+      "pos": "WR",
+      "team": "NYG",
+      "points": 9.3
+     },
+     "benchBest": {
+      "name": "Makai Lemon",
+      "pos": "WR",
+      "team": "PHI",
+      "points": 12.1
+     },
+     "benchLeft": 20.4
+    },
+    {
+     "manager": "drewkim",
+     "team": "Lucky Strike",
+     "roster_id": 1,
+     "points": 139.36,
+     "starters": [
+      {
+       "name": "C.J. Stroud",
+       "pos": "QB",
+       "team": "HOU",
+       "points": 36.36
+      },
+      {
+       "name": "Christian Watson",
+       "pos": "WR",
+       "team": "GB",
+       "points": 30.1
+      },
+      {
+       "name": "James Cook III",
+       "pos": "RB",
+       "team": "BUF",
+       "points": 16.7
+      },
+      {
+       "name": "Evan McPherson",
+       "pos": "K",
+       "team": "CIN",
+       "points": 13
+      },
+      {
+       "name": "Kansas City Chiefs",
+       "pos": "DEF",
+       "team": "KC",
+       "points": 12
+      },
+      {
+       "name": "George Kittle",
+       "pos": "TE",
+       "team": "SF",
+       "points": 9.8
+      },
+      {
+       "name": "Stefon Diggs",
+       "pos": "WR",
+       "team": "WAS",
+       "points": 8.1
+      },
+      {
+       "name": "Omarion Hampton",
+       "pos": "RB",
+       "team": "LAC",
+       "points": 6
+      },
+      {
+       "name": "Malik Washington",
+       "pos": "WR",
+       "team": "MIA",
+       "points": 4.1
+      },
+      {
+       "name": "Jaylen Waddle",
+       "pos": "WR",
+       "team": "DEN",
+       "points": 3.2
+      }
+     ],
+     "top": {
+      "name": "C.J. Stroud",
+      "pos": "QB",
+      "team": "HOU",
+      "points": 36.36
+     },
+     "bust": {
+      "name": "Jaylen Waddle",
+      "pos": "WR",
+      "team": "DEN",
+      "points": 3.2
+     },
+     "benchBest": {
+      "name": "Bo Nix",
+      "pos": "QB",
+      "team": "DEN",
+      "points": 16.68
+     },
+     "benchLeft": 58.08
+    }
+   ]
+  },
+  "unlucky": {
+   "manager": "drewkim",
+   "team": "Lucky Strike",
+   "roster_id": 1,
+   "points": 139.36,
+   "starters": [
+    {
+     "name": "C.J. Stroud",
+     "pos": "QB",
+     "team": "HOU",
+     "points": 36.36
+    },
+    {
+     "name": "Christian Watson",
+     "pos": "WR",
+     "team": "GB",
+     "points": 30.1
+    },
+    {
+     "name": "James Cook III",
+     "pos": "RB",
+     "team": "BUF",
+     "points": 16.7
+    },
+    {
+     "name": "Evan McPherson",
+     "pos": "K",
+     "team": "CIN",
+     "points": 13
+    },
+    {
+     "name": "Kansas City Chiefs",
+     "pos": "DEF",
+     "team": "KC",
+     "points": 12
+    },
+    {
+     "name": "George Kittle",
+     "pos": "TE",
+     "team": "SF",
+     "points": 9.8
+    },
+    {
+     "name": "Stefon Diggs",
+     "pos": "WR",
+     "team": "WAS",
+     "points": 8.1
+    },
+    {
+     "name": "Omarion Hampton",
+     "pos": "RB",
+     "team": "LAC",
+     "points": 6
+    },
+    {
+     "name": "Malik Washington",
+     "pos": "WR",
+     "team": "MIA",
+     "points": 4.1
+    },
+    {
+     "name": "Jaylen Waddle",
+     "pos": "WR",
+     "team": "DEN",
+     "points": 3.2
+    }
+   ],
+   "top": {
+    "name": "C.J. Stroud",
+    "pos": "QB",
+    "team": "HOU",
+    "points": 36.36
+   },
+   "bust": {
+    "name": "Jaylen Waddle",
+    "pos": "WR",
+    "team": "DEN",
+    "points": 3.2
+   },
+   "benchBest": {
+    "name": "Bo Nix",
+    "pos": "QB",
+    "team": "DEN",
+    "points": 16.68
+   },
+   "benchLeft": 58.08
+  }
+ }
+}
