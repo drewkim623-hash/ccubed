@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-11-11T11:29:26.164Z",
- "at": 1794396566164,
+ "generated": "2026-11-11T16:56:00.868Z",
+ "at": 1794416160868,
  "season": "2026",
  "week": 10,
  "liveWeek": null,
@@ -197,11 +197,11 @@
   },
   {
    "manager": "nikhil1123",
-   "cost": 0.01564029987760096,
+   "cost": 0.016700696613019428,
    "players": [
     {
-     "name": "Luther Burden III",
-     "status": "Questionable"
+     "name": "Travis Etienne Jr.",
+     "status": "IR"
     }
    ]
   },
