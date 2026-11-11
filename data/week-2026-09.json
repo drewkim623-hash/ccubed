@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 9,
- "generated": "2026-11-10T11:08:27.760Z",
- "generated_at": "2026-11-10T11:08:27.760Z",
+ "generated": "2026-11-11T11:08:18.919Z",
+ "generated_at": "2026-11-11T11:08:18.919Z",
  "final": true,
  "standings_through_week": 9,
  "standings_folded": false,
@@ -85,7 +85,7 @@
       {
        "name": "Nick Folk",
        "pos": "K",
-       "team": "ATL",
+       "team": "FA",
        "points": 4
       }
      ],
@@ -257,7 +257,7 @@
       {
        "name": "Keenan Allen",
        "pos": "WR",
-       "team": "IND",
+       "team": "SF",
        "points": 6.6
       },
       {
@@ -411,7 +411,7 @@
       {
        "name": "Kirk Cousins",
        "pos": "QB",
-       "team": "LV",
+       "team": "MIN",
        "points": 15.64
       },
       {
@@ -1255,6 +1255,47 @@
  ],
  "transactions": [
   {
+   "type": "waiver",
+   "managers": [
+    "edyun1"
+   ],
+   "adds": [
+    {
+     "name": "Kaleb Johnson",
+     "pos": "RB",
+     "team": "GB",
+     "to": "edyun1"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Tyler Bass",
+     "pos": "K",
+     "team": "BUF",
+     "from": "edyun1"
+    }
+   ],
+   "faab": 0,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "edyun1"
+   ],
+   "adds": [
+    {
+     "name": "Konata Mumpfield",
+     "pos": "WR",
+     "team": "LAR",
+     "to": "edyun1"
+    }
+   ],
+   "drops": [],
+   "faab": 0,
+   "picks": []
+  },
+  {
    "type": "free_agent",
    "managers": [
     "saiky7"
@@ -1353,7 +1394,7 @@
     {
      "name": "Kendre Miller",
      "pos": "RB",
-     "team": "FA",
+     "team": "DAL",
      "from": "nikhil1123"
     }
    ],
@@ -1550,7 +1591,7 @@
     {
      "name": "Nick Folk",
      "pos": "K",
-     "team": "ATL",
+     "team": "FA",
      "to": "jiddyyyyyy"
     }
    ],
@@ -1649,7 +1690,7 @@
     {
      "name": "Kendre Miller",
      "pos": "RB",
-     "team": "FA",
+     "team": "DAL",
      "to": "nikhil1123"
     }
    ],
@@ -1770,7 +1811,7 @@
     {
      "name": "Nick Folk",
      "pos": "K",
-     "team": "ATL",
+     "team": "FA",
      "points": 4
     }
    ],
@@ -2320,7 +2361,7 @@
       {
        "name": "Nick Folk",
        "pos": "K",
-       "team": "ATL",
+       "team": "FA",
        "points": 4
       }
      ],
