@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-11T16:49:04.439Z",
- "at": 1794415744440,
+ "generated": "2026-11-11T17:13:15.597Z",
+ "at": 1794417195597,
  "season": "2026",
  "nfl_week": 10,
  "season_type": "regular",
@@ -74,7 +74,8 @@
    "points_against": 1166.14,
    "faab_spent": 65,
    "starters_hurt": [
-    "Travis Etienne Jr. (IR)"
+    "Travis Etienne Jr. (IR)",
+    "Omar Cooper Jr. (Questionable)"
    ]
   },
   {
@@ -202,5 +203,5 @@
  ],
  "trades": [],
  "waivers": [],
- "free_agent_moves": 25
+ "free_agent_moves": 27
 }
