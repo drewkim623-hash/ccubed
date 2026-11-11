@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-10T22:12:40.968Z",
- "at": 1794348760969,
+ "generated": "2026-11-11T08:18:21.925Z",
+ "at": 1794385101925,
  "season": "2026",
  "nfl_week": 10,
  "season_type": "regular",
@@ -33,7 +33,7 @@
    "points_against": 1122.12,
    "faab_spent": 0,
    "starters_hurt": [
-    "Ladd McConkey (Questionable)"
+    "Garrett Wilson (Questionable)"
    ]
   },
   {
@@ -63,8 +63,7 @@
    "faab_spent": 40,
    "starters_hurt": [
     "Patrick Mahomes (Questionable)",
-    "KC Concepcion Jr. (Questionable)",
-    "Xavier Worthy (Out)"
+    "Xavier Worthy (Questionable)"
    ]
   },
   {
@@ -85,9 +84,7 @@
    "points_for": 1085.94,
    "points_against": 1201.46,
    "faab_spent": 12,
-   "starters_hurt": [
-    "Cam Skattebo (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "yojarshh",
@@ -105,9 +102,7 @@
    "points_for": 1099.8,
    "points_against": 1240.54,
    "faab_spent": 11,
-   "starters_hurt": [
-    "Jaylen Waddle (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "andychoe03",
@@ -118,7 +113,7 @@
    "faab_spent": 62,
    "starters_hurt": [
     "Malik Willis (IR)",
-    "George Pickens (Out)"
+    "George Pickens (Questionable)"
    ]
   },
   {
@@ -207,5 +202,5 @@
  ],
  "trades": [],
  "waivers": [],
- "free_agent_moves": 22
+ "free_agent_moves": 24
 }

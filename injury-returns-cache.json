@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-10T22:12:40.336Z",
+ "generated": "2026-11-11T08:18:21.478Z",
  "week": 10,
  "entries": {
   "2133": {
@@ -16,7 +16,7 @@
   },
   "2216": {
    "n": "Mike Evans",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
@@ -32,7 +32,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-10"
+   "retChecked": "2026-11-11"
   },
   "4881": {
    "n": "Lamar Jackson",
@@ -76,7 +76,7 @@
   },
   "5859": {
    "n": "A.J. Brown",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
@@ -86,7 +86,7 @@
   },
   "5872": {
    "n": "Deebo Samuel Sr.",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
@@ -96,7 +96,7 @@
   },
   "5892": {
    "n": "David Montgomery",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
@@ -133,7 +133,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-10"
+   "retChecked": "2026-11-11"
   },
   "7543": {
    "n": "Travis Etienne Jr.",
@@ -148,7 +148,7 @@
   },
   "7611": {
    "n": "Rhamondre Stevenson",
-   "s": "Out",
+   "s": "Doubtful",
    "ret": "2026-11-22",
    "retWeeks": null,
    "retSource": "report",
@@ -169,7 +169,7 @@
   },
   "8137": {
    "n": "George Pickens",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
@@ -190,7 +190,7 @@
   },
   "8146": {
    "n": "Garrett Wilson",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
@@ -206,7 +206,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-10",
+   "retChecked": "2026-11-11",
    "irSince": 10
   },
   "8205": {
@@ -232,23 +232,24 @@
   },
   "9493": {
    "n": "Puka Nacua",
-   "s": "Questionable",
+   "s": "Doubtful",
    "ret": null,
    "retWeeks": 1,
    "retSource": "default",
    "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-10"
+   "retNote": "default: Doubtful = coming week only",
+   "retChecked": "2026-11-11"
   },
   "10232": {
    "n": "Michael Wilson",
-   "s": "Out",
+   "s": "IR",
    "ret": "2027-02-15",
    "retWeeks": null,
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-10"
+   "retChecked": "2026-11-11",
+   "irSince": 10
   },
   "11577": {
    "n": "Will Shipley",
@@ -263,13 +264,13 @@
   },
   "11624": {
    "n": "Xavier Worthy",
-   "s": "Out",
+   "s": "Questionable",
    "ret": null,
    "retWeeks": 1,
    "retSource": "default",
    "retEstimated": true,
-   "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-10"
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-11"
   },
   "11635": {
    "n": "Ladd McConkey",
@@ -280,16 +281,6 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Foot. Week-to-week; active but 0 snaps Week 5. Q = Week 6 only. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-15"
-  },
-  "12481": {
-   "n": "Cam Skattebo",
-   "s": "Out",
-   "ret": "2026-11-15",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-07"
   },
   "12487": {
    "n": "Terrance Ferguson",
@@ -325,11 +316,11 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-10"
+   "retChecked": "2026-11-11"
   },
   "12529": {
    "n": "TreVeyon Henderson",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
@@ -360,7 +351,7 @@
   },
   "13279": {
    "n": "Carnell Tate",
-   "s": "Out",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
@@ -378,16 +369,6 @@
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-06",
    "irSince": 9
-  },
-  "13298": {
-   "n": "KC Concepcion Jr.",
-   "s": "Questionable",
-   "ret": "2026-11-15",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4870653/kc-concepcion — Concussion. In protocol; Week 6 status pending. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14"
   }
  }
 }
