@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-11T17:13:15.597Z",
- "at": 1794417195597,
+ "generated": "2026-11-12T07:48:49.173Z",
+ "at": 1794469729173,
  "season": "2026",
  "nfl_week": 10,
  "season_type": "regular",
@@ -14,7 +14,10 @@
    "points_for": 1300.34,
    "points_against": 1074.18,
    "faab_spent": 0,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Bhayshul Tuten (Questionable)",
+    "Amon-Ra St. Brown (Questionable)"
+   ]
   },
   {
    "manager": "Lee284",
@@ -43,7 +46,10 @@
    "points_for": 1243.26,
    "points_against": 1163.82,
    "faab_spent": 59,
-   "starters_hurt": []
+   "starters_hurt": [
+    "T.J. Hockenson (Questionable)",
+    "Dalton Kincaid (Questionable)"
+   ]
   },
   {
    "manager": "jjnhwg",
@@ -52,7 +58,11 @@
    "points_for": 1084.6,
    "points_against": 1072.46,
    "faab_spent": 1,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Jared Goff (Questionable)",
+    "Denzel Boston (Questionable)",
+    "Alvin Kamara (Questionable)"
+   ]
   },
   {
    "manager": "jiddyyyyyy",
@@ -62,8 +72,7 @@
    "points_against": 1128.18,
    "faab_spent": 40,
    "starters_hurt": [
-    "Patrick Mahomes (Questionable)",
-    "Xavier Worthy (Questionable)"
+    "Carnell Tate (Questionable)"
    ]
   },
   {
@@ -85,7 +94,9 @@
    "points_for": 1085.94,
    "points_against": 1201.46,
    "faab_spent": 12,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Woody Marks (Questionable)"
+   ]
   },
   {
    "manager": "yojarshh",
@@ -113,8 +124,10 @@
    "points_against": 1114.24,
    "faab_spent": 62,
    "starters_hurt": [
-    "Malik Willis (IR)",
-    "George Pickens (Questionable)"
+    "David Montgomery (Questionable)",
+    "George Pickens (Questionable)",
+    "Deebo Samuel Sr. (Questionable)",
+    "Harold Fannin Jr. (Questionable)"
    ]
   },
   {
@@ -124,7 +137,9 @@
    "points_for": 981.24,
    "points_against": 1162.26,
    "faab_spent": 58,
-   "starters_hurt": []
+   "starters_hurt": [
+    "A.J. Brown (Questionable)"
+   ]
   }
  ],
  "this_week": [
@@ -203,5 +218,5 @@
  ],
  "trades": [],
  "waivers": [],
- "free_agent_moves": 27
+ "free_agent_moves": 28
 }

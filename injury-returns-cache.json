@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-11T17:13:14.974Z",
+ "generated": "2026-11-12T07:48:48.668Z",
  "week": 10,
  "entries": {
   "2133": {
@@ -24,15 +24,25 @@
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-06"
   },
-  "4046": {
-   "n": "Patrick Mahomes",
+  "3163": {
+   "n": "Jared Goff",
    "s": "Questionable",
    "ret": null,
    "retWeeks": 1,
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-11"
+   "retChecked": "2026-11-12"
+  },
+  "4035": {
+   "n": "Alvin Kamara",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-12"
   },
   "4881": {
    "n": "Lamar Jackson",
@@ -44,6 +54,16 @@
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Ankle sprain (left). Minter unsure he practices Wednesday; ESPN Q Week 6. Coming week only. Consensus: matches audit; consensus.",
    "retChecked": "2026-11-03",
    "irSince": 9
+  },
+  "5844": {
+   "n": "T.J. Hockenson",
+   "s": "Questionable",
+   "ret": "2026-11-15",
+   "retWeeks": null,
+   "retSource": "report",
+   "retEstimated": false,
+   "retNote": "https://www.espn.com/nfl/player/_/id/4036133/tj-hockenson — Concussion. In protocol; MIN on bye Week 6, next game Week 7 Oct 25. 0 games missed. Consensus: matches audit; consensus.",
+   "retChecked": "2026-10-14"
   },
   "5850": {
    "n": "Josh Jacobs",
@@ -104,6 +124,16 @@
    "retNote": "https://www.espn.com/nfl/player/_/id/4035538/david-montgomery — Groin. Ryans: week-to-week; trending to miss Week 6. HOU bye Week 8; could extend to Week 7. Consensus: matches audit; consensus.",
    "retChecked": "2026-11-05"
   },
+  "5947": {
+   "n": "Jakobi Meyers",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-12"
+  },
   "6819": {
    "n": "Michael Pittman Jr.",
    "s": "IR",
@@ -133,7 +163,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-11"
+   "retChecked": "2026-11-12"
   },
   "7543": {
    "n": "Travis Etienne Jr.",
@@ -145,6 +175,16 @@
    "retNote": "https://www.espn.com/nfl/story/_/id/50079185/saints-putting-rb-travis-etienne-hamstring-ir — Hamstring strain. IR Oct 1; earliest Week 9 (NO bye Week 8). Moore: 'take a little while' - could run longer. Consensus: matches audit; consensus.",
    "retChecked": "2026-11-04",
    "irSince": 6
+  },
+  "7547": {
+   "n": "Amon-Ra St. Brown",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-12"
   },
   "7611": {
    "n": "Rhamondre Stevenson",
@@ -206,7 +246,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-11",
+   "retChecked": "2026-11-12",
    "irSince": 10
   },
   "8205": {
@@ -232,13 +272,33 @@
   },
   "9493": {
    "n": "Puka Nacua",
-   "s": "Doubtful",
+   "s": "Out",
+   "ret": "2026-12-13",
+   "retWeeks": null,
+   "retSource": "espn-return-date",
+   "retEstimated": false,
+   "retNote": "ESPN return date",
+   "retChecked": "2026-11-12"
+  },
+  "9502": {
+   "n": "Tank Dell",
+   "s": "Questionable",
    "ret": null,
    "retWeeks": 1,
    "retSource": "default",
    "retEstimated": true,
-   "retNote": "default: Doubtful = coming week only",
-   "retChecked": "2026-11-11"
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-12"
+  },
+  "10219": {
+   "n": "Chris Rodriguez Jr.",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-12"
   },
   "10232": {
    "n": "Michael Wilson",
@@ -248,29 +308,28 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-11",
+   "retChecked": "2026-11-12",
    "irSince": 10
   },
-  "11577": {
-   "n": "Will Shipley",
-   "s": "IR",
-   "ret": "2026-11-15",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4431545/will-shipley — Partial plantar fascia tear. Could be sidelined multiple weeks (2 assumed). Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14",
-   "irSince": 6
-  },
-  "11624": {
-   "n": "Xavier Worthy",
+  "10236": {
+   "n": "Dalton Kincaid",
    "s": "Questionable",
    "ret": null,
    "retWeeks": 1,
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-11"
+   "retChecked": "2026-11-12"
+  },
+  "11628": {
+   "n": "Marvin Harrison Jr.",
+   "s": "Questionable",
+   "ret": "2026-11-15",
+   "retWeeks": null,
+   "retSource": "report",
+   "retEstimated": false,
+   "retNote": "https://www.espn.com/nfl/story/_/id/50160631/texans-complete-trade-cardinals-wr-marvin-harrison-jr — None (Sleeper 'Coach's Decision' after trade to HOU). Not on Texans injury report; trade-related status, expected to play Week 6. Count 0 weeks; ESPN trade story not fetched. Consensus: matches audit; uncertain (audit tiebreak wk 6).",
+   "retChecked": "2026-10-14"
   },
   "11635": {
    "n": "Ladd McConkey",
@@ -281,6 +340,16 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Foot. Week-to-week; active but 0 snaps Week 5. Q = Week 6 only. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-15"
+  },
+  "12474": {
+   "n": "Woody Marks",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-12"
   },
   "12487": {
    "n": "Terrance Ferguson",
@@ -308,6 +377,26 @@
    "retChecked": "2026-11-01",
    "irSince": 8
   },
+  "12490": {
+   "n": "Bhayshul Tuten",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-12"
+  },
+  "12506": {
+   "n": "Harold Fannin Jr.",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-12"
+  },
   "12519": {
    "n": "Luther Burden III",
    "s": "Questionable",
@@ -316,11 +405,11 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-11"
+   "retChecked": "2026-11-12"
   },
   "12529": {
    "n": "TreVeyon Henderson",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
@@ -357,7 +446,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-11"
+   "retChecked": "2026-11-12"
   },
   "13279": {
    "n": "Carnell Tate",
@@ -379,6 +468,16 @@
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-06",
    "irSince": 9
+  },
+  "13346": {
+   "n": "Denzel Boston",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-12"
   }
  }
 }
