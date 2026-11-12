@@ -24,7 +24,7 @@
       "weeks": 1,
       "checked": "2026-11-12",
       "flag": "consensus",
-      "note": "Consensus: changed from audit []; consensus."
+      "note": "Consensus: matches audit; consensus."
     },
     "2449": {
       "kind": "report",
@@ -146,7 +146,7 @@
       ],
       "source": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more",
       "checked": "2026-11-12",
-      "note": "Commissioner exempt list (not an injury). No return date; possible 4-6 game suspension after activation. Default 1 week used but true absence could be much longer. Consensus: changed from audit []; consensus.",
+      "note": "Commissioner exempt list (not an injury). No return date; possible 4-6 game suspension after activation. Default 1 week used but true absence could be much longer. Consensus: matches audit; consensus.",
       "flag": "consensus"
     },
     "5854": {
@@ -163,7 +163,7 @@
       "weeks": "season",
       "checked": "2026-11-12",
       "flag": "consensus",
-      "note": "Consensus: changed from audit [10,12,13,14,15,16,17]; consensus."
+      "note": "Consensus: matches audit; consensus."
     },
     "5859": {
       "kind": "report",
@@ -195,8 +195,8 @@
       ],
       "source": "https://www.espn.com/nfl/player/_/id/4035538/david-montgomery",
       "checked": "2026-11-12",
-      "note": "Groin. Ryans: week-to-week; trending to miss Week 6. HOU bye Week 8; could extend to Week 7. Consensus: changed from audit []; consensus.",
-      "flag": "consensus"
+      "note": "Groin. Ryans: week-to-week; trending to miss Week 6. HOU bye Week 8; could extend to Week 7. Consensus: matches audit; uncertain (audit tiebreak wk 10).",
+      "flag": "uncertain"
     },
     "6786": {
       "kind": "report",
@@ -210,14 +210,14 @@
       "kind": "report",
       "weeks": 3,
       "weeks_list": [
-        6,
-        7,
-        8
+        10,
+        11,
+        12
       ],
       "source": "https://www.espn.com/nfl/player/_/id/4035687/michael-pittman-jr",
-      "checked": "2026-10-14",
-      "note": "Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: matches audit; uncertain (audit tiebreak wk 10).",
-      "flag": "uncertain"
+      "checked": "2026-11-12",
+      "note": "Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: changed from audit []; consensus.",
+      "flag": "consensus"
     },
     "6904": {
       "kind": "report",
@@ -263,8 +263,8 @@
       ],
       "weeks": 1,
       "checked": "2026-11-10",
-      "flag": "consensus",
-      "note": "Consensus: matches audit; consensus."
+      "flag": "uncertain",
+      "note": "Consensus: matches audit; uncertain (audit tiebreak wk 10)."
     },
     "8121": {
       "kind": "report",
@@ -330,12 +330,15 @@
       "kind": "report",
       "source": "consensus.mjs",
       "weeks_list": [
-        10
+        10,
+        11,
+        12,
+        13
       ],
-      "weeks": 1,
+      "weeks": 4,
       "checked": "2026-11-12",
       "flag": "consensus",
-      "note": "Consensus: changed from audit []; consensus."
+      "note": "Consensus: changed from audit [10]; consensus."
     },
     "8205": {
       "kind": "report",
@@ -599,7 +602,7 @@
       ],
       "source": "https://www.espn.com/nfl/player/_/id/4432710/treveyon-henderson",
       "checked": "2026-11-12",
-      "note": "High-ankle sprain (right). Expected to miss multiple weeks; no surgery. Exact length unknown (2 weeks assumed from 'multiple'). Consensus: changed from audit []; consensus.",
+      "note": "High-ankle sprain (right). Expected to miss multiple weeks; no surgery. Exact length unknown (2 weeks assumed from 'multiple'). Consensus: matches audit; consensus.",
       "flag": "consensus"
     },
     "12533": {
