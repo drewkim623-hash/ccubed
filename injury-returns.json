@@ -216,7 +216,7 @@
       ],
       "source": "https://www.espn.com/nfl/player/_/id/4035687/michael-pittman-jr",
       "checked": "2026-11-12",
-      "note": "Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: changed from audit []; consensus.",
+      "note": "Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: matches audit; consensus.",
       "flag": "consensus"
     },
     "6904": {
@@ -258,13 +258,11 @@
     "7611": {
       "kind": "report",
       "source": "consensus.mjs",
-      "weeks_list": [
-        10
-      ],
-      "weeks": 1,
-      "checked": "2026-11-10",
-      "flag": "uncertain",
-      "note": "Consensus: matches audit; uncertain (audit tiebreak wk 10)."
+      "weeks_list": [],
+      "weeks": 0,
+      "checked": "2026-11-13",
+      "flag": "consensus",
+      "note": "Consensus: changed from audit [10]; consensus."
     },
     "8121": {
       "kind": "report",
@@ -338,7 +336,7 @@
       "weeks": 4,
       "checked": "2026-11-12",
       "flag": "consensus",
-      "note": "Consensus: changed from audit [10]; consensus."
+      "note": "Consensus: matches audit; consensus."
     },
     "8205": {
       "kind": "report",
@@ -383,6 +381,22 @@
       "source": "https://www.espn.com/nfl/player/_/id/4430878/jaxon-smith-njigba",
       "checked": "2026-10-14",
       "note": "Ankle. Limited on estimated reports; Q for Thursday Week 6. Consensus: changed from audit [6]; consensus."
+    },
+    "9493": {
+      "kind": "report",
+      "source": "consensus.mjs",
+      "weeks_list": [
+        10,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "weeks": 6,
+      "checked": "2026-11-13",
+      "flag": "consensus",
+      "note": "Consensus: changed from audit []; consensus."
     },
     "9753": {
       "kind": "report",

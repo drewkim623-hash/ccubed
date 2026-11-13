@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-13T11:08:26.942Z",
+ "generated": "2026-11-13T14:24:32.043Z",
  "week": 10,
  "entries": {
   "2133": {
@@ -130,7 +130,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4035687/michael-pittman-jr — Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: changed from audit []; consensus.",
+   "retNote": "https://www.espn.com/nfl/player/_/id/4035687/michael-pittman-jr — Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: matches audit; consensus.",
    "retChecked": "2026-11-12",
    "irSince": 6
   },
@@ -178,12 +178,12 @@
   "7611": {
    "n": "Rhamondre Stevenson",
    "s": "Questionable",
-   "ret": "2026-11-22",
+   "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; uncertain (audit tiebreak wk 10).",
-   "retChecked": "2026-11-10"
+   "retNote": "consensus.mjs — Consensus: changed from audit [10]; consensus.",
+   "retChecked": "2026-11-13"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -234,7 +234,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: changed from audit [10]; consensus.",
+   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-12",
    "irSince": 10
   },
@@ -262,11 +262,19 @@
   "9493": {
    "n": "Puka Nacua",
    "s": "IR",
-   "ret": "2026-12-20",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
+   "ret": null,
+   "retWeeks": 6,
+   "retWeeksList": [
+    10,
+    12,
+    13,
+    14,
+    15,
+    16
+   ],
+   "retSource": "report",
    "retEstimated": false,
-   "retNote": "ESPN return date",
+   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
    "retChecked": "2026-11-13",
    "irSince": 10
   },
