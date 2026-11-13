@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-12T23:24:12.019Z",
+ "generated": "2026-11-13T11:08:26.942Z",
  "week": 10,
  "entries": {
   "2133": {
@@ -111,7 +111,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "5967": {
    "n": "Tony Pollard",
@@ -121,7 +121,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -152,7 +152,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "7543": {
    "n": "Travis Etienne Jr.",
@@ -173,7 +173,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "7611": {
    "n": "Rhamondre Stevenson",
@@ -261,13 +261,14 @@
   },
   "9493": {
    "n": "Puka Nacua",
-   "s": "Out",
-   "ret": "2026-12-13",
+   "s": "IR",
+   "ret": "2026-12-20",
    "retWeeks": null,
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13",
+   "irSince": 10
   },
   "10219": {
    "n": "Chris Rodriguez Jr.",
@@ -277,7 +278,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "10232": {
    "n": "Michael Wilson",
@@ -287,7 +288,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-12",
+   "retChecked": "2026-11-13",
    "irSince": 10
   },
   "10236": {
@@ -298,7 +299,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "11628": {
    "n": "Marvin Harrison Jr.",
@@ -328,7 +329,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "12487": {
    "n": "Terrance Ferguson",
@@ -364,7 +365,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "12506": {
    "n": "Harold Fannin Jr.",
@@ -374,7 +375,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "12519": {
    "n": "Luther Burden III",
@@ -384,7 +385,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "12529": {
    "n": "TreVeyon Henderson",
@@ -425,7 +426,7 @@
    "retSource": "espn-outlook",
    "retEstimated": true,
    "retNote": "landed him on injured reserve",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   },
   "13279": {
    "n": "Carnell Tate",
@@ -456,7 +457,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-13"
   }
  }
 }
