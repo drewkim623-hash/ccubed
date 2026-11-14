@@ -4158,6 +4158,151 @@
      "text": "Lines, playoff and title chances, points so far and starters left are from the site's odds board on Friday morning, with one NFL game of week 10 final; the win chance for each matchup counts points already scored. The Thursday comparison is the board's between-weeks reading in the odds history. Records, points and benches are from the week 1 to 9 files; injury designations are from the site's injury report. Nobody is quoted."
     }
    ]
+  },
+  {
+   "season": "2026",
+   "slug": "a-6-3-team-is-a-longer-title-price-than-two-teams-with-worse-records",
+   "aliases": [],
+   "date": "2026-11-14",
+   "kind": "opinion",
+   "source": "saturday",
+   "kicker": "2026 · week 10",
+   "headline": "A 6-3 Team Is a Longer Title Price Than Two Teams With Worse Records",
+   "dek": "Uzzz uzz uzz (jjnhwg) is 6-3 and +2190 to win the title, behind 4-5 n² at +1230 and 5-4 Team Meta/Bloomberg at +1800, while S2? #jtw #imwallin fell 31.535 points of playoff chance since Nov 6, the largest drop.",
+   "byline": "C Cubed desk",
+   "standfirst": "5 teams at 6-3 · 4.125 to 24.21 percent · week 10 lines",
+   "teaser": "🚨 C CUBED | WEEK 10\n\nA 6-3 TEAM IS A LONGER TITLE PRICE THAN TWO TEAMS WITH WORSE RECORDS\n\n📉 Uzzz uzz uzz (jjnhwg), 6-3, is +2190 to win the title; n² (nikhil1123), 4-5, is +1230\n📈 Team Meta/Bloomberg (jiddyyyyyy), 5-4, is +1800 and gained 10.68 points of playoff chance since Nov 6\n⚠️ S2? #jtw #imwallin (yojarshh) fell 31.535 points, from 43.35 to 11.815 percent\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/a-6-3-team-is-a-longer-title-price-than-two-teams-with-worse-records.html",
+   "blocks": [
+    {
+     "type": "p",
+     "lead": true,
+     "text": "<b>Uzzz uzz uzz (jjnhwg)</b> is 6-3, and the site's odds board prices it at +2190 to win the title, a 4.125 percent chance. Two teams with worse records are shorter: <b>n² (nikhil1123)</b>, 4-5, at +1230 and 7.075 percent, and <b>Team Meta/Bloomberg (jiddyyyyyy)</b>, 5-4, at +1800 and 4.96 percent. Those two play each other this week, and the board has n² as the 85.0 percent favorite."
+    },
+    {
+     "type": "stat",
+     "n": "4.125%",
+     "text": "jjnhwg's title chance at 6-3, the lowest of the five 6-3 teams. The other four run from 16.515 to 24.21 percent."
+    },
+    {
+     "type": "h",
+     "eyebrow": "record vs odds",
+     "text": "Six wins, and the fewest points of any 6-3 team"
+    },
+    {
+     "type": "p",
+     "text": "jjnhwg has 1,084.6 points for, the fewest of the five 6-3 teams and fewer than both teams priced ahead of it: nikhil1123 has 1,149.78 and jiddyyyyyy 1,138.28. Only two teams have scored fewer, <b>8 and thick (bigmoneyjos)</b> at 981.24 and <b>the if team (andychoe03)</b> at 965.72. The board still gives jjnhwg 7.8426 projected wins, more than nikhil1123's 6.96455 or jiddyyyyyy's 6.9897, and a 64.875 percent playoff chance at -220. The record has bought a playoff price. It has not bought a title price."
+    },
+    {
+     "type": "p",
+     "text": "Week 10 has not helped. jjnhwg is 32.9 percent against <b>Lucky Strike (drewkim)</b>, 3-6, and trails 20.3 to 12 with eight starters left to drewkim's nine. Its playoff chance was 69.75 percent on the Nov 12 reading, taken after week 9 was final; it is 64.875 now."
+    },
+    {
+     "type": "tiers",
+     "kicker": "Week 10 · The title board",
+     "title": "Four teams above 15 percent, and a 6-3 team behind two others",
+     "sub": "Big number: chance to win the title on the board now.",
+     "note": "Title % from the site's odds board, Nov 14; records through week 9. bigmoneyjos is listed at 0 percent.",
+     "href": "https://drewkim623-hash.github.io/ccubed/#picture",
+     "link": "See the live Playoff Picture",
+     "tiers": [
+      {
+       "name": "Contenders",
+       "range": "15% or better",
+       "rows": [
+        {
+         "team": "saiky7",
+         "pct": 24.21,
+         "rec": "6-3"
+        },
+        {
+         "team": "tonypng",
+         "pct": 20.565,
+         "rec": "6-3"
+        },
+        {
+         "team": "asierbelay",
+         "pct": 19.385,
+         "rec": "6-3"
+        },
+        {
+         "team": "Lee284",
+         "pct": 16.515,
+         "rec": "6-3"
+        }
+       ]
+      },
+      {
+       "name": "Live",
+       "range": "4% to 15%",
+       "rows": [
+        {
+         "team": "nikhil1123",
+         "pct": 7.075,
+         "rec": "4-5"
+        },
+        {
+         "team": "jiddyyyyyy",
+         "pct": 4.96,
+         "rec": "5-4"
+        },
+        {
+         "team": "jjnhwg",
+         "pct": 4.125,
+         "rec": "6-3"
+        }
+       ]
+      },
+      {
+       "name": "Long shots",
+       "range": "under 4%",
+       "rows": [
+        {
+         "team": "yojarshh",
+         "pct": 1.63,
+         "rec": "3-6"
+        },
+        {
+         "team": "drewkim",
+         "pct": 0.83,
+         "rec": "3-6"
+        },
+        {
+         "team": "edyun1",
+         "pct": 0.7,
+         "rec": "4-5"
+        },
+        {
+         "team": "andychoe03",
+         "pct": 0.005,
+         "rec": "3-6"
+        },
+        {
+         "team": "bigmoneyjos",
+         "pct": 0,
+         "rec": "2-7"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "who moved",
+     "text": "S2? #jtw #imwallin lost 31.535 points in a week"
+    },
+    {
+     "type": "p",
+     "text": "The odds history's last reading before last Saturday is Nov 6, taken after week 8 was final, so the comparison to the board now spans week 9 and Thursday night of week 10. <b>S2? #jtw #imwallin (yojarshh)</b> fell from 43.35 to 11.815 percent, the largest drop on the board, after losing 131.9 to 116.66 to bigmoneyjos, which had won once in eight weeks. yojarshh is 3-6, +700 to make the playoffs, and 42.1 percent against <b>AB x B (asierbelay)</b> while leading 6.2 to 0."
+    },
+    {
+     "type": "p",
+     "text": "jiddyyyyyy rose 10.68, from 37.355 to 48.035, the largest gain, after beating drewkim 147.18 to 139.36. <b>yerra x ecj (saiky7)</b> rose 10.2, from 87.445 to 97.645, by beating <b>Jug (Lee284)</b> 128.34 to 128.08. Lee284 fell 6.98 on the same 0.26 points, from 98.695 to 91.715, and its title chance went from 21.775 to 16.515 percent. It plays andychoe03 this week in the one game the board does not price."
+    },
+    {
+     "type": "note",
+     "text": "Odds and prices from the site's odds board on Nov 14 and its odds history (Nov 6 and Nov 12 readings); records and points for through week 9, and week 10 scores are partial after Thursday night. Nobody is quoted."
+    }
+   ]
   }
  ]
 }
