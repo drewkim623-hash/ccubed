@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-13T11:08:27.436Z",
- "at": 1794568107436,
+ "generated": "2026-11-14T11:07:18.902Z",
+ "at": 1794654438902,
  "season": "2026",
  "nfl_week": 10,
  "season_type": "regular",
@@ -15,8 +15,9 @@
    "points_against": 1074.18,
    "faab_spent": 0,
    "starters_hurt": [
-    "Bhayshul Tuten (Questionable)",
-    "Amon-Ra St. Brown (Questionable)"
+    "Kenneth Walker III (Questionable)",
+    "Amon-Ra St. Brown (Questionable)",
+    "Jordan Addison (Questionable)"
    ]
   },
   {
@@ -26,9 +27,7 @@
    "points_for": 1254.5,
    "points_against": 1062.3,
    "faab_spent": 1,
-   "starters_hurt": [
-    "Tony Pollard (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "asierbelay",
@@ -49,8 +48,7 @@
    "points_against": 1163.82,
    "faab_spent": 59,
    "starters_hurt": [
-    "T.J. Hockenson (Questionable)",
-    "Dalton Kincaid (Questionable)"
+    "T.J. Hockenson (Out)"
    ]
   },
   {
@@ -120,10 +118,7 @@
    "points_against": 1114.24,
    "faab_spent": 62,
    "starters_hurt": [
-    "David Montgomery (Questionable)",
-    "George Pickens (Questionable)",
-    "Deebo Samuel Sr. (Questionable)",
-    "Harold Fannin Jr. (Questionable)"
+    "David Montgomery (Questionable)"
    ]
   },
   {
