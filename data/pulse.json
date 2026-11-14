@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-14T11:07:18.902Z",
- "at": 1794654438902,
+ "generated": "2026-11-14T19:10:11.109Z",
+ "at": 1794683411109,
  "season": "2026",
  "nfl_week": 10,
  "season_type": "regular",
@@ -15,8 +15,8 @@
    "points_against": 1074.18,
    "faab_spent": 0,
    "starters_hurt": [
-    "Kenneth Walker III (Questionable)",
     "Amon-Ra St. Brown (Questionable)",
+    "Pat Freiermuth (Questionable)",
     "Jordan Addison (Questionable)"
    ]
   },
@@ -47,9 +47,7 @@
    "points_for": 1243.26,
    "points_against": 1163.82,
    "faab_spent": 59,
-   "starters_hurt": [
-    "T.J. Hockenson (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jjnhwg",
@@ -118,7 +116,7 @@
    "points_against": 1114.24,
    "faab_spent": 62,
    "starters_hurt": [
-    "David Montgomery (Questionable)"
+    "David Montgomery (Out)"
    ]
   },
   {
@@ -209,5 +207,5 @@
  ],
  "trades": [],
  "waivers": [],
- "free_agent_moves": 31
+ "free_agent_moves": 32
 }
