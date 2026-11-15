@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-15T11:07:28.019Z",
- "at": 1794740848020,
+ "generated": "2026-11-15T15:36:04.230Z",
+ "at": 1794756964230,
  "season": "2026",
  "nfl_week": 10,
  "season_type": "regular",
@@ -15,7 +15,6 @@
    "points_against": 1074.18,
    "faab_spent": 0,
    "starters_hurt": [
-    "Amon-Ra St. Brown (Questionable)",
     "Pat Freiermuth (Questionable)",
     "Jordan Addison (Questionable)"
    ]
@@ -37,6 +36,7 @@
    "points_against": 1122.12,
    "faab_spent": 0,
    "starters_hurt": [
+    "Drake Maye (Questionable)",
     "Garrett Wilson (Questionable)"
    ]
   },
@@ -77,7 +77,6 @@
    "points_against": 1166.14,
    "faab_spent": 65,
    "starters_hurt": [
-    "Travis Etienne Jr. (Questionable)",
     "Omar Cooper Jr. (Questionable)"
    ]
   },
@@ -124,21 +123,19 @@
    "points_for": 981.24,
    "points_against": 1162.26,
    "faab_spent": 58,
-   "starters_hurt": [
-    "A.J. Brown (Questionable)"
-   ]
+   "starters_hurt": []
   }
  ],
  "this_week": [
   {
    "a": {
     "manager": "drewkim",
-    "points": 20.3,
+    "points": 21.6,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "jjnhwg",
-    "points": 12,
+    "points": 24.42,
     "startersLeftToPlay": 8
    }
   },
@@ -162,7 +159,7 @@
    },
    "b": {
     "manager": "asierbelay",
-    "points": 0,
+    "points": 3.02,
     "startersLeftToPlay": 10
    }
   },
@@ -174,7 +171,7 @@
    },
    "b": {
     "manager": "jiddyyyyyy",
-    "points": 7.4,
+    "points": 18.4,
     "startersLeftToPlay": 9
    }
   },
@@ -198,7 +195,7 @@
    },
    "b": {
     "manager": "tonypng",
-    "points": 12.2,
+    "points": 26.5,
     "startersLeftToPlay": 9
    }
   }
