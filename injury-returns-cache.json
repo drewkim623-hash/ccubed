@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-14T19:10:10.642Z",
+ "generated": "2026-11-15T11:07:27.535Z",
  "week": 10,
  "entries": {
   "2133": {
@@ -104,18 +104,17 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-14"
+   "retChecked": "2026-11-15"
   },
   "7543": {
    "n": "Travis Etienne Jr.",
-   "s": "IR",
+   "s": "Questionable",
    "ret": "2026-11-15",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/story/_/id/50079185/saints-putting-rb-travis-etienne-hamstring-ir — Hamstring strain. IR Oct 1; earliest Week 9 (NO bye Week 8). Moore: 'take a little while' - could run longer. Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-04",
-   "irSince": 6
+   "retChecked": "2026-11-04"
   },
   "7547": {
    "n": "Amon-Ra St. Brown",
@@ -125,7 +124,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-14"
+   "retChecked": "2026-11-15"
   },
   "7600": {
    "n": "Pat Freiermuth",
@@ -135,7 +134,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-14"
+   "retChecked": "2026-11-15"
   },
   "7611": {
    "n": "Rhamondre Stevenson",
@@ -187,7 +186,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-14"
+   "retChecked": "2026-11-15"
   },
   "8161": {
    "n": "Malik Willis",
@@ -258,7 +257,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-14",
+   "retChecked": "2026-11-15",
    "irSince": 10
   },
   "11625": {
@@ -325,17 +324,18 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-14"
+   "retChecked": "2026-11-15"
   },
   "12529": {
    "n": "TreVeyon Henderson",
-   "s": "Out",
+   "s": "IR",
    "ret": "2026-11-22",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/4432710/treveyon-henderson — High-ankle sprain (right). Expected to miss multiple weeks; no surgery. Exact length unknown (2 weeks assumed from 'multiple'). Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-12"
+   "retChecked": "2026-11-12",
+   "irSince": 10
   },
   "12533": {
    "n": "Jacory Croskey-Merritt",
@@ -366,7 +366,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-14"
+   "retChecked": "2026-11-15"
   },
   "13279": {
    "n": "Carnell Tate",
@@ -397,7 +397,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-14"
+   "retChecked": "2026-11-15"
   }
  }
 }
