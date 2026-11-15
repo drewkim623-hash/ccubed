@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-15T17:48:59.215Z",
- "at": 1794764939215,
+ "generated": "2026-11-15T18:15:07.830Z",
+ "at": 1794766507831,
  "season": "2026",
  "nfl_week": 10,
  "season_type": "regular",
@@ -15,8 +15,7 @@
    "points_against": 1074.18,
    "faab_spent": 0,
    "starters_hurt": [
-    "Pat Freiermuth (Questionable)",
-    "Jordan Addison (Out)"
+    "Pat Freiermuth (Questionable)"
    ]
   },
   {
@@ -127,72 +126,72 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 22.8,
+    "points": 39.86,
     "startersLeftToPlay": 8
    },
    "b": {
     "manager": "jjnhwg",
-    "points": 34.42,
+    "points": 34.72,
     "startersLeftToPlay": 7
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 0,
+    "points": 9.06,
     "startersLeftToPlay": 10
    },
    "b": {
     "manager": "Lee284",
-    "points": 0,
+    "points": 10.8,
     "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "yojarshh",
-    "points": 6.2,
+    "points": 19.92,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "asierbelay",
-    "points": 5.62,
+    "points": 9.32,
     "startersLeftToPlay": 8
    }
   },
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 59.46,
+    "points": 81.26,
     "startersLeftToPlay": 7
    },
    "b": {
     "manager": "jiddyyyyyy",
-    "points": 56.6,
+    "points": 62.9,
     "startersLeftToPlay": 7
    }
   },
   {
    "a": {
     "manager": "edyun1",
-    "points": 27.2,
+    "points": 41.8,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 4.7,
+    "points": 19.5,
     "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "saiky7",
-    "points": 0,
+    "points": 0.34,
     "startersLeftToPlay": 10
    },
    "b": {
     "manager": "tonypng",
-    "points": 38,
+    "points": 52.2,
     "startersLeftToPlay": 8
    }
   }
