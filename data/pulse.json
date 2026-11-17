@@ -1,11 +1,11 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-17T04:33:34.034Z",
- "at": 1794890014034,
+ "generated": "2026-11-17T05:14:08.643Z",
+ "at": 1794892448643,
  "season": "2026",
- "nfl_week": 10,
+ "nfl_week": 11,
  "season_type": "regular",
- "week_in_progress": false,
+ "week_in_progress": true,
  "standings": [
   {
    "manager": "tonypng",
@@ -134,77 +134,77 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 118.4,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "jjnhwg",
-    "points": 97.12,
-    "startersLeftToPlay": 0
+    "manager": "yojarshh",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 172.4,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "Lee284",
-    "points": 136.06,
-    "startersLeftToPlay": 0
-   }
-  },
-  {
-   "a": {
-    "manager": "yojarshh",
-    "points": 111.64,
-    "startersLeftToPlay": 0
-   },
-   "b": {
-    "manager": "asierbelay",
-    "points": 130.62,
-    "startersLeftToPlay": 0
+    "manager": "edyun1",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 156.06,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "jiddyyyyyy",
-    "points": 125.42,
-    "startersLeftToPlay": 0
-   }
-  },
-  {
-   "a": {
-    "manager": "edyun1",
-    "points": 130.02,
-    "startersLeftToPlay": 0
-   },
-   "b": {
-    "manager": "bigmoneyjos",
-    "points": 163.72,
-    "startersLeftToPlay": 0
+    "manager": "tonypng",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "saiky7",
-    "points": 116.9,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "tonypng",
-    "points": 160.86,
-    "startersLeftToPlay": 0
+    "manager": "jiddyyyyyy",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "jjnhwg",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "asierbelay",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "Lee284",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "bigmoneyjos",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   }
  ],
  "trades": [],
  "waivers": [],
- "free_agent_moves": 34
+ "free_agent_moves": 10
 }
