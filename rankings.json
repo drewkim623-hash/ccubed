@@ -169,6 +169,24 @@
         {"manager": "andychoe03", "blurb": "A 71.42 lost to jjnhwg by 37.42, with George Pickens at 0 and Jordan Love's 36.18 on the bench; the record is 3-6 with 965.72 season points and $62 of FAAB spent."},
         {"manager": "bigmoneyjos", "blurb": "A 131.9 beat yojarshh by 15.24 on Christian McCaffrey's 22.7, with only 3.2 left on the bench, for a second win; the record is 2-7 with 981.24 season points."}
       ]
+    },
+    {
+      "season": "2026",
+      "week": 10,
+      "teams": [
+        {"manager": "tonypng", "blurb": "A 160.86 beat saiky7 by 43.96 behind Joe Burrow's 33.16, with three free-agent adds scoring 39.8; that is three straight wins, a 7-3 record and 1,461.2 season points."},
+        {"manager": "asierbelay", "blurb": "A 130.62 beat yojarshh by 18.98 on Chuba Hubbard's 34.2 and CeeDee Lamb's 20.2, overcoming Drake Maye's 3.02 at quarterback; the record is 7-3 with 1,377.68 season points."},
+        {"manager": "Lee284", "blurb": "A 136.06 lost to andychoe03 by 36.34 despite Ja'Marr Chase's 34.1 and Brock Purdy's 31.66; that is two straight losses, a 6-4 record and 1,390.56 season points."},
+        {"manager": "saiky7", "blurb": "A 116.9 lost to tonypng by 43.96, the week's widest margin, with Jaxon Smith-Njigba's 31.1 the high and Bryce Young at 8.1; the record is 6-4 with 1,360.16 season points."},
+        {"manager": "jjnhwg", "blurb": "A 97.12, the week's lowest score, lost to drewkim by 21.28, with Jared Goff's 22.42 the best of it and Tyler Warren at 2.4; the record is 6-4 with 1,181.72 season points."},
+        {"manager": "nikhil1123", "blurb": "A 156.06 beat jiddyyyyyy by 30.64 behind Emmett Johnson's 35.1, Isaiah Likely's 27.7 and Jayden Daniels's 22.76; the record is 5-5 with 1,305.84 season points."},
+        {"manager": "jiddyyyyyy", "blurb": "A 125.42 lost to nikhil1123 by 30.64, with Jahmyr Gibbs's 44.2 and Patrick Mahomes's 35.42 making up 79.62 of it; the record is 5-5 with 1,263.7 season points."},
+        {"manager": "drewkim", "blurb": "A 118.4 beat jjnhwg by 21.28 behind James Cook III's 21.7 and C.J. Stroud's 21.44, with Omarion Hampton's 17.5 on the bench; the record is 4-6 with 1,218.2 season points."},
+        {"manager": "edyun1", "blurb": "A 130.02 lost to bigmoneyjos by 33.7 with 62.58 points on the bench, the most of the week, and Cam Skattebo's 27.2 the best starter; the record is 4-6 with 1,215.96 season points."},
+        {"manager": "andychoe03", "blurb": "A 172.4, the week's high and the team's best of the season, beat Lee284 by 36.34 behind George Pickens's 43.5; the record is 4-6 with 1,138.12 season points."},
+        {"manager": "yojarshh", "blurb": "A 111.64 lost to asierbelay by 18.98, with Josh Allen's 23.34 the high and Matthew Stafford's 20.76 on the bench; that is two straight losses, a 3-7 record and 1,220.92 season points."},
+        {"manager": "bigmoneyjos", "blurb": "A 163.72, the team's best of the season, beat edyun1 by 33.7 behind Christian McCaffrey's 46.3; that is two straight wins, a 3-7 record and 1,144.96 season points."}
+      ]
     }
   ]
 }
