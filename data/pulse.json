@@ -1,11 +1,11 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-16T16:29:29.163Z",
- "at": 1794846569163,
+ "generated": "2026-11-17T04:33:34.034Z",
+ "at": 1794890014034,
  "season": "2026",
  "nfl_week": 10,
  "season_type": "regular",
- "week_in_progress": true,
+ "week_in_progress": false,
  "standings": [
   {
    "manager": "tonypng",
@@ -139,8 +139,8 @@
    },
    "b": {
     "manager": "jjnhwg",
-    "points": 78.12,
-    "startersLeftToPlay": 1
+    "points": 97.12,
+    "startersLeftToPlay": 0
    }
   },
   {
@@ -158,8 +158,8 @@
   {
    "a": {
     "manager": "yojarshh",
-    "points": 100.24,
-    "startersLeftToPlay": 1
+    "points": 111.64,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "asierbelay",
@@ -175,8 +175,8 @@
    },
    "b": {
     "manager": "jiddyyyyyy",
-    "points": 116.62,
-    "startersLeftToPlay": 1
+    "points": 125.42,
+    "startersLeftToPlay": 0
    }
   },
   {
@@ -187,8 +187,8 @@
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 159.72,
-    "startersLeftToPlay": 1
+    "points": 163.72,
+    "startersLeftToPlay": 0
    }
   },
   {

@@ -1,7 +1,7 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-16T23:23:45.651Z",
- "week": 10,
+ "generated": "2026-11-17T04:33:33.475Z",
+ "week": 11,
  "entries": {
   "1466": {
    "n": "Travis Kelce",
@@ -11,7 +11,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-16"
+   "retChecked": "2026-11-17"
   },
   "2133": {
    "n": "Davante Adams",
@@ -68,7 +68,7 @@
   "5859": {
    "n": "A.J. Brown",
    "s": "Out",
-   "ret": "2026-11-15",
+   "ret": "2026-11-22",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -99,7 +99,7 @@
   "7525": {
    "n": "DeVonta Smith",
    "s": "Out",
-   "ret": "2026-11-15",
+   "ret": "2026-11-22",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -114,7 +114,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-16"
+   "retChecked": "2026-11-17"
   },
   "8112": {
    "n": "Drake London",
@@ -124,7 +124,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-16"
+   "retChecked": "2026-11-17"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -145,15 +145,14 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-16"
+   "retChecked": "2026-11-17"
   },
   "8142": {
    "n": "Alec Pierce",
    "s": "IR",
    "ret": null,
-   "retWeeks": 4,
+   "retWeeks": 3,
    "retWeeksList": [
-    10,
     11,
     12,
     14
@@ -199,7 +198,7 @@
   "9486": {
    "n": "Dontayvion Wicks",
    "s": "Out",
-   "ret": "2026-11-15",
+   "ret": "2026-11-22",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -210,9 +209,8 @@
    "n": "Puka Nacua",
    "s": "IR",
    "ret": null,
-   "retWeeks": 6,
+   "retWeeks": 5,
    "retWeeksList": [
-    10,
     12,
     13,
     14,
@@ -228,7 +226,7 @@
   "9756": {
    "n": "Jordan Addison",
    "s": "Out",
-   "ret": "2026-11-15",
+   "ret": "2026-11-22",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -239,11 +237,11 @@
    "n": "Michael Wilson",
    "s": "IR",
    "ret": null,
-   "retWeeks": 4,
+   "retWeeks": 3,
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: IR minimum 4 weeks, on IR since wk 10",
-   "retChecked": "2026-11-16",
+   "retChecked": "2026-11-17",
    "irSince": 10
   },
   "11564": {
@@ -267,7 +265,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-16"
+   "retChecked": "2026-11-17"
   },
   "11635": {
    "n": "Ladd McConkey",
@@ -282,11 +280,8 @@
   "12474": {
    "n": "Woody Marks",
    "s": "Out",
-   "ret": null,
-   "retWeeks": 1,
-   "retWeeksList": [
-    11
-   ],
+   "ret": "2026-11-29",
+   "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
@@ -306,12 +301,8 @@
   "12489": {
    "n": "RJ Harvey",
    "s": "IR",
-   "ret": null,
-   "retWeeks": 2,
-   "retWeeksList": [
-    11,
-    12
-   ],
+   "ret": "2026-12-06",
+   "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
@@ -326,15 +317,14 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-16"
+   "retChecked": "2026-11-17"
   },
   "12529": {
    "n": "TreVeyon Henderson",
    "s": "IR",
    "ret": null,
-   "retWeeks": 4,
+   "retWeeks": 3,
    "retWeeksList": [
-    10,
     12,
     13,
     14
@@ -359,7 +349,7 @@
   "12534": {
    "n": "Kyle Monangai",
    "s": "Out",
-   "ret": "2026-11-15",
+   "ret": "2026-11-22",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -374,7 +364,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-16"
+   "retChecked": "2026-11-17"
   },
   "13279": {
    "n": "Carnell Tate",
