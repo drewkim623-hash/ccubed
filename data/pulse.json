@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-17T11:08:27.587Z",
- "at": 1794913707587,
+ "generated": "2026-11-17T13:48:58.461Z",
+ "at": 1794923338461,
  "season": "2026",
  "nfl_week": 11,
  "season_type": "regular",
@@ -44,7 +44,8 @@
    "points_against": 1324.68,
    "faab_spent": 59,
    "starters_hurt": [
-    "Drake London (Questionable)"
+    "Drake London (Questionable)",
+    "T.J. Hockenson (Out)"
    ]
   },
   {
@@ -66,7 +67,7 @@
    "points_against": 1291.56,
    "faab_spent": 65,
    "starters_hurt": [
-    "Omar Cooper Jr. (Out)"
+    "Luther Burden III (Questionable)"
    ]
   },
   {
