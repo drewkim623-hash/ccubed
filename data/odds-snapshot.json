@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-11-17T05:37:16.217Z",
- "at": 1794893836217,
+ "generated": "2026-11-17T11:08:49.332Z",
+ "at": 1794913729332,
  "season": "2026",
  "week": 11,
  "liveWeek": null,
