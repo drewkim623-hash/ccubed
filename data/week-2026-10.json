@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 10,
- "generated": "2026-11-17T11:08:24.588Z",
- "generated_at": "2026-11-17T11:08:24.588Z",
+ "generated": "2026-11-18T11:08:48.856Z",
+ "generated_at": "2026-11-18T11:08:48.856Z",
  "final": true,
  "standings_through_week": 10,
  "standings_folded": false,
@@ -1228,7 +1228,7 @@
    "ties": 0,
    "points_for": 1138.12,
    "points_against": 1250.3,
-   "waiver_budget_used": 62
+   "waiver_budget_used": 63
   },
   {
    "manager": "yojarshh",
@@ -1239,7 +1239,7 @@
    "ties": 0,
    "points_for": 1220.92,
    "points_against": 1282.72,
-   "waiver_budget_used": 44
+   "waiver_budget_used": 50
   },
   {
    "manager": "bigmoneyjos",
@@ -1254,6 +1254,119 @@
   }
  ],
  "transactions": [
+  {
+   "type": "waiver",
+   "managers": [
+    "yojarshh"
+   ],
+   "adds": [
+    {
+     "name": "Chig Okonkwo",
+     "pos": "TE",
+     "team": "WAS",
+     "to": "yojarshh"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Rachaad White",
+     "pos": "RB",
+     "team": "WAS",
+     "from": "yojarshh"
+    }
+   ],
+   "faab": 6,
+   "picks": []
+  },
+  {
+   "type": "free_agent",
+   "managers": [
+    "tonypng"
+   ],
+   "adds": [],
+   "drops": [
+    {
+     "name": "Indianapolis Colts",
+     "pos": "DEF",
+     "team": "IND",
+     "from": "tonypng"
+    }
+   ],
+   "faab": null,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "andychoe03"
+   ],
+   "adds": [
+    {
+     "name": "Cam Ward",
+     "pos": "QB",
+     "team": "TEN",
+     "to": "andychoe03"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Malik Willis",
+     "pos": "QB",
+     "team": "MIA",
+     "from": "andychoe03"
+    }
+   ],
+   "faab": 1,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "Ryan Flournoy",
+     "pos": "WR",
+     "team": "DAL",
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "New England Patriots",
+     "pos": "DEF",
+     "team": "NE",
+     "from": "saiky7"
+    }
+   ],
+   "faab": 0,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "saiky7"
+   ],
+   "adds": [
+    {
+     "name": "J.J. McCarthy",
+     "pos": "QB",
+     "team": "NYG",
+     "to": "saiky7"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Drew Lock",
+     "pos": "QB",
+     "team": "SEA",
+     "from": "saiky7"
+    }
+   ],
+   "faab": 0,
+   "picks": []
+  },
   {
    "type": "free_agent",
    "managers": [
