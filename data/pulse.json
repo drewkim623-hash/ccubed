@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-18T13:28:39.498Z",
- "at": 1795008519498,
+ "generated": "2026-11-18T15:48:26.788Z",
+ "at": 1795016906788,
  "season": "2026",
  "nfl_week": 11,
  "season_type": "regular",
@@ -76,7 +76,9 @@
    "points_for": 1263.7,
    "points_against": 1284.24,
    "faab_spent": 40,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Carnell Tate (Questionable)"
+   ]
   },
   {
    "manager": "drewkim",
@@ -260,5 +262,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 15
+ "free_agent_moves": 17
 }
