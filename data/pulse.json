@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-17T13:48:58.461Z",
- "at": 1794923338461,
+ "generated": "2026-11-18T05:28:59.513Z",
+ "at": 1794979739514,
  "season": "2026",
  "nfl_week": 11,
  "season_type": "regular",
@@ -14,7 +14,9 @@
    "points_for": 1461.2,
    "points_against": 1191.08,
    "faab_spent": 0,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Kenneth Walker III (Out)"
+   ]
   },
   {
    "manager": "asierbelay",
@@ -56,7 +58,7 @@
    "points_against": 1190.86,
    "faab_spent": 1,
    "starters_hurt": [
-    "Wan'Dale Robinson (Questionable)"
+    "Wan'Dale Robinson (IR)"
    ]
   },
   {
@@ -107,7 +109,9 @@
    "points_for": 1138.12,
    "points_against": 1250.3,
    "faab_spent": 62,
-   "starters_hurt": []
+   "starters_hurt": [
+    "David Montgomery (Out)"
+   ]
   },
   {
    "manager": "yojarshh",
@@ -207,5 +211,5 @@
  ],
  "trades": [],
  "waivers": [],
- "free_agent_moves": 10
+ "free_agent_moves": 11
 }
