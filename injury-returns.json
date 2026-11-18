@@ -218,8 +218,8 @@
       ],
       "source": "https://www.espn.com/nfl/player/_/id/4035687/michael-pittman-jr",
       "checked": "2026-11-12",
-      "note": "Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: matches audit; consensus.",
-      "flag": "consensus"
+      "note": "Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: matches audit; uncertain (audit tiebreak wk 11).",
+      "flag": "uncertain"
     },
     "6904": {
       "kind": "report",
@@ -280,6 +280,20 @@
       "flag": "consensus",
       "note": "Consensus: matches audit; consensus."
     },
+    "8126": {
+      "kind": "report",
+      "source": "consensus.mjs",
+      "weeks_list": [
+        11,
+        12,
+        13,
+        14
+      ],
+      "weeks": 4,
+      "checked": "2026-11-18",
+      "flag": "consensus",
+      "note": "Consensus: changed from audit []; consensus."
+    },
     "8137": {
       "kind": "report",
       "source": "consensus.mjs",
@@ -324,8 +338,8 @@
       ],
       "weeks": 1,
       "checked": "2026-11-15",
-      "flag": "consensus",
-      "note": "Consensus: matches audit; consensus."
+      "flag": "uncertain",
+      "note": "Consensus: matches audit; uncertain (audit tiebreak wk 11)."
     },
     "8155": {
       "kind": "report",
@@ -385,8 +399,8 @@
       ],
       "weeks": 1,
       "checked": "2026-11-06",
-      "flag": "consensus",
-      "note": "Consensus: matches audit; consensus."
+      "flag": "uncertain",
+      "note": "Consensus: matches audit; uncertain (audit tiebreak wk 11)."
     },
     "9488": {
       "kind": "report",
@@ -431,7 +445,7 @@
       ],
       "source": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more",
       "checked": "2026-11-17",
-      "note": "Hamstring soreness. MIN bye Week 6; ESPN return Oct 25. 0 games. Consensus: changed from audit []; consensus.",
+      "note": "Hamstring soreness. MIN bye Week 6; ESPN return Oct 25. 0 games. Consensus: matches audit; consensus.",
       "flag": "consensus"
     },
     "10229": {
@@ -534,8 +548,8 @@
       ],
       "source": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more",
       "checked": "2026-11-15",
-      "note": "Foot. Week-to-week; active but 0 snaps Week 5. Q = Week 6 only. Consensus: matches audit; consensus.",
-      "flag": "consensus"
+      "note": "Foot. Week-to-week; active but 0 snaps Week 5. Q = Week 6 only. Consensus: matches audit; uncertain (audit tiebreak wk 11).",
+      "flag": "uncertain"
     },
     "11646": {
       "kind": "report",
