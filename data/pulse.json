@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-18T21:48:44.729Z",
- "at": 1795038524729,
+ "generated": "2026-11-18T23:48:59.197Z",
+ "at": 1795045739198,
  "season": "2026",
  "nfl_week": 11,
  "season_type": "regular",
@@ -26,9 +26,7 @@
    "points_for": 1377.68,
    "points_against": 1233.76,
    "faab_spent": 0,
-   "starters_hurt": [
-    "Drake Maye (Out)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "Lee284",
@@ -48,6 +46,7 @@
    "faab_spent": 59,
    "starters_hurt": [
     "Jakobi Meyers (Questionable)",
+    "Dalton Kincaid (Questionable)",
     "T.J. Hockenson (Questionable)"
    ]
   },
@@ -97,7 +96,8 @@
    "points_against": 1365.18,
    "faab_spent": 12,
    "starters_hurt": [
-    "Brock Bowers (Questionable)"
+    "Brock Bowers (Questionable)",
+    "Jordyn Tyson (Questionable)"
    ]
   },
   {
@@ -107,7 +107,9 @@
    "points_for": 1138.12,
    "points_against": 1250.3,
    "faab_spent": 63,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Matt Gay (Questionable)"
+   ]
   },
   {
    "manager": "yojarshh",
@@ -188,7 +190,7 @@
    "b": {
     "manager": "asierbelay",
     "points": 0,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    }
   },
   {
