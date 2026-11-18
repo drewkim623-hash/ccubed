@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-18T15:48:26.788Z",
- "at": 1795016906788,
+ "generated": "2026-11-18T19:28:51.613Z",
+ "at": 1795030131613,
  "season": "2026",
  "nfl_week": 11,
  "season_type": "regular",
@@ -56,9 +56,7 @@
    "points_for": 1181.72,
    "points_against": 1190.86,
    "faab_spent": 1,
-   "starters_hurt": [
-    "Wan'Dale Robinson (IR)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "nikhil1123",
@@ -97,7 +95,6 @@
    "points_against": 1365.18,
    "faab_spent": 12,
    "starters_hurt": [
-    "Woody Marks (Doubtful)",
     "Brock Bowers (Questionable)"
    ]
   },
@@ -126,9 +123,7 @@
    "points_for": 1144.96,
    "points_against": 1292.28,
    "faab_spent": 58,
-   "starters_hurt": [
-    "A.J. Brown (Out)"
-   ]
+   "starters_hurt": []
   }
  ],
  "this_week": [
@@ -141,7 +136,7 @@
    "b": {
     "manager": "yojarshh",
     "points": 0,
-    "startersLeftToPlay": 9
+    "startersLeftToPlay": 10
    }
   },
   {
@@ -184,7 +179,7 @@
    "a": {
     "manager": "jjnhwg",
     "points": 0,
-    "startersLeftToPlay": 10
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "asierbelay",
@@ -262,5 +257,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 17
+ "free_agent_moves": 18
 }
