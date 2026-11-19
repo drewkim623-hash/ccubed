@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-18T23:48:59.197Z",
- "at": 1795045739198,
+ "generated": "2026-11-19T02:18:59.925Z",
+ "at": 1795054739925,
  "season": "2026",
  "nfl_week": 11,
  "season_type": "regular",
@@ -128,7 +128,8 @@
    "points_against": 1292.28,
    "faab_spent": 58,
    "starters_hurt": [
-    "Caleb Douglas (Questionable)"
+    "Caleb Douglas (Questionable)",
+    "Mike Evans (Questionable)"
    ]
   }
  ],
@@ -185,7 +186,7 @@
    "a": {
     "manager": "jjnhwg",
     "points": 0,
-    "startersLeftToPlay": 8
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "asierbelay",
@@ -263,5 +264,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 20
+ "free_agent_moves": 23
 }
