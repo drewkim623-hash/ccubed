@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-19T16:28:24.903Z",
+ "generated": "2026-11-19T19:11:06.404Z",
  "week": 11,
  "entries": {
   "1373": {
@@ -245,17 +245,6 @@
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
    "retChecked": "2026-11-19"
-  },
-  "10232": {
-   "n": "Michael Wilson",
-   "s": "IR",
-   "ret": null,
-   "retWeeks": 3,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: IR minimum 4 weeks, on IR since wk 10",
-   "retChecked": "2026-11-19",
-   "irSince": 10
   },
   "10236": {
    "n": "Dalton Kincaid",
