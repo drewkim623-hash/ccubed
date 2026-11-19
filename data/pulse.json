@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-19T02:18:59.925Z",
- "at": 1795054739925,
+ "generated": "2026-11-19T02:48:21.696Z",
+ "at": 1795056501696,
  "season": "2026",
  "nfl_week": 11,
  "season_type": "regular",
@@ -26,7 +26,9 @@
    "points_for": 1377.68,
    "points_against": 1233.76,
    "faab_spent": 0,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Geno Smith (Questionable)"
+   ]
   },
   {
    "manager": "Lee284",
@@ -191,7 +193,7 @@
    "b": {
     "manager": "asierbelay",
     "points": 0,
-    "startersLeftToPlay": 9
+    "startersLeftToPlay": 10
    }
   },
   {
@@ -264,5 +266,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 23
+ "free_agent_moves": 24
 }
