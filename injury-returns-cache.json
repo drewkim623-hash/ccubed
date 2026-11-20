@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-19T23:23:37.330Z",
+ "generated": "2026-11-20T11:08:43.533Z",
  "week": 11,
  "entries": {
   "1373": {
@@ -11,7 +11,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "2133": {
    "n": "Davante Adams",
@@ -83,7 +83,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "6083": {
    "n": "Matt Gay",
@@ -93,7 +93,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -117,7 +117,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "8112": {
    "n": "Drake London",
@@ -127,7 +127,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -234,7 +234,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "10236": {
    "n": "Dalton Kincaid",
@@ -244,7 +244,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "11564": {
    "n": "Drake Maye",
@@ -268,7 +268,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "11635": {
    "n": "Ladd McConkey",
@@ -320,7 +320,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "12529": {
    "n": "TreVeyon Henderson",
@@ -357,7 +357,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-19"
+   "retChecked": "2026-11-20"
   },
   "13279": {
    "n": "Carnell Tate",
@@ -399,6 +399,16 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Ankle. Missed 3 straight; MIA bye Week 6, ESPN return date Oct 25 (Week 7). 0 games missed. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14"
+  },
+  "13424": {
+   "n": "Seth McGowan",
+   "s": "Out",
+   "ret": "2026-11-29",
+   "retWeeks": null,
+   "retSource": "espn-return-date",
+   "retEstimated": false,
+   "retNote": "ESPN return date",
+   "retChecked": "2026-11-20"
   }
  }
 }

@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-19T19:11:07.080Z",
- "at": 1795115467080,
+ "generated": "2026-11-20T11:08:44.095Z",
+ "at": 1795172924095,
  "season": "2026",
  "nfl_week": 11,
  "season_type": "regular",
@@ -15,8 +15,7 @@
    "points_against": 1191.08,
    "faab_spent": 0,
    "starters_hurt": [
-    "Bhayshul Tuten (Questionable)",
-    "Kenneth Walker III (Questionable)"
+    "Bhayshul Tuten (Questionable)"
    ]
   },
   {
@@ -139,20 +138,20 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 21.46,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "yojarshh",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 5.7,
+    "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 15.4,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "edyun1",
@@ -163,20 +162,20 @@
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 15,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "tonypng",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 6,
+    "startersLeftToPlay": 9
    }
   },
   {
    "a": {
     "manager": "saiky7",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 4.3,
+    "startersLeftToPlay": 8
    },
    "b": {
     "manager": "jiddyyyyyy",
@@ -187,8 +186,8 @@
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 0,
-    "startersLeftToPlay": 9
+    "points": 9.9,
+    "startersLeftToPlay": 7
    },
    "b": {
     "manager": "asierbelay",
@@ -204,8 +203,8 @@
    },
    "b": {
     "manager": "bigmoneyjos",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 14.8,
+    "startersLeftToPlay": 9
    }
   }
  ],
