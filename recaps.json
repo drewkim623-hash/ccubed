@@ -4833,6 +4833,151 @@
      "text": "Lines, playoff and title chances, points so far and starters left are from the site's odds board on Friday morning, with one NFL game of week 11 final; the win chance for each matchup counts points already scored. The Thursday comparison is the board's between-weeks reading in the odds history. Records, points, benches and FAAB are from the week 1 to 10 files and the daily league file; injury designations are from the site's injury report. Nobody is quoted."
     }
    ]
+  },
+  {
+   "season": "2026",
+   "slug": "two-teams-are-0-01325-projected-wins-apart-and-28-7-points-of-playoff-chance-apart",
+   "aliases": [],
+   "date": "2026-11-21",
+   "kind": "opinion",
+   "source": "saturday",
+   "kicker": "2026 · week 11",
+   "headline": "Two Teams Are 0.01325 Projected Wins Apart and 28.7 Points of Playoff Chance Apart",
+   "dek": "The board projects Uzzz uzz uzz (jjnhwg), 6-4, for 7.3256 wins and n² (nikhil1123), 5-5, for 7.33885, and prices them at 44.035 and 72.735 percent to make the playoffs. Since Nov 12 one lost 25.715 points of chance and the other gained 26.795.",
+   "byline": "C Cubed desk",
+   "standfirst": "7.3256 and 7.33885 projected wins · 44.035 and 72.735 percent · week 11 lines",
+   "teaser": "🚨 C CUBED | WEEK 11\n\nTWO TEAMS ARE 0.01325 PROJECTED WINS APART AND 28.7 POINTS OF PLAYOFF CHANCE APART\n\n⚖️ Uzzz uzz uzz (jjnhwg), 6-4, and n² (nikhil1123), 5-5, are projected 0.01325 wins apart and priced 28.7 points apart\n📉 Uzzz uzz uzz has lost 25.715 points of playoff chance since Nov 12, to 44.035 percent\n📈 n² gained 26.795, to 72.735 percent, and is 67.3 percent against Tshough (tonypng)\n\nFull story 👇\nhttps://drewkim623-hash.github.io/ccubed/news/two-teams-are-0-01325-projected-wins-apart-and-28-7-points-of-playoff-chance-apart.html",
+   "blocks": [
+    {
+     "type": "p",
+     "lead": true,
+     "text": "<b>Uzzz uzz uzz (jjnhwg)</b> is 6-4 and <b>n² (nikhil1123)</b> is 5-5, and the site's odds board expects them to finish level in the wins column: 7.3256 projected wins for jjnhwg, 7.33885 for nikhil1123, a gap of 0.01325. Their playoff prices are not close. nikhil1123 is 72.735 percent to make the playoffs at -340; jjnhwg is 44.035 percent at +115, the only team with a winning record priced as an underdog to get in."
+    },
+    {
+     "type": "stat",
+     "n": "28.7",
+     "text": "Points of playoff chance between nikhil1123 and jjnhwg, two teams the board projects 0.01325 wins apart."
+    },
+    {
+     "type": "h",
+     "eyebrow": "record vs odds",
+     "text": "The game in hand is already spent"
+    },
+    {
+     "type": "p",
+     "text": "jjnhwg's extra win is real today and gone in the projection. The board makes it 26.0 percent this week against <b>AB x B (asierbelay)</b>, 7-3, though it leads 9.9 to 0: seven of its starters are left against all ten of asierbelay's. nikhil1123 is 67.3 percent against <b>Tshough (tonypng)</b>, the other 7-3 team, and leads 15 to 6."
+    },
+    {
+     "type": "p",
+     "text": "What separates them otherwise is scoring. nikhil1123 has 1,305.84 points for and jjnhwg 1,181.72, a difference of 124.12, and three teams with losing records have outscored jjnhwg: <b>S2? #jtw #imwallin (yojarshh)</b> at 1,220.92, <b>Lucky Strike (drewkim)</b> at 1,218.2 and <b>Tshough (edyun1)</b> at 1,215.96. <b>Team Meta/Bloomberg (jiddyyyyyy)</b>, also 5-5, is projected for 7.52955 wins and priced at 75.905 percent."
+    },
+    {
+     "type": "tiers",
+     "kicker": "Week 11 · The playoff board",
+     "title": "Three near-certain, four priced for three berths",
+     "sub": "Big number: chance to make the playoffs.",
+     "note": "Playoff % from the site's odds board, Nov 21; records through week 10. Six of twelve make it.",
+     "href": "https://drewkim623-hash.github.io/ccubed/#picture",
+     "link": "See the live Playoff Picture",
+     "tiers": [
+      {
+       "name": "Near-certain",
+       "range": "96% or better",
+       "rows": [
+        {
+         "team": "tonypng",
+         "pct": 99.67,
+         "rec": "7-3"
+        },
+        {
+         "team": "asierbelay",
+         "pct": 99.595,
+         "rec": "7-3"
+        },
+        {
+         "team": "Lee284",
+         "pct": 96.345,
+         "rec": "6-4"
+        }
+       ]
+      },
+      {
+       "name": "Four for three",
+       "range": "40% to 85%",
+       "rows": [
+        {
+         "team": "saiky7",
+         "pct": 83.005,
+         "rec": "6-4"
+        },
+        {
+         "team": "jiddyyyyyy",
+         "pct": 75.905,
+         "rec": "5-5"
+        },
+        {
+         "team": "nikhil1123",
+         "pct": 72.735,
+         "rec": "5-5"
+        },
+        {
+         "team": "jjnhwg",
+         "pct": 44.035,
+         "rec": "6-4"
+        }
+       ]
+      },
+      {
+       "name": "Long shots",
+       "range": "under 20%",
+       "rows": [
+        {
+         "team": "drewkim",
+         "pct": 13.59,
+         "rec": "4-6"
+        },
+        {
+         "team": "yojarshh",
+         "pct": 5.98,
+         "rec": "3-7"
+        },
+        {
+         "team": "andychoe03",
+         "pct": 5.405,
+         "rec": "4-6"
+        },
+        {
+         "team": "edyun1",
+         "pct": 3.31,
+         "rec": "4-6"
+        },
+        {
+         "team": "bigmoneyjos",
+         "pct": 0.425,
+         "rec": "3-7"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "h",
+     "eyebrow": "who moved",
+     "text": "The two prices crossed in nine days"
+    },
+    {
+     "type": "p",
+     "text": "The odds history's last reading before last Saturday is Nov 12, taken after week 9 was final, so the comparison spans week 10 and Thursday night of week 11. On it jjnhwg was 69.75 percent and nikhil1123 45.94. jjnhwg has since lost 25.715 points, the largest drop on the board, after its 97.12 lost to drewkim's 118.4. nikhil1123 gained 26.795, the largest rise, after beating jiddyyyyyy 156.06 to 125.42."
+    },
+    {
+     "type": "p",
+     "text": "jiddyyyyyy lost that game and still rose 24.475, from 51.43 to 75.905; 16.43 of it has come since the Nov 19 reading, with the board making it 91.0 percent this week against <b>yerra x ecj (saiky7)</b>. saiky7 fell 14.005, from 97.01 to 83.005. The five teams under 20 percent hold 28.71 points of playoff chance between them."
+    },
+    {
+     "type": "note",
+     "text": "Playoff chances, prices, projected wins and week 11 lines are from the site's odds board on Nov 21; moves are measured from the odds history's Nov 12 and Nov 19 readings. Records and points for are through week 10, and week 11 scores are partial after Thursday night. Nobody is quoted."
+    }
+   ]
   }
  ]
 }
