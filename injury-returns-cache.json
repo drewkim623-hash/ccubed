@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-21T14:23:59.045Z",
+ "generated": "2026-11-22T00:36:42.832Z",
  "week": 11,
  "entries": {
   "2133": {
@@ -23,6 +23,16 @@
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-12"
+  },
+  "2505": {
+   "n": "Darren Waller",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-22"
   },
   "4881": {
    "n": "Lamar Jackson",
@@ -63,7 +73,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-21"
+   "retChecked": "2026-11-22"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -87,7 +97,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-21"
+   "retChecked": "2026-11-22"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -127,6 +137,16 @@
    "retChecked": "2026-11-15",
    "irSince": 6
   },
+  "8150": {
+   "n": "Kyren Williams",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-22"
+  },
   "8151": {
    "n": "Kenneth Walker III",
    "s": "Out",
@@ -147,16 +167,6 @@
    "retNote": "https://www.cbssports.com/nfl/news/isiah-pacheco-injury-update-lions/ — Back surgery (nerve). 12-week recovery from Sep 14 surgery, December target => ~Week 13. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14",
    "irSince": 6
-  },
-  "9486": {
-   "n": "Dontayvion Wicks",
-   "s": "Out",
-   "ret": "2026-11-29",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
-   "retChecked": "2026-11-21"
   },
   "9493": {
    "n": "Puka Nacua",
@@ -194,7 +204,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Doubtful = coming week only",
-   "retChecked": "2026-11-21"
+   "retChecked": "2026-11-22"
   },
   "11564": {
    "n": "Drake Maye",
@@ -218,7 +228,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-21"
+   "retChecked": "2026-11-22"
   },
   "11635": {
    "n": "Ladd McConkey",
@@ -328,7 +338,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Out = coming week only",
-   "retChecked": "2026-11-21"
+   "retChecked": "2026-11-22"
   }
  }
 }
