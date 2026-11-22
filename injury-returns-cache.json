@@ -1,19 +1,20 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-22T16:54:21.735Z",
+ "generated": "2026-11-22T20:54:23.822Z",
  "week": 11,
  "entries": {
   "2133": {
    "n": "Davante Adams",
    "s": "IR",
    "ret": null,
-   "retWeeks": 1,
+   "retWeeks": 2,
    "retWeeksList": [
-    12
+    12,
+    13
    ],
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
+   "retNote": "consensus.mjs — Consensus: changed from audit [12]; consensus.",
    "retChecked": "2026-11-22",
    "irSince": 7
   },
@@ -38,15 +39,28 @@
    "retChecked": "2026-11-03",
    "irSince": 9
   },
-  "5850": {
-   "n": "Josh Jacobs",
-   "s": "Out",
+  "4983": {
+   "n": "DJ Moore",
+   "s": "Questionable",
    "ret": "2026-11-22",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Commissioner exempt list (not an injury). No return date; possible 4-6 game suspension after activation. Default 1 week used but true absence could be much longer. Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-12"
+   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Shoulder AC joint sprain. Missed Week 5; Q for Week 6. Coming week only. Consensus: matches audit; consensus.",
+   "retChecked": "2026-10-18"
+  },
+  "5850": {
+   "n": "Josh Jacobs",
+   "s": "Out",
+   "ret": null,
+   "retWeeks": 1,
+   "retWeeksList": [
+    12
+   ],
+   "retSource": "report",
+   "retEstimated": false,
+   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Commissioner exempt list (not an injury). No return date; possible 4-6 game suspension after activation. Default 1 week used but true absence could be much longer. Consensus: changed from audit []; consensus.",
+   "retChecked": "2026-11-22"
   },
   "5859": {
    "n": "A.J. Brown",
@@ -58,16 +72,6 @@
    "retNote": "https://www.espn.com/nfl/player/_/id/4047646/aj-brown — High-ankle sprain (right). Eligible off IR; Vrabel: 'a chance' to practice this week. ESPN return date 2026-10-22 => out Week 6, back Week 7. Consensus: matches audit; consensus.",
    "retChecked": "2026-11-06"
   },
-  "6083": {
-   "n": "Matt Gay",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-22"
-  },
   "6819": {
    "n": "Michael Pittman Jr.",
    "s": "IR",
@@ -75,9 +79,19 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4035687/michael-pittman-jr — Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: changed from audit [12]; consensus.",
+   "retNote": "https://www.espn.com/nfl/player/_/id/4035687/michael-pittman-jr — Foot (plantar fasciitis). Placed on IR Oct 10; earliest Week 10 Nov 15. Consensus: matches audit; uncertain (audit tiebreak wk 11).",
    "retChecked": "2026-11-22",
    "irSince": 6
+  },
+  "7002": {
+   "n": "Juwan Johnson",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-22"
   },
   "8112": {
    "n": "Drake London",
@@ -193,42 +207,34 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
+   "retNote": "consensus.mjs — Consensus: matches audit; uncertain (audit tiebreak wk 11).",
    "retChecked": "2026-11-22"
   },
   "11564": {
    "n": "Drake Maye",
    "s": "Out",
    "ret": null,
-   "retWeeks": 2,
+   "retWeeks": 4,
    "retWeeksList": [
     12,
-    13
+    13,
+    14,
+    15
    ],
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-19"
+   "retNote": "consensus.mjs — Consensus: changed from audit [12,13]; consensus.",
+   "retChecked": "2026-11-22"
   },
   "11604": {
    "n": "Brock Bowers",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-22"
-  },
-  "11635": {
-   "n": "Ladd McConkey",
-   "s": "Questionable",
-   "ret": "2026-11-22",
+   "s": "Out",
+   "ret": "2026-11-29",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Foot. Week-to-week; active but 0 snaps Week 5. Q = Week 6 only. Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-15"
+   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
+   "retChecked": "2026-11-22"
   },
   "12474": {
    "n": "Woody Marks",
