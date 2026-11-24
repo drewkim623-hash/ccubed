@@ -1,17 +1,13 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-23T23:24:23.824Z",
- "week": 11,
+ "generated": "2026-11-24T04:33:10.738Z",
+ "week": 12,
  "entries": {
   "2133": {
    "n": "Davante Adams",
    "s": "IR",
-   "ret": null,
-   "retWeeks": 2,
-   "retWeeksList": [
-    12,
-    13
-   ],
+   "ret": "2026-12-13",
+   "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
@@ -26,12 +22,12 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-23"
+   "retChecked": "2026-11-24"
   },
   "4866": {
    "n": "Saquon Barkley",
    "s": "Questionable",
-   "ret": "2026-11-22",
+   "ret": "2026-11-29",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -52,7 +48,7 @@
   "4983": {
    "n": "DJ Moore",
    "s": "Questionable",
-   "ret": "2026-11-22",
+   "ret": "2026-11-29",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -67,16 +63,13 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-23"
+   "retChecked": "2026-11-24"
   },
   "5850": {
    "n": "Josh Jacobs",
    "s": "Out",
-   "ret": null,
-   "retWeeks": 1,
-   "retWeeksList": [
-    12
-   ],
+   "ret": "2026-12-06",
+   "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Commissioner exempt list (not an injury). No return date; possible 4-6 game suspension after activation. Default 1 week used but true absence could be much longer. Consensus: matches audit; consensus.",
@@ -85,11 +78,8 @@
   "5859": {
    "n": "A.J. Brown",
    "s": "Out",
-   "ret": null,
-   "retWeeks": 1,
-   "retWeeksList": [
-    12
-   ],
+   "ret": "2026-12-06",
+   "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/4047646/aj-brown — High-ankle sprain (right). Eligible off IR; Vrabel: 'a chance' to practice this week. ESPN return date 2026-10-22 => out Week 6, back Week 7. Consensus: changed from audit []; consensus.",
@@ -114,7 +104,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-23"
+   "retChecked": "2026-11-24"
   },
   "8112": {
    "n": "Drake London",
@@ -124,12 +114,12 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-23"
+   "retChecked": "2026-11-24"
   },
   "8121": {
    "n": "Romeo Doubs",
    "s": "IR",
-   "ret": "2026-11-22",
+   "ret": "2026-11-29",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -141,7 +131,7 @@
    "n": "Wan'Dale Robinson",
    "s": "IR",
    "ret": null,
-   "retWeeks": 4,
+   "retWeeks": 3,
    "retSource": "report",
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
@@ -152,9 +142,8 @@
    "n": "Alec Pierce",
    "s": "IR",
    "ret": null,
-   "retWeeks": 3,
+   "retWeeks": 2,
    "retWeeksList": [
-    11,
     12,
     14
    ],
@@ -172,7 +161,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-23"
+   "retChecked": "2026-11-24"
   },
   "8151": {
    "n": "Kenneth Walker III",
@@ -200,13 +189,6 @@
    "s": "IR",
    "ret": null,
    "retWeeks": 5,
-   "retWeeksList": [
-    12,
-    13,
-    14,
-    15,
-    16
-   ],
    "retSource": "report",
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
@@ -233,17 +215,21 @@
    "retNote": "consensus.mjs — Consensus: matches audit; uncertain (audit tiebreak wk 11).",
    "retChecked": "2026-11-22"
   },
+  "10859": {
+   "n": "Sam LaPorta",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-24"
+  },
   "11564": {
    "n": "Drake Maye",
    "s": "Out",
    "ret": null,
    "retWeeks": 4,
-   "retWeeksList": [
-    12,
-    13,
-    14,
-    15
-   ],
    "retSource": "report",
    "retEstimated": false,
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
@@ -262,7 +248,7 @@
   "11646": {
    "n": "Jalen Coker",
    "s": "Questionable",
-   "ret": "2026-11-22",
+   "ret": "2026-11-29",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -277,7 +263,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-23"
+   "retChecked": "2026-11-24"
   },
   "12474": {
    "n": "Woody Marks",
@@ -292,7 +278,7 @@
   "12487": {
    "n": "Terrance Ferguson",
    "s": "IR",
-   "ret": "2026-11-22",
+   "ret": "2026-11-29",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
@@ -319,18 +305,13 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-23"
+   "retChecked": "2026-11-24"
   },
   "12529": {
    "n": "TreVeyon Henderson",
    "s": "IR",
    "ret": null,
    "retWeeks": 3,
-   "retWeeksList": [
-    12,
-    13,
-    14
-   ],
    "retSource": "report",
    "retEstimated": false,
    "retNote": "https://www.espn.com/nfl/player/_/id/4432710/treveyon-henderson — High-ankle sprain (right). Expected to miss multiple weeks; no surgery. Exact length unknown (2 weeks assumed from 'multiple'). Consensus: matches audit; consensus.",
@@ -366,7 +347,7 @@
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-23"
+   "retChecked": "2026-11-24"
   }
  }
 }

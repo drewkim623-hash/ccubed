@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-23T11:08:21.222Z",
- "at": 1795432101222,
+ "generated": "2026-11-24T04:33:11.229Z",
+ "at": 1795494791230,
  "season": "2026",
  "nfl_week": 11,
  "season_type": "regular",
@@ -14,7 +14,9 @@
    "points_for": 1461.2,
    "points_against": 1191.08,
    "faab_spent": 0,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Bhayshul Tuten (Questionable)"
+   ]
   },
   {
    "manager": "asierbelay",
@@ -23,7 +25,9 @@
    "points_for": 1377.68,
    "points_against": 1233.76,
    "faab_spent": 0,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Sam LaPorta (Questionable)"
+   ]
   },
   {
    "manager": "Lee284",
@@ -125,27 +129,29 @@
    "points_for": 1144.96,
    "points_against": 1292.28,
    "faab_spent": 58,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Cam Little (Questionable)"
+   ]
   }
  ],
  "this_week": [
   {
    "a": {
     "manager": "drewkim",
-    "points": 95.36,
-    "startersLeftToPlay": 2
+    "points": 113.86,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "yojarshh",
-    "points": 106.66,
-    "startersLeftToPlay": 1
+    "points": 117.26,
+    "startersLeftToPlay": 0
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 112.52,
-    "startersLeftToPlay": 2
+    "points": 133.82,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "edyun1",
@@ -156,13 +162,13 @@
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 105.8,
-    "startersLeftToPlay": 2
+    "points": 135.16,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "tonypng",
-    "points": 78.7,
-    "startersLeftToPlay": 2
+    "points": 119.8,
+    "startersLeftToPlay": 0
    }
   },
   {
@@ -180,8 +186,8 @@
   {
    "a": {
     "manager": "jjnhwg",
-    "points": 88.34,
-    "startersLeftToPlay": 1
+    "points": 106.34,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "asierbelay",
@@ -192,8 +198,8 @@
   {
    "a": {
     "manager": "Lee284",
-    "points": 109.94,
-    "startersLeftToPlay": 1
+    "points": 118.04,
+    "startersLeftToPlay": 0
    },
    "b": {
     "manager": "bigmoneyjos",
@@ -224,7 +230,7 @@
      "name": "Rachaad White",
      "pos": "RB",
      "team": "WAS",
-     "status": "Questionable",
+     "status": null,
      "from": "yojarshh"
     }
    ],
