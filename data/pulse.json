@@ -1,9 +1,9 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-24T04:33:11.229Z",
- "at": 1795494791230,
+ "generated": "2026-11-24T05:15:36.033Z",
+ "at": 1795497336033,
  "season": "2026",
- "nfl_week": 11,
+ "nfl_week": 12,
  "season_type": "regular",
  "week_in_progress": true,
  "standings": [
@@ -138,132 +138,77 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 113.86,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "yojarshh",
-    "points": 117.26,
-    "startersLeftToPlay": 0
+    "manager": "asierbelay",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "andychoe03",
-    "points": 133.82,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
-    "manager": "edyun1",
-    "points": 81.2,
-    "startersLeftToPlay": 0
+    "manager": "bigmoneyjos",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "yojarshh",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "jjnhwg",
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   },
   {
    "a": {
     "manager": "nikhil1123",
-    "points": 135.16,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "saiky7",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "edyun1",
+    "points": 0,
+    "startersLeftToPlay": 10
+   },
+   "b": {
+    "manager": "Lee284",
+    "points": 0,
+    "startersLeftToPlay": 10
+   }
+  },
+  {
+   "a": {
+    "manager": "jiddyyyyyy",
+    "points": 0,
+    "startersLeftToPlay": 10
    },
    "b": {
     "manager": "tonypng",
-    "points": 119.8,
-    "startersLeftToPlay": 0
-   }
-  },
-  {
-   "a": {
-    "manager": "saiky7",
-    "points": 58.66,
-    "startersLeftToPlay": 2
-   },
-   "b": {
-    "manager": "jiddyyyyyy",
-    "points": 141.26,
-    "startersLeftToPlay": 0
-   }
-  },
-  {
-   "a": {
-    "manager": "jjnhwg",
-    "points": 106.34,
-    "startersLeftToPlay": 0
-   },
-   "b": {
-    "manager": "asierbelay",
-    "points": 166.84,
-    "startersLeftToPlay": 0
-   }
-  },
-  {
-   "a": {
-    "manager": "Lee284",
-    "points": 118.04,
-    "startersLeftToPlay": 0
-   },
-   "b": {
-    "manager": "bigmoneyjos",
-    "points": 152.1,
-    "startersLeftToPlay": 0
+    "points": 0,
+    "startersLeftToPlay": 10
    }
   }
  ],
  "trades": [],
- "waivers": [
-  {
-   "week": 10,
-   "type": "waiver",
-   "managers": [
-    "yojarshh"
-   ],
-   "adds": [
-    {
-     "name": "Chig Okonkwo",
-     "pos": "TE",
-     "team": "WAS",
-     "status": null,
-     "to": "yojarshh"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Rachaad White",
-     "pos": "RB",
-     "team": "WAS",
-     "status": null,
-     "from": "yojarshh"
-    }
-   ],
-   "faab": 6,
-   "picks": []
-  },
-  {
-   "week": 10,
-   "type": "waiver",
-   "managers": [
-    "andychoe03"
-   ],
-   "adds": [
-    {
-     "name": "Cam Ward",
-     "pos": "QB",
-     "team": "TEN",
-     "status": null,
-     "to": "andychoe03"
-    }
-   ],
-   "drops": [
-    {
-     "name": "Malik Willis",
-     "pos": "QB",
-     "team": "MIA",
-     "status": "IR",
-     "from": "andychoe03"
-    }
-   ],
-   "faab": 1,
-   "picks": []
-  }
- ],
- "free_agent_moves": 28
+ "waivers": [],
+ "free_agent_moves": 15
 }
