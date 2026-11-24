@@ -1,100 +1,121 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-24T05:36:23.979Z",
- "at": 1795498583980,
+ "generated": "2026-11-24T11:08:46.962Z",
+ "at": 1795518526963,
  "season": "2026",
  "nfl_week": 12,
  "season_type": "regular",
  "week_in_progress": true,
  "standings": [
   {
-   "manager": "tonypng",
-   "wins": 7,
-   "losses": 3,
-   "points_for": 1461.2,
-   "points_against": 1191.08,
-   "faab_spent": 0,
-   "starters_hurt": [
-    "Bhayshul Tuten (Questionable)"
-   ]
-  },
-  {
    "manager": "asierbelay",
-   "wins": 7,
+   "wins": 8,
    "losses": 3,
-   "points_for": 1377.68,
-   "points_against": 1233.76,
+   "points_for": 1544.52,
+   "points_against": 1340.1,
    "faab_spent": 0,
    "starters_hurt": [
     "Sam LaPorta (Questionable)"
    ]
   },
   {
+   "manager": "tonypng",
+   "wins": 7,
+   "losses": 4,
+   "points_for": 1581,
+   "points_against": 1326.24,
+   "faab_spent": 0,
+   "starters_hurt": [
+    "Bhayshul Tuten (Questionable)",
+    "Kenneth Walker III (Out)"
+   ]
+  },
+  {
    "manager": "Lee284",
    "wins": 6,
-   "losses": 4,
-   "points_for": 1390.56,
-   "points_against": 1234.7,
+   "losses": 5,
+   "points_for": 1508.6,
+   "points_against": 1386.8,
    "faab_spent": 1,
+   "starters_hurt": []
+  },
+  {
+   "manager": "nikhil1123",
+   "wins": 6,
+   "losses": 5,
+   "points_for": 1441,
+   "points_against": 1411.36,
+   "faab_spent": 65,
    "starters_hurt": []
   },
   {
    "manager": "saiky7",
    "wins": 6,
-   "losses": 4,
-   "points_for": 1360.16,
-   "points_against": 1324.68,
+   "losses": 5,
+   "points_for": 1418.82,
+   "points_against": 1465.94,
    "faab_spent": 59,
    "starters_hurt": [
     "Dalton Kincaid (Out)"
    ]
   },
   {
-   "manager": "jjnhwg",
-   "wins": 6,
-   "losses": 4,
-   "points_for": 1181.72,
-   "points_against": 1190.86,
-   "faab_spent": 1,
-   "starters_hurt": [
-    "Derrick Henry (Questionable)"
-   ]
-  },
-  {
-   "manager": "nikhil1123",
-   "wins": 5,
-   "losses": 5,
-   "points_for": 1305.84,
-   "points_against": 1291.56,
-   "faab_spent": 65,
-   "starters_hurt": []
-  },
-  {
    "manager": "jiddyyyyyy",
-   "wins": 5,
+   "wins": 6,
    "losses": 5,
-   "points_for": 1263.7,
-   "points_against": 1284.24,
+   "points_for": 1404.96,
+   "points_against": 1342.9,
    "faab_spent": 40,
    "starters_hurt": [
     "Juwan Johnson (Questionable)"
    ]
   },
   {
+   "manager": "jjnhwg",
+   "wins": 6,
+   "losses": 5,
+   "points_for": 1288.06,
+   "points_against": 1357.7,
+   "faab_spent": 1,
+   "starters_hurt": [
+    "Derrick Henry (Questionable)"
+   ]
+  },
+  {
+   "manager": "andychoe03",
+   "wins": 5,
+   "losses": 6,
+   "points_for": 1271.94,
+   "points_against": 1331.5,
+   "faab_spent": 63,
+   "starters_hurt": []
+  },
+  {
+   "manager": "yojarshh",
+   "wins": 4,
+   "losses": 7,
+   "points_for": 1338.18,
+   "points_against": 1396.58,
+   "faab_spent": 50,
+   "starters_hurt": [
+    "Saquon Barkley (Questionable)"
+   ]
+  },
+  {
    "manager": "drewkim",
    "wins": 4,
-   "losses": 6,
-   "points_for": 1218.2,
-   "points_against": 1337.66,
+   "losses": 7,
+   "points_for": 1332.06,
+   "points_against": 1454.92,
    "faab_spent": 11,
    "starters_hurt": []
   },
   {
    "manager": "edyun1",
    "wins": 4,
-   "losses": 6,
-   "points_for": 1215.96,
-   "points_against": 1365.18,
+   "losses": 7,
+   "points_for": 1297.16,
+   "points_against": 1499,
    "faab_spent": 12,
    "starters_hurt": [
     "DJ Moore (Questionable)",
@@ -103,31 +124,11 @@
    ]
   },
   {
-   "manager": "andychoe03",
-   "wins": 4,
-   "losses": 6,
-   "points_for": 1138.12,
-   "points_against": 1250.3,
-   "faab_spent": 63,
-   "starters_hurt": []
-  },
-  {
-   "manager": "yojarshh",
-   "wins": 3,
-   "losses": 7,
-   "points_for": 1220.92,
-   "points_against": 1282.72,
-   "faab_spent": 50,
-   "starters_hurt": [
-    "Saquon Barkley (Questionable)"
-   ]
-  },
-  {
    "manager": "bigmoneyjos",
-   "wins": 3,
+   "wins": 4,
    "losses": 7,
-   "points_for": 1144.96,
-   "points_against": 1292.28,
+   "points_for": 1297.06,
+   "points_against": 1410.32,
    "faab_spent": 58,
    "starters_hurt": [
     "Cam Little (Questionable)"
