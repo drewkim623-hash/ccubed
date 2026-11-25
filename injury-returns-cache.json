@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-25T14:49:14.208Z",
+ "generated": "2026-11-25T18:16:02.556Z",
  "week": 12,
  "entries": {
   "2133": {
@@ -115,7 +115,7 @@
   },
   "8151": {
    "n": "Kenneth Walker III",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-11-29",
    "retWeeks": null,
    "retSource": "report",

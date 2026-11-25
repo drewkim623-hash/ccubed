@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-25T14:49:14.715Z",
- "at": 1795618154715,
+ "generated": "2026-11-25T18:16:03.024Z",
+ "at": 1795630563024,
  "season": "2026",
  "nfl_week": 12,
  "season_type": "regular",
@@ -24,8 +24,7 @@
    "points_against": 1326.24,
    "faab_spent": 0,
    "starters_hurt": [
-    "Bhayshul Tuten (Questionable)",
-    "Kenneth Walker III (Questionable)"
+    "Bhayshul Tuten (Questionable)"
    ]
   },
   {
