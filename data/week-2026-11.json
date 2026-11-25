@@ -2,8 +2,8 @@
  "_comment": "Written by build-week.mjs in GitHub Actions. The weekly writing job reads this instead of calling Sleeper, which it cannot reach. Everything is already resolved to manager and player names — no ids need looking up.",
  "season": "2026",
  "week": 11,
- "generated": "2026-11-24T11:08:43.173Z",
- "generated_at": "2026-11-24T11:08:43.173Z",
+ "generated": "2026-11-25T11:08:51.987Z",
+ "generated_at": "2026-11-25T11:08:51.987Z",
  "final": true,
  "standings_through_week": 11,
  "standings_folded": false,
@@ -1162,7 +1162,7 @@
    "ties": 0,
    "points_for": 1441,
    "points_against": 1411.36,
-   "waiver_budget_used": 65
+   "waiver_budget_used": 67
   },
   {
    "manager": "saiky7",
@@ -1254,6 +1254,23 @@
   }
  ],
  "transactions": [
+  {
+   "type": "waiver",
+   "managers": [
+    "nikhil1123"
+   ],
+   "adds": [
+    {
+     "name": "Washington Commanders",
+     "pos": "DEF",
+     "team": "WAS",
+     "to": "nikhil1123"
+    }
+   ],
+   "drops": [],
+   "faab": 2,
+   "picks": []
+  },
   {
    "type": "free_agent",
    "managers": [
@@ -1526,6 +1543,30 @@
     }
    ],
    "faab": null,
+   "picks": []
+  },
+  {
+   "type": "waiver",
+   "managers": [
+    "jiddyyyyyy"
+   ],
+   "adds": [
+    {
+     "name": "Dalton Schultz",
+     "pos": "TE",
+     "team": "HOU",
+     "to": "jiddyyyyyy"
+    }
+   ],
+   "drops": [
+    {
+     "name": "Tutu Atwell",
+     "pos": "WR",
+     "team": "LAR",
+     "from": "jiddyyyyyy"
+    }
+   ],
+   "faab": 0,
    "picks": []
   },
   {
