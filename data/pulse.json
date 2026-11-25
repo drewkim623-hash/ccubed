@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-24T13:48:35.964Z",
- "at": 1795528115964,
+ "generated": "2026-11-25T08:18:47.961Z",
+ "at": 1795594727961,
  "season": "2026",
  "nfl_week": 12,
  "season_type": "regular",
@@ -14,9 +14,7 @@
    "points_for": 1544.52,
    "points_against": 1340.1,
    "faab_spent": 0,
-   "starters_hurt": [
-    "Sam LaPorta (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "tonypng",
@@ -27,7 +25,7 @@
    "faab_spent": 0,
    "starters_hurt": [
     "Bhayshul Tuten (Questionable)",
-    "Kenneth Walker III (Out)"
+    "Kenneth Walker III (Questionable)"
    ]
   },
   {
@@ -45,7 +43,7 @@
    "losses": 5,
    "points_for": 1441,
    "points_against": 1411.36,
-   "faab_spent": 65,
+   "faab_spent": 67,
    "starters_hurt": []
   },
   {
@@ -56,7 +54,7 @@
    "points_against": 1465.94,
    "faab_spent": 59,
    "starters_hurt": [
-    "Dalton Kincaid (Out)"
+    "Dalton Kincaid (Questionable)"
    ]
   },
   {
@@ -77,9 +75,7 @@
    "points_for": 1288.06,
    "points_against": 1357.7,
    "faab_spent": 1,
-   "starters_hurt": [
-    "Derrick Henry (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "andychoe03",
@@ -97,9 +93,7 @@
    "points_for": 1338.18,
    "points_against": 1396.58,
    "faab_spent": 50,
-   "starters_hurt": [
-    "Saquon Barkley (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "drewkim",
@@ -118,9 +112,7 @@
    "points_against": 1499,
    "faab_spent": 12,
    "starters_hurt": [
-    "DJ Moore (Questionable)",
-    "Jalen Coker (Questionable)",
-    "Brock Bowers (Out)"
+    "Brock Bowers (Questionable)"
    ]
   },
   {
@@ -131,7 +123,7 @@
    "points_against": 1410.32,
    "faab_spent": 58,
    "starters_hurt": [
-    "Cam Little (Questionable)"
+    "J.K. Dobbins (Out)"
    ]
   }
  ],
@@ -210,6 +202,26 @@
   }
  ],
  "trades": [],
- "waivers": [],
- "free_agent_moves": 15
+ "waivers": [
+  {
+   "week": 11,
+   "type": "waiver",
+   "managers": [
+    "nikhil1123"
+   ],
+   "adds": [
+    {
+     "name": "Washington Commanders",
+     "pos": "DEF",
+     "team": "WAS",
+     "status": null,
+     "to": "nikhil1123"
+    }
+   ],
+   "drops": [],
+   "faab": 2,
+   "picks": []
+  }
+ ],
+ "free_agent_moves": 16
 }
