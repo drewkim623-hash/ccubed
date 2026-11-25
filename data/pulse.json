@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-25T18:16:03.024Z",
- "at": 1795630563024,
+ "generated": "2026-11-25T21:48:39.143Z",
+ "at": 1795643319143,
  "season": "2026",
  "nfl_week": 12,
  "season_type": "regular",
@@ -34,7 +34,9 @@
    "points_for": 1508.6,
    "points_against": 1386.8,
    "faab_spent": 1,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Tetairoa McMillan (Questionable)"
+   ]
   },
   {
    "manager": "nikhil1123",
@@ -43,7 +45,9 @@
    "points_for": 1441,
    "points_against": 1411.36,
    "faab_spent": 67,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Isaiah Likely (Questionable)"
+   ]
   },
   {
    "manager": "saiky7",
@@ -63,9 +67,7 @@
    "points_for": 1404.96,
    "points_against": 1342.9,
    "faab_spent": 40,
-   "starters_hurt": [
-    "Juwan Johnson (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jjnhwg",
@@ -74,7 +76,9 @@
    "points_for": 1288.06,
    "points_against": 1357.7,
    "faab_spent": 1,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Derrick Henry (Questionable)"
+   ]
   },
   {
    "manager": "andychoe03",
@@ -101,7 +105,9 @@
    "points_for": 1332.06,
    "points_against": 1454.92,
    "faab_spent": 11,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Stefon Diggs (Questionable)"
+   ]
   },
   {
    "manager": "edyun1",
@@ -122,7 +128,8 @@
    "points_against": 1410.32,
    "faab_spent": 58,
    "starters_hurt": [
-    "J.K. Dobbins (Out)"
+    "J.K. Dobbins (Out)",
+    "Mike Evans (Questionable)"
    ]
   }
  ],
@@ -222,5 +229,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 19
+ "free_agent_moves": 23
 }
