@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-26T11:08:34.462Z",
+ "generated": "2026-11-26T14:25:13.954Z",
  "week": 12,
  "entries": {
   "2133": {
@@ -123,7 +123,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
+   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-25",
    "irSince": 6
   },
@@ -166,12 +166,12 @@
   "8151": {
    "n": "Kenneth Walker III",
    "s": "Out",
-   "ret": "2026-11-29",
+   "ret": "2026-12-06",
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-21"
+   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
+   "retChecked": "2026-11-26"
   },
   "8167": {
    "n": "Christian Watson",
@@ -211,7 +211,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4430878/jaxon-smith-njigba — Ankle. Limited on estimated reports; Q for Thursday Week 6. Consensus: changed from audit [6]; consensus.",
+   "retNote": "https://www.espn.com/nfl/player/_/id/4430878/jaxon-smith-njigba — Ankle. Limited on estimated reports; Q for Thursday Week 6. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14"
   },
   "9493": {
@@ -272,7 +272,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; uncertain (audit tiebreak wk 12).",
+   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-22"
   },
   "12474": {
@@ -282,7 +282,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; uncertain (audit tiebreak wk 12).",
+   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-16"
   },
   "12487": {
@@ -376,7 +376,7 @@
    "retWeeks": null,
    "retSource": "report",
    "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: changed from audit []; consensus.",
+   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-25"
   }
  }
