@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-25T22:13:50.294Z",
+ "generated": "2026-11-26T11:08:34.462Z",
  "week": 12,
  "entries": {
   "2133": {
@@ -42,7 +42,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-25"
+   "retChecked": "2026-11-26"
   },
   "4881": {
    "n": "Lamar Jackson",
@@ -57,7 +57,7 @@
   },
   "5850": {
    "n": "Josh Jacobs",
-   "s": "Questionable",
+   "s": "Out",
    "ret": "2026-12-06",
    "retWeeks": null,
    "retSource": "report",
@@ -83,17 +83,17 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-25"
+   "retChecked": "2026-11-26"
   },
   "6806": {
    "n": "J.K. Dobbins",
-   "s": "Out",
+   "s": "Sus",
    "ret": "2026-12-06",
    "retWeeks": null,
    "retSource": "espn-return-date",
    "retEstimated": false,
    "retNote": "ESPN return date",
-   "retChecked": "2026-11-25"
+   "retChecked": "2026-11-26"
   },
   "6819": {
    "n": "Michael Pittman Jr.",
@@ -114,7 +114,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-25"
+   "retChecked": "2026-11-26"
   },
   "8121": {
    "n": "Romeo Doubs",
@@ -146,7 +146,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-25"
+   "retChecked": "2026-11-26"
   },
   "8142": {
    "n": "Alec Pierce",
@@ -173,6 +173,16 @@
    "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
    "retChecked": "2026-11-21"
   },
+  "8167": {
+   "n": "Christian Watson",
+   "s": "Out",
+   "ret": "2026-12-06",
+   "retWeeks": null,
+   "retSource": "espn-return-date",
+   "retEstimated": false,
+   "retNote": "ESPN return date",
+   "retChecked": "2026-11-26"
+  },
   "8183": {
    "n": "Brock Purdy",
    "s": "Questionable",
@@ -181,7 +191,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-25"
+   "retChecked": "2026-11-26"
   },
   "8205": {
    "n": "Isiah Pacheco",
@@ -193,6 +203,16 @@
    "retNote": "https://www.cbssports.com/nfl/news/isiah-pacheco-injury-update-lions/ — Back surgery (nerve). 12-week recovery from Sep 14 surgery, December target => ~Week 13. Consensus: matches audit; consensus.",
    "retChecked": "2026-10-14",
    "irSince": 6
+  },
+  "9488": {
+   "n": "Jaxon Smith-Njigba",
+   "s": "Questionable",
+   "ret": "2026-11-29",
+   "retWeeks": null,
+   "retSource": "report",
+   "retEstimated": false,
+   "retNote": "https://www.espn.com/nfl/player/_/id/4430878/jaxon-smith-njigba — Ankle. Limited on estimated reports; Q for Thursday Week 6. Consensus: changed from audit [6]; consensus.",
+   "retChecked": "2026-10-14"
   },
   "9493": {
    "n": "Puka Nacua",
@@ -214,6 +234,16 @@
    "retEstimated": false,
    "retNote": "https://www.nbcsports.com/fantasy/football/news/2026-nfl-week-6-injury-report-updates-on-lamar-jackson-david-montgomery-treveyon-henderson-and-more — Hamstring soreness. MIN bye Week 6; ESPN return Oct 25. 0 games. Consensus: matches audit; consensus.",
    "retChecked": "2026-11-24"
+  },
+  "9997": {
+   "n": "Zay Flowers",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-26"
   },
   "10236": {
    "n": "Dalton Kincaid",
@@ -285,7 +315,17 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-25"
+   "retChecked": "2026-11-26"
+  },
+  "12506": {
+   "n": "Harold Fannin Jr.",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-26"
   },
   "12526": {
    "n": "Tetairoa McMillan",
@@ -295,7 +335,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-25"
+   "retChecked": "2026-11-26"
   },
   "12529": {
    "n": "TreVeyon Henderson",
@@ -327,7 +367,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-25"
+   "retChecked": "2026-11-26"
   },
   "13424": {
    "n": "Seth McGowan",

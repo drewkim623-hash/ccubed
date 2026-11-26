@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-25T22:13:50.895Z",
- "at": 1795644830896,
+ "generated": "2026-11-26T11:08:34.996Z",
+ "at": 1795691314996,
  "season": "2026",
  "nfl_week": 12,
  "season_type": "regular",
@@ -57,6 +57,7 @@
    "points_against": 1465.94,
    "faab_spent": 59,
    "starters_hurt": [
+    "Jaxon Smith-Njigba (Questionable)",
     "Dalton Kincaid (Questionable)"
    ]
   },
@@ -87,7 +88,9 @@
    "points_for": 1271.94,
    "points_against": 1331.5,
    "faab_spent": 63,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Harold Fannin Jr. (Questionable)"
+   ]
   },
   {
    "manager": "yojarshh",
@@ -96,7 +99,9 @@
    "points_for": 1338.18,
    "points_against": 1396.58,
    "faab_spent": 50,
-   "starters_hurt": []
+   "starters_hurt": [
+    "Zay Flowers (Questionable)"
+   ]
   },
   {
    "manager": "drewkim",
@@ -106,6 +111,7 @@
    "points_against": 1454.92,
    "faab_spent": 11,
    "starters_hurt": [
+    "Christian Watson (Out)",
     "Stefon Diggs (Questionable)"
    ]
   },
@@ -128,7 +134,6 @@
    "points_against": 1410.32,
    "faab_spent": 58,
    "starters_hurt": [
-    "J.K. Dobbins (Out)",
     "Mike Evans (Questionable)"
    ]
   }
@@ -137,8 +142,8 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 16.5,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "asierbelay",
@@ -149,8 +154,8 @@
   {
    "a": {
     "manager": "andychoe03",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 10.62,
+    "startersLeftToPlay": 9
    },
    "b": {
     "manager": "bigmoneyjos",
@@ -161,8 +166,8 @@
   {
    "a": {
     "manager": "yojarshh",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 31.9,
+    "startersLeftToPlay": 8
    },
    "b": {
     "manager": "jjnhwg",
@@ -178,8 +183,8 @@
    },
    "b": {
     "manager": "saiky7",
-    "points": 0,
-    "startersLeftToPlay": 10
+    "points": 21.4,
+    "startersLeftToPlay": 8
    }
   },
   {
