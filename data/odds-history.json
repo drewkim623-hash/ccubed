@@ -1,6 +1,6 @@
 {
  "_comment": "Written by build-odds-history.mjs from data/odds-snapshot.json: every committed copy git can see plus the working-tree one. weeks rows are merged across runs and never removed or rewritten. One row per matchup per snapshot; pA is the chance manager a beats manager b as the site priced it at that moment. teams holds one row per team per finalized week: playoff and title are the site's playoffNow and titleNow from a snapshot taken between weeks, and a week there is replaced whole when read again.",
- "generated": "2026-11-26T14:25:54.173Z",
+ "generated": "2026-11-26T18:31:31.634Z",
  "weeks": {
   "2026-6": [
    {
@@ -5728,6 +5728,51 @@
     "pA": 0.8842691418718346,
     "aPts": 31.9,
     "bPts": 0,
+    "settled": false
+   },
+   {
+    "at": "2026-11-26T18:31:31.362Z",
+    "a": "jiddyyyyyy",
+    "b": "tonypng",
+    "pA": 0.506249610886587,
+    "aPts": 5.6,
+    "bPts": 10.3,
+    "settled": false
+   },
+   {
+    "at": "2026-11-26T18:31:31.362Z",
+    "a": "drewkim",
+    "b": "asierbelay",
+    "pA": 0.4637146647928603,
+    "aPts": 16.5,
+    "bPts": 0,
+    "settled": false
+   },
+   {
+    "at": "2026-11-26T18:31:31.362Z",
+    "a": "nikhil1123",
+    "b": "saiky7",
+    "pA": 0.5851468977542031,
+    "aPts": 1.4,
+    "bPts": 21.4,
+    "settled": false
+   },
+   {
+    "at": "2026-11-26T18:31:31.362Z",
+    "a": "andychoe03",
+    "b": "bigmoneyjos",
+    "pA": 0.38223483201576985,
+    "aPts": 12.52,
+    "bPts": -0.5,
+    "settled": false
+   },
+   {
+    "at": "2026-11-26T18:31:31.362Z",
+    "a": "yojarshh",
+    "b": "jjnhwg",
+    "pA": 0.9267591927523934,
+    "aPts": 31.9,
+    "bPts": 1.76,
     "settled": false
    }
   ]
