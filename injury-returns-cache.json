@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-27T21:12:42.654Z",
+ "generated": "2026-11-27T22:48:51.594Z",
  "week": 12,
  "entries": {
   "2133": {
@@ -147,16 +147,6 @@
    "retChecked": "2026-11-18",
    "irSince": 11
   },
-  "8131": {
-   "n": "Isaiah Likely",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-27"
-  },
   "8142": {
    "n": "Alec Pierce",
    "s": "IR",
@@ -194,12 +184,12 @@
   },
   "8183": {
    "n": "Brock Purdy",
-   "s": "Questionable",
-   "ret": null,
-   "retWeeks": 1,
-   "retSource": "default",
-   "retEstimated": true,
-   "retNote": "default: Questionable = coming week only",
+   "s": "Out",
+   "ret": "2026-12-06",
+   "retWeeks": null,
+   "retSource": "espn-return-date",
+   "retEstimated": false,
+   "retNote": "ESPN return date",
    "retChecked": "2026-11-27"
   },
   "8205": {
@@ -222,16 +212,6 @@
    "retEstimated": false,
    "retNote": "ESPN return date",
    "retChecked": "2026-11-27"
-  },
-  "9488": {
-   "n": "Jaxon Smith-Njigba",
-   "s": "Questionable",
-   "ret": "2026-11-29",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "https://www.espn.com/nfl/player/_/id/4430878/jaxon-smith-njigba — Ankle. Limited on estimated reports; Q for Thursday Week 6. Consensus: matches audit; consensus.",
-   "retChecked": "2026-10-14"
   },
   "9493": {
    "n": "Puka Nacua",

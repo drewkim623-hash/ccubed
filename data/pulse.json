@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-27T21:12:43.205Z",
- "at": 1795813963205,
+ "generated": "2026-11-27T22:48:52.053Z",
+ "at": 1795819732053,
  "season": "2026",
  "nfl_week": 12,
  "season_type": "regular",
@@ -47,8 +47,7 @@
    "points_against": 1411.36,
    "faab_spent": 67,
    "starters_hurt": [
-    "Tee Higgins (Questionable)",
-    "Isaiah Likely (Questionable)"
+    "Tee Higgins (Questionable)"
    ]
   },
   {
@@ -58,9 +57,7 @@
    "points_for": 1418.82,
    "points_against": 1465.94,
    "faab_spent": 59,
-   "starters_hurt": [
-    "Jaxon Smith-Njigba (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jiddyyyyyy",
@@ -143,12 +140,12 @@
   {
    "a": {
     "manager": "drewkim",
-    "points": 39.1,
+    "points": 46.3,
     "startersLeftToPlay": 8
    },
    "b": {
     "manager": "asierbelay",
-    "points": 53.5,
+    "points": 55.7,
     "startersLeftToPlay": 6
    }
   },
@@ -167,7 +164,7 @@
   {
    "a": {
     "manager": "yojarshh",
-    "points": 47.14,
+    "points": 57.24,
     "startersLeftToPlay": 5
    },
    "b": {
@@ -191,12 +188,12 @@
   {
    "a": {
     "manager": "edyun1",
-    "points": 5.5,
+    "points": 13.5,
     "startersLeftToPlay": 9
    },
    "b": {
     "manager": "Lee284",
-    "points": 59.3,
+    "points": 69.3,
     "startersLeftToPlay": 8
    }
   },
@@ -208,7 +205,7 @@
    },
    "b": {
     "manager": "tonypng",
-    "points": 100.8,
+    "points": 101.9,
     "startersLeftToPlay": 7
    }
   }
@@ -235,5 +232,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 30
+ "free_agent_moves": 31
 }
