@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-27T20:13:32.665Z",
+ "generated": "2026-11-27T20:48:54.864Z",
  "week": 12,
  "entries": {
   "2133": {
@@ -107,6 +107,16 @@
   },
   "5947": {
    "n": "Jakobi Meyers",
+   "s": "Questionable",
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Questionable = coming week only",
+   "retChecked": "2026-11-27"
+  },
+  "6801": {
+   "n": "Tee Higgins",
    "s": "Questionable",
    "ret": null,
    "retWeeks": 1,
@@ -407,16 +417,6 @@
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
    "retChecked": "2026-11-27"
-  },
-  "13424": {
-   "n": "Seth McGowan",
-   "s": "Out",
-   "ret": "2026-12-06",
-   "retWeeks": null,
-   "retSource": "report",
-   "retEstimated": false,
-   "retNote": "consensus.mjs — Consensus: matches audit; consensus.",
-   "retChecked": "2026-11-25"
   }
  }
 }
