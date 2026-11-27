@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-27T20:48:55.367Z",
- "at": 1795812535367,
+ "generated": "2026-11-27T21:12:43.205Z",
+ "at": 1795813963205,
  "season": "2026",
  "nfl_week": 12,
  "season_type": "regular",
@@ -24,7 +24,7 @@
    "points_against": 1326.24,
    "faab_spent": 0,
    "starters_hurt": [
-    "Bhayshul Tuten (Questionable)",
+    "Bhayshul Tuten (Out)",
     "DeVonta Smith (Questionable)"
    ]
   },
@@ -69,9 +69,7 @@
    "points_for": 1404.96,
    "points_against": 1342.9,
    "faab_spent": 40,
-   "starters_hurt": [
-    "Dalton Schultz (Questionable)"
-   ]
+   "starters_hurt": []
   },
   {
    "manager": "jjnhwg",
@@ -81,8 +79,7 @@
    "points_against": 1357.7,
    "faab_spent": 1,
    "starters_hurt": [
-    "Caleb Williams (Questionable)",
-    "Derrick Henry (Questionable)"
+    "Caleb Williams (Questionable)"
    ]
   },
   {
@@ -151,7 +148,7 @@
    },
    "b": {
     "manager": "asierbelay",
-    "points": 52.7,
+    "points": 53.5,
     "startersLeftToPlay": 6
    }
   },
@@ -170,7 +167,7 @@
   {
    "a": {
     "manager": "yojarshh",
-    "points": 45.84,
+    "points": 47.14,
     "startersLeftToPlay": 5
    },
    "b": {
@@ -199,7 +196,7 @@
    },
    "b": {
     "manager": "Lee284",
-    "points": 62.3,
+    "points": 59.3,
     "startersLeftToPlay": 8
    }
   },
@@ -211,7 +208,7 @@
    },
    "b": {
     "manager": "tonypng",
-    "points": 98.8,
+    "points": 100.8,
     "startersLeftToPlay": 7
    }
   }
@@ -238,5 +235,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 29
+ "free_agent_moves": 30
 }
