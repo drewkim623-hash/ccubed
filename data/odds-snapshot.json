@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-odds-snapshot.mjs, which drives the published site in a headless browser and reads the numbers the page itself computed. The article routines quote from this file. Nothing downstream recomputes a probability, so an article and the site cannot disagree.",
- "generated": "2026-11-27T11:09:09.077Z",
- "at": 1795777749077,
+ "generated": "2026-11-27T14:25:22.571Z",
+ "at": 1795789522571,
  "season": "2026",
  "week": 12,
  "liveWeek": 12,
@@ -13,10 +13,10 @@
    "rid": 9,
    "manager": "asierbelay",
    "titleWas": 0.1283,
-   "titleNow": 0.26435,
+   "titleNow": 0.2646,
    "playoffWas": 0.65725,
    "playoffNow": 1,
-   "wins": 9.8272,
+   "wins": 9.8268,
    "titleOdds": 260,
    "titleOddsOpen": 640,
    "playoffOdds": -19900
@@ -28,61 +28,61 @@
    "titleWas": 0.05635,
    "titleNow": 0.00095,
    "playoffWas": 0.4208,
-   "playoffNow": 0.01945,
-   "wins": 5.45275,
+   "playoffNow": 0.01965,
+   "wins": 5.45545,
    "titleOdds": 99200,
    "titleOddsOpen": 1570,
-   "playoffOdds": 4750
+   "playoffOdds": 4700
   },
   {
    "uid": "1257789215605788672",
    "rid": 2,
    "manager": "andychoe03",
    "titleWas": 0.0401,
-   "titleNow": 0.0047,
+   "titleNow": 0.0048,
    "playoffWas": 0.3461,
-   "playoffNow": 0.1006,
-   "wins": 6.28395,
-   "titleOdds": 19970,
+   "playoffNow": 0.10135,
+   "wins": 6.2856,
+   "titleOdds": 19550,
    "titleOddsOpen": 2250,
-   "playoffOdds": 840
+   "playoffOdds": 830
   },
   {
    "uid": "646481339029475328",
    "rid": 1,
    "manager": "drewkim",
    "titleWas": 0.03885,
-   "titleNow": 0.0025,
+   "titleNow": 0.00245,
    "playoffWas": 0.34785,
-   "playoffNow": 0.0313,
-   "wins": 5.4361,
-   "titleOdds": 37640,
+   "playoffNow": 0.0312,
+   "wins": 5.43215,
+   "titleOdds": 38410,
    "titleOddsOpen": 2330,
-   "playoffOdds": 2910
+   "playoffOdds": 2920
   },
   {
    "uid": "1002352049469693952",
    "rid": 6,
    "manager": "saiky7",
    "titleWas": 0.09735,
-   "titleNow": 0.0788,
+   "titleNow": 0.0798,
    "playoffWas": 0.56775,
-   "playoffNow": 0.7483,
-   "wins": 7.45455,
-   "titleOdds": 1100,
+   "playoffNow": 0.7504,
+   "wins": 7.45815,
+   "titleOdds": 1080,
    "titleOddsOpen": 870,
-   "playoffOdds": -380
+   "playoffOdds": -390
   },
   {
    "uid": "466018540445495296",
    "rid": 4,
    "manager": "nikhil1123",
    "titleWas": 0.09725,
-   "titleNow": 0.12025,
+   "titleNow": 0.11915,
    "playoffWas": 0.55715,
-   "playoffNow": 0.8794,
-   "wins": 7.78145,
-   "titleOdds": 680,
+   "playoffNow": 0.87925,
+   "wins": 7.7791,
+   "titleOdds": 690,
    "titleOddsOpen": 870,
    "playoffOdds": -1370
   },
@@ -91,24 +91,24 @@
    "rid": 3,
    "manager": "yojarshh",
    "titleWas": 0.0907,
-   "titleNow": 0.00765,
+   "titleNow": 0.0076,
    "playoffWas": 0.5396,
-   "playoffNow": 0.06305,
-   "wins": 5.49145,
-   "titleOdds": 12230,
+   "playoffNow": 0.06335,
+   "wins": 5.4935,
+   "titleOdds": 12310,
    "titleOddsOpen": 940,
-   "playoffOdds": 1400
+   "playoffOdds": 1390
   },
   {
    "uid": "809500620536004608",
    "rid": 7,
    "manager": "jjnhwg",
    "titleWas": 0.03765,
-   "titleNow": 0.0212,
+   "titleNow": 0.021,
    "playoffWas": 0.32545,
-   "playoffNow": 0.4292,
-   "wins": 7.27255,
-   "titleOdds": 4350,
+   "playoffNow": 0.4278,
+   "wins": 7.26925,
+   "titleOdds": 4390,
    "titleOddsOpen": 2410,
    "playoffOdds": 120
   },
@@ -119,8 +119,8 @@
    "titleWas": 0.14505,
    "titleNow": 0.1396,
    "playoffWas": 0.68175,
-   "playoffNow": 0.95105,
-   "wins": 7.85585,
+   "playoffNow": 0.9507,
+   "wins": 7.85565,
    "titleOdds": 580,
    "titleOddsOpen": 550,
    "playoffOdds": -19900
@@ -130,11 +130,11 @@
    "rid": 11,
    "manager": "tonypng",
    "titleWas": 0.13385,
-   "titleNow": 0.25885,
+   "titleNow": 0.25845,
    "playoffWas": 0.6537,
    "playoffNow": 0.9995,
-   "wins": 9.1848,
-   "titleOdds": 260,
+   "wins": 9.18475,
+   "titleOdds": 270,
    "titleOddsOpen": 600,
    "playoffOdds": -19900
   },
@@ -143,10 +143,10 @@
    "rid": 8,
    "manager": "jiddyyyyyy",
    "titleWas": 0.0872,
-   "titleNow": 0.10105,
+   "titleNow": 0.1015,
    "playoffWas": 0.5226,
-   "playoffNow": 0.77295,
-   "wins": 7.24065,
+   "playoffNow": 0.77165,
+   "wins": 7.23835,
    "titleOdds": 830,
    "titleOddsOpen": 980,
    "playoffOdds": -450
@@ -158,11 +158,11 @@
    "titleWas": 0.04735,
    "titleNow": 0.0001,
    "playoffWas": 0.38,
-   "playoffNow": 0.0052,
-   "wins": 4.7187,
+   "playoffNow": 0.00515,
+   "wins": 4.72125,
    "titleOdds": 943300,
    "titleOddsOpen": 1890,
-   "playoffOdds": 18040
+   "playoffOdds": 18220
   }
  ],
  "games": [
@@ -171,8 +171,8 @@
    "b": "bigmoneyjos",
    "aPts": 49.02,
    "bPts": 37.14,
-   "pA": 0.4703978986951022,
-   "pB": 0.5296021013048978,
+   "pA": 0.4703208685294876,
+   "pB": 0.5296791314705124,
    "settled": false,
    "aLeft": 7,
    "bLeft": 7,
@@ -184,8 +184,8 @@
    "b": "jjnhwg",
    "aPts": 42.04,
    "bPts": 30.3,
-   "pA": 0.46152794604860076,
-   "pB": 0.5384720539513992,
+   "pA": 0.4634848470026531,
+   "pB": 0.5365151529973469,
    "settled": false,
    "aLeft": 6,
    "bLeft": 8,
@@ -197,8 +197,8 @@
    "b": "asierbelay",
    "aPts": 36,
    "bPts": 50.1,
-   "pA": 0.3776891969393896,
-   "pB": 0.6223108030606104,
+   "pA": 0.37714656788520473,
+   "pB": 0.6228534321147953,
    "settled": false,
    "aLeft": 8,
    "bLeft": 6,
@@ -210,8 +210,8 @@
    "b": "saiky7",
    "aPts": 52.1,
    "bPts": 24.7,
-   "pA": 0.6313803304846846,
-   "pB": 0.36861966951531544,
+   "pA": 0.630232940712627,
+   "pB": 0.36976705928737297,
    "settled": false,
    "aLeft": 6,
    "bLeft": 7,
@@ -223,8 +223,8 @@
    "b": "Lee284",
    "aPts": 3.5,
    "bPts": 41.3,
-   "pA": 0.18089203134892606,
-   "pB": 0.8191079686510739,
+   "pA": 0.18323168977840348,
+   "pB": 0.8167683102215966,
    "settled": false,
    "aLeft": 9,
    "bLeft": 8,
@@ -236,8 +236,8 @@
    "b": "tonypng",
    "aPts": 64.36,
    "bPts": 93.8,
-   "pA": 0.06683109925575936,
-   "pB": 0.9331689007442406,
+   "pA": 0.06620534158127506,
+   "pB": 0.9337946584187249,
    "settled": false,
    "aLeft": 6,
    "bLeft": 7,
@@ -286,14 +286,24 @@
   },
   {
    "manager": "saiky7",
-   "cost": 0.03458503230934029,
+   "cost": 0.025575780089153066,
    "players": [
     {
      "name": "Jaxon Smith-Njigba",
      "status": "Questionable"
+    }
+   ]
+  },
+  {
+   "manager": "tonypng",
+   "cost": 0.022038316582914552,
+   "players": [
+    {
+     "name": "Bhayshul Tuten",
+     "status": "Questionable"
     },
     {
-     "name": "Dalton Kincaid",
+     "name": "DeVonta Smith",
      "status": "Questionable"
     }
    ]
@@ -324,16 +334,6 @@
    "players": [
     {
      "name": "Isaiah Likely",
-     "status": "Questionable"
-    }
-   ]
-  },
-  {
-   "manager": "tonypng",
-   "cost": 0.014679648241206045,
-   "players": [
-    {
-     "name": "Bhayshul Tuten",
      "status": "Questionable"
     }
    ]
@@ -374,9 +374,17 @@
   "pre": 12,
   "live": 0,
   "post": 4,
-  "at": 1795777748032
+  "at": 1795789521107
  },
  "articles": [
+  {
+   "slug": "week-12-replays-week-1-and-a-team-trailing-by-11-74-has-gained-11-655-points-of-playoff-chance",
+   "kicker": "2026 · week 12",
+   "headline": "Week 12 Replays Week 1, and a Team Trailing by 11.74 Has Gained 11.655 Points of Playoff Chance",
+   "dek": "All six week 12 matchups replay week 1 and all six are priced, with favorites between 53.0 and 93.3 percent. Uzzz uzz uzz (jjnhwg) trails by 11.74 and has gained 11.655 points of playoff chance since Wednesday; Team Meta/Bloomberg (jiddyyyyyy) has lost 8.095. Every game, below.",
+   "byline": "C Cubed desk",
+   "date": "2026-11-27"
+  },
   {
    "slug": "two-teams-are-0-01325-projected-wins-apart-and-28-7-points-of-playoff-chance-apart",
    "kicker": "2026 · week 11",
@@ -392,14 +400,6 @@
    "dek": "All six week 11 matchups are priced, with favorites between 50.5 and 91.0 percent. yerra x ecj (saiky7), 6-4, is 9.0 percent against Team Meta/Bloomberg (jiddyyyyyy), which has gained 16.34 points of playoff chance since Thursday. Every game, below.",
    "byline": "C Cubed desk",
    "date": "2026-11-20"
-  },
-  {
-   "slug": "three-favorites-lost-and-they-lost-the-weeks-three-widest-games",
-   "kicker": "2026 · week 10",
-   "headline": "Three Favorites Lost, and They Lost the Week's Three Widest Games",
-   "dek": "The board's first readings made saiky7 72.8 percent, edyun1 74.0 and Lee284 70.3; they lost by 43.96, 33.7 and 36.34, while the three favorites that won took the three closest games. Every game in full, below.",
-   "byline": "C Cubed desk",
-   "date": "2026-11-17"
   }
  ]
 }
