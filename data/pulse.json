@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-27T15:28:55.197Z",
- "at": 1795793335197,
+ "generated": "2026-11-27T20:13:33.260Z",
+ "at": 1795810413260,
  "season": "2026",
  "nfl_week": 12,
  "season_type": "regular",
@@ -92,7 +92,7 @@
    "points_against": 1331.5,
    "faab_spent": 63,
    "starters_hurt": [
-    "Parker Washington (Questionable)"
+    "Parker Washington (Out)"
    ]
   },
   {
@@ -150,7 +150,7 @@
    },
    "b": {
     "manager": "asierbelay",
-    "points": 50.1,
+    "points": 52.6,
     "startersLeftToPlay": 6
    }
   },
@@ -169,7 +169,7 @@
   {
    "a": {
     "manager": "yojarshh",
-    "points": 42.04,
+    "points": 42.14,
     "startersLeftToPlay": 5
    },
    "b": {
@@ -198,7 +198,7 @@
    },
    "b": {
     "manager": "Lee284",
-    "points": 41.3,
+    "points": 51.3,
     "startersLeftToPlay": 8
    }
   },
@@ -210,7 +210,7 @@
    },
    "b": {
     "manager": "tonypng",
-    "points": 93.8,
+    "points": 103.8,
     "startersLeftToPlay": 7
    }
   }
@@ -237,5 +237,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 26
+ "free_agent_moves": 28
 }
