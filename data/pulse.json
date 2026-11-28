@@ -1,7 +1,7 @@
 {
  "_comment": "Written by build-pulse.mjs. A current, factual picture of the league for the story watch to judge. It records what is true; it does not decide what is interesting.",
- "generated": "2026-11-27T22:48:52.053Z",
- "at": 1795819732053,
+ "generated": "2026-11-28T00:32:37.755Z",
+ "at": 1795825957755,
  "season": "2026",
  "nfl_week": 12,
  "season_type": "regular",
@@ -24,7 +24,6 @@
    "points_against": 1326.24,
    "faab_spent": 0,
    "starters_hurt": [
-    "Bhayshul Tuten (Out)",
     "DeVonta Smith (Questionable)"
    ]
   },
@@ -141,12 +140,12 @@
    "a": {
     "manager": "drewkim",
     "points": 46.3,
-    "startersLeftToPlay": 8
+    "startersLeftToPlay": 7
    },
    "b": {
     "manager": "asierbelay",
     "points": 55.7,
-    "startersLeftToPlay": 6
+    "startersLeftToPlay": 5
    }
   },
   {
@@ -165,7 +164,7 @@
    "a": {
     "manager": "yojarshh",
     "points": 57.24,
-    "startersLeftToPlay": 5
+    "startersLeftToPlay": 4
    },
    "b": {
     "manager": "jjnhwg",
@@ -189,12 +188,12 @@
    "a": {
     "manager": "edyun1",
     "points": 13.5,
-    "startersLeftToPlay": 9
+    "startersLeftToPlay": 8
    },
    "b": {
     "manager": "Lee284",
     "points": 69.3,
-    "startersLeftToPlay": 8
+    "startersLeftToPlay": 7
    }
   },
   {
@@ -206,7 +205,7 @@
    "b": {
     "manager": "tonypng",
     "points": 101.9,
-    "startersLeftToPlay": 7
+    "startersLeftToPlay": 5
    }
   }
  ],
@@ -232,5 +231,5 @@
    "picks": []
   }
  ],
- "free_agent_moves": 31
+ "free_agent_moves": 32
 }

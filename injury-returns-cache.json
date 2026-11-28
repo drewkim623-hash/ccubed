@@ -1,6 +1,6 @@
 {
  "_comment": "Written by injury-returns.mjs: every rostered injured player's derived return, with its source and the day it was looked up. A record, not an input — hand entries go in injury-returns.json.",
- "generated": "2026-11-27T22:48:51.594Z",
+ "generated": "2026-11-28T00:32:37.245Z",
  "week": 12,
  "entries": {
   "2133": {
@@ -32,7 +32,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-27"
+   "retChecked": "2026-11-28"
   },
   "4866": {
    "n": "Saquon Barkley",
@@ -58,12 +58,12 @@
   "5022": {
    "n": "Dallas Goedert",
    "s": "Out",
-   "ret": "2026-12-06",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-11-27"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Out = coming week only",
+   "retChecked": "2026-11-28"
   },
   "5850": {
    "n": "Josh Jacobs",
@@ -93,27 +93,27 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-27"
+   "retChecked": "2026-11-28"
   },
   "6806": {
    "n": "J.K. Dobbins",
    "s": "Sus",
-   "ret": "2026-12-06",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-11-27"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Sus = coming week only",
+   "retChecked": "2026-11-28"
   },
   "7002": {
    "n": "Juwan Johnson",
    "s": "Out",
-   "ret": "2026-12-06",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-11-27"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Out = coming week only",
+   "retChecked": "2026-11-28"
   },
   "7525": {
    "n": "DeVonta Smith",
@@ -175,22 +175,22 @@
   "8167": {
    "n": "Christian Watson",
    "s": "Out",
-   "ret": "2026-12-06",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-11-27"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Out = coming week only",
+   "retChecked": "2026-11-28"
   },
   "8183": {
    "n": "Brock Purdy",
    "s": "Out",
    "ret": "2026-12-06",
    "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-11-27"
+   "retSource": "espn-outlook",
+   "retEstimated": true,
+   "retNote": "return in Week 13",
+   "retChecked": "2026-11-28"
   },
   "8205": {
    "n": "Isiah Pacheco",
@@ -206,12 +206,12 @@
   "9487": {
    "n": "Parker Washington",
    "s": "Out",
-   "ret": "2026-12-06",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-11-27"
+   "ret": null,
+   "retWeeks": 2,
+   "retSource": "espn-outlook",
+   "retEstimated": true,
+   "retNote": "week-to-week",
+   "retChecked": "2026-11-28"
   },
   "9493": {
    "n": "Puka Nacua",
@@ -289,22 +289,22 @@
   "12490": {
    "n": "Bhayshul Tuten",
    "s": "Out",
-   "ret": "2026-12-06",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-11-27"
+   "ret": null,
+   "retWeeks": 1,
+   "retSource": "default",
+   "retEstimated": true,
+   "retNote": "default: Out = coming week only",
+   "retChecked": "2026-11-28"
   },
   "12517": {
    "n": "Colston Loveland",
    "s": "Out",
-   "ret": "2026-12-06",
-   "retWeeks": null,
-   "retSource": "espn-return-date",
-   "retEstimated": false,
-   "retNote": "ESPN return date",
-   "retChecked": "2026-11-27"
+   "ret": null,
+   "retWeeks": 4,
+   "retSource": "espn-outlook",
+   "retEstimated": true,
+   "retNote": "land on injured reserve",
+   "retChecked": "2026-11-28"
   },
   "12526": {
    "n": "Tetairoa McMillan",
@@ -314,7 +314,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-27"
+   "retChecked": "2026-11-28"
   },
   "12529": {
    "n": "TreVeyon Henderson",
@@ -356,7 +356,7 @@
    "retSource": "default",
    "retEstimated": true,
    "retNote": "default: Questionable = coming week only",
-   "retChecked": "2026-11-27"
+   "retChecked": "2026-11-28"
   }
  }
 }
